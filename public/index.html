@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Caso em 3 Atos</title><style>
+body{font-family:system-ui;max-width:720px;margin:auto;padding:1rem;background:#14161a;color:#eee}
+.s{display:flex;gap:.5rem;flex-wrap:wrap}.s button{flex:1;min-width:150px}button{padding:.6rem;border-radius:6px;border:1px solid #555;background:#252a33;color:#eee;cursor:pointer}
+button.on{border-color:#e6b450}#log{min-height:160px;background:#1d2026;padding:.6rem;border-radius:6px;margin:.6rem 0}.err{color:#ff8a80}
+form{display:flex;gap:.4rem}input{flex:1;padding:.6rem;border-radius:6px;border:1px solid #555;background:#1d2026;color:#eee}
+</style></head><body><h1 id="t">Caso em 3 Atos</h1><p id="intro"></p><small id="mode"></small>
+<h3>Interrogate</h3><div class="s" id="sus"></div><div id="log"></div>
+<form id="f"><input id="q" placeholder="Ask a question..." maxlength="500"><button>Ask</button></form>
+<h3>Accuse</h3><div class="s" id="acc"></div><p id="verdict"></p>
+<script>
+let C,cur,H={};const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(){$('log').innerHTML=(H[cur]||[]).map(m=>`<p class="${m.err?'err':''}"><b>${m.role==='user'?'You':esc(C.suspects.find(s=>s.id===cur).name)}:</b> ${esc(m.content)}</p>`).join('')||'<i>Choose a suspect.</i>'}
+(async()=>{C=await (await fetch('/api/case')).json();const st=await (await fetch('/api/status')).json();
+$('t').textContent=C.title;$('intro').textContent=C.intro;$('mode').textContent=st.mode==='mock'?'Mock mode (no FullCup key)':'Live: '+(st.model||'');
+for(const s of C.suspects){const b=document.createElement('button');b.innerHTML=`<b>${esc(s.name)}</b><br>${esc(s.role)}`;b.onclick=()=>{cur=s.id;document.querySelectorAll('#sus button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render()};$('sus').append(b);
+const a=document.createElement('button');a.textContent='Accuse '+s.name;a.onclick=async()=>{const r=await (await fetch('/api/accuse',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({suspectId:s.id})})).json();$('verdict').textContent=(r.correct?'Case solved! ':'Wrong. ')+r.solution;document.querySelectorAll('#acc button').forEach(x=>x.disabled=true)};$('acc').append(a)}render()})();
+$('f').onsubmit=async e=>{e.preventDefault();const q=$('q').value.trim();if(!q||!cur)return;$('q').value='';H[cur]=H[cur]||[];
+const history=H[cur].filter(m=>!m.err);H[cur].push({role:'user',content:q});render();
+const r=await (await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({suspectId:cur,question:q,history})})).json();
+H[cur].push(r.error?{role:'assistant',content:r.error,err:1}:{role:'assistant',content:r.answer});render()};
+</script></body></html>
