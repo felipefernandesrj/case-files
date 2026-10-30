@@ -1,5 +1,7 @@
 # Case Files: a pack of AI detective games
 
+## Overview
+
 Hi, I'm Caio Ventura. I make small browser mystery games where an AI plays every suspect. You ask questions, they lie, and you name the culprit.
 
 This repo starts from **Caso em 3 Atos**, a working prototype: three suspects played by a language model, an interrogation room and a verdict. Every question is one model call through the FullCup proxy, so the game runs on capacity from backers. It uses only open models on Cloudflare Workers AI.
@@ -21,7 +23,7 @@ This repo starts from **Caso em 3 Atos**, a working prototype: three suspects pl
 - Monthly backers (Case Club): a vote on the next case's setting, plus developer notes.
 - Everyone gets the receipts: every build and play call is signed and visible.
 
-## Run
+## Usage
 ```
 node src/server.js                                  # mock mode, no key needed
 FULLCUP_API_KEY=<your key> node src/server.js       # or put it in .fullcup-key (git-ignored)
