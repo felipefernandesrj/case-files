@@ -1,0 +1,489 @@
+[
+ {
+  "at": "2026-10-31T16:41:15.600Z",
+  "purpose": "author-case",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 37534,
+  "usage": {
+   "prompt_tokens": 439,
+   "completion_tokens": 2107,
+   "total_tokens": 2546,
+   "neurons": 157.62713623046875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlEQkFZU1ZBV0JFQzdOSFhCWkVUNVciLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjQ4MzkxMjksIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "QQjP0Hszn+r+Bvm9qUThtsR69KVP6m8aZlPWlciF4mXHsoOrE15Xzx/gQXfIvuSaPpyB4lP4P7F0EmDPyHA/Cw==",
+   "x-fullcup-receipt": "01M69DBAYSVAWBEC7NHXBZET5W",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793464860"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:41:34.996Z",
+  "purpose": "author-case",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 28275,
+  "usage": {
+   "prompt_tokens": 439,
+   "completion_tokens": 2439,
+   "total_tokens": 2878,
+   "neurons": 180.26351928710938,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlEQzZOTUdHSEtFN1I1NkhYMENaNEUiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjQ4Njc1MDgsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "52SXJbUzVfyUciJmqdxMa+fbK7RbsO1/S7dYfYHuij2ZuHZ6pLyULp5Uq+r+5WE4zAdrNlKLSkmN30sM1qr3CA==",
+   "x-fullcup-receipt": "01M69DC6NMGGHKE7R56HX0CZ4E",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793464920"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:42:25.173Z",
+  "purpose": "revise-case",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 30459,
+  "usage": {
+   "prompt_tokens": 1290,
+   "completion_tokens": 2037,
+   "total_tokens": 3327,
+   "neurons": 179.93154907226562,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlERE40UjU4NVlTMU04UUtIUTkzMEEiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjQ5MTUwOTYsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "SkYS4yFCru+hEPTt/1Q2Ylc/BHNG0aZeNCTcm/tNRMa2r3t228hXEIWUAyrvc+uMXWztjAvRfNS5gEbrh6slBw==",
+   "x-fullcup-receipt": "01M69DDN4R585YS1M8QKHQ930A",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793464920"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:04.135Z",
+  "purpose": "qa:list-models",
+  "method": "GET",
+  "endpoint": "/models",
+  "model": null,
+  "status": 200,
+  "ms": 417,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:08.648Z",
+  "purpose": "qa:allowed-model",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "status": 200,
+  "ms": 4512,
+  "usage": {
+   "prompt_tokens": 9,
+   "completion_tokens": 20,
+   "total_tokens": 29,
+   "neurons": 0.7775,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlERlJQQVRFUUJWS1dHN043QUNFQzYiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjQ5ODQyNjYsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "8jykd2sMXsqO1T6xP+92d9L9+mxYVDBKCg7GcJ7WMWFD44VsCKsVXa54xG/HPCXwKNRu41owtLUjWh97Qm9GDw==",
+   "x-fullcup-receipt": "01M69DFRPATEQBVKWG7N7ACEC6",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:08.771Z",
+  "purpose": "qa:disallowed-model",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/moonshotai/kimi-k2.6",
+  "status": 403,
+  "ms": 123,
+  "usage": null,
+  "cost": null,
+  "headers": {
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": {
+   "error": "model_outside_capacity_class",
+   "message": "This key cannot call that model. See allowed, or GET /v1/models.",
+   "allowed": [
+    "@cf/deepseek-ai/deepseek-v4-flash-0731",
+    "@cf/google/gemma-4-26b-a4b-it",
+    "@cf/meta/llama-4-scout-17b-16e-instruct",
+    "@cf/openai/gpt-oss-120b",
+    "@cf/zai-org/glm-4.7-flash",
+    "@cf/zai-org/glm-5.3-flash"
+   ]
+  }
+ },
+ {
+  "at": "2026-10-31T16:43:08.833Z",
+  "purpose": "qa:disallowed-model",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "deepseek-v4-pro",
+  "status": 403,
+  "ms": 62,
+  "usage": null,
+  "cost": null,
+  "headers": {
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": {
+   "error": "model_outside_capacity_class",
+   "message": "This key cannot call that model. See allowed, or GET /v1/models.",
+   "allowed": [
+    "@cf/deepseek-ai/deepseek-v4-flash-0731",
+    "@cf/google/gemma-4-26b-a4b-it",
+    "@cf/meta/llama-4-scout-17b-16e-instruct",
+    "@cf/openai/gpt-oss-120b",
+    "@cf/zai-org/glm-4.7-flash",
+    "@cf/zai-org/glm-5.3-flash"
+   ]
+  }
+ },
+ {
+  "at": "2026-10-31T16:43:08.904Z",
+  "purpose": "qa:disallowed-model",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "gpt-4o",
+  "status": 403,
+  "ms": 70,
+  "usage": null,
+  "cost": null,
+  "headers": {
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": {
+   "error": "model_outside_capacity_class",
+   "message": "This key cannot call that model. See allowed, or GET /v1/models.",
+   "allowed": [
+    "@cf/deepseek-ai/deepseek-v4-flash-0731",
+    "@cf/google/gemma-4-26b-a4b-it",
+    "@cf/meta/llama-4-scout-17b-16e-instruct",
+    "@cf/openai/gpt-oss-120b",
+    "@cf/zai-org/glm-4.7-flash",
+    "@cf/zai-org/glm-5.3-flash"
+   ]
+  }
+ },
+ {
+  "at": "2026-10-31T16:43:08.980Z",
+  "purpose": "pick-model",
+  "method": "GET",
+  "endpoint": "/models",
+  "model": null,
+  "status": 200,
+  "ms": 57,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:14.291Z",
+  "purpose": "interrogate:tomas",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 5311,
+  "usage": {
+   "prompt_tokens": 223,
+   "completion_tokens": 48,
+   "total_tokens": 271,
+   "neurons": 9.182727813720703,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlERlhCNFJTNVpXTTRNWUo5V1pXV1AiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjQ5ODkwMjgsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "ep0daPctsZBQT4STQQtOtED2m7Ren+kl67b0ihppyipLCtfg7+DEzBsP57Tx1F/J0xLr6+kFJe99ZX6DLYinBA==",
+   "x-fullcup-receipt": "01M69DFXB4RS5ZWM4MYJ9WZWWP",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:16.036Z",
+  "purpose": "pick-model",
+  "method": "GET",
+  "endpoint": "/models",
+  "model": null,
+  "status": 200,
+  "ms": 522,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:17.298Z",
+  "purpose": "interrogate:lia",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 3003,
+  "usage": {
+   "prompt_tokens": 177,
+   "completion_tokens": 51,
+   "total_tokens": 228,
+   "neurons": 8.285454750061035,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlERzJINkpWRU1XVkpGNVdZQ1FBSDQiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjQ5OTQzNDIsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "ugPcdhoLZ0164UT6i050e2GFmLUMqi+Pz/GEdJo5zXYh6afYUbd0iQ5An+10fIdL8f0uVMR9Vjm6NBSgZ3eZAA==",
+   "x-fullcup-receipt": "01M69DG2H6JVEMWVJF5WYCQAH4",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "56",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:20.536Z",
+  "purpose": "interrogate:tomas",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 4499,
+  "usage": {
+   "prompt_tokens": 223,
+   "completion_tokens": 50,
+   "total_tokens": 273,
+   "neurons": 9.337272644042969,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlERzQ3WjBTRzQyMlNDMjI4U0hISE0iLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjQ5OTYwOTUsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "13zDgAjXZuTVWptOKTnfI5AH1CUkaB+39R1HAPaq0SS84oudRxIrbzFq5d5rzqJPXQsckRqWSMbWw30a97z7AA==",
+   "x-fullcup-receipt": "01M69DG47Z0SG422SC228SHHHM",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "55",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:26.344Z",
+  "purpose": "interrogate:lia",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 5805,
+  "usage": {
+   "prompt_tokens": 177,
+   "completion_tokens": 51,
+   "total_tokens": 228,
+   "neurons": 8.285454750061035,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlERzhNR1NEN1NDNlBLVjhKVjZSOEoiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjUwMDA1OTIsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "7McVfeIDzTofFxdm8i2MfEl12+TUPp4JWGWKF4FmgMj1M7h8nLY77076wrKV6Y0YTCd7qL8ijStaiUltb/OOCA==",
+   "x-fullcup-receipt": "01M69DG8MGSD7SC6PKV8JV6R8J",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "54",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:29.775Z",
+  "purpose": "interrogate:marta",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 3428,
+  "usage": {
+   "prompt_tokens": 191,
+   "completion_tokens": 46,
+   "total_tokens": 237,
+   "neurons": 8.242727279663086,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlER0VBMFAxWFlWNlQyWDBNMEJZVE0iLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjUwMDY0MDAsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "QHrlL+jdElO5jlmIqqy5nD8Kj1q+mKsAMl9ZSoJIxh+A867z9n3v/9ThMOBezxeYf3QyOaAh/J24QNcpAP5bBQ==",
+   "x-fullcup-receipt": "01M69DGEA0P1XYV6T2X0M0BYTM",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "53",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:34.916Z",
+  "purpose": "interrogate:tomas",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 5138,
+  "usage": {
+   "prompt_tokens": 291,
+   "completion_tokens": 46,
+   "total_tokens": 337,
+   "neurons": 10.697273254394531,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlER0hZRjE5MlE2TkM4RDdGM1hZVEciLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjUwMTAxMjcsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "4FM0gGynzUJqWrJpIxTG5rErPqsCaf5eS5XsB3CFoG8sUyE7WZc1IRRuUAkN4MOCa3zrQdFMwDzIHgQGRycMBw==",
+   "x-fullcup-receipt": "01M69DGHYF192Q6NC8D7F3XYTG",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "52",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:38.887Z",
+  "purpose": "interrogate:tomas",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 3966,
+  "usage": {
+   "prompt_tokens": 223,
+   "completion_tokens": 50,
+   "total_tokens": 273,
+   "neurons": 9.337272644042969,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlER1BQOVk4WUM3UzVNRUpCQ0cwWDQiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjUwMTQ5ODUsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "N9/8P4DPwk5eOYa0+3y28EGajyR5hJFyr8EjUMRl0AS6rjl/2+Equ7QmqOUqIY/WtiLzY62sSJYNFY9NrRY1Aw==",
+   "x-fullcup-receipt": "01M69DGPP9Y8YC7S5MEJBCG0X4",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "51",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:45.613Z",
+  "purpose": "interrogate:lia",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 6723,
+  "usage": {
+   "prompt_tokens": 177,
+   "completion_tokens": 86,
+   "total_tokens": 263,
+   "neurons": 10.989999771118164,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlER1RITVBQME1LQlEzNDRBMEVUTTAiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjUwMTg5MzIsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "2zoEZC9C3XCBMQpRJSIDWttSjoA7iMsYEFmP1kVtHnahGFAuYTH+T+lnUJhANQRjaX6QVJo8j8cd3wLjXq2ZCw==",
+   "x-fullcup-receipt": "01M69DGTHMPP0MKBQ344A0ETM0",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "50",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-10-31T16:43:50.473Z",
+  "purpose": "interrogate:marta",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 4857,
+  "usage": {
+   "prompt_tokens": 193,
+   "completion_tokens": 57,
+   "total_tokens": 250,
+   "neurons": 9.141818046569824,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-promise": "eyJyZWNlaXB0X2lkIjoiMDFNNjlESDE1Tlc0TUtaUkZBS1M0OFNRREYiLCJjdXBfaWQiOiIwMU02NUNBQTZZMFI1WDRGVlZTS040VjIwUSIsImtleV9pZCI6IjAxTTY1Q0RBQUVXUzNIMzZXU0Y2OTQ3MEVCIiwicHJvbWlzZWRfYXQiOjE3OTM0NjUwMjU3MTcsIm1tZF9zZWNvbmRzIjo2MH0=",
+   "x-fullcup-promise-signature": "qskRtvZ7F/OjjLrQCUC8P73JFTyAn/SEGP5Up6/BhTNUQmcYkzvVxHVIDLrxuxiL8u8OGqwTaCD7lIeaJWvJCQ==",
+   "x-fullcup-receipt": "01M69DH15NW4MKZRFAKS48SQDF",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "49",
+   "x-ratelimit-reset": "1793465040"
+  },
+  "error": null
+ }
+]

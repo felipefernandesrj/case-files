@@ -1,0 +1,19 @@
+status {"mode":"live","model":null}
+[en] tomas <- What did you see at 23:00?
+      -> I saw a lantern flicker near the stove room, but I couldn't make out a face. I was busy tending to the light in the lamp room, and I didn't leave my post all night. That's all I can say about it.
+[en] lia <- Did you notice anything about Marta this morning?
+      -> Marta seemed a bit...off, I suppose. Her boots were covered in soot, which was weird since I didn't recall seeing her near the lighthouse. She just brushed it off, said she'd been out early, collecting firewood or something.
+[en] marta <- Where were you last night?
+      -> I was at home, alone, all night. I didn't leave my house until this morning, so I didn't see or hear anything about the fire at the lighthouse. It's a quiet night, I like to keep to myself.
+[en] tomas <- Did you find any remains of the ledger?
+      -> In the morning, I found a charred fragment of the ledger by the stove with the initials M.R. on it. It was the only piece I could salvage, and it seems that's all that's left of the thing.
+[en] VERDICT correct=true score=95
+[pt] tomas <- O que você viu às 23h?
+      -> Eu vi uma lanterna piscando perto da sala da estufa, mas não consegui ver o rosto de ninguém. Fiquei no quarto da lâmpada a noite toda, monitorando o farol. Não havia nada fora do comum.
+[pt] lia <- Notou algo na Marta hoje cedo?
+      -> Marta tava com as botas todas sujas de fuligem, não sei o que ela fez durante a noite, mas não tava nada limpa. Eu tava indo pro trabalho no porto e ela tava tomando um café no tavern, parecendo meio... cansada. Não liguei muito naquela hora, mas agora me lembro e fico me perguntando o que aquilo significava.
+[pt] marta <- Onde você estava ontem à noite?
+      -> Eu estava em casa, sozinha, durante toda a noite. Não saí de casa em momento algum, estava trabalhando em alguns papéis e depois fui dormir cedo. Não tenho ideia do que aconteceu no farol, mas espero que consigam descobrir o que foi que aconteceu.
+[pt] VERDICT correct=true score=100
+culprit marta
+exit 0

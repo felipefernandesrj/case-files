@@ -1,0 +1,6 @@
+1. intro says the fire was at midnight; the lantern clue is 23:00. Make the burning ~23:00.
+2. persona must be a short personality description (EN+PT), not "name, role". Marta: calm, precise, slightly defensive. Tomás: gruff, honest, tired. Lia: sarcastic, nervous about the smugglers.
+3. Tomás' facts say he knows Lia's boots were dirty: that implicates an innocent. Remove it.
+4. Clue c6 has from "harbor", which is not a suspect. Either drop it or make its source a suspect (e.g. tomas found the fragment).
+5. PT: the stove is "fogão" (not "lareira").
+6. Every suspect's facts must be second-person role-play instructions ("You are...", "If asked about X, say Y"); Marta lies that she was home, deflects on soot/lantern, never confesses outright.

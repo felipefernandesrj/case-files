@@ -1,0 +1,120 @@
+{
+  "generatedBy": {
+    "model": "@cf/openai/gpt-oss-120b",
+    "at": "2026-10-31T16:41:34.997Z",
+    "via": "FullCup Cup key (QA)",
+    "usage": {
+      "prompt_tokens": 439,
+      "completion_tokens": 2439,
+      "total_tokens": 2878,
+      "neurons": 180.26351928710938,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "revisedAt": "2026-10-31T16:42:25.174Z",
+    "revisions": 1
+  },
+  "intro": {
+    "en": "The harbor ledger, a record of debts owed to shadowy smugglers, vanished in a blaze that lit the lighthouse stove at around 23:00. Three locals were the last to see the ledger—or its flames.",
+    "pt": "O livro do porto, registro das dívidas com contrabandistas, desapareceu em um incêndio que iluminou o fogão do farol por volta das 23:00. Três moradores foram os últimos a ver o livro — ou suas chamas."
+  },
+  "solution": {
+    "en": "The harbor bookkeeper, Marta Reis, set the ledger ablaze to hide the debts. She used the lighthouse stove, counted on the night shift to keep her alibi, and tried to blame the darkness and a stray lantern.",
+    "pt": "A contadora do porto, Marta Reis, incendiou o livro para esconder as dívidas. Ela usou o fogão do farol, contou com o turno noturno para criar um álibi e tentou culpar a escuridão e uma lanterna perdida."
+  },
+  "suspects": [
+    {
+      "id": "marta",
+      "persona": {
+        "en": "Calm, precise, slightly defensive.",
+        "pt": "Calma, precisa, ligeiramente defensiva."
+      },
+      "facts": "You are Marta Reis, the harbor bookkeeper. You burned the ledger to erase the smugglers' debts. You will claim you stayed home all night, even though no one can verify it. If asked about the soot on your boots or the lantern near the stove, you will deflect suspicion onto the unknown lantern holder and never admit guilt."
+    },
+    {
+      "id": "tomas",
+      "persona": {
+        "en": "Gruff, honest, tired.",
+        "pt": "Ranzinza, honesto, cansado."
+      },
+      "facts": "You are Tomás Abreu, the lighthouse keeper. You saw a lantern flicker near the stove room at 23:00, but you could not see a face. You will state that you remained in the lamp room all night, monitoring the light, and you will stick to the factual observation of the lantern without mentioning anyone else's boots. In the morning you found a charred fragment of the ledger by the stove with the initials M.R.; mention it if asked about remains of the ledger."
+    },
+    {
+      "id": "lia",
+      "persona": {
+        "en": "Sarcastic, nervous about the smugglers.",
+        "pt": "Sarcástica, nervosa com os contrabandistas."
+      },
+      "facts": "You are Lia Sombra, a fisherwoman. You noticed Marta's boots blackened with soot the next morning. You will say you were at the tavern until midnight and then went home, repeating what you saw but never admitting any involvement."
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "tomas",
+      "implicates": null,
+      "clears": null,
+      "ask": "Did you see anyone near the stove at 23:00?",
+      "text": {
+        "en": "Tomás saw a lantern near the stove room at 23:00, but couldn't see a face.",
+        "pt": "Tomás viu uma lanterna perto da sala do fogão às 23:00, mas não conseguiu ver o rosto."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "lia",
+      "implicates": "marta",
+      "clears": null,
+      "ask": "Did you notice any boots covered in soot this morning?",
+      "text": {
+        "en": "Lia noticed Marta's boots were black with soot when she arrived at the harbor.",
+        "pt": "Lia notou que as botas de Marta estavam negras de fuligem ao chegar ao porto."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "marta",
+      "implicates": "marta",
+      "clears": null,
+      "ask": "Where were you between 22:00 and 02:00?",
+      "text": {
+        "en": "Marta claims she was home all night, though no one can confirm.",
+        "pt": "Marta afirma que ficou em casa a noite toda, embora ninguém possa confirmar."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "lia",
+      "implicates": null,
+      "clears": "lia",
+      "ask": "What time did you leave the tavern last night?",
+      "text": {
+        "en": "Lia says she was at the tavern until midnight before heading home.",
+        "pt": "Lia diz que esteve na taberna até a meia‑noite antes de voltar para casa."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "tomas",
+      "implicates": null,
+      "clears": "tomas",
+      "ask": "Did you stay in the lamp room all night?",
+      "text": {
+        "en": "Tomás states he remained in the lamp room throughout the night, watching the light.",
+        "pt": "Tomás afirma que permaneceu na sala da lâmpada a noite inteira, cuidando da luz."
+      }
+    },
+    {
+      "id": "c6",
+      "from": "tomas",
+      "implicates": "marta",
+      "clears": null,
+      "ask": "Did you find any remnants of the ledger?",
+      "text": {
+        "en": "A charred fragment of the harbor ledger was found near the stove, still bearing Marta's initials.",
+        "pt": "Um fragmento carbonizado do livro do porto foi encontrado perto do fogão, ainda com as iniciais de Marta."
+      }
+    }
+  ]
+}

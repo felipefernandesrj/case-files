@@ -14,7 +14,7 @@ try {
   await t('case in PT-BR', async () => { const c = await J(fetch(B + '/api/case?lang=pt')); assert.equal(c.title, 'O Livro do Farol'); assert.equal(c.suspects[1].role, 'faroleiro'); });
   await t('ui served with EN+PT', async () => { const h = await (await fetch(B + '/')).text(); assert.match(h, /Caso em 3 Atos/); assert.match(h, /Placar/); assert.match(h, /Scoreboard/); });
   await t('fair-play check passes', async () => assert.deepEqual(fairPlay(), { ok: true, errors: [] }));
-  await t('fair-play rejects unsolvable case', async () => assert.equal(fairPlay({ ...CASE, clues: CASE.clues.filter(k => k.id !== 'soot') }).ok, false));
+  await t('fair-play rejects unsolvable case', async () => assert.equal(fairPlay({ ...CASE, clues: CASE.clues.filter(k => k.implicates !== CASE.culprit || k.from === 'marta') }).ok, false));
   await t('every clue is reachable by its ask', async () => { for (const k of CASE.clues) for (const l of ['en', 'pt']) assert.doesNotMatch(mockAnswer(k.from, k.ask, l), /nothing more|Não tenho/); });
   await t('bad request 400', async () => assert.equal((await post('/api/ask', { suspectId: 'x', question: '' })).status, 400));
   for (const lang of ['en', 'pt']) await t(`plays case to solution (${lang})`, async () => {
@@ -32,6 +32,7 @@ try {
   });
   await t('wrong accusation scores 0', async () => { const { sessionId } = await J(post('/api/session', {})); const v = await J(post('/api/accuse', { suspectId: 'lia', sessionId, player: 'x' })); assert.equal(v.correct, false); assert.equal(v.score, 0); });
   await t('scoreboard ranks solvers', async () => { const s = (await J(fetch(B + '/api/scoreboard'))).scores; assert.equal(s.length, 3); assert.equal(s[0].score, 100); assert.equal(s.at(-1).score, 0); });
+  await t('case content authored via the Cup key', async () => { assert.match(CASE.generatedBy.via, /Cup key/); assert(CASE.generatedBy.usage.total_tokens > 0); });
   await t('402 → friendly no_capacity (EN/PT)', async () => { assert.equal(mapError(402, {}).code, 'no_capacity'); assert.match(mapError(402, {}, 'pt').error, /sem capacidade/); });
   await t('429 capacity:empty → no_capacity', async () => assert.equal(mapError(429, { error: { code: 'capacity:empty' } }).code, 'no_capacity'));
   await t('429 other → rate_limited', async () => assert.equal(mapError(429, { error: { code: 'rate_limit' } }).code, 'rate_limited'));

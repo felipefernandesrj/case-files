@@ -6,9 +6,9 @@ import { randomUUID } from 'node:crypto';
 import { CASE, publicCase, L, LANGS } from './case.js';
 import { createScoreboard, scoreFor } from './scoreboard.js';
 import { mockAnswer } from './mock.js';
+import { call } from './fullcup.js';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const BASE = process.env.FULLCUP_BASE_URL || 'https://qa-api.fullcup.ai/v1';
 const WORKLOAD = 'caso-em-3-atos:interrogate';
 
 export function loadKey() {
@@ -21,9 +21,9 @@ export function loadKey() {
 let modelCache = process.env.FULLCUP_MODEL || null;
 async function pickModel(key) {
   if (modelCache) return modelCache;
-  const r = await fetch(`${BASE}/models`, { headers: { Authorization: `Bearer ${key}` } });
-  const ids = ((await r.json()).data || []).map(m => m.id).filter(id => id.startsWith('@cf/'));
-  modelCache = ids.find(id => /instruct/i.test(id)) || ids.find(id => /llama/i.test(id)) || ids[0];
+  const r = await call(key, 'GET', '/models', null, { purpose: 'pick-model' });
+  const ids = (r.json.data || []).map(m => m.id).filter(id => id.startsWith('@cf/'));
+  modelCache =  ids.find(id => /llama/i.test(id)) || ids[0];
   return modelCache;
 }
 
@@ -50,10 +50,8 @@ async function ask(key, s, question, history, lang) {
     ...history.slice(-10).filter(m => ['user','assistant'].includes(m.role)).map(m => ({ role: m.role, content: String(m.content).slice(0, 500) })),
     { role: 'user', content: question }
   ];
-  const r = await fetch(`${BASE}/chat/completions`, { method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'X-FullCup-Workload': WORKLOAD },
-    body: JSON.stringify({ model: await pickModel(key), messages, max_tokens: 200 }) });
-  const body = await r.json().catch(() => ({}));
+  const r = await call(key, 'POST', '/chat/completions', { model: await pickModel(key), messages, max_tokens: 200 }, { workload: WORKLOAD, purpose: `interrogate:${s.id}` });
+  const body = r.json;
   if (!r.ok) return { status: r.status === 402 || r.status === 429 ? r.status : 502, ...mapError(r.status, body, lang) };
   return { answer: body.choices?.[0]?.message?.content?.trim() || '...' };
 }
