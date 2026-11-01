@@ -1347,5 +1347,74 @@
   },
   "files": [],
   "skipped": []
+ },
+ {
+  "label": "61-kbd",
+  "at": "2026-11-01T18:14:26.369Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 175177,
+  "usage": {
+   "prompt_tokens": 6910,
+   "completion_tokens": 8720,
+   "total_tokens": 15630,
+   "neurons": 300.6363525390625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 225
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "62-kbd",
+  "at": "2026-11-01T18:17:52.054Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 192462,
+  "usage": {
+   "prompt_tokens": 6024,
+   "completion_tokens": 9429,
+   "total_tokens": 15453,
+   "neurons": 311.9181823730469,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 251
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "63-kbd",
+  "at": "2026-11-01T18:21:58.481Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 213087,
+  "usage": {
+   "prompt_tokens": 6160,
+   "completion_tokens": 10925,
+   "total_tokens": 17085,
+   "neurons": 353.9545593261719,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 285
+   }
+  ],
+  "skipped": []
  }
 ]

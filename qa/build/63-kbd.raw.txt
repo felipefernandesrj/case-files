@@ -1,0 +1,287 @@
+<<<FILE test/keyboard.mjs>>>
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { spawn } from 'child_process';
+import http from 'http';
+import { createServer } from '../src/server.js';
+
+function findChrome() {
+  const candidates = [process.env.CHROME, '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].filter(Boolean);
+  for (const p of candidates) { try { fs.accessSync(p, fs.constants.X_OK); return p; } catch {} }
+  return null;
+}
+
+if (!global.WebSocket || !findChrome()) { console.log('SKIP keyboard'); process.exit(0); }
+
+const caseData = JSON.parse(fs.readFileSync(path.resolve('content/case.json'), 'utf8'));
+const suspectIds = caseData.suspects.map(s => s.id);
+
+const scoreFile = path.join(os.tmpdir(), `scores-${Date.now()}.json`);
+const server = createServer({ caseFile: 'content/case.json', scoreFile, mock: true });
+await new Promise(r => server.listen(0, r));
+const port = server.address().port;
+const baseUrl = `http://127.0.0.1:${port}`;
+
+const userDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'chrome-'));
+const chrome = spawn(findChrome(), ['--headless=new', '--no-sandbox', '--remote-debugging-port=0', `--user-data-dir=${userDataDir}`, `${baseUrl}/`], { stdio: ['ignore', 'ignore', 'pipe'] });
+
+let chromeKilled = false;
+let ws = null;
+let msgId = 1;
+const pending = new Map();
+
+function cleanup(code = 0) {
+  clearTimeout(watchdog);
+  if (!chromeKilled) { try { chrome.kill('SIGKILL'); } catch {} chromeKilled = true; }
+  try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch {}
+  try { server.close(); } catch {}
+  if (ws && ws.readyState === WebSocket.OPEN) ws.close();
+  process.exit(code);
+}
+
+const watchdog = setTimeout(() => cleanup(1), 60000);
+process.on('SIGINT', () => cleanup(1));
+process.on('SIGTERM', () => cleanup(1));
+process.on('uncaughtException', (err) => { console.error(`FAIL unexpected: ${err.message}`); cleanup(1); });
+
+let wsUrl = null;
+await new Promise((resolve, reject) => {
+  const timeout = setTimeout(() => reject(new Error('Chrome timeout')), 10000);
+  chrome.stderr.setEncoding('utf8');
+  chrome.stderr.on('data', chunk => {
+    const m = chunk.match(/DevTools listening on (ws:\/\/[^\s]+)/);
+    if (m) { wsUrl = m[1]; clearTimeout(timeout); resolve(); }
+  });
+});
+
+const dbgPort = new URL(wsUrl).port;
+await new Promise(r => setTimeout(r, 1000));
+
+async function getPageTargetId() {
+  for (let i = 0; i < 50; i++) {
+    try {
+      const res = await fetch(`http://127.0.0.1:${dbgPort}/json/list`);
+      const list = await res.json();
+      const target = list.find(t => t.type === 'page');
+      if (target?.id) return target.id;
+    } catch {}
+    await new Promise(r => setTimeout(r, 200));
+  }
+  throw new Error('No target');
+}
+const targetId = await getPageTargetId();
+ws = new WebSocket(`${wsUrl.replace(/\/devtools\/browser\/.*/, '')}/devtools/page/${targetId}`);
+await new Promise(r => ws.addEventListener('open', r));
+
+ws.addEventListener('message', e => {
+  const msg = JSON.parse(e.data);
+  if (msg.id && pending.has(msg.id)) { pending.get(msg.id)(msg); pending.delete(msg.id); }
+});
+
+async function send(method, params = {}) {
+  return new Promise((resolve, reject) => {
+    const id = msgId++;
+    const timer = setTimeout(() => { pending.delete(id); reject(new Error(`Timeout: ${method}`)); }, 5000);
+    pending.set(id, (msg) => { clearTimeout(timer); resolve(msg); });
+    ws.send(JSON.stringify({ id, method, params }));
+  });
+}
+
+async function evaluate(expr) {
+  const res = await send('Runtime.evaluate', { expression: expr, returnByValue: true });
+  if (res.result?.exceptionDetails) {
+    throw new Error(res.result.exceptionDetails.exception.description);
+  }
+  return res.result?.result?.value ?? res.result?.value;
+}
+
+async function waitFor(fn, timeout = 5000) {
+  const start = Date.now();
+  while (Date.now() - start < timeout) { if (await fn()) return; await new Promise(r => setTimeout(r, 100)); }
+  throw new Error('Timeout');
+}
+
+await send('Page.enable');
+await send('Runtime.enable');
+await send('DOM.enable');
+await send('Input.enable');
+await send('Page.navigate', { url: baseUrl + '/' });
+await waitFor(async () => (await evaluate('document.readyState')) === 'complete');
+await waitFor(async () => (await evaluate('document.querySelectorAll("#accuse-buttons button").length')) >= 3);
+
+async function pressKey(key, code, vk, text) {
+  await send('Input.dispatchKeyEvent', { type: 'keyDown', windowsVirtualKeyCode: vk, key, code, ...(text !== undefined ? { text, unmodifiedText: text } : {}) });
+  await send('Input.dispatchKeyEvent', { type: 'keyUp', windowsVirtualKeyCode: vk, key, code });
+}
+async function pressTab() { await pressKey('Tab', 'Tab', 9); }
+async function pressEnter() { await pressKey('Enter', 'Enter', 13, '\r'); }
+async function insertText(txt) { await send('Input.insertText', { text: txt }); }
+
+async function activeId() {
+  return await evaluate(`(function(){
+    const el=document.activeElement;
+    if(el.id) return el.id;
+    if(el.dataset.id) return el.dataset.id;
+    const acc=document.querySelectorAll('#accuse-buttons button');
+    for(let i=0;i<acc.length;i++) if(el===acc[i]) return 'accuse-'+i;
+    return el.tagName.toLowerCase();
+  })()`);
+}
+async function outlineNotNone(id) {
+  return await evaluate(`(function(){
+    const el=document.getElementById('${id}') || document.querySelector('button[data-id="${id}"]');
+    if(!el) return false;
+    const s=getComputedStyle(el);
+    return s.outlineStyle !== 'none';
+  })()`);
+}
+
+let passed = 0, failed = 0;
+function pass(n) { console.log(`PASS ${n}`); passed++; }
+function fail(n, r) { console.log(`FAIL ${n}: ${r}`); failed++; }
+
+async function runStep(name, task) {
+  try {
+    await task();
+    pass(name);
+  } catch (e) {
+    fail(name, e.message);
+  }
+}
+
+// 1. Tab order and outline
+await runStep('tab-order', async () => {
+  const expectedOrder = ['len', 'lpt', ...suspectIds, 'q', 'ask-btn', 'player'];
+  for (let i = 0; i < 3; i++) expectedOrder.push(`accuse-${i}`);
+  for (let i = 0; i < expectedOrder.length; i++) {
+    await pressTab();
+    const cur = await activeId();
+    if (cur !== expectedOrder[i]) throw new Error(`expected ${expectedOrder[i]}, got ${cur}`);
+    if (!cur.startsWith('accuse-')) {
+      const ok = await outlineNotNone(cur);
+      if (!ok) throw new Error(`${cur} no outline`);
+    }
+  }
+});
+
+// 2. Suspect select
+await runStep('suspect-select', async () => {
+  const sid = suspectIds[0];
+  await evaluate(`document.querySelector('button[data-id="${sid}"]').focus()`);
+  await pressEnter();
+  const pressed = await evaluate(`document.querySelector('button[data-id="${sid}"]').getAttribute('aria-pressed')`);
+  if (pressed !== 'true') throw new Error(`aria-pressed fail for ${sid}`);
+  const focus = await evaluate(`document.activeElement.id`);
+  if (focus !== 'q') throw new Error(`focus fail for ${sid}, got ${focus}`);
+});
+
+// 3. Ask
+await runStep('ask-question', async () => {
+  await evaluate(`document.getElementById('q').focus()`);
+  await insertText('What is your alibi?');
+  await pressEnter();
+  await waitFor(async () => (await evaluate(`document.querySelectorAll('#log p').length`)) >= 2);
+  const logText = await evaluate(`document.getElementById('log').innerText`);
+  if (!logText.includes('What is your alibi?')) throw new Error('not logged');
+});
+
+// 4. History isolation
+await runStep('history-per-suspect', async () => {
+  const s1 = suspectIds[0];
+  const s2 = suspectIds[1];
+  
+  // 1. Ensure we are on S1 and it has history
+  await evaluate(`document.querySelector('button[data-id="${s1}"]').focus()`);
+  await pressEnter();
+  
+  // 2. Switch to S2 and ask
+  await evaluate(`document.querySelector('button[data-id="${s2}"]').focus()`);
+  await pressEnter();
+  await evaluate(`document.getElementById('q').focus()`);
+  await insertText('Did you see anything?');
+  await pressEnter();
+  await waitFor(async () => (await evaluate(`document.querySelectorAll('#log p').length`)) >= 2);
+  const logS2 = await evaluate(`document.getElementById('log').innerText`);
+  if (!logS2.includes('Did you see anything?')) throw new Error('S2 log missing');
+
+  // 3. Switch to S1, check isolation
+  await evaluate(`document.querySelector('button[data-id="${s1}"]').focus()`);
+  await pressEnter();
+  const logS1 = await evaluate(`document.getElementById('log').innerText`);
+  if (!logS1.includes('What is your alibi?')) throw new Error('S1 history lost');
+  if (logS1.includes('Did you see anything?')) throw new Error('S2 history leaked to S1');
+
+  // 4. Switch back to S2, check persistence
+  await evaluate(`document.querySelector('button[data-id="${s2}"]').focus()`);
+  await pressEnter();
+  const logS2Back = await evaluate(`document.getElementById('log').innerText`);
+  if (!logS2Back.includes('Did you see anything?')) throw new Error('S2 history lost');
+});
+
+// 5. Lang
+await runStep('lang-pt', async () => {
+  await evaluate(`document.getElementById('lpt').focus()`);
+  await pressEnter();
+  let la = await evaluate(`document.documentElement.lang`);
+  let ql = await evaluate(`document.getElementById('question-label').textContent`);
+  if (la !== 'pt-BR' || ql !== 'Pergunta') throw new Error(`la=${la}, ql=${ql}`);
+});
+
+await runStep('lang-en', async () => {
+  await evaluate(`document.getElementById('len').focus()`);
+  await pressEnter();
+  let la = await evaluate(`document.documentElement.lang`);
+  let ql = await evaluate(`document.getElementById('question-label').textContent`);
+  if (la !== 'en' || ql !== 'Question') throw new Error(`la=${la}, ql=${ql}`);
+});
+
+// 6. Accuse
+await runStep('verdict-focus', async () => {
+  await evaluate(`document.getElementById('player').value = ''`);
+  await evaluate(`document.getElementById('player').focus()`);
+  await pressEnter();
+  await evaluate(`document.querySelectorAll('#accuse-buttons button')[0].focus()`);
+  await pressEnter();
+  await waitFor(async () => !(await evaluate(`document.getElementById('verdict').hidden`)));
+  const focus = await evaluate(`document.activeElement.id`);
+  if (focus !== 'verdict') throw new Error(`focus fail, got ${focus}`);
+});
+
+// 7. Accessibility: Names
+await runStep('accessible-names', async () => {
+  const missing = await evaluate(`(() => {
+    const errs = [];
+    document.querySelectorAll('button').forEach(b => {
+      if (!b.innerText.trim() && !b.getAttribute('aria-label')) errs.push('button');
+    });
+    document.querySelectorAll('input').forEach(i => {
+      const l = document.querySelector('label[for="' + i.id + '"]');
+      if (!l && !i.getAttribute('aria-label')) errs.push('input');
+    });
+    return errs.length > 0 ? errs[0] : null;
+  })()`);
+  if (missing) throw new Error(`${missing} missing accessible name`);
+});
+
+// 8. Accessibility: No Focus Trap
+await runStep('no-focus-trap', async () => {
+  await evaluate(`document.getElementById('player').focus()`);
+  for(let i=0; i<10; i++) {
+    const before = await activeId();
+    await pressTab();
+    const after = await activeId();
+    if (before === after) throw new Error('Focus trapped');
+  }
+});
+
+// 9. Error alert
+await runStep('#err-alert', async () => {
+  const errE = await evaluate(`document.getElementById('err') !== null`);
+  const errR = await evaluate(`document.getElementById('err')?.getAttribute('role')`);
+  if (!(errE && errR === 'alert')) throw new Error(`e=${errE}, r=${errR}`);
+});
+
+console.log(`${passed} passed, ${failed} failed`);
+cleanup(failed > 0 ? 1 : 0);
+<<<END>>>
