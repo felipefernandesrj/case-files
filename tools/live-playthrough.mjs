@@ -1,5 +1,6 @@
 // M1 live playthrough through the Cup key + model access QA. Prints answers only (no key).
 import { createServer, loadKey } from '../src/server.js'; import { call } from '../src/fullcup.js'; import { CASE } from '../src/case.js';
+const out = []; const _log = console.log; console.log = (...a) => { out.push(a.join(' ')); _log(...a); };
 const key = loadKey(); if (!key) throw new Error('no key');
 if (!process.env.SKIP_QA) {
 const m = await call(key, 'GET', '/models', null, { purpose: 'qa:list-models' }); console.log('models', m.status, m.json.data.map(x => x.id).join(', '));
@@ -14,9 +15,10 @@ console.log('status', JSON.stringify(await (await fetch(B + '/api/status')).json
 for (const lang of ['en', 'pt']) {
   const { sessionId } = await post('/api/session', {}, lang); const hist = {};
   const qs = lang === 'en' ? [['tomas', 'What did you see at 23:00?'], ['lia', 'Did you notice anything about Marta this morning?'], ['marta', 'Where were you last night?'], ['tomas', 'Did you find any remains of the ledger?']]
-    : [['tomas', 'O que você viu às 23h?'], ['lia', 'Notou algo na Marta hoje cedo?'], ['marta', 'Onde você estava ontem à noite?']];
+    : [['tomas', 'O que você viu às 23h?'], ['lia', 'Notou algo na Marta hoje cedo?'], ['marta', 'Onde você estava ontem à noite?'], ['lia', 'Como estavam as botas da Marta?']];
   for (const [id, q] of qs) { const h = hist[id] ||= []; const r = await post('/api/ask', { suspectId: id, question: q, sessionId, history: h }, lang);
     console.log(`[${lang}] ${id} <- ${q}\n      -> ${r.answer || r.code + ': ' + r.error}`); h.push({ role: 'user', content: q }, { role: 'assistant', content: r.answer || '' }); }
   const v = await post('/api/accuse', { suspectId: 'marta', sessionId, player: `live-${lang}` }, lang); console.log(`[${lang}] VERDICT correct=${v.correct} score=${v.score}`);
 }
 srv.close(); console.log('culprit', CASE.culprit);
+if (/fuliginos/i.test(out.join('\n'))) console.log('PT NIT STILL PRESENT: fuliginos*'); else console.log('PT nit check: no "fuliginos*" in answers');

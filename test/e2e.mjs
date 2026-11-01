@@ -38,5 +38,9 @@ try {
   await t('429 other → rate_limited', async () => assert.equal(mapError(429, { error: { code: 'rate_limit' } }).code, 'rate_limited'));
   await t('401 → bad_key', async () => assert.equal(mapError(401, {}).code, 'bad_key'));
   await t('PT system prompt carries glossary, EN does not', async () => { const s = CASE.suspects[0]; assert.match(systemPrompt(s, 'pt'), /sala do fogão/); assert.match(systemPrompt(s, 'pt'), /taverna/); assert.doesNotMatch(systemPrompt(s, 'en'), /fogão/); });
+  await t('PT glossary prefers "sujas de fuligem" over "fuliginosas"', async () => { const p = systemPrompt(CASE.suspects.find(x => x.id === 'lia'), 'pt'); assert.match(p, /sujo\(a\)s de fuligem/); assert.match(p, /never "fuliginoso/); });
+  await t('ui a11y markup: labels, live regions, focus style, toggle state', async () => { const h = await (await fetch(B + '/')).text();
+    for (const re of [/<label for="q"/, /<label for="player"/, /id="log" role="log" aria-live="polite"/, /id="verdict" role="status" aria-live/, /:focus-visible\{outline/, /aria-label="English"/, /aria-label="Português \(Brasil\)"/, /setAttribute\('aria-pressed',lang==='pt'\)/, /<button type="submit"/]) assert.match(h, re);
+    assert.doesNotMatch(h, /tabindex="[1-9]/); assert.doesNotMatch(h, /outline:\s*(none|0)/); });
   console.log(`\n${n}/${n} passed`);
 } finally { srv.close(); }

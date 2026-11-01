@@ -1,4 +1,10 @@
 # Changelog
+## 0.2.2 (M1 sprint 3, wording + keyboard access)
+- Portuguese suspects now say "sujas de fuligem" (soot-stained) instead of the stiff "fuliginosas".
+- The web player works fully from the keyboard: Tab reaches every control with a visible focus ring, Enter asks a question, choosing a suspect jumps to the question box, and the language toggle reports its state.
+- Screen readers get labelled inputs and announced answers and verdicts.
+- New real-browser keyboard tests (headless Chrome); 25/25 tests pass.
+
 ## 0.2.1 (M1 sprint 2, PT-BR polish)
 - Live interrogations in Portuguese now follow a fixed glossary (fogão, sala do fogão, taverna, lampião), so no English words or wrong rooms slip in.
 - New test for the PT system prompt (18/18).

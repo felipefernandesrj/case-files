@@ -694,5 +694,242 @@
    "x-ratelimit-reset": "1793491860"
   },
   "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:15.439Z",
+  "purpose": "pick-model",
+  "method": "GET",
+  "endpoint": "/models",
+  "model": null,
+  "status": 200,
+  "ms": 549,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:17.560Z",
+  "purpose": "interrogate:tomas",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 2121,
+  "usage": {
+   "prompt_tokens": 223,
+   "completion_tokens": 54,
+   "total_tokens": 277,
+   "neurons": 9.646364212036133,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG740JFXW35N5N9VVFWQHK",
+   "x-fullcup-receipt-id": "01M6BG740JFXW35N5N9VVFWQHK",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:18.857Z",
+  "purpose": "interrogate:lia",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 1295,
+  "usage": {
+   "prompt_tokens": 177,
+   "completion_tokens": 51,
+   "total_tokens": 228,
+   "neurons": 8.285454750061035,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG761MEMJZW0GYQWKMVCCX",
+   "x-fullcup-receipt-id": "01M6BG761MEMJZW0GYQWKMVCCX",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:19.821Z",
+  "purpose": "interrogate:marta",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 961,
+  "usage": {
+   "prompt_tokens": 191,
+   "completion_tokens": 46,
+   "total_tokens": 237,
+   "neurons": 8.242727279663086,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG779HQ1J82SFGJ7JXXS61",
+   "x-fullcup-receipt-id": "01M6BG779HQ1J82SFGJ7JXXS61",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:21.298Z",
+  "purpose": "interrogate:tomas",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 1475,
+  "usage": {
+   "prompt_tokens": 295,
+   "completion_tokens": 46,
+   "total_tokens": 341,
+   "neurons": 10.795454025268555,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG787X3F01E1QW6D7RX18B",
+   "x-fullcup-receipt-id": "01M6BG787X3F01E1QW6D7RX18B",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "56",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:22.423Z",
+  "purpose": "interrogate:tomas",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 1120,
+  "usage": {
+   "prompt_tokens": 344,
+   "completion_tokens": 48,
+   "total_tokens": 392,
+   "neurons": 12.152728080749512,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG79P354R18M6ZNT965EV9",
+   "x-fullcup-receipt-id": "01M6BG79P354R18M6ZNT965EV9",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "55",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:23.417Z",
+  "purpose": "interrogate:lia",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 992,
+  "usage": {
+   "prompt_tokens": 298,
+   "completion_tokens": 35,
+   "total_tokens": 333,
+   "neurons": 10.01909065246582,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG7AS285A5QT24BWEZEPMX",
+   "x-fullcup-receipt-id": "01M6BG7AS285A5QT24BWEZEPMX",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "54",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:24.294Z",
+  "purpose": "interrogate:marta",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 874,
+  "usage": {
+   "prompt_tokens": 314,
+   "completion_tokens": 31,
+   "total_tokens": 345,
+   "neurons": 10.102727890014648,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG7BR8KB3PBZ4NZDJPZJAP",
+   "x-fullcup-receipt-id": "01M6BG7BR8KB3PBZ4NZDJPZJAP",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "53",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-01T12:09:25.065Z",
+  "purpose": "interrogate:lia",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 768,
+  "usage": {
+   "prompt_tokens": 350,
+   "completion_tokens": 28,
+   "total_tokens": 378,
+   "neurons": 10.754545211791992,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6BG7CKNV3MYSHJRZNRNQC6Z",
+   "x-fullcup-receipt-id": "01M6BG7CKNV3MYSHJRZNRNQC6Z",
+   "x-fullcup-seal-by": "2026-11-02T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "52",
+   "x-ratelimit-reset": "1793535000"
+  },
+  "error": null
  }
 ]

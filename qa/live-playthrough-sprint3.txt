@@ -1,0 +1,21 @@
+status {"mode":"live","model":null}
+[en] tomas <- What did you see at 23:00?
+      -> I saw a lantern flicker near the stove room, but I couldn't make out a face. I was busy monitoring the light in the lamp room, keeping an eye on the optics and the rotation. It was a routine check, making sure everything was in order.
+[en] lia <- Did you notice anything about Marta this morning?
+      -> Marta seemed a bit...off, I suppose. Her boots were covered in soot, which was weird since I didn't recall seeing her near the lighthouse. She just brushed it off, said she'd been out early, collecting firewood or something.
+[en] marta <- Where were you last night?
+      -> I was at home, alone, all night. I didn't leave my house until this morning, so I didn't see or hear anything about the fire at the lighthouse. It's a quiet night, I like to keep to myself.
+[en] tomas <- Did you find any remains of the ledger?
+      -> In the morning, I found a charred fragment of the ledger by the stove, partially burned, with the initials "M.R." scribbled on it. It was the only thing left of that accursed book.
+[en] VERDICT correct=true score=95
+[pt] tomas <- O que você viu às 23h?
+      -> Eu vi um lampião bruxuleando perto da sala do fogão, mas não pude ver quem ou o que estava com ele. Eu estava na sala da lanterna do farol o tempo todo, monitorando a luz.
+[pt] lia <- Notou algo na Marta hoje cedo?
+      -> Sim, notei que as botas dela estavam sujas de fuligem, não sei o que aconteceu. Ela não disse nada, mas eu achei estranho.
+[pt] marta <- Onde você estava ontem à noite?
+      -> Eu estava em casa a noite toda, sozinha, sem sair. Não tenho ninguém para confirmar, mas não saí de casa ontem à noite.
+[pt] lia <- Como estavam as botas da Marta?
+      -> As botas da Marta estavam sujas de fuligem, parecia que ela havia passado pela sala do fogão ou algo parecido.
+[pt] VERDICT correct=true score=95
+culprit marta
+PT nit check: no "fuliginos*" in answers

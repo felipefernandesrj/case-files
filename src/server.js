@@ -40,8 +40,8 @@ export function mapError(status, body, lang = 'en') {
   return { code, error: L(MSG[code], lang) };
 }
 
-// M1 sprint 2: PT-BR glossary so place names stay consistent in live play (fixes "sala da estufa", "no tavern").
-export const PT_GLOSSARY = 'Use exactly these Brazilian Portuguese terms: stove = fogão; stove room = sala do fogão; lamp room = sala da lanterna do farol; lighthouse = farol; tavern = taverna (feminine: "na taverna"); harbor = porto; ledger = livro-caixa; soot = fuligem; lantern = lampião. Never leave English words in the answer.';
+// M1 sprint 2/3: PT-BR glossary so place names stay consistent in live play (fixes "sala da estufa", "no tavern"; sprint 3: "fuliginosas").
+export const PT_GLOSSARY = 'Use exactly these Brazilian Portuguese terms: stove = fogão; stove room = sala do fogão; lamp room = sala da lanterna do farol; lighthouse = farol; tavern = taverna (feminine: "na taverna"); harbor = porto; ledger = livro-caixa; soot = fuligem; covered in soot / soot-stained = sujo(a)s de fuligem (say "as botas sujas de fuligem", never "fuliginoso(a)s"); lantern = lampião. Never leave English words in the answer.';
 export function systemPrompt(s, lang = 'en') {
   const base = `You are ${s.name}, ${L(s.role, 'en')}, a suspect in "${CASE.title.en}". ${CASE.intro.en} Personality: ${s.persona.en} Hidden facts: ${s.facts} Stay in character, answer in 1-3 sentences, never mention being an AI.`;
   return lang === 'pt' ? `${base} Answer only in natural Brazilian Portuguese. ${PT_GLOSSARY}` : `${base} Answer in English.`;

@@ -27,3 +27,14 @@ Usage: 7 calls, 2,039 tokens (1,722 prompt, 317 completion), 66.8 neurons, well 
 New nit (not fixed yet): PT Lia said "botas todas fuliginosas" (valid but stiff; "sujas de fuligem" reads better).
 FullCup observation: these are the first calls after the 2026-11-01 00:00 UTC batch-receipt cutover. Headers now carry x-fullcup-receipt-id and x-fullcup-seal-by 2026-11-02T00:05Z; x-fullcup-promise and its signature are gone. Interrogation latency fell from about 4.7 s median (8 calls, 31 Oct) to about 1.7 s median (7 calls).
 Verdict: worth it. The fix is a prompt change, so it costs nothing extra per call beyond about 90 prompt tokens.
+
+## M1 sprint 3: PT wording + keyboard accessibility, 2026-11-01 12:09 UTC (Essential)
+| # | Step | Model | Result | Retries / fails | Manual fixes | Lines changed by hand |
+|---|------|-------|--------|-----------------|--------------|-----------------------|
+| 7 | live playthrough EN+PT, glossary now maps "covered in soot" to "sujas de fuligem" (8 interrogations + 1 GET /models) | llama-4-scout | 9/9 = 200. PT Lia said "as botas dela estavam sujas de fuligem" twice, no "fuliginosas"; no English words in PT; place terms right ("sala do fogão", "lampião", "sala da lanterna do farol"); both verdicts correct (EN 95, PT 95) | 0 | 0 | 0 |
+Prompt change by the agent (not by the key): one glossary entry in `PT_GLOSSARY` (src/server.js, 1 line). Keyboard accessibility in public/index.html (labels, aria-live log, role=status verdict, aria-pressed on suspects and language toggle, focus-visible outline, type=button/submit, focus moves to the question box after choosing a suspect): about 10 lines. New tests: 2 e2e (20/20) + 5 real keyboard tests in headless Chrome over CDP (test/keyboard.mjs, 5/5). `npm test`: 25/25.
+Usage: 9 calls, 2,531 tokens (2,192 prompt, 339 completion), 80.0 neurons, well under $0.001 at the neuron rate (about $0.002 even at the tier token rate).
+Headers on every chat call: x-fullcup-receipt-id (same value also as legacy x-fullcup-receipt), x-fullcup-seal-by 2026-11-02T00:05:00Z, x-ratelimit-limit 60 / remaining 59→52 / reset at the next UTC minute. Receipt ULID time matches the request start (within about 100 ms) on all 8.
+Latency: interrogation median 1.12 s (8 calls, range 0.77 to 2.12 s), down from 1.7 s in sprint 2. GET /models 0.55 s.
+FullCup observations (no wrong status codes; no refused model since no probes ran this sprint): GET /models still returns no x-ratelimit-* or receipt headers (5 of 5 calls since 31 Oct), and no call carries a cost value (no usage.cost, no x-fullcup-cost), so per-call cost can only be estimated from tokens/neurons.
+Verdict: worth it. The PT nit was fixed with one prompt line and zero rework; quality matches Essential for short role-play.
