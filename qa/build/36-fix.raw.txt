@@ -1,0 +1,17 @@
+<<<REPLACE test/keyboard.mjs>>>
+ws.on('message', data => {
+  const msg = JSON.parse(data);
+  if (msg.id && pending.has(msg.id)) {
+    pending.get(msg.id)(msg);
+    pending.delete(msg.id);
+  }
+});
+=====
+ws.addEventListener('message', data => {
+  const msg = JSON.parse(data);
+  if (msg.id && pending.has(msg.id)) {
+    pending.get(msg.id)(msg);
+    pending.delete(msg.id);
+  }
+});
+<<<END>>>

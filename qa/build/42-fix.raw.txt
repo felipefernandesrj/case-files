@@ -1,0 +1,168 @@
+<<<FILE src/server.js>>>
+import express from 'express';
+import cors from 'cors';
+import { readFileSync, existsSync, writeFileSync } from 'fs';
+import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
+
+const CASE_PATH = path.resolve('content', 'case.json');
+let caseData = {};
+try {
+  caseData = JSON.parse(readFileSync(CASE_PATH, 'utf8'));
+} catch (e) {
+  console.error('Failed to load case data:', e);
+}
+
+/**
+ * Load FullCup API key.
+ * Preference: env FULLCUP_KEY, then .fullcup-key file (trimmed).
+ * If not found, returns null.
+ */
+function loadFullCupKey() {
+  if (process.env.FULLCUP_KEY) return process.env.FULLCUP_KEY.trim();
+  const keyPath = path.resolve('.fullcup-key');
+  if (existsSync(keyPath)) {
+    try {
+      return readFileSync(keyPath, 'utf8').trim() || null;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+/**
+ * Create an Express app handling the required API.
+ * @param {Object} opts
+ * @param {boolean} opts.mock - force mock mode
+ * @param {string|null} opts.scoreFile - path to persist scores, or null for in‑memory
+ * @returns {express.Express}
+ */
+export function createServer({ mock = false, scoreFile = null } = {}) {
+  const app = express();
+
+  // Middleware
+  app.use(cors());
+  app.use(express.json());
+
+  // Serve static front‑end
+  const publicDir = path.resolve('public');
+  app.use(express.static(publicDir));
+
+  // In‑memory score store
+  let scores = [];
+
+  // Load persisted scores if a file is supplied
+  if (scoreFile) {
+    try {
+      const data = readFileSync(scoreFile, 'utf8');
+      scores = JSON.parse(data);
+    } catch {
+      scores = [];
+    }
+  }
+
+  // Determine mock mode based on key presence unless explicitly forced
+  const fullCupKey = loadFullCupKey();
+  const isMock = mock || !fullCupKey;
+
+  // Session endpoint – generate a simple UUID
+  app.post('/api/session', (req, res) => {
+    res.json({ sessionId: uuidv4() });
+  });
+
+  // Case endpoint – return case data (ignore language for now)
+  app.get('/api/case', (req, res) => {
+    // In a real implementation we would localise based on req.query.lang
+    res.json(caseData);
+  });
+
+  // Ask endpoint – forward to FullCup or mock
+  app.post('/api/ask', async (req, res) => {
+    const { sessionId, suspectId, question, lang } = req.body || {};
+    if (!sessionId || !suspectId || !question) {
+      return res.status(400).json({ error: { message: 'Missing parameters', code: 'bad_request' } });
+    }
+
+    if (isMock) {
+      // Simple deterministic mock answer
+      return res.json({ answer: `Mock answer to "${question}"` });
+    }
+
+    // Real request to FullCup API
+    try {
+      const baseUrl = process.env.FULLCUP_BASE_URL || 'https://qa-api.fullcup.ai/v1';
+      const payload = {
+        model: '@cf/meta/llama-4-scout-17b-16e-instruct',
+        messages: [{ role: 'user', content: question }],
+        max_tokens: 300,
+      };
+      const response = await fetch(`${baseUrl.replace(/\/+$/, '')}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${fullCupKey}`,
+          'Content-Type': 'application/json',
+          ...(lang ? { 'X-FullCup-Workload': lang } : {}),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        return res.status(response.status).json(err);
+      }
+
+      const data = await response.json();
+      const answer = data?.choices?.[0]?.message?.content || '';
+      res.json({ answer });
+    } catch (e) {
+      console.error('FullCup request error:', e);
+      res.status(502).json({ error: { message: 'Upstream error', code: 'upstream_error' } });
+    }
+  });
+
+  // Accuse endpoint – evaluate accusation
+  app.post('/api/accuse', (req, res) => {
+    const { sessionId, suspectId, player, lang } = req.body || {};
+    if (!sessionId || !suspectId) {
+      return res.status(400).json({ error: { message: 'Missing parameters', code: 'bad_request' } });
+    }
+
+    const correct = suspectId === caseData.culpritId;
+    const culpritName = caseData.culpritName || (caseData.suspects?.find(s => s.id === caseData.culpritId) || {}).name || '';
+    const solution = caseData.solution || '';
+    const score = correct ? 100 : 0;
+
+    // Record score
+    const entry = {
+      player: player || 'anon',
+      score,
+      questions: 0, // not tracked in this simple mock
+    };
+    scores.push(entry);
+    // Persist if needed
+    if (scoreFile) {
+      try {
+        writeFileSync(scoreFile, JSON.stringify(scores, null, 2));
+      } catch {}
+    }
+
+    res.json({ correct, culpritName, solution, score });
+  });
+
+  // Scores endpoint – return top 10 sorted by score descending
+  app.get('/api/scores', (req, res) => {
+    const top = [...scores]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10);
+    res.json(top);
+  });
+
+  // Fallback for any other route – serve index.html (SPA support)
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(publicDir, 'index.html'));
+  });
+
+  return app;
+}
+<<<END>>>

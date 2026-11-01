@@ -1,0 +1,14 @@
+<<<REPLACE test/keyboard.mjs>>>
+await waitFor(() => wsUrl !== '', 10000);
+<<<END>>>
+<<<REPLACE test/keyboard.mjs>>>
+try {
+  await waitFor(() => wsUrl !== '', 10000);
+} catch (e) {
+  console.log('SKIP keyboard (Chrome failed to start)');
+  chrome.kill();
+  fs.rmSync(userDataDir, { recursive: true, force: true });
+  server.close();
+  process.exit(0);
+}
+<<<END>>>

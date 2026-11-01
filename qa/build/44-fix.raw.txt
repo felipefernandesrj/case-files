@@ -1,0 +1,21 @@
+<<<REPLACE test/keyboard.mjs>>>
+async function getPageTargetId() {
+-  const res = await fetch(`http://127.0.0.1:${dbgPort}/json/list`);
+-  const list = await res.json();
+-  const target = list.find(t => t.type === 'page' && t.url.startsWith(baseUrl));
+-  return target.id;
++  const timeout = 10000;
++  const start = Date.now();
++  while (Date.now() - start < timeout) {
++    try {
++      const res = await fetch(`http://127.0.0.1:${dbgPort}/json/list`);
++      if (!res.ok) throw new Error('bad');
++      const list = await res.json();
++      const target = list.find(t => t.type === 'page' && t.url.startsWith(baseUrl));
++      if (target) return target.id;
++    } catch (_) {}
++    await new Promise(r => setTimeout(r, 200));
++  }
++  throw new Error('Page target not found');
+ }
+<<<END>>>

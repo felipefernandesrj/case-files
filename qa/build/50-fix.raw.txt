@@ -1,0 +1,351 @@
+<<<FILE src/case.js>>>
+import fs from 'fs';
+import path from 'path';
+
+export function loadCase(file = 'content/case.json') {
+  const p = path.resolve(file);
+  const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+  return data;
+}
+
+export function publicCase(c, lang = 'en') {
+  const title = c.title?.[lang] || '';
+  const intro = c.intro?.[lang] || '';
+  const suspects = (c.suspects || []).map(s => ({
+    id: s.id,
+    name: s.name,
+    role: s.role?.[lang] || '',
+    persona: s.persona?.[lang] || '',
+  }));
+  return { id: c.id, title, intro, suspects };
+}
+
+export function fairPlay(c) {
+  const reasons = [];
+  const suspects = c.suspects || [];
+  const clues = c.clues || [];
+  if (suspects.length !== 3) reasons.push('must have exactly 3 suspects');
+  if (!suspects.find(s => s.id === c.culprit)) reasons.push('culprit must be a suspect');
+  const culpritClues = clues.filter(cl => cl.implicates === c.culprit);
+  if (culpritClues.length < 2) reasons.push('at least 2 clues must implicate culprit');
+  const innocentIds = suspects.map(s => s.id).filter(id => id !== c.culprit);
+  innocentIds.forEach(id => {
+    const cleared = clues.some(cl => cl.clears === id);
+    if (!cleared) reasons.push(`innocent ${id} not cleared`);
+  });
+  clues.forEach(cl => {
+    if (!suspects.find(s => s.id === cl.from)) reasons.push(`clue ${cl.id} from unknown suspect`);
+    if (!cl.ask || typeof cl.ask !== 'string' || !cl.ask.trim()) reasons.push(`clue ${cl.id} missing ask`);
+    if (!Array.isArray(cl.keywords) || cl.keywords.length === 0) reasons.push(`clue ${cl.id} missing keywords`);
+    if (!cl.text?.en || !cl.text?.pt) reasons.push(`clue ${cl.id} missing text`);
+  });
+  return { ok: reasons.length === 0, reasons };
+}
+
+export function systemPrompt(c, suspectId, lang = 'en') {
+  const suspect = c.suspects.find(s => s.id === suspectId);
+  if (!suspect) return '';
+  const facts = suspect.facts || '';
+  const clues = (c.clues || []).filter(cl => cl.from === suspectId);
+  const clueTexts = clues.map(cl => cl.text?.[lang] || '').join(' ');
+  const glossaryLines = (c.glossary || []).map(g => `${g.en} = ${g.pt}`).join('\n');
+  const base = `You are ${suspect.name}, ${suspect.role?.[lang] || ''}. ${facts}`;
+  const prompt = lang === 'pt'
+    ? `${base}\nUse these exact PT-BR terms:\n${glossaryLines}\nAnswer in Portuguese, max 80 words.`
+    : `${base}\nAnswer in English, max 80 words.`;
+  return capWords(prompt, 80);
+}
+
+export function capWords(text, n = 80) {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= n) return text.trim();
+  return words.slice(0, n).join(' ') + '…';
+}
+<<<END>>>
+
+<<<FILE src/mock.js>>>
+import { loadCase } from './case.js';
+
+export function mockAnswer(c, suspectId, question, lang = 'en') {
+  const suspect = c.suspects.find(s => s.id === suspectId);
+  if (!suspect) return lang === 'pt' ? 'Desculpe, não entendi.' : 'Sorry, I did not understand.';
+  const lower = question.toLowerCase();
+  const clues = (c.clues || []).filter(cl => cl.from === suspectId);
+  for (const cl of clues) {
+    if (cl.keywords.some(kw => lower.includes(kw.toLowerCase()))) {
+      return cl.text?.[lang] || (lang === 'pt' ? 'Resposta.' : 'Answer.');
+    }
+  }
+  return lang === 'pt' ? `Resposta genérica do ${suspect.name}.` : `Generic answer from ${suspect.name}.`;
+}
+<<<END>>>
+
+<<<FILE src/messages.js>>>
+export function friendly(code, lang = 'en') {
+  const msgs = {
+    no_capacity: {
+      en: 'this Cup is out of capacity, backers can refill it',
+      pt: 'este Cup está sem capacidade, os apoiadores podem reabastecê‑lo',
+    },
+    rate_limited: {
+      en: 'try again in a moment',
+      pt: 'tente novamente em um momento',
+    },
+    bad_key: {
+      en: 'game key not configured or invalid, the creator was notified',
+      pt: 'chave do jogo não configurada ou inválida, o criador foi notificado',
+    },
+    upstream: {
+      en: 'upstream error, please try later',
+      pt: 'erro upstream, tente novamente mais tarde',
+    },
+    bad_request: {
+      en: 'bad request',
+      pt: 'requisição inválida',
+    },
+  };
+  return (msgs[code] && msgs[code][lang]) || msgs.bad_request[lang];
+}
+<<<END>>>
+
+<<<FILE src/scoreboard.js>>>
+import fs from 'fs';
+import path from 'path';
+import { randomUUID } from 'crypto';
+
+export function scoreFor(correct, questions) {
+  if (!correct) return 0;
+  const base = Math.max(10, 100 - 5 * Math.max(0, questions - 3));
+  return base;
+}
+
+export function createScoreboard(file = 'data/scores.json') {
+  const entries = [];
+  const dir = file ? path.dirname(file) : null;
+  if (file) {
+    try {
+      const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+      if (Array.isArray(data)) entries.push(...data);
+    } catch {}
+    if (dir) fs.mkdirSync(dir, { recursive: true });
+  }
+
+  function persist() {
+    if (file) fs.writeFileSync(file, JSON.stringify(entries, null, 2));
+  }
+
+  function add({ player, score, questions, correct, lang, at }) {
+    const rec = { player, score, questions, correct, lang, at: at || new Date().toISOString() };
+    entries.push(rec);
+    entries.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      if (a.questions !== b.questions) return a.questions - b.questions;
+      return new Date(a.at) - new Date(b.at);
+    });
+    while (entries.length > 100) entries.pop();
+    persist();
+  }
+
+  function top(n = 10) {
+    return entries.slice(0, n);
+  }
+
+  return { add, top };
+}
+<<<END>>>
+
+<<<FILE src/proxy.js>>>
+export function createProxy({ key, baseUrl, fetchImpl = fetch, model = '@cf/meta/llama-4-scout-17b-16e-instruct' }) {
+  async function chat(messages) {
+    const body = {
+      model,
+      messages,
+      max_tokens: 300,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${key}`,
+      'X-FullCup-Workload': 'case-files:play',
+    };
+    const res = await fetchImpl(`${baseUrl.replace(/\/+$/, '')}/chat/completions`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const txt = await res.text();
+      let errObj;
+      try {
+        errObj = JSON.parse(txt);
+      } catch {
+        errObj = { error: { message: txt, code: '' } };
+      }
+      const code = res.status;
+      const err = new Error(errObj.error?.message || 'proxy error');
+      err.code = code;
+      if (code === 402) err.code = 'no_capacity';
+      else if (code === 429) {
+        const bodyStr = txt.toLowerCase();
+        if (bodyStr.includes('capacity:empty')) err.code = 'no_capacity';
+        else err.code = 'rate_limited';
+      } else if (code === 401 || code === 403) err.code = 'bad_key';
+      else err.code = 'upstream';
+      throw err;
+    }
+    const data = await res.json();
+    const content = data.choices?.[0]?.message?.content ?? '';
+    return content;
+  }
+  return { chat };
+}
+<<<END>>>
+
+<<<FILE src/server.js>>>
+import http from 'http';
+import { randomUUID } from 'crypto';
+import { loadCase, publicCase, fairPlay, systemPrompt, capWords } from './case.js';
+import { mockAnswer } from './mock.js';
+import { friendly } from './messages.js';
+import { createScoreboard } from './scoreboard.js';
+import { createProxy } from './proxy.js';
+import fs from 'fs';
+import path from 'path';
+
+const caseData = loadCase();
+
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', chunk => (data += chunk));
+    req.on('end', () => resolve(data));
+    req.on('error', reject);
+  });
+}
+
+export function createServer(opts = {}) {
+  const {
+    caseFile,
+    scoreFile = 'data/scores.json',
+    key,
+    baseUrl,
+    fetchImpl,
+    mock = false,
+  } = opts;
+
+  const c = caseFile ? loadCase(caseFile) : caseData;
+  const scoreboard = createScoreboard(scoreFile);
+  const sessions = new Map();
+
+  const proxy = !mock
+    ? createProxy({
+        key: key || process.env.FULLCUP_KEY || '',
+        baseUrl: baseUrl || process.env.FULLCUP_BASE_URL || 'https://qa-api.fullcup.ai/v1',
+        fetchImpl,
+      })
+    : null;
+
+  async function handle(req, res) {
+    try {
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const pathname = url.pathname;
+      // Static files
+      if (pathname === '/' || pathname === '/index.html') {
+        const indexPath = path.resolve('public/index.html');
+        const data = fs.readFileSync(indexPath);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
+        return;
+      }
+      if (pathname.startsWith('/api/')) {
+        const method = req.method;
+        // status
+        if (pathname === '/api/status' && method === 'GET') {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ mode: mock ? 'mock' : 'live', caseId: c.id }));
+          return;
+        }
+        // case
+        if (pathname === '/api/case' && method === 'GET') {
+          const lang = url.searchParams.get('lang') || 'en';
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(publicCase(c, lang)));
+          return;
+        }
+        // session
+        if (pathname === '/api/session' && method === 'POST') {
+          const sid = randomUUID();
+          sessions.set(sid, { history: new Map(), accused: false, questions: 0 });
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ sessionId: sid }));
+          return;
+        }
+        // ask
+        if (pathname === '/api/ask' && method === 'POST') {
+          const body = JSON.parse(await readBody(req));
+          const { sessionId, suspectId, question, lang = 'en' } = body;
+          if (!sessions.has(sessionId)) throw { code: 'bad_request', message: 'unknown session' };
+          if (!c.suspects.find(s => s.id === suspectId)) throw { code: 'bad_request', message: 'unknown suspect' };
+          if (!question || typeof question !== 'string' || question.trim().length === 0) throw { code: 'bad_request', message: 'empty question' };
+          if (question.length > 500) throw { code: 'bad_request', message: 'question too long' };
+          const sess = sessions.get(sessionId);
+          sess.questions += 1;
+          let answer;
+          if (mock) {
+            answer = mockAnswer(c, suspectId, question, lang);
+          } else {
+            const system = systemPrompt(c, suspectId, lang);
+            const messages = [{ role: 'system', content: system }, { role: 'user', content: question }];
+            answer = await proxy.chat(messages);
+          }
+          answer = capWords(answer, 80);
+          // store history
+          const key = suspectId;
+          if (!sess.history.has(key)) sess.history.set(key, []);
+          sess.history.get(key).push({ q: question, a: answer });
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ answer }));
+          return;
+        }
+        // accuse
+        if (pathname === '/api/accuse' && method === 'POST') {
+          const body = JSON.parse(await readBody(req));
+          const { sessionId, suspectId, player = 'anon', lang = 'en' } = body;
+          if (!sessions.has(sessionId)) throw { code: 'bad_request', message: 'unknown session' };
+          const sess = sessions.get(sessionId);
+          if (sess.accused) throw { code: 'conflict', status: 409, message: 'already accused' };
+          sess.accused = true;
+          const correct = suspectId === c.culprit;
+          const culpritName = c.suspects.find(s => s.id === c.culprit)?.name || '';
+          const solution = c.solution?.[lang] || '';
+          const score = scoreFor(correct, sess.questions);
+          scoreboard.add({ player: player.slice(0, 24) || 'anon', score, questions: sess.questions, correct, lang, at: new Date().toISOString() });
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ correct, culprit: c.culprit, culpritName, solution, score, questions: sess.questions }));
+          return;
+        }
+        // scores
+        if (pathname === '/api/scores' && method === 'GET') {
+          const top = scoreboard.top(10);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(top));
+          return;
+        }
+        // unknown API
+        throw { code: 'bad_request', message: 'unknown api' };
+      }
+      // Not found
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'not_found' }));
+    } catch (e) {
+      const status = e.status || (e.code && ['no_capacity', 'rate_limited', 'bad_key', 'upstream', 'bad_request', 'conflict'].includes(e.code) ? (e.code === 'conflict' ? 409 : e.code === 'no_capacity' ? 402 : e.code === 'rate_limited' ? 429 : e.code === 'bad_key' ? 503 : e.code === 'upstream' ? 502 : e.code === 'bad_request' ? 400 : 500) : 500) : 500);
+      const code = e.code || 'internal_error';
+      const message = e.message || friendly(code, 'en');
+      res.writeHead(status, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: code, message }));
+    }
+  }
+
+  // Return a request listener (function) as required by the tests
+  return handle;
+}
+<<<END>>>

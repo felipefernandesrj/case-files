@@ -1,0 +1,11 @@
+<<<REPLACE test/keyboard.mjs>>>
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { spawn } from 'child_process';
+import http from 'http';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { createServer } from '../src/server.js';
++import WebSocket from 'ws';
++global.WebSocket = WebSocket;
+<<<END>>>

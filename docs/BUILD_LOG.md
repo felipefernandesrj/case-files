@@ -28,3 +28,9 @@ Invalid prompts: none (steering to exclude old code arrived before the first cal
 - One fix call returned only chain-of-thought text, no files.
 - Assumed `facts` is an array though the spec says string; live mode crashed the whole server (mock e2e did not cover it).
 - Ignored parts of the spec: no aria-live, only the last answer per suspect shown (no chat history), answers exceed ~80 words, the e2e prints one PASS instead of per-check. PT: "prodígio violonista" (violonista = guitarist).
+
+# Sprint 3 (keyboard/screen reader) — in progress, NOT done
+- Calls 34-54 (gpt-oss-120b): fix loop did not converge. 21 calls, ~16 empty/no-file or skipped outputs. Root cause found by PO analysis (no product edit): test/keyboard.mjs wraps the http.Server returned by createServer() in another http.createServer and omits caseFile, so the page never loads and Page.navigate hangs; the test printed nothing and the watchdog exited 0, so the model never saw a useful error. Also: nonexistent CDP 'Input.enable', waitFor not awaiting async conditions.
+- Model switch (PO/Felipi decision, 01/11): remaining calls use @cf/zai-org/glm-5.3-flash (best of the key's allowed models on the public LMArena WebDev ranking). Earlier commits keep gpt-oss-120b.
+- glm-5.3-flash via the key: 55, 56, 58 = HTTP 502 workers_ai_unavailable after ~236 s (non-stream, 22 KB prompt; also with single-file output). 57 tiny probe = 200 in 4 s. 59 with streaming (harness STREAM=1 added) = 200 after 216 s but 0 content (8 completion tokens). Conclusion: glm-5.3-flash currently cannot return a file-sized answer through the proxy (~4 min upstream cutoff).
+- Harness changes (tooling, not product): REPARSE, full-file via REPLACE, streaming, MODEL in tools/kbd-fix.sh.

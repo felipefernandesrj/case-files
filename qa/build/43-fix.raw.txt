@@ -1,0 +1,19 @@
+<<<REPLACE test/keyboard.mjs>>>
+async function getPageTargetId() {
+-  const res = await fetch(`http://127.0.0.1:${dbgPort}/json/list`);
+-  const list = await res.json();
+-  const target = list.find(t => t.type === 'page' && t.url.startsWith(baseUrl));
+-  return target.id;
++  while (true) {
++    const res = await fetch(`http://127.0.0.1:${dbgPort}/json/list`);
++    if (!res.ok) {
++      await new Promise(r => setTimeout(r, 100));
++      continue;
++    }
++    const list = await res.json();
++    const target = list.find(t => t.type === 'page' && t.url.startsWith(baseUrl));
++    if (target && target.id) return target.id;
++    await new Promise(r => setTimeout(r, 100));
++  }
+ }
+<<<END>>>

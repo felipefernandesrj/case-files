@@ -1,0 +1,6 @@
+<<<REPLACE test/keyboard.mjs>>>
+-const ws = new WebSocket(`${wsUrl}/devtools/page/${targetId}`);
++// Derive page-specific WebSocket URL from the browser endpoint
++const wsBase = wsUrl.replace(/\/devtools\/browser\/.*$/, '');
++const ws = new WebSocket(`${wsBase}/devtools/page/${targetId}`);
+<<<END>>>

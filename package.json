@@ -1,7 +1,9 @@
 {
+  "name": "fullcup-mystery",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
-    "test": "node test/e2e.mjs"
-  }
+    "test": "node test/e2e.mjs && node test/keyboard.mjs"
+  },
+  "dependencies": {}
 }

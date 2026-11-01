@@ -814,5 +814,538 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "34-kbd",
+  "at": "2026-11-01T16:34:10.906Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 50520,
+  "usage": {
+   "prompt_tokens": 4738,
+   "completion_tokens": 5113,
+   "total_tokens": 9851,
+   "neurons": 499.3671875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 343
+   },
+   {
+    "path": "package.json",
+    "lines": 9
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "35-fix",
+  "at": "2026-11-01T16:34:18.689Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 3646,
+  "usage": {
+   "prompt_tokens": 5663,
+   "completion_tokens": 343,
+   "total_tokens": 6006,
+   "neurons": 203.57168579101562,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "36-fix",
+  "at": "2026-11-01T16:34:32.230Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 9308,
+  "usage": {
+   "prompt_tokens": 5663,
+   "completion_tokens": 839,
+   "total_tokens": 6502,
+   "neurons": 237.38986206054688,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "37-fix",
+  "at": "2026-11-01T16:34:46.221Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 10254,
+  "usage": {
+   "prompt_tokens": 5747,
+   "completion_tokens": 649,
+   "total_tokens": 6396,
+   "neurons": 227.10801696777344,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "38-fix",
+  "at": "2026-11-01T16:35:27.465Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 36736,
+  "usage": {
+   "prompt_tokens": 5747,
+   "completion_tokens": 2960,
+   "total_tokens": 8707,
+   "neurons": 384.6761474609375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "39-fix",
+  "at": "2026-11-01T16:36:30.877Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 60879,
+  "usage": {
+   "prompt_tokens": 5747,
+   "completion_tokens": 3721,
+   "total_tokens": 9468,
+   "neurons": 436.5625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "39-reparse",
+  "at": "2026-11-01T16:37:03.927Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 348,
+    "fullViaReplace": true
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "40-fix",
+  "at": "2026-11-01T16:41:47.862Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 243946,
+  "usage": {
+   "prompt_tokens": 5727,
+   "completion_tokens": 871,
+   "total_tokens": 6598,
+   "neurons": 241.6080322265625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "41-fix",
+  "at": "2026-11-01T16:44:49.410Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 32576,
+  "usage": {
+   "prompt_tokens": 5727,
+   "completion_tokens": 1881,
+   "total_tokens": 7608,
+   "neurons": 310.47161865234375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "patch": true,
+    "hunksApplied": 4,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "42-fix",
+  "at": "2026-11-01T16:52:32.588Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 212083,
+  "usage": {
+   "prompt_tokens": 5751,
+   "completion_tokens": 2825,
+   "total_tokens": 8576,
+   "neurons": 375.598876953125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": [
+   "src/server.js"
+  ]
+ },
+ {
+  "label": "43-fix",
+  "at": "2026-11-01T16:55:35.970Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 13993,
+  "usage": {
+   "prompt_tokens": 5751,
+   "completion_tokens": 814,
+   "total_tokens": 6565,
+   "neurons": 238.48529052734375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "43-fix",
+  "at": "2026-11-01T16:55:40.194Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 13509,
+  "usage": {
+   "prompt_tokens": 7321,
+   "completion_tokens": 866,
+   "total_tokens": 8187,
+   "neurons": 291.9850158691406,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "44-fix",
+  "at": "2026-11-01T16:55:59.954Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 18772,
+  "usage": {
+   "prompt_tokens": 7321,
+   "completion_tokens": 668,
+   "total_tokens": 7989,
+   "neurons": 278.4850158691406,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "46-fix",
+  "at": "2026-11-01T16:56:28.777Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 16850,
+  "usage": {
+   "prompt_tokens": 7321,
+   "completion_tokens": 929,
+   "total_tokens": 8250,
+   "neurons": 296.28045654296875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "47-fix",
+  "at": "2026-11-01T16:56:47.725Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 17820,
+  "usage": {
+   "prompt_tokens": 7321,
+   "completion_tokens": 763,
+   "total_tokens": 8084,
+   "neurons": 284.9622802734375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "48-fix",
+  "at": "2026-11-01T16:58:03.415Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 45028,
+  "usage": {
+   "prompt_tokens": 7380,
+   "completion_tokens": 5462,
+   "total_tokens": 12842,
+   "neurons": 607.225830078125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": [
+   "src/case.js",
+   "src/scoreboard.js",
+   "src/server.js"
+  ]
+ },
+ {
+  "label": "49-fix",
+  "at": "2026-11-01T16:59:20.413Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 46490,
+  "usage": {
+   "prompt_tokens": 7380,
+   "completion_tokens": 3868,
+   "total_tokens": 11248,
+   "neurons": 498.5440368652344,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": [
+   "src/server.js"
+  ]
+ },
+ {
+  "label": "50-fix",
+  "at": "2026-11-01T17:00:54.946Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 63891,
+  "usage": {
+   "prompt_tokens": 7380,
+   "completion_tokens": 5399,
+   "total_tokens": 12779,
+   "neurons": 602.9303588867188,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": [
+   "src/case.js",
+   "src/mock.js",
+   "src/messages.js",
+   "src/scoreboard.js",
+   "src/proxy.js",
+   "src/server.js"
+  ]
+ },
+ {
+  "label": "51-kbd",
+  "at": "2026-11-01T17:06:26.860Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 29744,
+  "usage": {
+   "prompt_tokens": 5584,
+   "completion_tokens": 3381,
+   "total_tokens": 8965,
+   "neurons": 408.1943664550781,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 369
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "52-kbd",
+  "at": "2026-11-01T17:07:47.745Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 67089,
+  "usage": {
+   "prompt_tokens": 5781,
+   "completion_tokens": 6148,
+   "total_tokens": 11929,
+   "neurons": 603.12158203125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 369
+   }
+  ],
+  "skipped": [
+   "public/index.html"
+  ]
+ },
+ {
+  "label": "53b-kbd",
+  "at": "2026-11-01T17:17:30.768Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 249184,
+  "usage": {
+   "prompt_tokens": 5644,
+   "completion_tokens": 6070,
+   "total_tokens": 11714,
+   "neurons": 593.4443359375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 377
+   }
+  ],
+  "skipped": [
+   "public/index.html"
+  ]
+ },
+ {
+  "label": "54-kbd",
+  "at": "2026-11-01T17:34:05.412Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 83165,
+  "usage": {
+   "prompt_tokens": 5806,
+   "completion_tokens": 6482,
+   "total_tokens": 12288,
+   "neurons": 626.689697265625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "lines": 395
+   }
+  ],
+  "skipped": [
+   "public/index.html"
+  ]
+ },
+ {
+  "label": "55-kbd",
+  "at": "2026-11-01T17:46:29.785Z",
+  "model": "@cf/zai-org/glm-5.3-flash",
+  "status": 502,
+  "ms": 236749,
+  "usage": null,
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "56-kbd",
+  "at": "2026-11-01T17:52:31.959Z",
+  "model": "@cf/zai-org/glm-5.3-flash",
+  "status": 502,
+  "ms": 236499,
+  "usage": null,
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "57-probe",
+  "at": "2026-11-01T17:53:40.756Z",
+  "model": "@cf/zai-org/glm-5.3-flash",
+  "status": 200,
+  "ms": 4351,
+  "usage": {
+   "prompt_tokens": 61,
+   "completion_tokens": 35,
+   "total_tokens": 96,
+   "neurons": 2.422727346420288,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": [
+   "hello.txt"
+  ]
+ },
+ {
+  "label": "58-kbd",
+  "at": "2026-11-01T17:58:41.839Z",
+  "model": "@cf/zai-org/glm-5.3-flash",
+  "status": 502,
+  "ms": 236085,
+  "usage": null,
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "59-kbd",
+  "at": "2026-11-01T18:04:35.528Z",
+  "model": "@cf/zai-org/glm-5.3-flash",
+  "status": 200,
+  "ms": 215933,
+  "usage": {
+   "prompt_tokens": 0,
+   "completion_tokens": 8,
+   "total_tokens": 8,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 0.36363640427589417
+  },
+  "files": [],
+  "skipped": []
  }
 ]

@@ -4,10 +4,13 @@ const [promptFile, label, model = '@cf/openai/gpt-oss-120b'] = process.argv.slic
 const key = fs.readFileSync('.fullcup-key', 'utf8').trim();
 const BASE = process.env.FULLCUP_BASE_URL || 'https://qa-api.fullcup.ai/v1';
 const prompt = fs.readFileSync(promptFile, 'utf8');
+const REPARSE = process.env.REPARSE; // re-parse a saved raw output, no new call
 const sys = 'You are a senior Node.js engineer. Output ONLY files, each as:\n<<<FILE path/to/file>>>\n...full file content...\n<<<END>>>\nNo prose, no markdown fences.';
 const t0 = Date.now();
-const r = await fetch(BASE + '/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'X-FullCup-Workload': 'case-files:build-m1' }, body: JSON.stringify({ model, messages: [{ role: 'system', content: sys }, { role: 'user', content: prompt }], max_tokens: 16000 }) });
-const ms = Date.now() - t0; const txt = await r.text(); let j = {}; try { j = JSON.parse(txt); } catch {}
+const r = REPARSE ? { status: 200, text: async () => JSON.stringify({ choices: [{ message: { content: fs.readFileSync(`qa/build/${REPARSE}.raw.txt`, 'utf8') } }] }) } : await fetch(BASE + '/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'X-FullCup-Workload': 'case-files:build-m1' }, body: JSON.stringify({ model, messages: [{ role: 'system', content: sys }, { role: 'user', content: prompt }], max_tokens: 16000, stream: !!process.env.STREAM }) });
+const ms0 = Date.now() - t0; let txt = await r.text(); let j = {};
+if (/^data: /m.test(txt)) { let c = '', u = null; for (const l of txt.split('\n')) { if (!l.startsWith('data: {')) continue; try { const k = JSON.parse(l.slice(6)); c += k.choices?.[0]?.delta?.content || ''; if (k.usage) u = k.usage; } catch {} } j = { choices: [{ message: { content: c } }], usage: u }; txt = c; } else { try { j = JSON.parse(txt); } catch {} }
+const ms = Date.now() - t0;
 const out = j.choices?.[0]?.message?.content || '';
 const files = [];
 const allow = process.env.ALLOW ? process.env.ALLOW.split(',') : null; const skipped = [];
@@ -25,6 +28,7 @@ for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n=====\n([\s\S
 }
 // apply_patch-style hunks inside <<<REPLACE path>>> ... <<<END>>> (lines ' ' context, '-' old, '+' new, '@@' separators)
 for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
+  if (!/^@@/m.test(m[2]) && !/\n=====\n/.test(m[2]) && /^(import|\/\/|<!doctype|<!DOCTYPE|\{)/.test(m[2])) { if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; } fs.writeFileSync(m[1], m[2] + '\n'); files.push({ path: m[1], lines: m[2].split('\n').length, fullViaReplace: true }); continue; }
   if (!/^@@/m.test(m[2])) continue; if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   let cur = fs.readFileSync(m[1], 'utf8'); let ok = 0, bad = 0;
   for (const h of m[2].split(/^@@.*$/m)) {

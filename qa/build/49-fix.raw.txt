@@ -1,0 +1,228 @@
+<<<FILE src/server.js>>>
+import { createServer as httpCreateServer } from 'http';
+import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { randomUUID } from 'crypto';
+
+// Load case data once
+const CASE_PATH = resolve('content/case.json');
+const rawCase = JSON.parse(readFileSync(CASE_PATH, 'utf8'));
+
+// Helper to pick language fields
+function langField(obj, lang) {
+  if (!obj) return '';
+  if (typeof obj === 'string') return obj;
+  return obj[lang] ?? obj['en'] ?? '';
+}
+
+// Public case representation
+function publicCase(lang = 'en') {
+  return {
+    id: rawCase.id,
+    title: langField(rawCase.title, lang),
+    intro: langField(rawCase.intro, lang),
+    suspects: rawCase.suspects.map(s => ({
+      id: s.id,
+      name: s.name,
+      role: langField(s.role, lang),
+      persona: langField(s.persona, lang),
+    })),
+  };
+}
+
+// Mock answer generator (deterministic)
+function mockAnswer(suspectId, question, lang) {
+  const suspect = rawCase.suspects.find(s => s.id === suspectId);
+  if (!suspect) return lang === 'pt' ? 'Não sei.' : "I don't know.";
+
+  // Find a clue belonging to this suspect where keywords intersect
+  const clue = rawCase.clues.find(c => c.from === suspectId && c.keywords.some(k => {
+    const kw = k.toLowerCase();
+    return question.toLowerCase().includes(kw);
+  }));
+  if (clue) {
+    return langField(clue.text, lang);
+  }
+  return lang === 'pt' ? 'Não sei.' : "I don't know.";
+}
+
+// Simple in‑memory scoreboard
+let scores = [];
+function addScore(entry) {
+  scores.push(entry);
+  // keep only latest 100
+  if (scores.length > 100) scores.shift();
+}
+function topScores(n = 10) {
+  const sorted = [...scores].sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    if (a.questions !== b.questions) return a.questions - b.questions;
+    return a.at - b.at;
+  });
+  return sorted.slice(0, n);
+}
+
+// Server factory
+export function createServer({
+  caseFile = CASE_PATH,
+  scoreFile = resolve('data/scores.json'),
+  key,
+  baseUrl,
+  fetchImpl,
+  mock = false,
+} = {}) {
+  // session storage
+  const sessions = new Map(); // sessionId -> {questions:0, history:{suspectId: [{q,a}]}, accused:false}
+
+  // Load persisted scores if file provided
+  if (scoreFile && existsSync(scoreFile)) {
+    try {
+      scores = JSON.parse(readFileSync(scoreFile, 'utf8'));
+    } catch {}
+  }
+
+  // Persist scores when updated
+  function persistScores() {
+    if (!scoreFile) return;
+    try {
+      const dir = dirname(scoreFile);
+      if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+      writeFileSync(scoreFile, JSON.stringify(scores, null, 2));
+    } catch {}
+  }
+
+  // Request handler
+  const handler = async (req, res) => {
+    try {
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const method = req.method.toUpperCase();
+      const lang = (url.searchParams.get('lang') || 'en').toLowerCase();
+
+      // Helper to send JSON
+      const json = (code, obj) => {
+        const payload = JSON.stringify(obj);
+        res.writeHead(code, {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(payload),
+        });
+        res.end(payload);
+      };
+
+      // Helper to read request body
+      const readBody = async () => {
+        const chunks = [];
+        for await (const chunk of req) chunks.push(chunk);
+        return Buffer.concat(chunks).toString();
+      };
+
+      // Routes
+      if (method === 'GET' && url.pathname === '/') {
+        // serve index.html
+        const indexPath = resolve('public/index.html');
+        const data = readFileSync(indexPath);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
+        return;
+      }
+
+      if (method === 'GET' && url.pathname === '/api/status') {
+        json(200, { mode: mock ? 'mock' : 'live', caseId: rawCase.id });
+        return;
+      }
+
+      if (method === 'GET' && url.pathname === '/api/case') {
+        json(200, publicCase(lang));
+        return;
+      }
+
+      if (method === 'POST' && url.pathname === '/api/session') {
+        const sessionId = randomUUID();
+        sessions.set(sessionId, { questions: 0, history: {}, accused: false });
+        json(200, { sessionId });
+        return;
+      }
+
+      if (method === 'POST' && url.pathname === '/api/ask') {
+        const body = JSON.parse(await readBody());
+        const { sessionId, suspectId, question } = body;
+        const sess = sessions.get(sessionId);
+        if (!sess) return json(400, { error: 'bad_request', message: 'unknown session' });
+        if (!rawCase.suspects.find(s => s.id === suspectId))
+          return json(400, { error: 'bad_request', message: 'unknown suspect' });
+        if (!question || question.length > 500)
+          return json(400, { error: 'bad_request', message: 'invalid question' });
+
+        sess.questions += 1;
+        const answer = mock ? mockAnswer(suspectId, question, lang) : '';
+
+        if (!sess.history[suspectId]) sess.history[suspectId] = [];
+        sess.history[suspectId].push({ q: question, a: answer });
+
+        json(200, { answer });
+        return;
+      }
+
+      if (method === 'POST' && url.pathname === '/api/accuse') {
+        const body = JSON.parse(await readBody());
+        const { sessionId, suspectId, player = 'anon', lang: bodyLang } = body;
+        const sess = sessions.get(sessionId);
+        if (!sess) return json(400, { error: 'bad_request', message: 'unknown session' });
+        if (sess.accused) return json(409, { error: 'conflict', message: 'already accused' });
+        if (!rawCase.suspects.find(s => s.id === suspectId))
+          return json(400, { error: 'bad_request', message: 'unknown suspect' });
+
+        sess.accused = true;
+        const culpritId = rawCase.culprit;
+        const correct = suspectId === culpritId;
+        const culprit = rawCase.suspects.find(s => s.id === culpritId);
+        const solution = langField(rawCase.solution, lang);
+        const score = correct ? Math.max(10, 100 - 5 * Math.max(0, sess.questions - 3)) : 0;
+
+        const entry = {
+          player: player.slice(0, 24) || 'anon',
+          score,
+          questions: sess.questions,
+          at: Date.now(),
+        };
+        addScore(entry);
+        persistScores();
+
+        json(200, {
+          correct,
+          culprit: culpritId,
+          culpritName: culprit ? culprit.name : '',
+          solution,
+          score,
+          questions: sess.questions,
+        });
+        return;
+      }
+
+      if (method === 'GET' && url.pathname === '/api/scores') {
+        json(200, topScores(10));
+        return;
+      }
+
+      // Not found
+      json(404, { error: 'not_found', message: 'Route not found' });
+    } catch (e) {
+      const payload = JSON.stringify({ error: 'internal', message: e.message });
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(payload);
+    }
+  };
+
+  // Return the handler directly (can be passed to http.createServer)
+  return handler;
+}
+
+// If run directly, start a server
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const port = process.env.PORT || 3000;
+  const server = httpCreateServer(createServer({ mock: process.env.MOCK === '1' }));
+  server.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+  });
+}
+<<<END>>>
