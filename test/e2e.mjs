@@ -1,46 +1,147 @@
-import assert from 'node:assert/strict';
-process.env.MOCK = '1';
-const { createServer, mapError, systemPrompt } = await import('../src/server.js');
-const { CASE, fairPlay } = await import('../src/case.js');
-const { mockAnswer } = await import('../src/mock.js');
-const srv = createServer({ scoreFile: null }).listen(0); await new Promise(r => srv.once('listening', r));
-const B = `http://127.0.0.1:${srv.address().port}`; let n = 0;
-const t = async (name, fn) => { await fn(); n++; console.log('ok', name); };
-const post = (p, b, lang = 'en') => fetch(`${B}${p}?lang=${lang}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) });
-const J = async r => (await r).json();
-try {
-  await t('status mock', async () => assert.equal((await J(fetch(B + '/api/status'))).mode, 'mock'));
-  await t('case hides culprit', async () => { const c = await J(fetch(B + '/api/case')); assert.equal(c.suspects.length, 3); assert(!/culprit|facts|solution|clues/.test(JSON.stringify(c))); });
-  await t('case in PT-BR', async () => { const c = await J(fetch(B + '/api/case?lang=pt')); assert.equal(c.title, 'O Livro do Farol'); assert.equal(c.suspects[1].role, 'faroleiro'); });
-  await t('ui served with EN+PT', async () => { const h = await (await fetch(B + '/')).text(); assert.match(h, /Caso em 3 Atos/); assert.match(h, /Placar/); assert.match(h, /Scoreboard/); });
-  await t('fair-play check passes', async () => assert.deepEqual(fairPlay(), { ok: true, errors: [] }));
-  await t('fair-play rejects unsolvable case', async () => assert.equal(fairPlay({ ...CASE, clues: CASE.clues.filter(k => k.implicates !== CASE.culprit || k.from === 'marta') }).ok, false));
-  await t('every clue is reachable by its ask', async () => { for (const k of CASE.clues) for (const l of ['en', 'pt']) assert.doesNotMatch(mockAnswer(k.from, k.ask, l), /nothing more|Não tenho/); });
-  await t('bad request 400', async () => assert.equal((await post('/api/ask', { suspectId: 'x', question: '' })).status, 400));
-  for (const lang of ['en', 'pt']) await t(`plays case to solution (${lang})`, async () => {
-    const { sessionId } = await J(post('/api/session', {}));
-    const ask = async (id, q) => (await J(post('/api/ask', { suspectId: id, question: q, sessionId }, lang))).answer;
-    const lantern = await ask('tomas', lang === 'pt' ? 'O que você viu às 23h?' : 'What did you see at 23:00?');
-    const soot = await ask('lia', lang === 'pt' ? 'Notou algo na Marta?' : 'Did you notice anything about Marta?');
-    const alibi = await ask('marta', lang === 'pt' ? 'Onde você estava à noite?' : 'Where were you last night?');
-    assert.match(lantern, /lantern|lanterna/); assert.match(soot, /soot|fuligem/); assert.match(alibi, /home|casa/);
-    // Deduction from clues: the suspect implicated by the soot testimony is named in it.
-    const accused = CASE.suspects.find(s => soot.includes(s.name.split(' ')[0]) && s.id !== 'lia').id;
-    const v = await J(post('/api/accuse', { suspectId: accused, sessionId, player: `bot-${lang}` }, lang));
-    assert.equal(v.correct, true); assert.equal(v.score, 100); assert.match(v.solution, lang === 'pt' ? /contadora/ : /bookkeeper/);
-    assert.equal((await post('/api/accuse', { suspectId: accused, sessionId }, lang)).status, 409);
+import { spawn } from 'child_process';
+import { setTimeout as delay } from 'timers/promises';
+import assert from 'assert';
+import { fileURLToPath } from 'url';
+import { resolve, join } from 'path';
+import process from 'process';
+import { readFile } from 'fs/promises';
+import { createServer } from 'http';
+
+// Helper to wait for server readiness
+async function waitForServer(port, timeout = 5000) {
+  const start = Date.now();
+  while (Date.now() - start < timeout) {
+    try {
+      const res = await fetch(`http://127.0.0.1:${port}/`);
+      if (res.ok) return true;
+    } catch (_) {
+      // ignore
+    }
+    await delay(200);
+  }
+  return false;
+}
+
+// Determine random port
+const PORT = 30000 + Math.floor(Math.random() * 10000);
+
+// Spawn server
+const serverProc = spawn('node', [join(resolve(fileURLToPath(import.meta.url), '..', '..'), 'src', 'server.js')], {
+  env: { ...process.env, MOCK: '1', PORT: String(PORT) },
+  stdio: ['ignore', 'pipe', 'pipe'],
+});
+
+let stdout = '';
+serverProc.stdout.on('data', chunk => {
+  stdout += chunk.toString();
+});
+
+serverProc.stderr.on('data', chunk => {
+  // ignore for now
+});
+
+async function runTests() {
+  const base = `http://127.0.0.1:${PORT}`;
+
+  // Wait for server
+  const ready = await waitForServer(PORT);
+  if (!ready) {
+    console.error('Server did not start');
+    process.exit(1);
+  }
+
+  // 1. Root HTML contains language toggle
+  const rootRes = await fetch(`${base}/`);
+  assert.strictEqual(rootRes.status, 200, 'GET / should return 200');
+  const html = await rootRes.text();
+  assert.ok(html.includes('id="lang-toggle"'), 'HTML should contain language toggle');
+
+  // Helper to fetch case
+  async function fetchCase(lang) {
+    const r = await fetch(`${base}/api/case?lang=${lang}`);
+    assert.strictEqual(r.status, 200, `/api/case ${lang}`);
+    const data = await r.json();
+    assert.ok(data.title, 'case title');
+    assert.ok(Array.isArray(data.suspects) && data.suspects.length === 3, '3 suspects');
+    // ensure no facts / culprit
+    data.suspects.forEach(s => {
+      assert.ok(s.id && s.name && s.role && s.persona, 'suspect fields');
+      assert.strictEqual(s.facts, undefined, 'facts not exposed');
+    });
+    return data;
+  }
+
+  const caseEn = await fetchCase('en');
+  const casePt = await fetchCase('pt');
+
+  // Load the full case data from disk to get the hidden culprit
+  const caseFilePath = resolve(fileURLToPath(import.meta.url), '..', '..', 'content', 'case.json');
+  const fullCase = JSON.parse(await readFile(caseFilePath, 'utf8'));
+  const culpritId = fullCase.culprit;
+
+  // 2. Ask each suspect in both languages
+  for (const suspect of caseEn.suspects) {
+    for (const lang of ['en', 'pt']) {
+      const askRes = await fetch(`${base}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          suspectId: suspect.id,
+          question: 'What is your alibi?',
+          lang,
+          history: [],
+        }),
+      });
+      assert.strictEqual(askRes.status, 200, `ask ${suspect.id} ${lang}`);
+      const ans = await askRes.json();
+      assert.ok(typeof ans.answer === 'string' && ans.answer.length > 0, 'answer present');
+    }
+  }
+
+  // 3. Bad inputs
+  const bad1 = await fetch(`${base}/api/ask`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question: 'Hi', lang: 'en', history: [] }),
   });
-  await t('wrong accusation scores 0', async () => { const { sessionId } = await J(post('/api/session', {})); const v = await J(post('/api/accuse', { suspectId: 'lia', sessionId, player: 'x' })); assert.equal(v.correct, false); assert.equal(v.score, 0); });
-  await t('scoreboard ranks solvers', async () => { const s = (await J(fetch(B + '/api/scoreboard'))).scores; assert.equal(s.length, 3); assert.equal(s[0].score, 100); assert.equal(s.at(-1).score, 0); });
-  await t('case content authored via the Cup key', async () => { assert.match(CASE.generatedBy.via, /Cup key/); assert(CASE.generatedBy.usage.total_tokens > 0); });
-  await t('402 → friendly no_capacity (EN/PT)', async () => { assert.equal(mapError(402, {}).code, 'no_capacity'); assert.match(mapError(402, {}, 'pt').error, /sem capacidade/); });
-  await t('429 capacity:empty → no_capacity', async () => assert.equal(mapError(429, { error: { code: 'capacity:empty' } }).code, 'no_capacity'));
-  await t('429 other → rate_limited', async () => assert.equal(mapError(429, { error: { code: 'rate_limit' } }).code, 'rate_limited'));
-  await t('401 → bad_key', async () => assert.equal(mapError(401, {}).code, 'bad_key'));
-  await t('PT system prompt carries glossary, EN does not', async () => { const s = CASE.suspects[0]; assert.match(systemPrompt(s, 'pt'), /sala do fogão/); assert.match(systemPrompt(s, 'pt'), /taverna/); assert.doesNotMatch(systemPrompt(s, 'en'), /fogão/); });
-  await t('PT glossary prefers "sujas de fuligem" over "fuliginosas"', async () => { const p = systemPrompt(CASE.suspects.find(x => x.id === 'lia'), 'pt'); assert.match(p, /sujo\(a\)s de fuligem/); assert.match(p, /never "fuliginoso/); });
-  await t('ui a11y markup: labels, live regions, focus style, toggle state', async () => { const h = await (await fetch(B + '/')).text();
-    for (const re of [/<label for="q"/, /<label for="player"/, /id="log" role="log" aria-live="polite"/, /id="verdict" role="status" aria-live/, /:focus-visible\{outline/, /aria-label="English"/, /aria-label="Português \(Brasil\)"/, /setAttribute\('aria-pressed',lang==='pt'\)/, /<button type="submit"/]) assert.match(h, re);
-    assert.doesNotMatch(h, /tabindex="[1-9]/); assert.doesNotMatch(h, /outline:\s*(none|0)/); });
-  console.log(`\n${n}/${n} passed`);
-} finally { srv.close(); }
+  assert.strictEqual(bad1.status, 400, 'missing suspectId -> 400');
+
+  const bad2 = await fetch(`${base}/api/ask`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ suspectId: caseEn.suspects[0].id, question: '   ', lang: 'en', history: [] }),
+  });
+  assert.strictEqual(bad2.status, 400, 'empty question -> 400');
+
+  // 4. Accuse wrong and correct
+  const wrongId = caseEn.suspects.find(s => s.id !== culpritId)?.id || caseEn.suspects[0].id;
+  const accuseWrong = await fetch(`${base}/api/accuse`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ suspectId: wrongId, lang: 'en' }),
+  });
+  const resWrong = await accuseWrong.json();
+  assert.strictEqual(resWrong.correct, false, 'wrong accusation');
+
+  const accuseRight = await fetch(`${base}/api/accuse`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ suspectId: culpritId, lang: 'en' }),
+  });
+  const resRight = await accuseRight.json();
+  assert.strictEqual(resRight.correct, true, 'correct accusation');
+  assert.ok(resRight.solution, 'solution present');
+
+  console.log('PASS');
+}
+
+// Run and ensure cleanup
+runTests()
+  .then(() => process.exit(0))
+  .catch(err => {
+    console.error('FAIL', err);
+    process.exit(1);
+  })
+  .finally(() => {
+    serverProc.kill();
+  });

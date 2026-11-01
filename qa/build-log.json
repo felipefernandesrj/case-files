@@ -1,0 +1,123 @@
+[
+ {
+  "label": "01-case",
+  "at": "2026-11-01T15:47:46.697Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 27165,
+  "usage": {
+   "prompt_tokens": 728,
+   "completion_tokens": 1671,
+   "total_tokens": 2399,
+   "neurons": 137.0952911376953,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "content/case.json",
+    "lines": 57
+   }
+  ]
+ },
+ {
+  "label": "02-code",
+  "at": "2026-11-01T15:48:56.158Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 65248,
+  "usage": {
+   "prompt_tokens": 1321,
+   "completion_tokens": 5850,
+   "total_tokens": 7171,
+   "neurons": 440.8951110839844,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "package.json",
+    "lines": 7
+   },
+   {
+    "path": "src/server.js",
+    "lines": 236
+   },
+   {
+    "path": "public/index.html",
+    "lines": 97
+   },
+   {
+    "path": "test/e2e.mjs",
+    "lines": 141
+   },
+   {
+    "path": "content/case.json",
+    "lines": 26
+   }
+  ]
+ },
+ {
+  "label": "03-fix",
+  "at": "2026-11-01T15:49:43.726Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 29959,
+  "usage": {
+   "prompt_tokens": 3580,
+   "completion_tokens": 2728,
+   "total_tokens": 6308,
+   "neurons": 299.90838623046875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": []
+ },
+ {
+  "label": "04-fix",
+  "at": "2026-11-01T15:50:14.085Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 21939,
+  "usage": {
+   "prompt_tokens": 1782,
+   "completion_tokens": 1453,
+   "total_tokens": 3235,
+   "neurons": 155.767822265625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/e2e.mjs",
+    "lines": 147
+   }
+  ]
+ },
+ {
+  "label": "05-fix",
+  "at": "2026-11-01T15:51:08.537Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 34713,
+  "usage": {
+   "prompt_tokens": 2378,
+   "completion_tokens": 2218,
+   "total_tokens": 4596,
+   "neurons": 226.89044189453125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/server.js",
+    "lines": 246
+   }
+  ]
+ }
+]
