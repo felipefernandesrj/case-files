@@ -1,4 +1,8 @@
 # Changelog
+## 0.2.1 (M1 sprint 2, PT-BR polish)
+- Live interrogations in Portuguese now follow a fixed glossary (fogão, sala do fogão, taverna, lampião), so no English words or wrong rooms slip in.
+- New test for the PT system prompt (18/18).
+
 ## 0.2.0 — M1 polish
 - EN and PT-BR for case text, mock suspects, errors and UI (language toggle).
 - Scoreboard with per-session question count and one accusation per session.

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 process.env.MOCK = '1';
-const { createServer, mapError } = await import('../src/server.js');
+const { createServer, mapError, systemPrompt } = await import('../src/server.js');
 const { CASE, fairPlay } = await import('../src/case.js');
 const { mockAnswer } = await import('../src/mock.js');
 const srv = createServer({ scoreFile: null }).listen(0); await new Promise(r => srv.once('listening', r));
@@ -37,5 +37,6 @@ try {
   await t('429 capacity:empty → no_capacity', async () => assert.equal(mapError(429, { error: { code: 'capacity:empty' } }).code, 'no_capacity'));
   await t('429 other → rate_limited', async () => assert.equal(mapError(429, { error: { code: 'rate_limit' } }).code, 'rate_limited'));
   await t('401 → bad_key', async () => assert.equal(mapError(401, {}).code, 'bad_key'));
+  await t('PT system prompt carries glossary, EN does not', async () => { const s = CASE.suspects[0]; assert.match(systemPrompt(s, 'pt'), /sala do fogão/); assert.match(systemPrompt(s, 'pt'), /taverna/); assert.doesNotMatch(systemPrompt(s, 'en'), /fogão/); });
   console.log(`\n${n}/${n} passed`);
 } finally { srv.close(); }

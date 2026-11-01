@@ -40,13 +40,19 @@ export function mapError(status, body, lang = 'en') {
   return { code, error: L(MSG[code], lang) };
 }
 
+// M1 sprint 2: PT-BR glossary so place names stay consistent in live play (fixes "sala da estufa", "no tavern").
+export const PT_GLOSSARY = 'Use exactly these Brazilian Portuguese terms: stove = fogão; stove room = sala do fogão; lamp room = sala da lanterna do farol; lighthouse = farol; tavern = taverna (feminine: "na taverna"); harbor = porto; ledger = livro-caixa; soot = fuligem; lantern = lampião. Never leave English words in the answer.';
+export function systemPrompt(s, lang = 'en') {
+  const base = `You are ${s.name}, ${L(s.role, 'en')}, a suspect in "${CASE.title.en}". ${CASE.intro.en} Personality: ${s.persona.en} Hidden facts: ${s.facts} Stay in character, answer in 1-3 sentences, never mention being an AI.`;
+  return lang === 'pt' ? `${base} Answer only in natural Brazilian Portuguese. ${PT_GLOSSARY}` : `${base} Answer in English.`;
+}
 async function ask(key, s, question, history, lang) {
   if (!key) return { answer: mockAnswer(s.id, question, lang) };
   if (process.env.MOCK_STATUS) { // test hook: simulate upstream status
     const st = +process.env.MOCK_STATUS; return { status: st === 402 || st === 429 ? st : 502, ...mapError(st, { error: { code: process.env.MOCK_CODE } }, lang) };
   }
   const messages = [
-    { role: 'system', content: `You are ${s.name}, ${L(s.role, 'en')}, a suspect in "${CASE.title.en}". ${CASE.intro.en} Personality: ${s.persona.en} Hidden facts: ${s.facts} Stay in character, answer in 1-3 sentences, never mention being an AI. Answer in ${lang === 'pt' ? 'Brazilian Portuguese' : 'English'}.` },
+    { role: 'system', content: systemPrompt(s, lang) },
     ...history.slice(-10).filter(m => ['user','assistant'].includes(m.role)).map(m => ({ role: m.role, content: String(m.content).slice(0, 500) })),
     { role: 'user', content: question }
   ];

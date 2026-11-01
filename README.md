@@ -34,6 +34,6 @@ node src/cli.js --lang pt                           # play in the terminal
 ```
 Then open http://localhost:3000. The key stays on the server, and the browser never sees it.
 
-M1 status: bilingual (EN / PT-BR, toggle in the header), scoreboard (`data/scores.json`, git-ignored), fair-play clue check (`fairPlay()` in `src/case.js`), friendly messages for 402 / 429 capacity:empty / 401. Live play needs the Cup key from qa.fullcup.ai in `FULLCUP_API_KEY` or `.fullcup-key`.
+M1 status: bilingual (EN / PT-BR, toggle in the header), scoreboard (`data/scores.json`, git-ignored), fair-play clue check (`fairPlay()` in `src/case.js`), friendly messages for 402 / 429 capacity:empty / 401. Sprint 2 (polish): PT-BR glossary keeps place names consistent in live play. Live play needs the Cup key from qa.fullcup.ai in `FULLCUP_API_KEY` or `.fullcup-key`.
 
 See `docs/` for the PRD, the spec and the backbone notes.
