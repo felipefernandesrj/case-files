@@ -1,3 +1,7 @@
 # BACKBONE
-Browser UI → Node server (holds key) → FullCup proxy → Workers AI model.
-Case data in `src/case.js` (hidden facts server-side only). Mock answers are deterministic from keywords, so e2e is reproducible.
+Client (Browser) $\leftrightarrow$ Node.js Server $\leftrightarrow$ [FullCup API OR Mock Logic].
+
+- **Modules**: `server.js` (routing/sessions), `proxy.js` (LLM), `case.js` (logic/data).
+- **Data Flow**: `ask` $\rightarrow$ Server builds prompt with full case context $\rightarrow$ Proxy/Mock $\rightarrow$ Client.
+- **Security**: Hidden facts (culprit, clues) reside in `content/case.json`; `publicCase` strips secrets.
+- **Mocking**: `mock.js` uses keyword matching to provide deterministic, reproducible answers.

@@ -15,7 +15,7 @@ export function createProxy({
   fetchImpl = fetch,
   model = '@cf/meta/llama-4-scout-17b-16e-instruct',
 }) {
-  const endpoint = new URL('/chat/completions', baseUrl).toString();
+  const endpoint = baseUrl.replace(/\/$/, '') + '/chat/completions';
 
   async function chat(messages) {
     const payload = {
@@ -40,36 +40,36 @@ export function createProxy({
       return typeof content === 'string' ? content : '';
     }
 
-    // error handling
-    const err = new Error('FullCup request failed');
     const status = response.status;
+    console.error(`FullCup request failed with status: ${status}`);
 
-    let bodyJson;
+    const err = new Error('FullCup request failed');
+    err.status = status;
+
+    let bodyJson = null;
+    let errorText = '';
     try {
-      // Try JSON first
       bodyJson = await response.json();
-    } catch (_) {
+    } catch {
       try {
-        const txt = await response.text();
-        bodyJson = JSON.parse(txt);
-      } catch (_) {
-        bodyJson = null;
+        errorText = await response.text();
+      } catch {
+        // Both json() and text() failed or were unavailable
       }
     }
+
+    const errorContent = (bodyJson?.error?.code ?? bodyJson?.error?.message ?? errorText ?? '').toString().toLowerCase();
 
     if (status === 401 || status === 403) {
       err.code = 'bad_key';
     } else if (status === 402) {
       err.code = 'no_capacity';
     } else if (status === 429) {
-      const lower = (bodyJson?.error?.code ?? bodyJson?.error?.message ?? '').toString().toLowerCase();
-      if (lower.includes('capacity:empty')) {
+      if (errorContent.includes('capacity:empty')) {
         err.code = 'no_capacity';
       } else {
         err.code = 'rate_limited';
       }
-    } else if (status >= 500 && status < 600) {
-      err.code = 'upstream';
     } else {
       err.code = 'upstream';
     }

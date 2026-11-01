@@ -34,3 +34,36 @@ Invalid prompts: none (steering to exclude old code arrived before the first cal
 - Model switch (PO/Felipi decision, 01/11): remaining calls use @cf/zai-org/glm-5.3-flash (best of the key's allowed models on the public LMArena WebDev ranking). Earlier commits keep gpt-oss-120b.
 - glm-5.3-flash via the key: 55, 56, 58 = HTTP 502 workers_ai_unavailable after ~236 s (non-stream, 22 KB prompt; also with single-file output). 57 tiny probe = 200 in 4 s. 59 with streaming (harness STREAM=1 added) = 200 after 216 s but 0 content (8 completion tokens). Conclusion: glm-5.3-flash currently cannot return a file-sized answer through the proxy (~4 min upstream cutoff).
 - Harness changes (tooling, not product): REPARSE, full-file via REPLACE, streaming, MODEL in tools/kbd-fix.sh.
+
+- Model switch 2 (Felipi's choice, from his own experience, 01/11 15:10 BRT): @cf/google/gemma-4-26b-a4b-it for all remaining calls, one file per call. (A deepseek-v4-flash call, 60-kbd, was started then cancelled before logging.)
+
+# Sprint 3 result (gemma-4-26b-a4b-it, calls 61-70, all 200, all produced files)
+| # | Target | Result |
+|---|---|---|
+| 61 | test/keyboard.mjs rewrite with diagnosis | runs; Eval error (escaped template var) |
+| 62 | keyboard fix | 8/9; history check wrong (page correct) |
+| 63 | keyboard fix + a11y names, no focus trap | 10/10 PASS |
+| 64 | src/proxy.js: live bug, new URL dropped /v1 -> every live ask failed 'upstream' (sprint 2 regression, mock e2e did not catch it) | live EN+PT OK; broke capacity:empty mapping (2 e2e FAIL) |
+| 65 | src/case.js: answers <60 words in character (they hit the 80-word cap mid-sentence) | live answers 29/39 words |
+| 66 | new test/proxy.mjs (URL, auth, error codes, no key leak) | 12/12 PASS |
+| 67 | proxy fix (read error body via json first) | e2e 36/36 |
+| 68-70 | docs/SPEC.md, docs/BACKBONE.md, README.md to the new game | accepted |
+- npm test: e2e 36 + proxy 12 + keyboard 10 = 58 checks, 0 fail. Live EN+PT verified via key on :3000.
+- Manual edits: 1 line (package.json test script adds test/proxy.mjs).
+
+# Totals, all rebuild sprints (qa/build-log.json)
+| Model | Calls | Calls with files | Tokens in/out | Neurons | ~US$ |
+|---|---|---|---|---|---|
+| gpt-oss-120b (sprints 1-3) | 54 (+1 re-parse, no call) | 31 | 304 800 / 177 895 | 21 827 | 0.240 |
+| glm-5.3-flash | 5 (4 failed, 1 probe) | 0 | 61 / 43 | 3 | 0.000 |
+| gemma-4-26b-a4b-it | 10 | 10 | 40 853 / 57 800 | 1 924 | 0.021 |
+| Total | 69 | 41 | 345 714 / 235 738 | 23 754 | 0.261 |
+Final product: 2 384 lines (src, page, tests, case, package), all model-written; ~10 200 lines generated in total (~7 800 discarded/regenerated); manual 1 line.
+
+# FullCup QA finding (for PO decision): glm-5.3-flash cutoff
+- Model @cf/zai-org/glm-5.3-flash via qa-api.fullcup.ai/v1/chat/completions, Cup key, max_tokens 16000.
+- Request ~22 KB prompt (~6-7k tokens), expects a ~5-8k-token file. Non-stream (calls 55, 56; 58 with single-file output): HTTP 502 {"error":"workers_ai_unavailable"} after 236.7 s / 236.5 s / 236.1 s, usage null.
+- Stream on (59): HTTP 200, event-stream ends after 215.9 s with empty content, usage 0 prompt / 8 completion tokens, 0.36 neurons.
+- Same model, tiny prompt (57): 200 in 4.4 s. gemma-4-26b with similar size: 200 in 175 s with 8 720 tokens out.
+- Debit: the harness records no receipt header for failed calls, so debit was not verified; usage null on 502s suggests no metered debit, the stream call reported 0.36 neurons. Check the Cup ledger for 17:42-18:08 UTC 01/11.
+- Likely a ~236 s upstream/proxy timeout with glm reasoning tokens consuming the time; the proxy should return a clear timeout code, and stream mode should not end with 200 + empty content.

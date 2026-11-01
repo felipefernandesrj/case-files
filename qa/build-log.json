@@ -1416,5 +1416,166 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "64-proxy",
+  "at": "2026-11-01T18:23:11.216Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 38051,
+  "usage": {
+   "prompt_tokens": 1130,
+   "completion_tokens": 3338,
+   "total_tokens": 4468,
+   "neurons": 101.30908966064453,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/proxy.js",
+    "lines": 76
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "65-case",
+  "at": "2026-11-01T18:27:41.680Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 135753,
+  "usage": {
+   "prompt_tokens": 1712,
+   "completion_tokens": 6902,
+   "total_tokens": 8614,
+   "neurons": 203.79998779296875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "lines": 162
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "66-proxytest",
+  "at": "2026-11-01T18:28:22.424Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 40670,
+  "usage": {
+   "prompt_tokens": 891,
+   "completion_tokens": 4662,
+   "total_tokens": 5553,
+   "neurons": 135.24545288085938,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/proxy.mjs",
+    "lines": 187
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "67-fix",
+  "at": "2026-11-01T18:30:15.357Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 102130,
+  "usage": {
+   "prompt_tokens": 836,
+   "completion_tokens": 5261,
+   "total_tokens": 6097,
+   "neurons": 151.08181762695312,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/proxy.js",
+    "lines": 81
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "69-backbone",
+  "at": "2026-11-01T18:31:15.998Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 44532,
+  "usage": {
+   "prompt_tokens": 5404,
+   "completion_tokens": 2184,
+   "total_tokens": 7588,
+   "neurons": 108.69090270996094,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "docs/BACKBONE.md",
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "68-spec",
+  "at": "2026-11-01T18:31:16.837Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 45370,
+  "usage": {
+   "prompt_tokens": 5630,
+   "completion_tokens": 2203,
+   "total_tokens": 7833,
+   "neurons": 87.40907287597656,
+   "prompt_tokens_details": {
+    "cached_tokens": 5248
+   }
+  },
+  "files": [
+   {
+    "path": "docs/SPEC.md",
+    "lines": 77
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "70-readme",
+  "at": "2026-11-01T18:31:59.072Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 87605,
+  "usage": {
+   "prompt_tokens": 6156,
+   "completion_tokens": 4176,
+   "total_tokens": 10332,
+   "neurons": 169.8545379638672,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "README.md",
+    "lines": 39
+   }
+  ],
+  "skipped": []
  }
 ]

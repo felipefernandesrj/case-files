@@ -59,6 +59,8 @@ export function systemPrompt(c, suspectId, lang) {
     }
   }
 
+  prompt += `\n\nRespond in character. Use at most 3 short sentences and stay under 60 words. Never reveal you are an AI. Respond in ${l === 'pt' ? 'Portuguese' : 'English'}.`;
+
   return prompt;
 }
 

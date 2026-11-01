@@ -1,11 +1,77 @@
 # SPEC
-## Server (`src/server.js`, Node stdlib only)
-- `GET /` static UI from `public/`.
-- `GET /api/case` public case (no culprit).
-- `POST /api/ask {suspectId, question, history[]}` → `{answer}`; errors `{error, code}` with code `no_capacity` (402/429 capacity:empty), `rate_limited`, `upstream_error`.
-- `POST /api/accuse {suspectId}` → `{correct, culprit, solution}`.
-- `GET /api/status` → `{mode: "mock"|"live", model}`.
-## Upstream
-`POST {FULLCUP_BASE_URL}/chat/completions`, `Authorization: Bearer <key>`, `X-FullCup-Workload: caso-em-3-atos:interrogate`. Model: `FULLCUP_MODEL` or first `@cf/` id from `GET /v1/models` (chat-capable heuristic: contains `instruct` or `llama`).
-## Key
-`FULLCUP_API_KEY` env, else `.fullcup-key` file (gitignored). None → mock mode (`MOCK=1` forces it).
+
+## Server (`src/server.js`)
+
+### Routes
+
+#### Static
+- `GET /`: Serves `public/index.html`.
+
+#### API
+- `GET /api/status`
+  - Returns `{ mode: 'mock' | 'live', caseId: string }`.
+
+- `GET /api/case?lang=[pt|en]`
+  - Returns the public version of the case (no secrets).
+  - Shape: `{ id, title, intro, suspects: [{ id, name, role, persona }] }`.
+
+- `POST /api/session`
+  - Starts a new game session.
+  - Returns `{ sessionId: string }`.
+
+- `POST /api/ask`
+  - Body: `{ sessionId, suspectId, question, lang?: 'pt' | 'en' }`.
+  - Returns: `{ answer: string, questions: number }`.
+  - Errors:
+    - `400`: `unknown session`, `unknown suspect`, `empty question`, `question too long`.
+    - `402`: `no_capacity` (upstream capacity exhausted).
+    - `429`: `rate_limited` (upstream rate limit).
+    - `502`: `upstream` (upstream error).
+    - `503`: `bad_key` (invalid API key).
+
+- `POST /api/accuse`
+  - Body: `{ sessionId, suspectId, player?: string, lang?: 'pt' | 'en' }`.
+  - Returns: `{ correct: boolean, culprit: string, culpritName: string, solution: string, score: number, questions: number }`.
+  - Errors:
+    - `400`: `unknown session`, `unknown suspect`.
+    - `409`: `already accused`.
+
+- `GET /api/scores`
+  - Returns the top 10 scores for the current case.
+
+### Key & Mode Resolution
+1. **Key**: Provided via `createServer` options, or environment variable `FULLCUP_KEY`, or a `.fullcup-key` file in the working directory.
+2. **Mock Mode**: Enabled if `mock: true` is passed to `createServer`, if `process.env.MOCK === '1'`, or if no key is found.
+
+### Scoreboard
+- Persisted to `data/scores.json` (default).
+- Records player name (max 24 chars), score, questions asked, correctness, language, and case ID.
+
+## Upstream (`src/proxy.js`)
+
+The proxy communicates with the FullCup API:
+- **Endpoint**: `{baseUrl}/chat/completions`
+- **Method**: `POST`
+- **Headers**:
+  - `Authorization: Bearer <key>`
+  - `Content-Type: application/json`
+  - `X-FullCup-Workload: case-files:play`
+- **Payload**: `{ model, messages, max_tokens: 300 }`
+- **Default Model**: `@cf/meta/llama-4-scout-17b-16e-instruct`
+
+### Error Mapping
+- `401` / `403` $\rightarrow$ `bad_key`
+- `402` $\rightarrow$ `no_capacity`
+- `429` (if body contains `capacity:empty`) $\rightarrow$ `no_capacity`
+- `429` (otherwise) $\rightarrow$ `rate_limited`
+- All other non-200 $\rightarrow$ `upstream`
+
+## Testing
+
+Run the full test suite via npm:
+`npm test`
+
+This executes:
+1. `node test/e2e.mjs` (End-to-end flows)
+2. `node test/proxy.mjs` (Upstream communication)
+3. `node test/keyboard.mjs` (Manual/Keyboard interaction)
