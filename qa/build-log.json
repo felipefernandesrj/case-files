@@ -119,5 +119,700 @@
     "lines": 246
    }
   ]
+ },
+ {
+  "label": "06-case-v2",
+  "at": "2026-11-01T15:57:09.574Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 73044,
+  "usage": {
+   "prompt_tokens": 3324,
+   "completion_tokens": 3724,
+   "total_tokens": 7048,
+   "neurons": 359.67205810546875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "content/case.json",
+    "lines": 143
+   }
+  ]
+ },
+ {
+  "label": "07-lib",
+  "at": "2026-11-01T15:58:01.708Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 45200,
+  "usage": {
+   "prompt_tokens": 1967,
+   "completion_tokens": 4470,
+   "total_tokens": 6437,
+   "neurons": 367.358642578125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "lines": 141
+   },
+   {
+    "path": "src/proxy.js",
+    "lines": 77
+   },
+   {
+    "path": "src/mock.js",
+    "lines": 32
+   },
+   {
+    "path": "src/messages.js",
+    "lines": 34
+   },
+   {
+    "path": "src/scoreboard.js",
+    "lines": 92
+   }
+  ]
+ },
+ {
+  "label": "08-server",
+  "at": "2026-11-01T15:59:10.788Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 63758,
+  "usage": {
+   "prompt_tokens": 4855,
+   "completion_tokens": 4995,
+   "total_tokens": 9850,
+   "neurons": 495.0444641113281,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/server.js",
+    "lines": 294
+   },
+   {
+    "path": "src/cli.js",
+    "lines": 185
+   }
+  ]
+ },
+ {
+  "label": "09-fix",
+  "at": "2026-11-01T16:01:22.529Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 113710,
+  "usage": {
+   "prompt_tokens": 6276,
+   "completion_tokens": 7265,
+   "total_tokens": 13541,
+   "neurons": 695.030517578125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "lines": 146
+   },
+   {
+    "path": "src/cli.js",
+    "lines": 194
+   },
+   {
+    "path": "src/server.js",
+    "lines": 34
+   },
+   {
+    "path": "src/scoreboard.js",
+    "lines": 99
+   },
+   {
+    "path": "src/server.js",
+    "lines": 295
+   }
+  ]
+ },
+ {
+  "label": "10-fix",
+  "at": "2026-11-01T16:02:11.285Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 34040,
+  "usage": {
+   "prompt_tokens": 2080,
+   "completion_tokens": 1717,
+   "total_tokens": 3797,
+   "neurons": 183.24957275390625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/cli.js",
+    "lines": 197
+   }
+  ]
+ },
+ {
+  "label": "11-fix",
+  "at": "2026-11-01T16:03:43.107Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 56273,
+  "usage": {
+   "prompt_tokens": 1955,
+   "completion_tokens": 2811,
+   "total_tokens": 4766,
+   "neurons": 253.86322021484375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/cli.js",
+    "lines": 200
+   }
+  ]
+ },
+ {
+  "label": "12-fix",
+  "at": "2026-11-01T16:04:20.632Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 30661,
+  "usage": {
+   "prompt_tokens": 1965,
+   "completion_tokens": 2207,
+   "total_tokens": 4172,
+   "neurons": 212.99960327148438,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": []
+ },
+ {
+  "label": "13-fix",
+  "at": "2026-11-01T16:04:45.769Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 19505,
+  "usage": {
+   "prompt_tokens": 2010,
+   "completion_tokens": 1759,
+   "total_tokens": 3769,
+   "neurons": 183.88595581054688,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/cli.js",
+    "lines": 203
+   }
+  ]
+ },
+ {
+  "label": "14-page",
+  "at": "2026-11-01T16:06:39.437Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 108683,
+  "usage": {
+   "prompt_tokens": 1988,
+   "completion_tokens": 5509,
+   "total_tokens": 7497,
+   "neurons": 438.8677062988281,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "lines": 232
+   },
+   {
+    "path": "src/server.js",
+    "lines": 225
+   }
+  ]
+ },
+ {
+  "label": "15-e2e",
+  "at": "2026-11-01T16:07:37.240Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 34959,
+  "usage": {
+   "prompt_tokens": 2420,
+   "completion_tokens": 1513,
+   "total_tokens": 3933,
+   "neurons": 180.1586151123047,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "15b-e2e",
+  "at": "2026-11-01T16:10:00.632Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 130638,
+  "usage": {
+   "prompt_tokens": 2444,
+   "completion_tokens": 7366,
+   "total_tokens": 9810,
+   "neurons": 579.9902954101562,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/e2e.mjs",
+    "lines": 601
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "16-fix",
+  "at": "2026-11-01T16:10:34.156Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 24674,
+  "usage": {
+   "prompt_tokens": 10414,
+   "completion_tokens": 1543,
+   "total_tokens": 11957,
+   "neurons": 436.55712890625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "lines": 146
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "17-fix",
+  "at": "2026-11-01T16:14:33.147Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 502,
+  "ms": 235520,
+  "usage": null,
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "18-fix",
+  "at": "2026-11-01T16:18:03.435Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 210056,
+  "usage": {
+   "prompt_tokens": 11606,
+   "completion_tokens": 10840,
+   "total_tokens": 22446,
+   "neurons": 1108.370361328125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/server.js",
+    "lines": 291
+   },
+   {
+    "path": "src/proxy.js",
+    "lines": 81
+   },
+   {
+    "path": "src/server.js",
+    "lines": 290
+   },
+   {
+    "path": "src/proxy.js",
+    "lines": 81
+   },
+   {
+    "path": "src/case.js",
+    "lines": 168
+   }
+  ],
+  "skipped": [
+   "src/mock.js",
+   "src/messages.js",
+   "src/scoreboard.js",
+   "src/cli.js",
+   "src/scoreboard.js",
+   "src/cli.js",
+   "src/mock.js",
+   "src/messages.js",
+   "src/scoreboard.js",
+   "src/cli.js"
+  ]
+ },
+ {
+  "label": "19-fix",
+  "at": "2026-11-01T16:18:53.438Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 49681,
+  "usage": {
+   "prompt_tokens": 10243,
+   "completion_tokens": 2685,
+   "total_tokens": 12928,
+   "neurons": 508.97991943359375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "lines": 118
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "20-fix",
+  "at": "2026-11-01T16:20:20.913Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 45918,
+  "usage": {
+   "prompt_tokens": 6762,
+   "completion_tokens": 3644,
+   "total_tokens": 10406,
+   "neurons": 463.6077880859375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": [
+   "src/server.js"
+  ]
+ },
+ {
+  "label": "21-fix",
+  "at": "2026-11-01T16:21:35.726Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 47172,
+  "usage": {
+   "prompt_tokens": 6822,
+   "completion_tokens": 2444,
+   "total_tokens": 9266,
+   "neurons": 383.6986999511719,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "22-fix",
+  "at": "2026-11-01T16:23:51.101Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 126098,
+  "usage": {
+   "prompt_tokens": 6840,
+   "completion_tokens": 6829,
+   "total_tokens": 13669,
+   "neurons": 683.2485961914062,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "test/e2e.mjs",
+    "lines": 612
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "23-fix",
+  "at": "2026-11-01T16:24:51.090Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 55608,
+  "usage": {
+   "prompt_tokens": 9608,
+   "completion_tokens": 3517,
+   "total_tokens": 13125,
+   "neurons": 545.502685546875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "24-fix",
+  "at": "2026-11-01T16:26:20.582Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 88138,
+  "usage": {
+   "prompt_tokens": 9608,
+   "completion_tokens": 3343,
+   "total_tokens": 12951,
+   "neurons": 533.6390991210938,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "25-fix",
+  "at": "2026-11-01T16:27:03.470Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 41592,
+  "usage": {
+   "prompt_tokens": 9608,
+   "completion_tokens": 2720,
+   "total_tokens": 12328,
+   "neurons": 491.16180419921875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "26-fix",
+  "at": "2026-11-01T16:28:16.905Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 56648,
+  "usage": {
+   "prompt_tokens": 9608,
+   "completion_tokens": 3108,
+   "total_tokens": 12716,
+   "neurons": 517.6163330078125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "patch": true,
+    "hunksApplied": 2,
+    "hunksFailed": 0
+   },
+   {
+    "path": "src/cli.js",
+    "patch": true,
+    "hunksApplied": 0,
+    "hunksFailed": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "27-fix",
+  "at": "2026-11-01T16:28:54.971Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 36530,
+  "usage": {
+   "prompt_tokens": 9419,
+   "completion_tokens": 2652,
+   "total_tokens": 12071,
+   "neurons": 480.5118408203125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   },
+   {
+    "path": "src/cli.js",
+    "patch": true,
+    "hunksApplied": 4,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "28-fix",
+  "at": "2026-11-01T16:29:08.925Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 12385,
+  "usage": {
+   "prompt_tokens": 9695,
+   "completion_tokens": 656,
+   "total_tokens": 10351,
+   "neurons": 353.2027587890625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "29-fix",
+  "at": "2026-11-01T16:29:48.729Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 33941,
+  "usage": {
+   "prompt_tokens": 1762,
+   "completion_tokens": 3040,
+   "total_tokens": 4802,
+   "neurons": 263.3359680175781,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "30-fix",
+  "at": "2026-11-01T16:29:56.694Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 6185,
+  "usage": {
+   "prompt_tokens": 1762,
+   "completion_tokens": 724,
+   "total_tokens": 2486,
+   "neurons": 105.42693328857422,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "31-fix",
+  "at": "2026-11-01T16:30:10.374Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 11944,
+  "usage": {
+   "prompt_tokens": 1790,
+   "completion_tokens": 1042,
+   "total_tokens": 2832,
+   "neurons": 127.99964904785156,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "32-fix",
+  "at": "2026-11-01T16:31:15.821Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 56232,
+  "usage": {
+   "prompt_tokens": 7931,
+   "completion_tokens": 3209,
+   "total_tokens": 11140,
+   "neurons": 471.1439208984375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "33-case-js",
+  "at": "2026-11-01T16:33:00.143Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 91879,
+  "usage": {
+   "prompt_tokens": 9749,
+   "completion_tokens": 8591,
+   "total_tokens": 18340,
+   "neurons": 895.9434814453125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "lines": 160
+   },
+   {
+    "path": "test/e2e.mjs",
+    "lines": 616
+   }
+  ],
+  "skipped": []
  }
 ]

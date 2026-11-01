@@ -6,7 +6,7 @@
   },
   "intro": {
     "en": "During a rehearsal at the Aurora Music Academy, the priceless Stradivarius violin disappears from the instrument room. Three people were present that night: the charismatic conductor, a nervous violin prodigy, and the longtime janitor. Who took the priceless instrument?",
-    "pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, a prodígio violonista nervosa e o zelador de longa data. Quem levou o precioso instrumento?"
+    "pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, a prodígio violinista nervosa e o zelador de longa data. Quem levou o precioso instrumento?"
   },
   "culprit": "carlos",
   "suspects": [
@@ -49,6 +49,92 @@
       },
       "facts": "You are Carlos Mendes. You have been cleaning the academy for years and have access to all rooms. You stole the Stradivarius because you need money to pay for your daughter's surgery. You hid the violin in the back of your cart, planning to sell it later. You will claim you were only sweeping the hallway at the time and that you saw Lorenzo lingering near the case, implying he might have left it unattended. You will never directly admit the theft; you will deflect, lie about your whereabouts, and try to shift blame onto Lorenzo."
     }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "lorenzo",
+      "ask": "Did you notice the condition of the violin case lock?",
+      "keywords": ["lock", "fechadura"],
+      "implicates": "carlos",
+      "clears": null,
+      "text": {
+        "en": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+        "pt": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "maya",
+      "ask": "What did you see about the lock and the cart?",
+      "keywords": ["scratch", "arranhão", "cart", "carrinho"],
+      "implicates": "carlos",
+      "clears": null,
+      "text": {
+        "en": "The lock had a faint scratch, and I noticed the janitor's cart had a hidden wooden compartment.",
+        "pt": "A fechadura tinha um arranhão leve, e notei que o carrinho do zelador tinha um compartimento de madeira escondido."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "maya",
+      "ask": "Did you see Lorenzo near the case after you entered?",
+      "keywords": ["lorenzo", "maestro", "lorenzo near", "lorenzo perto"],
+      "implicates": null,
+      "clears": "lorenzo",
+      "text": {
+        "en": "I saw Lorenzo arrive earlier, but after I entered the room he was already away, not near the case.",
+        "pt": "Vi o Lorenzo chegar mais cedo, mas depois que entrei na sala ele já tinha saído, não estava perto da caixa."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "lorenzo",
+      "ask": "Did you notice anything about Maya's behavior?",
+      "keywords": ["maya", "violinist", "violinista", "nervous", "nervosa"],
+      "implicates": null,
+      "clears": "maya",
+      "text": {
+        "en": "Maya seemed focused on her practice and had no reason to steal the instrument.",
+        "pt": "Maya parecia concentrada em sua prática e não tinha motivo para roubar o instrumento."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "lorenzo",
+      "ask": "Where were you after retrieving the violin?",
+      "keywords": ["after", "depois", "room", "sala"],
+      "implicates": null,
+      "clears": "lorenzo",
+      "text": {
+        "en": "After I got the violin, I went straight to the rehearsal hall and stayed there.",
+        "pt": "Depois que peguei o violino, fui direto para a sala de ensaio e fiquei lá."
+      }
+    },
+    {
+      "id": "c6",
+      "from": "carlos",
+      "ask": "Why were you in the hallway that night?",
+      "keywords": ["hallway", "corredor", "surgery", "filho", "dinheiro"],
+      "implicates": "carlos",
+      "clears": null,
+      "text": {
+        "en": "I was sweeping the hallway, but I needed money for my daughter's surgery.",
+        "pt": "Eu estava varrendo o corredor, mas precisava de dinheiro para a cirurgia da minha filha."
+      }
+    }
+  ],
+  "glossary": [
+    { "en": "violin", "pt": "violino" },
+    { "en": "case", "pt": "caixa" },
+    { "en": "lock", "pt": "fechadura" },
+    { "en": "cart", "pt": "carrinho" },
+    { "en": "janitor", "pt": "zelador" },
+    { "en": "conductor", "pt": "maestro" },
+    { "en": "student", "pt": "estudante" },
+    { "en": "surgery", "pt": "cirurgia" },
+    { "en": "money", "pt": "dinheiro" },
+    { "en": "rehearsal", "pt": "ensaio" }
   ],
   "solution": {
     "en": "The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",

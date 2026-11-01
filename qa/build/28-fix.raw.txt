@@ -1,0 +1,12 @@
+<<<REPLACE src/case.js>>>
+-  if (cl.implicates == null || cl.implicates !== culprit) {
+-    reasons.push('clue_implicates_invalid');
+-    break;
+-  }
++  // If the clue explicitly defines an implicates field, it must match the culprit.
++  // Missing (undefined) implicates are acceptable, as they default to the culprit.
++  if (cl.implicates !== undefined && cl.implicates !== culprit) {
++    reasons.push('clue_implicates_invalid');
++    break;
++  }
+<<<END>>>

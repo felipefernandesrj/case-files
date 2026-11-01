@@ -1,0 +1,218 @@
+<<<REPLACE test/e2e.mjs>>>
+-  test('status mock mode', async () => {
+-  const server = createServer({ caseFile: CASE_FILE, mock: true });
+-  await once(server, 'listening');
++  test('status mock mode', async () => {
++  const server = createServer({ caseFile: CASE_FILE, mock: true });
++  server.listen(0);
++  await once(server, 'listening');
+   const { port } = server.address();
+   const { status, data } = await request(port, 'GET', '/api/status');
+   server.close();
+   if (status !== 200) throw `status ${status}`;
+@@ -138,7 +139,8 @@
+ test('case EN public fields', async () => {
+-  const server = createServer({ caseFile: CASE_FILE, mock: true });
+-  await once(server, 'listening');
++  const server = createServer({ caseFile: CASE_FILE, mock: true });
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+   const { status, data } = await request(port, 'GET', '/api/case?lang=en');
+   server.close();
+@@ -149,7 +151,8 @@
+ test('case PT public fields differ from EN', async () => {
+-  const server = createServer({ caseFile: CASE_FILE, mock: true });
+-  await once(server, 'listening');
++  const server = createServer({ caseFile: CASE_FILE, mock: true });
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+   const { status, data } = await request(port, 'GET', '/api/case?lang=pt');
+   server.close();
+@@ -160,7 +163,8 @@
+ test('public index.html contains required ids and attributes', async () => {
+-  const server = createServer({ caseFile: CASE_FILE, mock: true });
+-  await once(server, 'listening');
++  const server = createServer({ caseFile: CASE_FILE, mock: true });
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+   const { status, text } = await request(port, 'GET', '/');
+   server.close();
+@@ -171,7 +175,8 @@
+ async function startSharedMock() {
+-  sharedServer = createServer({ caseFile: CASE_FILE, mock: true });
+-  await once(sharedServer, 'listening');
++  sharedServer = createServer({ caseFile: CASE_FILE, mock: true });
++  sharedServer.listen(0); await once(sharedServer, 'listening');
+   sharedPort = sharedServer.address().port;
+ }
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('session creation', async () => {
+-  await startSharedMock();
++  await startSharedMock();
+   const { status, data } = await request(sharedPort, 'POST', '/api/session');
+   if (status !== 200) throw `status ${status}`;
+   if (!data.sessionId) throw 'no sessionId';
+   await stopSharedMock();
+ });
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('proxy maps 402 to no_capacity', async () => {
+   const fakeFetch = async () => ({
+@@
+   const proxy = createProxy({ key: 'k', baseUrl: 'http://x', fetchImpl: fakeFetch });
+   try {
+@@
+   });
+ });
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('server returns friendly messages for proxy errors EN', async () => {
+   const fakeFetch = async () => ({
+@@
+   const server = createServer({
+     caseFile: CASE_FILE,
+     mock: false,
+     key: 'test-secret-key',
+     baseUrl: 'http://x',
+     fetchImpl: fakeFetch,
+   });
+-  await once(server, 'listening');
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+   const sess = (await request(port, 'POST', '/api/session')).data.sessionId;
+   const res = await request(port, 'POST', '/api/ask', {
+@@
+   server.close();
+   if (res.status !== 402) throw `status ${res.status}`;
+   if (!res.data.error) throw 'no error code';
+   if (!res.data.message.includes(friendly('no_capacity', 'en'))) throw 'friendly missing';
+   if (res.text.includes('test-secret-key')) throw 'key leaked';
+ });
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('server returns friendly messages for proxy errors PT', async () => {
+   const fakeFetch = async () => ({
+@@
+   const server = createServer({
+     caseFile: CASE_FILE,
+     mock: false,
+     key: 'test-secret-key',
+     baseUrl: 'http://x',
+     fetchImpl: fakeFetch,
+   });
+-  await once(server, 'listening');
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+   const sess = (await request(port, 'POST', '/api/session')).data.sessionId;
+   const res = await request(port, 'POST', '/api/ask', {
+@@
+   server.close();
+   if (res.status !== 402) throw `status ${res.status}`;
+   if (!res.data.message.includes(friendly('no_capacity', 'pt'))) throw 'friendly PT missing';
+   if (res.text.includes('test-secret-key')) throw 'key leaked PT';
+ });
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('scoreboard persists and ranks correctly', async () => {
+   const tmpDir = mkdtempSync(join(os.tmpdir(), 'e2e-'));
+   const scoreFile = join(tmpDir, 'scores.json');
+-  const server = createServer({ caseFile: CASE_FILE, mock: true, scoreFile });
++  const server = createServer({ caseFile: CASE_FILE, mock: true, scoreFile });
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+ 
+   // two sessions with different scores
+   const sess1 = (await request(port, 'POST', '/api/session')).data.sessionId;
+@@
+   const scores = await request(port, 'GET', '/api/scores');
+-  server.close();
++  server.close();
+   if (scores.status !== 200) throw `scores status ${scores.status}`;
+   const list = scores.data;
+   if (list.length < 2) throw 'not enough scores';
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('CLI EN playthrough outputs solution', async () => {
+   const tmpDir = mkdtempSync(join(os.tmpdir(), 'cli-'));
+-  const server = createServer({
++  const server = createServer({
+     caseFile: CASE_FILE,
+     mock: true,
+     scoreFile: null,
+   });
+-  await once(server, 'listening');
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+   const env = { ...process.env, MOCK: '1', PORT: String(port) };
+   const cli = spawn('node', [join(__dirname, '../src/cli.js')], { env });
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('CLI PT aliases work', async () => {
+-  const server = createServer({
++  const server = createServer({
+     caseFile: CASE_FILE,
+     mock: true,
+     scoreFile: null,
+   });
+-  await once(server, 'listening');
++  server.listen(0); await once(server, 'listening');
+   const { port } = server.address();
+   const env = { ...process.env, MOCK: '1', PORT: String(port) };
+   const cli = spawn('node', [join(__dirname, '../src/cli.js')], { env });
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('proxy maps other 429 to rate_limited', async () => {
+   const fakeFetch = async () => ({
+@@
+   const proxy = createProxy({ key: 'k', baseUrl: 'http://x', fetchImpl: fakeFetch });
+   try {
+     await proxy.chat([]);
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('proxy maps 401 to bad_key', async () => {
+   const fakeFetch = async () => ({
+@@
+   const proxy = createProxy({ key: 'k', baseUrl: 'http://x', fetchImpl: fakeFetch });
+   try {
+     await proxy.chat([]);
+*** End of File
+<<<END>>>
+
+<<<REPLACE test/e2e.mjs>>>
+@@
+ test('proxy maps other 5xx to upstream', async () => {
+   const fakeFetch = async () => ({
+@@
+   const proxy = createProxy({ key: 'k', baseUrl: 'http://x', fetchImpl: fakeFetch });
+   try {
+     await proxy.chat([]);
+*** End of File
+<<<END>>>

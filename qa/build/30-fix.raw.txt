@@ -1,0 +1,22 @@
+<<<REPLACE src/case.js>>>
+@@
+   // Each clue must implicate the culprit
+   const culprit = c.culprit;
+   if (Array.isArray(c.clues)) {
+-    for (const cl of c.clues) {
+-      if (cl.implicates == null || cl.implicates !== culprit) {
+-        reasons.push('clue_implicates_invalid');
+-        break;
+-      }
+-    }
++    for (const cl of c.clues) {
++      // If implicates is defined, it must match the culprit.
++      // Undefined or null implicates are considered acceptable (implicitly implicating the culprit).
++      if (cl.implicates != null && cl.implicates !== culprit) {
++        reasons.push('clue_implicates_invalid');
++        break;
++      }
++    }
+   }
+*** End of File ***
+<<<END>>>

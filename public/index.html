@@ -1,97 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Case Files: AI Detective</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
-    #lang-toggle { margin-bottom: 1rem; }
-    .suspect { border: 1px solid #ccc; padding: 1rem; margin: 0.5rem 0; }
-    .chat { margin-top: 0.5rem; }
-    .answer { font-weight: bold; margin-top: 0.3rem; }
-    .hidden { display: none; }
-  </style>
+<meta charset="UTF-8">
+<title>FullCup Mystery</title>
+<style>
+  body{font-family:sans-serif;margin:0;padding:1rem;background:#f5f5f5;color:#222}
+  header,main,footer{max-width:800px;margin:auto}
+  button{margin:0.2rem;padding:0.5rem 1rem;background:#fff;border:1px solid #888;border-radius:4px;cursor:pointer}
+  button[aria-pressed="true"]{background:#e0e0ff}
+  button:disabled{opacity:0.5;cursor:not-allowed}
+  input,textarea{padding:0.4rem;font-size:1rem;width:100%;box-sizing:border-box}
+  #log{background:#fff;padding:0.5rem;border:1px solid #ccc;min-height:150px;overflow-y:auto;margin-top:0.5rem}
+  #verdict{margin-top:1rem;padding:1rem;background:#e0ffe0;border:1px solid #0a0}
+  #err{margin-top:1rem;padding:1rem;background:#ffe0e0;border:1px solid #a00}
+  table{width:100%;border-collapse:collapse;margin-top:0.5rem}
+  th,td{border:1px solid #999;padding:0.3rem;text-align:left}
+  [role="log"] p{margin:0.3rem 0}
+  button:focus-visible{outline:3px solid #0066ff}
+</style>
 </head>
 <body>
-  <button id="lang-toggle">EN/PT</button>
-  <h1 id="title">Loading...</h1>
-  <p id="intro"></p>
-  <div id="suspects"></div>
-  <div id="verdict" class="hidden">
-    <h2 id="verdict-title"></h2>
-    <p id="solution"></p>
+<header>
+  <h1 id="title">FullCup Mystery</h1>
+  <div>
+    <button id="len" aria-pressed="true">EN</button>
+    <button id="lpt" aria-pressed="false">PT</button>
   </div>
+</header>
+<main>
+  <section id="intro"></section>
 
-  <script>
-    const langBtn = document.getElementById('lang-toggle');
-    let lang = 'en';
+  <section id="suspects">
+    <h2 id="suspects-title">Suspects</h2>
+    <div id="suspect-buttons"></div>
+  </section>
 
-    async function loadCase() {
-      const res = await fetch(`/api/case?lang=${lang}`);
-      const data = await res.json();
-      document.getElementById('title').textContent = data.title;
-      document.getElementById('intro').textContent = data.intro;
-      const container = document.getElementById('suspects');
-      container.innerHTML = '';
-      data.suspects.forEach(s => {
-        const div = document.createElement('div');
-        div.className = 'suspect';
-        div.dataset.id = s.id;
-        div.innerHTML = `
-          <strong>${s.name}</strong> - ${s.role}<br>
-          <em>${s.persona}</em><br>
-          <input type="text" placeholder="${lang==='en'?'Ask...':'Pergunte...'}" class="question">
-          <button class="ask">${lang==='en'?'Ask':'Perguntar'}</button>
-          <div class="chat"><span class="answer"></span></div>
-          <button class="accuse">${lang==='en'?'Accuse':'Acusar'}</button>
-        `;
-        container.appendChild(div);
-      });
-    }
+  <section id="conversation">
+    <h2 id="conversation-title">Conversation</h2>
+    <div id="log" role="log" aria-live="polite"></div>
+    <form id="ask-form">
+      <label for="q" id="question-label">Question</label>
+      <input type="text" id="q" maxlength="500" required>
+      <button type="submit" id="ask-btn">Ask</button>
+    </form>
+  </section>
 
-    async function ask(suspectDiv) {
-      const suspectId = suspectDiv.dataset.id;
-      const qInput = suspectDiv.querySelector('.question');
-      const question = qInput.value.trim();
-      if (!question) return;
-      const resp = await fetch('/api/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ suspectId, question, lang, history: [] })
-      });
-      const data = await resp.json();
-      suspectDiv.querySelector('.answer').textContent = data.answer || '';
-    }
+  <section id="player-section">
+    <label for="player" id="player-label">Your name</label>
+    <input type="text" id="player" maxlength="24" placeholder="anon">
+  </section>
 
-    async function accuse(suspectDiv) {
-      const suspectId = suspectDiv.dataset.id;
-      const resp = await fetch('/api/accuse', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ suspectId, lang })
-      });
-      const data = await resp.json();
-      document.getElementById('verdict-title').textContent = data.correct
-        ? (lang==='en'?'Correct!':'Correto!')
-        : (lang==='en'?'Wrong!':'Errado!');
-      document.getElementById('solution').textContent = data.solution;
-      document.getElementById('verdict').classList.remove('hidden');
-    }
+  <section id="accuse-section">
+    <h2 id="accuse-title">Accuse</h2>
+    <div id="accuse-buttons"></div>
+  </section>
 
-    document.addEventListener('click', e => {
-      if (e.target.matches('.ask')) {
-        ask(e.target.closest('.suspect'));
-      } else if (e.target.matches('.accuse')) {
-        accuse(e.target.closest('.suspect'));
-      }
+  <section id="verdict" role="status" aria-live="assertive" tabindex="-1" hidden></section>
+  <section id="err" role="alert" hidden></section>
+
+  <section id="scores-section" hidden>
+    <h2>Scoreboard</h2>
+    <table>
+      <caption>Top 10 Players</caption>
+      <thead><tr><th>#</th><th>Player</th><th>Score</th><th>Questions</th></tr></thead>
+      <tbody id="scores-body"></tbody>
+    </table>
+  </section>
+</main>
+
+<script type="module">
+const API = '/api';
+let lang = 'en';
+let sessionId = null;
+let caseData = null;
+let selectedSuspect = null;
+const histories = {}; // per suspectId [{q,a},...]
+
+function setLang(newLang) {
+  lang = newLang;
+  document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
+  document.getElementById('len').setAttribute('aria-pressed', newLang === 'en');
+  document.getElementById('lpt').setAttribute('aria-pressed', newLang === 'pt');
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  document.getElementById('question-label').textContent = newLang === 'pt' ? 'Pergunta' : 'Question';
+  document.getElementById('ask-btn').textContent = newLang === 'pt' ? 'Perguntar' : 'Ask';
+  document.getElementById('player-label').textContent = newLang === 'pt' ? 'Seu nome' : 'Your name';
+  document.getElementById('suspects-title').textContent = newLang === 'pt' ? 'Suspeitos' : 'Suspects';
+  document.getElementById('conversation-title').textContent = newLang === 'pt' ? 'Conversa' : 'Conversation';
+  document.getElementById('accuse-title').textContent = newLang === 'pt' ? 'Acusar' : 'Accuse';
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+}
+
+document.getElementById('len').addEventListener('click',()=>setLang('en'));
+document.getElementById('lpt').addEventListener('click',()=>setLang('pt'));
+
+async function init() {
+  const sessRes = await fetch(API + '/session', {method:'POST'});
+  const sessData = await sessRes.json();
+  sessionId = sessData.sessionId;
+  await loadCase();
+  setLang('en');
+}
+async function loadCase() {
+  const res = await fetch(API + '/case?lang=' + lang);
+  caseData = await res.json();
+}
+function renderCase() {
+  if (!caseData) return;
+  document.getElementById('intro').innerHTML = `<p>${caseData.intro}</p>`;
+  const btnContainer = document.getElementById('suspect-buttons');
+  btnContainer.innerHTML = '';
+  caseData.suspects.forEach(s => {
+    const btn = document.createElement('button');
+    btn.textContent = s.name;
+    btn.dataset.id = s.id;
+    btn.setAttribute('aria-pressed','false');
+    btn.addEventListener('click',()=>selectSuspect(s.id));
+    btnContainer.appendChild(btn);
+  });
+}
+function selectSuspect(id) {
+  selectedSuspect = id;
+  document.querySelectorAll('#suspect-buttons button').forEach(b=>{
+    b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
+  });
+  document.getElementById('q').focus();
+  renderConversation();
+}
+function renderConversation() {
+  const log = document.getElementById('log');
+  log.innerHTML = '';
+  if (!selectedSuspect) return;
+  const hist = histories[selectedSuspect] || [];
+  hist.forEach(pair=>{
+    const pQ = document.createElement('p');
+    pQ.textContent = (lang==='pt'?'Pergunta: ':'Q: ') + pair.q;
+    const pA = document.createElement('p');
+    pA.textContent = (lang==='pt'?'Resposta: ':'A: ') + pair.a;
+    log.appendChild(pQ);
+    log.appendChild(pA);
+  });
+}
+async function askQuestion(e){
+  e.preventDefault();
+  if (!selectedSuspect) return;
+  const question = document.getElementById('q').value.trim();
+  if (!question) return;
+  document.getElementById('ask-btn').disabled = true;
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+  thinking.textContent = '…thinking';
+  log.appendChild(thinking);
+  try{
+    const res = await fetch(API + '/ask', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId:selectedSuspect, question, lang})
     });
-
-    langBtn.addEventListener('click', () => {
-      lang = lang === 'en' ? 'pt' : 'en';
-      loadCase();
+    const data = await res.json();
+    if (!res.ok) throw data;
+    const answer = data.answer;
+    // store
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+    histories[selectedSuspect].push({q:question,a:answer});
+    renderConversation();
+  }catch(err){
+    showError(err.message||'Error');
+  }finally{
+    document.getElementById('ask-btn').disabled = false;
+    document.getElementById('q').value = '';
+  }
+}
+async function accuse(suspectId){
+  const playerName = document.getElementById('player').value.trim()||'anon';
+  try{
+    const res = await fetch(API + '/accuse', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId, player:playerName, lang})
     });
-
-    loadCase();
-  </script>
+    const data = await res.json();
+    if (!res.ok) throw data;
+    const verdict = document.getElementById('verdict');
+    verdict.hidden = false;
+    verdict.innerHTML = `<p>${data.correct ? (lang==='pt'?'Acerto!':'Correct!') : (lang==='pt'?'Errou!':'Wrong!')}</p>
+      <p>${lang==='pt'?'Culprit':'Culprit'}: ${data.culpritName}</p>
+      <p>${lang==='pt'?'Solution':'Solution'}: ${data.solution}</p>
+      <p>${lang==='pt'?'Score':'Score'}: ${data.score}</p>`;
+    verdict.focus();
+    await loadScores();
+  }catch(err){
+    showError(err.message||'Error');
+  }
+}
+function renderAccuseButtons(){
+  if (!caseData) return;
+  const container = document.getElementById('accuse-buttons');
+  container.innerHTML = '';
+  caseData.suspects.forEach(s=>{
+    const btn = document.createElement('button');
+    btn.textContent = (lang==='pt'?'Acusar ':'Accuse ') + s.name;
+    btn.addEventListener('click',()=>accuse(s.id));
+    container.appendChild(btn);
+  });
+}
+async function loadScores(){
+  const sec = document.getElementById('scores-section');
+  const tbody = document.getElementById('scores-body');
+  const res = await fetch(API + '/scores');
+  const data = await res.json();
+  tbody.innerHTML = '';
+  data.forEach((row,i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td>${row.player}</td><td>${row.score}</td><td>${row.questions}</td>`;
+    tbody.appendChild(tr);
+  });
+  sec.hidden = false;
+}
+function showError(msg){
+  const el = document.getElementById('err');
+  el.textContent = msg;
+  el.hidden = false;
+  setTimeout(()=>{el.hidden=true;},5000);
+}
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+</script>
 </body>
 </html>

@@ -1,0 +1,148 @@
+<<<FILE src/case.js>>>
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+/**
+ * Load the case JSON file.
+ * @param {string} [file='content/case.json']
+ * @returns {Object}
+ */
+export function loadCase(file = 'content/case.json') {
+  const base = dirname(fileURLToPath(import.meta.url));
+  const path = resolve(base, '..', file);
+  const data = readFileSync(path, 'utf8');
+  return JSON.parse(data);
+}
+
+/**
+ * Return a public version of the case (no secrets) in the requested language.
+ * @param {Object} c
+ * @param {'en'|'pt'} lang
+ * @returns {Object}
+ */
+export function publicCase(c, lang) {
+  const suspects = c.suspects.map(s => ({
+    id: s.id,
+    name: s.name,
+    role: s.role[lang],
+    persona: s.persona[lang],
+  }));
+  return {
+    id: c.id,
+    title: c.title[lang],
+    intro: c.intro[lang],
+    suspects,
+  };
+}
+
+/**
+ * Validate the case for fair play.
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+ */
+export function fairPlay(c) {
+  const reasons = [];
+
+  // 3 suspects
+  if (!Array.isArray(c.suspects) || c.suspects.length !== 3) {
+    reasons.push('case must contain exactly 3 suspects');
+  }
+
+  const suspectIds = new Set(c.suspects.map(s => s.id));
+
+  // culprit is a suspect
+  if (!suspectIds.has(c.culprit)) {
+    reasons.push('culprit must be one of the suspect ids');
+  }
+
+  // clues checks
+  if (!Array.isArray(c.clues) || c.clues.length === 0) {
+    reasons.push('case must contain clues');
+  } else {
+    // at least 2 clues implicate the culprit
+    const implicating = c.clues.filter(cl => cl.implicates === c.culprit);
+    if (implicating.length < 2) {
+      reasons.push('at least two clues must implicate the culprit');
+    }
+
+    // every innocent cleared by at least one clue
+    const innocents = c.suspects.filter(s => s.id !== c.culprit).map(s => s.id);
+    for (const innocent of innocents) {
+      const cleared = c.clues.some(cl => cl.clears === innocent);
+      if (!cleared) {
+        reasons.push(`innocent suspect ${innocent} must be cleared by at least one clue`);
+      }
+    }
+
+    // each clue.from must be a suspect id and fields non‑empty
+    for (const cl of c.clues) {
+      if (!suspectIds.has(cl.from)) {
+        reasons.push(`clue ${cl.id} has invalid from ${cl.from}`);
+      }
+      if (!cl.ask || typeof cl.ask !== 'string' || cl.ask.trim() === '') {
+        reasons.push(`clue ${cl.id} must have a non‑empty ask`);
+      }
+      if (!Array.isArray(cl.keywords) || cl.keywords.length === 0) {
+        reasons.push(`clue ${cl.id} must have non‑empty keywords`);
+      }
+      if (!cl.text?.en || typeof cl.text.en !== 'string' || cl.text.en.trim() === '') {
+        reasons.push(`clue ${cl.id} must have non‑empty text.en`);
+      }
+      if (!cl.text?.pt || typeof cl.text.pt !== 'string' || cl.text.pt.trim() === '') {
+        reasons.push(`clue ${cl.id} must have non‑empty text.pt`);
+      }
+    }
+  }
+
+  return { ok: reasons.length === 0, reasons };
+}
+
+/**
+ * Build a system prompt for the LLM.
+ * @param {Object} c
+ * @param {string} suspectId
+ * @param {'en'|'pt'} lang
+ * @returns {string}
+ */
+export function systemPrompt(c, suspectId, lang) {
+  const suspect = c.suspects.find(s => s.id === suspectId);
+  if (!suspect) return '';
+
+  const facts = suspect.facts?.trim() ?? '';
+  const role = suspect.role[lang];
+  const persona = suspect.persona[lang];
+
+  let prompt = `You are ${suspect.name}, a ${role}. Persona: ${persona}.`;
+
+  if (facts) {
+    prompt += ` Facts: ${facts}.`;
+  }
+
+  // Add glossary for Portuguese
+  if (lang === 'pt') {
+    const lines = c.glossary.map(g => `${g.en}: ${g.pt}`);
+    prompt += ` Use these exact PT-BR terms: ${lines.join(', ')}.`;
+    // Instruction in Portuguese
+    prompt += ' Responda em no máximo 80 palavras.';
+  } else {
+    // Instruction in English
+    prompt += ' Answer in at most 80 words.';
+  }
+
+  // No word‑cap on the system prompt; it must be complete.
+  return prompt;
+}
+
+/**
+ * Trim a text to at most n words, adding an ellipsis if cut.
+ * @param {string} text
+ * @param {number} [n=80]
+ * @returns {string}
+ */
+export function capWords(text, n = 80) {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= n) return text.trim();
+  return words.slice(0, n).join(' ') + '…';
+}
+<<<END>>>

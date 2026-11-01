@@ -1,0 +1,109 @@
+<<<REPLACE src/case.js>>>
+@@
+ export function fairPlay(c) {
+   const reasons = [];
+ 
+   const suspectIds = (c.suspects ?? []).map(s => s.id);
+ 
+   // Culprit must be among suspects
+   if (!suspectIds.includes(c.culprit)) {
+     reasons.push('culprit_not_suspect');
+   }
+ 
+   // Every clue must reference a known suspect
+   if ((c.clues ?? []).some(cl => !suspectIds.includes(cl.from))) {
+     reasons.push('clue_from_unknown');
+   }
++
++  // Each clue must implicate the culprit
++  const culprit = c.culprit;
++  if (Array.isArray(c.clues)) {
++    for (const cl of c.clues) {
++      if (cl.implicates == null || cl.implicates !== culprit) {
++        reasons.push('clue_implicates_invalid');
++        break;
++      }
++    }
++  }
++
++  // Every innocent suspect must be cleared by at least one clue
++  const innocents = suspectIds.filter(id => id !== culprit);
++  for (const innocentId of innocents) {
++    const cleared = (c.clues ?? []).some(cl => cl.clears === innocentId);
++    if (!cleared) {
++      reasons.push('suspect_not_cleared');
++      break;
++    }
++  }
+ 
+   return { ok: reasons.length === 0, reasons };
+ }
+<<<END>>>
+
+<<<REPLACE src/cli.js>>>
+@@
+ let lang = 'en';
+ let player = 'anon';
+@@
+ for (let i = 0; i < args.length; i++) {
+   if (args[i] === '--lang' && i + 1 < args.length) {
+     lang = args[i + 1] === 'pt' ? 'pt' : 'en';
+     i++;
+   } else if (args[i] === '--player' && i + 1 < args.length) {
+@@
+   const cmdMap = {
+     pergunta: 'ask',
+     acusar: 'accuse',
+     historico: 'history',
+     sair: 'quit',
+     quit: 'quit',
+     ask: 'ask',
+     accuse: 'accuse',
+     history: 'history',
+   };
+   const action = cmdMap[cmd] || null;
+   if (!action) {
+     console.log('Unknown command');
+     return false;
+   }
++  // Adjust language based on Portuguese command aliases
++  if (['pergunta', 'acusar', 'historico', 'sair'].includes(cmd)) {
++    lang = 'pt';
++  }
+ 
+   try {
+     if (action === 'ask') {
+@@
+     } else if (action === 'accuse') {
+       const suspectId = parts[1];
+       if (!suspectId) {
+         console.log('Usage: accuse <suspectId>');
+       } else {
+         const resp = await postJSON(`${baseUrl}/api/accuse`, {
+           sessionId,
+           suspectId,
+           player,
+           lang,
+         });
+-        console.log('\n=== Verdict ===');
+-        console.log(resp.correct ? 'Correct!' : 'Wrong.');
+-        console.log(`Culprit: ${resp.culpritName}`);
+-        console.log(`Solution: ${resp.solution}`);
+-        console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
++        console.log('\n=== Verdict ===');
++        if (lang === 'pt') {
++          console.log(resp.correct ? 'Correto!' : 'Errado.');
++          console.log(`Culprit: ${resp.culpritName}`);
++          console.log(`Solução: ${resp.solution}`);
++          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
++        } else {
++          console.log(resp.correct ? 'Correct!' : 'Wrong.');
++          console.log(`Culprit: ${resp.culpritName}`);
++          console.log(`Solution: ${resp.solution}`);
++          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
++        }
+ 
+         const top = await getJSON(`${baseUrl}/api/scores`);
+         console.log('--- Top Scores ---');
+*** End of File
+<<<END>>>

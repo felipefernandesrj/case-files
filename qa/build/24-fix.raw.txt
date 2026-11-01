@@ -1,0 +1,66 @@
+<<<REPLACE src/case.js>>>
+@@
+   // Every clue must have an implicates field
+-  if ((c.clues ?? []).some(cl => cl.implicates == null)) {
+-    reasons.push('clue_missing_implicates');
+-  }
++  if ((c.clues ?? []).some(cl => (cl.implicates == null && cl.implicate == null))) {
++    reasons.push('clue_missing_implicates');
++  }
+@@
+   // Innocent suspects must be cleared by at least one clue
+   const innocents = suspectIds.filter(id => id !== c.culprit);
+   const cleared = new Set();
+   (c.clues ?? []).forEach(cl => {
+-    if (Array.isArray(cl.clears)) {
+-      cl.clears.forEach(id => cleared.add(id));
+-    }
++    if (Array.isArray(cl.clears)) {
++      cl.clears.forEach(id => cleared.add(id));
++    } else if (Array.isArray(cl.clear)) {
++      cl.clear.forEach(id => cleared.add(id));
++    }
+   });
+*** End of File
+<<<END>>>
+<<<REPLACE src/case.js>>>
+@@
+   if (l === 'pt' && Array.isArray(c.glossary)) {
+-    const suspectGlossary = new Set(suspect.glossary || []);
+-    const lines = c.glossary
+-      .filter(g => suspectGlossary.has(g.en) || suspectGlossary.has(g.id))
+-      .map(g => `${g.en}: ${g[l]}`)
+-      .join('\n');
+-    if (lines) {
+-      prompt += `\nUse these exact PT‑BR terms:\n${lines}`;
+-    }
++    const lines = c.glossary
++      .map(g => `${g.en}: ${g[l]}`)
++      .join('\n');
++    if (lines) {
++      prompt += `\nUse these exact PT‑BR terms:\n${lines}`;
++    }
+   }
+*** End of File
+<<<END>>>
+<<<REPLACE src/cli.js>>>
+@@
+     } else if (action === 'accuse') {
+       const suspectId = parts[1];
+       if (!suspectId) {
+         console.log('Usage: accuse <suspectId>');
+       } else {
+         const resp = await postJSON(`${baseUrl}/api/accuse`, {
+           sessionId,
+           suspectId,
+           player,
+           lang,
+         });
+         console.log('\n=== Verdict ===');
+         console.log(resp.correct ? 'Correct!' : 'Wrong.');
+         console.log(`Culprit: ${resp.culpritName}`);
+-        console.log(`Solution: ${resp.solution}`);
++        console.log(`${lang === 'pt' ? 'Solução' : 'Solution'}: ${resp.solution}`);
+         console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
+*** End of File
+<<<END>>>

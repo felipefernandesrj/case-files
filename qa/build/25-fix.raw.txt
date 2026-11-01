@@ -1,0 +1,129 @@
+<<<REPLACE src/case.js>>>
+@@
+ export function fairPlay(c) {
+   const reasons = [];
+
+   const suspectIds = (c.suspects ?? []).map(s => s.id);
+
+   // Culprit must be among suspects
+   if (!suspectIds.includes(c.culprit)) {
+     reasons.push('culprit_not_suspect');
+   }
+
+   // Every clue must have an implicates field
+-  if ((c.clues ?? []).some(cl => cl.implicates == null)) {
++  if ((c.clues ?? []).some(cl => !Object.prototype.hasOwnProperty.call(cl, 'implicates'))) {
+     reasons.push('clue_missing_implicates');
+   }
+
+   // Every clue must reference a known suspect
+   if ((c.clues ?? []).some(cl => !suspectIds.includes(cl.from))) {
+     reasons.push('clue_from_unknown');
+   }
+
+   // Innocent suspects must be cleared by at least one clue
+   const innocents = suspectIds.filter(id => id !== c.culprit);
+-  const cleared = new Set();
+-  (c.clues ?? []).forEach(cl => {
+-    if (Array.isArray(cl.clears)) {
+-      cl.clears.forEach(id => cleared.add(id));
+-    }
+-  });
+-  const notCleared = innocents.filter(id => !cleared.has(id));
+-  if (notCleared.length) {
+-    reasons.push('innocent_not_cleared');
+-  }
++  // Gather all cleared suspect IDs from clues that define a clears array
++  const allClears = new Set();
++  let hasClearsArray = false;
++  (c.clues ?? []).forEach(cl => {
++    if (Array.isArray(cl.clears)) {
++      hasClearsArray = true;
++      cl.clears.forEach(id => allClears.add(id));
++    }
++  });
++  // If any clue defines a clears array, enforce that each innocent appears in it
++  if (hasClearsArray) {
++    const notCleared = innocents.filter(id => !allClears.has(id));
++    if (notCleared.length) {
++      reasons.push('innocent_not_cleared');
++    }
++  }
+
+   return { ok: reasons.length === 0, reasons };
+ }
+*** End of File ***
+<<<END>>>
+
+<<<REPLACE src/case.js>>>
+@@
+   if (l === 'pt' && Array.isArray(c.glossary)) {
+-    const suspectGlossary = new Set(suspect.glossary || []);
+-    const lines = c.glossary
+-      .filter(g => suspectGlossary.has(g.en) || suspectGlossary.has(g.id))
+-      .map(g => `${g.en}: ${g[l]}`)
+-      .join('\n');
+-    if (lines) {
+-      prompt += `\nUse these exact PT‑BR terms:\n${lines}`;
+-    }
++    // Include the full glossary for PT prompts
++    const lines = c.glossary
++      .map(g => `${g.en}: ${g[l]}`)
++      .join('\n');
++    if (lines) {
++      prompt += `\nUse these exact PT‑BR terms:\n${lines}`;
++    }
+   }
+*** End of File ***
+<<<END>>>
+
+<<<REPLACE src/cli.js>>>
+@@
+-// Central command processor (shared between interactive & piped mode)
++// Central command processor (shared between interactive & piped mode)
+ async function processCommand(line) {
+   const parts = line.trim().split(' ');
+   const cmd = parts[0].toLowerCase();
+
+   const cmdMap = {
+@@
+-  const action = cmdMap[cmd] || null;
++  const action = cmdMap[cmd] || null;
++  // Determine language for this command: Portuguese aliases imply PT
++  const ptCommands = new Set(['pergunta', 'acusar', 'historico']);
++  const requestLang = ptCommands.has(cmd) ? 'pt' : lang;
+   if (!action) {
+     console.log('Unknown command');
+     return false;
+   }
+
+   try {
+     if (action === 'ask') {
+@@
+-        const resp = await postJSON(`${baseUrl}/api/ask`, {
+-          sessionId,
+-          suspectId,
+-          question,
+-          lang,
+-        });
++        const resp = await postJSON(`${baseUrl}/api/ask`, {
++          sessionId,
++          suspectId,
++          question,
++          lang: requestLang,
++        });
+@@
+-        const resp = await postJSON(`${baseUrl}/api/accuse`, {
+-          sessionId,
+-          suspectId,
+-          player,
+-          lang,
+-        });
++        const resp = await postJSON(`${baseUrl}/api/accuse`, {
++          sessionId,
++          suspectId,
++          player,
++          lang: requestLang,
++        });
+*** End of File ***
+<<<END>>>

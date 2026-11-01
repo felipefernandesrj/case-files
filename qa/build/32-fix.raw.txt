@@ -1,0 +1,42 @@
+<<<REPLACE src/case.js>>>
+@@
+ export function fairPlay(c) {
+-  const reasons = [];
+-
+-  const suspectIds = (c.suspects ?? []).map(s => s.id);
+-
+-  // Culprit must be among suspects
+-  if (!suspectIds.includes(c.culprit)) {
+-    reasons.push('culprit_not_suspect');
+-  }
+-
+-  // Every clue must reference a known suspect
+-  if ((c.clues ?? []).some(cl => !suspectIds.includes(cl.from))) {
+-    reasons.push('clue_from_unknown');
+-  }
+-
+-  // Each clue must implicate the culprit
+-  const culprit = c.culprit;
+-  if (Array.isArray(c.clues)) {
+-    for (const cl of c.clues) {
+-      // The clue must explicitly implicate the culprit.
+-      // Any value other than the culprit (including undefined or null) is invalid.
+-      if (cl.implicates !== culprit) {
+-        reasons.push('clue_implicates_invalid');
+-        break;
+-      }
+-    }
+-  }
+-
+-  // Every innocent suspect must be cleared by at least one clue
+-  const innocents = suspectIds.filter(id => id !== culprit);
+-  for (const innocentId of innocents) {
+-    const cleared = (c.clues ?? []).some(cl => cl.clears === innocentId);
+-    if (!cleared) {
+-      reasons.push('suspect_not_cleared');
+-      break;
+-    }
+-  }
+-
+-  return { ok: reasons.length === 0, reasons };
++  const reasons = [];\n+\n+  const suspectIds = (c.suspects ?? []).map(s => s.id);\n+\n+  // Culprit must be among suspects\n+  if (!suspectIds.includes(c.culprit)) {\n+    reasons.push('culprit_not_suspect');\n+  }\n+\n+  // Validate each clue\n+  const clues = c.clues ?? [];\n+  let implicateCount = 0;\n+  for (const cl of clues) {\n+    // clue.from must be a known suspect\n+    if (!suspectIds.includes(cl.from)) {\n+      reasons.push('clue_from_unknown');\n+    }\n+\n+    // ask must be non‑empty string\n+    if (!cl.ask || typeof cl.ask !== 'string' || !cl.ask.trim()) {\n+      reasons.push('clue_missing_ask');\n+    }\n+\n+    // keywords must be a non‑empty array of non‑empty strings\n+    if (!Array.isArray(cl.keywords) || cl.keywords.length === 0 || cl.keywords.some(k => typeof k !== 'string' || !k.trim())) {\n+      reasons.push('clue_invalid_keywords');\n+    }\n+\n+    // text.en and text.pt must be non‑empty strings\n+    if (!cl.text || typeof cl.text.en !== 'string' || !cl.text.en.trim()) {\n+      reasons.push('clue_missing_text_en');\n+    }\n+    if (!cl.text || typeof cl.text.pt !== 'string' || !cl.text.pt.trim()) {\n+      reasons.push('clue_missing_text_pt');\n+    }\n+\n+    // implicates: if non‑null must be a known suspect; count those equal to culprit\n+    if (cl.implicates != null) {\n+      if (!suspectIds.includes(cl.implicates)) {\n+        reasons.push('clue_implicates_invalid');\n+      } else if (cl.implicates === c.culprit) {\n+        implicateCount++;\n+      }\n+    }\n+\n+    // clears: if non‑null must be a known suspect\n+    if (cl.clears != null && !suspectIds.includes(cl.clears)) {\n+      reasons.push('clue_clears_invalid');\n+    }\n+  }\n+\n+  // At least two clues must implicate the culprit\n+  if (implicateCount < 2) {\n+    reasons.push('not_enough_implicates');\n+  }\n+\n+  // Every innocent suspect must be cleared by at least one clue\n+  const innocents = suspectIds.filter(id => id !== c.culprit);\n+  for (const innocentId of innocents) {\n+    const cleared = clues.some(cl => cl.clears === innocentId);\n+    if (!cleared) {\n+      reasons.push('suspect_not_cleared');\n+      break;\n+    }\n+  }\n+\n+  return { ok: reasons.length === 0, reasons };\n }\n*** End of File ***\n<<<END>>>

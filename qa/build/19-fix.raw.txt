@@ -1,0 +1,120 @@
+<<<FILE src/case.js>>>
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+/**
+ * Load the case JSON file.
+ * @param {string} [file='content/case.json']
+ * @returns {Object}
+ */
+export function loadCase(file = 'content/case.json') {
+  const base = dirname(fileURLToPath(import.meta.url));
+  const path = resolve(base, '..', file);
+  return JSON.parse(readFileSync(path, 'utf8'));
+}
+
+/**
+ * Return a public version of the case (no secrets).
+ * @param {Object} c
+ * @param {'en'|'pt'} lang
+ * @returns {Object}
+ */
+export function publicCase(c, lang) {
+  const l = lang === 'pt' ? 'pt' : 'en';
+  return {
+    id: c.id,
+    title: c.title?.[l] ?? '',
+    intro: c.intro?.[l] ?? '',
+    suspects: (c.suspects ?? []).map(s => ({
+      id: s.id,
+      name: s.name,
+      role: s.role?.[l] ?? '',
+      persona: s.persona?.[l] ?? '',
+    })),
+  };
+}
+
+/**
+ * Build the system prompt for the LLM.
+ * @param {Object} c
+ * @param {string} suspectId
+ * @param {'en'|'pt'} lang
+ * @returns {string}
+ */
+export function systemPrompt(c, suspectId, lang) {
+  const l = lang === 'pt' ? 'pt' : 'en';
+  const suspect = (c.suspects ?? []).find(s => s.id === suspectId) || {};
+  const intro = c.intro?.[l] ?? '';
+  const persona = suspect.persona?.[l] ?? '';
+  let prompt = `${intro}\n\nYou are role‑playing as ${suspect.name ?? ''}. ${persona}`;
+
+  // Glossary is only added for PT prompts and only for terms that belong to the suspect.
+  if (l === 'pt' && Array.isArray(c.glossary)) {
+    const suspectGlossary = new Set(suspect.glossary || []);
+    const lines = c.glossary
+      .filter(g => suspectGlossary.has(g.en) || suspectGlossary.has(g.id))
+      .map(g => `${g.en}: ${g[l]}`)
+      .join('\n');
+    if (lines) {
+      prompt += `\nUse these exact PT‑BR terms:\n${lines}`;
+    }
+  }
+
+  return prompt;
+}
+
+/**
+ * Truncate a string to a maximum number of words.
+ * @param {string} text
+ * @param {number} maxWords
+ * @returns {string}
+ */
+export function capWords(text, maxWords) {
+  if (!text) return '';
+  const words = text.trim().split(/\s+/);
+  if (words.length <= maxWords) return words.join(' ');
+  return words.slice(0, maxWords).join(' ');
+}
+
+/**
+ * Validate that a case follows the "fair play" rules.
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+ */
+export function fairPlay(c) {
+  const reasons = [];
+
+  const suspectIds = (c.suspects ?? []).map(s => s.id);
+
+  // Culprit must be among suspects
+  if (!suspectIds.includes(c.culprit)) {
+    reasons.push('culprit_not_suspect');
+  }
+
+  // Every clue must have an implicates field
+  if ((c.clues ?? []).some(cl => cl.implicates == null)) {
+    reasons.push('clue_missing_implicates');
+  }
+
+  // Every clue must reference a known suspect
+  if ((c.clues ?? []).some(cl => !suspectIds.includes(cl.from))) {
+    reasons.push('clue_from_unknown');
+  }
+
+  // Innocent suspects must be cleared by at least one clue
+  const innocents = suspectIds.filter(id => id !== c.culprit);
+  const cleared = new Set();
+  (c.clues ?? []).forEach(cl => {
+    if (Array.isArray(cl.clears)) {
+      cl.clears.forEach(id => cleared.add(id));
+    }
+  });
+  const notCleared = innocents.filter(id => !cleared.has(id));
+  if (notCleared.length) {
+    reasons.push('innocent_not_cleared');
+  }
+
+  return { ok: reasons.length === 0, reasons };
+}
+<<<END>>>
