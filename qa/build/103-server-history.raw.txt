@@ -1,0 +1,5 @@
+<<<REPLACE src/server.js>>>
+        const newHist = [...hist, { role: 'assistant', content: trimmed }];
+=====
+        const newHist = [...hist, { role: 'user', content: question }, { role: 'assistant', content: trimmed }];
+<<<END>>>

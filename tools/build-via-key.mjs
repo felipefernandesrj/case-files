@@ -21,14 +21,14 @@ for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
   files.push({ path: m[1], lines: body.split('\n').length });
 }
 // literal search/replace edits produced by the model: <<<REPLACE path>>>\nOLD\n=====\nNEW\n<<<END>>>
-for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n=====\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 4: a missing <<<END>>> before the next block ends the block
+for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n={5,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 4: a missing <<<END>>> before the next block ends the block
   if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   const cur = fs.readFileSync(m[1], 'utf8'); const n = cur.split(m[2]).length - 1;
   fs.writeFileSync(m[1], cur.split(m[2]).join(m[3])); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });
 }
 // apply_patch-style hunks inside <<<REPLACE path>>> ... <<<END>>> (lines ' ' context, '-' old, '+' new, '@@' separators)
 for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
-  if (!/^@@/m.test(m[2]) && !/\n=====\n/.test(m[2]) && /^(import|\/\/|<!doctype|<!DOCTYPE|\{)/.test(m[2])) { if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; } fs.writeFileSync(m[1], m[2] + '\n'); files.push({ path: m[1], lines: m[2].split('\n').length, fullViaReplace: true }); continue; }
+  if (!/^@@/m.test(m[2]) && !/\n={5,}\n/.test(m[2]) && /^(import|\/\/|<!doctype|<!DOCTYPE|\{)/.test(m[2])) { if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; } fs.writeFileSync(m[1], m[2] + '\n'); files.push({ path: m[1], lines: m[2].split('\n').length, fullViaReplace: true }); continue; }
   if (!/^@@/m.test(m[2])) continue; if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   let cur = fs.readFileSync(m[1], 'utf8'); let ok = 0, bad = 0;
   for (const h of m[2].split(/^@@.*$/m)) {

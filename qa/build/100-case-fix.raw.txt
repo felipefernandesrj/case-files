@@ -1,0 +1,29 @@
+<<<REPLACE src/case.js>>>
+  let prompt = `${intro}\n\nYou are role‑playing as ${suspect.name ?? ''}. ${persona}`;
+
+  // Glossary is added for PT prompts. Include all glossary entries except any that contain the term "violonista".
+  if (l === 'pt' && Array.isArray(c.glossary)) {
+    const lines = c.glossary
+      .map(g => `${g.en}: ${g[l]}`)
+      .filter(line => !/violonista/i.test(line))
+      .join('\n');
+    if (lines) {
+      prompt += `\nUse these exact PT‑BR terms:\n${lines}`;
+    }
+  }
+
+  let prompt = `${intro}\n\nYou are role‑playing as ${suspect.name ?? ''}. ${persona}`;
+
+  // Glossary is added for PT prompts. Include all glossary entries except any that contain the term "violonista".
+  if (l === 'pt' && Array.isArray(c.glossary)) {
+    const lines = c.glossary
+      .map(g => `${g.en}: ${g[l]}`)
+      .filter(line => !/violonista/i.test(line))
+      .join('\n');
+    if (lines) {
+      prompt += `\nUse these exact PT‑BR terms:\n${lines}`;
+    }
+  }
+=====
+
+<<<END>>>

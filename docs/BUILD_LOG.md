@@ -116,3 +116,16 @@ Model: @cf/google/gemma-4-26b-a4b-it only, one file per call, via the QA Cup key
 - reasoning_effort ("low", "none") passes through but gemma still reasons (681 / 500 chars); chat_template_kwargs.enable_thinking=false passes through and removes reasoning (0 chars, 22 completion tokens). Not documented in prompts/_api.md or /v1/models.
 - GET /v1/models: 200, still no x-ratelimit-* or receipt headers. /v1/receipts/{id}, /v1/receipt/{id}, /v1/usage: 404 `{"error":"not_found"}`. Public receipt page https://qa.fullcup.ai/receipts/{id} works without auth.
 - Seal check (read-only): receipts with seal-by 2026-11-02T00:05Z are now sealed. 01M6A72KQ3M2KM8082JCC4S4HN, 01M6A72ZR0D8XX8SE9HV3RDC9C (sprint 2) and 01M6BWA00KQ37169D2S4MGASES (sprint 3) show "Genuine receipt ... one of 130 in the signed root of 2026-11-01", root signature matches. Sprint 4 receipts show "Recorded, waiting for the daily seal, will be sealed on 2026-11-03 00:05 UTC".
+
+# Sprint 5 (consistent suspects + waste cut), 2026-11-02 12:07-12:22 UTC (09:07-09:22 BRT)
+Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, `chat_template_kwargs.enable_thinking=false` on every build call and max_tokens 400-5000 (was 16000). One small task per call; prompts give requirements, the model's own current files and its own errors. Live smoke with llama-4-scout through the game server.
+
+- Calls 99-101: edit blocks on systemPrompt broke the function three times (duplicate declaration, then undeclared, then made-up glossary). Reverted, wasted.
+- Call 102: whole src/case.js. systemPrompt now adds the suspect's private facts, that suspect's clues, the cast ("The only people in this case are:" + never invent anyone) and consistency rules. Accepted.
+- Call 103: src/server.js stores {user question, assistant answer} per suspect (was answers only). Accepted.
+- Calls 104-107: test/consistency.mjs (4 offline tests: prompt contents/leakage/Maya lock/cast names, Q+A history, per-suspect history, failed call adds nothing) + npm test script. Three small fixes of the model's own test bugs (.mjs imports, cast parsing, counter, unclosed server). With the old src it fails 2 of 4.
+- Calls 108-110: test/live-consistency.mjs (live, not in npm test): logs upstream status/usage/receipt headers (never the key) to qa/key-usage-log.json and a transcript. Fixes: syntax, removed a dummy baseUrl that would have sent the key to localhost, exit before finally, receipts from upstream headers (110 re-parsed after a 7-character separator).
+- Call 112: README status (v0.2.4, 71 checks) + CHANGELOG 0.2.4 and the missing 0.2.3 entry.
+- Live smoke 12:20 UTC: 10/10 200, 10/10 checks. EN+PT Maya kept the scratched lock story across 3 questions; Carlos named only Lorenzo, Maya and himself and said he cleans alone. No "Joe".
+- Result: npm test 71/71 (was 67). 26 requests, 17 893 / 12 421 tokens, 596.1 neurons, ~US$ 0.0066. Build: 13 calls, 3 wasted, 0 API failures, slowest 72.3 s. Manual: 0 product lines; 1 CHANGELOG bullet + 1 blank line; 2 harness lines.
+- Details, receipts and FullCup observations: qa/rework.md (sprint 5).

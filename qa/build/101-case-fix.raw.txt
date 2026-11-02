@@ -1,0 +1,10 @@
+<<<REPLACE src/case.js>>>
+  const persona = suspect.persona?.[l] ?? '';
+=====
+  const persona = suspect.persona?.[l] ?? '';
+  let prompt = `${intro}\n\nYou are role‑playing as ${persona}.`;
+
+  if (l === 'pt') {
+    prompt += `\n\nUse these exact PT‑BR terms:\n- Investigator: Investigador\n- Witness: Testemunha\n- Suspect: Suspeito\n- Clue: Pista\n- Evidence: Evidência`;
+  }
+<<<END>>>

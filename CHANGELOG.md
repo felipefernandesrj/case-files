@@ -1,4 +1,17 @@
 # Changelog
+
+## 0.2.4 (M1 sprint 5, consistent suspects)
+- Suspects now receive private facts and specific clues in their role-play prompts
+- Added rules to prevent suspects from inventing people and to maintain story consistency
+- Server now keeps each question with its answer per suspect, so suspects remember what they were asked
+- Improved consistency through new offline and live smoke tests
+
+## 0.2.3 (M1 sprint 4, Portuguese wording + backer credits)
+- Completed full PT-BR wording pass for the case and UI
+- Added "Thanks to the backers" screen using credits from the API
+- Fixed language switching to ensure the case reloads in the correct language
+- Increased automated checks to 67
+
 ## 0.2.2 (M1 sprint 3, wording + keyboard access)
 - Portuguese suspects now say "sujas de fuligem" (soot-stained) instead of the stiff "fuliginosas".
 - The web player works fully from the keyboard: Tab reaches every control with a visible focus ring, Enter asks a question, choosing a suspect jumps to the question box, and the language toggle reports its state.

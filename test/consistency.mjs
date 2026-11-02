@@ -1,0 +1,263 @@
+import { createServer } from '../src/server.js';
+import { loadCase, systemPrompt } from '../src/case.js';
+import http from 'node:http';
+
+const assert = (cond, msg) => { if (!cond) throw new Error(msg); };
+
+async function runTests() {
+  let passed = 0;
+  let failed = 0;
+
+  const test = async (name, fn) => {
+    try {
+      await fn();
+      console.log(`PASS ${name}`);
+      passed++;
+    } catch (err) {
+      console.error(`FAIL ${name}: ${err.message}`);
+      failed++;
+    }
+  };
+
+  const caseData = await loadCase();
+  const suspects = caseData.suspects;
+  const languages = ['en', 'pt'];
+
+  // Helper to create a mock server instance
+  const setupServer = (fetchImpl) => {
+    const server = createServer({
+      caseFile: 'content/case.json',
+      scoreFile: null,
+      key: 'test-key',
+      baseUrl: 'http://upstream.test/v1',
+      fetchImpl,
+      mock: false
+    });
+    return new Promise((resolve) => {
+      server.listen(0, () => resolve(server));
+    });
+  };
+
+  // 1. Prompt Content & 2. Leakage & 3. Maya Lock & 7. No Invented People
+  await test('Prompt Integrity (Content, Leakage, Maya, Names)', async () => {
+    const fetchHistory = [];
+    const server = await setupServer((url, opts) => {
+      const body = JSON.parse(opts.body);
+      fetchHistory.push(body.messages);
+      return Promise.resolve({
+        ok: true, status: 200,
+        json: async () => ({ choices: [{ message: { role: 'assistant', content: 'AI_RESPONSE' } }] }),
+        text: async () => ''
+      });
+    });
+
+    try {
+      for (const s of suspects) {
+        for (const lang of languages) {
+          const prompt = systemPrompt(caseData, s.id, lang);
+          
+          // 1. Required segments
+          assert(prompt.includes(s.facts), `Missing facts for ${s.id}`);
+          assert(prompt.includes("Never invent or name any other person"), "Missing 'Never invent'");
+          assert(prompt.includes("Stay consistent with everything you said earlier"), "Missing 'Stay consistent'");
+          
+          const relevantClues = caseData.clues.filter(cl => cl.from === s.id);
+          for (const clue of relevantClues) {
+            assert(prompt.includes(clue.text[lang]), `Missing clue text for ${s.id} in ${lang}`);
+          }
+
+          // Check all 3 names exist in prompt
+          suspects.forEach(other => assert(prompt.includes(other.name), `Missing name ${other.name}`));
+
+          // 2. Leakage Check
+          suspects.forEach(other => {
+            if (other.id !== s.id) {
+              assert(!prompt.includes(other.facts), `Leaked facts of ${other.id} to ${s.id}`);
+            }
+          });
+          assert(!prompt.includes(caseData.solution.en), "Leaked solution EN");
+          assert(!prompt.includes(caseData.solution.pt), "Leaked solution PT");
+
+          // 3. Maya Lock
+          if (s.id === 'maya') {
+            if (lang === 'en') assert(prompt.includes('scratch'), "Maya EN missing scratch");
+            if (lang === 'pt') assert(prompt.includes('arranhão'), "Maya PT missing arranhão");
+          }
+
+          // 7. No invented people in prompt
+          const lines = prompt.split('\n');
+          let peopleSection = "";
+          let foundPeople = false;
+          for (const line of lines) {
+            if (line.includes("The only people in this case are:")) { foundPeople = true; continue; }
+            if (foundPeople && line.trim() === "") break;
+            if (foundPeople && line.trim().startsWith("- ")) peopleSection += line + " ";
+          }
+          
+          const namesIn = (text) => {
+            const words = text.match(/\b[A-Z][a-z]+\b/g) || [];
+            return words;
+          };
+          const capturedNames = namesIn(peopleSection);
+          const validNames = [...suspects.map(s => s.name), ...suspects.map(s => s.role.en), ...suspects.map(s => s.role.pt)];
+          for (const name of capturedNames) {
+            const isOk = suspects.some(s => s.name.includes(name) || s.role.en.includes(name) || s.role.pt.includes(name));
+            assert(isOk, `Invented person detected in prompt: ${name}`);
+          }
+        }
+      }
+    } finally {
+      server.close();
+    }
+  });
+
+  // 4. History Management
+  await test('History holds questions and answers', async () => {
+    const history = [];
+    const server = await setupServer((url, opts) => {
+      const body = JSON.parse(opts.body);
+      history.push(body.messages);
+      return Promise.resolve({
+        ok: true, status: 200,
+        json: async () => ({ choices: [{ message: { role: 'assistant', content: 'A1' } }] }),
+        text: async () => ''
+      });
+    });
+
+    try {
+      const res1 = await fetch(`http://localhost:${server.address().port}/api/session`, { method: 'POST' });
+      const { sessionId } = await res1.json();
+
+      // First ask
+      await fetch(`http://localhost:${server.address().port}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, suspectId: 'maya', question: 'Did you see the lock?', lang: 'en' })
+      });
+
+      // Second ask
+      await fetch(`http://localhost:${server.address().port}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, suspectId: 'maya', question: 'Was the lock normal?', lang: 'en' })
+      });
+
+      // The second request in history should contain 4 messages
+      const secondReq = history[1];
+      assert(secondReq.length === 4, `Expected 4 messages, got ${secondReq.length}`);
+      assert(secondReq[0].role === 'system', 'Msg 0 should be system');
+      assert(secondReq[1].content === 'Did you see the lock?', 'Msg 1 mismatch');
+      assert(secondReq[2].role === 'assistant' && secondReq[2].content === 'A1', 'Msg 2 mismatch');
+      assert(secondReq[3].content === 'Was the lock normal?', 'Msg 3 mismatch');
+    } finally {
+      server.close();
+    }
+  });
+
+  // 5. History is per suspect
+  await test('History is per suspect', async () => {
+    const history = [];
+    const server = await setupServer((url, opts) => {
+      const body = JSON.parse(opts.body);
+      history.push(body.messages);
+      return Promise.resolve({
+        ok: true, status: 200,
+        json: async () => ({ choices: [{ message: { role: 'assistant', content: 'A' } }] }),
+        text: async () => ''
+      });
+    });
+
+    try {
+      const res = await fetch(`http://localhost:${server.address().port}/api/session`, { method: 'POST' });
+      const { sessionId } = await res.json();
+
+      await fetch(`http://localhost:${server.address().port}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, suspectId: 'maya', question: 'Hi', lang: 'en' })
+      });
+
+      await fetch(`http://localhost:${server.address().port}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, suspectId: 'carlos', question: 'Hello', lang: 'en' })
+      });
+
+      const carlosReq = history[1];
+      // Should only contain system + current user question
+      assert(carlosReq.length === 2, `Carlos request should be fresh, got ${carlosReq.length}`);
+      assert(carlosReq[0].role === 'system' && carlosReq[1].content === 'Hello', 'Carlos context corrupted');
+    } finally {
+      server.close();
+    }
+  });
+
+  // 6. Failed upstream call adds nothing
+  await test('Failed upstream call adds nothing', async () => {
+    let callCount = 0;
+    const server = await setupServer((url, opts) => {
+      callCount++;
+      if (callCount === 1) {
+        return Promise.resolve({ ok: false, status: 502, json: async () => ({ error: 'fail' }), text: async () => '' });
+      }
+      return Promise.resolve({
+        ok: true, status: 200,
+        json: async () => ({ choices: [{ message: { role: 'assistant', content: 'Success' } }] }),
+        text: async () => ''
+      });
+    });
+
+    const history = [];
+    const originalFetch = globalThis.fetch;
+    // We need to intercept the internal server fetchImpl via the mock setup above, 
+    // but to check history we need to monitor what the server's fetchImpl receives.
+    // Since server.js uses fetchImpl passed in, we can track it in our mock.
+    
+    // Re-implementing the logic to capture history via the server's internal call
+    const serverWithHistory = createServer({
+      caseFile: 'content/case.json',
+      scoreFile: null,
+      key: 'test-key',
+      baseUrl: 'http://upstream.test/v1',
+      fetchImpl: (url, opts) => {
+        history.push(JSON.parse(opts.body).messages);
+        const currentCount = ++callCount;
+        if (currentCount === 1) return Promise.resolve({ ok: false, status: 502, json: async () => ({}), text: async () => '' });
+        return Promise.resolve({ ok: true, status: 200, json: async () => ({ choices: [{ message: { role: 'assistant', content: 'S' } }] }), text: async () => '' });
+      },
+      mock: false
+    });
+
+    try {
+      await new Promise(r => serverWithHistory.listen(0, r));
+      const res1 = await fetch(`http://localhost:${serverWithHistory.address().port}/api/session`, { method: 'POST' });
+      const { sessionId } = await res1.json();
+
+      await fetch(`http://localhost:${serverWithHistory.address().port}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, suspectId: 'maya', question: 'Q1', lang: 'en' })
+      });
+
+      await fetch(`http://localhost:${serverWithHistory.address().port}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, suspectId: 'maya', question: 'Q2', lang: 'en' })
+      });
+
+      assert(history.length === 2, 'Should have two calls');
+      assert(history[1].length === 2, 'Second call should not have the first failed question in history');
+    } finally {
+      serverWithHistory.close();
+      server.close();
+    }
+  });
+
+  console.log(`${passed} passed, ${failed} failed`);
+  process.exit(failed > 0 ? 1 : 0);
+}
+
+runTests().catch(err => {
+  console.error(err);
+  process.exit(1);
+});

@@ -210,7 +210,7 @@ export function createServer({
         }
 
         const trimmed = capWords(answer, 80);
-        const newHist = [...hist, { role: 'assistant', content: trimmed }];
+        const newHist = [...hist, { role: 'user', content: question }, { role: 'assistant', content: trimmed }];
         sess.history.set(suspectId, newHist);
 
         return sendJSON(res, 200, { answer: trimmed, questions: sess.questions });

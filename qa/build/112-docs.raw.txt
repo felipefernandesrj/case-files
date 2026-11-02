@@ -1,0 +1,23 @@
+<<<REPLACE README.md>>>
+M1 status: bilingual (EN / PT-BR) with full PT wording pass, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard, fair-play check, CLI, capacity messages, and credits screen. 67 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+=====
+M1 status (v0.2.4): bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard, fair-play check, CLI, capacity messages, and credits screen. 71 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+<<<END>>>
+
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+=====
+# Changelog
+
+## 0.2.4 (M1 sprint 5, consistent suspects)
+- Suspects now receive private facts and specific clues in their role-play prompts
+- Added rules to prevent suspects from inventing people and to maintain story consistency
+- Server now tracks question and answer history per suspect to prevent repeating questions
+- Improved consistency through new offline and live smoke tests
+
+## 0.2.3 (M1 sprint 4, Portuguese wording + backer credits)
+- Completed full PT-BR wording pass for the case and UI
+- Added "Thanks to the backers" screen using credits from the API
+- Fixed language switching to ensure the case reloads in the correct language
+- Increased automated checks to 67
+<<<END>>>

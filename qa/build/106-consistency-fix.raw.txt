@@ -1,0 +1,16 @@
+<<<REPLACE test/consistency.mjs>>>
+            if (foundPeople) peopleSection += line + " ";
+=====
+            if (foundPeople && line.trim().startsWith("- ")) peopleSection += line + " ";
+<<<END>>>
+
+<<<REPLACE test/consistency.mjs>>>
+      fetchImpl: (url, opts) => {
+        history.push(JSON.parse(opts.body).messages);
+        if (callCount === 1) return Promise.resolve({ ok: false, status: 502, json: async () => ({}), text: async () => '' });
+=====
+      fetchImpl: (url, opts) => {
+        history.push(JSON.parse(opts.body).messages);
+        const currentCount = ++callCount;
+        if (currentCount === 1) return Promise.resolve({ ok: false, status: 502, json: async () => ({}), text: async () => '' });
+<<<END>>>

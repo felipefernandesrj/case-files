@@ -1,0 +1,14 @@
+<<<REPLACE test/consistency.mjs>>>
+      serverWithHistory.close();
+=====
+      serverWithHistory.close();
+      server.close();
+<<<END>>>
+
+<<<REPLACE test/consistency.mjs>>>
+  console.log(`\nSummary: ${passed} passed, ${failed} failed`);
+  if (failed > 0) process.exit(1);
+=====
+  console.log(`${passed} passed, ${failed} failed`);
+  process.exit(failed > 0 ? 1 : 0);
+<<<END>>>

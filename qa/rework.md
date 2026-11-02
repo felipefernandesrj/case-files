@@ -75,3 +75,42 @@ Totals: 30 calls (27 harness + 3 probes), 11 wasted, 83 157 / 56 752 tokens, 2 2
 Manual lines: 0 product code; 1 doc line (+1 blank) in docs/SPEC.md; 1 config line in .gitignore.
 npm test 67/67 (was 58). Live smoke via key OK (EN + PT ask, accuse, credits).
 Verdict: worth it, the result is better than before (two real bugs from earlier sprints found and fixed by the model's own new tests: PT case text never loaded in the page, and focus handling), but gemma-4-26b needs thinking off (chat_template_kwargs.enable_thinking=false) and small edit tasks, or calls die at the ~236 s proxy cutoff.
+
+## M1 rebuild sprint 5: consistent suspects + waste cut, 2026-11-02 12:07-12:22 UTC (09:07-09:22 BRT) (Essential, gemma-4-26b-a4b-it, thinking off)
+All build calls: `chat_template_kwargs.enable_thinking=false` (NOTHINK=1), max_tokens 400-5000 sized to the task (was 16000), one small task per call, requirements only (no pre-rebuild code).
+| Call | Target | Model | Status | Latency | Tokens in/out | Neurons | Files | Lines | Accepted / rework |
+|---|---|---|---|---|---|---|---|---|---|
+| 99 | case.js systemPrompt (edit block) | gemma-4-26b | 200 | 11.9 s | 985/565 | 24.36 | src/case.js | 30 | wasted: re-declared `let prompt` + duplicated glossary (SyntaxError) |
+| 100 | case.js fix | gemma-4-26b | 200 | 6.3 s | 1027/330 | 18.34 | src/case.js | 1 | wasted: removed both copies, `prompt` undeclared |
+| 101 | case.js fix | gemma-4-26b | 200 | 3.7 s | 762/134 | 10.58 | src/case.js | 6 | wasted: lost suspect name, made-up glossary; reverted 99-101 |
+| 102 | case.js, full file | gemma-4-26b | 200 | 44.2 s | 2274/1915 | 70.57 | src/case.js | +24 | accepted |
+| 103 | server.js history (user+assistant) | gemma-4-26b | 200 | 2.6 s | 287/64 | 4.35 | src/server.js | 1 | accepted |
+| 104 | test/consistency.mjs + package.json | gemma-4-26b | 200 | 72.3 s | 1163/3007 | 92.58 | 2 files | 261+1 | accepted (rework 105-107) |
+| 105 | consistency fix (.mjs imports) | gemma-4-26b | 200 | 8.0 s | 253/98 | 4.97 | test/consistency.mjs | 2 | accepted (rework of 104) |
+| 106 | consistency fix (cast parse, counter) | gemma-4-26b | 200 | 5.0 s | 404/215 | 9.54 | test/consistency.mjs | 5 | accepted, but test hung (unclosed server) |
+| 107 | consistency fix (close, exit, summary) | gemma-4-26b | 200 | 1.9 s | 362/123 | 6.65 | test/consistency.mjs | 4 | accepted, 4/4 |
+| 108 | test/live-consistency.mjs | gemma-4-26b | 200 | 59.6 s | 1182/2547 | 80.21 | test/live-consistency.mjs | 239 | accepted (rework 109-110: syntax, dummy baseUrl, exit skipped finally) |
+| 109 | live smoke fix, full file | gemma-4-26b | 200 | 48.0 s | 3013/2533 | 96.47 | test/live-consistency.mjs | 239 | accepted (receipts still from wrong response) |
+| 110 | live smoke fix (receipts) | gemma-4-26b | 200 | 5.0 s | 302/180 | 7.65 | - | 0 | format: `=======` (7 =); content right, harness re-parse 110-reparse applied it (2 occurrences) |
+| 112 | README status + CHANGELOG 0.2.4/0.2.3 | gemma-4-26b | 200 | 7.8 s | 720/364 | 16.47 | README.md, CHANGELOG.md | 1+13 | accepted with nit (1 bullet said "to prevent repeating questions", reworded by hand) |
+| live x10 | test/live-consistency.mjs EN+PT (maya x3, carlos x2 per lang) | llama-4-scout | 10/10 200 | median 1.62 s (1.12-1.84) | 5159/346 | 153.37 | qa/live-consistency-sprint5.txt | - | 10/10 checks pass |
+| probes x3 | GET /models, disallowed model, /v1/receipts/{id} | - | 200 / 403 / 404 | 0.39-0.44 s | 0 | 0 | - | - | QA probe |
+
+Totals: 26 requests (13 build + 10 live + 3 probes), 17 893 in / 12 421 out tokens, 596.1 neurons, about US$ 0.0066 at $0.011/1k neurons.
+Build only: 13 calls, 12 734 / 12 075 tokens, 442.8 neurons. Wasted calls 3 (99-101, 53.3 neurons, 12% of build neurons), 0 API failures, 0 x 502, slowest call 72.3 s (sprint 4: 30 calls, 11 wasted, 5 API failures, 2 283 neurons, four calls killed at ~236 s). Rework share (wasted + calls that fixed the model's own bugs: 99-101, 105-107, 109, 110): 178.6 of 442.8 build neurons = 40%. Same share as sprint 4, but on a fifth of the neurons and no proxy failures.
+Lesson: with thinking off, gemma-4-26b gets sloppy on literal edit blocks against code it has to re-quote (99-101); a full small file (102) or a one-line anchor (103) works first time.
+Root cause found and fixed: systemPrompt never sent the suspect's private facts or clues to the model, and the server history stored only answers (never questions). That is why Maya "noticed nothing" about the lock and Carlos invented "Joe the janitor". Mutation check: with the old src, test/consistency.mjs fails 2 of 4.
+Manual lines: 0 product code. 1 CHANGELOG bullet reworded + 1 blank line (docs). 2 harness lines in tools/build-via-key.mjs (accept `={5,}` as the separator, tooling only).
+npm test: 71/71 (e2e 42, proxy 12, consistency 4 new, keyboard 13; was 67). Live smoke 10/10.
+Verdict: worth it. Equal or better: the two live nits are gone in both languages, with the same tests still green plus 4 new tests.
+Receipts (seal-by 2026-11-03T00:05:00Z): build 01M6E2G7BETE0J2P5B66P80CXV, 01M6E2GXDTS1HFH4TYYE4RWW50, 01M6E2HFP7VYFA4W401QF9XPY2, 01M6E2J27V8SKX9RBETVRTXJ14, 01M6E2KNBM6KPFW27DBZJPTAZP, 01M6E2MQAHCN65M3HB3N9EXMF1, 01M6E2Q44A3SC299WVRV5D943R, 01M6E2QVM9AN9P6WP1CCP5NRZE, 01M6E309XX37PFFXQQNPYH9V1J, 01M6E31B34W00VF89WD6JTRBW0, 01M6E33XCYJRDHBJJ01ZTR6HNP, 01M6E35SGGSFD2RYSJQ0TZ43R5, 01M6E387FVDM4S6Y7VJFN7454V; live 01M6E369DN79FAQ0RVGJYFJGSM .. 01M6E36PN5HD4PQ9V52JA7HQEX (10, listed in qa/live-consistency-sprint5.txt).
+
+### FullCup observations, sprint 5
+- Reproduced: GET /v1/models returns no x-ratelimit-* and no receipt headers (1 of 1 this sprint, 6 of 6 since 31 Oct).
+- Reproduced: error body shape is flat, outside the documented `{"error":{"message","code"}}`: 403 `{"error":"model_outside_capacity_class","message":"...","allowed":[6 models]}` (1 of 1), no receipt id, x-ratelimit-* present.
+- Reproduced: no API receipt endpoint, GET /v1/receipts/{id} 404 (1 of 1).
+- Reproduced: no per-call cost anywhere (26 of 26), cost only from neurons.
+- Reproduced: duplicate receipt headers x-fullcup-receipt (legacy) + x-fullcup-receipt-id on every chat 200 (23 of 23).
+- Reproduced: chat_template_kwargs.enable_thinking=false is honoured by gemma-4-26b (13 of 13, no reasoning text), still undocumented in /v1/models.
+- Not reproduced: 502 workers_ai_unavailable at ~236 s and empty 200 stream (0 of 13; no call ran past 73 s, no stream used). So the cutoff waste is avoidable on the client side, but the proxy behaviour itself is unchanged as far as we know.
+- New, low: usage.prompt_tokens_details.cached_tokens 512 on call 102 (prompt cache hit reported, 1 of 13); check whether cached tokens are billed at a lower neuron rate.

@@ -1,0 +1,12 @@
+<<<REPLACE test/live-consistency.mjs>>>
+        const rid = res.headers.get('x-fullcup-receipt-id');
+        if (rid) {
+          receipts.push({ id: rid, seal: res.headers.get('x-fullcup-seal-by') });
+        }
+=======
+        const h = usageEntries[usageEntries.length - 1]?.headers || {};
+        const rid = res.headers.get('x-fullcup-receipt-id') || h['x-fullcup-receipt-id'];
+        if (rid) {
+          receipts.push({ id: rid, seal: res.headers.get('x-fullcup-seal-by') || h['x-fullcup-seal-by'] });
+        }
+<<<END>>>

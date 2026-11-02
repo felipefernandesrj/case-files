@@ -1,0 +1,10 @@
+<<<REPLACE test/consistency.mjs>>>
+import { createServer } from '../src/server.mjs';
+=====
+import { createServer } from '../src/server.js';
+<<<END>>>
+<<<REPLACE test/consistency.mjs>>>
+import { loadCase, systemPrompt } from '../src/case.mjs';
+=====
+import { loadCase, systemPrompt } from '../src/case.js';
+<<<END>>>

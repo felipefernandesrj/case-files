@@ -48,6 +48,30 @@ export function systemPrompt(c, suspectId, lang) {
   const persona = suspect.persona?.[l] ?? '';
   let prompt = `${intro}\n\nYou are role‑playing as ${suspect.name ?? ''}. ${persona}`;
 
+  // 1. Private facts
+  if (suspect.facts) {
+    prompt += `\n\nYour private facts (fixed, never contradict them):\n${suspect.facts}`;
+  }
+
+  // 2. Clues
+  const myClues = (c.clues ?? []).filter(cl => cl.from === suspectId);
+  if (myClues.length > 0) {
+    prompt += `\n\nThings you know and say when asked about them:`;
+    for (const cl of myClues) {
+      prompt += `\n- ${cl.text?.[l] ?? ''}`;
+    }
+  }
+
+  // 3. Cast
+  prompt += `\n\nThe only people in this case are:`;
+  for (const s of (c.suspects ?? [])) {
+    prompt += `\n- ${s.name} (${s.role?.[l] ?? ''})`;
+  }
+  prompt += `\nNever invent or name any other person (no other staff, guests, witnesses or relatives by name). If asked about someone else, say you only know these people.`;
+
+  // 4. Consistency rules
+  prompt += `\n\nStay consistent with everything you said earlier in this conversation and with your private facts. Do not change your story between questions. You may lie only where your facts say you lie or hide something.`;
+
   // Glossary is added for PT prompts. Include all glossary entries except any that contain the term "violonista".
   if (l === 'pt' && Array.isArray(c.glossary)) {
     const lines = c.glossary
