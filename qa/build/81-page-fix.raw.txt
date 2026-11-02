@@ -1,0 +1,58 @@
+<<<REPLACE public/index.html>>>
+function setLang(newLang) {
+  lang = newLang;
+  document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
+  document.getElementById('len').setAttribute('aria-pressed', newLang === 'en');
+  document.getElementById('lpt').setAttribute('aria-pressed', newLang === 'pt');
+  
+  // Basic UI
+  document.getElementById('question-label').textContent = newLang === 'pt' ? 'Pergunta' : 'Question';
+  document.getElementById('ask-btn').textContent = newLang === 'pt' ? 'Perguntar' : 'Ask';
+  document.getElementById('player-label').textContent = newLang === 'pt' ? 'Seu nome' : 'Your name';
+  document.getElementById('suspects-title').textContent = newLang === 'pt' ? 'Suspeitos' : 'Suspects';
+  document.getElementById('conversation-title').textContent = newLang === 'pt' ? 'Conversa' : 'Conversation';
+  document.getElementById('accuse-title').textContent = newLang === 'pt' ? 'Acusar' : 'Accuse';
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+
+  // Scoreboard
+  document.getElementById('scores-title').textContent = newLang === 'pt' ? 'Placar' : 'Scoreboard';
+  document.getElementById('scores-caption').textContent = newLang === 'pt' ? '10 melhores jogadores' : 'Top 10 Players';
+  document.getElementById('th-player').textContent = newLang === 'pt' ? 'Jogador' : 'Player';
+  document.getElementById('th-score').textContent = newLang === 'pt' ? 'Pontos' : 'Score';
+  document.getElementById('th-questions').textContent = newLang === 'pt' ? 'Perguntas' : 'Questions';
+
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  if (lastAccuseResult) renderVerdict();
+  if (!document.getElementById('credits').hidden) loadCredits();
+}
+=====
+async function setLang(newLang) {
+  lang = newLang;
+  document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
+  document.getElementById('len').setAttribute('aria-pressed', newLang === 'en');
+  document.getElementById('lpt').setAttribute('aria-pressed', newLang === 'pt');
+  
+  // Basic UI
+  document.getElementById('question-label').textContent = newLang === 'pt' ? 'Pergunta' : 'Question';
+  document.getElementById('ask-btn').textContent = newLang === 'pt' ? 'Perguntar' : 'Ask';
+  document.getElementById('player-label').textContent = newLang === 'pt' ? 'Seu nome' : 'Your name';
+  document.getElementById('suspects-title').textContent = newLang === 'pt' ? 'Suspeitos' : 'Suspects';
+  document.getElementById('conversation-title').textContent = newLang === 'pt' ? 'Conversa' : 'Conversation';
+  document.getElementById('accuse-title').textContent = newLang === 'pt' ? 'Acusar' : 'Accuse';
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+
+  // Scoreboard
+  document.getElementById('scores-title').textContent = newLang === 'pt' ? 'Placar' : 'Scoreboard';
+  document.getElementById('scores-caption').textContent = newLang === 'pt' ? '10 melhores jogadores' : 'Top 10 Players';
+  document.getElementById('th-player').textContent = newLang === 'pt' ? 'Jogador' : 'Player';
+  document.getElementById('th-score').textContent = newLang === 'pt' ? 'Pontos' : 'Score';
+  document.getElementById('th-questions').textContent = newLang === 'pt' ? 'Perguntas' : 'Questions';
+
+  await loadCase();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  if (lastAccuseResult) renderVerdict();
+  if (!document.getElementById('credits').hidden) await loadCredits(false);

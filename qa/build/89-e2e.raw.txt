@@ -1,0 +1,92 @@
+<<<REPLACE test/e2e.mjs>>>
+/* ---------- run all tests ---------- */
+=====
+/* ---------- sprint 4 credits ---------- */
+test('credits EN', async () => {
+  const creditsPath = join(__dirname, '..', 'data', 'credits.json');
+  const creditsData = JSON.parse(readFileSync(creditsPath, 'utf8'));
+  const server = createServer({ caseFile: CASE_FILE, mock: true });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const { status, data } = await request(port, 'GET', '/api/credits?lang=en');
+  server.close();
+  if (status !== 200) throw `status ${status}`;
+  if (data.title !== creditsData.title.en) throw 'title EN mismatch';
+  if (data.backers.length !== creditsData.backers.length) throw 'backers length mismatch';
+  if (data.example !== creditsData.example) throw 'example flag mismatch';
+});
+
+test('credits PT', async () => {
+  const creditsPath = join(__dirname, '..', 'data', 'credits.json');
+  const creditsData = JSON.parse(readFileSync(creditsPath, 'utf8'));
+  const server = createServer({ caseFile: CASE_FILE, mock: true });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const { status, data } = await request(port, 'GET', '/api/credits?lang=pt');
+  server.close();
+  if (status !== 200) throw `status ${status}`;
+  if (data.title !== creditsData.title.pt) throw 'title PT mismatch';
+  if (data.backers.length !== creditsData.backers.length) throw 'backers length mismatch';
+});
+
+test('credits missing file', async () => {
+  const server = createServer({ caseFile: CASE_FILE, mock: true, creditsFile: join(os.tmpdir(), 'non-existent-credits.json') });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const resEn = await request(port, 'GET', '/api/credits?lang=en');
+  if (resEn.status !== 200 || resEn.data.title !== 'Thanks to the backers' || resEn.data.backers.length !== 0 || resEn.data.example !== false) throw 'EN fallback failed';
+  const resPt = await request(port, 'GET', '/api/credits?lang=pt');
+  if (resPt.status !== 200 || resPt.data.title !== 'Obrigado aos apoiadores') throw 'PT fallback failed';
+  server.close();
+});
+
+test('credits invalid json', async () => {
+  const tmpDir = mkdtempSync(join(os.tmpdir(), 'e2e-json-'));
+  const badFile = join(tmpDir, 'bad.json');
+  writeFileSync(badFile, '{not json');
+  const server = createServer({ caseFile: CASE_FILE, mock: true, creditsFile: badFile });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const res = await request(port, 'GET', '/api/credits');
+  if (res.status !== 200 || res.data.example !== false) throw 'invalid json fallback failed';
+  const statusRes = await request(port, 'GET', '/api/status');
+  if (statusRes.status !== 200) throw 'server died after bad json';
+  server.close();
+  rmSync(tmpDir, { recursive: true, force: true });
+});
+
+test('credits default path independent of cwd', async () => {
+  const originalCwd = process.cwd();
+  try {
+    process.chdir(os.tmpdir());
+    const creditsPath = join(__dirname, '..', 'data', 'credits.json');
+    const creditsData = JSON.parse(readFileSync(creditsPath, 'utf8'));
+    const server = createServer({ caseFile: CASE_FILE, mock: true });
+    server.listen(0);
+    await once(server, 'listening');
+    const { port } = server.address();
+    const { status, data } = await request(port, 'GET', '/api/credits');
+    server.close();
+    if (status !== 200 || data.backers.length !== creditsData.backers.length) throw 'cwd changed path resolution';
+  } finally {
+    process.chdir(originalCwd);
+  }
+});
+
+test('case PT wording', async () => {
+  const ptText = JSON.stringify(caseData).toLowerCase();
+  const forbidden = ['violonista', 'flamboyant', 'performance'];
+  for (const f of forbidden) {
+    if (ptText.includes(f)) throw `found forbidden word: ${f}`;
+  }
+  // Check if intro contains 'violinista' (assuming it's a key test for requirement)
+  if (!caseData.intro.pt.includes('violinista')) throw 'PT intro missing "violinista"';
+  if (!fairPlay(caseData).ok) throw 'fairPlay failed';
+});
+
+/* ---------- run all tests ---------- */
+<<<END>>>

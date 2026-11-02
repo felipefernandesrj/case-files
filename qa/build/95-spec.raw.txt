@@ -1,0 +1,77 @@
+<<<REPLACE docs/SPEC.md>>>
+#### API
+- `GET /api/status`
+=====
+#### API
+- `GET /api/status`
+<<<REPLACE docs/SPEC.md>>>
+- `GET /api/scores`
+  - Returns the top 10 scores for the current case.
+
+### Key & Mode Resolution
+=====
+- `GET /api/scores`
+  - Returns the top 10 scores for the current case.
+
+- `GET /api/credits?lang=[pt|en]`
+  - Returns credits information.
+  - Shape: `{ title: string, backers: string[], example: boolean }`.
+  - If the file (configured via `creditsFile` option, defaults to `data/credits.json`) is missing or invalid, returns: `{ title: "Thanks to the backers" | "Obrigado aos apoiadores", backers: [], example: false }`.
+
+### Key & Mode Resolution
+<<<REPLACE docs/SPEC.md>>>
+## Testing
+
+Run the full test suite via npm:
+`npm test`
+
+This executes:
+1. `node test/e2e.mjs` (End-to-end flows)
+2. `node test/proxy.mjs` (Upstream communication)
+3. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+=====
+## Testing
+
+Run the full test suite via npm:
+`npm test`
+
+This executes:
+1. `node test/e2e.mjs` (End-to-end flows)
+2. `node test/proxy.mjs` (Upstream communication)
+3. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Total checks: 67 (e2e: 42, proxy: 12, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- `POST /api/accuse`
+  - Body: `{ sessionId, suspectId, player?: string, lang?: 'pt' | 'en' }`.
+  - Returns: `{ correct: boolean, culprit: string, culpritName: string, solution: string, score: number, questions: number }`.
+  - Errors:
+    - `400`: `unknown session`, `unknown suspect`.
+    - `409`: `already accused`.
+
+- `GET /api/scores`
+=====
+- `POST /api/accuse`
+  - Body: `{ sessionId, suspectId, player?: string, lang?: 'pt' | 'en' }`.
+  - Returns: `{ correct: boolean, culprit: string, culpritName: string, solution: string, score: number, questions: number }`.
+  - Errors:
+    - `400`: `unknown session`, `unknown suspect`.
+    - `409`: `already accused`.
+
+- `GET /api/scores`
+<<<REPLACE docs/SPEC.md>>>
+## Upstream (`src/proxy.js`)
+=====
+## Upstream (`src/proxy.js`)
+
+## Web page: closing screen
+
+When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+
+## Upstream (`src/proxy.js`)
+<<<END>>>

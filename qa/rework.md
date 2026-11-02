@@ -38,3 +38,40 @@ Headers on every chat call: x-fullcup-receipt-id (same value also as legacy x-fu
 Latency: interrogation median 1.12 s (8 calls, range 0.77 to 2.12 s), down from 1.7 s in sprint 2. GET /models 0.55 s.
 FullCup observations (no wrong status codes; no refused model since no probes ran this sprint): GET /models still returns no x-ratelimit-* or receipt headers (5 of 5 calls since 31 Oct), and no call carries a cost value (no usage.cost, no x-fullcup-cost), so per-call cost can only be estimated from tokens/neurons.
 Verdict: worth it. The PT nit was fixed with one prompt line and zero rework; quality matches Essential for short role-play.
+
+## M1 rebuild sprint 4: PT-BR wording + backer credits screen, 2026-11-02 00:08-00:58 UTC (Essential, gemma-4-26b-a4b-it)
+| Call | Target | Model | Status | Latency | Tokens in/out | Neurons | Files | Lines | Accepted / rework |
+|---|---|---|---|---|---|---|---|---|---|
+| 71 | case.json PT | gemma-4-26b | 200 | 176.1 s | 2620/7579 | 230.5 | content/case.json | 4 | accepted |
+| 72 | credits.json | gemma-4-26b | 200 | 9.4 s | 475/356 | 14.0 | data/credits.json | 13 | accepted |
+| 73 | server /api/credits | gemma-4-26b | 200 | 48.3 s | 5320/4029 | 158.2 | src/server.js | 32 | accepted (rework in 92) |
+| 74 | page | gemma-4-26b | 502 | 236.3 s | - | - | - | 0 | wasted |
+| 75 | page (stream) | gemma-4-26b | 200 | 181.8 s | 0/1 | 0.03 | - | 0 | wasted |
+| 76 | page (edits) | gemma-4-26b | 200 | 72.5 s | 3904/7987 | 253.3 | - | 0 | wasted (format) |
+| 77 | page | gemma-4-26b | 502 | 236.1 s | - | - | - | 0 | wasted |
+| 78 | page (full, effort low) | gemma-4-26b | 200 | 147.4 s | 3867/6857 | 222.2 | public/index.html | 309 | accepted |
+| 79 | keyboard test | gemma-4-26b | 200 | 78.1 s | 8315/7407 | 277.6 | test/keyboard.mjs | 57 | accepted |
+| 80 | page fix | gemma-4-26b | 502 | 236.5 s | - | - | - | 0 | wasted |
+| 81 | page fix | gemma-4-26b | 200 | 166.9 s | 4592/7000 | 232.7 | - | 0 | wasted (truncated) |
+| 82a-c | probes | gemma-4-26b | 200 | 1.6-5.2 s | 81/407 | 11.8 | - | 0 | QA probe |
+| 83 | page fix | gemma-4-26b | 200 | 20.1 s | 4594/830 | 64.4 | index.html | 49 | rework (syntax) |
+| 84 | page fix | gemma-4-26b | 200 | 29.6 s | 4680/1856 | 93.2 | index.html | 69 | accepted |
+| 85 | page fix | gemma-4-26b | 200 | 15.3 s | 4547/628 | 58.5 | index.html | 37 | rework (focus) |
+| 86 | page fix | gemma-4-26b | 200 | 12.5 s | 4586/480 | 51.3 | index.html | 17 | rework (regression) |
+| 87 | page fix | gemma-4-26b | 200 | 22.6 s | 4597/892 | 55.1 | index.html | 37 | accepted |
+| 88 | e2e checks | gemma-4-26b | 200 | 11.7 s | 9938/1175 | 122.4 | - | 0 | wasted (format) |
+| 89 | e2e checks | gemma-4-26b | 200 | 29.8 s | 10015/1254 | 125.2 | test/e2e.mjs | 88 | accepted |
+| 90 | e2e fix | gemma-4-26b | 200 | 15.6 s | 493/569 | 20.0 | - | 0 | wasted |
+| 91 | e2e fix | gemma-4-26b | 200 | 6.3 s | 588/408 | 16.5 | test/e2e.mjs | 25 | accepted |
+| 92 | server fix | gemma-4-26b | 200 | 41.9 s | 4017/1717 | 83.3 | src/server.js | 29 | accepted |
+| 93 | SPEC | gemma-4-26b | 502 | 236.2 s | - | - | - | 0 | wasted |
+| 94 | README | gemma-4-26b | 200 | 5.2 s | 323/171 | 7.6 | README.md | 1 | accepted |
+| 95 | SPEC | gemma-4-26b | 200 | 19.3 s | 1554/793 | 35.8 | docs/SPEC.md | 15 | accepted (nit) |
+| 96 | SPEC fix | gemma-4-26b | 200 | 6.0 s | 1333/198 | 17.5 | - | 0 | wasted (format) |
+| 97 | SPEC fix | gemma-4-26b | 200 | 73.2 s | 1397/3000 | 88.7 | - | 0 | wasted (loop) |
+| 98 | SPEC fix | gemma-4-26b | 200 | 30.0 s | 1321/1158 | 43.6 | docs/SPEC.md | 94 | partly (heading fixed by hand) |
+
+Totals: 30 calls (27 harness + 3 probes), 11 wasted, 83 157 / 56 752 tokens, 2 283 neurons (~US$ 0.025). Rework share: about 40% of neurons (909 of 2 283) went to wasted or reworked calls.
+Manual lines: 0 product code; 1 doc line (+1 blank) in docs/SPEC.md; 1 config line in .gitignore.
+npm test 67/67 (was 58). Live smoke via key OK (EN + PT ask, accuse, credits).
+Verdict: worth it, the result is better than before (two real bugs from earlier sprints found and fixed by the model's own new tests: PT case text never loaded in the page, and focus handling), but gemma-4-26b needs thinking off (chat_template_kwargs.enable_thinking=false) and small edit tasks, or calls die at the ~236 s proxy cutoff.

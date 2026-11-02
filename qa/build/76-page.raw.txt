@@ -1,0 +1,176 @@
+<<<REPLACE public/index.html>>>
+  <section id="verdict" role="status" aria-live="assertive" tabindex="-1" hidden></section>
+  <section id="err" role="alert" hidden></section>
+
+  <section id="scores-section" hidden>
+    <h2 id="scores-title">Scoreboard</h2>
+    <table>
+      <caption id="scores-caption">Top 10 Players</caption>
+      <thead>
+        <tr><th id="th-idx">#</th><th id="th-player">Player</th><th id="th-score">Score</th><th id="th-questions">Questions</th></tr>
+      </thead>
+      <tbody id="scores-body"></tbody>
+    </table>
+  </section>
+</main>
+
+<section id="credits" aria-labelledby="credits-title" tabindex="-1" hidden>
+  <h2 id="credits-title"></h2>
+  <ul id="credits-list"></ul>
+  <p id="credits-note" hidden></p>
+</section>
+
+<script type="module">
+const API = '/api';
+let lang = 'en';
+let sessionId = null;
+let caseData = null;
+let selectedSuspect = null;
+let lastVerdict = null;
+let lastCredits = null;
+const histories = {}; // per suspectId [{q,a},...]
+<<<END>>>
+<<<REPLACE public/index.html>>>
+function setLang(newLang) {
+  lang = newLang;
+  document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
+  document.getElementById('len').setAttribute('aria-pressed', newLang === 'en');
+  document.getElementById('lpt').setAttribute('aria-pressed', newLang === 'pt');
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  document.getElementById('question-label').textContent = newLang === 'pt' ? 'Pergunta' : 'Question';
+  document.getElementById('ask-btn').textContent = newLang === 'pt' ? 'Perguntar' : 'Ask';
+  document.getElementById('player-label').textContent = newLang === 'pt' ? 'Seu nome' : 'Your name';
+  document.getElementById('suspects-title').textContent = newLang === 'pt' ? 'Suspeitos' : 'Suspects';
+  document.getElementById('conversation-title').textContent = newLang === 'pt' ? 'Conversa' : 'Conversation';
+  document.getElementById('accuse-title').textContent = newLang === 'pt' ? 'Acusar' : 'Accuse';
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+  document.getElementById('scores-title').textContent = newLang === 'pt' ? 'Placar' : 'Scoreboard';
+  document.getElementById('scores-caption').textContent = newLang === 'pt' ? '10 melhores jogadores' : 'Top 10 Players';
+  document.getElementById('th-player').textContent = newLang === 'pt' ? 'Jogador' : 'Player';
+  document.getElementById('th-score').textContent = newLang === 'pt' ? 'Pontos' : 'Score';
+  document.getElementById('th-questions').textContent = newLang === 'pt' ? 'Perguntas' : 'Questions';
+  if (lastVerdict) renderVerdict(lastVerdict);
+  if (lastCredits) loadCredits();
+}
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+  thinking.textContent = lang === 'pt' ? '…pensando' : '…thinking';
+  log.appendChild(thinking);
+  try{
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function accuse(suspectId){
+  const playerName = document.getElementById('player').value.trim()||'anon';
+  try{
+    const res = await fetch(API + '/accuse', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId, player:playerName, lang})
+    });
+    const data = await res.json();
+    if (!res.ok) throw data;
+    lastVerdict = data;
+    renderVerdict(lastVerdict);
+    await loadScores();
+    await loadCredits();
+  }catch(err){
+    showError(err.message||(lang==='pt'?'Erro':'Error'));
+  }
+}
+function renderVerdict(data) {
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = !data;
+  if (!data) return;
+  verdict.innerHTML = `<p>${data.correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!')}</p>
+    <p>${lang==='pt'?'Culpado':'Culprit'}: ${data.culpritName}</p>
+    <p>${lang==='pt'?'Solução':'Solution'}: ${data.solution}</p>
+    <p>${lang==='pt'?'Pontuação':'Score'}: ${data.score}</p>`;
+  verdict.focus();
+}
+function renderAccuseButtons(){
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function loadScores(){
+  const sec = document.getElementById('scores-section');
+  const tbody = document.getElementById('scores-body');
+  const res = await fetch(API + '/scores');
+  const data = await res.json();
+  tbody.innerHTML = '';
+  data.forEach((row,i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td>${row.player}</td><td>${row.score}</td><td>${row.questions}</td>`;
+    tbody.appendChild(tr);
+  });
+  sec.hidden = false;
+}
+function showError(msg){
+  const el = document.getElementById('err');
+  el.textContent = msg;
+  el.hidden = false;
+  setTimeout(()=>{el.hidden=true;},5000);
+}
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+</script>
+</body>
+</html>
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function loadScores(){
+  const sec = document.getElementById('scores-section');
+  const tbody = document.getElementById('scores-body');
+  const res = await fetch(API + '/scores');
+  const data = await res.json();
+  tbody.innerHTML = '';
+  data.forEach((row,i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td>${row.player}</td><td>${row.score}</td><td>${row.questions}</td>`;
+    tbody.appendChild(tr);
+  });
+  sec.hidden = false;
+}
+async function loadCredits() {
+  try {
+    const res = await fetch(API + '/credits?lang=' + lang);
+    if (!res.ok) return;
+    lastCredits = await res.json();
+    renderCredits(lastCredits);
+  } catch (e) {}
+}
+function renderCredits(data) {
+  if (!data) return;
+  const sec = document.getElementById('credits');
+  sec.hidden = false;
+  document.getElementById('credits-title').textContent = data.title;
+  const list = document.getElementById('credits-list');
+  list.innerHTML = '';
+  data.backers.forEach(b => {
+    const li = document.createElement('li');
+    li.textContent = b;
+    list.appendChild(li);
+  });
+  const note = document.getElementById('credits-note');
+  if (data.example) {
+    note.textContent = lang === 'pt' ? 'Nomes de exemplo' : 'Example names';
+    note.hidden = false;
+  } else {
+    note.hidden = true;
+  }
+  sec.focus();
+}
+function showError(msg){
+  const el = document.getElementById('err');
+  el.textContent = msg;
+  el.hidden = false;
+  setTimeout(()=>{el.hidden=true;},5000);
+}
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+</script>
+</body>
+</html>
+<<<END>>>

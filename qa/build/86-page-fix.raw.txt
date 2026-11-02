@@ -1,0 +1,38 @@
+<<<REPLACE public/index.html>>>
+  if (lastAccuseResult) renderVerdict();
+  if (!document.getElementById('credits').hidden) await loadCredits(false);
+}
+=====
+  if (lastAccuseResult) renderVerdict();
+  if (!document.getElementById('credits').hidden) await loadCredits(false);
+}
+<<<END>>>
+<<<REPLACE public/index.html>>>
+function renderVerdict() {
+  if (!lastAccuseResult) return;
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = false;
+  const { correct, culpritName, solution, score } = lastAccuseResult;
+  verdict.innerHTML = `
+    <p>${correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!')}</p>
+    <p>${lang==='pt'?'Culpado':'Culprit'}: ${culpritName}</p>
+    <p>${lang==='pt'?'Solução':'Solution'}: ${solution}</p>
+    <p>${lang==='pt'?'Pontuação':'Score'}: ${score}</p>`;
+  verdict.focus();
+}
+=====
+function renderVerdict() {
+  if (!lastAccuseResult) return;
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = false;
+  const { correct, culpritName, solution, score } = lastAccuseResult;
+  verdict.innerHTML = `
+    <p>${correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!')}</p>
+    <p>${lang==='pt'?'Culpado':'Culprit'}: ${culpritName}</p>
+    <p>${lang==='pt'?'Solução':'Solution'}: ${solution}</p>
+    <p>${lang==='pt'?'Pontuação':'Score'}: ${score}</p>`;
+  if (document.activeElement.tagName !== 'BUTTON') {
+    verdict.focus();
+  }
+}
+<<<END>>>

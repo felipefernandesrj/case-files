@@ -63,6 +63,7 @@ function sendFile(res, filePath) {
  * @param {Object} opts
  * @param {string} opts.caseFile
  * @param {string} [opts.scoreFile='data/scores.json']
+ * @param {string} [opts.creditsFile='data/credits.json']
  * @param {string} [opts.key]
  * @param {string} [opts.baseUrl]
  * @param {Function} [opts.fetchImpl]
@@ -72,6 +73,7 @@ function sendFile(res, filePath) {
 export function createServer({
   caseFile,
   scoreFile = 'data/scores.json',
+  creditsFile = 'data/credits.json',
   key,
   baseUrl,
   fetchImpl,
@@ -260,6 +262,36 @@ export function createServer({
       if (req.method === 'GET' && pathname === '/api/scores') {
         const top = scoreboard.top(10, c.id);
         return sendJSON(res, 200, top);
+      }
+
+      if (req.method === 'GET' && pathname === '/api/credits') {
+        let credits;
+        try {
+          const __dirname = dirname(fileURLToPath(import.meta.url));
+          const absoluteCreditsFile = creditsFile.startsWith('/') 
+            ? creditsFile 
+            : resolve(__dirname, '..', creditsFile);
+          const raw = readFileSync(absoluteCreditsFile, 'utf8');
+          credits = JSON.parse(raw);
+        } catch (_) {
+          credits = null;
+        }
+
+        if (!credits) {
+          const fallbackTitle = queryLang === 'pt' ? 'Obrigado aos apoiadores' : 'Thanks to the backers';
+          return sendJSON(res, 200, {
+            title: fallbackTitle,
+            backers: [],
+            example: false,
+          });
+        }
+
+        const title = typeof credits.title === 'object' ? (credits.title[queryLang] || credits.title['en']) : credits.title;
+        return sendJSON(res, 200, {
+          title: title,
+          backers: credits.backers || [],
+          example: !!credits.example,
+        });
       }
 
       // Not found

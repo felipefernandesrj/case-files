@@ -6,7 +6,7 @@
   },
   "intro": {
     "en": "During a rehearsal at the Aurora Music Academy, the priceless Stradivarius violin disappears from the instrument room. Three people were present that night: the charismatic conductor, a nervous violin prodigy, and the longtime janitor. Who took the priceless instrument?",
-    "pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, a prodígio violinista nervosa e o zelador de longa data. Quem levou o precioso instrumento?"
+    "pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?"
   },
   "culprit": "carlos",
   "suspects": [
@@ -19,7 +19,7 @@
       },
       "persona": {
         "en": "A passionate, slightly flamboyant conductor who prides himself on precision and reputation. He often stays late to perfect the orchestra’s sound.",
-        "pt": "Um maestro apaixonado, um pouco flamboyant, que se orgulha da precisão e da reputação. Ele costuma ficar até tarde para aperfeiçoar o som da orquestra."
+        "pt": "Um maestro apaixonado, um pouco extravagante, que se orgulha da precisão e da reputação. Ele costuma ficar até tarde para aperfeiçoar o som da orquestra."
       },
       "facts": "You are Lorenzo Moretti. You were in the instrument room at 9:30 pm to retrieve the Stradivarius for the final piece. You noticed the lock on the case was slightly ajar, but you assumed it was an oversight. Later, you saw a janitor (Carlos) pushing a cart near the room, but you dismissed it as routine. You want to protect the academy’s image, so you will downplay any negligence and subtly shift suspicion toward the student if pressed. You never admit seeing the lock tampered."
     },
@@ -32,7 +32,7 @@
       },
       "persona": {
         "en": "A talented but anxious student who dreams of soloing at the upcoming recital. She is meticulous about her instrument and worries about her performance.",
-        "pt": "Uma estudante talentosa, porém ansiosa, que sonha em fazer solo no recital que se aproxima. Ela é meticulosa com seu violino e se preocupa com sua performance."
+        "pt": "Uma estudante talentosa, porém ansiosa, que sonha em fazer um solo no recital que se aproxima. Ela é meticulosa com seu violino e se preocupa com seu desempenho."
       },
       "facts": "You are Maya Santos. You rehearsed in the main hall all evening and planned to borrow the Stradivarius for the finale. You entered the instrument room at 9:45 pm and saw the case slightly open, with a faint scratch on the lock—evidence of tampering. You also noticed the janitor’s cart had a wooden compartment that seemed out of place. You are afraid to accuse anyone without proof, but you will mention the odd cart and the disturbed lock. You also hide the fact that you previously borrowed the violin for private practice, fearing it might look suspicious."
     },
@@ -115,7 +115,7 @@
       "id": "c6",
       "from": "carlos",
       "ask": "Why were you in the hallway that night?",
-      "keywords": ["hallway", "corredor", "surgery", "filho", "dinheiro"],
+      "keywords": ["hallway", "corredor", "surgery", "filha", "dinheiro"],
       "implicates": "carlos",
       "clears": null,
       "text": {

@@ -1,0 +1,38 @@
+<<<REPLACE test/e2e.mjs>>>
+test('case PT wording', async () => {
+  const ptText = JSON.stringify(caseData).toLowerCase();
+  const forbidden = ['violonista', 'flamboyant', 'performance'];
+  for (const f of forbidden) {
+    if (ptText.includes(f)) throw `found forbidden word: ${f}`;
+  }
+  // Check if intro contains 'violinista' (assuming it's a key test for requirement)
+  if (!caseData.intro.pt.includes('violinista')) throw 'PT intro missing "violinista"';
+  if (!fairPlay(caseData).ok) throw 'fairPlay failed';
+});
+=====
+test('case PT wording', async () => {
+  const forbidden = ['violonista', 'flamboyant', 'performance'];
+  
+  const collectPtValues = (obj) => {
+    let values = [];
+    if (typeof obj !== 'object' || obj === null) return values;
+    
+    for (const key in obj) {
+      if (key === 'pt' && typeof obj[key] === 'string') {
+        values.push(obj[key].toLowerCase());
+      } else {
+        values = values.concat(collectPtValues(obj[key]));
+      }
+    }
+    return values;
+  };
+
+  const ptValues = collectPtValues(caseData);
+  for (const f of forbidden) {
+    if (ptValues.some(v => v.includes(f))) throw `found forbidden word: ${f}`;
+  }
+
+  if (!caseData.intro.pt.includes('violinista')) throw 'PT intro missing "violinista"';
+  if (!fairPlay(caseData).ok) throw 'fairPlay failed';
+});
+<<<END>>>

@@ -7,7 +7,7 @@ const prompt = fs.readFileSync(promptFile, 'utf8');
 const REPARSE = process.env.REPARSE; // re-parse a saved raw output, no new call
 const sys = 'You are a senior Node.js engineer. Output ONLY files, each as:\n<<<FILE path/to/file>>>\n...full file content...\n<<<END>>>\nNo prose, no markdown fences.';
 const t0 = Date.now();
-const r = REPARSE ? { status: 200, text: async () => JSON.stringify({ choices: [{ message: { content: fs.readFileSync(`qa/build/${REPARSE}.raw.txt`, 'utf8') } }] }) } : await fetch(BASE + '/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'X-FullCup-Workload': 'case-files:build-m1' }, body: JSON.stringify({ model, messages: [{ role: 'system', content: sys }, { role: 'user', content: prompt }], max_tokens: 16000, stream: !!process.env.STREAM }) });
+const r = REPARSE ? { status: 200, text: async () => JSON.stringify({ choices: [{ message: { content: fs.readFileSync(`qa/build/${REPARSE}.raw.txt`, 'utf8') } }] }) } : await fetch(BASE + '/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'X-FullCup-Workload': 'case-files:build-m1' }, body: JSON.stringify({ model, messages: [{ role: 'system', content: sys }, { role: 'user', content: prompt }], max_tokens: Number(process.env.MAXTOK) || 16000, stream: !!process.env.STREAM, ...(process.env.REASONING ? { reasoning_effort: process.env.REASONING } : {}), ...(process.env.NOTHINK ? { chat_template_kwargs: { enable_thinking: false } } : {}) }) });
 const ms0 = Date.now() - t0; let txt = await r.text(); let j = {};
 if (/^data: /m.test(txt)) { let c = '', u = null; for (const l of txt.split('\n')) { if (!l.startsWith('data: {')) continue; try { const k = JSON.parse(l.slice(6)); c += k.choices?.[0]?.delta?.content || ''; if (k.usage) u = k.usage; } catch {} } j = { choices: [{ message: { content: c } }], usage: u }; txt = c; } else { try { j = JSON.parse(txt); } catch {} }
 const ms = Date.now() - t0;
@@ -21,7 +21,7 @@ for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
   files.push({ path: m[1], lines: body.split('\n').length });
 }
 // literal search/replace edits produced by the model: <<<REPLACE path>>>\nOLD\n=====\nNEW\n<<<END>>>
-for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n=====\n([\s\S]*?)\n?<<<END>>>/g)) {
+for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n=====\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 4: a missing <<<END>>> before the next block ends the block
   if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   const cur = fs.readFileSync(m[1], 'utf8'); const n = cur.split(m[2]).length - 1;
   fs.writeFileSync(m[1], cur.split(m[2]).join(m[3])); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });
@@ -40,7 +40,8 @@ for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)
 }
 fs.mkdirSync('qa/build', { recursive: true });
 fs.writeFileSync(`qa/build/${label}.raw.txt`, out || txt.slice(0, 2000));
-const e = { label, at: new Date().toISOString(), model, status: r.status, ms, usage: j.usage || null, files, skipped };
+const hdr = {}; try { for (const [k, v] of r.headers) if (/^(x-fullcup|x-ratelimit|retry-after|ratelimit)/i.test(k)) hdr[k] = v; } catch {} // sprint 4: log receipt/seal/ratelimit headers
+const e = { label, at: new Date().toISOString(), model, status: r.status, ms, usage: j.usage || null, headers: hdr, files, skipped };
 let a = []; try { a = JSON.parse(fs.readFileSync('qa/build-log.json', 'utf8')); } catch {}
 a.push(e); fs.writeFileSync('qa/build-log.json', JSON.stringify(a, null, 1));
 console.log(JSON.stringify(e));

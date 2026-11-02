@@ -1,0 +1,84 @@
+<<<REPLACE src/server.js>>>
+/**
+ * Create the game server.
+ * @param {Object} opts
+ * @param {string} opts.caseFile
+ * @param {string} [opts.scoreFile='data/scores.json']
+ * @param {string} [opts.key]
+ * @param {string} [opts.baseUrl]
+ * @param {Function} [opts.fetchImpl]
+ * @param {boolean} [opts.mock]
+ * @returns {import('node:http').Server}
+ */
+export function createServer({
+  caseFile,
+  scoreFile = 'data/scores.json',
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+}) {
+=====
+/**
+ * Create the game server.
+ * @param {Object} opts
+ * @param {string} opts.caseFile
+ * @param {string} [opts.scoreFile='data/scores.json']
+ * @param {string} [opts.creditsFile='data/credits.json']
+ * @param {string} [opts.key]
+ * @param {string} [opts.baseUrl]
+ * @param {Function} [opts.fetchImpl]
+ * @param {boolean} [opts.mock]
+ * @returns {import('node:http').Server}
+ */
+export function createServer({
+  caseFile,
+  scoreFile = 'data/scores.json',
+  creditsFile = 'data/credits.json',
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+}) {
+<<<END>>>
+<<<REPLACE src/server.js>>>
+      if (req.method === 'GET' && pathname === '/api/scores') {
+        const top = scoreboard.top(10, c.id);
+        return sendJSON(res, 200, top);
+      }
+
+      // Not found
+=====
+      if (req.method === 'GET' && pathname === '/api/scores') {
+        const top = scoreboard.top(10, c.id);
+        return sendJSON(res, 200, top);
+      }
+
+      if (req.method === 'GET' && pathname === '/api/credits') {
+        let credits;
+        try {
+          const raw = readFileSync(resolve(process.cwd(), creditsFile), 'utf8');
+          credits = JSON.parse(raw);
+        } catch (_) {
+          credits = null;
+        }
+
+        if (!credits) {
+          const fallbackTitle = queryLang === 'pt' ? 'Obrigado aos apoiadores' : 'Thanks to the backers';
+          return sendJSON(res, 200, {
+            title: fallbackTitle,
+            backers: [],
+            example: false,
+          });
+        }
+
+        const title = typeof credits.title === 'object' ? (credits.title[queryLang] || credits.title['en']) : credits.title;
+        return sendJSON(res, 200, {
+          title: title,
+          backers: credits.backers || [],
+          example: !!credits.example,
+        });
+      }
+
+      // Not found
+<<<END>>>

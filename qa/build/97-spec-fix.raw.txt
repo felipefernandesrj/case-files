@@ -1,0 +1,168 @@
+<<<REPLACE docs/SPEC.md>>>
+## Upstream (`src/proxy.js`)
+
+## Web page: closing screen
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+## Web page: closing screen
+
+When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
+- **Content**: An `<h2` for the title, a `<ul` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs.md>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- **Content**: An `<h2>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is

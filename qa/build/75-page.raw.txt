@@ -1,0 +1,46 @@
+<<<FILE public/index.html>>>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FullCup Mystery</title>
+<style>
+  body{font-family:sans-serif;margin:0;padding:1rem;background:#f5f5f5;color:#222}
+  header,main,footer{max-width:800px;margin:auto}
+  button{margin:0.2rem;padding:0.5rem 1rem;background:#fff;border:1px solid #888;border-radius:4px;cursor:pointer}
+  button[aria-pressed="true"]{background:#e0e0ff}
+  button:disabled{opacity:0.5;cursor:not-allowed}
+  input,textarea{padding:0.4rem;font-size:1rem;width:100%;box-sizing:border-box}
+  #log{background:#fff;padding:0.5rem;border:1px solid #ccc;min-height:150px;overflow-y:auto;margin-top:0.5rem}
+  #verdict{margin-top:1rem;padding:1rem;background:#e0ffe0;border:1px solid #0a0}
+  #err{margin-top:1rem;padding:1rem;background:#ffe0e0;border:1px solid #a00}
+  table{width:100%;border-collapse:collapse;margin-top:0.5rem}
+  th,td{border:1px solid #999;padding:0.3rem;text-align:left}
+  [role="log"] p{margin:0.3rem 0}
+  button:focus-visible{outline:3px solid #0066ff}
+  #credits{margin-top:2rem;padding:1rem;background:#eee;border-radius:8px}
+  .example-note{font-style:italic;font-size:0.9rem;color:#666}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">FullCup Mystery</h1>
+  <div>
+    <button id="len" aria-pressed="true">EN</button>
+    <button id="lpt" aria-pressed="false">PT</button>
+  </div>
+</header>
+<main>
+  <section id="intro"></section>
+
+  <section id="suspects">
+    <h2 id="suspects-title">Suspects</h2>
+    <div id="suspect-buttons"></div>
+  </section>
+
+  <section id="conversation">
+    <h2 id="conversation-title">Conversation</h2>
+    <div id="log" role="log" aria-live="polite"></div>
+    <form id="ask-form">
+      <label for="q" id="question-label">Question</label>
+      <input type="text"

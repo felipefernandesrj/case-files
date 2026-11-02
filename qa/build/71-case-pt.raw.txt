@@ -1,0 +1,20 @@
+<<<REPLACE content/case.json>>>
+"pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, a prodígio violinista nervosa e o zelador de longa data. Quem levou o precioso instrumento?"
+=====
+"pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?"
+<<<END>>>
+<<<REPLACE content/case.json>>>
+"pt": "Um maestro apaixonado, um pouco flamboyant, que se orgulha da precisão e da reputação. Ele costuma ficar até tarde para aperfeiçoar o som da orquestra."
+=====
+"pt": "Um maestro apaixonado, um pouco extravagante, que se orgulha da precisão e da reputação. Ele costuma ficar até tarde para aperfeiçoar o som da orquestra."
+<<<END>>>
+<<<REPLACE content/case.json>>>
+"pt": "Uma estudante talentosa, porém ansiosa, que sonha em fazer solo no recital que se aproxima. Ela é meticulosa com seu violino e se preocupa com sua performance."
+=====
+"pt": "Uma estudante talentosa, porém ansiosa, que sonha em fazer um solo no recital que se aproxima. Ela é meticulosa com seu violino e se preocupa com seu desempenho."
+<<<END>>>
+<<<REPLACE content/case.json>>>
+"keywords": ["hallway", "corredor", "surgery", "filho", "dinheiro"],
+=====
+"keywords": ["hallway", "corredor", "surgery", "filha", "dinheiro"],
+<<<END>>>

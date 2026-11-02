@@ -39,6 +39,11 @@
 - `GET /api/scores`
   - Returns the top 10 scores for the current case.
 
+- `GET /api/credits?lang=[pt|en]`
+  - Returns credits information.
+  - Shape: `{ title: string, backers: string[], example: boolean }`.
+  - If the file (configured via `creditsFile` option, defaults to `data/credits.json`) is missing or invalid, returns: `{ title: "Thanks to the backers" | "Obrigado aos apoiadores", backers: [], example: false }`.
+
 ### Key & Mode Resolution
 1. **Key**: Provided via `createServer` options, or environment variable `FULLCUP_KEY`, or a `.fullcup-key` file in the working directory.
 2. **Mock Mode**: Enabled if `mock: true` is passed to `createServer`, if `process.env.MOCK === '1'`, or if no key is found.
@@ -46,6 +51,14 @@
 ### Scoreboard
 - Persisted to `data/scores.json` (default).
 - Records player name (max 24 chars), score, questions asked, correctness, language, and case ID.
+
+## Web page: closing screen
+
+When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
+- **Content**: An `<h2\>` for the title, a `<ul>` for backer names, and a small note if `example` is true.
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+- **Data**: `data/credits.json` holds example names ("Backer 1".."Backer 3", example: true) to be replaced with real backer names before release.
 
 ## Upstream (`src/proxy.js`)
 
@@ -75,3 +88,5 @@ This executes:
 1. `node test/e2e.mjs` (End-to-end flows)
 2. `node test/proxy.mjs` (Upstream communication)
 3. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Total checks: 67 (e2e: 42, proxy: 12, keyboard: 13).

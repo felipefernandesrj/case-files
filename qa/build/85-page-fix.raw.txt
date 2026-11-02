@@ -1,0 +1,79 @@
+<<<REPLACE public/index.html>>>
+  await loadCase();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  if (lastAccuseResult) renderVerdict();
+  if (!document.getElementById('credits').hidden) await loadCredits();
+}
+=====
+  await loadCase();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  if (lastAccuseResult) renderVerdict();
+  if (!document.getElementById('credits').hidden) await loadCredits(false);
+}
+<<<REPLACE public/index.html>>>
+async function loadCredits() {
+  try {
+    const res = await fetch(API + '/credits?lang=' + lang);
+    const data = await res.json();
+    const section = document.getElementById('credits');
+    const title = document.getElementById('credits-title');
+    const list = document.getElementById('credits-list');
+    const note = document.getElementById('credits-note');
+
+    title.textContent = data.title;
+    list.innerHTML = '';
+    data.backers.forEach(name => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      list.appendChild(li);
+    });
+
+    if (data.example) {
+      note.textContent = lang === 'pt' ? 'Nomes de exemplo' : 'Example names';
+      note.hidden = false;
+    } else {
+      note.hidden = true;
+    }
+
+    section.hidden = false;
+    section.focus();
+  } catch (e) {
+    console.error('Credits error:', e);
+  }
+}
+=====
+async function loadCredits(moveFocus = true) {
+  try {
+    const res = await fetch(API + '/credits?lang=' + lang);
+    const data = await res.json();
+    const section = document.getElementById('credits');
+    const title = document.getElementById('credits-title');
+    const list = document.getElementById('credits-list');
+    const note = document.getElementById('credits-note');
+
+    title.textContent = data.title;
+    list.innerHTML = '';
+    data.backers.forEach(name => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      list.appendChild(li);
+    });
+
+    if (data.example) {
+      note.textContent = lang === 'pt' ? 'Nomes de exemplo' : 'Example names';
+      note.hidden = false;
+    } else {
+      note.hidden = true;
+    }
+
+    section.hidden = false;
+    if (moveFocus) section.focus();
+  } catch (e) {
+    console.error('Credits error:', e);
+  }
+}
+<<<END>>>

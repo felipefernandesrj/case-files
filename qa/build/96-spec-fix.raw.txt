@@ -1,0 +1,20 @@
+<<<REPLACE
+## Upstream (`src/proxy.js`)
+
+## Web page: closing screen
+===
+## Web page: closing screen
+<<<END>>>
+
+<<<REPLACE
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+
+## Upstream (`src/proxy.js`)
+===
+- **Language**: Re-renders title/note on language switch without moving focus.
+- **Focus**: After rendering, keyboard focus moves to `#credits` (the verdict is announced first via `role=status`).
+- **Data**: `data/credits.json` contains placeholder names (e.g., "Backer 1") and `example: true` to be replaced with real backers before release.
+
+## Upstream (`src/proxy.js`)
+<<<END>>>

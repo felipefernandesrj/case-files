@@ -1,0 +1,79 @@
+<<<REPLACE test/keyboard.mjs>>>
+const caseData = JSON.parse(fs.readFileSync(path.resolve('content/case.json'), 'utf8'));
+const suspectIds = caseData.suspects.map(s => s.id);
+=====
+const caseData = JSON.parse(fs.readFileSync(path.resolve('content/case.json'), 'utf8'));
+const creditsData = JSON.parse(fs.readFileSync(path.resolve('data/credits.json'), 'utf8'));
+const suspectIds = caseData.suspects.map(s => s.id);
+<<<END>>>
+
+<<<REPLACE test/keyboard.mjs>>>
+// 6. Accuse
+await runStep('verdict-focus', async () => {
+  await evaluate(`document.getElementById('player').value = ''`);
+  await evaluate(`document.getElementById('player').focus()`);
+  await pressEnter();
+  await evaluate(`document.querySelectorAll('#accuse-buttons button')[0].focus()`);
+  await pressEnter();
+  await waitFor(async () => !(await evaluate(`document.getElementById('verdict').hidden`)));
+  const focus = await evaluate(`document.activeElement.id`);
+  if (focus !== 'verdict') throw new Error(`focus fail, got ${focus}`);
+});
+
+// 7. Accessibility: Names
+=====
+// 6. Accuse
+await runStep('verdict-then-credits', async () => {
+  await evaluate(`document.getElementById('player').value = ''`);
+  await evaluate(`document.getElementById('player').focus()`);
+  await pressEnter();
+  await evaluate(`document.querySelectorAll('#accuse-buttons button')[0].focus()`);
+  await pressEnter();
+  await waitFor(async () => !(await evaluate(`document.getElementById('verdict').hidden`)));
+  await waitFor(async () => !(await evaluate(`document.getElementById('credits').hidden`)));
+  const focus = await evaluate(`document.activeElement.id`);
+  if (focus !== 'credits') throw new Error(`expected credits focus, got ${focus}`);
+});
+
+// 7. Credits A11y
+await runStep('credits-a11y', async () => {
+  const aria = await evaluate(`document.getElementById('credits').getAttribute('aria-labelledby')`);
+  if (aria !== 'credits-title') throw new Error(`aria-labelledby fail: ${aria}`);
+  const title = await evaluate(`document.getElementById('credits-title').textContent`);
+  if (title !== creditsData.title.en) throw new Error(`title fail: ${title}`);
+  const listItems = await evaluate(`Array.from(document.querySelectorAll('#credits-list li')).map(li => li.textContent)`);
+  for(let i=0; i<creditsData.backers.length; i++) {
+    if (listItems[i] !== creditsData.backers[i]) throw new Error(`backer ${i} fail: ${listItems[i]}`);
+  }
+  const noteVisible = await evaluate(`!document.getElementById('credits-note').hidden`);
+  if (!noteVisible) throw new Error('example note not visible');
+});
+
+// 8. Credits PT
+await runStep('credits-pt', async () => {
+  await evaluate(`document.getElementById('lpt').focus()`);
+  await pressEnter();
+  await waitFor(async () => (await evaluate(`document.getElementById('credits-title').textContent`)) === creditsData.title.pt);
+  const note = await evaluate(`document.getElementById('credits-note').textContent`);
+  if (note !== 'Nomes de exemplo') throw new Error(`note fail: ${note}`);
+  const vText = await evaluate(`document.getElementById('verdict').innerText`);
+  if (!vText.includes('Culpado')) throw new Error(`verdict pt fail: ${vText}`);
+  const sCap = await evaluate(`document.getElementById('scores-caption').textContent`);
+  if (sCap !== '10 melhores jogadores') throw new Error(`caption pt fail: ${sCap}`);
+  const focus = await evaluate(`document.activeElement.id`);
+  if (focus !== 'lpt') throw new Error(`focus lost on lang switch, got ${focus}`);
+});
+
+// 9. Case PT/EN
+await runStep('case-pt', async () => {
+  const intro = await evaluate(`document.getElementById('intro').innerText`);
+  if (intro !== caseData.intro.pt) throw new Error(`intro pt fail: ${intro}`);
+  await evaluate(`document.getElementById('len').focus()`);
+  await pressEnter();
+  await waitFor(async () => (await evaluate(`document.getElementById('intro').innerText`)) === caseData.intro.en);
+  const introEn = await evaluate(`document.getElementById('intro').innerText`);
+  if (introEn !== caseData.intro.en) throw new Error(`intro en fail: ${introEn}`);
+});
+
+// 10. Accessibility: Names
+<<<END>>>

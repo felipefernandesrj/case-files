@@ -67,3 +67,52 @@ Final product: 2 384 lines (src, page, tests, case, package), all model-written;
 - Same model, tiny prompt (57): 200 in 4.4 s. gemma-4-26b with similar size: 200 in 175 s with 8 720 tokens out.
 - Debit: the harness records no receipt header for failed calls, so debit was not verified; usage null on 502s suggests no metered debit, the stream call reported 0.36 neurons. Check the Cup ledger for 17:42-18:08 UTC 01/11.
 - Likely a ~236 s upstream/proxy timeout with glm reasoning tokens consuming the time; the proxy should return a clear timeout code, and stream mode should not end with 200 + empty content.
+
+# Sprint 4 (perfectionist pass: PT-BR wording + backer credits screen), 2026-11-02 00:08-00:58 UTC (01/11 21:08-21:58 BRT)
+Model: @cf/google/gemma-4-26b-a4b-it only, one file per call, via the QA Cup key (qa-api.fullcup.ai/v1). Model got only spec text, product description, API summary, its own current rebuild files and its own errors. No pre-rebuild code.
+
+| # | Target | Status | Latency | Tokens in/out | Neurons | Files | Lines | Result |
+|---|---|---|---|---|---|---|---|---|
+| 71 | content/case.json PT wording | 200 | 176.1 s | 2620 / 7579 | 230.5 | case.json (4 edits) | 4 | accepted (only pt values + 1 PT keyword changed, checked by script) |
+| 72 | data/credits.json | 200 | 9.4 s | 475 / 356 | 14.0 | data/credits.json | 13 | accepted |
+| 73 | server: GET /api/credits | 200 | 48.3 s | 5320 / 4029 | 158.2 | src/server.js (2 edits) | 32 | accepted, cwd bug found later by 89 |
+| 74 | page: PT UI + credits (full file) | 502 | 236.3 s | - | - | none | 0 | wasted, `{"error":"workers_ai_unavailable"}`, no receipt |
+| 75 | same, stream | 200 | 181.8 s | 0 / 1 | 0.03 | none | 0 | wasted, stream cut, empty content |
+| 76 | same, edit blocks | 200 | 72.5 s | 3904 / 7987 | 253.3 | none | 0 | wasted, blocks had no old text / ===== |
+| 77 | same + format feedback | 502 | 236.1 s | - | - | none | 0 | wasted |
+| 78 | same, full file, reasoning_effort low | 200 | 147.4 s | 3867 / 6857 | 222.2 | public/index.html | 309 | accepted; broke old verdict-focus test (expected, spec changed) |
+| 79 | test/keyboard.mjs: 3 new steps + verdict-then-credits | 200 | 78.1 s | 8315 / 7407 | 277.6 | keyboard.mjs (2 edits) | 57 | accepted; found 2 real page bugs (focus stolen on language switch; case never reloads in PT, a sprint 1-3 bug) |
+| 80 | page fix | 502 | 236.5 s | - | - | none | 0 | wasted |
+| 81 | page fix, max_tokens 7000 | 200 | 166.9 s | 4592 / 7000 | 232.7 | none | 0 | wasted, truncated (finish at 7000, mostly reasoning) |
+| 82a-c | curl probes: reasoning_effort low / none / chat_template_kwargs.enable_thinking=false | 200 | 1.6-5.2 s | 81 / 407 | 11.8 | none | 0 | only enable_thinking=false removes reasoning |
+| 83 | page fix, thinking off | 200 | 20.1 s | 4594 / 830 | 64.4 | index.html (4 edits) | 49 | rework: `await` in non-async setLang, page dead |
+| 84 | page fix (syntax error) | 200 | 29.6 s | 4680 / 1856 | 93.2 | index.html (4 edits) | 69 | accepted, 12/13 |
+| 85 | page fix (focus) | 200 | 15.3 s | 4547 / 628 | 58.5 | index.html | 37 | missing <<<END>>> corrupted file; harness undid and re-parsed (85-reparse) |
+| 86 | page fix (focus) | 200 | 12.5 s | 4586 / 480 | 51.3 | index.html (2 edits) | 17 | rework: activeElement hack broke accusation flow |
+| 87 | page fix (explicit moveFocus) | 200 | 22.6 s | 4597 / 892 | 55.1 | index.html (3 edits) | 37 | accepted, keyboard 13/13 |
+| 88 | test/e2e.mjs: 6 credits/PT checks | 200 | 11.7 s | 9938 / 1175 | 122.4 | none | 0 | wasted, no ===== |
+| 89 | same + format feedback | 200 | 29.8 s | 10015 / 1254 | 125.2 | e2e.mjs | 88 | accepted; 40/42 (1 test bug, 1 real server bug) |
+| 90 | e2e fix | 200 | 15.6 s | 493 / 569 | 20.0 | none (0 occurrences) | 0 | wasted, new text in both halves |
+| 91 | e2e fix + feedback | 200 | 6.3 s | 588 / 408 | 16.5 | e2e.mjs | 25 | accepted |
+| 92 | server fix: credits path from project root | 200 | 41.9 s | 4017 / 1717 | 83.3 | src/server.js | 29 | accepted, e2e 42/42 |
+| 93 | docs/SPEC.md | 502 | 236.2 s | - | - | none | 0 | wasted (thinking off, still 502) |
+| 94 | README M1 status line | 200 | 5.2 s | 323 / 171 | 7.6 | README.md | 1 | accepted |
+| 95 | docs/SPEC.md, max_tokens 4000 | 200 | 19.3 s | 1554 / 793 | 35.8 | SPEC.md (5 edits) | 15 | accepted with nit: duplicated "## Upstream" heading |
+| 96 | SPEC fix | 200 | 6.0 s | 1333 / 198 | 17.5 | none | 0 | wasted, bad format (`===`, no path) |
+| 97 | SPEC fix + feedback | 200 | 73.2 s | 1397 / 3000 | 88.7 | none | 0 | wasted, repetition loop to max_tokens |
+| 98 | SPEC fix, full file | 200 | 30.0 s | 1321 / 1158 | 43.6 | docs/SPEC.md | 94 | bullet added, duplicate heading still there; removed by hand |
+
+- Calls: 27 harness calls + 3 curl probes = 30 model calls, 1 re-parse (no call). 11 wasted (5 x 502/empty stream, 6 format/truncation). Tokens 83 157 in / 56 752 out; 2 283 neurons, about US$ 0.025 at $0.011/1k neurons (receipt pages show the same rate, e.g. 71 = $0.002536 for 230.5 neurons).
+- npm test: e2e 42 + proxy 12 + keyboard 13 = 67 checks, 0 fail (was 58). New: 6 e2e (credits EN/PT, missing file, invalid JSON, cwd-independent path, PT wording), 3 keyboard (credits-a11y, credits-pt with focus kept on #lpt, case-pt) and verdict-focus replaced by verdict-then-credits.
+- Live smoke (key, llama-4-scout via the app on a free port): EN ask 200, PT ask 200 (PT answer, glossary terms), EN ask 200 in 1.51 s, accuse carlos PT 200 correct score 100, GET /api/credits?lang=pt 200 with 3 example names. Quality nits (llama-4-scout, not in scope): EN Maya said she noticed nothing unusual about the lock; EN Carlos invented "Joe the janitor".
+- Product lines changed by the model this sprint: about 293 (index.html +96/-18, e2e +102, keyboard +45/-3, server +32, credits 13, case 4/4, README 1) + 15 doc lines.
+- Manual edits: 0 product code lines. 1 doc line (+1 blank) removed in docs/SPEC.md (duplicate empty "## Upstream" heading the model failed to remove in 96-98); 1 config line in .gitignore (`data/` -> `data/scores.json`, otherwise data/credits.json is ignored).
+- Harness (tooling, not product): logs x-fullcup-*/x-ratelimit-* headers; REASONING, NOTHINK (chat_template_kwargs.enable_thinking=false) and MAXTOK env; a missing <<<END>>> before the next <<<REPLACE ends the block (call 85 corrupted the page; the bad edit was reversed by script and 85 re-parsed).
+
+## FullCup observations, sprint 4
+- Headers on every 200 non-stream chat call: x-fullcup-receipt-id (+ legacy x-fullcup-receipt, same value), x-fullcup-seal-by 2026-11-03T00:05:00.000Z, x-ratelimit-limit 60, remaining 56-59, reset = next UTC minute after the request START (on 147-176 s calls the reset is already in the past when the response arrives). Receipt ULID time matches request start.
+- Anomaly A (reproduced 4x with gemma-4-26b, previously only seen with glm-5.3-flash): non-stream POST /v1/chat/completions, max_tokens 16000, 4-12 KB prompt -> HTTP 502 `{"error":"workers_ai_unavailable"}` after 236.1-236.5 s (74, 77, 80, 93), usage null, no x-fullcup-receipt-id, only x-ratelimit-* headers. Body is outside the documented `{"error":{"message","code"}}` shape. 93 had thinking disabled, so it is not only reasoning; output loops (see 97) can run to max_tokens past the ~236 s cutoff.
+- Anomaly B (stream, 75): HTTP 200 text/event-stream, ended at 181.8 s with empty content, usage prompt 0 / completion 1, 0.03 neurons, receipt 01M6CSVT02GTYBSMQW8HG2X7N1 issued, no x-ratelimit-* headers. Same as G2/G3 in docs/PROXY_CAPABILITY_AUDIT.md: a cut stream looks like success and under-reports usage.
+- reasoning_effort ("low", "none") passes through but gemma still reasons (681 / 500 chars); chat_template_kwargs.enable_thinking=false passes through and removes reasoning (0 chars, 22 completion tokens). Not documented in prompts/_api.md or /v1/models.
+- GET /v1/models: 200, still no x-ratelimit-* or receipt headers. /v1/receipts/{id}, /v1/receipt/{id}, /v1/usage: 404 `{"error":"not_found"}`. Public receipt page https://qa.fullcup.ai/receipts/{id} works without auth.
+- Seal check (read-only): receipts with seal-by 2026-11-02T00:05Z are now sealed. 01M6A72KQ3M2KM8082JCC4S4HN, 01M6A72ZR0D8XX8SE9HV3RDC9C (sprint 2) and 01M6BWA00KQ37169D2S4MGASES (sprint 3) show "Genuine receipt ... one of 130 in the signed root of 2026-11-01", root signature matches. Sprint 4 receipts show "Recorded, waiting for the daily seal, will be sealed on 2026-11-03 00:05 UTC".

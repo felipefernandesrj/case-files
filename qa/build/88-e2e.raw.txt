@@ -1,0 +1,84 @@
+<<<REPLACE test/e2e.mjs>>>
+test('credits EN', async () => {
+  const creditsData = JSON.parse(readFileSync(join(__dirname, '..', 'data', 'credits.json'), 'utf8'));
+  const server = createServer({ caseFile: CASE_FILE, mock: true });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const { status, data } = await request(port, 'GET', '/api/credits?lang=en');
+  server.close();
+  if (status !== 200) throw `status ${status}`;
+  if (data.title !== creditsData.title.en) throw 'title EN mismatch';
+  if (JSON.stringify(data.backers) !== JSON.stringify(creditsData.backers)) throw 'backers mismatch';
+  if (data.example !== creditsData.example) throw 'example mismatch';
+});
+
+test('credits PT', async () => {
+  const creditsData = JSON.parse(readFileSync(join(__dirname, '..', 'data', 'credits.json'), 'utf8'));
+  const server = createServer({ caseFile: CASE_FILE, mock: true });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const { status, data } = await request(port, 'GET', '/api/credits?lang=pt');
+  server.close();
+  if (status !== 200) throw `status ${status}`;
+  if (data.title !== creditsData.title.pt) throw 'title PT mismatch';
+  if (JSON.stringify(data.backers) !== JSON.stringify(creditsData.backers)) throw 'backers mismatch';
+});
+
+test('credits missing file', async () => {
+  const server = createServer({ caseFile: CASE_FILE, mock: true, creditsFile: join(os.tmpdir(), 'missing-credits.json') });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const { status: s1, data: d1 } = await request(port, 'GET', '/api/credits?lang=en');
+  if (s1 !== 200 || d1.title !== 'Thanks to the backers' || d1.backers.length !== 0 || d1.example !== false) throw 'EN fallback failed';
+  const { status: s2, data: d2 } = await request(port, 'GET', '/api/credits?lang=pt');
+  if (s2 !== 200 || d2.title !== 'Obrigado aos apoiadores') throw 'PT fallback failed';
+  server.close();
+});
+
+test('credits invalid json', async () => {
+  const tmpDir = mkdtempSync(join(os.tmpdir(), 'bad-json-'));
+  const badFile = join(tmpDir, 'bad.json');
+  writeFileSync(badFile, '{not json');
+  const server = createServer({ caseFile: CASE_FILE, mock: true, creditsFile: badFile });
+  server.listen(0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const { status, data } = await request(port, 'GET', '/api/credits');
+  if (status !== 200 || data.example !== false) throw 'invalid json fallback failed';
+  const { status: s2, data: d2 } = await request(port, 'GET', '/api/status');
+  if (s2 !== 200) throw 'server crashed after invalid json';
+  server.close();
+  rmSync(tmpDir, { recursive: true, force: true });
+});
+
+test('credits default path independent of cwd', async () => {
+  const originalCwd = process.cwd();
+  try {
+    process.chdir(os.tmpdir());
+    const server = createServer({ caseFile: CASE_FILE, mock: true });
+    server.listen(0);
+    await once(server, 'listening');
+    const { port } = server.address();
+    const { status, data } = await request(port, 'GET', '/api/credits');
+    server.close();
+    if (status !== 200 || data.backers.length === 0) throw 'default path resolution failed';
+  } finally {
+    process.chdir(originalCwd);
+  }
+});
+
+test('case PT wording', async () => {
+  const ptContent = JSON.stringify(caseData).toLowerCase();
+  const badWords = ['violonista', 'flamboyant', 'performance'];
+  for (const w of badWords) {
+    if (ptContent.includes(w)) throw `found forbidden word ${w} in case data`;
+  }
+  if (!caseData.intro.pt.includes('violinista')) throw 'PT intro missing "violinista"';
+  if (!fairPlay(caseData).ok) throw 'fairPlay failed after wording check';
+});
+
+/* ---------- run all tests ---------- */
+<<<END>>>

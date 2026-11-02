@@ -1,0 +1,59 @@
+<<<REPLACE test/e2e.mjs>>>
+test('case PT wording', async () => {
+  const forbidden = ['violonista', 'flamboyant', 'performance'];
+  
+  const getPtValues = (obj) => {
+    let values = [];
+    if (obj === null || typeof obj !== 'object') return values;
+    
+    for (const key in obj) {
+      if (key === 'pt' && typeof obj[key] === 'string') {
+        values.push(obj[key]);
+      } else {
+        values = values.concat(getPtValues(obj[key]));
+      }
+    }
+    return values;
+  };
+
+  const ptStrings = getPtValues(caseData);
+  const ptTextCombined = ptStrings.join(' ').toLowerCase();
+
+  for (const f of forbidden) {
+    if (ptTextCombined.includes(f)) throw `found forbidden word in PT: ${f}`;
+  }
+
+  // Check if intro contains 'violinista' (assuming it's a key test for requirement)
+  if (!caseData.intro.pt.includes('violinista')) throw 'PT intro missing "violinista"';
+  if (!fairPlay(caseData).ok) throw 'fairPlay failed';
+});
+=====
+test('case PT wording', async () => {
+  const forbidden = ['violonista', 'flamboyant', 'performance'];
+  
+  const getPtValues = (obj) => {
+    let values = [];
+    if (obj === null || typeof obj !== 'object') return values;
+    
+    for (const key in obj) {
+      if (key === 'pt' && typeof obj[key] === 'string') {
+        values.push(obj[key]);
+      } else {
+        values = values.concat(getPtValues(obj[key]));
+      }
+    }
+    return values;
+  };
+
+  const ptStrings = getPtValues(caseData);
+  const ptTextCombined = ptStrings.join(' ').toLowerCase();
+
+  for (const f of forbidden) {
+    if (ptTextCombined.includes(f)) throw `found forbidden word in PT: ${f}`;
+  }
+
+  // Check if intro contains 'violinista' (assuming it's a key test for requirement)
+  if (!caseData.intro.pt.includes('violinista')) throw 'PT intro missing "violinista"';
+  if (!fairPlay(caseData).ok) throw 'fairPlay failed';
+});
+<<<END>>>

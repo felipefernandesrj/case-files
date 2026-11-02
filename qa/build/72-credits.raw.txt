@@ -1,0 +1,15 @@
+<<<FILE data/credits.json>>>
+{
+  "example": true,
+  "note": "Example data. Replace with real backer names before release.",
+  "title": {
+    "en": "Thanks to the backers",
+    "pt": "Obrigado aos apoiadores"
+  },
+  "backers": [
+    "Backer 1",
+    "Backer 2",
+    "Backer 3"
+  ]
+}
+<<<END>>>

@@ -1,0 +1,88 @@
+<<<REPLACE public/index.html>>>
+async function accuse(suspectId){
+  const playerName = document.getElementById('player').value.trim()||'anon';
+  try{
+    const res = await fetch(API + '/accuse', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId, player:playerName, lang})
+    });
+    const data = await res.json();
+    if (!res.ok) throw data;
+    lastAccuseResult = data;
+    renderVerdict();
+    await loadScores();
+    // Use a timeout so the verdict focus happens first
+    setTimeout(loadCredits, 50);
+  }catch(err){
+    showError(err.message||'Error');
+  }
+}
+=====
+async function accuse(suspectId){
+  const playerName = document.getElementById('player').value.trim()||'anon';
+  try{
+    const res = await fetch(API + '/accuse', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId, player:playerName, lang})
+    });
+    const data = await res.json();
+    if (!res.ok) throw data;
+    lastAccuseResult = data;
+    renderVerdict(true);
+    await loadScores();
+    await loadCredits(true);
+  }catch(err){
+    showError(err.message||'Error');
+  }
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  await loadCase();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  if (lastAccuseResult) renderVerdict();
+  if (!document.getElementById('credits').hidden) await loadCredits(false);
+}
+=====
+  await loadCase();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  if (lastAccuseResult) renderVerdict(false);
+  if (!document.getElementById('credits').hidden) await loadCredits(false);
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+function renderVerdict() {
+  if (!lastAccuseResult) return;
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = false;
+  const { correct, culpritName, solution, score } = lastAccuseResult;
+  verdict.innerHTML = `
+    <p>${correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!')}</p>
+    <p>${lang==='pt'?'Culpado':'Culprit'}: ${culpritName}</p>
+    <p>${lang==='pt'?'Solução':'Solution'}: ${solution}</p>
+    <p>${lang==='pt'?'Pontuação':'Score'}: ${score}</p>`;
+  if (document.activeElement.tagName !== 'BUTTON') {
+    verdict.focus();
+  }
+}
+=====
+function renderVerdict(moveFocus = true) {
+  if (!lastAccuseResult) return;
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = false;
+  const { correct, culpritName, solution, score } = lastAccuseResult;
+  verdict.innerHTML = `
+    <p>${correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!')}</p>
+    <p>${lang==='pt'?'Culpado':'Culprit'}: ${culpritName}</p>
+    <p>${lang==='pt'?'Solução':'Solution'}: ${solution}</p>
+    <p>${lang==='pt'?'Pontuação':'Score'}: ${score}</p>`;
+  if (moveFocus) verdict.focus();
+}
+<<<END>>>
