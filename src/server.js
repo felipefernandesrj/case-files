@@ -121,6 +121,7 @@ export function createServer({
   // Load static index.html
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const indexPath = resolve(__dirname, '..', 'public', 'index.html');
+  const bestPath = resolve(__dirname, '..', 'public', 'best.js');
 
   const server = httpCreateServer(async (req, res) => {
     try {
@@ -135,6 +136,10 @@ export function createServer({
       };
 
       // Routes
+      if (req.method === 'GET' && pathname === '/best.js') {
+        res.setHeader('Content-Type', 'text/javascript; charset=utf-8');
+        return sendFile(res, bestPath);
+      }
       if (req.method === 'GET' && pathname === '/') {
         return sendFile(res, indexPath);
       }

@@ -34,7 +34,7 @@ node src/cli.js --lang pt                           # play in the terminal
 ```
 Then open http://localhost:3000. The key stays on the server, and the browser never sees it.
 
-M1 status (v0.2.5): bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard, fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 77 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+M1 status (v0.2.6): bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard, personal best per language with a confirmed reset, fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 87 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
 
 **New player?** Read [How to play / Como jogar](docs/HOW_TO_PLAY.md).
 See `docs/` for the PRD, the spec and the backbone notes.

@@ -1,0 +1,113 @@
+<<<REPLACE public/index.html>>>
+  #credits-note{font-style:italic;font-size:0.9rem;color:#555}
+</style>
+</head>
+=====
+  #credits-note{font-style:italic;font-size:0.9rem;color:#555}
+  #best-section{margin-top:1rem}
+</style>
+</head>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    </form>
+  </section>
+<<<END>>>
+    </form>
+    <p id="questions-used" aria-live="polite"></p>
+  </section>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  <section id="scores-section" hidden>
+=====
+  <section id="best-section" aria-labelledby="best-title">
+    <h2 id="best-title"></h2>
+    <p id="best-en"></p>
+    <p id="best-pt"></p>
+    <button type="button" id="reset-best"></button>
+    <p id="best-status" role="status"></p>
+  </section>
+  <section id="scores-section" hidden>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+const API = '/api';
+let lang = 'en';
+=====
+const API = '/api';
+import { readBest, recordResult, resetBest, bestText, questionsText, LABELS } from '/best.js';
+const store = (() => { try { return window.localStorage; } catch { return null; } })();
+let lang = 'en';
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  document.getElementById('th-questions').textContent = newLang === 'pt' ? 'Perguntas' : 'Questions';
+
+  await loadCase();
+=====
+  document.getElementById('th-questions').textContent = newLang === 'pt' ? 'Perguntas' : 'Questions';
+
+  renderBest();
+  renderQuestions();
+  document.getElementById('best-status').textContent = '';
+
+  await loadCase();
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    const answer = data.answer;
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+=====
+    const answer = data.answer;
+    questionsUsed = data.questions;
+    renderQuestions();
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    lastAccuseResult = data;
+    renderVerdict(true);
+=====
+    lastAccuseResult = data;
+    recordResult(store, lang, data);
+    renderBest();
+    renderVerdict(true);
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+</script>
+=====
+let questionsUsed = 0;
+function renderQuestions() {
+  document.getElementById('questions-used').textContent = questionsText(lang, questionsUsed);
+}
+
+function renderBest() {
+  const b = readBest(store);
+  document.getElementById('best-title').textContent = LABELS[lang].bestTitle;
+  document.getElementById('reset-best').textContent = LABELS[lang].reset;
+  document.getElementById('best-en').textContent = bestText('en', b.en);
+  document.getElementById('best-pt').textContent = bestText('pt', b.pt);
+}
+
+document.getElementById('reset-best').addEventListener('click', () => {
+  const btn = document.getElementById('reset-best');
+  let status = '';
+  if (confirm(LABELS[lang].confirm)) {
+    resetBest(store);
+    status = LABELS[lang].done;
+  } else {
+    status = LABELS[lang].kept;
+  }
+  renderBest();
+  document.getElementById('best-status').textContent = status;
+  btn.focus();
+});
+
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+</script>
+<<<END>>>

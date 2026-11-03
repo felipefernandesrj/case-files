@@ -1,0 +1,5 @@
+<<<REPLACE test/scoreboard.mjs>>>
+    try { recordResult(sThrow, 'en', {score: 1, questions: 1, correct: true}, NOW); assert(false, "should have thrown"); } catch (e) {}
+=====
+    const { isNew, best } = recordResult(throwingStorage(), 'en', {score: 1, questions: 1, correct: true}, NOW); assert(isNew === true && best.score === 1);
+<<<END>>>

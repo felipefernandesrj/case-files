@@ -1,0 +1,7 @@
+<<<REPLACE src/server.js>>>
+        res.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8' });
+        return fs.sendFile(res, bestPath);
+=====
+        res.setHeader('Content-Type', 'text/javascript; charset=utf-8');
+        return sendFile(res, bestPath);
+<<<END>>>

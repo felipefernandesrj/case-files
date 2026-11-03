@@ -1,0 +1,13 @@
+<<<REPLACE public/index.html>>>
+  <section id="best-section" hidden>
+=====
+  <section id="best-section" aria-labelledby="best-title">
+<<<END>>>
+<<<REPLACE test/scoreboard.mjs>>>
+    assert(html.includes('id="best-section"'), "missing best-section");
+=====
+    assert(html.includes('id="best-section"'), "missing best-section");
+    const bestSection = html.match(/<section id="best-section"[^>]*>/)[0];
+    assert(!bestSection.includes('hidden'), "best-section should not be hidden");
+    assert(bestSection.includes('aria-labelledby="best-title"'), "best-section missing aria-labelledby");
+<<<END>>>

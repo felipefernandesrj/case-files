@@ -1,0 +1,15 @@
+<<<REPLACE src/server.js>>>
+  const indexPath = resolve(__dirname, '..', 'public', 'index.html');
+=====
+  const indexPath = resolve(__dirname, '..', 'public', 'index.html');
+  const bestPath = resolve(__dirname, '..', 'public', 'best.js');
+<<<END>>>
+<<<REPLACE src/server.js>>>
+      if (req.method === 'GET' && pathname === '/') {
+=====
+      if (req.method === 'GET' && pathname === '/best.js') {
+        res.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8' });
+        return fs.sendFile(res, bestPath);
+      }
+      if (req.method === 'GET' && pathname === '/') {
+<<<END>>>

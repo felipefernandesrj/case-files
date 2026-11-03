@@ -19,6 +19,7 @@
   button:focus-visible{outline:3px solid #0066ff}
   #credits{margin-top:2rem;padding:1rem;border-top:1px solid #ccc}
   #credits-note{font-style:italic;font-size:0.9rem;color:#555}
+  #best-section{margin-top:1rem}
 </style>
 </head>
 <body>
@@ -45,6 +46,7 @@
       <input type="text" id="q" maxlength="500" required>
       <button type="submit" id="ask-btn">Ask</button>
     </form>
+    <p id="questions-used" aria-live="polite"></p>
   </section>
 
   <section id="player-section">
@@ -60,6 +62,13 @@
   <section id="verdict" role="status" aria-live="assertive" tabindex="-1" hidden></section>
   <section id="err" role="alert" hidden></section>
 
+  <section id="best-section" aria-labelledby="best-title">
+    <h2 id="best-title"></h2>
+    <p id="best-en"></p>
+    <p id="best-pt"></p>
+    <button id="reset-best" type="button">Reset Best</button>
+    <p id="best-status" role="status"></p>
+  </section>
   <section id="scores-section" hidden>
     <h2 id="scores-title">Scoreboard</h2>
     <table>
@@ -85,6 +94,8 @@
 
 <script type="module">
 const API = '/api';
+import { readBest, recordResult, resetBest, bestText, questionsText, LABELS } from '/best.js';
+const store = (() => { try { return window.localStorage; } catch { return null; } })();
 let lang = 'en';
 let sessionId = null;
 let caseData = null;
@@ -113,6 +124,10 @@ async function setLang(newLang) {
   document.getElementById('th-player').textContent = newLang === 'pt' ? 'Jogador' : 'Player';
   document.getElementById('th-score').textContent = newLang === 'pt' ? 'Pontos' : 'Score';
   document.getElementById('th-questions').textContent = newLang === 'pt' ? 'Perguntas' : 'Questions';
+
+  renderBest();
+  renderQuestions();
+  document.getElementById('best-status').textContent = '';
 
   await loadCase();
   renderCase();
@@ -196,6 +211,8 @@ async function askQuestion(e){
     const data = await res.json();
     if (!res.ok) throw data;
     const answer = data.answer;
+    questionsUsed = data.questions;
+    renderQuestions();
     if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
     histories[selectedSuspect].push({q:question,a:answer});
     renderConversation();
@@ -218,6 +235,8 @@ async function accuse(suspectId){
     const data = await res.json();
     if (!res.ok) throw data;
     lastAccuseResult = data;
+    recordResult(store, lang, data);
+    renderBest();
     renderVerdict(true);
     await loadScores();
     await loadCredits(true);
@@ -302,6 +321,33 @@ function showError(msg){
   el.hidden = false;
   setTimeout(()=>{el.hidden=true;},5000);
 }
+
+let questionsUsed = 0;
+function renderQuestions() {
+  document.getElementById('questions-used').textContent = questionsText(lang, questionsUsed);
+}
+
+function renderBest() {
+  const b = readBest(store);
+  document.getElementById('best-title').textContent = LABELS[lang].bestTitle;
+  document.getElementById('reset-best').textContent = LABELS[lang].reset;
+  document.getElementById('best-en').textContent = bestText('en', b.en);
+  document.getElementById('best-pt').textContent = bestText('pt', b.pt);
+}
+
+document.getElementById('reset-best').addEventListener('click', () => {
+  const btn = document.getElementById('reset-best');
+  let status = '';
+  if (confirm(LABELS[lang].confirm)) {
+    resetBest(store);
+    status = LABELS[lang].done;
+  } else {
+    status = LABELS[lang].kept;
+  }
+  renderBest();
+  document.getElementById('best-status').textContent = status;
+  btn.focus();
+});
 
 document.getElementById('ask-form').addEventListener('submit',askQuestion);
 init();

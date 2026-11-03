@@ -154,3 +154,38 @@ Receipts (seal-by 2026-11-04T00:05:00Z), 15, first..last: 01M6FBKZM0CFTPR25YCA4Q
 - New, low: seal lag. At 00:05:38Z the public page still promised sealing "on 2026-11-03 00:05 UTC" (a time already past); sealed by 00:12:35Z. Lag under 7 minutes.
 - Not reproduced: 502 workers_ai_unavailable at ~236 s and empty 200 stream (0 of 15; slowest call 68.8 s, no stream).
 - cached_tokens 0 on 15 of 15.
+
+## M1 sprint 7: scoreboard polish (personal best per language), 2026-11-03 12:05-12:12 UTC (Essential)
+Model gemma-4-26b-a4b-it, thinking off, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Lines | Result |
+|---|---|---|---|---|---|---|---|---|
+| 126 | public/best.js | 200 | 25.0 s | 777 / 1142 | 38.2 | public/best.js | 128 | accepted, 1 bug found by test (131) |
+| 127 | server GET /best.js | 200 | 4.7 s | 372 / 188 | 8.5 | src/server.js (2 edits) | 5 | rework: fs.sendFile + writeHead crash |
+| 128 | test/scoreboard.mjs | 200 | 67.7 s | 1368 / 3212 | 100.0 | test/scoreboard.mjs | 225 | accepted with test bugs |
+| 129 | test fix (now as ISO string, dead helpers) | 200 | 48.9 s | 3659 / 2866 | 111.4 | test/scoreboard.mjs | full | rework, accepted 8/10 |
+| 130 | server fix | 200 | 3.4 s | 267 / 88 | 4.8 | src/server.js | 2 | rework, accepted |
+| 131 | best.js fix (reuse readBest) | 200 | 3.3 s | 1438 / 107 | 16.0 | public/best.js | 1 | rework (real product bug), accepted |
+| 132 | test fix (no-op throw check) | 200 | 1.1 s | 262 / 112 | 5.4 | test/scoreboard.mjs | 1 | rework, accepted 9/10 |
+| 133 | page: best section, counter, reset | 200 | 17.4 s | 4292 / 948 | 64.9 | index.html (8 blocks, 6 applied) | 33 | 1 bad separator swallowed 1 block |
+| 134 | page fix: resend 2 blocks | 200 | 4.9 s | 304 / 173 | 7.5 | index.html | 8 | rework: added `hidden` |
+| 135 | page fix: visible + test check | 200 | 4.2 s | 374 / 177 | 8.2 | index.html, test | 4 | rework, 10/10 |
+| 136 | package.json | 200 | 2.9 s | 213 / 118 | 5.2 | package.json | 1 | accepted |
+| 137 | CHANGELOG, README, SPEC, HOW_TO_PLAY | 200 | 14.2 s | 772 / 585 | 23.0 | 4 files (5 edits) | 17 | accepted |
+| live | smoke EN Maya + PT Carlos | 200 x2 | 3.1 / 2.3 s | 921 / 107 | 30.9 | - | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.5-1.0 s | 0 | 0 | - | - | QA probe |
+
+Totals: 17 requests (12 build + 2 live + 3 probes), 15 019 in / 9 823 out tokens, 424.0 neurons, about US$ 0.0047 at $0.011/1k neurons. Build only: 12 calls, 14 098 / 9 716 tokens, 393.2 neurons. Wasted 0, rework 6 (129, 130, 131, 132, 134, 135) = 153.3 neurons (39% of build; sprint 6: 33%), 0 API failures, 0 x 502, slowest 67.7 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s7.mjs (copy of smoke-s6 with sed, plus best.js check on the accusation; PO tooling, logs headers, never the key).
+npm test: 87/87 (was 77).
+Verdict: worth it. Players see their own best per language, how many questions they used, and can clear it safely; the test caught one real product bug (131) and one invisible-section regression (135).
+Receipts (seal-by 2026-11-04T00:05:00Z), 14, first..last: 01M6GMR2XW1XCNVWR07CRQ72CF (126) .. 01M6GN4GBX439MBEZEJP2Q6ZYC (137); live 01M6GN3DF6C8HXB3M61WGRX632, 01M6GN3G8E8K1PQT999CVMC7V6. All ids in qa/key-usage-log.json (purpose sprint7-*).
+
+### FullCup observations, sprint 7 (evidence qa/s7-probes/)
+- Reproduced: no per-call cost (14 of 14 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (14 of 14).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers, still only id/object/owned_by (models.h, models.json).
+- Reproduced: GET /v1/receipts/{id} 404, nested OpenAI-style body (receipt.json), while 403 model_outside_capacity_class stays flat (disallowed.json): mixed error shapes.
+- Reproduced: enable_thinking=false honoured by gemma-4-26b (12 of 12).
+- No new anomaly. Log fix only: sprint 6 key-usage-log stored `allowed: 6`; the real 403 body has `allowed` as an array of 6 model ids.
+- cached_tokens 0 on 14 of 14, including 129 which resent the same file as 128.

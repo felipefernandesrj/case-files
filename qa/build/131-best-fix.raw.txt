@@ -1,0 +1,14 @@
+<<<REPLACE public/best.js>>>
+  let all = { en: null, pt: null };
+  
+  try {
+    if (storage) {
+      const raw = storage.getItem(BEST_KEY);
+      if (raw) all = JSON.parse(raw);
+    }
+  } catch (e) {
+    all = { en: null, pt: null };
+  }
+=====
+  const all = readBest(storage);
+<<<END>>>

@@ -1,0 +1,18 @@
+<<<REPLACE public/index.html>>>
+    </form>
+=====
+    </form>
+    <p id="questions-used" aria-live="polite"></p>
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  <section id="scores-section" hidden>
+=====
+  <section id="best-section" hidden>
+    <h2 id="best-title"></h2>
+    <p id="best-en"></p>
+    <p id="best-pt"></p>
+    <button id="reset-best" type="button">Reset Best</button>
+    <p id="best-status" role="status"></p>
+  </section>
+  <section id="scores-section" hidden>
+<<<END>>>

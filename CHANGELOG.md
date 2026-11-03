@@ -1,4 +1,11 @@
+
 # Changelog
+
+## 0.2.6 (M1 sprint 7, personal scoreboard)
+- Added personal best tracking per language in browser localStorage.
+- Implemented "Your best / Seu recorde" display and reset functionality.
+- Added live question counter under the question box.
+- Increased automated tests to 87.
 
 ## 0.2.5 (M1 sprint 6, player guide + fair capacity messages)
 - Added new player guides in English and Portuguese including scoring and accessibility tips

@@ -1,0 +1,42 @@
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+
+=======
+
+# Changelog
+
+## 0.2.6 (M1 sprint 7, personal scoreboard)
+- Added personal best tracking per language in browser localStorage.
+- Implemented "Your best / Seu recorde" display and reset functionality.
+- Added live question counter under the question box.
+- Increased automated tests to 87.
+
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.2.5): bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard, fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 77 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+=======
+M1 status (v0.2.6): bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard, personal best per language with a confirmed reset, fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 87 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Records player name (max 24 chars), score, questions asked, correctness, language, and case ID.
+=======
+- Records player name (max 24 chars), score, questions asked, correctness, language, and case ID.
+### Personal best (browser)
+- Stored in browser's localStorage under `casefiles:best:v1`.
+- Better result = higher score, or same score with fewer questions (wrong accusations never count).
+- Reset requires user confirmation; GET /best.js serves the storage module.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+Top scores appear on the scoreboard.
+=======
+Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+As melhores pontuações aparecem no placar.
+=======
+As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação).
+<<<END>>>
