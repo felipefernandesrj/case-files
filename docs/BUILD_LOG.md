@@ -129,3 +129,18 @@ Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, `chat_template_kw
 - Live smoke 12:20 UTC: 10/10 200, 10/10 checks. EN+PT Maya kept the scratched lock story across 3 questions; Carlos named only Lorenzo, Maya and himself and said he cleans alone. No "Joe".
 - Result: npm test 71/71 (was 67). 26 requests, 17 893 / 12 421 tokens, 596.1 neurons, ~US$ 0.0066. Build: 13 calls, 3 wasted, 0 API failures, slowest 72.3 s. Manual: 0 product lines; 1 CHANGELOG bullet + 1 blank line; 2 harness lines.
 - Details, receipts and FullCup observations: qa/rework.md (sprint 5).
+
+# Sprint 6 (docs + polish: player guide, fair capacity messages), 2026-11-03 00:06-00:13 UTC (02/11 21:06-21:13 BRT)
+Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, `chat_template_kwargs.enable_thinking=false`, max_tokens 400-4000, one file per call. Prompts: requirements, the model's own files and its own test output.
+
+- Call 113: src/messages.js, clearer EN/PT texts for no capacity, rate limit, bad key, error, bad request; PT no longer says "Copo" for Cup. Accepted (wording polish in 122).
+- Call 114: src/server.js, the question is counted only after a successful answer (before: a 402/429/5xx still cost the player 5 points per question after 3). Accepted first time (two one-line anchors).
+- Calls 115-117: new test/capacity.mjs (6 checks: EN/PT capacity text, all messages clean sentences, 402 shows the friendly text and does not count, upstream error leaves no history, score not reduced by failed questions). 115 had 2 test bugs (destructured sessionId from the wrapper, nested error body), 116 fixed one and broke the message check, 117 one-line fix. 6/6. Mutation check: with the old src (messages + server) it fails 6 of 6.
+- Call 118: package.json, test/capacity.mjs in npm test.
+- Calls 119-121: docs/HOW_TO_PLAY.md (EN + PT, spoiler-free: case, steps, scoring, tips, when the game cannot answer, accessibility, thanks/receipts, terminal). 120 applied 7 review findings (PT button names, "pontuação", "Academia de Música Aurora", failed questions do not count, screen names) but put the PT academy name into the English text; 121 fixed it.
+- Call 122: no_capacity wording, "This case is out of play capacity for now" (was "We are...", unclear "it").
+- Calls 123-125: docs/SPEC.md counting rule, README status v0.2.5 + link to the guide, CHANGELOG 0.2.5.
+- Live smoke 00:12 UTC (tools/smoke-s6.mjs, llama-4-scout through the game server): EN Maya 200 in 2.1 s, 39 words, kept the scratched lock story; PT Carlos 200 in 1.9 s, 33 words, natural PT, named only Lorenzo and Maya; PT accuse 200, questions 1. qa/live-smoke-sprint6.json.
+- Result: npm test 77/77 (e2e 42, proxy 12, consistency 4, capacity 6 new, keyboard 13; was 71). 18 requests (13 build + 2 live + 3 probes), 10 856 / 9 081 tokens, 365.5 neurons, about US$ 0.0040. Build: 13 calls, 335.3 neurons, 0 wasted, 3 rework (116, 117, 121: 109.4 neurons, 33%), 0 API failures, slowest 68.8 s. Manual: 0 product lines; harness tools/smoke-s6.mjs (PO tooling).
+- Nit left as generated: CHANGELOG 0.2.5 section is followed by two blank lines.
+- Details, receipts and FullCup observations: qa/rework.md (sprint 6).

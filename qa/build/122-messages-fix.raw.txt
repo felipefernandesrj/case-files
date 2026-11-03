@@ -1,0 +1,10 @@
+<<<REPLACE src/messages.js>>>
+We are out of play capacity for now.
+=====
+This case is out of play capacity for now.
+<<<END>>>
+<<<REPLACE src/messages.js>>>
+Estamos sem capacidade de jogo por enquanto.
+=====
+Este caso está sem capacidade de jogo por enquanto.
+<<<END>>>

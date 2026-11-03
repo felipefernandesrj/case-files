@@ -22,6 +22,7 @@
 - `POST /api/ask`
   - Body: `{ sessionId, suspectId, question, lang?: 'pt' | 'en' }`.
   - Returns: `{ answer: string, questions: number }`.
+  - Only a successful answer counts: `questions` and the suspect's history change only on 200. A failed ask (402, 429, 502, 503) changes nothing in the session, and `message` is a friendly EN/PT sentence from src/messages.js.
   - Errors:
     - `400`: `unknown session`, `unknown suspect`, `empty question`, `question too long`.
     - `402`: `no_capacity` (upstream capacity exhausted).

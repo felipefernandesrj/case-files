@@ -1,0 +1,36 @@
+<<<FILE src/messages.js>>>
+/**
+ * Friendly messages for client‑facing errors.
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'bad_request'} code
+ * @param {'en'|'pt'} lang
+ * @returns {string}
+ */
+export function friendly(code, lang) {
+  const msgs = {
+    no_capacity: {
+      en: 'We are out of play capacity for now. Backers can refill it on FullCup. Your questions so far are kept and nothing was counted for this one. Try again later.',
+      pt: 'Estamos sem capacidade de jogo por enquanto. Os apoiadores podem reabastecer no FullCup. Suas perguntas foram salvas e nada foi contabilizado nesta. Tente novamente mais tarde.',
+    },
+    rate_limited: {
+      en: 'There are too many questions at once. Please wait a few seconds and ask again.',
+      pt: 'Há muitas perguntas ao mesmo tempo. Por favor, aguarde alguns segundos e tente novamente.',
+    },
+    bad_key: {
+      en: 'The game is not connected to its Cup right now. The creator has to fix it; it is not your fault.',
+      pt: 'O jogo não está conectado ao seu Cup agora. O criador precisa consertar isso; não é culpa sua.',
+    },
+    upstream: {
+      en: 'The suspects could not answer right now, please ask again in a moment. Your question was not counted.',
+      pt: 'Os suspeitos não puderam responder agora, por favor tente novamente em um momento. Sua pergunta não foi contabilizada.',
+    },
+    bad_request: {
+      en: 'The question could not be read, please type it again.',
+      pt: 'A pergunta não pôde ser lida, por favor digite-a novamente.',
+    },
+  };
+
+  const entry = msgs[code];
+  if (!entry) return '';
+  return lang === 'pt' ? entry.pt : entry.en;
+}
+<<<END>>>

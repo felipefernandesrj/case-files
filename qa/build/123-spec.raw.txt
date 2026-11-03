@@ -1,0 +1,6 @@
+<<<REPLACE docs/SPEC.md>>>
+  - Returns: `{ answer: string, questions: number }`.
+=====
+  - Returns: `{ answer: string, questions: number }`.
+  - Only a successful answer counts: `questions` and the suspect's history change only on 200. A failed ask (402, 429, 502, 503) changes nothing in the session, and `message` is a friendly EN/PT sentence from src/messages.js.
+<<<END>>>

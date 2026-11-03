@@ -1,0 +1,11 @@
+<<<REPLACE src/server.js>>>
+        sess.questions += 1;
+=====
+        // question is counted only after a successful answer (sprint 6)
+<<<END>>>
+<<<REPLACE src/server.js>>>
+        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions });
+=====
+        sess.questions += 1;
+        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions });
+<<<END>>>

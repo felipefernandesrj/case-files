@@ -3020,5 +3020,456 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "113-messages",
+  "at": "2026-11-03T00:06:03.149Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 12205,
+  "usage": {
+   "prompt_tokens": 781,
+   "completion_tokens": 465,
+   "total_tokens": 1246,
+   "neurons": 19.781818389892578,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBKZM0CFTPR25YCA4QTF0J",
+   "x-fullcup-receipt-id": "01M6FBKZM0CFTPR25YCA4QTF0J",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793664360"
+  },
+  "files": [
+   {
+    "path": "src/messages.js",
+    "lines": 34
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "114-server-count",
+  "at": "2026-11-03T00:06:17.003Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3891,
+  "usage": {
+   "prompt_tokens": 362,
+   "completion_tokens": 115,
+   "total_tokens": 477,
+   "neurons": 6.427272796630859,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBMN4YCMMZRMXSPYYPDQ7Q",
+   "x-fullcup-receipt-id": "01M6FBMN4YCMMZRMXSPYYPDQ7Q",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793664420"
+  },
+  "files": [
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "115-capacity-test",
+  "at": "2026-11-03T00:07:50.791Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 68796,
+  "usage": {
+   "prompt_tokens": 1088,
+   "completion_tokens": 3056,
+   "total_tokens": 4144,
+   "neurons": 93.23635864257812,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBNGQXKRZQGYDVMMCDYWXV",
+   "x-fullcup-receipt-id": "01M6FBNGQXKRZQGYDVMMCDYWXV",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793664420"
+  },
+  "files": [
+   {
+    "path": "test/capacity.mjs",
+    "lines": 224
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "116-capacity-fix",
+  "at": "2026-11-03T00:09:01.426Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 58183,
+  "usage": {
+   "prompt_tokens": 3505,
+   "completion_tokens": 2520,
+   "total_tokens": 6025,
+   "neurons": 100.59091186523438,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBR0N0N8ED2F6NGMM9GR7N",
+   "x-fullcup-receipt-id": "01M6FBR0N0N8ED2F6NGMM9GR7N",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793664540"
+  },
+  "files": [
+   {
+    "path": "test/capacity.mjs",
+    "lines": 200
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "117-capacity-fix",
+  "at": "2026-11-03T00:09:14.132Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3227,
+  "usage": {
+   "prompt_tokens": 233,
+   "completion_tokens": 84,
+   "total_tokens": 317,
+   "neurons": 4.409090995788574,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBT2WFKZ0XDX16ZQKZ0S71",
+   "x-fullcup-receipt-id": "01M6FBT2WFKZ0XDX16ZQKZ0S71",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793664600"
+  },
+  "files": [
+   {
+    "path": "test/capacity.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "118-package",
+  "at": "2026-11-03T00:09:28.993Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3422,
+  "usage": {
+   "prompt_tokens": 197,
+   "completion_tokens": 102,
+   "total_tokens": 299,
+   "neurons": 4.572727203369141,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBTGZ56KHTE43TATS32NJC",
+   "x-fullcup-receipt-id": "01M6FBTGZ56KHTE43TATS32NJC",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793664600"
+  },
+  "files": [
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "119-how-to-play",
+  "at": "2026-11-03T00:10:03.407Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 18081,
+  "usage": {
+   "prompt_tokens": 880,
+   "completion_tokens": 914,
+   "total_tokens": 1794,
+   "neurons": 32.92727279663086,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBV469RCSY1ECT7DSABBWQ",
+   "x-fullcup-receipt-id": "01M6FBV469RCSY1ECT7DSABBWQ",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793664600"
+  },
+  "files": [
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "lines": 64
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "120-how-to-play-fix",
+  "at": "2026-11-03T00:10:29.995Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10508,
+  "usage": {
+   "prompt_tokens": 1327,
+   "completion_tokens": 1062,
+   "total_tokens": 2389,
+   "neurons": 41.02727127075195,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBW5NQAX3QQ9W66X0NBBE0",
+   "x-fullcup-receipt-id": "01M6FBW5NQAX3QQ9W66X0NBBE0",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793664660"
+  },
+  "files": [
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "lines": 70
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "121-how-to-play-fix",
+  "at": "2026-11-03T00:10:41.363Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 2706,
+  "usage": {
+   "prompt_tokens": 226,
+   "completion_tokens": 84,
+   "total_tokens": 310,
+   "neurons": 4.345454216003418,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBWQWV2J4V54HYVSHXYEV4",
+   "x-fullcup-receipt-id": "01M6FBWQWV2J4V54HYVSHXYEV4",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793664660"
+  },
+  "files": [
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "122-messages-fix",
+  "at": "2026-11-03T00:10:52.969Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3460,
+  "usage": {
+   "prompt_tokens": 226,
+   "completion_tokens": 73,
+   "total_tokens": 299,
+   "neurons": 4.045454502105713,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBX2ZESRSHV4G7G528N6TB",
+   "x-fullcup-receipt-id": "01M6FBX2ZESRSHV4G7G528N6TB",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793664660"
+  },
+  "files": [
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "123-spec",
+  "at": "2026-11-03T00:11:24.832Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 4439,
+  "usage": {
+   "prompt_tokens": 248,
+   "completion_tokens": 119,
+   "total_tokens": 367,
+   "neurons": 5.5,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBY1MRVEP9RA95V9GCSAMN",
+   "x-fullcup-receipt-id": "01M6FBY1MRVEP9RA95V9GCSAMN",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793664720"
+  },
+  "files": [
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "124-readme",
+  "at": "2026-11-03T00:11:32.320Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 7417,
+  "usage": {
+   "prompt_tokens": 519,
+   "completion_tokens": 283,
+   "total_tokens": 802,
+   "neurons": 12.436363220214844,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBY50WYVFX9R05T2AZG304",
+   "x-fullcup-receipt-id": "01M6FBY50WYVFX9R05T2AZG304",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793664720"
+  },
+  "files": [
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "125-changelog",
+  "at": "2026-11-03T00:11:46.133Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3570,
+  "usage": {
+   "prompt_tokens": 343,
+   "completion_tokens": 105,
+   "total_tokens": 448,
+   "neurons": 5.981818199157715,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6FBYPW32A5V6XY55AMXXFM0",
+   "x-fullcup-receipt-id": "01M6FBYPW32A5V6XY55AMXXFM0",
+   "x-fullcup-seal-by": "2026-11-04T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793664720"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "sprint6-summary",
+  "at": "2026-11-03T00:13:00Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "note": "Sprint 6 (v0.2.5): 18 requests (13 build + 2 live smoke llama-4-scout + 3 probes), 10856/9081 tokens, 365.54 neurons, ~US$0.0040; build 13 calls 335.28 neurons, 0 wasted, 3 rework (116,117,121) 109.35 neurons, 0 API failures, slowest 68.8 s; manual product lines 0; receipts 01M6FBKZM0CFTPR25YCA4QTF0J..01M6FBZE8KQJSBK8Q82ME2YXQM (15); npm test 77/77",
+  "files": [],
+  "skipped": []
  }
 ]

@@ -1,0 +1,5 @@
+<<<REPLACE test/capacity.mjs>>>
+        if (res1.body.error !== friendly('no_capacity', lang)) throw new Error('wrong error message');
+=====
+        if (res1.body.error !== 'no_capacity' || res1.body.message !== friendly('no_capacity', lang)) throw new Error('wrong error message');
+<<<END>>>

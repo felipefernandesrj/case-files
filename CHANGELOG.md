@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.5 (M1 sprint 6, player guide + fair capacity messages)
+- Added new player guides in English and Portuguese including scoring and accessibility tips
+- Improved error messages and fixed incorrect Portuguese translations for Cup
+- Failed questions due to capacity or errors no longer penalize score or affect memory
+- Added new capacity tests and increased total test count to 77
+
+
 ## 0.2.4 (M1 sprint 5, consistent suspects)
 - Suspects now receive private facts and specific clues in their role-play prompts
 - Added rules to prevent suspects from inventing people and to maintain story consistency

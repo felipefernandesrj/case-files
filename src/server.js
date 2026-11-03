@@ -179,7 +179,7 @@ export function createServer({
         }
 
         const sess = sessions.get(sessionId);
-        sess.questions += 1;
+        // question is counted only after a successful answer (sprint 6)
 
         // Build messages
         const messages = [];
@@ -213,6 +213,7 @@ export function createServer({
         const newHist = [...hist, { role: 'user', content: question }, { role: 'assistant', content: trimmed }];
         sess.history.set(suspectId, newHist);
 
+        sess.questions += 1;
         return sendJSON(res, 200, { answer: trimmed, questions: sess.questions });
       }
 

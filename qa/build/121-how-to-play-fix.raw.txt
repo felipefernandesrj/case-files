@@ -1,0 +1,11 @@
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+instrument room of the Academia de Música Aurora
+=====
+instrument room of the Aurora Music Academy
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+`node src/cli.js`
+=====
+`node src/cli.js` (add `--lang pt` for Portuguese).
+<<<END>>>

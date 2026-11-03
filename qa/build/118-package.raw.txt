@@ -1,0 +1,5 @@
+<<<REPLACE package.json>>>
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/keyboard.mjs"
+=====
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/keyboard.mjs"
+<<<END>>>

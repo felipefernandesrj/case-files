@@ -114,3 +114,43 @@ Receipts (seal-by 2026-11-03T00:05:00Z): build 01M6E2G7BETE0J2P5B66P80CXV, 01M6E
 - Reproduced: chat_template_kwargs.enable_thinking=false is honoured by gemma-4-26b (13 of 13, no reasoning text), still undocumented in /v1/models.
 - Not reproduced: 502 workers_ai_unavailable at ~236 s and empty 200 stream (0 of 13; no call ran past 73 s, no stream used). So the cutoff waste is avoidable on the client side, but the proxy behaviour itself is unchanged as far as we know.
 - New, low: usage.prompt_tokens_details.cached_tokens 512 on call 102 (prompt cache hit reported, 1 of 13); check whether cached tokens are billed at a lower neuron rate.
+
+## M1 rebuild sprint 6: player guide + fair capacity messages, 2026-11-03 00:06-00:13 UTC (02/11 21:06-21:13 BRT) (Essential, gemma-4-26b-a4b-it, thinking off)
+| Call | Target | Model | Status | Latency | Tokens in/out | Neurons | Files | Accepted / rework |
+|---|---|---|---|---|---|---|---|---|
+| 113 | messages.js EN/PT texts | gemma-4-26b | 200 | 12.2 s | 781/465 | 19.78 | src/messages.js | accepted |
+| 114 | server.js count only on success | gemma-4-26b | 200 | 3.9 s | 362/115 | 6.43 | src/server.js | accepted |
+| 115 | test/capacity.mjs | gemma-4-26b | 200 | 68.8 s | 1088/3056 | 93.24 | test/capacity.mjs | accepted, 3/6 (test bugs) |
+| 116 | capacity fix, full file | gemma-4-26b | 200 | 58.2 s | 3505/2520 | 100.59 | test/capacity.mjs | rework, 5/6 |
+| 117 | capacity fix, one line | gemma-4-26b | 200 | 3.2 s | 233/84 | 4.41 | test/capacity.mjs | rework, 6/6 |
+| 118 | package.json test script | gemma-4-26b | 200 | 3.4 s | 197/102 | 4.57 | package.json | accepted |
+| 119 | docs/HOW_TO_PLAY.md | gemma-4-26b | 200 | 18.1 s | 880/914 | 32.93 | docs/HOW_TO_PLAY.md | accepted with 7 review findings |
+| 120 | guide review fixes | gemma-4-26b | 200 | 10.5 s | 1327/1062 | 41.03 | docs/HOW_TO_PLAY.md | accepted, 1 regression |
+| 121 | guide regression fix | gemma-4-26b | 200 | 2.7 s | 226/84 | 4.35 | docs/HOW_TO_PLAY.md | rework, accepted |
+| 122 | no_capacity wording | gemma-4-26b | 200 | 3.5 s | 226/73 | 4.05 | src/messages.js | accepted (polish) |
+| 123 | SPEC counting rule | gemma-4-26b | 200 | 4.4 s | 248/119 | 5.50 | docs/SPEC.md | accepted |
+| 124 | README status + guide link | gemma-4-26b | 200 | 7.4 s | 519/283 | 12.44 | README.md | accepted |
+| 125 | CHANGELOG 0.2.5 | gemma-4-26b | 200 | 3.6 s | 343/105 | 5.98 | CHANGELOG.md | accepted (nit: double blank line) |
+| live x2 | EN Maya, PT Carlos + PT accuse | llama-4-scout | 200, 200 | 2.1 / 1.9 s | 921/99 | 30.26 | qa/live-smoke-sprint6.json | pass |
+| probes x3 | GET /models, GET /v1/receipts/{id}, disallowed model | - | 200 / 404 / 403 | 0.10-0.76 s | 0 | 0 | - | QA probe |
+
+Totals: 18 requests (13 build + 2 live + 3 probes), 10 856 in / 9 081 out tokens, 365.5 neurons, about US$ 0.0040 at $0.011/1k neurons. Build only: 13 calls, 9 935 / 8 982 tokens, 335.3 neurons. Wasted 0, rework 3 (116, 117, 121) = 109.4 neurons (33% of build; sprint 5: 40%), 0 API failures, 0 x 502, slowest 68.8 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s6.mjs (new, PO tooling, logs headers, never the key).
+npm test: 77/77 (was 71). Note: the first baseline run before any change hit a one-off keyboard.mjs "Timeout" (cold headless Chrome); all 4 later runs 13/13.
+Verdict: worth it. Players now get a clear EN/PT message when capacity runs out and a failed question no longer lowers their score (a real fairness bug since sprint 1, found while writing the guide); 6 new checks; players have a guide.
+Receipts (seal-by 2026-11-04T00:05:00Z), 15, first..last: 01M6FBKZM0CFTPR25YCA4QTF0J (113) .. 01M6FBZE8KQJSBK8Q82ME2YXQM (live PT). All ids in qa/key-usage-log.json (purpose sprint6-*).
+
+### Seal check of earlier receipts (public page, curl)
+- 00:05:38 UTC (33 s after seal-by 2026-11-03 00:05Z): 01M6E2G7BETE0J2P5B66P80CXV, 01M6CSVT02GTYBSMQW8HG2X7N1, 01M6E387FVDM4S6Y7VJFN7454V still said "Recorded, waiting for the daily seal, will be sealed on 2026-11-03 00:05 UTC".
+- 00:12:35 UTC: all three plus 01M6E369DN79FAQ0RVGJYFJGSM (sprint 5 live) and 01M6A72KQ3M2KM8082JCC4S4HN (sprint 2) show "Genuine receipt", "one of 53 in the signed root of 2026-11-02", root signature matches the FullCup key. Sprint 6 receipts show "waiting for the daily seal, will be sealed on 2026-11-04 00:05 UTC".
+
+### FullCup observations, sprint 6
+- Reproduced: no per-call cost (15 of 15 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (15 of 15).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers, and still lists only id/object/owned_by (no capabilities, enable_thinking undocumented) (1 of 1).
+- Reproduced: chat_template_kwargs.enable_thinking=false honoured by gemma-4-26b (13 of 13, no reasoning text).
+- Reproduced: 403 model_outside_capacity_class body still flat `{"error":"model_outside_capacity_class","message","allowed":[6]}`, no receipt, x-ratelimit-* present (1 of 1).
+- Changed: GET /v1/receipts/{id} still 404, but the body is now OpenAI-style nested `{"error":{"message","type":"invalid_request_error","param":null,"code":"unsupported_endpoint"}}` (sprint 5: flat `{"error":"not_found"}`). So error shapes are now mixed: 404 nested, 403 flat. The message also lists POST /v1/responses as supported (not in our prompts/_api.md).
+- New, low: seal lag. At 00:05:38Z the public page still promised sealing "on 2026-11-03 00:05 UTC" (a time already past); sealed by 00:12:35Z. Lag under 7 minutes.
+- Not reproduced: 502 workers_ai_unavailable at ~236 s and empty 200 stream (0 of 15; slowest call 68.8 s, no stream).
+- cached_tokens 0 on 15 of 15.

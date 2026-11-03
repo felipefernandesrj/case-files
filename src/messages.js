@@ -7,24 +7,24 @@
 export function friendly(code, lang) {
   const msgs = {
     no_capacity: {
-      en: 'this Cup is out of capacity, backers can refill it',
-      pt: 'este Copo está sem capacidade, os apoiadores podem reabastecê-lo',
+      en: 'This case is out of play capacity for now. Backers can refill it on FullCup. Your questions so far are kept and nothing was counted for this one. Try again later.',
+      pt: 'Este caso está sem capacidade de jogo por enquanto. Os apoiadores podem reabastecer no FullCup. Suas perguntas foram salvas e nada foi contabilizado nesta. Tente novamente mais tarde.',
     },
     rate_limited: {
-      en: 'try again in a moment',
-      pt: 'tente novamente em um momento',
+      en: 'There are too many questions at once. Please wait a few seconds and ask again.',
+      pt: 'Há muitas perguntas ao mesmo tempo. Por favor, aguarde alguns segundos e tente novamente.',
     },
     bad_key: {
-      en: 'game key not configured or invalid, the creator was notified',
-      pt: 'chave do jogo não configurada ou inválida, o criador foi notificado',
+      en: 'The game is not connected to its Cup right now. The creator has to fix it; it is not your fault.',
+      pt: 'O jogo não está conectado ao seu Cup agora. O criador precisa consertar isso; não é culpa sua.',
     },
     upstream: {
-      en: 'upstream service error, please try later',
-      pt: 'erro no serviço upstream, tente novamente mais tarde',
+      en: 'The suspects could not answer right now, please ask again in a moment. Your question was not counted.',
+      pt: 'Os suspeitos não puderam responder agora, por favor tente novamente em um momento. Sua pergunta não foi contabilizada.',
     },
     bad_request: {
-      en: 'bad request',
-      pt: 'requisição inválida',
+      en: 'The question could not be read, please type it again.',
+      pt: 'A pergunta não pôde ser lida, por favor digite-a novamente.',
     },
   };
 
