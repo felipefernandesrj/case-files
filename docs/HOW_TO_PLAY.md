@@ -15,7 +15,7 @@ A priceless Stradivarius vanished from the instrument room of the Aurora Music A
 5. When you are ready, type your name (or "anon") and press the button with the suspect's name in the "Accuse" section. You only get one accusation per game.
 
 ### Scoring
-A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm).
+A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
 
 ### Tips
 * Ask where each person was and when.
@@ -49,7 +49,7 @@ Um Stradivarius de valor inestimável desapareceu da sala de instrumentos da Aca
 5. Quando estiver pronto, digite seu nome (ou "anon") e aperte o botão com o nome do suspeito na seção "Acusar". Você tem apenas uma acusação por jogo.
 
 ### Pontuação
-Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação).
+Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
 
 ### Dicas
 * Pergunte onde cada pessoa estava e quando.

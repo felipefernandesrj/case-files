@@ -2816,5 +2816,333 @@
    "x-ratelimit-reset": "1793707920"
   },
   "error": null
+ },
+ {
+  "at": "2026-11-04T00:02:44.811Z",
+  "purpose": "sprint8-build:138-best-ui-lang",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 34261,
+  "usage": {
+   "prompt_tokens": 728,
+   "completion_tokens": 1345,
+   "total_tokens": 2073,
+   "neurons": 43.30000305175781,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HXSZB17G8ZQ2FSC0WT1A9W",
+   "x-fullcup-receipt-id": "01M6HXSZB17G8ZQ2FSC0WT1A9W",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750580"
+  },
+  "error": null,
+  "note": "wasted: model emitted 4 duplicate bestText versions with thinking-aloud comments; discarded (git checkout), redone in 139"
+ },
+ {
+  "at": "2026-11-04T00:03:11.899Z",
+  "purpose": "sprint8-build:139-best-ui-lang-retry",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10452,
+  "usage": {
+   "prompt_tokens": 796,
+   "completion_tokens": 592,
+   "total_tokens": 1388,
+   "neurons": 23.381816864013672,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HXVH3N2G6J4GFXM6MPYV42",
+   "x-fullcup-receipt-id": "01M6HXVH3N2G6J4GFXM6MPYV42",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750640"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:03:33.934Z",
+  "purpose": "sprint8-build:140-page-tests",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 7705,
+  "usage": {
+   "prompt_tokens": 912,
+   "completion_tokens": 643,
+   "total_tokens": 1555,
+   "neurons": 25.827272415161133,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HXW8YAS6W4CZ0CF62HKYT5",
+   "x-fullcup-receipt-id": "01M6HXW8YAS6W4CZ0CF62HKYT5",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793750640"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:04:05.753Z",
+  "purpose": "sprint8-build:141-test-fix",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 24588,
+  "usage": {
+   "prompt_tokens": 548,
+   "completion_tokens": 683,
+   "total_tokens": 1231,
+   "neurons": 23.609092712402344,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HXWQG7HKTKY6R7QWP1KVYH",
+   "x-fullcup-receipt-id": "01M6HXWQG7HKTKY6R7QWP1KVYH",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793750640"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:04:36.717Z",
+  "purpose": "sprint8-build:142-msg-jsdoc",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 19389,
+  "usage": {
+   "prompt_tokens": 648,
+   "completion_tokens": 704,
+   "total_tokens": 1352,
+   "neurons": 25.090909957885742,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HXXTY37Q0NE97VXZT0W3BM",
+   "x-fullcup-receipt-id": "01M6HXXTY37Q0NE97VXZT0W3BM",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750700"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:05:04.095Z",
+  "purpose": "sprint8-build:143-docs",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 9777,
+  "usage": {
+   "prompt_tokens": 625,
+   "completion_tokens": 424,
+   "total_tokens": 1049,
+   "neurons": 17.245454788208008,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HXYYWJYNNRWP6WJ27AAYHG",
+   "x-fullcup-receipt-id": "01M6HXYYWJYNNRWP6WJ27AAYHG",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793750700"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:05:46.667Z",
+  "purpose": "sprint8-build:144-docs-fix",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 17405,
+  "usage": {
+   "prompt_tokens": 802,
+   "completion_tokens": 863,
+   "total_tokens": 1665,
+   "neurons": 30.827272415161133,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HY015ZQTN8YY3Z0FTDKSFD",
+   "x-fullcup-receipt-id": "01M6HY015ZQTN8YY3Z0FTDKSFD",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750760"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:05:52.386Z",
+  "purpose": "sprint8-smoke:en:maya",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 3909,
+  "usage": {
+   "prompt_tokens": 441,
+   "completion_tokens": 57,
+   "total_tokens": 498,
+   "neurons": 15.22909164428711,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HY0QNT36A43HHEMRRM5CH4",
+   "x-fullcup-receipt-id": "01M6HY0QNT36A43HHEMRRM5CH4",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793750760"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:05:56.304Z",
+  "purpose": "sprint8-smoke:pt:carlos",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 2327,
+  "usage": {
+   "prompt_tokens": 480,
+   "completion_tokens": 48,
+   "total_tokens": 528,
+   "neurons": 15.490909576416016,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6HY0V084JNZQ3556CTBNXJV",
+   "x-fullcup-receipt-id": "01M6HY0V084JNZQ3556CTBNXJV",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793750760"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:06:08.443Z",
+  "purpose": "sprint8-probe:models",
+  "method": "GET",
+  "endpoint": "/models",
+  "model": null,
+  "status": 200,
+  "ms": 178,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": null
+ },
+ {
+  "at": "2026-11-04T00:06:08.625Z",
+  "purpose": "sprint8-probe:receipt-api",
+  "method": "GET",
+  "endpoint": "/receipts/01M6HY0V084JNZQ3556CTBNXJV",
+  "model": null,
+  "status": 404,
+  "ms": 103,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": {
+   "error": {
+    "message": "GET /v1/receipts/01M6HY0V084JNZQ3556CTBNXJV is not an endpoint FullCup.ai offers. Supported endpoints: POST /v1/chat/completions, POST /v1/responses and GET /v1/models. Other OpenAI endpoints, such as embeddings, completions, images and audio, are not available.",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": "unsupported_endpoint"
+   }
+  }
+ },
+ {
+  "at": "2026-11-04T00:06:08.729Z",
+  "purpose": "sprint8-probe:disallowed-model",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "status": 403,
+  "ms": 197,
+  "usage": null,
+  "cost": null,
+  "headers": {
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750820"
+  },
+  "error": {
+   "error": "model_outside_capacity_class",
+   "message": "This key cannot call that model. See allowed, or GET /v1/models.",
+   "allowed": [
+    "@cf/deepseek-ai/deepseek-v4-flash-0731",
+    "@cf/google/gemma-4-26b-a4b-it",
+    "@cf/meta/llama-4-scout-17b-16e-instruct",
+    "@cf/openai/gpt-oss-120b",
+    "@cf/zai-org/glm-4.7-flash",
+    "@cf/zai-org/glm-5.3-flash"
+   ]
+  }
+ },
+ {
+  "at": "2026-11-04T00:06:23Z",
+  "purpose": "sprint8-seal-check",
+  "method": "GET",
+  "endpoint": "https://qa.fullcup.ai/receipts/{id} (signed out)",
+  "model": null,
+  "status": 200,
+  "note": "s6 01M6FBKZM0CFTPR25YCA4QTF0J, 01M6FBZE8KQJSBK8Q82ME2YXQM and s7 01M6GMR2XW1XCNVWR07CRQ72CF, 01M6GN4GBX439MBEZEJP2Q6ZYC: Genuine receipt, one of 29 in the signed root of 2026-11-03 (seal-by 2026-11-04T00:05Z, checked 00:06:23Z, lag < 1.5 min). s8 01M6HY0V084JNZQ3556CTBNXJV: Recorded, waiting, will be sealed on 2026-11-05 00:05 UTC."
+ },
+ {
+  "at": "2026-11-04T00:07:00Z",
+  "purpose": "sprint8-summary",
+  "note": "Sprint 8 (v0.2.7): 12 requests (7 build gemma-4-26b thinking off + 2 live smoke llama-4-scout + 3 probes), 5980/5359 tokens, 220.0 neurons, ~US$0.0024; build 189.3 neurons; wasted 1 (138, 43.3 neurons, 23%); rework 3 (141,142,144) 79.5 neurons (42%); 0 API failures; receipts 01M6HXSZB17G8ZQ2FSC0WT1A9W..01M6HY0V084JNZQ3556CTBNXJV (9), seal-by 2026-11-05T00:05Z; npm test 88/88"
  }
 ]

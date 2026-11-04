@@ -1,0 +1,58 @@
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+
+=======
+
+# Changelog
+
+## 0.2.7 (M1 sprint 8, best line wording + new best announcement)
+
+- Personal best lines now match the UI language.
+- New personal best announced via role=status for screen readers.
+- Removed unused variable in tests.
+- Added check for localized best lines.
+
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.2.6):
+=======
+
+M1 status (v0.2.7):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+personal best per language with a confirmed reset,
+=======
+
+personal best per language (shown in your language, new best announced) with a confirmed reset,
+<<<END>>>
+
+<<<REPLACE README.md>>>
+87 automated checks.
+=======
+
+88 automated checks.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Reset requires user confirmation; GET /best.js serves the storage module.
+=======
+
+- Reset requires user confirmation; GET /best.js serves the storage module.
+- Best lines use the UI language wording (bestText(lang, entry, ui)) and a new best is announced in the role=status line.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+use "Reset my best scores" to clear it (you will be asked to confirm).
+=======
+
+use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+use "Apagar meus recordes" para limpar (o jogo pede confirmação).
+=======
+
+use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
+<<<END>>>

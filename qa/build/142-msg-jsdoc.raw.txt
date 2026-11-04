@@ -1,0 +1,31 @@
+<<<REPLACE public/best.js>>>
+ * @param {'en'|'pt'} [ui='en']
+=====
+ * @param {'en'|'pt'} [ui=lang] language of the wording
+<<<END>>>
+
+<<<REPLACE test/scoreboard.mjs>>>
+    assert(bestText('en', null, 'pt') === "Ainda sem recorde em inglês.", "msg");
+    assert(bestText('pt', null, 'en') === "No best score yet in Portuguese.", "msg");
+    assert(bestText('en', {score: 95, questions: 4, at: 't'}, 'pt') === "Seu recorde em inglês: 95 pontos com 4 perguntas.", "msg");
+    assert(bestText('pt', {score: 90, questions: 1, at: 't'}, 'en') === "Your best in Portuguese: 90 points with 1 question.", "msg");
+    assert(bestText('pt', null, 'pt') === bestText('pt', null), "msg");
+    assert(LABELS.en.newBest === 'New personal best!', "msg");
+    assert(LABELS.pt.newBest === 'Novo recorde pessoal!', "msg");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    assert(html.includes("bestText('en', b.en, lang)"), "msg");
+    assert(html.includes("bestText('pt', b.pt, lang)"), "msg");
+    assert(html.includes("LABELS[lang].newBest"), "msg");
+=====
+    assert(bestText('en', null, 'pt') === "Ainda sem recorde em inglês.", "pt ui, en empty");
+    assert(bestText('pt', null, 'en') === "No best score yet in Portuguese.", "en ui, pt empty");
+    assert(bestText('en', {score: 95, questions: 4, at: 't'}, 'pt') === "Seu recorde em inglês: 95 pontos com 4 perguntas.", "pt ui, en entry");
+    assert(bestText('pt', {score: 90, questions: 1, at: 't'}, 'en') === "Your best in Portuguese: 90 points with 1 question.", "en ui, pt single");
+    assert(bestText('pt', null, 'pt') === bestText('pt', null), "pt default ui");
+    assert(LABELS.en.newBest === 'New personal best!', "en newBest");
+    assert(LABELS.pt.newBest === 'Novo recorde pessoal!', "pt newBest");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    assert(html.includes("bestText('en', b.en, lang)"), "page passes lang (en)");
+    assert(html.includes("bestText('pt', b.pt, lang)"), "page passes lang (pt)");
+    assert(html.includes("LABELS[lang].newBest"), "page announces new best");
+<<<END>>>

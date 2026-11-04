@@ -1,0 +1,31 @@
+<<<REPLACE test/scoreboard.mjs>>>
+  // 11. best lines follow the UI language
+  results.push(await test("best lines follow the UI language", async () => {
+    assert.strictEqual(bestText('en', null, 'pt'), "Ainda sem recorde em inglês.");
+    assert.strictEqual(bestText('pt', null, 'en'), "No best score yet in Portuguese.");
+    assert.strictEqual(bestText('en', {score: 95, questions: 4, at: 't'}, 'pt'), "Seu recorde em inglês: 95 pontos com 4 perguntas.");
+    assert.strictEqual(bestText('pt', {score: 90, questions: 1, at: 't'}, 'en'), "Your best in Portuguese: 90 points with 1 question.");
+    assert.strictEqual(bestText('pt', null, 'pt'), bestText('pt', null));
+    assert.strictEqual(LABELS.en.newBest, 'New personal best!');
+    assert.strictEqual(LABELS.pt.newBest, 'Novo recorde pessoal!');
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    assert.ok(html.includes("bestText('en', b.en, lang)"));
+    assert.ok(html.includes("bestText('pt', b.pt, lang)"));
+    assert.ok(html.includes("LABELS[lang].newBest"));
+  }));
+=====
+  // 11. best lines follow the UI language
+  results.push(await test("best lines follow the UI language", async () => {
+    assert(bestText('en', null, 'pt') === "Ainda sem recorde em inglês.", "msg");
+    assert(bestText('pt', null, 'en') === "No best score yet in Portuguese.", "msg");
+    assert(bestText('en', {score: 95, questions: 4, at: 't'}, 'pt') === "Seu recorde em inglês: 95 pontos com 4 perguntas.", "msg");
+    assert(bestText('pt', {score: 90, questions: 1, at: 't'}, 'en') === "Your best in Portuguese: 90 points with 1 question.", "msg");
+    assert(bestText('pt', null, 'pt') === bestText('pt', null), "msg");
+    assert(LABELS.en.newBest === 'New personal best!', "msg");
+    assert(LABELS.pt.newBest === 'Novo recorde pessoal!', "msg");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    assert(html.includes("bestText('en', b.en, lang)"), "msg");
+    assert(html.includes("bestText('pt', b.pt, lang)"), "msg");
+    assert(html.includes("LABELS[lang].newBest"), "msg");
+  }));
+<<<END>>>

@@ -1,5 +1,12 @@
 
+
 # Changelog
+
+## 0.2.7 (M1 sprint 8, best line wording + new best announcement)
+- Personal best lines now match the UI language.
+- New personal best announced via role=status for screen readers.
+- Removed unused variable in tests.
+- Added check for localized best lines.
 
 ## 0.2.6 (M1 sprint 7, personal scoreboard)
 - Added personal best tracking per language in browser localStorage.

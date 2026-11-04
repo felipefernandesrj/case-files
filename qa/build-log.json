@@ -3947,5 +3947,358 @@
   "note": "Sprint 7 (v0.2.6): 17 requests (12 build + 2 live smoke llama-4-scout + 3 probes), 15019/9823 tokens, 424.02 neurons, ~US$0.0047; build 12 calls 393.15 neurons, 0 wasted, 6 rework (129,130,131,132,134,135) 153.3 neurons (39%), 0 API failures, slowest 67.7 s; manual product lines 0; receipts 01M6GMR2XW1XCNVWR07CRQ72CF..01M6GN4GBX439MBEZEJP2Q6ZYC (14); npm test 87/87",
   "files": [],
   "skipped": []
+ },
+ {
+  "label": "138-best-ui-lang",
+  "at": "2026-11-04T00:02:44.811Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 34261,
+  "usage": {
+   "prompt_tokens": 728,
+   "completion_tokens": 1345,
+   "total_tokens": 2073,
+   "neurons": 43.30000305175781,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6HXSZB17G8ZQ2FSC0WT1A9W",
+   "x-fullcup-receipt-id": "01M6HXSZB17G8ZQ2FSC0WT1A9W",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750580"
+  },
+  "files": [
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 69
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "139-best-ui-lang-retry",
+  "at": "2026-11-04T00:03:11.899Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10452,
+  "usage": {
+   "prompt_tokens": 796,
+   "completion_tokens": 592,
+   "total_tokens": 1388,
+   "neurons": 23.381816864013672,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6HXVH3N2G6J4GFXM6MPYV42",
+   "x-fullcup-receipt-id": "01M6HXVH3N2G6J4GFXM6MPYV42",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750640"
+  },
+  "files": [
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 19
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "140-page-tests",
+  "at": "2026-11-04T00:03:33.934Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 7705,
+  "usage": {
+   "prompt_tokens": 912,
+   "completion_tokens": 643,
+   "total_tokens": 1555,
+   "neurons": 25.827272415161133,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6HXW8YAS6W4CZ0CF62HKYT5",
+   "x-fullcup-receipt-id": "01M6HXW8YAS6W4CZ0CF62HKYT5",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793750640"
+  },
+  "files": [
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 1
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 16
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "141-test-fix",
+  "at": "2026-11-04T00:04:05.753Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 24588,
+  "usage": {
+   "prompt_tokens": 548,
+   "completion_tokens": 683,
+   "total_tokens": 1231,
+   "neurons": 23.609092712402344,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6HXWQG7HKTKY6R7QWP1KVYH",
+   "x-fullcup-receipt-id": "01M6HXWQG7HKTKY6R7QWP1KVYH",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793750640"
+  },
+  "files": [
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 14
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "142-msg-jsdoc",
+  "at": "2026-11-04T00:04:36.717Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 19389,
+  "usage": {
+   "prompt_tokens": 648,
+   "completion_tokens": 704,
+   "total_tokens": 1352,
+   "neurons": 25.090909957885742,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6HXXTY37Q0NE97VXZT0W3BM",
+   "x-fullcup-receipt-id": "01M6HXXTY37Q0NE97VXZT0W3BM",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750700"
+  },
+  "files": [
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "143-docs",
+  "at": "2026-11-04T00:05:04.095Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 9777,
+  "usage": {
+   "prompt_tokens": 625,
+   "completion_tokens": 424,
+   "total_tokens": 1049,
+   "neurons": 17.245454788208008,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6HXYYWJYNNRWP6WJ27AAYHG",
+   "x-fullcup-receipt-id": "01M6HXYYWJYNNRWP6WJ27AAYHG",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793750700"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "144-docs-fix",
+  "at": "2026-11-04T00:05:46.667Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 17405,
+  "usage": {
+   "prompt_tokens": 802,
+   "completion_tokens": 863,
+   "total_tokens": 1665,
+   "neurons": 30.827272415161133,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6HY015ZQTN8YY3Z0FTDKSFD",
+   "x-fullcup-receipt-id": "01M6HY015ZQTN8YY3Z0FTDKSFD",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793750760"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "sprint8-summary",
+  "at": "2026-11-04T00:07:00Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "note": "Sprint 8 (v0.2.7): 7 build calls (138-144) 5059/5254 tokens 189.28 neurons; wasted 1 (138) 43.3 (23%); rework 3 (141,142,144) 79.5 (42%); live smoke 2/2 llama-4-scout 921/105 30.7 neurons; 3 probes; total 12 requests 220.0 neurons ~US$0.0024; manual product lines 0; npm test 88/88",
+  "files": [],
+  "skipped": []
  }
 ]

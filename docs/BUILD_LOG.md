@@ -159,3 +159,11 @@ Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, `chat_template_kw
 - Result: npm test 87/87 (e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 10 new, keyboard 13; was 77). 1 of 5 full runs had a keyboard.mjs timeout in 3 steps (cold headless Chrome, same as sprint 6); 4 later runs 13/13.
 - Nit left as generated: in the PT UI the English best line stays in English ("Your best in English: ...") because bestText is per language of the record, not of the UI. Candidate for sprint 8. Also an unused `sThrow` variable in test 6.
 - Details, receipts and FullCup observations: qa/rework.md (sprint 7).
+
+# Sprint 8 (polish: best line wording + new best announcement), 2026-11-04 00:02-00:06 UTC (03/11 21:02-21:06 BRT)
+Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, thinking off, max_tokens 1000-1500, literal edit blocks.
+- Calls 138-139: public/best.js bestText(lang, entry, ui = lang): the wording follows the UI language, the record language is named ("Seu recorde em inglês: ...", "Your best in Portuguese: ..."); LABELS.newBest EN/PT. 138 wasted (duplicate functions), 139 accepted.
+- Call 140: index.html passes `lang` to both best lines and announces "New personal best!" / "Novo recorde pessoal!" in the role=status line after a better result; removed unused `sThrow` in test 6; new test 11. 141-142 fixed the test (local assert, real messages) and the JSDoc.
+- Calls 143-144: CHANGELOG 0.2.7, README v0.2.7 (88 checks), SPEC, HOW_TO_PLAY EN/PT; 144 fixed whitespace damage from 143.
+- npm test 88/88 (was 87). Test 11 fails on the sprint 7 best.js (mutation check).
+- Live smoke 00:05 UTC (tools/smoke-s8.mjs): EN Maya 200 3.9 s 42 words (scratched lock kept), PT Carlos 200 2.3 s 34 words (named only Lorenzo and Maya), PT wrong accusation score 0, no best saved, "No best score yet in Portuguese." / "Ainda sem recorde em inglês." qa/live-smoke-sprint8.json.

@@ -116,7 +116,6 @@ async function run() {
     let res = recordResult(sErr, 'en', {score: 40, questions: 3, correct: true}, NOW);
     assert(res.isNew === true && res.best.score === 40, "should recover from bad schema");
 
-    const sThrow = throwingStorage();
     const { isNew, best } = recordResult(throwingStorage(), 'en', {score: 1, questions: 1, correct: true}, NOW); assert(isNew === true && best.score === 1);
 
     const sNull = fakeStorage({[BEST_KEY]:'null'});
@@ -185,6 +184,21 @@ async function run() {
     assert(html.includes('id="questions-used"'), "missing questions-used");
     assert(html.includes('confirm('), "missing confirm()");
     assert(html.includes('localStorage'), "missing localStorage");
+  }));
+
+  // 11. best lines follow the UI language
+  results.push(await test("best lines follow the UI language", async () => {
+    assert(bestText('en', null, 'pt') === "Ainda sem recorde em inglês.", "pt ui, en empty");
+    assert(bestText('pt', null, 'en') === "No best score yet in Portuguese.", "en ui, pt empty");
+    assert(bestText('en', {score: 95, questions: 4, at: 't'}, 'pt') === "Seu recorde em inglês: 95 pontos com 4 perguntas.", "pt ui, en entry");
+    assert(bestText('pt', {score: 90, questions: 1, at: 't'}, 'en') === "Your best in Portuguese: 90 points with 1 question.", "en ui, pt single");
+    assert(bestText('pt', null, 'pt') === bestText('pt', null), "pt default ui");
+    assert(LABELS.en.newBest === 'New personal best!', "en newBest");
+    assert(LABELS.pt.newBest === 'Novo recorde pessoal!', "pt newBest");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    assert(html.includes("bestText('en', b.en, lang)"), "page passes lang (en)");
+    assert(html.includes("bestText('pt', b.pt, lang)"), "page passes lang (pt)");
+    assert(html.includes("LABELS[lang].newBest"), "page announces new best");
   }));
 
   const passed = results.filter(r => r.ok).length;

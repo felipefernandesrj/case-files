@@ -1,0 +1,49 @@
+<<<REPLACE public/best.js>>>
+/**
+ * @param {'en'|'pt'} lang
+ * @param {{score: number, questions: number, at: string}|null} entry
+ * @returns {string}
+ */
+export function bestText(lang, entry) {
+  if (lang === 'pt') {
+    if (!entry) return "Ainda sem recorde em português.";
+    const q = entry.questions === 1 ? "1 pergunta" : `${entry.questions} perguntas`;
+    return `Seu recorde em português: ${entry.score} pontos com ${q}.`;
+  }
+  if (!entry) return "No best score yet in English.";
+  const q = entry.questions === 1 ? "1 question" : `${entry.questions} questions`;
+  return `Your best in English: ${entry.score} points with ${q}.`;
+}
+=====
+/**
+ * @param {'en'|'pt'} lang
+ * @param {{score: number, questions: number, at: string}|null} entry
+ * @param {'en'|'pt'} [ui='en']
+ * @returns {string}
+ */
+export function bestText(lang, entry, ui = lang) {
+  const NAMES = { en: { en: 'English', pt: 'Portuguese' }, pt: { en: 'inglês', pt: 'português' } };
+  const u = ui === 'pt' ? 'pt' : 'en';
+  const name = NAMES[u][lang === 'pt' ? 'pt' : 'en'];
+  if (u === 'pt') {
+    if (!entry) return `Ainda sem recorde em ${name}.`;
+    const q = entry.questions === 1 ? "1 pergunta" : `${entry.questions} perguntas`;
+    return `Seu recorde em ${name}: ${entry.score} pontos com ${q}.`;
+  }
+  if (!entry) return `No best score yet in ${name}.`;
+  const q = entry.questions === 1 ? "1 question" : `${entry.questions} questions`;
+  return `Your best in ${name}: ${entry.score} points with ${q}.`;
+}
+<<<END>>>
+<<<REPLACE public/best.js>>>
+    kept: 'Nothing was reset.'
+=====
+    kept: 'Nothing was reset.',
+    newBest: 'New personal best!'
+<<<END>>>
+<<<REPLACE public/best.js>>>
+    kept: 'Nada foi apagado.'
+=====
+    kept: 'Nada foi apagado.',
+    newBest: 'Novo recorde pessoal!'
+<<<END>>>

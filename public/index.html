@@ -235,8 +235,9 @@ async function accuse(suspectId){
     const data = await res.json();
     if (!res.ok) throw data;
     lastAccuseResult = data;
-    recordResult(store, lang, data);
+    const rec = recordResult(store, lang, data);
     renderBest();
+    document.getElementById('best-status').textContent = rec.isNew ? LABELS[lang].newBest : '';
     renderVerdict(true);
     await loadScores();
     await loadCredits(true);
@@ -331,8 +332,8 @@ function renderBest() {
   const b = readBest(store);
   document.getElementById('best-title').textContent = LABELS[lang].bestTitle;
   document.getElementById('reset-best').textContent = LABELS[lang].reset;
-  document.getElementById('best-en').textContent = bestText('en', b.en);
-  document.getElementById('best-pt').textContent = bestText('pt', b.pt);
+  document.getElementById('best-en').textContent = bestText('en', b.en, lang);
+  document.getElementById('best-pt').textContent = bestText('pt', b.pt, lang);
 }
 
 document.getElementById('reset-best').addEventListener('click', () => {

@@ -78,17 +78,21 @@ export function resetBest(storage) {
 /**
  * @param {'en'|'pt'} lang
  * @param {{score: number, questions: number, at: string}|null} entry
+ * @param {'en'|'pt'} [ui=lang] language of the wording
  * @returns {string}
  */
-export function bestText(lang, entry) {
-  if (lang === 'pt') {
-    if (!entry) return "Ainda sem recorde em português.";
+export function bestText(lang, entry, ui = lang) {
+  const NAMES = { en: { en: 'English', pt: 'Portuguese' }, pt: { en: 'inglês', pt: 'português' } };
+  const u = ui === 'pt' ? 'pt' : 'en';
+  const name = NAMES[u][lang === 'pt' ? 'pt' : 'en'];
+  if (u === 'pt') {
+    if (!entry) return `Ainda sem recorde em ${name}.`;
     const q = entry.questions === 1 ? "1 pergunta" : `${entry.questions} perguntas`;
-    return `Seu recorde em português: ${entry.score} pontos com ${q}.`;
+    return `Seu recorde em ${name}: ${entry.score} pontos com ${q}.`;
   }
-  if (!entry) return "No best score yet in English.";
+  if (!entry) return `No best score yet in ${name}.`;
   const q = entry.questions === 1 ? "1 question" : `${entry.questions} questions`;
-  return `Your best in English: ${entry.score} points with ${q}.`;
+  return `Your best in ${name}: ${entry.score} points with ${q}.`;
 }
 
 /**
@@ -107,13 +111,15 @@ export const LABELS = {
     reset: 'Reset my best scores',
     confirm: 'Reset your best scores for both languages? This cannot be undone.',
     done: 'Your best scores were reset.',
-    kept: 'Nothing was reset.'
+    kept: 'Nothing was reset.',
+    newBest: 'New personal best!'
   },
   pt: {
     bestTitle: 'Seu recorde',
     reset: 'Apagar meus recordes',
     confirm: 'Apagar seus recordes nos dois idiomas? Isso não pode ser desfeito.',
     done: 'Seus recordes foram apagados.',
-    kept: 'Nada foi apagado.'
+    kept: 'Nada foi apagado.',
+    newBest: 'Novo recorde pessoal!'
   }
 };

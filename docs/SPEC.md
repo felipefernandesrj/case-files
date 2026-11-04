@@ -56,6 +56,7 @@
 - Stored in browser's localStorage under `casefiles:best:v1`.
 - Better result = higher score, or same score with fewer questions (wrong accusations never count).
 - Reset requires user confirmation; GET /best.js serves the storage module.
+- Best lines use the UI language wording (bestText(lang, entry, ui)) and a new best is announced in the role=status line.
 
 ## Web page: closing screen
 

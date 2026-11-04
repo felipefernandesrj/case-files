@@ -1,0 +1,1 @@
+{"error":{"message":"GET /v1/receipts/01M6HY0V084JNZQ3556CTBNXJV is not an endpoint FullCup.ai offers. Supported endpoints: POST /v1/chat/completions, POST /v1/responses and GET /v1/models. Other OpenAI endpoints, such as embeddings, completions, images and audio, are not available.","type":"invalid_request_error","param":null,"code":"unsupported_endpoint"}}

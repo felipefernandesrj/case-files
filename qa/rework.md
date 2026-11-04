@@ -189,3 +189,34 @@ Receipts (seal-by 2026-11-04T00:05:00Z), 14, first..last: 01M6GMR2XW1XCNVWR07CRQ
 - Reproduced: enable_thinking=false honoured by gemma-4-26b (12 of 12).
 - No new anomaly. Log fix only: sprint 6 key-usage-log stored `allowed: 6`; the real 403 body has `allowed` as an array of 6 model ids.
 - cached_tokens 0 on 14 of 14, including 129 which resent the same file as 128.
+
+## M1 sprint 8: best line wording + new best announcement, 2026-11-04 00:02-00:06 UTC (03/11 21:02-21:06 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 1000-1500, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 138 | best.js: bestText(lang, entry, ui) + LABELS.newBest | 200 | 34.3 s | 728 / 1345 | 43.3 | public/best.js | wasted: 4 duplicate bestText versions with thinking-aloud comments (prompt used ${name}/${nome} placeholders, too loose); discarded with git checkout |
+| 139 | retry with explicit NAMES table + examples | 200 | 10.5 s | 796 / 592 | 23.4 | public/best.js (3 edits) | accepted (JSDoc default said 'en', fixed in 142) |
+| 140 | page passes ui lang, announces new best, remove sThrow, test 11 | 200 | 7.7 s | 912 / 643 | 25.8 | index.html (2), scoreboard.mjs (2); best.js JSDoc block did not match | accepted 4/5, test used assert.strictEqual (not in file) |
+| 141 | test 11 fix: local assert | 200 | 24.6 s | 548 / 683 | 23.6 | test/scoreboard.mjs | rework, green, but every message "msg" |
+| 142 | specific assert messages + JSDoc [ui=lang] | 200 | 19.4 s | 648 / 704 | 25.1 | best.js, scoreboard.mjs | rework, accepted |
+| 143 | CHANGELOG 0.2.7, README, SPEC, HOW_TO_PLAY | 200 | 9.8 s | 625 / 424 | 17.2 | 4 files (7 edits) | accepted with whitespace damage (empty line after =======, split paragraphs) |
+| 144 | docs whitespace fix | 200 | 17.4 s | 802 / 863 | 30.8 | 4 files (5 edits) | rework, accepted |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 3.9 / 2.3 s | 921 / 105 | 30.7 | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.1-0.2 s | 0 | 0 | - | QA probe |
+
+Totals: 12 requests (7 build + 2 live + 3 probes), 5 980 in / 5 359 out tokens, 220.0 neurons, about US$ 0.0024 at $0.011/1k neurons. Build only: 7 calls, 5 059 / 5 254 tokens, 189.3 neurons. Wasted 1 (138) = 43.3 neurons (23% of build); rework 3 (141, 142, 144) = 79.5 neurons (42% of build; sprint 7: 39%); wasted + rework 65%. 0 API failures, slowest 34.3 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s8.mjs (smoke-s7 via sed, adds cross-language best lines), tools/probe-s8.mjs (3 probes, logs headers, never the key). Nits left as generated: CHANGELOG.md now starts with 2 empty lines, README has 2 empty lines before the status line (both render the same).
+npm test: 88/88 (was 87). Mutation check: new test 11 fails on the sprint 7 best.js.
+Verdict: worth it, but the costliest sprint per line changed. Lesson: give gemma exact tables and examples, never template placeholders, and warn it about the empty line after the separator.
+Receipts (seal-by 2026-11-05T00:05:00Z), 9, first..last: 01M6HXSZB17G8ZQ2FSC0WT1A9W (138) .. 01M6HY015ZQTN8YY3Z0FTDKSFD (144); live 01M6HY0QNT36A43HHEMRRM5CH4, 01M6HY0V084JNZQ3556CTBNXJV. All ids in qa/key-usage-log.json (purpose sprint8-*).
+
+### FullCup observations, sprint 8 (evidence qa/s8-probes/)
+- Reproduced: no per-call cost (9 of 9 chat 200s, no usage.cost or cost header). The public receipt page does show "Exact cost" per call (s7 137: $0.000253).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (9 of 9).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers, still only id/object/owned_by.
+- Reproduced: mixed error shapes, 404 /v1/receipts/{id} nested {"error":{code:"unsupported_endpoint"}}, 403 model_outside_capacity_class flat with allowed array of 6 ids.
+- Reproduced: enable_thinking=false honoured (7 of 7, no reasoning in output; 138 thought aloud inside code comments, which is a prompt problem, not thinking).
+- Known, seen again: x-ratelimit-reset already in the past on arrival for a 34 s call (138: reset 00:03:00Z, response 00:03:19Z). The window is per UTC minute, so any call that crosses the minute shows it, not only calls over 150 s.
+- No new anomaly. cached_tokens 0 on 9 of 9.
+- Seal check 2026-11-04 00:06:23Z (signed out): sprint 6 (01M6FBKZM0CFTPR25YCA4QTF0J, 01M6FBZE8KQJSBK8Q82ME2YXQM) and sprint 7 (01M6GMR2XW1XCNVWR07CRQ72CF, 01M6GN4GBX439MBEZEJP2Q6ZYC) all "Genuine receipt, one of 29 in the signed root of 2026-11-03" (15 s6 + 14 s7 chat receipts = 29, matches). Seal lag under 1.5 min (sprint 5: under 7 min).
