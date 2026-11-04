@@ -52,6 +52,8 @@
 ### Scoreboard
 - Persisted to `data/scores.json` (default).
 - Records player name (max 24 chars), score, questions asked, correctness, language, and case ID.
+- The page renders every scoreboard cell with textContent, so player names are plain text, never HTML.
+
 ### Personal best (browser)
 - Stored in browser's localStorage under `casefiles:best:v1`.
 - Better result = higher score, or same score with fewer questions (wrong accusations never count).

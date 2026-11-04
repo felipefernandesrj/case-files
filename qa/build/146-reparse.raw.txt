@@ -1,0 +1,42 @@
+<<<REPLACE CHANGELOG.md>>>
+
+# Changelog
+=====
+# Changelog
+
+## 0.2.8 (M1 sprint 9, scoreboard names as plain text)
+- Scoreboard player names are shown as plain text, never as HTML.
+- Added check that runs the scoreboard with an HTML-looking name.
+- Removed extra empty lines at the top of this file and in the README.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+Then open http://localhost:3000. The key stays on the server, and the browser never sees it.
+
+
+M1 status (v0.2.7):
+=====
+Then open http://localhost:3000. The key stays on the server, and the browser never sees it.
+
+M1 status (v0.2.8):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+CDP tests, scoreboard, personal best
+=====
+CDP tests, scoreboard (names shown as plain text), personal best
+<<<END>>>
+
+<<<REPLACE README.md>>>
+88 automated checks.
+=====
+89 automated checks.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Records player name (max 24 chars), score, questions asked, correctness, language, and case ID.
+=====
+- Records player name (max 24 chars), score, questions asked, correctness, language, and case ID.
+- The page renders every scoreboard cell with textContent, so player names are plain text, never HTML.
+
+<<<END>>>

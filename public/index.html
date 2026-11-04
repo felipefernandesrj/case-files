@@ -266,7 +266,11 @@ async function loadScores(){
   tbody.innerHTML = '';
   data.forEach((row,i)=>{
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${i+1}</td><td>${row.player}</td><td>${row.score}</td><td>${row.questions}</td>`;
+    [i + 1, row.player, row.score, row.questions].forEach(value => {
+        const td = document.createElement('td');
+        td.textContent = String(value);
+        tr.appendChild(td);
+    });
     tbody.appendChild(tr);
   });
   sec.hidden = false;

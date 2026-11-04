@@ -167,3 +167,11 @@ Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, thinking off, max
 - Calls 143-144: CHANGELOG 0.2.7, README v0.2.7 (88 checks), SPEC, HOW_TO_PLAY EN/PT; 144 fixed whitespace damage from 143.
 - npm test 88/88 (was 87). Test 11 fails on the sprint 7 best.js (mutation check).
 - Live smoke 00:05 UTC (tools/smoke-s8.mjs): EN Maya 200 3.9 s 42 words (scratched lock kept), PT Carlos 200 2.3 s 34 words (named only Lorenzo and Maya), PT wrong accusation score 0, no best saved, "No best score yet in Portuguese." / "Ainda sem recorde em inglês." qa/live-smoke-sprint8.json.
+
+# Sprint 9 (polish: scoreboard names as plain text + doc nits), 2026-11-04 12:07-12:09 UTC (04/11 09:07-09:09 BRT)
+Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, thinking off, max_tokens 200-1500, literal edit blocks.
+- Call 145: public/index.html loadScores builds every scoreboard cell with createElement('td') + textContent (was tr.innerHTML with the raw player name, so an HTML name ran for every player); new test 12 runs loadScores against a fake DOM with `<img src=x onerror=alert(1)>`.
+- Calls 146-148: CHANGELOG 0.2.8 and its 2 leading empty lines, README v0.2.8 (89 checks, one empty line before the status), SPEC scoreboard bullet. 147 wasted (deleted the heading, discarded), 148 removed the last empty line as a diff hunk.
+- npm test 89/89 (was 88). Test 12 fails on the sprint 8 index.html (mutation check).
+- Live smoke 12:08 UTC (tools/smoke-s9.mjs): EN Maya 200 5.9 s 44 words (scratch on the lock), PT Carlos 200 3.9 s 35 words (named only Lorenzo and Maya), PT wrong accusation score 0, no best saved. qa/live-smoke-sprint9.json.
+- Details, receipts and FullCup observations: qa/rework.md (sprint 9).

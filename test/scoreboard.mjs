@@ -201,6 +201,30 @@ async function run() {
     assert(html.includes("LABELS[lang].newBest"), "page announces new best");
   }));
 
+  // 12. scoreboard shows player names as plain text
+  results.push(await test("scoreboard shows player names as plain text", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const src = html.slice(html.indexOf('async function loadScores'), html.indexOf('async function loadCredits'));
+    assert(src.length > 0, "loadScores not found");
+    const made = [];
+    function el() { return { children: [], textContent: '', hidden: true, sets: [], appendChild(c) { this.children.push(c); }, set innerHTML(v) { this.sets.push(v); this.children = []; }, get innerHTML() { return ''; } }; }
+    const tbody = el();
+    const sec = el();
+    const fakeDoc = { getElementById: id => id === 'scores-body' ? tbody : sec, createElement: tag => { const e = el(); e.tag = tag; made.push(e); return e; } };
+    const evil = '<img src=x onerror=alert(1)>';
+    const fakeFetch = async () => ({ json: async () => [{ player: evil, score: 100, questions: 3 }] });
+    const loadScores = new Function('document', 'fetch', 'API', src + '\nreturn loadScores;')(fakeDoc, fakeFetch, '/api');
+    await loadScores();
+    assert(tbody.children.length === 1, "one row");
+    const tds = tbody.children[0].children;
+    assert(tds.length === 4, "four cells");
+    assert(tds.every(td => td.tag === 'td'), "cells are td");
+    assert(tds.map(td => td.textContent).join('|') === `1|${evil}|100|3`, "cells hold plain text");
+    assert(made.every(e => e.sets.length === 0), "no innerHTML on rows or cells");
+    assert(tbody.sets.every(v => v === ''), "tbody only cleared");
+    assert(sec.hidden === false, "scoreboard shown");
+  }));
+
   const passed = results.filter(r => r.ok).length;
   const failed = results.length - passed;
   console.log(`${passed} passed, ${failed} failed`);

@@ -1,6 +1,9 @@
-
-
 # Changelog
+
+## 0.2.8 (M1 sprint 9, scoreboard names as plain text)
+- Scoreboard player names are shown as plain text, never as HTML.
+- Added check that runs the scoreboard with an HTML-looking name.
+- Removed extra empty lines at the top of this file and in the README.
 
 ## 0.2.7 (M1 sprint 8, best line wording + new best announcement)
 - Personal best lines now match the UI language.

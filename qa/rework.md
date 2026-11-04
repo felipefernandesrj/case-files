@@ -220,3 +220,31 @@ Receipts (seal-by 2026-11-05T00:05:00Z), 9, first..last: 01M6HXSZB17G8ZQ2FSC0WT1
 - Known, seen again: x-ratelimit-reset already in the past on arrival for a 34 s call (138: reset 00:03:00Z, response 00:03:19Z). The window is per UTC minute, so any call that crosses the minute shows it, not only calls over 150 s.
 - No new anomaly. cached_tokens 0 on 9 of 9.
 - Seal check 2026-11-04 00:06:23Z (signed out): sprint 6 (01M6FBKZM0CFTPR25YCA4QTF0J, 01M6FBZE8KQJSBK8Q82ME2YXQM) and sprint 7 (01M6GMR2XW1XCNVWR07CRQ72CF, 01M6GN4GBX439MBEZEJP2Q6ZYC) all "Genuine receipt, one of 29 in the signed root of 2026-11-03" (15 s6 + 14 s7 chat receipts = 29, matches). Seal lag under 1.5 min (sprint 5: under 7 min).
+
+## M1 sprint 9: scoreboard names as plain text + doc nits, 2026-11-04 12:07-12:09 UTC (04/11 09:07-09:09 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 200-1500, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 145 | index.html loadScores cells via textContent + test 12 (fake DOM runs loadScores with `<img src=x onerror=alert(1)>`) | 200 | 15.9 s | 1004 / 701 | 28.25 | public/index.html, test/scoreboard.mjs | accepted (nit: forEach body indented 8 spaces instead of 6) |
+| 146 | CHANGELOG 0.2.8 + top empty lines, README status v0.2.8 / 89 checks / one empty line, SPEC scoreboard bullet + blank before heading | 200 | 8.1 s | 850 / 335 | 16.86 | 3 files (5 edits) | accepted 4.5/5: CHANGELOG OLD had 1 empty line instead of 2, so 1 leading empty line was left |
+| 147 | CHANGELOG remove last leading empty line (REPLACE with =====) | 200 | 1.5 s | 196 / 36 | 2.76 | CHANGELOG.md | wasted: block split in two, NEW empty, deleted `# Changelog`; discarded (git checkout + REPARSE of 146 for CHANGELOG only, no new call) |
+| 148 | same as unified-diff hunk (`@@`, `-` empty line, ` # Changelog`) | 200 | 2.4 s | 218 / 22 | 2.58 | CHANGELOG.md | rework, accepted |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 5.9 / 3.9 s | 921 / 109 | 31.03 | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.07-0.54 s | 0 | 0 | - | QA probe |
+
+Totals: 9 requests (4 build + 2 live + 3 probes), 3 189 in / 1 203 out tokens, 81.5 neurons, about US$ 0.0009 at $0.011/1k neurons. Build only: 4 calls, 2 268 / 1 094 tokens, 50.5 neurons. Wasted 1 (147) = 2.8 neurons (5% of build); rework 1 (148) = 2.6 neurons (5% of build; sprint 8: 42%); wasted + rework 11%. 0 API failures, slowest 15.9 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s9.mjs, tools/probe-s9.mjs (smoke-s8 / probe-s8 via sed; log headers, never the key). Nit left as generated: the new forEach body in loadScores is indented 8 spaces (file style is 6); renders and runs the same.
+npm test: 89/89 (was 88). Mutation check: new test 12 fails on the sprint 8 index.html ("four cells", the old row had 0 td children because it used innerHTML).
+Verdict: worth it, cheapest sprint so far. Real bug fixed: any player name with HTML (24 chars is enough for `<img src=x onerror=...>`) ran as HTML on every player's scoreboard. Lesson: a leading empty line is hard to express in a `=====` block; the `@@`/`-` hunk format did it in one call.
+Receipts (seal-by 2026-11-05T00:05:00Z), 6, first..last: 01M6K79REJ3CPFMAKP9PPEN9EZ (145) .. 01M6K7CP5AWA1ASMMRHGDNWBAX (live PT); build 01M6K79REJ3CPFMAKP9PPEN9EZ, 01M6K7ATS20V8JQ552Y5BEK30X, 01M6K7BEH4P5WQVFE6P08DM3AK, 01M6K7C0MNH44NC4GT5SMJEV44; live 01M6K7CGWX7R7QCJ656XNZ2S5H, 01M6K7CP5AWA1ASMMRHGDNWBAX. All ids in qa/key-usage-log.json (purpose sprint9-*).
+
+### FullCup observations, sprint 9 (evidence qa/s9-probes/)
+- Reproduced: no per-call cost (6 of 6 chat 200s, no usage.cost or cost header). Public receipt page shows "Exact cost" (145: $0.000311 = 28.25 neurons x $0.011/1k, consistent).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (6 of 6).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers, still only id/object/owned_by (models.h, models.json).
+- Reproduced: mixed error shapes, 404 /v1/receipts/{id} nested {"error":{code:"unsupported_endpoint"}}, 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* present on the 403.
+- Reproduced: enable_thinking=false honoured (4 of 4, no reasoning text).
+- Reproduced: cached_tokens 0 on 6 of 6.
+- Not seen: x-ratelimit-reset in the past (no call crossed a UTC minute boundary this sprint).
+- No new anomaly. Seal check 12:09Z (signed out): s8 01M6HXSZB17G8ZQ2FSC0WT1A9W and s9 01M6K79REJ3CPFMAKP9PPEN9EZ both "Recorded, waiting" (seal-by 2026-11-05 00:05 UTC, not due yet).

@@ -4300,5 +4300,196 @@
   "note": "Sprint 8 (v0.2.7): 7 build calls (138-144) 5059/5254 tokens 189.28 neurons; wasted 1 (138) 43.3 (23%); rework 3 (141,142,144) 79.5 (42%); live smoke 2/2 llama-4-scout 921/105 30.7 neurons; 3 probes; total 12 requests 220.0 neurons ~US$0.0024; manual product lines 0; npm test 88/88",
   "files": [],
   "skipped": []
+ },
+ {
+  "label": "145-scores-as-text",
+  "at": "2026-11-04T12:07:35.215Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 15868,
+  "usage": {
+   "prompt_tokens": 1004,
+   "completion_tokens": 701,
+   "total_tokens": 1705,
+   "neurons": 28.245452880859375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6K79REJ3CPFMAKP9PPEN9EZ",
+   "x-fullcup-receipt-id": "01M6K79REJ3CPFMAKP9PPEN9EZ",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793794080"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 25
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "146-docs",
+  "at": "2026-11-04T12:08:02.766Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 8062,
+  "usage": {
+   "prompt_tokens": 850,
+   "completion_tokens": 335,
+   "total_tokens": 1185,
+   "neurons": 16.863636016845703,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6K7ATS20V8JQ552Y5BEK30X",
+   "x-fullcup-receipt-id": "01M6K7ATS20V8JQ552Y5BEK30X",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793794080"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "147-changelog-top",
+  "at": "2026-11-04T12:08:16.911Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 1527,
+  "usage": {
+   "prompt_tokens": 196,
+   "completion_tokens": 36,
+   "total_tokens": 232,
+   "neurons": 2.763636350631714,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6K7BEH4P5WQVFE6P08DM3AK",
+   "x-fullcup-receipt-id": "01M6K7BEH4P5WQVFE6P08DM3AK",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793794140"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "146-reparse",
+  "at": "2026-11-04T12:08:33.287Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   }
+  ],
+  "skipped": [
+   "README.md",
+   "README.md",
+   "README.md",
+   "docs/SPEC.md"
+  ]
+ },
+ {
+  "label": "148-changelog-top-diff",
+  "at": "2026-11-04T12:08:35.748Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 2425,
+  "usage": {
+   "prompt_tokens": 218,
+   "completion_tokens": 22,
+   "total_tokens": 240,
+   "neurons": 2.581818103790283,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6K7C0MNH44NC4GT5SMJEV44",
+   "x-fullcup-receipt-id": "01M6K7C0MNH44NC4GT5SMJEV44",
+   "x-fullcup-seal-by": "2026-11-05T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793794140"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
  }
 ]

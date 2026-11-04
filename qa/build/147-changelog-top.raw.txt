@@ -1,0 +1,8 @@
+<<<REPLACE CHANGELOG.md>>>
+
+# Changelog
+=====
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+=====
+<<<END>>>
