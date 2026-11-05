@@ -225,6 +225,14 @@ async function run() {
     assert(sec.hidden === false, "scoreboard shown");
   }));
 
+  // 13. package.json version matches the latest CHANGELOG entry
+  results.push(await test("package.json version matches CHANGELOG", async () => {
+    const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+    const top = fs.readFileSync('./CHANGELOG.md', 'utf8').match(/^## (\d+\.\d+\.\d+)/m);
+    assert(top, "no CHANGELOG version heading");
+    assert(pkg.version === top[1], `package.json ${pkg.version} vs CHANGELOG ${top[1]}`);
+  }));
+
   const passed = results.filter(r => r.ok).length;
   const failed = results.length - passed;
   console.log(`${passed} passed, ${failed} failed`);

@@ -1,0 +1,39 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.2.8 (M1 sprint 9, scoreboard names as plain text)
+=====
+## 0.2.9 (M1 sprint 10, tidy-up)
+- Scoreboard code indentation fixed (no behaviour change).
+- package.json version now follows this changelog (was 1.0.0).
+- Added check that package.json and the latest changelog entry share the same version.
+- SPEC testing section lists all six test files and the real check count.
+
+## 0.2.8 (M1 sprint 9, scoreboard names as plain text)
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.2.8):
+=====
+M1 status (v0.2.9):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+89 automated checks.
+=====
+90 automated checks.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+3. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+=====
+3. `node test/consistency.mjs` (Case consistency)
+4. `node test/capacity.mjs` (Capacity messages)
+5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
+6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 67 (e2e: 42, proxy: 12, keyboard: 13).
+=====
+Total checks: 90 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 13, keyboard: 13).
+<<<END>>>

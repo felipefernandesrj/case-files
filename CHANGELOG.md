@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.9 (M1 sprint 10, tidy-up)
+- Scoreboard code indentation fixed (no behaviour change).
+- package.json version now follows this changelog (was 1.0.0).
+- Added check that package.json and the latest changelog entry share the same version.
+- SPEC testing section lists all six test files and the real check count.
+
 ## 0.2.8 (M1 sprint 9, scoreboard names as plain text)
 - Scoreboard player names are shown as plain text, never as HTML.
 - Added check that runs the scoreboard with an HTML-looking name.

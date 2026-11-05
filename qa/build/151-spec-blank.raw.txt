@@ -1,0 +1,7 @@
+<<<REPLACE docs/SPEC.md>>>
+@@
+ 6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+ 
+-
+ Total checks: 90 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 13, keyboard: 13).
+<<<END>>>

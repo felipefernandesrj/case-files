@@ -248,3 +248,30 @@ Receipts (seal-by 2026-11-05T00:05:00Z), 6, first..last: 01M6K79REJ3CPFMAKP9PPEN
 - Reproduced: cached_tokens 0 on 6 of 6.
 - Not seen: x-ratelimit-reset in the past (no call crossed a UTC minute boundary this sprint).
 - No new anomaly. Seal check 12:09Z (signed out): s8 01M6HXSZB17G8ZQ2FSC0WT1A9W and s9 01M6K79REJ3CPFMAKP9PPEN9EZ both "Recorded, waiting" (seal-by 2026-11-05 00:05 UTC, not due yet).
+
+## M1 sprint 10: tidy-up (indent nit, package.json version, version check, SPEC testing section), 2026-11-05 00:06-00:08 UTC (04/11 21:06-21:08 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 300-1200, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 149 | loadScores forEach body 8 -> 6 spaces (`@@` hunk), package.json version 1.0.0 -> 0.2.9, test 13 (package.json version = latest CHANGELOG heading) | 200 | 10.5 s | 720 / 340 | 15.82 | public/index.html, package.json, test/scoreboard.mjs | accepted: model output exact; harness bug swallowed the package.json block (the `=====` regex ran from the index.html hunk block across its `<<<END>>>`); fixed the regex in tools/build-via-key.mjs, git checkout + REPARSE (no new call) |
+| 150 | CHANGELOG 0.2.9, README v0.2.9 / 90 checks, SPEC testing section (6 files, 90 checks) | 200 | 11.5 s | 602 / 403 | 16.46 | 3 files (5 edits) | accepted 4.5/5: SPEC got 2 empty lines before "Total checks" (my prompt said "then the same empty line" while OLD did not end in one) |
+| 151 | SPEC remove 1 of 2 empty lines (`@@` hunk) | 200 | 3.4 s | 283 / 83 | 4.84 | docs/SPEC.md | rework, accepted |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 3.0 / 2.7 s | 921 / 107 | 30.87 | - | 2/2 |
+| probes | GET /models (x2, first run crashed before saving evidence), GET /receipts/{id}, disallowed model | 200 / 200 / 404 / 403 | 0.09-0.87 s | 0 | 0 | - | QA probe |
+
+Totals: 9 requests (3 build + 2 live + 4 probes), 2 526 in / 933 out tokens, 68.0 neurons, about US$ 0.00075 at $0.011/1k neurons. Build only: 3 calls, 1 605 / 826 tokens, 37.1 neurons. Wasted 0; rework 1 (151) = 4.8 neurons (13% of build; sprint 9: 5%). 0 API failures, slowest 11.5 s. 1 extra probe call (GET /models, 0 neurons) from my own harness crash (qa/s10-probes not created).
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s10.mjs, tools/probe-s10.mjs (sed from s9), tools/build-via-key.mjs regex fix (OLD may not cross `<<<END>>>`).
+npm test: 90/90 (was 89). Mutation check: test 13 fails with the old package.json ("package.json 1.0.0 vs CHANGELOG 0.2.9").
+Verdict: worth it, cheapest sprint so far. The version check keeps package.json and CHANGELOG from drifting again; SPEC testing section was stale since sprint 4 (listed 3 of 6 files, 67 checks). Lesson: never describe an empty line in prose next to a `=====` block; use a `@@` hunk.
+Receipts (seal-by 2026-11-06T00:05:00Z), 5, first..last: 01M6MGDR9RTM08XQYNZKB7N46B (149) .. 01M6MGG699F82AQYXE7YZ8D6CX (live PT); build 01M6MGDR9RTM08XQYNZKB7N46B, 01M6MGEXP593TKRWR10CFX42FB, 01M6MGFP78M5EQFJCA0VJR81KF; live 01M6MGG3SSY5Z7ABZX4EXXCAXX, 01M6MGG699F82AQYXE7YZ8D6CX. All ids in qa/key-usage-log.json (purpose sprint10-*).
+
+### FullCup observations, sprint 10 (evidence qa/s10-probes/)
+- Seal check (signed out, curl): 00:05:06Z both s8 01M6HXSZB17G8ZQ2FSC0WT1A9W and s9 01M6K79REJ3CPFMAKP9PPEN9EZ still "Recorded, waiting for the daily seal"; 00:07:47Z both "Genuine receipt", "one of 15 in the signed root of 2026-11-04", "Sealed at 2026-11-05 00:05:23 UTC" (lag under 3 min). Last s8 and s9 ids also Genuine. Exact cost s8 $0.000476, s9 $0.000311. Pages saved as seal-*.html.
+- Reproduced: no per-call cost (5 of 5 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (5 of 5).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers, only id/object/owned_by.
+- Reproduced: mixed error shapes, 404 /v1/receipts/{id} nested {"error":{code:"unsupported_endpoint"}}, 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
+- Reproduced: enable_thinking=false honoured (3 of 3), cached_tokens 0 (5 of 5).
+- Not seen: x-ratelimit-reset in the past (no call crossed a UTC minute boundary).
+- No new FullCup anomaly. The only new failures were mine (harness regex, probe dir), both fixed.

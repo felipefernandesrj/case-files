@@ -1,0 +1,29 @@
+<<<REPLACE public/index.html>>>
+@@
+     [i + 1, row.player, row.score, row.questions].forEach(value => {
+-        const td = document.createElement('td');
+-        td.textContent = String(value);
+-        tr.appendChild(td);
++      const td = document.createElement('td');
++      td.textContent = String(value);
++      tr.appendChild(td);
+     });
+<<<END>>>
+<<<REPLACE package.json>>>
+  "version": "1.0.0",
+=====
+  "version": "0.2.9",
+<<<END>>>
+<<<REPLACE test/scoreboard.mjs>>>
+  const passed = results.filter(r => r.ok).length;
+=====
+  // 13. package.json version matches the latest CHANGELOG entry
+  results.push(await test("package.json version matches CHANGELOG", async () => {
+    const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+    const top = fs.readFileSync('./CHANGELOG.md', 'utf8').match(/^## (\d+\.\d+\.\d+)/m);
+    assert(top, "no CHANGELOG version heading");
+    assert(pkg.version === top[1], `package.json ${pkg.version} vs CHANGELOG ${top[1]}`);
+  }));
+
+  const passed = results.filter(r => r.ok).length;
+<<<END>>>

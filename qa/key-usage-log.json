@@ -3387,5 +3387,233 @@
   "at": "2026-11-04T12:10:00Z",
   "purpose": "sprint9-summary",
   "note": "Sprint 9 (v0.2.8): 9 requests (4 build gemma-4-26b thinking off + 2 live smoke llama-4-scout + 3 probes), 3189/1203 tokens, 81.5 neurons, ~US$0.0009; build 50.5 neurons; wasted 1 (147, 2.8 neurons, 5%); rework 1 (148) 2.6 neurons (5%); 0 API failures; receipts 01M6K79REJ3CPFMAKP9PPEN9EZ..01M6K7CP5AWA1ASMMRHGDNWBAX (6), seal-by 2026-11-05T00:05Z; npm test 89/89"
+ },
+ {
+  "at": "2026-11-05T00:07:19.619Z",
+  "purpose": "sprint10-smoke:en:maya",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 2977,
+  "usage": {
+   "prompt_tokens": 441,
+   "completion_tokens": 57,
+   "total_tokens": 498,
+   "neurons": 15.22909164428711,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6MGG3SSY5Z7ABZX4EXXCAXX",
+   "x-fullcup-receipt-id": "01M6MGG3SSY5Z7ABZX4EXXCAXX",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793837280"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-05T00:07:22.602Z",
+  "purpose": "sprint10-smoke:pt:carlos",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 2665,
+  "usage": {
+   "prompt_tokens": 480,
+   "completion_tokens": 50,
+   "total_tokens": 530,
+   "neurons": 15.645454406738281,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6MGG699F82AQYXE7YZ8D6CX",
+   "x-fullcup-receipt-id": "01M6MGG699F82AQYXE7YZ8D6CX",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1793837280"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-05T00:07:29.427Z",
+  "purpose": "sprint10-probe:models",
+  "method": "GET",
+  "endpoint": "/models",
+  "model": null,
+  "status": 200,
+  "ms": 868,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": null
+ },
+ {
+  "at": "2026-11-05T00:07:30.299Z",
+  "purpose": "sprint10-probe:receipt-api",
+  "method": "GET",
+  "endpoint": "/receipts/01M6MGFP78M5EQFJCA0VJR81KF",
+  "model": null,
+  "status": 404,
+  "ms": 92,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": {
+   "error": {
+    "message": "GET /v1/receipts/01M6MGFP78M5EQFJCA0VJR81KF is not an endpoint FullCup.ai offers. Supported endpoints: POST /v1/chat/completions, POST /v1/responses and GET /v1/models. Other OpenAI endpoints, such as embeddings, completions, images and audio, are not available.",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": "unsupported_endpoint"
+   }
+  }
+ },
+ {
+  "at": "2026-11-05T00:07:30.392Z",
+  "purpose": "sprint10-probe:disallowed-model",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "status": 403,
+  "ms": 100,
+  "usage": null,
+  "cost": null,
+  "headers": {
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "56",
+   "x-ratelimit-reset": "1793837280"
+  },
+  "error": {
+   "error": "model_outside_capacity_class",
+   "message": "This key cannot call that model. See allowed, or GET /v1/models.",
+   "allowed": [
+    "@cf/deepseek-ai/deepseek-v4-flash-0731",
+    "@cf/google/gemma-4-26b-a4b-it",
+    "@cf/meta/llama-4-scout-17b-16e-instruct",
+    "@cf/openai/gpt-oss-120b",
+    "@cf/zai-org/glm-4.7-flash",
+    "@cf/zai-org/glm-5.3-flash"
+   ]
+  }
+ },
+ {
+  "at": "2026-11-05T00:06:12.637Z",
+  "purpose": "sprint10-build:149-indent-version",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10490,
+  "usage": {
+   "prompt_tokens": 720,
+   "completion_tokens": 340,
+   "total_tokens": 1060,
+   "neurons": 15.818181991577148,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6MGDR9RTM08XQYNZKB7N46B",
+   "x-fullcup-receipt-id": "01M6MGDR9RTM08XQYNZKB7N46B",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793837220"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-05T00:06:26.988Z",
+  "purpose": "sprint10-build:149-indent-version-reparse",
+  "note": "REPARSE of saved 149 raw output after harness regex fix, no API call"
+ },
+ {
+  "at": "2026-11-05T00:06:51.605Z",
+  "purpose": "sprint10-build:150-docs",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 11510,
+  "usage": {
+   "prompt_tokens": 602,
+   "completion_tokens": 403,
+   "total_tokens": 1005,
+   "neurons": 16.46363639831543,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6MGEXP593TKRWR10CFX42FB",
+   "x-fullcup-receipt-id": "01M6MGEXP593TKRWR10CFX42FB",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793837220"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-05T00:07:08.846Z",
+  "purpose": "sprint10-build:151-spec-blank",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3408,
+  "usage": {
+   "prompt_tokens": 283,
+   "completion_tokens": 83,
+   "total_tokens": 366,
+   "neurons": 4.836363792419434,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6MGFP78M5EQFJCA0VJR81KF",
+   "x-fullcup-receipt-id": "01M6MGFP78M5EQFJCA0VJR81KF",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793837280"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-05T00:07:28Z",
+  "purpose": "sprint10-probe:models (crashed run)",
+  "method": "GET",
+  "endpoint": "/models",
+  "status": "200 (not captured)",
+  "note": "first probe-s10 run crashed writing evidence (qa/s10-probes missing) after the /models call returned; call made but not captured; rerun below"
+ },
+ {
+  "at": "2026-11-05T00:07:47Z",
+  "purpose": "sprint10-seal-check",
+  "method": "GET",
+  "endpoint": "https://qa.fullcup.ai/receipts/{id} (signed out)",
+  "model": null,
+  "status": 200,
+  "note": "00:05:06Z s8 01M6HXSZB17G8ZQ2FSC0WT1A9W + s9 01M6K79REJ3CPFMAKP9PPEN9EZ Recorded, waiting; 00:07:47Z both Genuine receipt, one of 15 in signed root of 2026-11-04, sealed 2026-11-05 00:05:23 UTC"
+ },
+ {
+  "at": "2026-11-05T00:09:00Z",
+  "purpose": "sprint10-summary",
+  "note": "Sprint 10 (v0.2.9): 9 requests (3 build gemma-4-26b thinking off + 2 live smoke llama-4-scout + 4 probes), 2526/933 tokens, 68.0 neurons, ~US$0.00075; build 37.1 neurons; wasted 0; rework 1 (151) 4.8 neurons (13%); 0 API failures; receipts 01M6MGDR9RTM08XQYNZKB7N46B..01M6MGG699F82AQYXE7YZ8D6CX (5), seal-by 2026-11-06T00:05Z; npm test 90/90"
  }
 ]

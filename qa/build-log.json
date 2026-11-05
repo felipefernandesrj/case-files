@@ -4491,5 +4491,170 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "149-indent-version",
+  "at": "2026-11-05T00:06:12.637Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10490,
+  "usage": {
+   "prompt_tokens": 720,
+   "completion_tokens": 340,
+   "total_tokens": 1060,
+   "neurons": 15.818181991577148,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6MGDR9RTM08XQYNZKB7N46B",
+   "x-fullcup-receipt-id": "01M6MGDR9RTM08XQYNZKB7N46B",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793837220"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 1
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "public/index.html",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "149-indent-version-reparse",
+  "at": "2026-11-05T00:06:26.988Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 1,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "public/index.html",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "150-docs",
+  "at": "2026-11-05T00:06:51.605Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 11510,
+  "usage": {
+   "prompt_tokens": 602,
+   "completion_tokens": 403,
+   "total_tokens": 1005,
+   "neurons": 16.46363639831543,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6MGEXP593TKRWR10CFX42FB",
+   "x-fullcup-receipt-id": "01M6MGEXP593TKRWR10CFX42FB",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1793837220"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "151-spec-blank",
+  "at": "2026-11-05T00:07:08.846Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3408,
+  "usage": {
+   "prompt_tokens": 283,
+   "completion_tokens": 83,
+   "total_tokens": 366,
+   "neurons": 4.836363792419434,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6MGFP78M5EQFJCA0VJR81KF",
+   "x-fullcup-receipt-id": "01M6MGFP78M5EQFJCA0VJR81KF",
+   "x-fullcup-seal-by": "2026-11-06T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1793837280"
+  },
+  "files": [
+   {
+    "path": "docs/SPEC.md",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 0
+   }
+  ],
+  "skipped": []
  }
 ]

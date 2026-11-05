@@ -267,9 +267,9 @@ async function loadScores(){
   data.forEach((row,i)=>{
     const tr = document.createElement('tr');
     [i + 1, row.player, row.score, row.questions].forEach(value => {
-        const td = document.createElement('td');
-        td.textContent = String(value);
-        tr.appendChild(td);
+      const td = document.createElement('td');
+      td.textContent = String(value);
+      tr.appendChild(td);
     });
     tbody.appendChild(tr);
   });

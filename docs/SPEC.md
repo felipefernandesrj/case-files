@@ -95,6 +95,9 @@ Run the full test suite via npm:
 This executes:
 1. `node test/e2e.mjs` (End-to-end flows)
 2. `node test/proxy.mjs` (Upstream communication)
-3. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+3. `node test/consistency.mjs` (Case consistency)
+4. `node test/capacity.mjs` (Capacity messages)
+5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
+6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 67 (e2e: 42, proxy: 12, keyboard: 13).
+Total checks: 90 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 13, keyboard: 13).

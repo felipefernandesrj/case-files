@@ -1,6 +1,6 @@
 {
   "name": "fullcup-mystery",
-  "version": "1.0.0",
+  "version": "0.2.9",
   "type": "module",
   "scripts": {
     "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/keyboard.mjs"

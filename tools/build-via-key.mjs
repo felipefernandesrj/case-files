@@ -20,8 +20,9 @@ for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
   fs.mkdirSync(path.dirname(m[1]), { recursive: true }); fs.writeFileSync(m[1], body + '\n');
   files.push({ path: m[1], lines: body.split('\n').length });
 }
+// sprint 10: OLD may not cross a <<<END>>> (a hunk block before a ===== block was swallowed)
 // literal search/replace edits produced by the model: <<<REPLACE path>>>\nOLD\n=====\nNEW\n<<<END>>>
-for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n={5,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 4: a missing <<<END>>> before the next block ends the block
+for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*?)\n={5,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 4: a missing <<<END>>> before the next block ends the block
   if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   const cur = fs.readFileSync(m[1], 'utf8'); const n = cur.split(m[2]).length - 1;
   fs.writeFileSync(m[1], cur.split(m[2]).join(m[3])); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });
