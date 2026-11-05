@@ -275,3 +275,29 @@ Receipts (seal-by 2026-11-06T00:05:00Z), 5, first..last: 01M6MGDR9RTM08XQYNZKB7N
 - Reproduced: enable_thinking=false honoured (3 of 3), cached_tokens 0 (5 of 5).
 - Not seen: x-ratelimit-reset in the past (no call crossed a UTC minute boundary).
 - No new FullCup anomaly. The only new failures were mine (harness regex, probe dir), both fixed.
+
+## M1 sprint 11: accuse confirmation (v0.3.0), 2026-11-05 12:08-12:10 UTC (05/11 09:08-09:10 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 2200-2500, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 152 | Accuse native confirm (EN/PT LABELS.confirmAccuse + replace {name}), keyboard auto-accept JS dialog, package.json 0.3.0, test 14 | 200 | 19.4 s | 1153 / 746 | 30.83 | public/best.js, public/index.html, test/keyboard.mjs, package.json, test/scoreboard.mjs | accepted 6/6 edits exact |
+| 153 | CHANGELOG 0.3.0, README v0.3.0 / 91 checks + accuse phrase, SPEC accuse UX + totals, HOW_TO_PLAY EN+PT confirm note | 200 | 16.5 s | 948 / 696 | 27.60 | 4 files (8 edits) | accepted 8/8 |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 2.8 / 1.3 s | 921 / 105 | 30.72 | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.07-0.53 s | 0 | 0 | - | QA probe |
+
+Totals: 7 requests (2 build + 2 live + 3 probes), 3 022 in / 1 547 out tokens, 89.1 neurons, about US$ 0.00098 at $0.011/1k neurons. Build only: 2 calls, 2 101 / 1 442 tokens, 58.4 neurons. Wasted 0; rework 0 (0%). 0 API failures, slowest 19.4 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s11.mjs, tools/probe-s11.mjs (sed from s10).
+npm test: 91/91 (was 90). Mutation check: test 14 fails when renderAccuseButtons is restored to `()=>accuse(s.id)` ("renderAccuseButtons must call confirm").
+Verdict: worth it. Native confirm matches the personal-best reset pattern; keyboard CDP auto-accepts Page.javascriptDialogOpening so verdict-then-credits still passes. Lesson: any native confirm() in the Accuse path needs the keyboard harness to handle JS dialogs or the CDP session hangs.
+Receipts (seal-by 2026-11-06T00:05:00Z), 4 chat, first..last: 01M6NSR1K7M57JSP37EXD53DK1 (152) .. 01M6NSTCVH7E9GQMJFPQF6WQCD (live PT); build 01M6NSR1K7M57JSP37EXD53DK1, 01M6NSS5VC8KG3QM5K7ADTWNSG; live 01M6NSTB23KY07RM05FSAY3DK1, 01M6NSTCVH7E9GQMJFPQF6WQCD. All ids in qa/key-usage-log.json (purpose sprint11-*).
+
+### FullCup observations, sprint 11 (evidence qa/s11-probes/)
+- Seal check (signed out, curl): s8 01M6HXSZB17G8ZQ2FSC0WT1A9W Genuine receipt, $0.000476, one of 15 in the signed root of 2026-11-04, Sealed at 2026-11-05 00:05:23 UTC. s9 01M6K79REJ3CPFMAKP9PPEN9EZ Genuine receipt, $0.000311, same seal. Pages saved as seal-*.html / .snip.txt. s10 seals still wait until 2026-11-06 00:05Z (OK).
+- Reproduced: no per-call cost (4 of 4 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (4 of 4).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers.
+- Reproduced: mixed error shapes, 404 /v1/receipts/{id} nested unsupported_endpoint, 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
+- Reproduced: enable_thinking=false honoured (2 of 2), cached_tokens 0 (4 of 4).
+- Not seen: x-ratelimit-reset in the past (remaining stayed high within the minute).
+- No new FullCup anomaly.

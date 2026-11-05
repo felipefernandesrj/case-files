@@ -253,7 +253,11 @@ function renderAccuseButtons(){
   caseData.suspects.forEach(s=>{
     const btn = document.createElement('button');
     btn.textContent = (lang==='pt'?'Acusar ':'Accuse ') + s.name;
-    btn.addEventListener('click',()=>accuse(s.id));
+    btn.addEventListener('click',()=>{
+      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+        accuse(s.id);
+      }
+    });
     container.appendChild(btn);
   });
 }

@@ -12,7 +12,7 @@ A priceless Stradivarius vanished from the instrument room of the Aurora Music A
 2. Choose a suspect to talk to.
 3. Type a question and press Enter or the Ask button.
 4. Switch between suspects to compare their stories.
-5. When you are ready, type your name (or "anon") and press the button with the suspect's name in the "Accuse" section. You only get one accusation per game.
+5. When you are ready, type your name (or "anon") and press the button with the suspect's name in the "Accuse" section. The game asks you to confirm; you only get one accusation per game.
 
 ### Scoring
 A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
@@ -46,7 +46,7 @@ Um Stradivarius de valor inestimável desapareceu da sala de instrumentos da Aca
 2. Escolha um suspeito para conversar.
 3. Digite uma pergunta e aperte Enter ou o botão Perguntar.
 4. Troque de suspeito para comparar as histórias.
-5. Quando estiver pronto, digite seu nome (ou "anon") e aperte o botão com o nome do suspeito na seção "Acusar". Você tem apenas uma acusação por jogo.
+5. Quando estiver pronto, digite seu nome (ou "anon") e aperte o botão com o nome do suspeito na seção "Acusar". O jogo pede confirmação; você tem apenas uma acusação por jogo.
 
 ### Pontuação
 Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".

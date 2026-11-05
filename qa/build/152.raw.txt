@@ -1,0 +1,61 @@
+<<<REPLACE public/best.js>>>
+    kept: 'Nothing was reset.',
+    newBest: 'New personal best!'
+=====
+    kept: 'Nothing was reset.',
+    newBest: 'New personal best!',
+    confirmAccuse: 'Accuse {name}? You only get one accusation.'
+<<<END>>>
+
+<<<REPLACE public/best.js>>>
+    kept: 'Nada foi apagado.',
+    newBest: 'Novo recorde pessoal!'
+=====
+    kept: 'Nada foi apagado.',
+    newBest: 'Novo recorde pessoal!',
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.'
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    btn.addEventListener('click',()=>accuse(s.id));
+=====
+    btn.addEventListener('click',()=>{
+      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+        accuse(s.id);
+      }
+    });
+<<<END>>>
+
+<<<REPLACE test/keyboard.mjs>>>
+  if (msg.id && pending.has(msg.id)) { pending.get(msg.id)(msg); pending.delete(msg.id); }
+=====
+  if (msg.id && pending.has(msg.id)) { pending.get(msg.id)(msg); pending.delete(msg.id); }
+  if (msg.method === 'Page.javascriptDialogOpening') {
+    send('Page.handleJavaScriptDialog', { accept: true });
+  }
+<<<END>>>
+
+<<<REPLACE package.json>>>
+  "version": "0.2.9",
+=====
+  "version": "0.3.0",
+<<<END>>>
+
+<<<REPLACE test/scoreboard.mjs>>>
+  const passed = results.filter(r => r.ok).length;
+=====
+  // 14. accuse requires confirmation before POST /api/accuse
+  results.push(await test("accuse requires confirmation", async () => {
+    assert(LABELS.en.confirmAccuse === 'Accuse {name}? You only get one accusation.', "en confirmAccuse");
+    assert(LABELS.pt.confirmAccuse === 'Acusar {name}? Você só tem uma acusação.', "pt confirmAccuse");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const src = html.slice(html.indexOf('function renderAccuseButtons'), html.indexOf('async function loadScores'));
+    assert(src.includes('confirm('), "renderAccuseButtons must call confirm");
+    assert(src.includes('LABELS[lang].confirmAccuse'), "uses confirmAccuse label");
+    assert(src.includes(".replace('{name}', s.name)"), "substitutes the suspect name");
+    assert(!/addEventListener\('click',\s*\(\)\s*=>\s*accuse\(s\.id\)\)/.test(src), "must not call accuse directly on click");
+    assert(/confirm\(LABELS\[lang\]\.confirmAccuse/.test(src) && /accuse\(s\.id\)/.test(src), "accuse runs only after confirm");
+  }));
+
+  const passed = results.filter(r => r.ok).length;
+<<<END>>>

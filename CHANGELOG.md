@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (M1 sprint 11, accuse confirmation)
+- Accuse buttons ask for confirmation before the irreversible accusation (native confirm, EN/PT).
+- Cancel keeps the game open; Confirm is the only path that calls /api/accuse.
+- Added check that the Accuse click path confirms first.
+- Player guide notes the one-accusation confirm step.
+
 ## 0.2.9 (M1 sprint 10, tidy-up)
 - Scoreboard code indentation fixed (no behaviour change).
 - package.json version now follows this changelog (was 1.0.0).

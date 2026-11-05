@@ -233,6 +233,19 @@ async function run() {
     assert(pkg.version === top[1], `package.json ${pkg.version} vs CHANGELOG ${top[1]}`);
   }));
 
+  // 14. accuse requires confirmation before POST /api/accuse
+  results.push(await test("accuse requires confirmation", async () => {
+    assert(LABELS.en.confirmAccuse === 'Accuse {name}? You only get one accusation.', "en confirmAccuse");
+    assert(LABELS.pt.confirmAccuse === 'Acusar {name}? Você só tem uma acusação.', "pt confirmAccuse");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const src = html.slice(html.indexOf('function renderAccuseButtons'), html.indexOf('async function loadScores'));
+    assert(src.includes('confirm('), "renderAccuseButtons must call confirm");
+    assert(src.includes('LABELS[lang].confirmAccuse'), "uses confirmAccuse label");
+    assert(src.includes(".replace('{name}', s.name)"), "substitutes the suspect name");
+    assert(!/addEventListener\('click',\s*\(\)\s*=>\s*accuse\(s\.id\)\)/.test(src), "must not call accuse directly on click");
+    assert(/confirm\(LABELS\[lang\]\.confirmAccuse/.test(src) && /accuse\(s\.id\)/.test(src), "accuse runs only after confirm");
+  }));
+
   const passed = results.filter(r => r.ok).length;
   const failed = results.length - passed;
   console.log(`${passed} passed, ${failed} failed`);

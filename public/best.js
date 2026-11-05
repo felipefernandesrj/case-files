@@ -112,7 +112,8 @@ export const LABELS = {
     confirm: 'Reset your best scores for both languages? This cannot be undone.',
     done: 'Your best scores were reset.',
     kept: 'Nothing was reset.',
-    newBest: 'New personal best!'
+    newBest: 'New personal best!',
+    confirmAccuse: 'Accuse {name}? You only get one accusation.'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -120,6 +121,7 @@ export const LABELS = {
     confirm: 'Apagar seus recordes nos dois idiomas? Isso não pode ser desfeito.',
     done: 'Seus recordes foram apagados.',
     kept: 'Nada foi apagado.',
-    newBest: 'Novo recorde pessoal!'
+    newBest: 'Novo recorde pessoal!',
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.'
   }
 };

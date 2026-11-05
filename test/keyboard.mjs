@@ -77,6 +77,9 @@ await new Promise(r => ws.addEventListener('open', r));
 ws.addEventListener('message', e => {
   const msg = JSON.parse(e.data);
   if (msg.id && pending.has(msg.id)) { pending.get(msg.id)(msg); pending.delete(msg.id); }
+  if (msg.method === 'Page.javascriptDialogOpening') {
+    send('Page.handleJavaScriptDialog', { accept: true });
+  }
 });
 
 async function send(method, params = {}) {

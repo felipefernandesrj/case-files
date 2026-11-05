@@ -58,6 +58,7 @@
 - Stored in browser's localStorage under `casefiles:best:v1`.
 - Better result = higher score, or same score with fewer questions (wrong accusations never count).
 - Reset requires user confirmation; GET /best.js serves the storage module.
+- Accuse: the page shows a native confirm (EN "Accuse {name}? You only get one accusation." / PT "Acusar {name}? Você só tem uma acusação.") before POST /api/accuse; Cancel does nothing.
 - Best lines use the UI language wording (bestText(lang, entry, ui)) and a new best is announced in the role=status line.
 
 ## Web page: closing screen
@@ -100,4 +101,4 @@ This executes:
 5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
 6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 90 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 13, keyboard: 13).
+Total checks: 91 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 14, keyboard: 13).
