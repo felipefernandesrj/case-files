@@ -155,7 +155,7 @@ async function runStep(name, task) {
 
 // 1. Tab order and outline
 await runStep('tab-order', async () => {
-  const expectedOrder = ['len', 'lpt', ...suspectIds, 'q', 'ask-btn', 'player'];
+  const expectedOrder = ['len', 'lpt', 'restart-btn', ...suspectIds, 'q', 'ask-btn', 'player'];
   for (let i = 0; i < 3; i++) expectedOrder.push(`accuse-${i}`);
   for (let i = 0; i < expectedOrder.length; i++) {
     await pressTab();

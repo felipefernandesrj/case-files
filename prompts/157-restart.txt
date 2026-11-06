@@ -1,0 +1,120 @@
+# Task (sprint 13): Start over / Nova partida control
+Add a bilingual restart control so the player can begin a fresh session without reloading. Keep every other behaviour.
+
+Output ONLY these literal edit blocks, in this order. Format each block: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, public/best.js. OLD is exactly these 2 lines:
+    confirmAccuse: 'Accuse {name}? You only get one accusation.',
+    thinking: '…thinking'
+NEW is exactly these 4 lines:
+    confirmAccuse: 'Accuse {name}? You only get one accusation.',
+    thinking: '…thinking',
+    startOver: 'Start over',
+    confirmRestart: 'Start a new game? Your current questions will be lost.'
+
+Block 2, public/best.js. OLD is exactly these 2 lines:
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
+    thinking: '…pensando'
+NEW is exactly these 4 lines:
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
+    thinking: '…pensando',
+    startOver: 'Nova partida',
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.'
+
+Block 3, public/index.html. OLD is exactly these 4 lines:
+  <div>
+    <button id="len" aria-pressed="true">EN</button>
+    <button id="lpt" aria-pressed="false">PT</button>
+  </div>
+NEW is exactly these 5 lines:
+  <div>
+    <button id="len" aria-pressed="true">EN</button>
+    <button id="lpt" aria-pressed="false">PT</button>
+    <button id="restart-btn" type="button">Start over</button>
+  </div>
+
+Block 4, public/index.html. OLD is exactly this 1 line:
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+NEW is exactly these 2 lines:
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+  document.getElementById('restart-btn').textContent = LABELS[newLang].startOver;
+
+Block 5, public/index.html. OLD is exactly these 7 lines:
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  askBtn.disabled = true;
+  qInput.disabled = true;
+  accuseBtns.forEach(b => { b.disabled = true; });
+  askForm.setAttribute('aria-busy', 'true');
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+NEW is exactly these 9 lines:
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  const restartBtn = document.getElementById('restart-btn');
+  askBtn.disabled = true;
+  qInput.disabled = true;
+  accuseBtns.forEach(b => { b.disabled = true; });
+  if (restartBtn) restartBtn.disabled = true;
+  askForm.setAttribute('aria-busy', 'true');
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+
+Block 6, public/index.html. OLD is exactly these 6 lines:
+    askBtn.disabled = false;
+    qInput.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+    askForm.removeAttribute('aria-busy');
+    qInput.value = '';
+    qInput.focus();
+NEW is exactly these 7 lines:
+    askBtn.disabled = false;
+    qInput.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+    if (restartBtn) restartBtn.disabled = false;
+    askForm.removeAttribute('aria-busy');
+    qInput.value = '';
+    qInput.focus();
+
+Block 7, public/index.html. OLD is exactly these 2 lines:
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+NEW is exactly these 40 lines:
+async function restartGame(){
+  if (!confirm(LABELS[lang].confirmRestart)) return;
+  const sessRes = await fetch(API + '/session', {method:'POST'});
+  const sessData = await sessRes.json();
+  sessionId = sessData.sessionId;
+  for (const k of Object.keys(histories)) delete histories[k];
+  questionsUsed = 0;
+  selectedSuspect = null;
+  lastAccuseResult = null;
+  document.getElementById('log').innerHTML = '';
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = true;
+  verdict.innerHTML = '';
+  document.getElementById('credits').hidden = true;
+  document.getElementById('scores-section').hidden = true;
+  document.getElementById('err').hidden = true;
+  document.getElementById('ask-btn').disabled = false;
+  document.getElementById('q').disabled = false;
+  document.getElementById('q').value = '';
+  document.getElementById('ask-form').removeAttribute('aria-busy');
+  document.querySelectorAll('#accuse-buttons button').forEach(b => { b.disabled = false; });
+  document.getElementById('restart-btn').disabled = false;
+  document.getElementById('best-status').textContent = '';
+  renderQuestions();
+  renderBest();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  const first = document.querySelector('#suspect-buttons button');
+  if (first) first.focus();
+  else document.getElementById('q').focus();
+}
+document.getElementById('restart-btn').addEventListener('click', restartGame);
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+
+Block 8, package.json. OLD is exactly this 1 line:
+  "version": "0.3.1",
+NEW is exactly this 1 line:
+  "version": "0.3.2",

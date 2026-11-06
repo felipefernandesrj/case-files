@@ -1,0 +1,123 @@
+<<<REPLACE public/best.js>>>
+    confirmAccuse: 'Accuse {name}? You only get one accusation.',
+    thinking: '…thinking'
+=====
+    confirmAccuse: 'Accuse {name}? You only get one accusation.',
+    thinking: '…thinking',
+    startOver: 'Start over',
+    confirmRestart: 'Start a new game? Your current questions will be lost.'
+<<<END>>>
+
+<<<REPLACE public/best.js>>>
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
+    thinking: '…pensando'
+=====
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
+    thinking: '…pensando',
+    startOver: 'Nova partida',
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.'
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  <div>
+    <button id="len" aria-pressed="true">EN</button>
+    <button id="lpt" aria-pressed="false">PT</button>
+  </div>
+=====
+  <div>
+    <button id="len" aria-pressed="true">EN</button>
+    <button id="lpt" aria-pressed="false">PT</button>
+    <button id="restart-btn" type="button">Start over</button>
+  </div>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+=====
+  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+  document.getElementById('restart-btn').textContent = LABELS[newLang].startOver;
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  askBtn.disabled = true;
+  qInput.disabled = true;
+  accuseBtns.forEach(b => { b.disabled = true; });
+  askForm.setAttribute('aria-busy', 'true');
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+=====
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  const restartBtn = document.getElementById('restart-btn');
+  askBtn.disabled = true;
+  qInput.disabled = true;
+  accuseBtns.forEach(b => { b.disabled = true; });
+  if (restartBtn) restartBtn.disabled = true;
+  askForm.setAttribute('aria-busy', 'true');
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    askBtn.disabled = false;
+    qInput.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+    askForm.removeAttribute('aria-busy');
+    qInput.value = '';
+    qInput.focus();
+=====
+    askBtn.disabled = false;
+    qInput.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+    if (restartBtn) restartBtn.disabled = false;
+    askForm.removeAttribute('aria-busy');
+    qInput.value = '';
+    qInput.focus();
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+=====
+async function restartGame(){
+  if (!confirm(LABELS[lang].confirmRestart)) return;
+  const sessRes = await fetch(API + '/session', {method:'POST'});
+  const sessData = await sessRes.json();
+  sessionId = sessData.sessionId;
+  for (const k of Object.keys(histories)) delete histories[k];
+  questionsUsed = 0;
+  selectedSuspect = null;
+  lastAccuseResult = null;
+  document.getElementById('log').innerHTML = '';
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = true;
+  verdict.innerHTML = '';
+  document.getElementById('credits').hidden = true;
+  document.getElementById('scores-section').hidden = true;
+  document.getElementById('err').hidden = true;
+  document.getElementById('ask-btn').disabled = false;
+  document.getElementById('q').disabled = false;
+  document.getElementById('q').value = '';
+  document.getElementById('ask-form').removeAttribute('aria-busy');
+  document.querySelectorAll('#accuse-buttons button').forEach(b => { b.disabled = false; });
+  document.getElementById('restart-btn').disabled = false;
+  document.getElementById('best-status').textContent = '';
+  renderQuestions();
+  renderBest();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  const first = document.querySelector('#suspect-buttons button');
+  if (first) first.focus();
+  else document.getElementById('q').focus();
+}
+document.getElementById('restart-btn').addEventListener('click', restartGame);
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+<<<END>>>
+
+<<<REPLACE package.json>>>
+  "version": "0.3.1",
+=====
+  "version": "0.3.2",
+<<<END>>>

@@ -8,7 +8,7 @@
 A priceless Stradivarius vanished from the instrument room of the Aurora Music Academy during a rehearsal. Three suspects are waiting for you: Lorenzo Moretti (Conductor), Maya Santos (Violinist), and Carlos Mendes (Janitor). Each suspect is played live by an AI. They answer in character, keep their story straight, and may hide things; answers are short. They remember what you have already asked.
 
 ### How to play
-1. Pick EN or PT at the top of the screen.
+1. Pick EN or PT at the top of the screen. Use "Start over" to begin a new game without reloading (you will be asked to confirm; your personal best is kept).
 2. Choose a suspect to talk to.
 3. Type a question and press Enter or the Ask button. While the suspect answers, the question box and Accuse buttons stay locked.
 4. Switch between suspects to compare their stories.
@@ -42,7 +42,7 @@ After the verdict, you will see a list of our wonderful backers. Every question 
 Um Stradivarius de valor inestimável desapareceu da sala de instrumentos da Academia de Música Aurora durante um ensaio. Três suspeitos esperam por você: Lorenzo Moretti (Maestro), Maya Santos (Violinista) e Carlos Mendes (Zelador). Cada suspeito é interpretado por uma IA. Eles respondem como personagens, mantêm a história coerente e podem esconder coisas; as respostas são curtas. Eles lembram do que você já perguntou.
 
 ### Como jogar
-1. Escolha EN ou PT no topo da tela.
+1. Escolha EN ou PT no topo da tela. Use "Nova partida" para começar de novo sem recarregar (o jogo pede confirmação; seu recorde pessoal é mantido).
 2. Escolha um suspeito para conversar.
 3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
 4. Troque de suspeito para comparar as histórias.

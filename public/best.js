@@ -114,7 +114,9 @@ export const LABELS = {
     kept: 'Nothing was reset.',
     newBest: 'New personal best!',
     confirmAccuse: 'Accuse {name}? You only get one accusation.',
-    thinking: '…thinking'
+    thinking: '…thinking',
+    startOver: 'Start over',
+    confirmRestart: 'Start a new game? Your current questions will be lost.'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -124,6 +126,8 @@ export const LABELS = {
     kept: 'Nada foi apagado.',
     newBest: 'Novo recorde pessoal!',
     confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
-    thinking: '…pensando'
+    thinking: '…pensando',
+    startOver: 'Nova partida',
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.'
   }
 };

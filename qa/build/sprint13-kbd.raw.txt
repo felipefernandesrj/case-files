@@ -1,0 +1,5 @@
+<<<REPLACE test/keyboard.mjs>>>
+  const expectedOrder = ['len', 'lpt', ...suspectIds, 'q', 'ask-btn', 'player'];
+=====
+  const expectedOrder = ['len', 'lpt', 'restart-btn', ...suspectIds, 'q', 'ask-btn', 'player'];
+<<<END>>>

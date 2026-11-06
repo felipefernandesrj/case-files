@@ -1,0 +1,100 @@
+# Task (sprint 13): add test 16 for restartGame Start over / Nova partida
+The product restart changes are already on disk. Add only the automated test. Output ONLY one literal edit block. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, test/scoreboard.mjs. OLD is exactly this 1 line:
+  const passed = results.filter(r => r.ok).length;
+NEW: a new test 16, then an empty line, then that same original line. Use the file's own test(name, fn) and assert(cond, msg); fs and LABELS are already imported; 2-space indentation, 4 spaces inside the test body. Exact NEW content:
+
+  // 16. restartGame confirm cancel vs new session + clear
+  results.push(await test("restartGame start over", async () => {
+    assert(LABELS.en.startOver === 'Start over', "en startOver");
+    assert(LABELS.pt.startOver === 'Nova partida', "pt startOver");
+    assert(LABELS.en.confirmRestart.includes('Start a new game'), "en confirmRestart");
+    assert(LABELS.pt.confirmRestart.includes('novo jogo'), "pt confirmRestart");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    assert(html.includes('id="restart-btn"'), "has #restart-btn");
+    assert(html.includes("LABELS[newLang].startOver"), "setLang sets startOver");
+    assert(html.includes("if (restartBtn) restartBtn.disabled = true"), "busy disables restart");
+    assert(html.includes("if (restartBtn) restartBtn.disabled = false"), "busy re-enables restart");
+    const src = html.slice(html.indexOf('async function restartGame'), html.indexOf("document.getElementById('restart-btn').addEventListener"));
+    assert(src.includes("confirm(LABELS[lang].confirmRestart)"), "confirms restart");
+    assert(src.includes("API + '/session'"), "posts new session");
+    assert(src.includes("Object.keys(histories)"), "clears histories");
+    assert(src.includes("questionsUsed = 0"), "resets questionsUsed");
+    assert(src.includes("selectedSuspect = null"), "clears selectedSuspect");
+    assert(src.includes("lastAccuseResult = null"), "clears lastAccuseResult");
+    assert(src.includes("verdict.hidden = true"), "hides verdict");
+    assert(src.includes("renderBest()"), "refreshes best display");
+    function el(extras = {}) {
+      return {
+        children: [], textContent: '', value: '', disabled: false, hidden: false, innerHTML: '', attrs: {}, focused: false,
+        appendChild(c) { this.children.push(c); },
+        setAttribute(k, v) { this.attrs[k] = v; },
+        removeAttribute(k) { delete this.attrs[k]; },
+        focus() { this.focused = true; },
+        ...extras
+      };
+    }
+    const log = el({ innerHTML: 'Q' });
+    const verdict = el({ hidden: false, innerHTML: 'v' });
+    const credits = el({ hidden: false });
+    const scores = el({ hidden: false });
+    const err = el({ hidden: false });
+    const askBtn = el({ disabled: true });
+    const q = el({ disabled: true, value: 'old' });
+    const askForm = el({ attrs: { 'aria-busy': 'true' } });
+    const restartBtn = el({ disabled: true });
+    const bestStatus = el({ textContent: 'x' });
+    const accuseA = el({ disabled: true });
+    const firstSuspect = el();
+    const fakeDoc = {
+      getElementById: id => ({ log, verdict, credits, 'scores-section': scores, err, 'ask-btn': askBtn, q, 'ask-form': askForm, 'restart-btn': restartBtn, 'best-status': bestStatus }[id]),
+      querySelectorAll: sel => sel === '#accuse-buttons button' ? [accuseA] : [],
+      querySelector: sel => sel === '#suspect-buttons button' ? firstSuspect : null
+    };
+    const histories = { maya: [{ q: 'a', a: 'b' }] };
+    let sessionId = 'old-sess';
+    let questionsUsed = 3;
+    let selectedSuspect = 'maya';
+    let lastAccuseResult = { score: 1 };
+    const renders = { q: 0, best: 0, case: 0, accuse: 0, conv: 0 };
+    let fetchCalls = [];
+    let confirmRet = false;
+    const fakeConfirm = () => confirmRet;
+    const fakeFetch = async (url, opts) => { fetchCalls.push({ url, opts }); return { json: async () => ({ sessionId: 'new-sess' }) }; };
+    const makeRestart = () => new Function(
+      'document', 'fetch', 'confirm', 'API', 'LABELS', 'lang', 'histories',
+      'renderQuestions', 'renderBest', 'renderCase', 'renderAccuseButtons', 'renderConversation',
+      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 };\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
+    )(
+      fakeDoc, fakeFetch, fakeConfirm, '/api', LABELS, 'en', histories,
+      () => { renders.q++; }, () => { renders.best++; }, () => { renders.case++; }, () => { renders.accuse++; }, () => { renders.conv++; }
+    );
+    confirmRet = false;
+    fetchCalls = [];
+    const cancelled = makeRestart();
+    await cancelled.restartGame();
+    assert(fetchCalls.length === 0, "cancel does not fetch");
+    assert(cancelled.sessionId === 'old-sess', "cancel keeps session");
+    assert(Object.keys(histories).length === 1, "cancel keeps histories");
+    assert(cancelled.questionsUsed === 3, "cancel keeps questionsUsed");
+    confirmRet = true;
+    fetchCalls = [];
+    const ok = makeRestart();
+    await ok.restartGame();
+    assert(fetchCalls.length === 1 && fetchCalls[0].url === '/api/session' && fetchCalls[0].opts.method === 'POST', "confirm posts session");
+    assert(ok.sessionId === 'new-sess', "assigns new sessionId");
+    assert(Object.keys(histories).length === 0, "clears histories");
+    assert(ok.questionsUsed === 0, "resets questionsUsed");
+    assert(ok.selectedSuspect === null, "clears selectedSuspect");
+    assert(ok.lastAccuseResult === null, "clears lastAccuseResult");
+    assert(log.innerHTML === '' && verdict.hidden === true && verdict.innerHTML === '', "clears log and verdict");
+    assert(credits.hidden === true && scores.hidden === true && err.hidden === true, "hides closed UI");
+    assert(askBtn.disabled === false && q.disabled === false && q.value === '' && accuseA.disabled === false && restartBtn.disabled === false, "re-enables controls");
+    assert(askForm.attrs['aria-busy'] === undefined, "clears aria-busy");
+    assert(bestStatus.textContent === '', "clears best-status");
+    assert(renders.q === 1 && renders.best === 1 && renders.case === 1 && renders.accuse === 1 && renders.conv === 1, "rerenders");
+    assert(firstSuspect.focused === true, "focuses first suspect");
+  }));
+
+  const passed = results.filter(r => r.ok).length;

@@ -330,3 +330,31 @@ Receipts (seal-by 2026-11-07T00:05:00Z), 5 chat, first..last: 01M6Q345C32V3WYFWK
 - NEW: 404 GET /v1/receipts/{id} error shape flipped from nested OpenAI-style {error:{message,type,param,code:"unsupported_endpoint"}} (s11) to flat {error:"unsupported_endpoint", message, supported, docs}. Message now lists POST /v1/images/generations. Evidence receipt.json.
 - Mixed error shapes remain (403 flat string error vs older nested 404); the 404 side moved toward the flat style.
 - Not seen: x-ratelimit-reset in the past (remaining stayed high within the minute).
+
+## M1 sprint 13: Start over / Nova partida (v0.3.2), 2026-11-06 12:09-12:12 UTC (06/11 09:09-09:12 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 800-3500, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 157 | LABELS startOver/confirmRestart EN+PT, #restart-btn, setLang label, ask busy locks restart, restartGame (confirm + POST /session + clear), package 0.3.2 | 200 | 28.6 s | 1539 / 1257 | 48.27 | public/best.js, public/index.html, package.json | accepted 8/8 |
+| 158 | test 16 restartGame cancel vs confirm (stubbed fetch fake DOM) | 200 | 40.5 s | 1990 / 1742 | 65.60 | test/scoreboard.mjs | accepted |
+| 159 | CHANGELOG 0.3.2, README v0.3.2 / 93 checks + Start over phrase, SPEC restart + totals, HOW_TO_PLAY EN+PT | 200 | 18.8 s | 1071 / 838 | 32.59 | 4 files (8 edits) | accepted 8/8 |
+| 160 | keyboard tab-order includes restart-btn after lpt | 200 | 3.2 s | 276 / 80 | 4.69 | test/keyboard.mjs | rework (header placement shifted tab order), accepted |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 2.6 / 1.4 s | 921 / 105 | 30.72 | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.05-0.50 s | 0 | 0 | - | QA probe |
+
+Totals: 9 requests (4 build + 2 live + 3 probes), 5 797 in / 4 022 out tokens, 181.9 neurons, about US$ 0.0020 at $0.011/1k neurons. Build only: 4 calls, 4 876 / 3 917 tokens, 151.2 neurons. Wasted 0; rework 1 (160) = 4.7 neurons (3% of build). 0 API failures, slowest 40.5 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s13.mjs, tools/probe-s13.mjs (sed from s12).
+npm test: 93/93 (was 92). Mutation: test 16 fails without LABELS.startOver / restartGame.
+Verdict: worth it. Native confirm matches accuse + reset-best. Lesson: a new header control must update the CDP tab-order list in the same sprint (or place the control after #ask-btn so the old list still matches).
+Receipts (seal-by 2026-11-07T00:05:00Z), 6 chat, first..last: 01M6RC6FD4G7PHA1CC7H3R1JZZ (157) .. 01M6RCC6S2JV00FCMF7S7JRJRH (live PT); build 01M6RC6FD4G7PHA1CC7H3R1JZZ, 01M6RC8ACM789TQS43F0CD81F7, 01M6RC9Q5T9ANDDA0MMVRSK00R, 01M6RCBQF6ECDN49JWWB7QNX2G; live 01M6RCC5B6NB688T6ZX0P73ZVY, 01M6RCC6S2JV00FCMF7S7JRJRH. All ids in qa/key-usage-log.json (purpose sprint13-*).
+
+### FullCup observations, sprint 13 (evidence qa/s13-probes/)
+- Seal check (signed out, curl qa.fullcup.ai): s12 01M6Q345C32V3WYFWK20NBKCFA still "Recorded, waiting for the daily seal" / Will be sealed on 2026-11-07 00:05 UTC (expected; today is 2026-11-06). Snip in seal-*.snip.txt.
+- Reproduced: no per-call cost (6 of 6 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (6 of 6).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers; entries still include capabilities {type, endpoint, vision}.
+- Reproduced: flat 404 GET /v1/receipts/{id} {error:"unsupported_endpoint", message, supported, docs} listing POST /v1/images/generations.
+- Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
+- Reproduced: enable_thinking=false honoured (4 of 4), cached_tokens 0 (6 of 6).
+- No new FullCup anomaly vs sprint 12.

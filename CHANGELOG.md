@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 (M1 sprint 13, Start over / Nova partida)
+- Start over / Nova partida button begins a fresh session without reloading (native confirm EN/PT).
+- Cancel keeps the current questions; Confirm posts a new session, clears histories and closed UI, and keeps personal best.
+- While Ask is in flight, the restart button is disabled with the same busy lock as Accuse.
+- Added check that restart cancel leaves state and confirm creates a new session.
+
 ## 0.3.1 (M1 sprint 12, ask busy state)
 - While a question is in flight, the question box and Accuse buttons are disabled and #ask-form sets aria-busy.
 - Thinking line uses LABELS (EN/PT); on success or error controls reopen, aria-busy clears, leftover thinking is removed, and focus returns to #q.

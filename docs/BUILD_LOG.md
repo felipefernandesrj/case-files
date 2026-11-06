@@ -175,3 +175,4 @@ Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, thinking off, max
 - npm test 89/89 (was 88). Test 12 fails on the sprint 8 index.html (mutation check).
 - Live smoke 12:08 UTC (tools/smoke-s9.mjs): EN Maya 200 5.9 s 44 words (scratch on the lock), PT Carlos 200 3.9 s 35 words (named only Lorenzo and Maya), PT wrong accusation score 0, no best saved. qa/live-smoke-sprint9.json.
 - Details, receipts and FullCup observations: qa/rework.md (sprint 9).
+- Sprint 13 (v0.3.2): Start over / Nova partida (#restart-btn, native confirm EN/PT, POST /api/session, clears play state, busy-locks with Ask). Calls 157-160 via gemma-4-26b thinking off. npm test 93/93. Live smoke EN+PT OK. Details: qa/rework.md (sprint 13).

@@ -1,0 +1,54 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.3.1 (M1 sprint 12, ask busy state)
+=====
+## 0.3.2 (M1 sprint 13, Start over / Nova partida)
+- Start over / Nova partida button begins a fresh session without reloading (native confirm EN/PT).
+- Cancel keeps the current questions; Confirm posts a new session, clears histories and closed UI, and keeps personal best.
+- While Ask is in flight, the restart button is disabled with the same busy lock as Accuse.
+- Added check that restart cancel leaves state and confirm creates a new session.
+
+## 0.3.1 (M1 sprint 12, ask busy state)
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.3.1):
+=====
+M1 status (v0.3.2):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+92 automated checks.
+=====
+93 automated checks.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+ask busy state (aria-busy, locked #q and Accuse while waiting)
+=====
+ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload)
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Ask busy: while POST /api/ask is in flight, #q and Accuse buttons are disabled, #ask-form has aria-busy=true, and the thinking line uses LABELS.thinking (EN "…thinking" / PT "…pensando"); on settle, controls re-enable, aria-busy clears, leftover thinking is removed, and #q is focused.
+=====
+- Ask busy: while POST /api/ask is in flight, #q and Accuse buttons are disabled, #ask-form has aria-busy=true, and the thinking line uses LABELS.thinking (EN "…thinking" / PT "…pensando"); on settle, controls re-enable, aria-busy clears, leftover thinking is removed, and #q is focused. The Start over button is disabled under the same busy lock.
+- Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 92 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 15, keyboard: 13).
+=====
+Total checks: 93 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 16, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+1. Pick EN or PT at the top of the screen.
+=====
+1. Pick EN or PT at the top of the screen. Use "Start over" to begin a new game without reloading (you will be asked to confirm; your personal best is kept).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+1. Escolha EN ou PT no topo da tela.
+=====
+1. Escolha EN ou PT no topo da tela. Use "Nova partida" para começar de novo sem recarregar (o jogo pede confirmação; seu recorde pessoal é mantido).
+<<<END>>>

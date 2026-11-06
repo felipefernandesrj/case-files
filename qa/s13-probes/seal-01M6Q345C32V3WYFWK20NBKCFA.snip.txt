@@ -1,0 +1,15 @@
+Recorded, waiting for the daily seal · 01M6Q345C32V · FullCup.ai
+Receipt 01M6Q345C32V
+Request receipt
+Recorded, waiting for the daily seal
+Will be sealed on 2026-11-07 00:05 UTC.
+After the seal, this page can check the call against the signed root of its UTC day.
+Unsigned until the seal
+Receipt id
+01M6Q345C32V3WYFWK20NBKCFA
+Exact cost
+A receipt never contains the prompt, the completion, or any user content. Only consumption metadata.
+Check it after the seal
+Raw JSON for this receipt
+wai_01M6Q345C32V3WYFWK20NBKCFA
+Verify receipt

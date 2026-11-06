@@ -59,7 +59,8 @@
 - Better result = higher score, or same score with fewer questions (wrong accusations never count).
 - Reset requires user confirmation; GET /best.js serves the storage module.
 - Accuse: the page shows a native confirm (EN "Accuse {name}? You only get one accusation." / PT "Acusar {name}? Você só tem uma acusação.") before POST /api/accuse; Cancel does nothing.
-- Ask busy: while POST /api/ask is in flight, #q and Accuse buttons are disabled, #ask-form has aria-busy=true, and the thinking line uses LABELS.thinking (EN "…thinking" / PT "…pensando"); on settle, controls re-enable, aria-busy clears, leftover thinking is removed, and #q is focused.
+- Ask busy: while POST /api/ask is in flight, #q and Accuse buttons are disabled, #ask-form has aria-busy=true, and the thinking line uses LABELS.thinking (EN "…thinking" / PT "…pensando"); on settle, controls re-enable, aria-busy clears, leftover thinking is removed, and #q is focused. The Start over button is disabled under the same busy lock.
+- Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
 - Best lines use the UI language wording (bestText(lang, entry, ui)) and a new best is announced in the role=status line.
 
 ## Web page: closing screen
@@ -102,4 +103,4 @@ This executes:
 5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
 6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 92 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 15, keyboard: 13).
+Total checks: 93 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 16, keyboard: 13).

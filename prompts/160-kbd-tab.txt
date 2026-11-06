@@ -1,0 +1,7 @@
+# Task (sprint 13 follow-up): tab-order includes #restart-btn
+The Start over button sits in the header after the language toggle. Update only the keyboard tab-order expectation. Output ONLY one literal edit block. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, test/keyboard.mjs. OLD is exactly this 1 line:
+  const expectedOrder = ['len', 'lpt', ...suspectIds, 'q', 'ask-btn', 'player'];
+NEW is exactly this 1 line:
+  const expectedOrder = ['len', 'lpt', 'restart-btn', ...suspectIds, 'q', 'ask-btn', 'player'];
