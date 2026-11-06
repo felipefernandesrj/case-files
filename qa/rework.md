@@ -301,3 +301,32 @@ Receipts (seal-by 2026-11-06T00:05:00Z), 4 chat, first..last: 01M6NSR1K7M57JSP37
 - Reproduced: enable_thinking=false honoured (2 of 2), cached_tokens 0 (4 of 4).
 - Not seen: x-ratelimit-reset in the past (remaining stayed high within the minute).
 - No new FullCup anomaly.
+
+## M1 sprint 12: ask busy-state polish (v0.3.1), 2026-11-06 00:12-00:14 UTC (05/11 21:12-21:14 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 1800-2500, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 154 | LABELS.thinking EN/PT + askQuestion busy (#q / Accuse disabled, aria-busy, finally restore + focus) + package 0.3.1 | 200 | 55.2 s | 3274 / 2500 | 97.95 | public/best.js, public/index.html, package.json | accepted product 4/4; truncated at max_tokens before test 15 finished (MAXTOK=2500 too low for the stubbed-fetch test) |
+| 155 | test 15 askQuestion busy state (static asserts + stubbed fetch fake DOM, success + error paths) | 200 | 32.0 s | 1870 / 1593 | 60.45 | test/scoreboard.mjs | rework (follow-up for truncated 154), accepted |
+| 156 | CHANGELOG 0.3.1, README v0.3.1 / 92 checks + busy phrase, SPEC ask busy + totals, HOW_TO_PLAY EN+PT lock note | 200 | 17.8 s | 949 / 716 | 28.15 | 4 files (8 edits) | accepted 8/8 |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 2.2 / 0.9 s | 921 / 103 | 30.57 | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.08-0.17 s | 0 | 0 | - | QA probe |
+
+Totals: 8 requests (3 build + 2 live + 3 probes), 7 014 in / 4 912 out tokens, 217.1 neurons, about US$ 0.0024 at $0.011/1k neurons. Build only: 3 calls, 6 093 / 4 809 tokens, 186.5 neurons. Wasted 0; rework 1 (155) = 60.4 neurons (32% of build; sprint 11: 0%). Cause: first prompt packed a long stubbed-fetch test after the product hunks and hit max_tokens. 0 API failures, slowest 55.2 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s12.mjs, tools/probe-s12.mjs (sed from s11).
+npm test: 92/92 (was 91). Mutation check: test 15 fails on the sprint 11 best.js/index.html ("en thinking", LABELS.thinking missing).
+Verdict: worth it. Busy state matches the accuse-confirm polish pattern. Lesson: keep long stubbed-fetch tests in their own key call; do not share a 2500-token budget with a full-function REPLACE.
+Receipts (seal-by 2026-11-07T00:05:00Z), 5 chat, first..last: 01M6Q345C32V3WYFWK20NBKCFA (154) .. 01M6Q38WF3GDWP50K3BPNFMD9X (live PT); build 01M6Q345C32V3WYFWK20NBKCFA, 01M6Q36F5EMDW5C317B116GVGH, 01M6Q37W7JKJE4W6QS4FH8HZ9G; live 01M6Q38TZ6YR18RCY5V55V8YEJ, 01M6Q38WF3GDWP50K3BPNFMD9X. All ids in qa/key-usage-log.json (purpose sprint12-*).
+
+### FullCup observations, sprint 12 (evidence qa/s12-probes/)
+- Seal check (signed out, curl qa.fullcup.ai): s10 01M6MGDR9RTM08XQYNZKB7N46B Genuine receipt, Exact cost $0.000174, one of 9 in the signed root of 2026-11-05, Sealed at 2026-11-06 00:05:27 UTC. s11 01M6NSR1K7M57JSP37EXD53DK1 Genuine receipt, Exact cost $0.000339, same seal. Snips in seal-*.snip.txt.
+- Reproduced: no per-call cost (5 of 5 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (5 of 5).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers.
+- Reproduced: enable_thinking=false honoured (3 of 3), cached_tokens 0 (5 of 5).
+- Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
+- NEW: GET /v1/models entries now include capabilities {type, endpoint, vision} (s11 was only id/object/owned_by). Evidence models.json.
+- NEW: 404 GET /v1/receipts/{id} error shape flipped from nested OpenAI-style {error:{message,type,param,code:"unsupported_endpoint"}} (s11) to flat {error:"unsupported_endpoint", message, supported, docs}. Message now lists POST /v1/images/generations. Evidence receipt.json.
+- Mixed error shapes remain (403 flat string error vs older nested 404); the 404 side moved toward the flat style.
+- Not seen: x-ratelimit-reset in the past (remaining stayed high within the minute).

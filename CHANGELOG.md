@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 (M1 sprint 12, ask busy state)
+- While a question is in flight, the question box and Accuse buttons are disabled and #ask-form sets aria-busy.
+- Thinking line uses LABELS (EN/PT); on success or error controls reopen, aria-busy clears, leftover thinking is removed, and focus returns to #q.
+- Added check that askQuestion disables controls, sets aria-busy, then restores focus.
+
 ## 0.3.0 (M1 sprint 11, accuse confirmation)
 - Accuse buttons ask for confirmation before the irreversible accusation (native confirm, EN/PT).
 - Cancel keeps the game open; Confirm is the only path that calls /api/accuse.

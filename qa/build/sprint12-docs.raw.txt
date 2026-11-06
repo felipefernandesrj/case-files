@@ -1,0 +1,53 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.3.0 (M1 sprint 11, accuse confirmation)
+=====
+## 0.3.1 (M1 sprint 12, ask busy state)
+- While a question is in flight, the question box and Accuse buttons are disabled and #ask-form sets aria-busy.
+- Thinking line uses LABELS (EN/PT); on success or error controls reopen, aria-busy clears, leftover thinking is removed, and focus returns to #q.
+- Added check that askQuestion disables controls, sets aria-busy, then restores focus.
+
+## 0.3.0 (M1 sprint 11, accuse confirmation)
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.3.0):
+=====
+M1 status (v0.3.1):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+91 automated checks.
+=====
+92 automated checks.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+accuse confirmation before the one allowed accusation
+=====
+accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting)
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Accuse: the page shows a native confirm (EN "Accuse {name}? You only get one accusation." / PT "Acusar {name}? Você só tem uma acusação.") before POST /api/accuse; Cancel does nothing.
+=====
+- Accuse: the page shows a native confirm (EN "Accuse {name}? You only get one accusation." / PT "Acusar {name}? Você só tem uma acusação.") before POST /api/accuse; Cancel does nothing.
+- Ask busy: while POST /api/ask is in flight, #q and Accuse buttons are disabled, #ask-form has aria-busy=true, and the thinking line uses LABELS.thinking (EN "…thinking" / PT "…pensando"); on settle, controls re-enable, aria-busy clears, leftover thinking is removed, and #q is focused.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 91 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 14, keyboard: 13).
+=====
+Total checks: 92 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 15, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+3. Type a question and press Enter or the Ask button.
+=====
+3. Type a question and press Enter or the Ask button. While the suspect answers, the question box and Accuse buttons stay locked.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar.
+=====
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
+<<<END>>>

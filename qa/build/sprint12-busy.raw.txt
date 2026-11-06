@@ -1,0 +1,193 @@
+<<<REPLACE public/best.js>>>
+    newBest: 'New personal best!',
+    confirmAccuse: 'Accuse {name}? You only get one accusation.'
+=====
+    newBest: 'New personal best!',
+    confirmAccuse: 'Accuse {name}? You only get one accusation.',
+    thinking: '…thinking'
+<<<END>>>
+
+<<<REPLACE public/best.js>>>
+    newBest: 'Novo recorde pessoal!',
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.'
+=====
+    newBest: 'Novo recorde pessoal!',
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
+    thinking: '…pensando'
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+async function askQuestion(e){
+  e.preventDefault();
+  if (!selectedSuspect) return;
+  const question = document.getElementById('q').value.trim();
+  if (!question) return;
+  document.getElementById('ask-btn').disabled = true;
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+  thinking.textContent = lang === 'pt' ? '…pensando' : '…thinking';
+  log.appendChild(thinking);
+  try{
+    const res = await fetch(API + '/ask', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId:selectedSuspect, question, lang})
+    });
+    const data = await res.json();
+    if (!res.ok) throw data;
+    const answer = data.answer;
+    questionsUsed = data.questions;
+    renderQuestions();
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+    histories[selectedSuspect].push({q:question,a:answer});
+    renderConversation();
+  }catch(err){
+    showError(err.message||'Error');
+  }finally{
+    document.getElementById('ask-btn').disabled = false;
+    document.getElementById('q').value = '';
+  }
+}
+=====
+async function askQuestion(e){
+  e.preventDefault();
+  if (!selectedSuspect) return;
+  const question = document.getElementById('q').value.trim();
+  if (!question) return;
+  const qInput = document.getElementById('q');
+  const askBtn = document.getElementById('ask-btn');
+  const askForm = document.getElementById('ask-form');
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  askBtn.disabled = true;
+  qInput.disabled = true;
+  accuseBtns.forEach(b => { b.disabled = true; });
+  askForm.setAttribute('aria-busy', 'true');
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+  thinking.textContent = LABELS[lang].thinking;
+  log.appendChild(thinking);
+  try{
+    const res = await fetch(API + '/ask', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId:selectedSuspect, question, lang})
+    });
+    const data = await res.json();
+    if (!res.ok) throw data;
+    const answer = data.answer;
+    questionsUsed = data.questions;
+    renderQuestions();
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+    histories[selectedSuspect].push({q:question,a:answer});
+    renderConversation();
+  }catch(err){
+    showError(err.message||'Error');
+  }finally{
+    if (thinking.parentNode) thinking.remove();
+    askBtn.disabled = false;
+    qInput.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+    askForm.removeAttribute('aria-busy');
+    qInput.value = '';
+    qInput.focus();
+  }
+}
+<<<END>>>
+
+<<<REPLACE package.json>>>
+  "version": "0.3.0",
+=====
+  "version": "0.3.1",
+<<<END>>>
+
+<<<REPLACE test/scoreboard.mjs>>>
+  const passed = results.filter(r => r.ok).length;
+=====
+  // 15. askQuestion busy state disables #q / accuse and sets aria-busy
+  results.push(await test("askQuestion busy state", async () => {
+    assert(LABELS.en.thinking === '…thinking', "en thinking");
+    assert(LABELS.pt.thinking === '…pensando', "pt thinking");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const src = html.slice(html.indexOf('async function askQuestion'), html.indexOf('async function accuse'));
+    assert(src.includes("LABELS[lang].thinking"), "uses LABELS.thinking");
+    assert(!src.includes("'…pensando'") && !src.includes("'…thinking'"), "no hardcoded thinking strings");
+    assert(src.includes("setAttribute('aria-busy', 'true')"), "sets aria-busy");
+    assert(src.includes("removeAttribute('aria-busy')"), "clears aria-busy");
+    assert(src.includes("qInput.disabled = true"), "disables #q while busy");
+    assert(src.includes("qInput.disabled = false"), "re-enables #q");
+    assert(src.includes("accuseBtns.forEach"), "toggles Accuse buttons");
+    assert(src.includes("qInput.focus()"), "refocuses #q");
+    assert(src.includes("thinking.parentNode") && src.includes("thinking.remove()"), "removes leftover thinking line");
+    function el(extras = {}) {
+      return {
+        children: [], textContent: '', value: '', disabled: false, attrs: {}, focused: false,
+        appendChild(c) { this.children.push(c); c.parentNode = this; },
+        remove() { if (this.parentNode) { const p = this.parentNode; p.children = p.children.filter(x => x !== this); this.parentNode = null; } },
+        setAttribute(k, v) { this.attrs[k] = v; },
+        removeAttribute(k) { delete this.attrs[k]; },
+        focus() { this.focused = true; },
+        ...extras
+      };
+    }
+    const qInput = el({ value: 'Where were you?' });
+    const askBtn = el();
+    const askForm = el();
+    const accuseA = el();
+    const accuseB = el();
+    const log = el();
+    const made = [];
+    const fakeDoc = {
+      getElementById: id => ({ q: qInput, 'ask-btn': askBtn, 'ask-form': askForm, log }[id]),
+      querySelectorAll: sel => sel === '#accuse-buttons button' ? [accuseA, accuseB] : [],
+      createElement: () => { const e = el(); made.push(e); return e; }
+    };
+    let fetchCalls = 0;
+    const fakeFetch = async () => { fetchCalls++; await Promise.resolve(); return { ok: true, json: async () => ({ answer: 'I was in the hall.', questions: 1 }) }; };
+    const calls = { renderQuestions: 0, renderConversation: 0, showError: 0 };
+    const askQuestion = new Function(
+      'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+      'renderQuestions', 'renderConversation', 'showError',
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+    )(
+      fakeDoc, fakeFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
+      () => { calls.renderQuestions++; },
+      () => { calls.renderConversation++; },
+      () => { calls.showError++; }
+    );
+    const mid = [];
+    const origFetch = fakeFetch;
+    const observingFetch = async (...args) => {
+      mid.push({ q: qInput.disabled, ask: askBtn.disabled, a1: accuseA.disabled, a2: accuseB.disabled, busy: askForm.attrs['aria-busy'], think: log.children.length, thinkText: log.children[0] && log.children[0].textContent });
+      return origFetch(...args);
+    };
+    const askQuestionObs = new Function(
+      'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+      'renderQuestions', 'renderConversation', 'showError',
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+    )(
+      fakeDoc, observingFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
+      () => { calls.renderQuestions++; },
+      () => { calls.renderConversation++; log.children = []; },
+      () => { calls.showError++; }
+    );
+    qInput.value = 'Where were you?';
+    qInput.disabled = false; askBtn.disabled = false; accuseA.disabled = false; accuseB.disabled = false;
+    askForm.attrs = {}; log.children = []; qInput.focused = false;
+    await askQuestionObs({ preventDefault() {} });
+    assert(mid.length === 1, "fetch ran once");
+    assert(mid[0].q === true && mid[0].ask === true && mid[0].a1 === true && mid[0].a2 === true, "disabled while in flight");
+    assert(mid[0].busy === 'true', "aria-busy while in flight");
+    assert(mid[0].think === 1 && mid[0].thinkText === '…thinking', "thinking line while in flight");
+    assert(qInput.disabled === false && askBtn.disabled === false && accuseA.disabled === false && accuseB.disabled === false, "re-enabled after");
+    assert(askForm.attrs['aria-busy'] === undefined, "aria-busy cleared");
+    assert(qInput.value === '', "clears #q");
+    assert(qInput.focused === true, "focuses #q");
+    assert(calls.renderConversation === 1 && calls.showError === 0, "success path ran");
+    // error path: leftover thinking removed
+    const q2 = el({ value: 'Again?' });
+    const askBtn2 = el();
+    const askForm2 = el();
+    const accuseC = el();
+    const log2 = el();
+    const fakeDoc2 = {
+      

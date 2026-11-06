@@ -197,10 +197,17 @@ async function askQuestion(e){
   if (!selectedSuspect) return;
   const question = document.getElementById('q').value.trim();
   if (!question) return;
-  document.getElementById('ask-btn').disabled = true;
+  const qInput = document.getElementById('q');
+  const askBtn = document.getElementById('ask-btn');
+  const askForm = document.getElementById('ask-form');
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  askBtn.disabled = true;
+  qInput.disabled = true;
+  accuseBtns.forEach(b => { b.disabled = true; });
+  askForm.setAttribute('aria-busy', 'true');
   const log = document.getElementById('log');
   const thinking = document.createElement('p');
-  thinking.textContent = lang === 'pt' ? '…pensando' : '…thinking';
+  thinking.textContent = LABELS[lang].thinking;
   log.appendChild(thinking);
   try{
     const res = await fetch(API + '/ask', {
@@ -219,8 +226,13 @@ async function askQuestion(e){
   }catch(err){
     showError(err.message||'Error');
   }finally{
-    document.getElementById('ask-btn').disabled = false;
-    document.getElementById('q').value = '';
+    if (thinking.parentNode) thinking.remove();
+    askBtn.disabled = false;
+    qInput.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+    askForm.removeAttribute('aria-busy');
+    qInput.value = '';
+    qInput.focus();
   }
 }
 

@@ -1,0 +1,211 @@
+# Task (sprint 12): busy-state polish while Ask is in flight
+While a question is being asked, disable more than just #ask-btn: also disable #q and the Accuse buttons, set aria-busy on #ask-form, use LABELS for the thinking line, and on success or error re-enable everything, clear aria-busy, remove a leftover thinking line if still in the log, and focus #q. Keep every other behaviour.
+
+Output ONLY these literal edit blocks, in this order. Format each block: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, public/best.js. OLD is exactly these 2 lines:
+    newBest: 'New personal best!',
+    confirmAccuse: 'Accuse {name}? You only get one accusation.'
+NEW is those 2 lines plus one new line (keep the commas). Add after confirmAccuse:
+    thinking: '…thinking'
+so the en LABELS object ends with confirmAccuse then thinking (comma after confirmAccuse).
+
+Block 2, public/best.js. OLD is exactly these 2 lines:
+    newBest: 'Novo recorde pessoal!',
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.'
+NEW is those 2 lines plus:
+    thinking: '…pensando'
+(comma after confirmAccuse; closing }; of LABELS stays as in the file after this block).
+
+Block 3, public/index.html. OLD is exactly this whole askQuestion function (from the async line through the closing brace before async function accuse). Match it exactly, including indentation:
+async function askQuestion(e){
+  e.preventDefault();
+  if (!selectedSuspect) return;
+  const question = document.getElementById('q').value.trim();
+  if (!question) return;
+  document.getElementById('ask-btn').disabled = true;
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+  thinking.textContent = lang === 'pt' ? '…pensando' : '…thinking';
+  log.appendChild(thinking);
+  try{
+    const res = await fetch(API + '/ask', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId:selectedSuspect, question, lang})
+    });
+    const data = await res.json();
+    if (!res.ok) throw data;
+    const answer = data.answer;
+    questionsUsed = data.questions;
+    renderQuestions();
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+    histories[selectedSuspect].push({q:question,a:answer});
+    renderConversation();
+  }catch(err){
+    showError(err.message||'Error');
+  }finally{
+    document.getElementById('ask-btn').disabled = false;
+    document.getElementById('q').value = '';
+  }
+}
+NEW is exactly this function (same try body; busy setup before try; finally re-enables, clears aria-busy, removes thinking if still attached, clears #q, focuses #q):
+async function askQuestion(e){
+  e.preventDefault();
+  if (!selectedSuspect) return;
+  const question = document.getElementById('q').value.trim();
+  if (!question) return;
+  const qInput = document.getElementById('q');
+  const askBtn = document.getElementById('ask-btn');
+  const askForm = document.getElementById('ask-form');
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  askBtn.disabled = true;
+  qInput.disabled = true;
+  accuseBtns.forEach(b => { b.disabled = true; });
+  askForm.setAttribute('aria-busy', 'true');
+  const log = document.getElementById('log');
+  const thinking = document.createElement('p');
+  thinking.textContent = LABELS[lang].thinking;
+  log.appendChild(thinking);
+  try{
+    const res = await fetch(API + '/ask', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sessionId, suspectId:selectedSuspect, question, lang})
+    });
+    const data = await res.json();
+    if (!res.ok) throw data;
+    const answer = data.answer;
+    questionsUsed = data.questions;
+    renderQuestions();
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+    histories[selectedSuspect].push({q:question,a:answer});
+    renderConversation();
+  }catch(err){
+    showError(err.message||'Error');
+  }finally{
+    if (thinking.parentNode) thinking.remove();
+    askBtn.disabled = false;
+    qInput.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+    askForm.removeAttribute('aria-busy');
+    qInput.value = '';
+    qInput.focus();
+  }
+}
+
+Block 4, package.json. OLD is exactly this 1 line:
+  "version": "0.3.0",
+NEW is exactly this 1 line:
+  "version": "0.3.1",
+
+Block 5, test/scoreboard.mjs. OLD is exactly this 1 line:
+  const passed = results.filter(r => r.ok).length;
+NEW: a new test 15, then an empty line, then that same original line. Test 15 uses the file's own test(name, fn) and assert(cond, msg); fs and LABELS are already imported; 2-space indentation, 4 spaces inside the test body. It must fail on the pre-sprint askQuestion (which only disables ask-btn and hardcodes thinking). Include a lightweight stubbed-fetch run of askQuestion on a fake DOM (same idea as test 12):
+  // 15. askQuestion busy state disables #q / accuse and sets aria-busy
+  results.push(await test("askQuestion busy state", async () => {
+    assert(LABELS.en.thinking === '…thinking', "en thinking");
+    assert(LABELS.pt.thinking === '…pensando', "pt thinking");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const src = html.slice(html.indexOf('async function askQuestion'), html.indexOf('async function accuse'));
+    assert(src.includes("LABELS[lang].thinking"), "uses LABELS.thinking");
+    assert(!src.includes("'…pensando'") && !src.includes("'…thinking'"), "no hardcoded thinking strings");
+    assert(src.includes("setAttribute('aria-busy', 'true')"), "sets aria-busy");
+    assert(src.includes("removeAttribute('aria-busy')"), "clears aria-busy");
+    assert(src.includes("qInput.disabled = true"), "disables #q while busy");
+    assert(src.includes("qInput.disabled = false"), "re-enables #q");
+    assert(src.includes("accuseBtns.forEach"), "toggles Accuse buttons");
+    assert(src.includes("qInput.focus()"), "refocuses #q");
+    assert(src.includes("thinking.parentNode") && src.includes("thinking.remove()"), "removes leftover thinking line");
+    function el(extras = {}) {
+      return {
+        children: [], textContent: '', value: '', disabled: false, attrs: {}, focused: false,
+        appendChild(c) { this.children.push(c); c.parentNode = this; },
+        remove() { if (this.parentNode) { const p = this.parentNode; p.children = p.children.filter(x => x !== this); this.parentNode = null; } },
+        setAttribute(k, v) { this.attrs[k] = v; },
+        removeAttribute(k) { delete this.attrs[k]; },
+        focus() { this.focused = true; },
+        ...extras
+      };
+    }
+    const qInput = el({ value: 'Where were you?' });
+    const askBtn = el();
+    const askForm = el();
+    const accuseA = el();
+    const accuseB = el();
+    const log = el();
+    const made = [];
+    const fakeDoc = {
+      getElementById: id => ({ q: qInput, 'ask-btn': askBtn, 'ask-form': askForm, log }[id]),
+      querySelectorAll: sel => sel === '#accuse-buttons button' ? [accuseA, accuseB] : [],
+      createElement: () => { const e = el(); made.push(e); return e; }
+    };
+    let fetchCalls = 0;
+    const fakeFetch = async () => { fetchCalls++; await Promise.resolve(); return { ok: true, json: async () => ({ answer: 'I was in the hall.', questions: 1 }) }; };
+    const calls = { renderQuestions: 0, renderConversation: 0, showError: 0 };
+    const askQuestion = new Function(
+      'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+      'renderQuestions', 'renderConversation', 'showError',
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+    )(
+      fakeDoc, fakeFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
+      () => { calls.renderQuestions++; },
+      () => { calls.renderConversation++; },
+      () => { calls.showError++; }
+    );
+    const mid = [];
+    const origFetch = fakeFetch;
+    const observingFetch = async (...args) => {
+      mid.push({ q: qInput.disabled, ask: askBtn.disabled, a1: accuseA.disabled, a2: accuseB.disabled, busy: askForm.attrs['aria-busy'], think: log.children.length, thinkText: log.children[0] && log.children[0].textContent });
+      return origFetch(...args);
+    };
+    const askQuestionObs = new Function(
+      'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+      'renderQuestions', 'renderConversation', 'showError',
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+    )(
+      fakeDoc, observingFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
+      () => { calls.renderQuestions++; },
+      () => { calls.renderConversation++; log.children = []; },
+      () => { calls.showError++; }
+    );
+    qInput.value = 'Where were you?';
+    qInput.disabled = false; askBtn.disabled = false; accuseA.disabled = false; accuseB.disabled = false;
+    askForm.attrs = {}; log.children = []; qInput.focused = false;
+    await askQuestionObs({ preventDefault() {} });
+    assert(mid.length === 1, "fetch ran once");
+    assert(mid[0].q === true && mid[0].ask === true && mid[0].a1 === true && mid[0].a2 === true, "disabled while in flight");
+    assert(mid[0].busy === 'true', "aria-busy while in flight");
+    assert(mid[0].think === 1 && mid[0].thinkText === '…thinking', "thinking line while in flight");
+    assert(qInput.disabled === false && askBtn.disabled === false && accuseA.disabled === false && accuseB.disabled === false, "re-enabled after");
+    assert(askForm.attrs['aria-busy'] === undefined, "aria-busy cleared");
+    assert(qInput.value === '', "clears #q");
+    assert(qInput.focused === true, "focuses #q");
+    assert(calls.renderConversation === 1 && calls.showError === 0, "success path ran");
+    // error path: leftover thinking removed
+    const q2 = el({ value: 'Again?' });
+    const askBtn2 = el();
+    const askForm2 = el();
+    const accuseC = el();
+    const log2 = el();
+    const fakeDoc2 = {
+      getElementById: id => ({ q: q2, 'ask-btn': askBtn2, 'ask-form': askForm2, log: log2 }[id]),
+      querySelectorAll: () => [accuseC],
+      createElement: () => el()
+    };
+    const askFail = new Function(
+      'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+      'renderQuestions', 'renderConversation', 'showError',
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+    )(
+      fakeDoc2,
+      async () => ({ ok: false, json: async () => ({ message: 'busy' }) }),
+      '/api', LABELS, 'maya', 'en', 'sess-1', {},
+      () => {}, () => {}, () => {}
+    );
+    await askFail({ preventDefault() {} });
+    assert(log2.children.length === 0, "thinking removed on error");
+    assert(q2.disabled === false && askBtn2.disabled === false && accuseC.disabled === false, "re-enabled on error");
+    assert(askForm2.attrs['aria-busy'] === undefined, "aria-busy cleared on error");
+    assert(q2.focused === true, "focuses #q on error");
+  }));

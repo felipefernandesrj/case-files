@@ -246,6 +246,98 @@ async function run() {
     assert(/confirm\(LABELS\[lang\]\.confirmAccuse/.test(src) && /accuse\(s\.id\)/.test(src), "accuse runs only after confirm");
   }));
 
+  // 15. askQuestion busy state disables #q / accuse and sets aria-busy
+  results.push(await test("askQuestion busy state", async () => {
+    assert(LABELS.en.thinking === '…thinking', "en thinking");
+    assert(LABELS.pt.thinking === '…pensando', "pt thinking");
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const src = html.slice(html.indexOf('async function askQuestion'), html.indexOf('async function accuse'));
+    assert(src.includes("LABELS[lang].thinking"), "uses LABELS.thinking");
+    assert(!src.includes("'…pensando'") && !src.includes("'…thinking'"), "no hardcoded thinking strings");
+    assert(src.includes("setAttribute('aria-busy', 'true')"), "sets aria-busy");
+    assert(src.includes("removeAttribute('aria-busy')"), "clears aria-busy");
+    assert(src.includes("qInput.disabled = true"), "disables #q while busy");
+    assert(src.includes("qInput.disabled = false"), "re-enables #q");
+    assert(src.includes("accuseBtns.forEach"), "toggles Accuse buttons");
+    assert(src.includes("qInput.focus()"), "refocuses #q");
+    assert(src.includes("thinking.parentNode") && src.includes("thinking.remove()"), "removes leftover thinking line");
+    function el(extras = {}) {
+      return {
+        children: [], textContent: '', value: '', disabled: false, attrs: {}, focused: false,
+        appendChild(c) { this.children.push(c); c.parentNode = this; },
+        remove() { if (this.parentNode) { const p = this.parentNode; p.children = p.children.filter(x => x !== this); this.parentNode = null; } },
+        setAttribute(k, v) { this.attrs[k] = v; },
+        removeAttribute(k) { delete this.attrs[k]; },
+        focus() { this.focused = true; },
+        ...extras
+      };
+    }
+    const qInput = el({ value: 'Where were you?' });
+    const askBtn = el();
+    const askForm = el();
+    const accuseA = el();
+    const accuseB = el();
+    const log = el();
+    const fakeDoc = {
+      getElementById: id => ({ q: qInput, 'ask-btn': askBtn, 'ask-form': askForm, log }[id]),
+      querySelectorAll: sel => sel === '#accuse-buttons button' ? [accuseA, accuseB] : [],
+      createElement: () => el()
+    };
+    const calls = { renderQuestions: 0, renderConversation: 0, showError: 0 };
+    const mid = [];
+    const observingFetch = async () => {
+      mid.push({ q: qInput.disabled, ask: askBtn.disabled, a1: accuseA.disabled, a2: accuseB.disabled, busy: askForm.attrs['aria-busy'], think: log.children.length, thinkText: log.children[0] && log.children[0].textContent });
+      await Promise.resolve();
+      return { ok: true, json: async () => ({ answer: 'I was in the hall.', questions: 1 }) };
+    };
+    const askQuestionObs = new Function(
+      'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+      'renderQuestions', 'renderConversation', 'showError',
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+    )(
+      fakeDoc, observingFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
+      () => { calls.renderQuestions++; },
+      () => { calls.renderConversation++; log.children = []; },
+      () => { calls.showError++; }
+    );
+    qInput.value = 'Where were you?';
+    await askQuestionObs({ preventDefault() {} });
+    assert(mid.length === 1, "fetch ran once");
+    assert(mid[0].q === true && mid[0].ask === true && mid[0].a1 === true && mid[0].a2 === true, "disabled while in flight");
+    assert(mid[0].busy === 'true', "aria-busy while in flight");
+    assert(mid[0].think === 1 && mid[0].thinkText === '…thinking', "thinking line while in flight");
+    assert(qInput.disabled === false && askBtn.disabled === false && accuseA.disabled === false && accuseB.disabled === false, "re-enabled after");
+    assert(askForm.attrs['aria-busy'] === undefined, "aria-busy cleared");
+    assert(qInput.value === '', "clears #q");
+    assert(qInput.focused === true, "focuses #q");
+    assert(calls.renderConversation === 1 && calls.showError === 0, "success path ran");
+    const q2 = el({ value: 'Again?' });
+    const askBtn2 = el();
+    const askForm2 = el();
+    const accuseC = el();
+    const log2 = el();
+    const fakeDoc2 = {
+      getElementById: id => ({ q: q2, 'ask-btn': askBtn2, 'ask-form': askForm2, log: log2 }[id]),
+      querySelectorAll: () => [accuseC],
+      createElement: () => el()
+    };
+    const askFail = new Function(
+      'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+      'renderQuestions', 'renderConversation', 'showError',
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+    )(
+      fakeDoc2,
+      async () => ({ ok: false, json: async () => ({ message: 'busy' }) }),
+      '/api', LABELS, 'maya', 'en', 'sess-1', {},
+      () => {}, () => {}, () => {}
+    );
+    await askFail({ preventDefault() {} });
+    assert(log2.children.length === 0, "thinking removed on error");
+    assert(q2.disabled === false && askBtn2.disabled === false && accuseC.disabled === false, "re-enabled on error");
+    assert(askForm2.attrs['aria-busy'] === undefined, "aria-busy cleared on error");
+    assert(q2.focused === true, "focuses #q on error");
+  }));
+
   const passed = results.filter(r => r.ok).length;
   const failed = results.length - passed;
   console.log(`${passed} passed, ${failed} failed`);

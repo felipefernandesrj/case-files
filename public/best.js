@@ -113,7 +113,8 @@ export const LABELS = {
     done: 'Your best scores were reset.',
     kept: 'Nothing was reset.',
     newBest: 'New personal best!',
-    confirmAccuse: 'Accuse {name}? You only get one accusation.'
+    confirmAccuse: 'Accuse {name}? You only get one accusation.',
+    thinking: '…thinking'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -122,6 +123,7 @@ export const LABELS = {
     done: 'Seus recordes foram apagados.',
     kept: 'Nada foi apagado.',
     newBest: 'Novo recorde pessoal!',
-    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.'
+    confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
+    thinking: '…pensando'
   }
 };

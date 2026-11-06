@@ -59,6 +59,7 @@
 - Better result = higher score, or same score with fewer questions (wrong accusations never count).
 - Reset requires user confirmation; GET /best.js serves the storage module.
 - Accuse: the page shows a native confirm (EN "Accuse {name}? You only get one accusation." / PT "Acusar {name}? Você só tem uma acusação.") before POST /api/accuse; Cancel does nothing.
+- Ask busy: while POST /api/ask is in flight, #q and Accuse buttons are disabled, #ask-form has aria-busy=true, and the thinking line uses LABELS.thinking (EN "…thinking" / PT "…pensando"); on settle, controls re-enable, aria-busy clears, leftover thinking is removed, and #q is focused.
 - Best lines use the UI language wording (bestText(lang, entry, ui)) and a new best is announced in the role=status line.
 
 ## Web page: closing screen
@@ -101,4 +102,4 @@ This executes:
 5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
 6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 91 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 14, keyboard: 13).
+Total checks: 92 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 15, keyboard: 13).

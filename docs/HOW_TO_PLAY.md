@@ -10,7 +10,7 @@ A priceless Stradivarius vanished from the instrument room of the Aurora Music A
 ### How to play
 1. Pick EN or PT at the top of the screen.
 2. Choose a suspect to talk to.
-3. Type a question and press Enter or the Ask button.
+3. Type a question and press Enter or the Ask button. While the suspect answers, the question box and Accuse buttons stay locked.
 4. Switch between suspects to compare their stories.
 5. When you are ready, type your name (or "anon") and press the button with the suspect's name in the "Accuse" section. The game asks you to confirm; you only get one accusation per game.
 
@@ -44,7 +44,7 @@ Um Stradivarius de valor inestimável desapareceu da sala de instrumentos da Aca
 ### Como jogar
 1. Escolha EN ou PT no topo da tela.
 2. Escolha um suspeito para conversar.
-3. Digite uma pergunta e aperte Enter ou o botão Perguntar.
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
 4. Troque de suspeito para comparar as histórias.
 5. Quando estiver pronto, digite seu nome (ou "anon") e aperte o botão com o nome do suspeito na seção "Acusar". O jogo pede confirmação; você tem apenas uma acusação por jogo.
 
