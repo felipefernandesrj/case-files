@@ -358,3 +358,30 @@ Receipts (seal-by 2026-11-07T00:05:00Z), 6 chat, first..last: 01M6RC6FD4G7PHA1CC
 - Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
 - Reproduced: enable_thinking=false honoured (4 of 4), cached_tokens 0 (6 of 6).
 - No new FullCup anomaly vs sprint 12.
+
+## M1 sprint 14: Escape clears question (v0.3.3), 2026-11-07 00:10-00:12 UTC (06/11 21:10-21:12 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 1500-2500, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 161 | Escape keydown clears #q when focused + keep focus, package 0.3.3 | 200 | 2.5 s | 475 / 194 | 9.61 | public/index.html, package.json | accepted 2/2 |
+| 162 | test 17 Escape clears question input (static asserts, mutation-friendly) | 200 | 10.0 s | 620 / 378 | 15.95 | test/scoreboard.mjs | accepted |
+| 163 | CHANGELOG 0.3.3, README v0.3.3 / 94 checks + Escape phrase, SPEC Escape + totals, HOW_TO_PLAY EN+PT | 200 | 29.7 s | 1035 / 799 | 31.20 | 4 files (8 edits) | accepted 8/8 |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 3.1 / 3.0 s | 921 / 105 | 30.72 | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.05-0.16 s | 0 | 0 | - | QA probe |
+
+Totals: 8 requests (3 build + 2 live + 3 probes), 3 051 in / 1 476 out tokens, 87.5 neurons, about US$ 0.00096 at $0.011/1k neurons. Build only: 3 calls, 2 130 / 1 371 tokens, 56.8 neurons. Wasted 0; rework 0 (0%). 0 API failures, slowest 29.7 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s14.mjs, tools/probe-s14.mjs (sed from s13).
+npm test: 94/94 (was 93). Mutation: test 17 fails without the Escape keydown / clear.
+Verdict: worth it. Tiny polish; Escape only clears #q when focused and does not touch accuse/restart confirms.
+Receipts (seal-by 2026-11-08T00:05:00Z), 5 chat, first..last: 01M6SNF6SFB4WWXBJHVWD2271Z (161) .. 01M6SNHJMYGDFMXYEH2NY5XKSK (live PT); build 01M6SNF6SFB4WWXBJHVWD2271Z, 01M6SNFEPRX5Y72DP6BW86NJ3F, 01M6SNFX4KN3NQMMBT4Z1RQ8ZW; live 01M6SNHG5C29GY40ANRF7WYXXR, 01M6SNHJMYGDFMXYEH2NY5XKSK. All ids in qa/key-usage-log.json (purpose sprint14-*).
+
+### FullCup observations, sprint 14 (evidence qa/s14-probes/)
+- Seal check (signed out, curl qa.fullcup.ai): s12 01M6Q345C32V3WYFWK20NBKCFA Genuine receipt, Exact cost $0.001077, one of 11 in the signed root of 2026-11-06, Sealed at 2026-11-07 00:05:25 UTC. s13 01M6RC6FD4G7PHA1CC7H3R1JZZ Genuine receipt, Exact cost $0.000531, same seal. Snips in seal-*.snip.txt.
+- Reproduced: no per-call cost (5 of 5 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (5 of 5).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers; entries still include capabilities {type, endpoint, vision}.
+- Reproduced: flat 404 GET /v1/receipts/{id} {error:"unsupported_endpoint", message, supported, docs} listing POST /v1/images/generations.
+- Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
+- Reproduced: enable_thinking=false honoured (3 of 3), cached_tokens 0 (5 of 5).
+- No new FullCup anomaly vs sprint 13.

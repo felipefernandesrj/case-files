@@ -5169,5 +5169,152 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "161",
+  "at": "2026-11-07T00:10:27.126Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 2493,
+  "usage": {
+   "prompt_tokens": 475,
+   "completion_tokens": 194,
+   "total_tokens": 669,
+   "neurons": 9.609090805053711,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6SNF6SFB4WWXBJHVWD2271Z",
+   "x-fullcup-receipt-id": "01M6SNF6SFB4WWXBJHVWD2271Z",
+   "x-fullcup-seal-by": "2026-11-08T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794010260"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "162",
+  "at": "2026-11-07T00:10:43.357Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10046,
+  "usage": {
+   "prompt_tokens": 620,
+   "completion_tokens": 378,
+   "total_tokens": 998,
+   "neurons": 15.945453643798828,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6SNFEPRX5Y72DP6BW86NJ3F",
+   "x-fullcup-receipt-id": "01M6SNFEPRX5Y72DP6BW86NJ3F",
+   "x-fullcup-seal-by": "2026-11-08T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794010260"
+  },
+  "files": [
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 16
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "163",
+  "at": "2026-11-07T00:11:17.260Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 29683,
+  "usage": {
+   "prompt_tokens": 1035,
+   "completion_tokens": 799,
+   "total_tokens": 1834,
+   "neurons": 31.200000762939453,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M6SNFX4KN3NQMMBT4Z1RQ8ZW",
+   "x-fullcup-receipt-id": "01M6SNFX4KN3NQMMBT4Z1RQ8ZW",
+   "x-fullcup-seal-by": "2026-11-08T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1794010260"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
  }
 ]

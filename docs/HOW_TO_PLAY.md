@@ -27,7 +27,7 @@ A correct accusation scores 100 points if you asked 3 questions or fewer. Each e
 Every question is paid for by capacity provided by our backers in the Case Files Cup on FullCup. If capacity runs out, the game will tell you. Only answered questions count; if a question fails, it is not counted and the suspect does not remember it. Your questions so far are kept. Backers can refill the capacity so you can try again later. If you ask too many questions too fast, please wait a few seconds.
 
 ### Accessibility
-The game works with Tab and Enter. Focus is always visible. Screen readers will announce answers and the final verdict.
+The game works with Tab and Enter. Escape clears the question box while it is focused. Focus is always visible. Screen readers will announce answers and the final verdict.
 
 ### Thanks to the backers
 After the verdict, you will see a list of our wonderful backers. Every question creates a public receipt on FullCup so backers can see how the capacity is used.
@@ -61,7 +61,7 @@ Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada
 Cada pergunta é paga pela capacidade enviada pelos apoiadores no Case Files Cup via FullCup. Se a capacidade acabar, o jogo avisará. Apenas perguntas respondidas contam; se uma pergunta falhar, ela não é contada e o suspeito não a lembrará. Suas perguntas até agora são mantidas. Os apoiadores podem recarregar a capacidade para você tentar mais tarde. Se fizer muitas perguntas seguidas, aguarde alguns segundos.
 
 ### Acessibilidade
-O jogo funciona com Tab e Enter. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
+O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela está em foco. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
 
 ### Obrigado aos apoiadores
 Após o veredito, você verá uma lista de nossos apoiadores. Cada pergunta cria um recibo público no FullCup para que os apoiadores vejam como a capacidade está sendo usada.

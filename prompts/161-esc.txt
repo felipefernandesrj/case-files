@@ -1,0 +1,25 @@
+# Task (sprint 14): Escape clears the question input
+When the player presses Escape and focus is in #q, clear #q.value and keep focus on #q. Do nothing else (do not cancel accuse/restart confirms; native confirm dialogs already intercept Escape). Add a document-level keydown listener for Escape that only acts when document.activeElement === #q (or event.target === #q). No new LABELS strings. Bump package.json to 0.3.3.
+
+Output ONLY these literal edit blocks, in this order. Format each block: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, public/index.html. OLD is exactly these 3 lines:
+document.getElementById('restart-btn').addEventListener('click', restartGame);
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+init();
+NEW is exactly these 10 lines:
+document.getElementById('restart-btn').addEventListener('click', restartGame);
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  const q = document.getElementById('q');
+  if (document.activeElement !== q && e.target !== q) return;
+  q.value = '';
+  q.focus();
+});
+init();
+
+Block 2, package.json. OLD is exactly this 1 line:
+  "version": "0.3.2",
+NEW is exactly this 1 line:
+  "version": "0.3.3",

@@ -1,0 +1,41 @@
+receipt 01M6RC6FD4G7PHA1CC7H3R1JZZ
+Genuine receipt · 01M6RC6FD4G7 · FullCup.ai
+Skip to content
+FullCup
+Request receipt
+Genuine receipt
+Case Files: AI detective games pack
+FullCup.ai&#39;s server checked this call against the signed root of its day and it matches. Run your own check to confirm it independently.
+This call is one of 11 in the signed root of 2026-11-06. The audit path folds to that root, and the root signature matches the FullCup.ai public key.
+This confirms the figures, the Cup and that the call is part of the sealed day. It does not show what was asked or answered: that is never recorded.
+Consumption
+Total tokens
+01M6RC6FD4G7PHA1CC7H3R1JZZ
+Exact cost
+$0.000531 (less than one cent)
+Model
+@cf/google/gemma-4-26b-a4b-it
+Check in this browser
+proof.json holds the leaf, the audit path and the signed root. Anyone can check it offline with the published key.
+Check a proof file
+Where this call sits
+af064bbd3bf53d041304a2661f25c6098d1fe97405625952283270d922354cef
+Sealed at
+2026-11-07 00:05:25 UTC
+Not part of the signature: how FullCup.ai settled this request
+Charged to the Cup
+$0.000531
+Covered by FullCup.ai
+$0.000000
+Technical details
+Raw JSON for this receipt
+&quot;cost_micro_usd&quot;: 531,
+&quot;price_source&quot;: &quot;neurons_measured&quot;,
+&quot;upstream_id&quot;: &quot;wai_01M6RC6FD4G7PHA1CC7H3R1JZZ&quot;,
+&quot;workload_tag&quot;: &quot;case-files:build-m1&quot;,
+]
+Signed root document
+{
+&quot;format&quot;: &quot;fullcup.receipt-batch.v1&quot;,
+&quot;signing_key_id&quot;: &quot;v1&quot;,
+&quot;sealed_at&quot;: &quot;2026-11-07T00:05:25.098Z&quot;

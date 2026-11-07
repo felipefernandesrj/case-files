@@ -1,0 +1,42 @@
+# Task (sprint 14): docs for v0.3.3 Escape clears question
+Output ONLY these literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes. Do NOT declare M1 delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly this 1 line:
+## 0.3.2 (M1 sprint 13, Start over / Nova partida)
+NEW is a new entry, then an empty line, then that same OLD line. The new entry is exactly:
+## 0.3.3 (M1 sprint 14, Escape clears question)
+- Escape while the question box is focused clears #q and keeps focus there.
+- Does not cancel accuse or restart confirms (native confirm already handles Escape).
+- Added check that index.html has an Escape keydown that clears and refocuses #q.
+
+Block 2, README.md. OLD is exactly: M1 status (v0.3.2):
+NEW is exactly: M1 status (v0.3.3):
+
+Block 3, README.md. OLD is exactly: 93 automated checks.
+NEW is exactly: 94 automated checks.
+
+Block 4, README.md. OLD is exactly this fragment inside the M1 status sentence:
+Start over / Nova partida (fresh session without reload)
+NEW is exactly:
+Start over / Nova partida (fresh session without reload), Escape clears the question box while focused
+
+Block 5, docs/SPEC.md. OLD is exactly this 1 line:
+- Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
+NEW is exactly these 2 lines:
+- Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
+- Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
+
+Block 6, docs/SPEC.md. OLD is exactly this 1 line:
+Total checks: 93 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 16, keyboard: 13).
+NEW is exactly this 1 line:
+Total checks: 94 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 17, keyboard: 13).
+
+Block 7, docs/HOW_TO_PLAY.md. OLD is exactly this 1 line:
+The game works with Tab and Enter. Focus is always visible. Screen readers will announce answers and the final verdict.
+NEW is exactly this 1 line:
+The game works with Tab and Enter. Escape clears the question box while it is focused. Focus is always visible. Screen readers will announce answers and the final verdict.
+
+Block 8, docs/HOW_TO_PLAY.md. OLD is exactly this 1 line:
+O jogo funciona com Tab e Enter. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
+NEW is exactly this 1 line:
+O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela está em foco. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.

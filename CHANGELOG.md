@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.3 (M1 sprint 14, Escape clears question)
+- Escape while the question box is focused clears #q and keeps focus there.
+- Does not cancel accuse or restart confirms (native confirm already handles Escape).
+- Added check that index.html has an Escape keydown that clears and refocuses #q.
+
 ## 0.3.2 (M1 sprint 13, Start over / Nova partida)
 - Start over / Nova partida button begins a fresh session without reloading (native confirm EN/PT).
 - Cancel keeps the current questions; Confirm posts a new session, clears histories and closed UI, and keeps personal best.

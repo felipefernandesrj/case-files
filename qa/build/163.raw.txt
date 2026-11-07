@@ -1,0 +1,53 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.3.2 (M1 sprint 13, Start over / Nova partida)
+=====
+## 0.3.3 (M1 sprint 14, Escape clears question)
+- Escape while the question box is focused clears #q and keeps focus there.
+- Does not cancel accuse or restart confirms (native confirm already handles Escape).
+- Added check that index.html has an Escape keydown that clears and refocuses #q.
+
+## 0.3.2 (M1 sprint 13, Start over / Nova partida)
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.3.2):
+=====
+M1 status (v0.3.3):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+93 automated checks.
+=====
+94 automated checks.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+Start over / Nova partida (fresh session without reload)
+=====
+Start over / Nova partida (fresh session without reload), Escape clears the question box while focused
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
+=====
+- Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
+- Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 93 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 16, keyboard: 13).
+=====
+Total checks: 94 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 17, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+The game works with Tab and Enter. Focus is always visible. Screen readers will announce answers and the final verdict.
+=====
+The game works with Tab and Enter. Escape clears the question box while it is focused. Focus is always visible. Screen readers will announce answers and the final verdict.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+O jogo funciona com Tab e Enter. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
+=====
+O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela está em foco. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
+<<<END>>>

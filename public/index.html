@@ -409,6 +409,13 @@ async function restartGame(){
 }
 document.getElementById('restart-btn').addEventListener('click', restartGame);
 document.getElementById('ask-form').addEventListener('submit',askQuestion);
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  const q = document.getElementById('q');
+  if (document.activeElement !== q && e.target !== q) return;
+  q.value = '';
+  q.focus();
+});
 init();
 </script>
 </body>

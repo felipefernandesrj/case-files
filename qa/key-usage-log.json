@@ -4244,5 +4244,125 @@
     "@cf/zai-org/glm-5.3-flash"
    ]
   }
+ },
+ {
+  "at": "2026-11-07T00:11:40.002Z",
+  "purpose": "sprint14-smoke:en:maya",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 3061,
+  "usage": {
+   "prompt_tokens": 441,
+   "completion_tokens": 56,
+   "total_tokens": 497,
+   "neurons": 15.151819229125977,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6SNHG5C29GY40ANRF7WYXXR",
+   "x-fullcup-receipt-id": "01M6SNHG5C29GY40ANRF7WYXXR",
+   "x-fullcup-seal-by": "2026-11-08T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794010320"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-07T00:11:43.069Z",
+  "purpose": "sprint14-smoke:pt:carlos",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 2984,
+  "usage": {
+   "prompt_tokens": 480,
+   "completion_tokens": 49,
+   "total_tokens": 529,
+   "neurons": 15.568181991577148,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M6SNHJMYGDFMXYEH2NY5XKSK",
+   "x-fullcup-receipt-id": "01M6SNHJMYGDFMXYEH2NY5XKSK",
+   "x-fullcup-seal-by": "2026-11-08T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794010320"
+  },
+  "error": null
+ },
+ {
+  "at": "2026-11-07T00:11:50.929Z",
+  "purpose": "sprint14-probe:models",
+  "method": "GET",
+  "endpoint": "/models",
+  "model": null,
+  "status": 200,
+  "ms": 164,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": null
+ },
+ {
+  "at": "2026-11-07T00:11:51.097Z",
+  "purpose": "sprint14-probe:receipt-api",
+  "method": "GET",
+  "endpoint": "/receipts/01M6RC6FD4G7PHA1CC7H3R1JZZ",
+  "model": null,
+  "status": 404,
+  "ms": 50,
+  "usage": null,
+  "cost": null,
+  "headers": {},
+  "error": {
+   "error": "unsupported_endpoint",
+   "message": "GET /v1/receipts/01M6RC6FD4G7PHA1CC7H3R1JZZ is not an endpoint FullCup.ai offers. Supported endpoints: POST /v1/chat/completions, POST /v1/responses, POST /v1/images/generations (text to image) and GET /v1/models. Other OpenAI endpoints, such as embeddings, completions, image edits and audio, are not available.",
+   "supported": [
+    "POST /v1/chat/completions",
+    "POST /v1/responses",
+    "POST /v1/images/generations",
+    "GET /v1/models"
+   ],
+   "docs": "https://qa-docs.fullcup.ai/errors"
+  }
+ },
+ {
+  "at": "2026-11-07T00:11:51.148Z",
+  "purpose": "sprint14-probe:disallowed-model",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "status": 403,
+  "ms": 124,
+  "usage": null,
+  "cost": null,
+  "headers": {
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1794010320"
+  },
+  "error": {
+   "error": "model_outside_capacity_class",
+   "message": "This key cannot call that model. See allowed, or GET /v1/models.",
+   "allowed": [
+    "@cf/deepseek-ai/deepseek-v4-flash-0731",
+    "@cf/google/gemma-4-26b-a4b-it",
+    "@cf/meta/llama-4-scout-17b-16e-instruct",
+    "@cf/openai/gpt-oss-120b",
+    "@cf/zai-org/glm-4.7-flash",
+    "@cf/zai-org/glm-5.3-flash"
+   ]
+  }
  }
 ]

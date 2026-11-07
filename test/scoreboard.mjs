@@ -430,6 +430,21 @@ async function run() {
     assert(firstSuspect.focused === true, "focuses first suspect");
   }));
 
+  // 17. Escape clears #q when focused
+  results.push(await test("Escape clears question input", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    assert(html.includes("document.addEventListener('keydown'"), "has document keydown listener");
+    assert(html.includes("e.key !== 'Escape'") || html.includes('e.key !== "Escape"') || html.includes("e.key === 'Escape'") || html.includes('e.key === "Escape"'), "checks Escape key");
+    assert(html.includes("getElementById('q')") || html.includes('getElementById("q")'), "reads #q");
+    assert(html.includes("activeElement") || html.includes("e.target"), "guards on focus/#q");
+    assert(/q\.value\s*=\s*['"]['"]/.test(html) || /qInput\.value\s*=\s*['"]['"]/.test(html), "clears #q value");
+    const escIdx = html.search(/addEventListener\(['"]keydown['"]/);
+    assert(escIdx >= 0, "keydown listener present");
+    const slice = html.slice(escIdx, escIdx + 400);
+    assert(slice.includes("focus()"), "refocuses #q after clear");
+    assert(slice.includes("Escape"), "Escape in keydown handler");
+  }));
+
   const passed = results.filter(r => r.ok).length;
   const failed = results.length - passed;
   console.log(`${passed} passed, ${failed} failed`);
