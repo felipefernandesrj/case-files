@@ -1,0 +1,53 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.3.3 (M1 sprint 14, Escape clears question)
+=====
+## 0.3.4 (M1 sprint 15, lock Ask/Accuse after verdict)
+- After a successful accusation, Ask and Accuse stay locked and #best-status shows the game-over line (EN/PT).
+- Start over / Nova partida clears the lock and re-enables Ask and Accuse.
+- Added check that gameOver/setGameOver and LABELS.gameOver EN+PT are present and guarded.
+
+## 0.3.3 (M1 sprint 14, Escape clears question)
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.3.3):
+=====
+M1 status (v0.3.4):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+94 automated checks.
+=====
+95 automated checks.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+Escape clears the question box while focused
+=====
+Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
+=====
+- Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
+- Game over: after a successful accusation, setGameOver(true) disables #q, #ask-btn and Accuse buttons, and #best-status shows LABELS.gameOver (EN "Game over. Use Start over for a new case." / PT "Fim de jogo. Use Nova partida para um novo caso."); askQuestion and Accuse clicks no-op while locked; restartGame clears the lock; setLang refreshes the game-over status; renderAccuseButtons keeps Accuse disabled while locked.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 94 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 17, keyboard: 13).
+=====
+Total checks: 95 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 18, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+The game works with Tab and Enter. Escape clears the question box while it is focused. Focus is always visible. Screen readers will announce answers and the final verdict.
+=====
+The game works with Tab and Enter. Escape clears the question box while it is focused. After the verdict, Ask and Accuse stay locked until you use Start over. Focus is always visible. Screen readers will announce answers and the final verdict.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela está em foco. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
+=====
+O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela está em foco. Após o veredito, Perguntar e Acusar ficam bloqueados até você usar Nova partida. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
+<<<END>>>

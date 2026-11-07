@@ -1,0 +1,29 @@
+# Task (sprint 15): add test 18 for post-verdict Ask/Accuse lock
+The product gameOver changes are already on disk. Add only the automated test. Output ONLY one literal edit block. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, test/scoreboard.mjs. OLD is exactly this 1 line:
+  const passed = results.filter(r => r.ok).length;
+NEW: a new test 18, then an empty line, then that same original line. Use the file's own test(name, fn) and assert(cond, msg); fs is already imported; 2-space indentation, 4 spaces inside the test body. Exact NEW content:
+
+  // 18. Game over locks Ask/Accuse after verdict
+  results.push(await test("Game over locks Ask and Accuse after verdict", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const best = fs.readFileSync('./public/best.js', 'utf8');
+    assert(html.includes('let gameOver') || html.includes('var gameOver') || /gameOver\s*=\s*false/.test(html), "declares gameOver");
+    assert(html.includes('function setGameOver') || html.includes('setGameOver('), "has setGameOver");
+    assert(best.includes("gameOver: 'Game over. Use Start over for a new case.'") || best.includes('gameOver: "Game over. Use Start over for a new case."'), "LABELS.en.gameOver");
+    assert(best.includes("gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'") || best.includes('gameOver: "Fim de jogo. Use Nova partida para um novo caso."'), "LABELS.pt.gameOver");
+    assert(/if\s*\(\s*gameOver\s*\)\s*return/.test(html), "askQuestion/accuse guard returns when gameOver");
+    const askIdx = html.indexOf('async function askQuestion');
+    assert(askIdx >= 0, "askQuestion present");
+    const askSlice = html.slice(askIdx, askIdx + 200);
+    assert(/if\s*\(\s*gameOver\s*\)\s*return/.test(askSlice), "askQuestion returns when gameOver before selectedSuspect");
+    assert(html.includes('setGameOver(true)'), "accuse success calls setGameOver(true)");
+    assert(html.includes('setGameOver(false)') || /gameOver\s*=\s*false/.test(html), "restart clears gameOver");
+    const restartIdx = html.indexOf('async function restartGame');
+    assert(restartIdx >= 0, "restartGame present");
+    const restartSlice = html.slice(restartIdx, restartIdx + 900);
+    assert(/gameOver\s*=\s*false/.test(restartSlice) || restartSlice.includes('setGameOver(false)'), "restartGame clears lock");
+  }));
+
+  const passed = results.filter(r => r.ok).length;

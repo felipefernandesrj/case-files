@@ -1,0 +1,12 @@
+# Task (sprint 15 rework): inject gameOver into ask/restart test stubs
+Tests 15 and 16 eval sliced askQuestion/restartGame source. That source now references gameOver and setGameOver, so the Function stubs must declare them. Do not change product files. Output ONLY these literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, test/scoreboard.mjs. OLD is exactly this 1 line (it appears twice; replace every occurrence):
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+NEW is exactly this 1 line:
+      'let questionsUsed = 0; let gameOver = false;\n' + src + '\nreturn askQuestion;'
+
+Block 2, test/scoreboard.mjs. OLD is exactly this 1 line:
+      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 };\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
+NEW is exactly this 1 line:
+      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 }; let gameOver = true; function setGameOver(on){ gameOver = !!on; }\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'

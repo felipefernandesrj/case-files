@@ -102,6 +102,23 @@ let sessionId = null;
 let caseData = null;
 let selectedSuspect = null;
 let lastAccuseResult = null;
+let gameOver = false;
+function setGameOver(on){
+  gameOver = !!on;
+  const q = document.getElementById('q');
+  const ask = document.getElementById('ask-btn');
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  if (on) {
+    q.disabled = true;
+    ask.disabled = true;
+    accuseBtns.forEach(b => { b.disabled = true; });
+    document.getElementById('best-status').textContent = LABELS[lang].gameOver;
+  } else {
+    q.disabled = false;
+    ask.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+  }
+}
 const histories = {}; // per suspectId [{q,a},...]
 
 async function setLang(newLang) {
@@ -129,7 +146,7 @@ async function setLang(newLang) {
 
   renderBest();
   renderQuestions();
-  document.getElementById('best-status').textContent = '';
+  document.getElementById('best-status').textContent = gameOver ? LABELS[lang].gameOver : '';
 
   await loadCase();
   renderCase();
@@ -196,6 +213,7 @@ function renderConversation() {
 
 async function askQuestion(e){
   e.preventDefault();
+  if (gameOver) return;
   if (!selectedSuspect) return;
   const question = document.getElementById('q').value.trim();
   if (!question) return;
@@ -256,6 +274,7 @@ async function accuse(suspectId){
     renderBest();
     document.getElementById('best-status').textContent = rec.isNew ? LABELS[lang].newBest : '';
     renderVerdict(true);
+    setGameOver(true);
     await loadScores();
     await loadCredits(true);
   }catch(err){
@@ -271,12 +290,16 @@ function renderAccuseButtons(){
     const btn = document.createElement('button');
     btn.textContent = (lang==='pt'?'Acusar ':'Accuse ') + s.name;
     btn.addEventListener('click',()=>{
+      if (gameOver) return;
       if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
         accuse(s.id);
       }
     });
     container.appendChild(btn);
   });
+  if (gameOver) {
+    container.querySelectorAll('button').forEach(b => { b.disabled = true; });
+  }
 }
 
 async function loadScores(){
@@ -384,6 +407,8 @@ async function restartGame(){
   questionsUsed = 0;
   selectedSuspect = null;
   lastAccuseResult = null;
+  gameOver = false;
+  setGameOver(false);
   document.getElementById('log').innerHTML = '';
   const verdict = document.getElementById('verdict');
   verdict.hidden = true;

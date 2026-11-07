@@ -385,3 +385,31 @@ Receipts (seal-by 2026-11-08T00:05:00Z), 5 chat, first..last: 01M6SNF6SFB4WWXBJH
 - Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
 - Reproduced: enable_thinking=false honoured (3 of 3), cached_tokens 0 (5 of 5).
 - No new FullCup anomaly vs sprint 13.
+
+## M1 sprint 15: lock Ask/Accuse after verdict (v0.3.4), 2026-11-07 12:11-12:13 UTC (07/11 09:11-09:13 BRT, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 2000-4000, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 164 | LABELS.gameOver EN+PT, setGameOver, ask/accuse guards, restart clear, setLang/renderAccuseButtons, package 0.3.4 | 200 | 21.3 s | 1339 / 947 | 38.00 | public/best.js, public/index.html, package.json | accepted 10/10 |
+| 165 | test 18 Game over locks Ask and Accuse (static asserts) | 200 | 8.2 s | 816 / 568 | 22.91 | test/scoreboard.mjs | accepted |
+| 166 | CHANGELOG 0.3.4, README v0.3.4 / 95 checks + post-verdict lock, SPEC Game over + totals, HOW_TO_PLAY EN+PT | 200 | 18.5 s | 1049 / 807 | 31.55 | 4 files (8 edits) | accepted 8/8 |
+| 167 | rework: inject gameOver/setGameOver into ask+restart Function stubs (tests 15/16) | 200 | 7.0 s | 511 / 277 | 12.20 | test/scoreboard.mjs | rework, accepted 3/3 |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 7.3 / 5.6 s | 921 / 105 | 30.72 | - | 2/2 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.04-0.54 s | 0 | 0 | - | QA probe |
+
+Totals: 9 requests (4 build + 2 live + 3 probes), 4 636 in / 2 704 out tokens, 135.4 neurons, about US$ 0.0015 at $0.011/1k neurons. Build only: 4 calls, 3 715 / 2 599 tokens, 104.7 neurons. Wasted 0; rework 1 (167) = 12.2 neurons (12% of build). 0 API failures, slowest 21.3 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s15.mjs, tools/probe-s15.mjs (sed from s14).
+npm test: 95/95 (was 94). Mutation: test 18 fails without gameOver/setGameOver / LABELS.gameOver.
+Verdict: worth it. Post-verdict lock is a small UX guard; older stubbed busy/restart tests needed gameOver in scope (lesson: when product adds free vars into sliced functions, update Function stubs in the same sprint).
+Receipts (seal-by 2026-11-08T00:05:00Z), 6 chat, first..last: 01M6TYQ1SF3KWCYNR8RY6YH2HS (164) .. 01M6TYTAQM20G6YQB1QG7ADBNX (live PT); build 01M6TYQ1SF3KWCYNR8RY6YH2HS, 01M6TYQZ7MEHTK016GNYCJR0T3, 01M6TYR9C53KEGDT1SP3WN0VWH, 01M6TYSKXFZ1FW280BMCN1YT5M; live 01M6TYT3XMDQC8VZ3JJ0F097QW, 01M6TYTAQM20G6YQB1QG7ADBNX. Build ids in qa/build-log.json; live/probe in qa/key-usage-log.json (purpose sprint15-*).
+
+### FullCup observations, sprint 15 (evidence qa/s15-probes/)
+- Seal check (signed out, curl qa.fullcup.ai): s12 01M6Q345C32V3WYFWK20NBKCFA Genuine receipt, Exact cost $0.001077, one of 11 in the signed root of 2026-11-06, Sealed at 2026-11-07 00:05:25 UTC. s13 01M6RC6FD4G7PHA1CC7H3R1JZZ Genuine receipt, Exact cost $0.000531, same seal. s14 01M6SNF6SFB4WWXBJHVWD2271Z still Recorded, waiting for the daily seal / Will be sealed on 2026-11-08 00:05 UTC (expected). Snips in seal-*.snip.txt.
+- Reproduced: no per-call cost (6 of 6 chat 200s, no usage.cost or cost header).
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (6 of 6).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers; entries still include capabilities {type, endpoint, vision}.
+- Reproduced: flat 404 GET /v1/receipts/{id} {error:"unsupported_endpoint", message, supported, docs} listing POST /v1/images/generations.
+- Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
+- Reproduced: enable_thinking=false honoured (4 of 4), cached_tokens 0 (6 of 6).
+- No new FullCup anomaly vs sprint 14.

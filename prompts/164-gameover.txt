@@ -1,0 +1,113 @@
+# Task (sprint 15): lock Ask/Accuse after verdict (game over)
+After a successful accusation (verdict shown), disable #q, #ask-btn and Accuse buttons; set #best-status to LABELS[lang].gameOver (gameOver text wins over newBest); askQuestion and Accuse click paths no-op while locked; restartGame clears the lock and re-enables; setLang refreshes gameOver status; renderAccuseButtons disables buttons when locked. Bump package.json to 0.3.4. Do NOT declare M1 delivered.
+
+Output ONLY these literal edit blocks, in this order. Format each block: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, public/best.js. OLD is exactly these 2 lines:
+    startOver: 'Start over',
+    confirmRestart: 'Start a new game? Your current questions will be lost.'
+NEW is exactly these 3 lines:
+    startOver: 'Start over',
+    confirmRestart: 'Start a new game? Your current questions will be lost.',
+    gameOver: 'Game over. Use Start over for a new case.'
+
+Block 2, public/best.js. OLD is exactly these 2 lines:
+    startOver: 'Nova partida',
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.'
+NEW is exactly these 3 lines:
+    startOver: 'Nova partida',
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'
+
+Block 3, public/index.html. OLD is exactly these 2 lines:
+let lastAccuseResult = null;
+const histories = {}; // per suspectId [{q,a},...]
+NEW is exactly these 23 lines:
+let lastAccuseResult = null;
+let gameOver = false;
+function setGameOver(on){
+  gameOver = !!on;
+  const q = document.getElementById('q');
+  const ask = document.getElementById('ask-btn');
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  if (on) {
+    q.disabled = true;
+    ask.disabled = true;
+    accuseBtns.forEach(b => { b.disabled = true; });
+    document.getElementById('best-status').textContent = LABELS[lang].gameOver;
+  } else {
+    q.disabled = false;
+    ask.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+  }
+}
+const histories = {}; // per suspectId [{q,a},...]
+
+Block 4, public/index.html. OLD is exactly these 3 lines:
+  renderBest();
+  renderQuestions();
+  document.getElementById('best-status').textContent = '';
+NEW is exactly these 3 lines:
+  renderBest();
+  renderQuestions();
+  document.getElementById('best-status').textContent = gameOver ? LABELS[lang].gameOver : '';
+
+Block 5, public/index.html. OLD is exactly these 3 lines:
+async function askQuestion(e){
+  e.preventDefault();
+  if (!selectedSuspect) return;
+NEW is exactly these 4 lines:
+async function askQuestion(e){
+  e.preventDefault();
+  if (gameOver) return;
+  if (!selectedSuspect) return;
+
+Block 6, public/index.html. OLD is exactly these 3 lines:
+    document.getElementById('best-status').textContent = rec.isNew ? LABELS[lang].newBest : '';
+    renderVerdict(true);
+    await loadScores();
+NEW is exactly these 4 lines:
+    document.getElementById('best-status').textContent = rec.isNew ? LABELS[lang].newBest : '';
+    renderVerdict(true);
+    setGameOver(true);
+    await loadScores();
+
+Block 7, public/index.html. OLD is exactly these 5 lines:
+    btn.addEventListener('click',()=>{
+      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+        accuse(s.id);
+      }
+    });
+NEW is exactly these 6 lines:
+    btn.addEventListener('click',()=>{
+      if (gameOver) return;
+      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+        accuse(s.id);
+      }
+    });
+
+Block 8, public/index.html. OLD is exactly these 3 lines:
+    container.appendChild(btn);
+  });
+}
+NEW is exactly these 6 lines:
+    container.appendChild(btn);
+  });
+  if (gameOver) {
+    container.querySelectorAll('button').forEach(b => { b.disabled = true; });
+  }
+}
+
+Block 9, public/index.html. OLD is exactly these 2 lines:
+  lastAccuseResult = null;
+  document.getElementById('log').innerHTML = '';
+NEW is exactly these 4 lines:
+  lastAccuseResult = null;
+  gameOver = false;
+  setGameOver(false);
+  document.getElementById('log').innerHTML = '';
+
+Block 10, package.json. OLD is exactly this 1 line:
+  "version": "0.3.3",
+NEW is exactly this 1 line:
+  "version": "0.3.4",

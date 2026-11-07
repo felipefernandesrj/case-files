@@ -116,7 +116,8 @@ export const LABELS = {
     confirmAccuse: 'Accuse {name}? You only get one accusation.',
     thinking: '…thinking',
     startOver: 'Start over',
-    confirmRestart: 'Start a new game? Your current questions will be lost.'
+    confirmRestart: 'Start a new game? Your current questions will be lost.',
+    gameOver: 'Game over. Use Start over for a new case.'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -128,6 +129,7 @@ export const LABELS = {
     confirmAccuse: 'Acusar {name}? Você só tem uma acusação.',
     thinking: '…pensando',
     startOver: 'Nova partida',
-    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.'
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'
   }
 };

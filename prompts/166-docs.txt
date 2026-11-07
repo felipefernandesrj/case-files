@@ -1,0 +1,42 @@
+# Task (sprint 15): docs for v0.3.4 lock Ask/Accuse after verdict
+Output ONLY these literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes. Do NOT declare M1 delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly this 1 line:
+## 0.3.3 (M1 sprint 14, Escape clears question)
+NEW is a new entry, then an empty line, then that same OLD line. The new entry is exactly:
+## 0.3.4 (M1 sprint 15, lock Ask/Accuse after verdict)
+- After a successful accusation, Ask and Accuse stay locked and #best-status shows the game-over line (EN/PT).
+- Start over / Nova partida clears the lock and re-enables Ask and Accuse.
+- Added check that gameOver/setGameOver and LABELS.gameOver EN+PT are present and guarded.
+
+Block 2, README.md. OLD is exactly: M1 status (v0.3.3):
+NEW is exactly: M1 status (v0.3.4):
+
+Block 3, README.md. OLD is exactly: 94 automated checks.
+NEW is exactly: 95 automated checks.
+
+Block 4, README.md. OLD is exactly this fragment inside the M1 status sentence:
+Escape clears the question box while focused
+NEW is exactly:
+Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over
+
+Block 5, docs/SPEC.md. OLD is exactly this 1 line:
+- Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
+NEW is exactly these 2 lines:
+- Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
+- Game over: after a successful accusation, setGameOver(true) disables #q, #ask-btn and Accuse buttons, and #best-status shows LABELS.gameOver (EN "Game over. Use Start over for a new case." / PT "Fim de jogo. Use Nova partida para um novo caso."); askQuestion and Accuse clicks no-op while locked; restartGame clears the lock; setLang refreshes the game-over status; renderAccuseButtons keeps Accuse disabled while locked.
+
+Block 6, docs/SPEC.md. OLD is exactly this 1 line:
+Total checks: 94 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 17, keyboard: 13).
+NEW is exactly this 1 line:
+Total checks: 95 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 18, keyboard: 13).
+
+Block 7, docs/HOW_TO_PLAY.md. OLD is exactly this 1 line:
+The game works with Tab and Enter. Escape clears the question box while it is focused. Focus is always visible. Screen readers will announce answers and the final verdict.
+NEW is exactly this 1 line:
+The game works with Tab and Enter. Escape clears the question box while it is focused. After the verdict, Ask and Accuse stay locked until you use Start over. Focus is always visible. Screen readers will announce answers and the final verdict.
+
+Block 8, docs/HOW_TO_PLAY.md. OLD is exactly this 1 line:
+O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela está em foco. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.
+NEW is exactly this 1 line:
+O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela está em foco. Após o veredito, Perguntar e Acusar ficam bloqueados até você usar Nova partida. O foco está sempre visível. Leitores de tela anunciarão as respostas e o veredito final.

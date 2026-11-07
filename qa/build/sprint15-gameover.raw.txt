@@ -1,0 +1,109 @@
+<<<REPLACE public/best.js>>>
+    startOver: 'Start over',
+    confirmRestart: 'Start a new game? Your current questions will be lost.'
+=====
+    startOver: 'Start over',
+    confirmRestart: 'Start a new game? Your current questions will be lost.',
+    gameOver: 'Game over. Use Start over for a new case.'
+<<<END>>>
+<<<REPLACE public/best.js>>>
+    startOver: 'Nova partida',
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.'
+=====
+    startOver: 'Nova partida',
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'
+<<<END>>>
+<<<REPLACE public/index.html>>>
+let lastAccuseResult = null;
+const histories = {}; // per suspectId [{q,a},...]
+=====
+let lastAccuseResult = null;
+let gameOver = false;
+function setGameOver(on){
+  gameOver = !!on;
+  const q = document.getElementById('q');
+  const ask = document.getElementById('ask-btn');
+  const accuseBtns = document.querySelectorAll('#accuse-buttons button');
+  if (on) {
+    q.disabled = true;
+    ask.disabled = true;
+    accuseBtns.forEach(b => { b.disabled = true; });
+    document.getElementById('best-status').textContent = LABELS[lang].gameOver;
+  } else {
+    q.disabled = false;
+    ask.disabled = false;
+    accuseBtns.forEach(b => { b.disabled = false; });
+  }
+}
+const histories = {}; // per suspectId [{q,a},...]
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  renderBest();
+  renderQuestions();
+  document.getElementById('best-status').textContent = '';
+=====
+  renderBest();
+  renderQuestions();
+  document.getElementById('best-status').textContent = gameOver ? LABELS[lang].gameOver : '';
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function askQuestion(e){
+  e.preventDefault();
+  if (!selectedSuspect) return;
+=====
+async function askQuestion(e){
+  e.preventDefault();
+  if (gameOver) return;
+  if (!selectedSuspect) return;
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    document.getElementById('best-status').textContent = rec.isNew ? LABELS[lang].newBest : '';
+    renderVerdict(true);
+    await loadScores();
+=====
+    document.getElementById('best-status').textContent = rec.isNew ? LABELS[lang].newBest : '';
+    renderVerdict(true);
+    setGameOver(true);
+    await loadScores();
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    btn.addEventListener('click',()=>{
+      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+        accuse(s.id);
+      }
+    });
+=====
+    btn.addEventListener('click',()=>{
+      if (gameOver) return;
+      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+        accuse(s.id);
+      }
+    });
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    container.appendChild(btn);
+  });
+}
+=====
+    container.appendChild(btn);
+  });
+  if (gameOver) {
+    container.querySelectorAll('button').forEach(b => { b.disabled = true; });
+  }
+}
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  lastAccuseResult = null;
+  document.getElementById('log').innerHTML = '';
+=====
+  lastAccuseResult = null;
+  gameOver = false;
+  setGameOver(false);
+  document.getElementById('log').innerHTML = '';
+<<<END>>>
+<<<REPLACE package.json>>>
+  "version": "0.3.3",
+=====
+  "version": "0.3.4",
+<<<END>>>

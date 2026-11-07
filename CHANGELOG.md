@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.4 (M1 sprint 15, lock Ask/Accuse after verdict)
+- After a successful accusation, Ask and Accuse stay locked and #best-status shows the game-over line (EN/PT).
+- Start over / Nova partida clears the lock and re-enables Ask and Accuse.
+- Added check that gameOver/setGameOver and LABELS.gameOver EN+PT are present and guarded.
+
 ## 0.3.3 (M1 sprint 14, Escape clears question)
 - Escape while the question box is focused clears #q and keeps focus there.
 - Does not cancel accuse or restart confirms (native confirm already handles Escape).

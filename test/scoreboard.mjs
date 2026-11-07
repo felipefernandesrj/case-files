@@ -293,7 +293,7 @@ async function run() {
     const askQuestionObs = new Function(
       'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
       'renderQuestions', 'renderConversation', 'showError',
-      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+      'let questionsUsed = 0; let gameOver = false;\n' + src + '\nreturn askQuestion;'
     )(
       fakeDoc, observingFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
       () => { calls.renderQuestions++; },
@@ -324,7 +324,7 @@ async function run() {
     const askFail = new Function(
       'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
       'renderQuestions', 'renderConversation', 'showError',
-      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+      'let questionsUsed = 0; let gameOver = false;\n' + src + '\nreturn askQuestion;'
     )(
       fakeDoc2,
       async () => ({ ok: false, json: async () => ({ message: 'busy' }) }),
@@ -398,7 +398,7 @@ async function run() {
     const makeRestart = () => new Function(
       'document', 'fetch', 'confirm', 'API', 'LABELS', 'lang', 'histories',
       'renderQuestions', 'renderBest', 'renderCase', 'renderAccuseButtons', 'renderConversation',
-      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 };\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
+      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 }; let gameOver = true; function setGameOver(on){ gameOver = !!on; }\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
     )(
       fakeDoc, fakeFetch, fakeConfirm, '/api', LABELS, 'en', histories,
       () => { renders.q++; }, () => { renders.best++; }, () => { renders.case++; }, () => { renders.accuse++; }, () => { renders.conv++; }
@@ -443,6 +443,27 @@ async function run() {
     const slice = html.slice(escIdx, escIdx + 400);
     assert(slice.includes("focus()"), "refocuses #q after clear");
     assert(slice.includes("Escape"), "Escape in keydown handler");
+  }));
+
+  // 18. Game over locks Ask/Accuse after verdict
+  results.push(await test("Game over locks Ask and Accuse after verdict", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const best = fs.readFileSync('./public/best.js', 'utf8');
+    assert(html.includes('let gameOver') || html.includes('var gameOver') || /gameOver\s*=\s*false/.test(html), "declares gameOver");
+    assert(html.includes('function setGameOver') || html.includes('setGameOver('), "has setGameOver");
+    assert(best.includes("gameOver: 'Game over. Use Start over for a new case.'") || best.includes('gameOver: "Game over. Use Start over for a new case."'), "LABELS.en.gameOver");
+    assert(best.includes("gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'") || best.includes('gameOver: "Fim de jogo. Use Nova partida para um novo caso."'), "LABELS.pt.gameOver");
+    assert(/if\s*\(\s*gameOver\s*\)\s*return/.test(html), "askQuestion/accuse guard returns when gameOver");
+    const askIdx = html.indexOf('async function askQuestion');
+    assert(askIdx >= 0, "askQuestion present");
+    const askSlice = html.slice(askIdx, askIdx + 200);
+    assert(/if\s*\(\s*gameOver\s*\)\s*return/.test(askSlice), "askQuestion returns when gameOver before selectedSuspect");
+    assert(html.includes('setGameOver(true)'), "accuse success calls setGameOver(true)");
+    assert(html.includes('setGameOver(false)') || /gameOver\s*=\s*false/.test(html), "restart clears gameOver");
+    const restartIdx = html.indexOf('async function restartGame');
+    assert(restartIdx >= 0, "restartGame present");
+    const restartSlice = html.slice(restartIdx, restartIdx + 900);
+    assert(/gameOver\s*=\s*false/.test(restartSlice) || restartSlice.includes('setGameOver(false)'), "restartGame clears lock");
   }));
 
   const passed = results.filter(r => r.ok).length;

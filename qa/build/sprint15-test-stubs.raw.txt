@@ -1,0 +1,10 @@
+<<<REPLACE test/scoreboard.mjs>>>
+      'let questionsUsed = 0;\n' + src + '\nreturn askQuestion;'
+=====
+      'let questionsUsed = 0; let gameOver = false;\n' + src + '\nreturn askQuestion;'
+<<<END>>>
+<<<REPLACE test/scoreboard.mjs>>>
+      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 };\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
+=====
+      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 }; let gameOver = true; function setGameOver(on){ gameOver = !!on; }\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
+<<<END>>>
