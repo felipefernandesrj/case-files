@@ -1,0 +1,25 @@
+# Task (sprint 16): add test 19 for Ask hints when no suspect or empty question
+The product Ask hint changes are already on disk. Add only the automated test. Output ONLY one literal edit block. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, test/scoreboard.mjs. OLD is exactly this 1 line:
+  const passed = results.filter(r => r.ok).length;
+NEW: a new test 19, then an empty line, then that same original line. Use the file's own test(name, fn) and assert(cond, msg); fs is already imported; 2-space indentation, 4 spaces inside the test body. Exact NEW content:
+
+  // 19. Ask hints when no suspect or empty question
+  results.push(await test("Ask hints when no suspect or empty question", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const best = fs.readFileSync('./public/best.js', 'utf8');
+    assert(best.includes("pickSuspect: 'Choose a suspect first.'") || best.includes('pickSuspect: "Choose a suspect first."'), "LABELS.en.pickSuspect");
+    assert(best.includes("emptyQuestion: 'Type a question first.'") || best.includes('emptyQuestion: "Type a question first."'), "LABELS.en.emptyQuestion");
+    assert(best.includes("pickSuspect: 'Escolha um suspeito primeiro.'") || best.includes('pickSuspect: "Escolha um suspeito primeiro."'), "LABELS.pt.pickSuspect");
+    assert(best.includes("emptyQuestion: 'Digite uma pergunta primeiro.'") || best.includes('emptyQuestion: "Digite uma pergunta primeiro."'), "LABELS.pt.emptyQuestion");
+    const askIdx = html.indexOf('async function askQuestion');
+    assert(askIdx >= 0, "askQuestion present");
+    const askSlice = html.slice(askIdx, askIdx + 500);
+    assert(askSlice.includes("LABELS[lang].pickSuspect"), "askQuestion sets pickSuspect when no suspect");
+    assert(!/if\s*\(\s*!selectedSuspect\s*\)\s*return/.test(askSlice), "not a silent return when no suspect");
+    assert(askSlice.includes("LABELS[lang].emptyQuestion"), "askQuestion sets emptyQuestion when empty");
+    assert(askSlice.includes("getElementById('q').focus()") || askSlice.includes('getElementById("q").focus()'), "empty question focuses #q");
+  }));
+
+  const passed = results.filter(r => r.ok).length;

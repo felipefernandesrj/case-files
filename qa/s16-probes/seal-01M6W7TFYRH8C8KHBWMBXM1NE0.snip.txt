@@ -1,0 +1,1 @@
+01M6W7TFYRH8C8KHBWMBXM1NE0: EXISTS; Recorded, waiting for the daily seal; Exact cost $0.000170; 528 tokens (480 prompt / 48 completion); llama-4-scout-17b-16e-instruct; executed 2026-11-08 00:09:39 UTC; will be sealed about 2026-11-09 00:05 UTC; work case-files:play; NOT in local key-usage-log.json

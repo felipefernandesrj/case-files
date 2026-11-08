@@ -1,0 +1,1 @@
+01M6XH6E23J5KVNGRW6156VDNR: Recorded, waiting for the daily seal; Exact cost $0.000169; 500 tokens (441 prompt / 59 completion); llama-4-scout-17b-16e-instruct; executed 2026-11-08 12:12:43 UTC; will be sealed about 2026-11-09 00:05 UTC; work case-files:play; this-run sprint16-smoke:en:maya

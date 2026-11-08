@@ -1,0 +1,47 @@
+# Task (sprint 16): docs for v0.3.5 Ask hints when no suspect or empty question
+Output ONLY these literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes. Do NOT declare M1 delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly this 1 line:
+## 0.3.4 (M1 sprint 15, lock Ask/Accuse after verdict)
+NEW is a new entry, then an empty line, then that same OLD line. The new entry is exactly:
+## 0.3.5 (M1 sprint 16, Ask hints)
+- Ask shows a hint in #best-status when no suspect is selected (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently.
+- An empty question shows a hint (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and focuses #q.
+- Added check that pickSuspect/emptyQuestion EN+PT and the askQuestion hints are present.
+
+Block 2, package.json. OLD is exactly:
+    "version": "0.3.4",
+NEW is exactly:
+    "version": "0.3.5",
+
+Block 3, README.md. OLD is exactly: M1 status (v0.3.4):
+NEW is exactly: M1 status (v0.3.5):
+
+Block 4, README.md. OLD is exactly: 95 automated checks.
+NEW is exactly: 96 automated checks.
+
+Block 5, README.md. OLD is exactly this fragment inside the M1 status sentence:
+Ask and Accuse lock after the verdict until Start over
+NEW is exactly:
+Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently
+
+Block 6, docs/SPEC.md. OLD is exactly this 1 line:
+- Game over: after a successful accusation, setGameOver(true) disables #q, #ask-btn and Accuse buttons, and #best-status shows LABELS.gameOver (EN "Game over. Use Start over for a new case." / PT "Fim de jogo. Use Nova partida para um novo caso."); askQuestion and Accuse clicks no-op while locked; restartGame clears the lock; setLang refreshes the game-over status; renderAccuseButtons keeps Accuse disabled while locked.
+NEW is exactly these 2 lines:
+- Game over: after a successful accusation, setGameOver(true) disables #q, #ask-btn and Accuse buttons, and #best-status shows LABELS.gameOver (EN "Game over. Use Start over for a new case." / PT "Fim de jogo. Use Nova partida para um novo caso."); askQuestion and Accuse clicks no-op while locked; restartGame clears the lock; setLang refreshes the game-over status; renderAccuseButtons keeps Accuse disabled while locked.
+- Ask hints: if Ask is pressed with no selectedSuspect, #best-status shows LABELS.pickSuspect (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently; if the question is empty, #best-status shows LABELS.emptyQuestion (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and #q is focused.
+
+Block 7, docs/SPEC.md. OLD is exactly this 1 line:
+Total checks: 95 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 18, keyboard: 13).
+NEW is exactly this 1 line:
+Total checks: 96 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 19, keyboard: 13).
+
+Block 8, docs/HOW_TO_PLAY.md. OLD is exactly this 1 line:
+3. Type a question and press Enter or the Ask button. While the suspect answers, the question box and Accuse buttons stay locked.
+NEW is exactly this 1 line:
+3. Type a question and press Enter or the Ask button. If no suspect is chosen or the question is empty, the game explains what is missing. While the suspect answers, the question box and Accuse buttons stay locked.
+
+Block 9, docs/HOW_TO_PLAY.md. OLD is exactly this 1 line:
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
+NEW is exactly this 1 line:
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Se nenhum suspeito estiver escolhido ou a pergunta estiver vazia, o jogo explica o que falta. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.

@@ -413,3 +413,34 @@ Receipts (seal-by 2026-11-08T00:05:00Z), 6 chat, first..last: 01M6TYQ1SF3KWCYNR8
 - Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
 - Reproduced: enable_thinking=false honoured (4 of 4), cached_tokens 0 (6 of 6).
 - No new FullCup anomaly vs sprint 14.
+
+## M1 sprint 16: Ask hints when no suspect or empty question (v0.3.5), 2026-11-08 00:08 UTC (07/11 21:08 BRT, hints) and 2026-11-08 12:11-12:13 UTC (08/11 09:11-09:13 BRT, this run, Essential)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 4000, via the Cup key. Live smoke llama-4-scout.
+Hints product edits (168) landed last night and stayed in the working tree; tests, docs, live smoke, probes and commit were missing locally (notes had claimed commit ea797c2 and 96 tests; that commit does not exist). This run restored tracked qa/build, generated the remaining files via the key, then smoked and committed.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 168 | LABELS pickSuspect/emptyQuestion EN+PT + askQuestion writes #best-status (no silent return) and focuses #q | 200 | 4.2 s | 478 / 279 | 11.95 | public/best.js, public/index.html | accepted 3/3 (preexisting, 2026-11-08T00:08:17.214Z) |
+| 169 | test 19 Ask hints when no suspect or empty question (static asserts) | 200 | 11.2 s | 733 / 486 | 19.92 | test/scoreboard.mjs | accepted |
+| 170 | CHANGELOG 0.3.5, README v0.3.5 / 96 checks + Ask hints, SPEC Ask hints + totals, HOW_TO_PLAY EN+PT; package.json missed | 200 | 18.3 s | 1203 / 960 | 37.12 | CHANGELOG.md, README.md, docs/SPEC.md, docs/HOW_TO_PLAY.md (package.json 0 occurrences) | accepted 8/9; package.json OLD indent was 4 spaces vs file 2 spaces |
+| 171 | rework: package.json 0.3.5 (2-space indent) | 200 | 1.5 s | 235 / 38 | 3.17 | package.json | rework, accepted 1/1 |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 2.5 / 1.6 s | 921 / 105 | 30.72 | - | 2/2 HTTP 200 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.46 / 0.04 / 0.07 s | 0 | 0 | - | QA probe |
+
+Totals from local logs only: 9 requests (4 build + 2 live + 3 probes), 3 570 in / 1 868 out tokens, 102.9 neurons, about US$ 0.0011 at $0.011/1k neurons. Build only: 4 calls, 2 649 / 1 763 tokens, 72.16 neurons. Wasted 0; rework 1 (171) = 3.17 neurons (4.4% of build). 0 API failures, slowest 18.3 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s16.mjs, tools/probe-s16.mjs (sed from s15). Prompts 169/170/171 written by the agent; 168 already on disk.
+npm test: 96/96 (was 95; e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 19, keyboard 13). Mutation: test 19 fails on the pre-hint silent `if (!selectedSuspect) return` (missing pickSuspect/emptyQuestion and the silent-return regex).
+Verdict: worth it. Ask hints is a small UX guard so Ask explains a missing suspect or empty question. Lesson: copy package.json indent exactly (2 spaces); the docs prompt used 4 spaces and that one hunk did not apply.
+Receipts in local logs (seal-by 2026-11-09T00:05:00Z), 6 chat: build 01M6W7QX8TF6V66QVMK39M0W0W (168), 01M6XH4GCGHASKD871BRANYV89 (169), 01M6XH4Y5BRCW5V62EW2Z4BHW9 (170), 01M6XH5R5GT4Z15YSCEJJ68KCC (171); live 01M6XH6E23J5KVNGRW6156VDNR (EN), 01M6XH6G7BXX958W3821GNFP67 (PT). Build ids in qa/build-log.json; live/probe in qa/key-usage-log.json (purpose sprint16-*). last night's qa/build/sprint16-hints.raw.txt is not on disk (only the build-log entry remains).
+
+Claimed extra receipt IDs from last night's notes (exist on qa.fullcup.ai, not in local logs, not counted above): 01M6W7RMGE0HHXD5EFJMQDA254 (Recorded, Exact cost $0.000437, 2,294 tokens 1,258/1,036, gemma-4-26b-a4b-it, executed 2026-11-08 00:09:08 UTC, work case-files:build-m1; likely a test/docs call whose file output did not persist); 01M6W7TCW1CN8KVF662RBGHSR3 (Recorded, Exact cost $0.000164, 494 tokens 441/53, llama-4-scout-17b-16e-instruct, executed 2026-11-08 00:09:38 UTC, work case-files:play); 01M6W7TFYRH8C8KHBWMBXM1NE0 (Recorded, Exact cost $0.000170, 528 tokens 480/48, llama-4-scout-17b-16e-instruct, executed 2026-11-08 00:09:39 UTC, work case-files:play). Community post https://qa.fullcup.ai/p/01M6W7W7G2GX7J6X4D8T2HW211 was reported present ("M1 progress: sprint 16 done"); local test count is the 96/96 run after this run's generated files, not that post.
+
+### FullCup observations, sprint 16 (evidence qa/s16-probes/)
+- Seal check (signed out, curl qa.fullcup.ai): s14 01M6SNF6SFB4WWXBJHVWD2271Z Genuine receipt, Exact cost $0.000106, 669 tokens (475/194), gemma-4-26b-a4b-it, executed 2026-11-07 00:10:27 UTC, one of 11 in the signed root of 2026-11-07, Sealed at 2026-11-08 00:05:40 UTC. s15 01M6TYQ1SF3KWCYNR8RY6YH2HS Genuine receipt, Exact cost $0.000418, 2,286 tokens (1,339/947), gemma-4-26b-a4b-it, executed 2026-11-07 12:11:34 UTC, one of 11 in the signed root of 2026-11-07, Sealed at 2026-11-08 00:05:40 UTC. s16 hints 01M6W7QX8TF6V66QVMK39M0W0W Recorded, waiting for the daily seal, Exact cost $0.000131, 757 tokens (478/279), gemma-4-26b-a4b-it, executed 2026-11-08 00:08:17 UTC, will be sealed about 2026-11-09 00:05 UTC. This-run receipts 01M6XH4GCGHASKD871BRANYV89 ($0.000219, 1,219 tokens 733/486), 01M6XH4Y5BRCW5V62EW2Z4BHW9 ($0.000408, 2,163 tokens 1,203/960), 01M6XH5R5GT4Z15YSCEJJ68KCC ($0.000035, 273 tokens 235/38), 01M6XH6E23J5KVNGRW6156VDNR ($0.000169, 500 tokens 441/59, llama-4-scout), 01M6XH6G7BXX958W3821GNFP67 ($0.000169, 526 tokens 480/46, llama-4-scout) are all Recorded, waiting, seal about 2026-11-09 00:05 UTC. Snips in seal-*.snip.txt.
+- Reproduced: no per-call cost (6 of 6 chat 200s, no usage.cost or cost header). Public receipt pages do show Exact cost after the fact.
+- Reproduced: duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id, same value (6 of 6).
+- Reproduced: GET /v1/models has no x-ratelimit-* and no receipt headers; entries still include capabilities {type, endpoint, vision} (6 models).
+- Reproduced: flat 404 GET /v1/receipts/{id} {error:"unsupported_endpoint", message, supported, docs} listing POST /v1/images/generations.
+- Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
+- Reproduced: enable_thinking=false honoured (4 of 4), cached_tokens 0 (6 of 6).
+- No new FullCup anomaly vs sprint 15.

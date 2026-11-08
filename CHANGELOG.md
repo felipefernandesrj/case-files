@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.5 (M1 sprint 16, Ask hints)
+- Ask shows a hint in #best-status when no suspect is selected (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently.
+- An empty question shows a hint (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and focuses #q.
+- Added check that pickSuspect/emptyQuestion EN+PT and the askQuestion hints are present.
+
 ## 0.3.4 (M1 sprint 15, lock Ask/Accuse after verdict)
 - After a successful accusation, Ask and Accuse stay locked and #best-status shows the game-over line (EN/PT).
 - Start over / Nova partida clears the lock and re-enables Ask and Accuse.

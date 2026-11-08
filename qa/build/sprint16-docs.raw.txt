@@ -1,0 +1,59 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.3.4 (M1 sprint 15, lock Ask/Accuse after verdict)
+=====
+## 0.3.5 (M1 sprint 16, Ask hints)
+- Ask shows a hint in #best-status when no suspect is selected (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently.
+- An empty question shows a hint (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and focuses #q.
+- Added check that pickSuspect/emptyQuestion EN+PT and the askQuestion hints are present.
+
+## 0.3.4 (M1 sprint 15, lock Ask/Accuse after verdict)
+<<<END>>>
+
+<<<REPLACE package.json>>>
+    "version": "0.3.4",
+=====
+    "version": "0.3.5",
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.3.4):
+=====
+M1 status (v0.3.5):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+95 automated checks.
+=====
+96 automated checks.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+Ask and Accuse lock after the verdict until Start over
+=====
+Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Game over: after a successful accusation, setGameOver(true) disables #q, #ask-btn and Accuse buttons, and #best-status shows LABELS.gameOver (EN "Game over. Use Start over for a new case." / PT "Fim de jogo. Use Nova partida para um novo caso."); askQuestion and Accuse clicks no-op while locked; restartGame clears the lock; setLang refreshes the game-over status; renderAccuseButtons keeps Accuse disabled while locked.
+=====
+- Game over: after a successful accusation, setGameOver(true) disables #q, #ask-btn and Accuse buttons, and #best-status shows LABELS.gameOver (EN "Game over. Use Start over for a new case." / PT "Fim de jogo. Use Nova partida para um novo caso."); askQuestion and Accuse clicks no-op while locked; restartGame clears the lock; setLang refreshes the game-over status; renderAccuseButtons keeps Accuse disabled while locked.
+- Ask hints: if Ask is pressed with no selectedSuspect, #best-status shows LABELS.pickSuspect (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently; if the question is empty, #best-status shows LABELS.emptyQuestion (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and #q is focused.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 95 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 18, keyboard: 13).
+=====
+Total checks: 96 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 19, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+3. Type a question and press Enter or the Ask button. While the suspect answers, the question box and Accuse buttons stay locked.
+=====
+3. Type a question and press Enter or the Ask button. If no suspect is chosen or the question is empty, the game explains what is missing. While the suspect answers, the question box and Accuse buttons stay locked.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
+=====
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Se nenhum suspeito estiver escolhido ou a pergunta estiver vazia, o jogo explica o que falta. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
+<<<END>>>

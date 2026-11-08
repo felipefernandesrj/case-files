@@ -1,0 +1,1 @@
+01M6TYQ1SF3KWCYNR8RY6YH2HS: Genuine receipt; Exact cost $0.000418; 2,286 tokens (1,339 prompt / 947 completion); gemma-4-26b-a4b-it; executed 2026-11-07 12:11:34 UTC; one of 11 in the signed root of 2026-11-07; Sealed at 2026-11-08 00:05:40 UTC; work case-files:build-m1

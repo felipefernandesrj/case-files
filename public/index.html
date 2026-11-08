@@ -214,9 +214,9 @@ function renderConversation() {
 async function askQuestion(e){
   e.preventDefault();
   if (gameOver) return;
-  if (!selectedSuspect) return;
+  if (!selectedSuspect) { document.getElementById('best-status').textContent = LABELS[lang].pickSuspect; return; }
   const question = document.getElementById('q').value.trim();
-  if (!question) return;
+  if (!question) { document.getElementById('best-status').textContent = LABELS[lang].emptyQuestion; document.getElementById('q').focus(); return; }
   const qInput = document.getElementById('q');
   const askBtn = document.getElementById('ask-btn');
   const askForm = document.getElementById('ask-form');

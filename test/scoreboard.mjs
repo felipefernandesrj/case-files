@@ -466,6 +466,23 @@ async function run() {
     assert(/gameOver\s*=\s*false/.test(restartSlice) || restartSlice.includes('setGameOver(false)'), "restartGame clears lock");
   }));
 
+  // 19. Ask hints when no suspect or empty question
+  results.push(await test("Ask hints when no suspect or empty question", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const best = fs.readFileSync('./public/best.js', 'utf8');
+    assert(best.includes("pickSuspect: 'Choose a suspect first.'") || best.includes('pickSuspect: "Choose a suspect first."'), "LABELS.en.pickSuspect");
+    assert(best.includes("emptyQuestion: 'Type a question first.'") || best.includes('emptyQuestion: "Type a question first."'), "LABELS.en.emptyQuestion");
+    assert(best.includes("pickSuspect: 'Escolha um suspeito primeiro.'") || best.includes('pickSuspect: "Escolha um suspeito primeiro."'), "LABELS.pt.pickSuspect");
+    assert(best.includes("emptyQuestion: 'Digite uma pergunta primeiro.'") || best.includes('emptyQuestion: "Digite uma pergunta primeiro."'), "LABELS.pt.emptyQuestion");
+    const askIdx = html.indexOf('async function askQuestion');
+    assert(askIdx >= 0, "askQuestion present");
+    const askSlice = html.slice(askIdx, askIdx + 500);
+    assert(askSlice.includes("LABELS[lang].pickSuspect"), "askQuestion sets pickSuspect when no suspect");
+    assert(!/if\s*\(\s*!selectedSuspect\s*\)\s*return/.test(askSlice), "not a silent return when no suspect");
+    assert(askSlice.includes("LABELS[lang].emptyQuestion"), "askQuestion sets emptyQuestion when empty");
+    assert(askSlice.includes("getElementById('q').focus()") || askSlice.includes('getElementById("q").focus()'), "empty question focuses #q");
+  }));
+
   const passed = results.filter(r => r.ok).length;
   const failed = results.length - passed;
   console.log(`${passed} passed, ${failed} failed`);

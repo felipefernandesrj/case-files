@@ -1,0 +1,25 @@
+# Task (sprint 16): friendly hint when Ask is pressed with no suspect or an empty question
+Output ONLY these literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, public/best.js. OLD is exactly this 1 line:
+    gameOver: 'Game over. Use Start over for a new case.'
+NEW is exactly these 3 lines:
+    gameOver: 'Game over. Use Start over for a new case.',
+    pickSuspect: 'Choose a suspect first.',
+    emptyQuestion: 'Type a question first.'
+
+Block 2, public/best.js. OLD is exactly this 1 line:
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'
+NEW is exactly these 3 lines:
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
+    pickSuspect: 'Escolha um suspeito primeiro.',
+    emptyQuestion: 'Digite uma pergunta primeiro.'
+
+Block 3, public/index.html. OLD is exactly these 3 lines:
+  if (!selectedSuspect) return;
+  const question = document.getElementById('q').value.trim();
+  if (!question) return;
+NEW is exactly these lines:
+  if (!selectedSuspect) { document.getElementById('best-status').textContent = LABELS[lang].pickSuspect; return; }
+  const question = document.getElementById('q').value.trim();
+  if (!question) { document.getElementById('best-status').textContent = LABELS[lang].emptyQuestion; document.getElementById('q').focus(); return; }

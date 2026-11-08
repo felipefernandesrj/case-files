@@ -117,7 +117,9 @@ export const LABELS = {
     thinking: '…thinking',
     startOver: 'Start over',
     confirmRestart: 'Start a new game? Your current questions will be lost.',
-    gameOver: 'Game over. Use Start over for a new case.'
+    gameOver: 'Game over. Use Start over for a new case.',
+    pickSuspect: 'Choose a suspect first.',
+    emptyQuestion: 'Type a question first.'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -130,6 +132,8 @@ export const LABELS = {
     thinking: '…pensando',
     startOver: 'Nova partida',
     confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
-    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
+    pickSuspect: 'Escolha um suspeito primeiro.',
+    emptyQuestion: 'Digite uma pergunta primeiro.'
   }
 };
