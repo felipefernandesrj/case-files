@@ -1,0 +1,41 @@
+[
+ {
+  "lang": "en",
+  "suspect": "maya",
+  "q": "Where were you when the violin vanished, and did you notice anything about the lock?",
+  "status": 200,
+  "questions": 1,
+  "answer": "I was in the main hall rehearsing until 9:45 pm, then I entered the instrument room. I noticed the lock on the Stradivarius case had a faint scratch, indicating it had been tampered with. That's when I became concerned something was amiss.",
+  "words": 42,
+  "upstreamMs": 3829,
+  "receipt": "01M7038JJGT5PTN1VPAHDV6BCK",
+  "dupHeader": true,
+  "sealBy": "2026-11-10T00:05:00.000Z",
+  "cost": null
+ },
+ {
+  "lang": "pt",
+  "suspect": "carlos",
+  "q": "Onde você estava durante o ensaio e quem mais estava no prédio?",
+  "status": 200,
+  "questions": 1,
+  "answer": "Eu estava varrendo o corredor, fazendo meu trabalho de zelador. O maestro Lorenzo e a estudante Maya Santos estavam presentes, creio que ensaiando. Eu só os vi de longe, não conversei com eles.",
+  "words": 33,
+  "upstreamMs": 2240,
+  "receipt": "01M7038NZKWJ3HV9328T97JVMC",
+  "dupHeader": true,
+  "sealBy": "2026-11-10T00:05:00.000Z",
+  "cost": null
+ },
+ {
+  "accuse": 200,
+  "correct": false,
+  "questions": 1,
+  "score": 0,
+  "bestPt": "Ainda sem recorde em português.",
+  "bestPtInEnUi": "No best score yet in Portuguese.",
+  "bestEnInPtUi": "Ainda sem recorde em inglês.",
+  "newBest": false,
+  "isNew": false
+ }
+]

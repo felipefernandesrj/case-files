@@ -1,0 +1,57 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.3.5 (M1 sprint 16, Ask hints)
+=====
+## 0.3.6 (M1 sprint 17, clear stale hint)
+- Choosing a suspect clears the "Choose a suspect first." hint (EN/PT) from #best-status; other status messages such as the game-over line are left alone.
+- Added check that selectSuspect clears the pickSuspect hint in both languages.
+
+## 0.3.5 (M1 sprint 16, Ask hints)
+<<<END>>>
+
+<<<REPLACE package.json>>>
+  "version": "0.3.5",
+=====
+  "version": "0.3.6",
+<<<END>>>
+
+<<<REPLACE README.md>>>
+M1 status (v0.3.5):
+=====
+M1 status (v0.3.6):
+<<<END>>>
+
+<<<REPLACE README.md>>>
+96 automated checks.
+=====
+97 automated checks.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+Ask explains a missing suspect or empty question instead of returning silently
+=====
+Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect)
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+and #q is focused.
+=====
+and #q is focused. selectSuspect clears #best-status when it shows LABELS.en.pickSuspect or LABELS.pt.pickSuspect.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 96 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 19, keyboard: 13).
+=====
+Total checks: 97 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+the game explains what is missing.
+=====
+the game explains what is missing, and the hint disappears once you pick a suspect.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+o jogo explica o que falta.
+=====
+o jogo explica o que falta, e o aviso some quando você escolhe um suspeito.
+<<<END>>>

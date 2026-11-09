@@ -63,7 +63,7 @@
 - Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
 - Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
 - Game over: after a successful accusation, setGameOver(true) disables #q, #ask-btn and Accuse buttons, and #best-status shows LABELS.gameOver (EN "Game over. Use Start over for a new case." / PT "Fim de jogo. Use Nova partida para um novo caso."); askQuestion and Accuse clicks no-op while locked; restartGame clears the lock; setLang refreshes the game-over status; renderAccuseButtons keeps Accuse disabled while locked.
-- Ask hints: if Ask is pressed with no selectedSuspect, #best-status shows LABELS.pickSuspect (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently; if the question is empty, #best-status shows LABELS.emptyQuestion (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and #q is focused.
+- Ask hints: if Ask is pressed with no selectedSuspect, #best-status shows LABELS.pickSuspect (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently; if the question is empty, #best-status shows LABELS.emptyQuestion (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and #q is focused. selectSuspect clears #best-status when it shows LABELS.en.pickSuspect or LABELS.pt.pickSuspect.
 - Best lines use the UI language wording (bestText(lang, entry, ui)) and a new best is announced in the role=status line.
 
 ## Web page: closing screen
@@ -106,4 +106,4 @@ This executes:
 5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
 6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 96 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 19, keyboard: 13).
+Total checks: 97 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, keyboard: 13).

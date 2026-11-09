@@ -10,7 +10,7 @@ A priceless Stradivarius vanished from the instrument room of the Aurora Music A
 ### How to play
 1. Pick EN or PT at the top of the screen. Use "Start over" to begin a new game without reloading (you will be asked to confirm; your personal best is kept).
 2. Choose a suspect to talk to.
-3. Type a question and press Enter or the Ask button. If no suspect is chosen or the question is empty, the game explains what is missing. While the suspect answers, the question box and Accuse buttons stay locked.
+3. Type a question and press Enter or the Ask button. If no suspect is chosen or the question is empty, the game explains what is missing, and the hint disappears once you pick a suspect. While the suspect answers, the question box and Accuse buttons stay locked.
 4. Switch between suspects to compare their stories.
 5. When you are ready, type your name (or "anon") and press the button with the suspect's name in the "Accuse" section. The game asks you to confirm; you only get one accusation per game.
 
@@ -44,7 +44,7 @@ Um Stradivarius de valor inestimável desapareceu da sala de instrumentos da Aca
 ### Como jogar
 1. Escolha EN ou PT no topo da tela. Use "Nova partida" para começar de novo sem recarregar (o jogo pede confirmação; seu recorde pessoal é mantido).
 2. Escolha um suspeito para conversar.
-3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Se nenhum suspeito estiver escolhido ou a pergunta estiver vazia, o jogo explica o que falta. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
+3. Digite uma pergunta e aperte Enter ou o botão Perguntar. Se nenhum suspeito estiver escolhido ou a pergunta estiver vazia, o jogo explica o que falta, e o aviso some quando você escolhe um suspeito. Enquanto o suspeito responde, a caixa de pergunta e os botões Acusar ficam bloqueados.
 4. Troque de suspeito para comparar as histórias.
 5. Quando estiver pronto, digite seu nome (ou "anon") e aperte o botão com o nome do suspeito na seção "Acusar". O jogo pede confirmação; você tem apenas uma acusação por jogo.
 

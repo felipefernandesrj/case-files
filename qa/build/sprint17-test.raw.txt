@@ -1,0 +1,16 @@
+<<<REPLACE test/scoreboard.mjs>>>
+  const passed = results.filter(r => r.ok).length;
+=====
+  // 20. selectSuspect clears the stale pickSuspect hint
+  results.push(await test("selectSuspect clears stale pickSuspect hint", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const idx = html.indexOf('function selectSuspect');
+    assert(idx >= 0, "selectSuspect present");
+    const slice = html.slice(idx, idx + 600);
+    assert(slice.includes("getElementById('best-status')"), "selectSuspect reads #best-status");
+    assert(slice.includes("LABELS.en.pickSuspect") && slice.includes("LABELS.pt.pickSuspect"), "checks pickSuspect EN and PT");
+    assert(/textContent\s*=\s*''/.test(slice), "clears the hint");
+  }));
+
+  const passed = results.filter(r => r.ok).length;
+<<<END>>>

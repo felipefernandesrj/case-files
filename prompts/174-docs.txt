@@ -1,0 +1,45 @@
+# Task (sprint 17): docs for v0.3.6 clear stale Ask hint on suspect select
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud. Do NOT declare M1 delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly this 1 line:
+## 0.3.5 (M1 sprint 16, Ask hints)
+NEW is a new entry, then an empty line, then that same OLD line. The new entry is exactly:
+## 0.3.6 (M1 sprint 17, clear stale hint)
+- Choosing a suspect clears the "Choose a suspect first." hint (EN/PT) from #best-status; other status messages such as the game-over line are left alone.
+- Added check that selectSuspect clears the pickSuspect hint in both languages.
+
+Block 2, package.json. OLD is exactly this 1 line (2-space indent):
+  "version": "0.3.5",
+NEW is exactly this 1 line (2-space indent):
+  "version": "0.3.6",
+
+Block 3, README.md. OLD is exactly: M1 status (v0.3.5):
+NEW is exactly: M1 status (v0.3.6):
+
+Block 4, README.md. OLD is exactly: 96 automated checks.
+NEW is exactly: 97 automated checks.
+
+Block 5, README.md. OLD is exactly this fragment:
+Ask explains a missing suspect or empty question instead of returning silently
+NEW is exactly:
+Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect)
+
+Block 6, docs/SPEC.md. OLD is exactly this fragment at the end of the Ask hints line:
+and #q is focused.
+NEW is exactly:
+and #q is focused. selectSuspect clears #best-status when it shows LABELS.en.pickSuspect or LABELS.pt.pickSuspect.
+
+Block 7, docs/SPEC.md. OLD is exactly this 1 line:
+Total checks: 96 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 19, keyboard: 13).
+NEW is exactly this 1 line:
+Total checks: 97 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, keyboard: 13).
+
+Block 8, docs/HOW_TO_PLAY.md. OLD is exactly this fragment:
+the game explains what is missing.
+NEW is exactly:
+the game explains what is missing, and the hint disappears once you pick a suspect.
+
+Block 9, docs/HOW_TO_PLAY.md. OLD is exactly this fragment:
+o jogo explica o que falta.
+NEW is exactly:
+o jogo explica o que falta, e o aviso some quando você escolhe um suspeito.

@@ -1,0 +1,19 @@
+# Task (sprint 17): add test 20 for clearing the pickSuspect hint on suspect selection
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, test/scoreboard.mjs. OLD is exactly this 1 line:
+  const passed = results.filter(r => r.ok).length;
+NEW: a new test 20, then an empty line, then that same original line. Use the file's own test(name, fn) and assert(cond, msg); fs is already imported; 2-space indentation, 4 spaces inside the test body. Exact NEW content:
+
+  // 20. selectSuspect clears the stale pickSuspect hint
+  results.push(await test("selectSuspect clears stale pickSuspect hint", async () => {
+    const html = fs.readFileSync('./public/index.html', 'utf8');
+    const idx = html.indexOf('function selectSuspect');
+    assert(idx >= 0, "selectSuspect present");
+    const slice = html.slice(idx, idx + 600);
+    assert(slice.includes("getElementById('best-status')"), "selectSuspect reads #best-status");
+    assert(slice.includes("LABELS.en.pickSuspect") && slice.includes("LABELS.pt.pickSuspect"), "checks pickSuspect EN and PT");
+    assert(/textContent\s*=\s*''/.test(slice), "clears the hint");
+  }));
+
+  const passed = results.filter(r => r.ok).length;

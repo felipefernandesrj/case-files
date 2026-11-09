@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.6 (M1 sprint 17, clear stale hint)
+- Choosing a suspect clears the "Choose a suspect first." hint (EN/PT) from #best-status; other status messages such as the game-over line are left alone.
+- Added check that selectSuspect clears the pickSuspect hint in both languages.
+
 ## 0.3.5 (M1 sprint 16, Ask hints)
 - Ask shows a hint in #best-status when no suspect is selected (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently.
 - An empty question shows a hint (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and focuses #q.

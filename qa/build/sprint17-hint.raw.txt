@@ -1,0 +1,9 @@
+<<<REPLACE public/index.html>>>
+function selectSuspect(id) {
+  selectedSuspect = id;
+=====
+function selectSuspect(id) {
+  selectedSuspect = id;
+  const bs = document.getElementById('best-status');
+  if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
+<<<END>>>

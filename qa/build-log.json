@@ -5742,5 +5742,185 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "sprint17-hint",
+  "at": "2026-11-09T12:06:17.073Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3149,
+  "usage": {
+   "prompt_tokens": 275,
+   "completion_tokens": 98,
+   "total_tokens": 373,
+   "neurons": 5.172727584838867,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7037B798DQXF3VHKHHYFJ2A",
+   "x-fullcup-receipt-id": "01M7037B798DQXF3VHKHHYFJ2A",
+   "x-fullcup-seal-by": "2026-11-10T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794226020"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "sprint17-test",
+  "at": "2026-11-09T12:06:22.501Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 5320,
+  "usage": {
+   "prompt_tokens": 479,
+   "completion_tokens": 248,
+   "total_tokens": 727,
+   "neurons": 11.118181228637695,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7037DZCN4VAQSM0R0J5P4D1",
+   "x-fullcup-receipt-id": "01M7037DZCN4VAQSM0R0J5P4D1",
+   "x-fullcup-seal-by": "2026-11-10T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794226020"
+  },
+  "files": [
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "sprint17-docs",
+  "at": "2026-11-09T12:06:35.356Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 12794,
+  "usage": {
+   "prompt_tokens": 792,
+   "completion_tokens": 540,
+   "total_tokens": 1332,
+   "neurons": 21.92727279663086,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7037KH3A3GK8T51GZD21307",
+   "x-fullcup-receipt-id": "01M7037KH3A3GK8T51GZD21307",
+   "x-fullcup-seal-by": "2026-11-10T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "57",
+   "x-ratelimit-reset": "1794226020"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 2,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "sprint17-spec-rework",
+  "at": "2026-11-09T12:06:47.461Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 2679,
+  "usage": {
+   "prompt_tokens": 216,
+   "completion_tokens": 67,
+   "total_tokens": 283,
+   "neurons": 3.7909090518951416,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M70389EATXWNAAA41H2HZ9J5",
+   "x-fullcup-receipt-id": "01M70389EATXWNAAA41H2HZ9J5",
+   "x-fullcup-seal-by": "2026-11-10T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "56",
+   "x-ratelimit-reset": "1794226020"
+  },
+  "files": [
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
  }
 ]

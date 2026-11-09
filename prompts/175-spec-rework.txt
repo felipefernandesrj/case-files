@@ -1,0 +1,7 @@
+# Task (sprint 17 rework): remove a misplaced sentence from docs/SPEC.md
+Output ONLY one literal edit block. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. No prose, no fences, no em-dashes.
+
+Block 1, docs/SPEC.md. OLD is exactly this 1 fragment:
+and #q is focused. selectSuspect clears #best-status when it shows LABELS.en.pickSuspect or LABELS.pt.pickSuspect. The Start over button
+NEW is exactly this 1 fragment:
+and #q is focused. The Start over button

@@ -189,6 +189,8 @@ function renderCase() {
 
 function selectSuspect(id) {
   selectedSuspect = id;
+  const bs = document.getElementById('best-status');
+  if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
   document.querySelectorAll('#suspect-buttons button').forEach(b=>{
     b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
   });

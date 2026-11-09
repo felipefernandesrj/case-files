@@ -1,0 +1,5 @@
+<<<REPLACE docs/SPEC.md>>>
+and #q is focused. selectSuspect clears #best-status when it shows LABELS.en.pickSuspect or LABELS.pt.pickSuspect. The Start over button
+=====
+and #q is focused. The Start over button
+<<<END>>>

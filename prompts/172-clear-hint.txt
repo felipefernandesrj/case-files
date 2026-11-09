@@ -1,0 +1,11 @@
+# Task (sprint 17): clear the stale "Choose a suspect first." hint once a suspect is selected
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, public/index.html. OLD is exactly these 2 lines:
+function selectSuspect(id) {
+  selectedSuspect = id;
+NEW is exactly these 4 lines:
+function selectSuspect(id) {
+  selectedSuspect = id;
+  const bs = document.getElementById('best-status');
+  if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';

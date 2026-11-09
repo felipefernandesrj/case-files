@@ -444,3 +444,22 @@ Claimed extra receipt IDs from last night's notes (exist on qa.fullcup.ai, not i
 - Reproduced: 403 model_outside_capacity_class flat with allowed array of 6 ids, x-ratelimit-* on the 403.
 - Reproduced: enable_thinking=false honoured (4 of 4), cached_tokens 0 (6 of 6).
 - No new FullCup anomaly vs sprint 15.
+
+## M1 sprint 17: clear stale Ask hint when a suspect is selected (v0.3.6), 2026-11-09 12:06 UTC (09:06 BRT)
+Model gemma-4-26b-a4b-it, thinking off, max_tokens 4000, via the Cup key. Live smoke llama-4-scout.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 172 | selectSuspect clears pickSuspect hint (EN/PT) | 200 | 3.1 s | 275 / 98 | 5.17 | public/index.html | accepted 1/1 |
+| 173 | test 20 selectSuspect clears stale hint | 200 | 5.3 s | 479 / 248 | 11.12 | test/scoreboard.mjs | accepted |
+| 174 | CHANGELOG 0.3.6, package.json, README, SPEC, HOW_TO_PLAY EN+PT | 200 | 12.8 s | 792 / 540 | 21.93 | 5 files | accepted 9/9, but SPEC fragment "and #q is focused." matched 2 lines, a sentence landed in the Ask busy line too |
+| 175 | rework: remove misplaced SPEC sentence | 200 | 2.7 s | 216 / 67 | 3.79 | docs/SPEC.md | rework, accepted |
+| live | smoke EN Maya + PT Carlos + PT wrong accuse | 200 x3 (2 key calls) | 3.8 / 2.2 s | 921 / 103 | 30.57 | - | 2/2 HTTP 200 |
+| probes | GET /models, GET /receipts/{id}, disallowed model | 200 / 404 / 403 | 0.51 / 0.05 / 0.18 s | 0 | 0 | - | QA probe |
+
+Totals: 9 requests (4 build + 2 live + 3 probes), 2 683 in / 1 056 out tokens, 72.58 neurons, about US$ 0.0008 at $0.011/1k neurons. Build only: 4 calls, 1 762 / 953 tokens, 42.01 neurons. Wasted 0; rework 1 (175) = 3.79 neurons (9.0% of build). 0 API failures, slowest 12.8 s.
+Manual lines: 0 product, 0 docs. Harness: tools/smoke-s17.mjs, tools/probe-s17.mjs (sed from s16). Prompts 172-175 written by the agent.
+npm test: 97/97 (was 96; e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, keyboard 13).
+Verdict: small UX polish, worth it. Lesson: when OLD is a short fragment, make it unique (the "and #q is focused." fragment occurred twice).
+Receipts (seal-by 2026-11-10T00:05:00Z): build 01M7037B798DQXF3VHKHHYFJ2A (172), 01M7037DZCN4VAQSM0R0J5P4D1 (173), 01M7037KH3A3GK8T51GZD21307 (174), 01M70389EATXWNAAA41H2HZ9J5 (175); live 01M7038JJGT5PTN1VPAHDV6BCK (EN), 01M7038NZKWJ3HV9328T97JVMC (PT).
+Seal check of s16 receipts (signed out, curl): all 9 Genuine receipt, sealed 2026-11-09 00:05:24 UTC, signed root of 2026-11-08. Snips in qa/s17-probes/seal-*.snip.txt.
