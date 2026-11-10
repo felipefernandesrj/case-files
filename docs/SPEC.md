@@ -104,6 +104,11 @@ This executes:
 3. `node test/consistency.mjs` (Case consistency)
 4. `node test/capacity.mjs` (Capacity messages)
 5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
-6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not wired into the game)
+7. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 97 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, keyboard: 13).
+Total checks: 105 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, keyboard: 13).
+
+### Case engine (`src/case.js`, M2)
+- `fairPlay(c, { suspects = 3 } = {})`: same rules as before with the expected suspect count as an option (The Night Train uses 4).
+- `timelineCheck(c)`: `c.timeline` is a non-empty array of stops `{id, time "HH:MM", stop{en,pt}, event{en,pt}, who[], crime?}`; ids unique, times strictly increasing (one midnight wrap allowed), every `who` entry a suspect id, exactly one `crime: true` stop whose `who` includes the culprit. Reasons: timeline_missing, timeline_bad_id, timeline_bad_time, timeline_missing_text, timeline_unknown_suspect, timeline_out_of_order, timeline_crime_count, timeline_culprit_absent.

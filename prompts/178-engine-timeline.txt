@@ -1,0 +1,38 @@
+# Task (M2 sprint 1): shared case engine, step 1 in src/case.js
+fairPlay gets an optional suspect count (default 3, so The Vanishing Violin is unchanged) and a new export timelineCheck validates a case timeline (The Night Train has 4 suspects and 5 timeline stops that cross midnight). Do not change any other function. Nothing is wired into the server or the page.
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Every OLD is unique in the file. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, src/case.js. OLD is exactly these 3 lines:
+ * Validate that a case follows the "fair play" rules.
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+NEW is exactly these 4 lines:
+ * Validate that a case follows the "fair play" rules.
+ * @param {Object} c
+ * @param {{suspects?: number}} [opts] expected suspect count (default 3)
+ * @returns {{ok:boolean, reasons:string[]}}
+
+Block 2, src/case.js. OLD is exactly this 1 line:
+export function fairPlay(c) {
+NEW is exactly this 1 line:
+export function fairPlay(c, { suspects = 3 } = {}) {
+
+Block 3, src/case.js. OLD is exactly these 2 lines:
+  // Exactly three suspects
+  if (suspectIds.length !== 3) {
+NEW is exactly these 2 lines:
+  // Exactly `suspects` suspects (3 by default)
+  if (suspectIds.length !== suspects) {
+
+Block 4, src/case.js. OLD is exactly these 2 lines (the end of fairPlay, last lines of the file):
+  return { ok: reasons.length === 0, reasons };
+}
+NEW: those same 2 lines, an empty line, then a new exported function timelineCheck(c) with a JSDoc block (@param {Object} c, @returns {{ok:boolean, reasons:string[]}}), 2-space indentation, plain ES2020, no imports. Behaviour, pushing each reason string at most once (use a Set, return [...set]):
+- c.timeline missing or not a non-empty array: reason 'timeline_missing', return at once.
+- each stop: id is a non-empty string and unique across stops, else 'timeline_bad_id'.
+- time matches /^([01]\d|2[0-3]):[0-5]\d$/, else 'timeline_bad_time'.
+- stop.en, stop.pt, event.en, event.pt are non-empty strings, else 'timeline_missing_text'.
+- who is a non-empty array whose every entry is a suspect id of c.suspects, else 'timeline_unknown_suspect'.
+- order: convert each valid time to minutes; when a time is lower than the previous one add 1440 (the night crosses midnight, at most once); a second drop or a time equal to the previous one gives 'timeline_out_of_order'.
+- exactly one stop has crime === true, else 'timeline_crime_count'; if exactly one, its who must include c.culprit, else 'timeline_culprit_absent'.
+Return { ok: reasons.length === 0, reasons }.

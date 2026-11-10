@@ -1,0 +1,40 @@
+# Task (M2 sprint 1): docs for v0.4.1 (Night Train case file, M2 in progress)
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Every OLD below is unique in its file; copy OLD and NEW byte for byte (package.json uses 2-space indent). No prose, no fences, no em-dashes, no thinking aloud. Do NOT declare M2 delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly:
+## 0.4.0 (M1 delivered, 2026-11-09)
+NEW is exactly:
+## 0.4.1 (M2 sprint 1, Night Train case file)
+- M2 "Case 2: The Night Train" is in progress. New case file content/cases/night-train.json: 4 suspects (Helena, Victor, Tomás, Inês) with EN and PT role, persona and alibi, a 5 stop timeline that crosses midnight, 5 clues, glossary and solution.
+- Shared case engine, step 1: fairPlay(c, { suspects }) takes the expected suspect count (default 3, so The Vanishing Violin is unchanged) and the new timelineCheck(c) checks stop order, EN and PT text, known suspects and one crime stop with the culprit.
+- Added test/night-train.mjs (8 checks): fair play with 4 suspects, timeline checks and broken timelines, public text never names the culprit, PT prompts keep other suspects' facts private, and the case is not wired into the game yet.
+- Not playable yet: the server and the page still load only The Vanishing Violin. M2 is not delivered.
+
+## 0.4.0 (M1 delivered, 2026-11-09)
+
+Block 2, package.json. OLD is exactly:
+  "version": "0.4.0",
+NEW is exactly:
+  "version": "0.4.1",
+
+Block 3, README.md. OLD is exactly:
+**M1 Delivered (2026-11-09, v0.4.0).** Next: M2, The Night Train.
+NEW is exactly:
+**M1 Delivered (2026-11-09, v0.4.0).**
+
+**M2 in progress (v0.4.1, sprint 1).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks. It is not playable yet; the game still serves The Vanishing Violin. 105 automated checks.
+
+Block 4, docs/SPEC.md. OLD is exactly:
+6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+NEW is exactly:
+6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not wired into the game)
+7. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Block 5, docs/SPEC.md. OLD is exactly:
+Total checks: 97 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, keyboard: 13).
+NEW is exactly:
+Total checks: 105 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, keyboard: 13).
+
+### Case engine (`src/case.js`, M2)
+- `fairPlay(c, { suspects = 3 } = {})`: same rules as before with the expected suspect count as an option (The Night Train uses 4).
+- `timelineCheck(c)`: `c.timeline` is a non-empty array of stops `{id, time "HH:MM", stop{en,pt}, event{en,pt}, who[], crime?}`; ids unique, times strictly increasing (one midnight wrap allowed), every `who` entry a suspect id, exactly one `crime: true` stop whose `who` includes the culprit. Reasons: timeline_missing, timeline_bad_id, timeline_bad_time, timeline_missing_text, timeline_unknown_suspect, timeline_out_of_order, timeline_crime_count, timeline_culprit_absent.

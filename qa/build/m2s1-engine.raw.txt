@@ -1,0 +1,103 @@
+<<<REPLACE src/case.js>>>
+ * Validate that a case follows the "fair play" rules.
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+=====
+ * Validate that a case follows the "fair play" rules.
+ * @param {Object} c
+ * @param {{suspects?: number}} [opts] expected suspect count (default 3)
+ * @returns {{ok:boolean, reasons:string[]}}
+<<<END>>>
+
+<<<REPLACE src/case.js>>>
+export function fairPlay(c) {
+=====
+export function fairPlay(c, { suspects = 3 } = {}) {
+<<<END>>>
+
+<<<REPLACE src/case.js>>>
+  // Exactly three suspects
+  if (suspectIds.length !== 3) {
+=====
+  // Exactly `suspects` suspects (3 by default)
+  if (suspectIds.length !== suspects) {
+<<<END>>>
+
+<<<REPLACE src/case.js>>>
+  return { ok: reasons.length === 0, reasons };
+}
+=====
+  return { ok: reasons.length === 0, reasons };
+}
+
+/**
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+ */
+export function timelineCheck(c) {
+  if (!Array.isArray(c.timeline) || c.timeline.length === 0) {
+    return { ok: false, reasons: ['timeline_missing'] };
+  }
+
+  const reasons = new Set();
+  const stopIds = new Set();
+  const suspectIds = new Set(c.suspects || []);
+  let crimeCount = 0;
+  let crimeStop = null;
+
+  const timeToMins = (t) => {
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  };
+
+  let lastMins = -1;
+  let midnightCrossed = false;
+
+  for (const stop of c.timeline) {
+    if (!stop.id || typeof stop.id !== 'string' || stopIds.has(stop.id)) {
+      reasons.add('timeline_bad_id');
+    }
+    stopIds.add(stop.id);
+
+    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(stop.time)) {
+      reasons.add('timeline_bad_time');
+    } else {
+      let currentMins = timeToMins(stop.time);
+      if (lastMins !== -1) {
+        if (currentMins < lastMins) {
+          if (midnightCrossed) {
+            reasons.add('timeline_out_of_order');
+          } else {
+            currentMins += 1440;
+            midnightCrossed = true;
+          }
+        } else if (currentMins === lastMins) {
+          reasons.add('timeline_out_of_order');
+        }
+      }
+      lastMins = currentMins;
+    }
+
+    if (!stop.en || !stop.pt || !stop.event?.en || !stop.event?.pt) {
+      reasons.add('timeline_missing_text');
+    }
+
+    if (!Array.isArray(stop.who) || stop.who.length === 0 || !stop.who.every(id => suspectIds.has(id))) {
+      reasons.add('timeline_unknown_suspect');
+    }
+
+    if (stop.crime) {
+      crimeCount++;
+      crimeStop = stop;
+    }
+  }
+
+  if (crimeCount !== 1) {
+    reasons.add('timeline_crime_count');
+  } else if (!crimeStop.who.includes(c.culprit)) {
+    reasons.add('timeline_culprit_absent');
+  }
+
+  return { ok: reasons.size === 0, reasons: [...reasons] };
+}
+<<<END>>>

@@ -1,0 +1,27 @@
+# Task (M2 sprint 1): new case file content/cases/night-train.json (data only, not wired into the game)
+Output ONLY one file block: <<<FILE content/cases/night-train.json>>> newline, the full JSON, newline, <<<END>>>. Valid JSON (double quotes, no comments, no trailing commas), 2-space indentation. No prose, no fences, no em-dashes, no thinking aloud. Every "pt" value is natural Brazilian Portuguese. Keep each text to 1 or 2 short sentences.
+
+Top-level keys in this order: id, title, intro, culprit, suspects, timeline, clues, glossary, solution.
+- id: "case-night-train-002"
+- title: en "The Night Train", pt "O Trem Noturno"
+- intro {en, pt}: on the overnight train Southern Star, the Duchess's sapphire necklace vanishes from the locked safe in the luggage car between Alder Crossing and Port Elling. Four people had a reason to be near it. Who took it?
+- culprit: "ines"
+- suspects: exactly these 4, in this order, each {id, name, role{en,pt}, persona{en,pt}, alibi{en,pt}, facts}. facts is ONE English string of private role-play instructions in second person ("You are ...", 3 to 5 sentences).
+  1. id "helena", name "Helena Costa", role en "Train conductor" pt "Chefe de trem". Locked the necklace in the safe at Alder Crossing and holds the only key. Alibi: she was at the door of sleeper 7 talking to Victor when the lights came back after the tunnel. Proud, by the book, afraid of losing her job.
+  2. id "victor", name "Victor Hale", role en "Jeweller, passenger" pt "Joalheiro, passageiro". Valued the necklace for the Duchess. Alibi: in sleeper 7 all night, opened the door to Helena in pajamas when the lights came back. Smooth talker, hides that he owes money.
+  3. id "tomas", name "Tomás Reyes", role en "Night porter" pt "Carregador noturno". Loaded mailbags at Grey Hollow. Alibi: during the blackout he was in the corridor of car 4, at the far end from the luggage car, singing to calm passengers. Cheerful, gossipy.
+  4. id "ines", name "Inês Duarte", role en "Dining car chef" pt "Cozinheira do vagão-restaurante". The culprit: during the tunnel blackout she slipped into the luggage car, opened the safe with a key copied from Helena's ring, and hid the necklace in a flour tin. Her facts say she lies that she was cleaning the kitchen the whole time and never admits touching the safe. Alibi (her false claim): cleaning the dining car kitchen alone during the blackout.
+- timeline: exactly 5 stops in time order, each {id, time "HH:MM", stop{en,pt}, event{en,pt}, who: [suspect ids involved]}; mark only the crime stop with "crime": true (omit the key elsewhere):
+  t1 "21:10" Alder Crossing: departure; Helena locks the necklace in the luggage car safe; who all 4.
+  t2 "22:05" Millbrook: Victor goes to sleeper 7; Inês closes the dining car; who victor, ines.
+  t3 "23:20" Grey Hollow: 10 minute stop; Tomás loads mailbags on the platform; who tomas, helena.
+  t4 "23:35" Black Ridge Tunnel: the lights go out for 4 minutes; the necklace is taken; who ines; "crime": true.
+  t5 "00:40" Port Elling: Helena finds the safe open and empty; who helena, victor, tomas, ines.
+- clues: exactly 5, each {id, from, ask, keywords, implicates, clears, text{en,pt}}; ask is an English question; keywords has 2 to 4 lowercase words mixing EN and PT; implicates and clears are a suspect id or null:
+  c1 from tomas, implicates ines, clears null: right after the tunnel he saw someone in a white chef's apron leave the luggage car.
+  c2 from helena, implicates ines, clears null: at Port Elling she found flour smudges on the safe handle.
+  c3 from victor, implicates null, clears helena: Helena was at his door when the lights came back.
+  c4 from helena, implicates null, clears victor: Victor opened sleeper 7 in pajamas when the lights came back, three cars from the luggage car.
+  c5 from victor, implicates null, clears tomas: during the blackout he heard Tomás singing in car 4, far from the luggage car.
+- glossary: array of {en, pt}: train/trem, conductor/chefe de trem, porter/carregador, chef/cozinheira, necklace/colar, safe/cofre, luggage car/vagão de bagagem, tunnel/túnel, sleeper/cabine-leito, flour/farinha.
+- solution {en, pt}: Inês Duarte took the necklace during the tunnel blackout with a copied key and hid it in a flour tin; the apron seen by Tomás and the flour on the safe point to her; Helena, Victor and Tomás are cleared by each other's accounts.

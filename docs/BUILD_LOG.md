@@ -179,3 +179,13 @@ Model: @cf/google/gemma-4-26b-a4b-it only, via the QA Cup key, thinking off, max
 
 ## M1 delivered (2026-11-09, v0.4.0)
 - Acceptance: npm test 97/97, live EN + PT smoke 2/2 via the Cup key (tools/smoke-m1.mjs). No product change; docs by hand. See docs/M1_DELIVERY.md.
+
+## M2 sprint 1 (v0.4.1, Night Train case file), 2026-11-10 12:08-12:16 UTC (09:08-09:16 BRT)
+Model: @cf/google/gemma-4-26b-a4b-it via the QA Cup key, thinking off, max_tokens 4000. M2 in progress, not playable, not declared.
+- Calls 176-177: content/cases/night-train.json (4 suspects Helena, Victor, Tomás, Inês; 5 stop timeline 21:10 to 00:40; 5 clues; glossary; solution; EN + PT). 177 removed an answer leak (Inês public persona "The culprit."), named the facts and moved clues to first person.
+- Calls 178-179: src/case.js fairPlay(c, { suspects = 3 }) and new timelineCheck(c); 179 fixed 3 bugs in the first version.
+- Calls 180-181: test/night-train.mjs (8 checks) in npm test; 181 fixed test 5.
+- Calls 182-183: CHANGELOG 0.4.1, package.json 0.4.1, README "M2 in progress", SPEC test list, totals and Case engine section; 183 restored text cut at an empty line.
+- Live smoke (tools/smoke-m2s1.mjs, llama-4-scout, Violin regression): EN Maya 200 41 words, correct accuse 100; PT Carlos 200 34 words, wrong accuse 0, no best. qa/live-smoke-m2s1.json.
+- Result: npm test 105/105 (was 97). 10 key calls, 9 277 / 8 999 tokens, 349.2 neurons (~US$ 0.0038), rework 4 calls = 35% of build neurons, 0 API failures.
+- Details, receipts and FullCup observations: qa/rework.md (M2 sprint 1).

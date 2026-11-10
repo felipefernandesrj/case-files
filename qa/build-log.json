@@ -5922,5 +5922,493 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "m2s1-case",
+  "at": "2026-11-10T12:09:29.044Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 53570,
+  "usage": {
+   "prompt_tokens": 1278,
+   "completion_tokens": 2737,
+   "total_tokens": 4015,
+   "neurons": 86.26363372802734,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72NRCX1X2EZASSMTQP2SDPW",
+   "x-fullcup-receipt-id": "01M72NRCX1X2EZASSMTQP2SDPW",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794312540"
+  },
+  "files": [
+   {
+    "path": "content/cases/night-train.json",
+    "lines": 296
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s1-case-rework",
+  "at": "2026-11-10T12:11:00.158Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 34591,
+  "usage": {
+   "prompt_tokens": 2031,
+   "completion_tokens": 1619,
+   "total_tokens": 3650,
+   "neurons": 62.61817932128906,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72NVRKSW176ZY3MFBA6B26T",
+   "x-fullcup-receipt-id": "01M72NVRKSW176ZY3MFBA6B26T",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794312660"
+  },
+  "files": [
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s1-engine",
+  "at": "2026-11-10T12:11:48.625Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 17896,
+  "usage": {
+   "prompt_tokens": 875,
+   "completion_tokens": 924,
+   "total_tokens": 1799,
+   "neurons": 33.154544830322266,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72NXQQ0N4DYXTM04RYT28MG",
+   "x-fullcup-receipt-id": "01M72NXQQ0N4DYXTM04RYT28MG",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794312720"
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 73
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s1-engine-rework",
+  "at": "2026-11-10T12:12:29.242Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 16308,
+  "usage": {
+   "prompt_tokens": 958,
+   "completion_tokens": 638,
+   "total_tokens": 1596,
+   "neurons": 26.109088897705078,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72NZ0EM2M0RE01QBPY54FQJ",
+   "x-fullcup-receipt-id": "01M72NZ0EM2M0RE01QBPY54FQJ",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794312780"
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s1-test",
+  "at": "2026-11-10T12:13:53.660Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 51904,
+  "usage": {
+   "prompt_tokens": 1073,
+   "completion_tokens": 1801,
+   "total_tokens": 2874,
+   "neurons": 58.87272644042969,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72P0G79M201C0NNYPGKWYJ1",
+   "x-fullcup-receipt-id": "01M72P0G79M201C0NNYPGKWYJ1",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794312840"
+  },
+  "files": [
+   {
+    "path": "test/night-train.mjs",
+    "lines": 134
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s1-test-rework",
+  "at": "2026-11-10T12:14:16.757Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 2334,
+  "usage": {
+   "prompt_tokens": 310,
+   "completion_tokens": 77,
+   "total_tokens": 387,
+   "neurons": 4.918181419372559,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72P2Q5QDBQTJY3C3HVTTZ54",
+   "x-fullcup-receipt-id": "01M72P2Q5QDBQTJY3C3HVTTZ54",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794312900"
+  },
+  "files": [
+   {
+    "path": "test/night-train.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s1-docs",
+  "at": "2026-11-10T12:15:07.532Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 13904,
+  "usage": {
+   "prompt_tokens": 1106,
+   "completion_tokens": 669,
+   "total_tokens": 1775,
+   "neurons": 28.299999237060547,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72P3XPF1066JA2FYWMB58AB",
+   "x-fullcup-receipt-id": "01M72P3XPF1066JA2FYWMB58AB",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794312900"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s1-docs-rework",
+  "at": "2026-11-10T12:15:58.473Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 24963,
+  "usage": {
+   "prompt_tokens": 725,
+   "completion_tokens": 430,
+   "total_tokens": 1155,
+   "neurons": 18.31818199157715,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M72P54E85ENNJSGXJG0KJBCP",
+   "x-fullcup-receipt-id": "01M72P54E85ENNJSGXJG0KJBCP",
+   "x-fullcup-seal-by": "2026-11-11T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794312960"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   }
+  ],
+  "skipped": []
  }
 ]

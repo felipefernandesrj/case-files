@@ -1,0 +1,64 @@
+# Task (M2 sprint 1, rework): fix timelineCheck from call 178 in src/case.js
+Review found: suspectIds is built from suspect objects, not ids, so every who entry is unknown; the text check reads stop.en/stop.pt but the stop name lives in stop.stop.en/stop.stop.pt; after the midnight wrap the next stop is compared raw against a shifted minute count and is wrongly out of order; crimeStop.who is not guarded; the JSDoc has no description line.
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Every OLD below is unique in the file; copy OLD and NEW byte for byte with the same indentation. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, src/case.js. OLD is exactly:
+/**
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+ */
+export function timelineCheck(c) {
+NEW is exactly:
+/**
+ * Validate a case timeline: stops in time order (the night may cross midnight once), EN and PT text, known suspects, one crime stop with the culprit.
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+ */
+export function timelineCheck(c) {
+
+Block 2, src/case.js. OLD is exactly:
+  const suspectIds = new Set(c.suspects || []);
+NEW is exactly:
+  const suspectIds = new Set((c.suspects ?? []).map(s => s.id));
+
+Block 3, src/case.js. OLD is exactly:
+  let midnightCrossed = false;
+NEW is exactly:
+  let offset = 0;
+
+Block 4, src/case.js. OLD is exactly:
+      let currentMins = timeToMins(stop.time);
+      if (lastMins !== -1) {
+        if (currentMins < lastMins) {
+          if (midnightCrossed) {
+            reasons.add('timeline_out_of_order');
+          } else {
+            currentMins += 1440;
+            midnightCrossed = true;
+          }
+        } else if (currentMins === lastMins) {
+          reasons.add('timeline_out_of_order');
+        }
+      }
+      lastMins = currentMins;
+NEW is exactly:
+      let currentMins = timeToMins(stop.time) + offset;
+      if (lastMins !== -1 && currentMins < lastMins && offset === 0) {
+        offset = 1440;
+        currentMins += 1440;
+      }
+      if (lastMins !== -1 && currentMins <= lastMins) {
+        reasons.add('timeline_out_of_order');
+      }
+      lastMins = currentMins;
+
+Block 5, src/case.js. OLD is exactly:
+    if (!stop.en || !stop.pt || !stop.event?.en || !stop.event?.pt) {
+NEW is exactly:
+    const filled = (v) => typeof v === 'string' && v.trim() !== '';
+    if (!filled(stop.stop?.en) || !filled(stop.stop?.pt) || !filled(stop.event?.en) || !filled(stop.event?.pt)) {
+
+Block 6, src/case.js. OLD is exactly:
+  } else if (!crimeStop.who.includes(c.culprit)) {
+NEW is exactly:
+  } else if (!Array.isArray(crimeStop.who) || !crimeStop.who.includes(c.culprit)) {

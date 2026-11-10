@@ -1,0 +1,128 @@
+# Task (M2 sprint 1, rework): fix content/cases/night-train.json from call 176
+Problems found by review: the public persona of Inês says "The culprit." (leaks the answer on screen); facts are too thin (no name, Inês facts miss the copied key and the flour tin); clue texts are in third person but clues are read by the suspect as first person lines; clue asks name the suspect instead of asking them; PT says "cabine 7" and "carro 4" while the glossary says cabine-leito and vagão.
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Every OLD below is a unique fragment of one line; copy OLD and NEW byte for byte (keep the JSON quotes and commas exactly). No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, content/cases/night-train.json. OLD is exactly:
+"facts": "You are the conductor. You locked the necklace in the safe at Alder Crossing and hold the only key. You must maintain your professional reputation at all costs."
+NEW is exactly:
+"facts": "You are Helena Costa, the train conductor. At Alder Crossing you locked the Duchess's sapphire necklace in the luggage car safe, and you keep the only key on your ring. When the lights went out in Black Ridge Tunnel you were walking to sleeper 7, and when they came back you were at its door talking to Victor. At Port Elling you found the safe open with flour smudges on its handle. You are proud and by the book, and you never admit that your key ring hangs on a hook in the dining car during dinner service."
+
+Block 2, content/cases/night-train.json. OLD is exactly:
+"facts": "You are a passenger and a jeweller. You valued the necklace for the Duchess. You are currently struggling with heavy debts."
+NEW is exactly:
+"facts": "You are Victor Hale, a jeweller travelling in sleeper 7. You valued the necklace for the Duchess and know it is worth a fortune. You stayed in sleeper 7 all night; during the blackout you heard Tomás singing in car 4, and when the lights came back you opened the door to Helena in your pajamas. You hide that you owe money and get defensive if asked about it, but you did not take the necklace."
+
+Block 3, content/cases/night-train.json. OLD is exactly:
+"facts": "You are the night porter. You loaded mailbags at Grey Hollow. You enjoy knowing everyone's business."
+NEW is exactly:
+"facts": "You are Tomás Reyes, the night porter. At Grey Hollow you loaded mailbags on the platform while Helena watched. During the blackout in Black Ridge Tunnel you stood in the corridor of car 4 singing to calm the passengers. Right after the tunnel you saw someone in a white chef's apron leave the luggage car, but you did not see a face. You are cheerful and love gossip."
+
+Block 4, content/cases/night-train.json. OLD is exactly:
+"facts": "You are the chef. You lie that you were cleaning the kitchen the whole time. You never admit to touching the safe."
+NEW is exactly:
+"facts": "You are Inês Duarte, the dining car chef, and you took the necklace. During dinner you copied Helena's safe key while her key ring hung on the dining car hook. During the Black Ridge Tunnel blackout you slipped into the luggage car, opened the safe and hid the necklace in a flour tin in your kitchen. You lie that you were cleaning the kitchen alone the whole time. You never admit touching the safe or the key, and you stay calm and friendly."
+
+Block 5, content/cases/night-train.json. OLD is exactly:
+"en": "The culprit.",
+NEW is exactly:
+"en": "Warm and busy, always smelling of fresh bread; quick to offer food and slow to answer.",
+
+Block 6, content/cases/night-train.json. OLD is exactly:
+"pt": "A culpada."
+NEW is exactly:
+"pt": "Calorosa e atarefada, sempre com cheiro de pão fresco; rápida para oferecer comida e lenta para responder."
+
+Block 7, content/cases/night-train.json. OLD is exactly:
+"ask": "What did Tomás see?"
+NEW is exactly:
+"ask": "What did you see right after the tunnel?"
+
+Block 8, content/cases/night-train.json. OLD is exactly:
+"ask": "What was on the safe?"
+NEW is exactly:
+"ask": "Did you notice anything on the safe?"
+
+Block 9, content/cases/night-train.json. OLD is exactly:
+"ask": "Where was Helena?"
+NEW is exactly:
+"ask": "Who was with you when the lights came back?"
+
+Block 10, content/cases/night-train.json. OLD is exactly:
+"ask": "What was Victor wearing?"
+NEW is exactly:
+"ask": "Where was Victor when the lights came back?"
+
+Block 11, content/cases/night-train.json. OLD is exactly:
+"ask": "What did Victor hear?"
+NEW is exactly:
+"ask": "Did you hear anything during the blackout?"
+
+Block 12, content/cases/night-train.json. OLD is exactly:
+"en": "Right after the tunnel he saw someone
+NEW is exactly:
+"en": "Right after the tunnel I saw someone
+
+Block 13, content/cases/night-train.json. OLD is exactly:
+"pt": "Logo após o túnel, ele viu alguém com um avental de cozinheiro branco saindo
+NEW is exactly:
+"pt": "Logo depois do túnel, vi alguém de avental branco de cozinha saindo
+
+Block 14, content/cases/night-train.json. OLD is exactly:
+"en": "At Port Elling she found flour smudges
+NEW is exactly:
+"en": "At Port Elling I found flour smudges
+
+Block 15, content/cases/night-train.json. OLD is exactly:
+"pt": "Em Port Elling, ela encontrou manchas de farinha na maçaneta do cofre."
+NEW is exactly:
+"pt": "Em Port Elling, encontrei manchas de farinha no puxador do cofre."
+
+Block 16, content/cases/night-train.json. OLD is exactly:
+"en": "Helena was at his door when
+NEW is exactly:
+"en": "Helena was at my door when
+
+Block 17, content/cases/night-train.json. OLD is exactly:
+"pt": "Helena estava na porta dele quando
+NEW is exactly:
+"pt": "A Helena estava na minha porta quando
+
+Block 18, content/cases/night-train.json. OLD is exactly:
+"en": "Victor opened sleeper 7 in pajamas
+NEW is exactly:
+"en": "Victor opened sleeper 7 in his pajamas
+
+Block 19, content/cases/night-train.json. OLD is exactly:
+"pt": "Victor abriu a cabine 7 de pijama
+NEW is exactly:
+"pt": "O Victor abriu a cabine-leito 7 de pijama
+
+Block 20, content/cases/night-train.json. OLD is exactly:
+"en": "During the blackout he heard Tomás
+NEW is exactly:
+"en": "During the blackout I heard Tomás
+
+Block 21, content/cases/night-train.json. OLD is exactly:
+"pt": "Durante o apagão, ele ouviu Tomás cantando no carro 4,
+NEW is exactly:
+"pt": "Durante o apagão, ouvi o Tomás cantando no vagão 4,
+
+Block 22, content/cases/night-train.json. OLD is exactly:
+na porta da cabine 7 conversando
+NEW is exactly:
+na porta da cabine-leito 7 conversando
+
+Block 23, content/cases/night-train.json. OLD is exactly:
+"pt": "Na cabine 7 a noite toda
+NEW is exactly:
+"pt": "Na cabine-leito 7 a noite toda
+
+Block 24, content/cases/night-train.json. OLD is exactly:
+vai para a cabine 7;
+NEW is exactly:
+vai para a cabine-leito 7;
+
+Block 25, content/cases/night-train.json. OLD is exactly:
+no corredor do carro 4,
+NEW is exactly:
+no corredor do vagão 4,

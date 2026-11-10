@@ -1,0 +1,59 @@
+<<<REPLACE src/case.js>>>
+/**
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+ */
+=====
+/**
+ * Validate a case timeline: stops in time order (the night may cross midnight once), EN and PT text, known suspects, one crime stop with the culprit.
+ * @param {Object} c
+ * @returns {{ok:boolean, reasons:string[]}}
+ */
+<<<END>>>
+<<<REPLACE src/case.js>>>
+  const suspectIds = new Set(c.suspects || []);
+=====
+  const suspectIds = new Set((c.suspects ?? []).map(s => s.id));
+<<<END>>>
+<<<REPLACE src/case.js>>>
+  let midnightCrossed = false;
+=====
+  let offset = 0;
+<<<END>>>
+<<<REPLACE src/case.js>>>
+      let currentMins = timeToMins(stop.time);
+      if (lastMins !== -1) {
+        if (currentMins < lastMins) {
+          if (midnightCrossed) {
+            reasons.add('timeline_out_of_order');
+          } else {
+            currentMins += 1440;
+            midnightCrossed = true;
+          }
+        } else if (currentMins === lastMins) {
+          reasons.add('timeline_out_of_order');
+        }
+      }
+      lastMins = currentMins;
+=====
+      let currentMins = timeToMins(stop.time) + offset;
+      if (lastMins !== -1 && currentMins < lastMins && offset === 0) {
+        offset = 1440;
+        currentMins += 1440;
+      }
+      if (lastMins !== -1 && currentMins <= lastMins) {
+        reasons.add('timeline_out_of_order');
+      }
+      lastMins = currentMins;
+<<<END>>>
+<<<REPLACE src/case.js>>>
+    if (!stop.en || !stop.pt || !stop.event?.en || !stop.event?.pt) {
+=====
+    const filled = (v) => typeof v === 'string' && v.trim() !== '';
+    if (!filled(stop.stop?.en) || !filled(stop.stop?.pt) || !filled(stop.event?.en) || !filled(stop.event?.pt)) {
+<<<END>>>
+<<<REPLACE src/case.js>>>
+  } else if (!crimeStop.who.includes(c.culprit)) {
+=====
+  } else if (!Array.isArray(crimeStop.who) || !crimeStop.who.includes(c.culprit)) {
+<<<END>>>

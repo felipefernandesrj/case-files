@@ -1,0 +1,36 @@
+<<<REPLACE CHANGELOG.md>>>
+## 0.4.0 (M1 delivered, 2026-11-09)
+=====
+## 0.4.1 (M2 sprint 1, Night Train case file)
+- M2 "Case 2: The Night Train" is in progress. New case file content/cases/night-train.json: 4 suspects (Helena, Victor, Tomás, Inês) with EN and PT role, persona and alibi, a 5 stop timeline that crosses midnight, 5 clues, glossary and solution.
+- Shared case engine, step 1: fairPlay(c, { suspects }) takes the expected suspect count (default 3, so The Vanishing Violin is unchanged) and the new timelineCheck(c) checks stop order, EN and PT text, known suspects and one crime stop with the culprit.
+- Added test/night-train.mjs (8 checks): fair play with 4 suspects, timeline checks and broken timelines, public text never names the culprit, PT prompts keep other suspects' facts private, and the case is not wired into the game yet.
+- Not playable yet: the server and the page still load only The Vanishing Violin. M2 is not delivered.
+<<<END>>>
+
+<<<REPLACE package.json>>>
+  "version": "0.4.0",
+=====
+  "version": "0.4.1",
+<<<END>>>
+
+<<<REPLACE README.md>>>
+**M1 Delivered (2026-11-09, v0.4.0).** Next: M2, The Night Train.
+=====
+**M1 Delivered (2026-11-09, v0.4.0).**
+
+**M2 in progress (v0.4.1, sprint 1).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks. It is not playable yet; the game still serves The Vanishing Violin. 105 automated checks.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+6. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+=====
+6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not wired into the game)
+7. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 97 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, keyboard: 13).
+=====
+Total checks: 105 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, keyboard: 13).
+<<<END>>>

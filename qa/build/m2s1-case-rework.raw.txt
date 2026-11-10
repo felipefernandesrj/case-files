@@ -1,0 +1,125 @@
+<<<REPLACE content/cases/night-train.json>>>
+"facts": "You are the conductor. You locked the necklace in the safe at Alder Crossing and hold the only key. You must maintain your professional reputation at all costs."
+=====
+"facts": "You are Helena Costa, the train conductor. At Alder Crossing you locked the Duchess's sapphire necklace in the luggage car safe, and you keep the only key on your ring. When the lights went out in Black Ridge Tunnel you were walking to sleeper 7, and when they came back you were at its door talking to Victor. At Port Elling you found the safe open with flour smudges on its handle. You are proud and by the book, and you never admit that your key ring hangs on a hook in the dining car during dinner service."
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"facts": "You are a passenger and a jeweller. You valued the necklace for the Duchess. You are currently struggling with heavy debts."
+=====
+"facts": "You are Victor Hale, a jeweller travelling in sleeper 7. You valued the necklace for the Duchess and know it is worth a fortune. You stayed in sleeper 7 all night; during the blackout you heard Tomás singing in car 4, and when the lights came back you opened the door to Helena in your pajamas. You hide that you owe money and get defensive if asked about it, but you did not take the necklace."
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"facts": "You are the night porter. You loaded mailbags at Grey Hollow. You enjoy knowing everyone's business."
+=====
+"facts": "You are Tomás Reyes, the night porter. At Grey Hollow you loaded mailbags on the platform while Helena watched. During the blackout in Black Ridge Tunnel you stood in the corridor of car 4 singing to calm the passengers. Right after the tunnel you saw someone in a white chef's apron leave the luggage car, but you did not see a face. You are cheerful and love gossip."
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"facts": "You are the chef. You lie that you were cleaning the kitchen the whole time. You never admit to touching the safe."
+=====
+"facts": "You are Inês Duarte, the dining car chef, and you took the necklace. During dinner you copied Helena's safe key while her key ring hung on the dining car hook. During the Black Ridge Tunnel blackout you slipped into the luggage car, opened the safe and hid the necklace in a flour tin in your kitchen. You lie that you were cleaning the kitchen alone the whole time. You never admit touching the safe or the key, and you stay calm and friendly."
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"en": "The culprit.",
+=====
+"en": "Warm and busy, always smelling of fresh bread; quick to offer food and slow to answer.",
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"pt": "A culpada."
+=====
+"pt": "Calorosa e atarefada, sempre com cheiro de pão fresco; rápida para oferecer comida e lenta para responder."
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"ask": "What did Tomás see?"
+=====
+"ask": "What did you see right after the tunnel?"
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"ask": "What was on the safe?"
+=====
+"ask": "Did you notice anything on the safe?"
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"ask": "Where was Helena?"
+=====
+"ask": "Who was with you when the lights came back?"
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"ask": "What was Victor wearing?"
+=====
+"ask": "Where was Victor when the lights came back?"
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"ask": "What did Victor hear?"
+=====
+"ask": "Did you hear anything during the blackout?"
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"en": "Right after the tunnel he saw someone
+=====
+"en": "Right after the tunnel I saw someone
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"pt": "Logo após o túnel, ele viu alguém com um avental de cozinheiro branco saindo
+=====
+"pt": "Logo depois do túnel, vi alguém de avental branco de cozinha saindo
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"en": "At Port Elling she found flour smudges
+=====
+"en": "At Port Elling I found flour smudges
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"pt": "Em Port Elling, ela encontrou manchas de farinha na maçaneta do cofre."
+=====
+"pt": "Em Port Elling, encontrei manchas de farinha no puxador do cofre."
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"en": "Helena was at his door when
+=====
+"en": "Helena was at my door when
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"pt": "Helena estava na porta dele quando
+=====
+"pt": "A Helena estava na minha porta quando
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"en": "Victor opened sleeper 7 in pajamas
+=====
+"en": "Victor opened sleeper 7 in his pajamas
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"pt": "Victor abriu a cabine 7 de pijama
+=====
+"pt": "O Victor abriu a cabine-leito 7 de pijama
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"en": "During the blackout he heard Tomás
+=====
+"en": "During the blackout I heard Tomás
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"pt": "Durante o apagão, ele ouviu Tomás cantando no carro 4,
+=====
+"pt": "Durante o apagão, ouvi o Tomás cantando no vagão 4,
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+na porta da cabine 7 conversando
+=====
+na porta da cabine-leito 7 conversando
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+"pt": "Na cabine 7 a noite toda
+=====
+"pt": "Na cabine-leito 7 a noite toda
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+vai para a cabine 7;
+=====
+vai para a cabine-leito 7;
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+no corredor do carro 4,
+=====
+no corredor do vagão 4,
+<<<END>>>

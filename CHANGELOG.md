@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 (M2 sprint 1, Night Train case file)
+- M2 "Case 2: The Night Train" is in progress. New case file content/cases/night-train.json: 4 suspects (Helena, Victor, Tomás, Inês) with EN and PT role, persona and alibi, a 5 stop timeline that crosses midnight, 5 clues, glossary and solution.
+- Shared case engine, step 1: fairPlay(c, { suspects }) takes the expected suspect count (default 3, so The Vanishing Violin is unchanged) and the new timelineCheck(c) checks stop order, EN and PT text, known suspects and one crime stop with the culprit.
+- Added test/night-train.mjs (8 checks): fair play with 4 suspects, timeline checks and broken timelines, public text never names the culprit, PT prompts keep other suspects' facts private, and the case is not wired into the game yet.
+- Not playable yet: the server and the page still load only The Vanishing Violin. M2 is not delivered.
+
 ## 0.4.0 (M1 delivered, 2026-11-09)
 - M1 "The Vanishing Violin, polished" declared delivered: public case in English and Portuguese, scoreboard and personal best, friendly capacity-out messages, keyboard and screen reader support, credits screen.
 - Acceptance re-checked on 2026-11-09: npm test 97/97 and a live EN + PT smoke through the Cup key (EN correct accusation score 100, PT answers in Portuguese, wrong accusation saves no best).

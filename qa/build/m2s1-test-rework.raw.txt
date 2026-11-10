@@ -1,0 +1,5 @@
+<<<REPLACE test/night-train.mjs>>>
+  assert(nt.timeline[4].stop.time < nt.timeline[0].stop.time, 'timeline does not cross midnight');
+=====
+  assert(nt.timeline[4].time < nt.timeline[0].time, 'timeline does not cross midnight');
+<<<END>>>

@@ -469,3 +469,30 @@ No product code change. Docs only, written by hand: CHANGELOG 0.4.0, package.jso
 npm test: 97/97 (e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, keyboard 13); first cold run had 3 keyboard timeouts, rerun 13/13.
 Live acceptance smoke (llama-4-scout): EN Maya 200 41 words + correct accuse score 100; PT Carlos 200 34 words + wrong accuse score 0, no best. 2 key calls, 921 / 104 tokens, 30.64 neurons (~US$ 0.0003). Receipts 01M71DXPH99V0EA0CR170X3MYW, 01M71DXTQMZN91NFP0DD1Q0VBM, seal-by 2026-11-11T00:05:00Z.
 M1 totals from local logs: 318 requests, 270 x 200, 172 with receipt id, 529,836 / 358,666 tokens, 29,670 neurons, ~US$ 0.33.
+
+## M2 sprint 1: Night Train case file + shared engine step 1 (v0.4.1), 2026-11-10 12:08-12:16 UTC (09:08-09:16 BRT)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 4000, via the Cup key. Live smoke llama-4-scout. M2 in progress; Night Train not wired into the game; M2 not declared.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 176 | content/cases/night-train.json: 4 suspects (EN/PT role, persona, alibi, facts), 5 stop timeline across midnight, 5 clues, glossary, solution | 200 | 53.6 s | 1278 / 2737 | 86.26 | content/cases/night-train.json | accepted after review: valid JSON, fairPlay(4) ok, but Inês public persona was "The culprit." (answer leak), thin facts without names, clues in third person |
+| 177 | rework: 25 unique one-line edits (persona, 4 facts, 5 asks, 10 clue texts first person, PT cabine-leito / vagão) | 200 | 34.6 s | 2031 / 1619 | 62.62 | content/cases/night-train.json | rework, accepted 25/25 (every OLD checked unique before sending, every NEW verified present) |
+| 178 | src/case.js: fairPlay(c, { suspects = 3 }) + new timelineCheck(c) | 200 | 17.9 s | 875 / 924 | 33.15 | src/case.js | accepted 4/4 hunks, but timelineCheck had 3 bugs (suspect objects instead of ids, stop.en instead of stop.stop.en, midnight offset not kept) |
+| 179 | rework: 6 unique edits to timelineCheck | 200 | 16.3 s | 958 / 638 | 26.11 | src/case.js | rework, accepted 6/6; timelineCheck(night-train) ok |
+| 180 | test/night-train.mjs (8 checks) + package.json npm test script | 200 | 51.9 s | 1073 / 1801 | 58.87 | test/night-train.mjs, package.json | accepted, 7/8 green: test 5 read entry.stop.time |
+| 181 | rework: test 5 uses entry.time | 200 | 2.3 s | 310 / 77 | 4.92 | test/night-train.mjs | rework, accepted, 8/8 |
+| 182 | CHANGELOG 0.4.1, package.json 0.4.1, README M2 in progress, SPEC test list + totals + Case engine | 200 | 13.9 s | 1106 / 669 | 28.30 | 4 files (5 edits) | accepted 5/5 but 2 NEW texts cut at their first empty line (lost CHANGELOG 0.4.0 heading, SPEC Case engine section) |
+| 183 | rework: restore 0.4.0 heading + SPEC Case engine section | 200 | 25.0 s | 725 / 430 | 18.32 | CHANGELOG.md, docs/SPEC.md | rework, accepted 2/2 |
+| live | smoke EN Maya + correct accuse, PT Carlos + wrong accuse (Violin regression) | 200 x4 (2 key calls) | 2.7 / 1.5 s | 921 / 104 | 30.64 | - | 2/2 HTTP 200, EN 41 words score 100, PT 34 words score 0 no best |
+
+Totals: 10 key calls (8 build + 2 live), 9 277 in / 8 999 out tokens, 349.2 neurons, about US$ 0.0038 at $0.011/1k neurons. Build only: 8 calls, 8 356 / 8 895 tokens, 318.6 neurons. Wasted 0; rework 4 (177, 179, 181, 183) = 112.0 neurons (35.2% of build). 0 API failures, slowest 53.6 s. Probes skipped (optional).
+Manual lines: 0 product, 0 docs (qa/rework.md, docs/BUILD_LOG.md are PO logs). Harness: tools/smoke-m2s1.mjs (sed from smoke-m1). Prompts 176-183 written by the agent; 177, 179, 182, 183 assembled by a script that checks every OLD occurs exactly once before the call.
+npm test: 105/105 (was 97; e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8 new, keyboard 13); no keyboard flake this run.
+Mutation: with the v0.4.0 src/case.js test/night-train.mjs cannot load (timelineCheck missing); with Inês persona back to "The culprit." test 4 fails; with the midnight wrap disabled test 5 fails (timeline_out_of_order).
+Verdict: worth it as a first M2 step, but rework is high (35%). Lessons: (1) review generated case text for answer leaks in public fields, a schema check alone passed the leaking file; (2) gemma cuts NEW at its first empty line unless the prompt says the line count and that empty lines are part of NEW; (3) give field paths explicitly (stop.stop.en, entry.time) when a key name repeats.
+Receipts (seal-by 2026-11-11T00:05:00Z), 10 chat: build 01M72NRCX1X2EZASSMTQP2SDPW (176), 01M72NVRKSW176ZY3MFBA6B26T (177), 01M72NXQQ0N4DYXTM04RYT28MG (178), 01M72NZ0EM2M0RE01QBPY54FQJ (179), 01M72P0G79M201C0NNYPGKWYJ1 (180), 01M72P2Q5QDBQTJY3C3HVTTZ54 (181), 01M72P3XPF1066JA2FYWMB58AB (182), 01M72P54E85ENNJSGXJG0KJBCP (183); live 01M72P67XGGGA762NA2K6SG7W1 (EN), 01M72P69JMT9BDP0QHZQKKK4K4 (PT). Build ids in qa/build-log.json (label m2s1-*); live in qa/key-usage-log.json (purpose m2s1-smoke:*).
+
+### FullCup observations, M2 sprint 1 (evidence qa/m2s1-probes/)
+- Seal check (signed out, curl https://qa.fullcup.ai/receipts/<id>): all 6 s17 receipts Genuine receipt, one of 6 in the signed root of 2026-11-09, Sealed at 2026-11-10 00:05:23 UTC. 01M7037B798DQXF3VHKHHYFJ2A $0.000057, 01M7037DZCN4VAQSM0R0J5P4D1 $0.000122, 01M7037KH3A3GK8T51GZD21307 $0.000241, 01M70389EATXWNAAA41H2HZ9J5 $0.000042 (gemma-4-26b-a4b-it); 01M7038JJGT5PTN1VPAHDV6BCK $0.000168, 01M7038NZKWJ3HV9328T97JVMC $0.000169 (llama-4-scout). Snips in seal-*.snip.txt.
+- Reproduced: no per-call cost (10 of 10 chat 200s, cost null), duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id same value (10 of 10), enable_thinking=false honoured (8 of 8), cached_tokens 0.
+- No new FullCup anomaly.

@@ -1,0 +1,21 @@
+# Task (M2 sprint 1): new test file test/night-train.mjs that loads and validates the Night Train case (data only, not playable yet)
+Output exactly two blocks, no prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1: <<<FILE test/night-train.mjs>>> newline, full file, newline, <<<END>>>.
+ES module, Node 20, no dependencies. Imports: `import fs from 'node:fs';` and `import { loadCase, publicCase, systemPrompt, fairPlay, timelineCheck } from '../src/case.js';`.
+Harness exactly like the other test files: `let passed = 0, failed = 0;` an async `test(name, fn)` that prints `PASS ${name}` or `FAIL ${name}: ${err.message}` (console.error) and counts; `const assert = (cond, msg) => { if (!cond) throw new Error(msg); };`; at the end `console.log(`\n${passed} passed, ${failed} failed`);` and `process.exit(failed ? 1 : 0);`. Use top-level await. 2-space indentation.
+`const nt = loadCase('content/cases/night-train.json');` and `const violin = loadCase();`. `const clone = (o) => JSON.parse(JSON.stringify(o));`. `const filled = (v) => typeof v === 'string' && v.trim() !== '';`.
+Exactly these 8 tests, in this order, with these names:
+1. "night train passes fair play with 4 suspects": fairPlay(nt, { suspects: 4 }) has ok true (message lists reasons joined by ',').
+2. "default fair play still expects 3 suspects": fairPlay(nt).reasons includes 'wrong_suspect_count'; fairPlay(violin).ok is true.
+3. "4 suspects with EN and PT text and private facts": nt.suspects.length === 4; ids unique; each has filled name, and filled role.en, role.pt, persona.en, persona.pt, alibi.en, alibi.pt; facts starts with `You are ${s.name}`; nt.culprit is one of the ids; title.en is 'The Night Train' and title.pt is 'O Trem Noturno'; intro.en, intro.pt, solution.en, solution.pt filled.
+4. "public text never names the culprit": for lang of ['en', 'pt'], JSON.stringify(publicCase(nt, lang)).toLowerCase() contains neither 'culprit' nor 'culpad'; and for every suspect, the stringified public case does not include s.facts.
+5. "timeline passes and crosses midnight": timelineCheck(nt).ok is true (message lists reasons); nt.timeline.length === 5; the last stop time is lower than the first (string compare); exactly one stop has crime === true and its who includes nt.culprit.
+6. "timeline check catches broken timelines": each on a clone of nt: swapping timeline[0] and timeline[1] gives reasons including 'timeline_out_of_order'; setting timeline[2].who = ['nobody'] gives 'timeline_unknown_suspect'; setting timeline[0].crime = true gives 'timeline_crime_count'; setting timeline[1].stop.pt = '' gives 'timeline_missing_text'; setting the crime stop who to the suspect ids without nt.culprit gives 'timeline_culprit_absent'; and timelineCheck(violin).reasons deep-equals ['timeline_missing'] (compare with JSON.stringify).
+7. "PT prompt lists all 4 suspects and keeps other facts private": for each suspect s, p = systemPrompt(nt, s.id, 'pt'); p includes every suspect name; p includes s.facts; p includes no other suspect's facts; p includes 'Use these exact PT' and 'cabine-leito'; p ends with 'Respond in Portuguese.'.
+8. "night train is not wired into the game yet": the text of src/server.js and src/cli.js (fs.readFileSync, utf8) each includes 'content/case.json' and neither includes 'night-train'.
+
+Block 2: <<<REPLACE package.json>>> newline, OLD, newline, =====, newline, NEW, newline, <<<END>>>. OLD is exactly this fragment:
+ && node test/keyboard.mjs"
+NEW is exactly this fragment:
+ && node test/night-train.mjs && node test/keyboard.mjs"

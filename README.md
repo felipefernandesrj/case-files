@@ -34,7 +34,9 @@ node src/cli.js --lang pt                           # play in the terminal
 ```
 Then open http://localhost:3000. The key stays on the server, and the browser never sees it.
 
-**M1 Delivered (2026-11-09, v0.4.0).** Next: M2, The Night Train.
+**M1 Delivered (2026-11-09, v0.4.0).**
+
+**M2 in progress (v0.4.1, sprint 1).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks. It is not playable yet; the game still serves The Vanishing Violin. 105 automated checks.
 
 M1 scope as shipped: bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard (names shown as plain text), personal best per language (shown in your language, new best announced) with a confirmed reset, accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload), Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect), fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 97 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
 

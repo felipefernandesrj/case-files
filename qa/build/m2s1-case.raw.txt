@@ -1,0 +1,298 @@
+<<<FILE content/cases/night-train.json>>>
+{
+  "id": "case-night-train-002",
+  "title": {
+    "en": "The Night Train",
+    "pt": "O Trem Noturno"
+  },
+  "intro": {
+    "en": "On the overnight train Southern Star, the Duchess's sapphire necklace vanishes from the locked safe in the luggage car between Alder Crossing and Port Elling. Four people had a reason to be near it. Who took it?",
+    "pt": "No trem noturno Southern Star, o colar de safira da Duquesa desaparece do cofre trancado no vagão de bagagem entre Alder Crossing e Port Elling. Quatro pessoas tinham motivos para estar por perto. Quem roubou?"
+  },
+  "culprit": "ines",
+  "suspects": [
+    {
+      "id": "helena",
+      "name": "Helena Costa",
+      "role": {
+        "en": "Train conductor",
+        "pt": "Chefe de trem"
+      },
+      "persona": {
+        "en": "Proud, by the book, afraid of losing her job.",
+        "pt": "Orgulhosa, metódica, com medo de perder o emprego."
+      },
+      "alibi": {
+        "en": "She was at the door of sleeper 7 talking to Victor when the lights came back after the tunnel.",
+        "pt": "Ela estava na porta da cabine 7 conversando com Victor quando as luzes voltaram após o túnel."
+      },
+      "facts": "You are the conductor. You locked the necklace in the safe at Alder Crossing and hold the only key. You must maintain your professional reputation at all costs."
+    },
+    {
+      "id": "victor",
+      "name": "Victor Hale",
+      "role": {
+        "en": "Jeweller, passenger",
+        "pt": "Joalheiro, passageiro"
+      },
+      "persona": {
+        "en": "Smooth talker, hides that he owes money.",
+        "pt": "Bom de lábia, esconde que deve dinheiro."
+      },
+      "alibi": {
+        "en": "In sleeper 7 all night, opened the door to Helena in pajamas when the lights came back.",
+        "pt": "Na cabine 7 a noite toda, abriu a porta para Helena de pijama quando as luzes voltaram."
+      },
+      "facts": "You are a passenger and a jeweller. You valued the necklace for the Duchess. You are currently struggling with heavy debts."
+    },
+    {
+      "id": "tomas",
+      "name": "Tomás Reyes",
+      "role": {
+        "en": "Night porter",
+        "pt": "Carregador noturno"
+      },
+      "persona": {
+        "en": "Cheerful, gossipy.",
+        "pt": "Alegre, fofoqueiro."
+      },
+      "alibi": {
+        "en": "During the blackout he was in the corridor of car 4, at the far end from the luggage car, singing to calm passengers.",
+        "pt": "Durante o apagão, ele estava no corredor do carro 4, longe do vagão de bagagem, cantando para acalmar os passageiros."
+      },
+      "facts": "You are the night porter. You loaded mailbags at Grey Hollow. You enjoy knowing everyone's business."
+    },
+    {
+      "id": "ines",
+      "name": "Inês Duarte",
+      "role": {
+        "en": "Dining car chef",
+        "pt": "Cozinheira do vagão-restaurante"
+      },
+      "persona": {
+        "en": "The culprit.",
+        "pt": "A culpada."
+      },
+      "alibi": {
+        "en": "Cleaning the dining car kitchen alone during the blackout.",
+        "pt": "Limpando a cozinha do vagão-restaurante sozinha durante o apagão."
+      },
+      "facts": "You are the chef. You lie that you were cleaning the kitchen the whole time. You never admit to touching the safe."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:10",
+      "stop": {
+        "en": "Alder Crossing",
+        "pt": "Alder Crossing"
+      },
+      "event": {
+        "en": "Departure; Helena locks the necklace in the luggage car safe.",
+        "pt": "Partida; Helena tranca o colar no cofre do vagão de bagagem."
+      },
+      "who": [
+        "helena",
+        "victor",
+        "tomas",
+        "ines"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:05",
+      "stop": {
+        "en": "Millbrook",
+        "pt": "Millbrook"
+      },
+      "event": {
+        "en": "Victor goes to sleeper 7; Inês closes the dining car.",
+        "pt": "Victor vai para a cabine 7; Inês fecha o vagão-restaurante."
+      },
+      "who": [
+        "victor",
+        "ines"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "23:20",
+      "stop": {
+        "en": "Grey Hollow",
+        "pt": "Grey Hollow"
+      },
+      "event": {
+        "en": "10 minute stop; Tomás loads mailbags on the platform.",
+        "pt": "Parada de 10 minutos; Tomás carrega sacos de correio na plataforma."
+      },
+      "who": [
+        "tomas",
+        "helena"
+      ]
+    },
+    {
+      "id": "t4",
+      "time": "23:35",
+      "stop": {
+        "en": "Black Ridge Tunnel",
+        "pt": "Túnel Black Ridge"
+      },
+      "event": {
+        "en": "The lights go out for 4 minutes; the necklace is taken.",
+        "pt": "As luzes se apagam por 4 minutos; o colar é roubado."
+      },
+      "who": [
+        "ines"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t5",
+      "time": "00:40",
+      "stop": {
+        "en": "Port Elling",
+        "pt": "Port Elling"
+      },
+      "event": {
+        "en": "Helena finds the safe open and empty.",
+        "pt": "Helena encontra o cofre aberto e vazio."
+      },
+      "who": [
+        "helena",
+        "victor",
+        "tomas",
+        "ines"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "tomas",
+      "ask": "What did Tomás see?",
+      "keywords": [
+        "chef",
+        "apron",
+        "avental"
+      ],
+      "implicates": "ines",
+      "clears": null,
+      "text": {
+        "en": "Right after the tunnel he saw someone in a white chef's apron leave the luggage car.",
+        "pt": "Logo após o túnel, ele viu alguém com um avental de cozinheiro branco saindo do vagão de bagagem."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "helena",
+      "ask": "What was on the safe?",
+      "keywords": [
+        "flour",
+        "farinha",
+        "smudges"
+      ],
+      "implicates": "ines",
+      "clears": null,
+      "text": {
+        "en": "At Port Elling she found flour smudges on the safe handle.",
+        "pt": "Em Port Elling, ela encontrou manchas de farinha na maçaneta do cofre."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "victor",
+      "ask": "Where was Helena?",
+      "keywords": [
+        "door",
+        "porta",
+        "helena"
+      ],
+      "implicates": null,
+      "clears": "helena",
+      "text": {
+        "en": "Helena was at his door when the lights came back.",
+        "pt": "Helena estava na porta dele quando as luzes voltaram."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "helena",
+      "ask": "What was Victor wearing?",
+      "keywords": [
+        "pajamas",
+        "pijama",
+        "victor"
+      ],
+      "implicates": null,
+      "clears": "victor",
+      "text": {
+        "en": "Victor opened sleeper 7 in pajamas when the lights came back, three cars from the luggage car.",
+        "pt": "Victor abriu a cabine 7 de pijama quando as luzes voltaram, a três vagões do vagão de bagagem."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "victor",
+      "ask": "What did Victor hear?",
+      "keywords": [
+        "singing",
+        "cantando",
+        "tomas"
+      ],
+      "implicates": null,
+      "clears": "tomas",
+      "text": {
+        "en": "During the blackout he heard Tomás singing in car 4, far from the luggage car.",
+        "pt": "Durante o apagão, ele ouviu Tomás cantando no carro 4, longe do vagão de bagagem."
+      }
+    }
+  ],
+  "glossary": [
+    {
+      "en": "train",
+      "pt": "trem"
+    },
+    {
+      "en": "conductor",
+      "pt": "chefe de trem"
+    },
+    {
+      "en": "porter",
+      "pt": "carregador"
+    },
+    {
+      "en": "chef",
+      "pt": "cozinheira"
+    },
+    {
+      "en": "necklace",
+      "pt": "colar"
+    },
+    {
+      "en": "safe",
+      "pt": "cofre"
+    },
+    {
+      "en": "luggage car",
+      "pt": "vagão de bagagem"
+    },
+    {
+      "en": "tunnel",
+      "pt": "túnel"
+    },
+    {
+      "en": "sleeper",
+      "pt": "cabine-leito"
+    },
+    {
+      "en": "flour",
+      "pt": "farinha"
+    }
+  ],
+  "solution": {
+    "en": "Inês Duarte took the necklace during the tunnel blackout with a copied key and hid it in a flour tin; the apron seen by Tomás and the flour on the safe point to her; Helena, Victor and Tomás are cleared by each other's accounts.",
+    "pt": "Inês Duarte pegou o colar durante o apagão no túnel com uma chave copiada e o escondeu em uma lata de farinha; o avental visto por Tomás e a farinha no cofre a incriminam; Helena, Victor e Tomás estão inocentados pelos depoimentos uns dos outros."
+  }
+}
+<<<END>>>

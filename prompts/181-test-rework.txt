@@ -1,0 +1,8 @@
+# Task (M2 sprint 1, rework): fix test 5 in test/night-train.mjs from call 180
+The timeline stop time lives in entry.time, not entry.stop.time (entry.stop holds the station name {en, pt}), so test 5 compares undefined and fails.
+Output ONLY one literal edit block. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. No prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1, test/night-train.mjs. OLD is exactly this 1 line (2-space indent):
+  assert(nt.timeline[4].stop.time < nt.timeline[0].stop.time, 'timeline does not cross midnight');
+NEW is exactly this 1 line (2-space indent):
+  assert(nt.timeline[4].time < nt.timeline[0].time, 'timeline does not cross midnight');
