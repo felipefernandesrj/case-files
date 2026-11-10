@@ -10,5 +10,7 @@ Players in a browser; the creator who funds it via a Cup.
 - Accuse one suspect; reveal verdict and solution.
 - Key never reaches the browser. Works without key (mock mode).
 - When the Cup has no capacity (402, or 429 `capacity:empty`), the player sees a clear message, not an error dump.
+## M1 status
+Delivered 2026-11-09 (v0.4.0). The scoreboard and personal best were added during M1 because the roadmap deliverable lists a scoreboard. See docs/M1_DELIVERY.md.
 ## Out of scope (M1)
-Images, generated cases, scoreboard.
+Images, generated cases.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 (M1 delivered, 2026-11-09)
+- M1 "The Vanishing Violin, polished" declared delivered: public case in English and Portuguese, scoreboard and personal best, friendly capacity-out messages, keyboard and screen reader support, credits screen.
+- Acceptance re-checked on 2026-11-09: npm test 97/97 and a live EN + PT smoke through the Cup key (EN correct accusation score 100, PT answers in Portuguese, wrong accusation saves no best).
+- Docs: README roadmap marks M1 Delivered, PRD M1 scope matches what shipped, docs/M1_DELIVERY.md lists the acceptance checks, cost totals and receipts.
+- No product code change in this release.
+
 ## 0.3.6 (M1 sprint 17, clear stale hint)
 - Choosing a suspect clears the "Choose a suspect first." hint (EN/PT) from #best-status; other status messages such as the game-over line are left alone.
 - Added check that selectSuspect clears the pickSuspect hint in both languages.

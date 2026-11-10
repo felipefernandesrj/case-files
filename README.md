@@ -14,7 +14,7 @@ This repo starts from **The Vanishing Violin**, a working case: three suspects p
 
 | # | Milestone | Budget | Deliverable |
 |---|---|---|---|
-| M1 | The Vanishing Violin, polished | $25 | The current case, public, in English and Portuguese, with a scoreboard and a friendly message when capacity runs out. |
+| M1 | The Vanishing Violin, polished | $25 | The current case, public, in English and Portuguese, with a scoreboard and a friendly message when capacity runs out. **Delivered 2026-11-09** ([delivery notes](docs/M1_DELIVERY.md)) |
 | M2 | Case 2: The Night Train | $30 | A second case with 4 suspects and a moving timeline, on a shared case engine. |
 | M3 | Case 3: The Generated Case | $35 | A generator that writes and validates new mysteries from a seed. |
 | M4 | The Pack, published | $30 | One web app with every case, a case picker, a shared scoreboard and a public cost log for each case. |
@@ -34,7 +34,9 @@ node src/cli.js --lang pt                           # play in the terminal
 ```
 Then open http://localhost:3000. The key stays on the server, and the browser never sees it.
 
-M1 status (v0.3.6): bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard (names shown as plain text), personal best per language (shown in your language, new best announced) with a confirmed reset, accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload), Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect), fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 97 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+**M1 Delivered (2026-11-09, v0.4.0).** Next: M2, The Night Train.
+
+M1 scope as shipped: bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard (names shown as plain text), personal best per language (shown in your language, new best announced) with a confirmed reset, accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload), Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect), fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 97 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
 
 **New player?** Read [How to play / Como jogar](docs/HOW_TO_PLAY.md).
 See `docs/` for the PRD, the spec and the backbone notes.

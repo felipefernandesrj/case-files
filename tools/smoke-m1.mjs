@@ -1,0 +1,16 @@
+// M1 delivery acceptance smoke (PO harness, not product): EN + PT ask via the game server with the Cup key; logs status/usage/headers (never the key).
+import fs from 'node:fs'; import { once } from 'node:events'; import { createServer } from '../src/server.js'; import { recordResult, bestText } from '../public/best.js';
+const log = JSON.parse(fs.readFileSync('qa/key-usage-log.json', 'utf8')); const out = []; let purpose = '';
+const fetchImpl = async (url, opts) => { const t0 = Date.now(); const r = await fetch(url, opts); const ms = Date.now() - t0; const j = await r.clone().json().catch(() => null);
+  const h = {}; for (const [k, v] of r.headers) if (/^(x-fullcup|x-ratelimit|retry-after)/i.test(k)) h[k] = v;
+  log.push({ at: new Date(t0).toISOString(), purpose, method: 'POST', endpoint: '/chat/completions', model: JSON.parse(opts.body).model, status: r.status, ms, usage: j?.usage || null, cost: j?.usage?.cost ?? null, headers: h, error: r.ok ? null : j });
+  return r; };
+const server = createServer({ caseFile: 'content/case.json', scoreFile: null, fetchImpl, mock: false }); server.listen(0); await once(server, 'listening');
+const P = `http://localhost:${server.address().port}/api`; const post = (p, b) => fetch(P + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then(async r => ({ status: r.status, body: await r.json() }));
+const steps = [['en', 'maya', 'Where were you when the violin vanished, and did you notice anything about the lock?'], ['pt', 'carlos', 'Onde você estava durante o ensaio e quem mais estava no prédio?']];
+for (const [lang, s, q] of steps) { const sid = (await post('/session', {})).body.sessionId; purpose = `m1-acceptance:${lang}:${s}`;
+  const a = await post('/ask', { sessionId: sid, suspectId: s, question: q, lang }); const last = log.at(-1);
+  out.push({ lang, suspect: s, q, status: a.status, questions: a.body.questions, answer: a.body.answer || a.body.message, words: (a.body.answer || '').split(/\s+/).length, upstreamMs: last.ms, receipt: last.headers['x-fullcup-receipt-id'], dupHeader: last.headers['x-fullcup-receipt'] === last.headers['x-fullcup-receipt-id'], sealBy: last.headers['x-fullcup-seal-by'], cost: last.cost });
+  if (lang === 'en') { const v = await post('/accuse', { sessionId: sid, suspectId: 'carlos', player: 'm1-acceptance', lang }); out.push({ accuse: v.status, lang, correct: v.body.correct, score: v.body.score, questions: v.body.questions }); }
+  if (lang === 'pt') { const v = await post('/accuse', { sessionId: sid, suspectId: 'lorenzo', player: 'm1-acceptance', lang }); const st = {}; const fake = { getItem: k => st[k] ?? null, setItem: (k, x) => { st[k] = x; }, removeItem: k => { delete st[k]; } }; const rb = recordResult(fake, lang, v.body); out.push({ accuse: v.status, correct: v.body.correct, questions: v.body.questions, score: v.body.score, bestPt: bestText('pt', rb.best), bestPtInEnUi: bestText('pt', rb.best, 'en'), bestEnInPtUi: bestText('en', null, 'pt'), newBest: rb.isNew, isNew: rb.isNew }); } }
+server.close(); fs.writeFileSync('qa/key-usage-log.json', JSON.stringify(log, null, 1)); fs.writeFileSync('qa/live-smoke-m1-delivery.json', JSON.stringify(out, null, 1)); console.log(JSON.stringify(out, null, 1));

@@ -463,3 +463,9 @@ npm test: 97/97 (was 96; e2e 42, proxy 12, consistency 4, capacity 6, scoreboard
 Verdict: small UX polish, worth it. Lesson: when OLD is a short fragment, make it unique (the "and #q is focused." fragment occurred twice).
 Receipts (seal-by 2026-11-10T00:05:00Z): build 01M7037B798DQXF3VHKHHYFJ2A (172), 01M7037DZCN4VAQSM0R0J5P4D1 (173), 01M7037KH3A3GK8T51GZD21307 (174), 01M70389EATXWNAAA41H2HZ9J5 (175); live 01M7038JJGT5PTN1VPAHDV6BCK (EN), 01M7038NZKWJ3HV9328T97JVMC (PT).
 Seal check of s16 receipts (signed out, curl): all 9 Genuine receipt, sealed 2026-11-09 00:05:24 UTC, signed root of 2026-11-08. Snips in qa/s17-probes/seal-*.snip.txt.
+
+## M1 delivery acceptance, 2026-11-09 (v0.4.0)
+No product code change. Docs only, written by hand: CHANGELOG 0.4.0, package.json 0.4.0, README (M1 Delivered), PRD (M1 status, scoreboard no longer out of scope), docs/M1_DELIVERY.md. Harness tools/smoke-m1.mjs (sed from smoke-s17).
+npm test: 97/97 (e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, keyboard 13); first cold run had 3 keyboard timeouts, rerun 13/13.
+Live acceptance smoke (llama-4-scout): EN Maya 200 41 words + correct accuse score 100; PT Carlos 200 34 words + wrong accuse score 0, no best. 2 key calls, 921 / 104 tokens, 30.64 neurons (~US$ 0.0003). Receipts 01M71DXPH99V0EA0CR170X3MYW, 01M71DXTQMZN91NFP0DD1Q0VBM, seal-by 2026-11-11T00:05:00Z.
+M1 totals from local logs: 318 requests, 270 x 200, 172 with receipt id, 529,836 / 358,666 tokens, 29,670 neurons, ~US$ 0.33.
