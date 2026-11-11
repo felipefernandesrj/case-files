@@ -1,3 +1,8 @@
 .fullcup-key
 node_modules
 data/scores.json
+
+# Local asset-pipeline venv / caches (infra, never commit weights)
+scripts/assets/.venv
+scripts/assets/__pycache__
+scripts/assets/.pytest_cache

@@ -1,0 +1,6 @@
+# Local, unpaid pipeline only. Install in a venv; do not commit the venv or weights.
+pillow>=11
+numpy>=2
+rembg[cpu]>=2.0.87
+cairosvg>=2.7
+# rembg model used: u2net (Apache-2.0). Do not use bria-rmbg (CC BY-NC 4.0).
