@@ -105,13 +105,14 @@ This executes:
 4. `node test/capacity.mjs` (Capacity messages)
 5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
 6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not the default case)
-7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page)
+7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page, friendly one line error and exit code 2 for an unknown id in the server and the CLI)
 8. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 112 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 7, keyboard: 13).
+Total checks: 114 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 9, keyboard: 13).
 
 ### Case engine (`src/case.js`, M2)
 - `CASES` and `caseFileFor(id)`: frozen registry containing violin (content/case.json) and night-train (content/cases/night-train.json) that throws unknown_case for any other IDs.
 - Flag: createServer({ caseId }), CASE_ID for node src/server.js and --case for the CLI, default The Vanishing Violin, not exposed in the page.
+- `unknownCaseLine(id)`: returns the one line message naming the id and the valid ids, and node src/server.js and the CLI print it to stderr and exit with code 2 instead of a stack trace when the id is unknown.
 - `fairPlay(c, { suspects = 3 } = {})`: same rules as before with the expected suspect count as an option (The Night Train uses 4).
 - `timelineCheck(c)`: `c.timeline` is a non-empty array of stops `{id, time "HH:MM", stop{en,pt}, event{en,pt}, who[], crime?}`; ids unique, times strictly increasing (one midnight wrap allowed), every `who` entry a suspect id, exactly one `crime: true` stop whose `who` includes the culprit. Reasons: timeline_missing, timeline_bad_id, timeline_bad_time, timeline_missing_text, timeline_unknown_suspect, timeline_out_of_order, timeline_crime_count, timeline_culprit_absent.

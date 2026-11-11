@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { once } from 'node:events';
 import { spawnSync } from 'node:child_process';
 import { createServer } from '../src/server.js';
-import { loadCase, CASES, caseFileFor } from '../src/case.js';
+import { loadCase, CASES, caseFileFor, unknownCaseLine } from '../src/case.js';
 
 let passed = 0, failed = 0;
 
@@ -137,6 +137,24 @@ await test('CLI --case loads the night train and the page has no case picker', a
   assert(r.stdout.includes(nt.title.pt) && r.stdout.includes('Inês Duarte'), 'stdout missing data');
   const page = fs.readFileSync('public/index.html', 'utf8');
   assert(!page.includes('night-train') && !page.includes('caseId') && !page.includes('CASE_ID'), 'picker leaked to HTML');
+});
+
+await test('unknown CASE_ID gives one friendly line and exit code 2', async () => {
+  const r = spawnSync(process.execPath, ['src/server.js'], { env: { ...process.env, CASE_ID: 'nope', PORT: '0' }, encoding: 'utf8', timeout: 10000 });
+  assert(r.status === 2, 'server should exit 2');
+  assert(r.stderr.trim() === unknownCaseLine('nope'), 'stderr is not the friendly line');
+  assert(r.stderr.trim().split('\n').length === 1, 'more than one line');
+  assert(r.stderr.includes('violin') && r.stderr.includes('night-train'), 'valid ids missing');
+  assert(!r.stderr.includes('    at ') && !r.stderr.includes('Error:'), 'stack trace printed');
+  assert(!r.stdout.includes('listening'), 'server started');
+});
+
+await test('CLI --case with an unknown id gives one friendly line and exit code 2', async () => {
+  const r = spawnSync(process.execPath, ['src/cli.js', '--case', 'Night-Train'], { input: 'quit\n', encoding: 'utf8', timeout: 10000 });
+  assert(r.status === 2, 'cli should exit 2');
+  assert(r.stderr.trim() === unknownCaseLine('Night-Train'), 'stderr is not the friendly line');
+  assert(!r.stderr.includes('    at '), 'stack trace printed');
+  assert(r.stdout.trim() === '', 'cli printed a case');
 });
 
 console.log(`\n${passed} passed, ${failed} failed`);

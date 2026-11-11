@@ -1,0 +1,9 @@
+2026-11-11 09:15 BRT, after call 189:
+$ CASE_ID=nope node src/server.js  -> stderr: Unknown case "nope". Valid case ids: violin, night-train.  exit=2
+$ node src/cli.js --case nope </dev/null -> stderr: Unknown case "nope". Valid case ids: violin, night-train.  exit=2
+$ CASE_ID=night-train MOCK=1 PORT=3999 timeout 2 node src/server.js -> "Server listening at http://localhost:3999" (killed by timeout, exit 124)
+Before (v0.4.2): both printed an unhandled Error stack trace (case.js:29, code unknown_case) and exited 1.
+Mutations (test/case-select.mjs, each restored after):
+ M1 server rethrows instead of printing the line -> FAIL "unknown CASE_ID gives one friendly line and exit code 2" (server should exit 2), 8/9
+ M2 cli exits 0 instead of 2 -> FAIL "CLI --case with an unknown id gives one friendly line and exit code 2" (cli should exit 2), 8/9
+ M3 line without the valid ids -> FAIL "unknown CASE_ID ..." (valid ids missing), 8/9

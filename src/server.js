@@ -3,7 +3,7 @@ import { createReadStream, readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
-import { loadCase, caseFileFor, publicCase, systemPrompt, capWords } from './case.js';
+import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWords } from './case.js';
 import { createProxy } from './proxy.js';
 import { mockAnswer } from './mock.js';
 import { friendly } from './messages.js';
@@ -326,5 +326,11 @@ export function createServer({
 // If run directly via `node src/server.js`
 if (import.meta.url === `file://${process.argv[1]}`) {
   // default options
-  createServer({ caseFile: 'content/case.json', caseId: process.env.CASE_ID || undefined });
+  try {
+    createServer({ caseFile: 'content/case.json', caseId: process.env.CASE_ID || undefined });
+  } catch (err) {
+    if (err.code !== 'unknown_case') throw err;
+    console.error(unknownCaseLine(process.env.CASE_ID));
+    process.exit(2);
+  }
 }

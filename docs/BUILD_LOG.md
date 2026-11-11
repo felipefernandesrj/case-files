@@ -198,3 +198,12 @@ Model: @cf/google/gemma-4-26b-a4b-it via the QA Cup key, thinking off. M2 in pro
 - Live smoke (tools/smoke-m2s2.mjs, llama-4-scout, Night Train by id): PT Helena 200 42 words, PT Inês 200 40 words, correct accuse score 100. qa/live-smoke-m2s2.json.
 - Result: npm test 112/112 (was 105). 7 key calls, 5 913 / 4 022 tokens, 184.5 neurons (~US$ 0.0020), rework 2 calls = 13% of build neurons, 0 API failures.
 - Details, receipts and FullCup observations: qa/rework.md (M2 sprint 2).
+
+## M2 sprint 3 (v0.4.3, friendly error for an unknown case id), 2026-11-11 12:15-12:18 UTC (09:15-09:18 BRT)
+Model: @cf/google/gemma-4-26b-a4b-it via the QA Cup key, thinking off. M2 in progress, not in the page, not declared.
+- Call 189: src/case.js unknownCaseLine(id); node src/server.js (CASE_ID) and the CLI (--case) catch unknown_case, print one line naming the id and the valid ids to stderr and exit 2; other errors still rethrown.
+- Calls 190-191: test/case-select.mjs 2 new checks (9 in the file); 191 fixed their indentation.
+- Calls 192-193: CHANGELOG 0.4.3, package.json 0.4.3, README "M2 in progress (v0.4.3, sprint 3)", SPEC test list, totals and Case engine; 193 put the example message in backticks.
+- Live smoke (tools/smoke-m2s3.mjs, llama-4-scout, Night Train by id): PT Victor 200 32 words, correct accuse score 100. qa/live-smoke-m2s3.json.
+- Result: npm test 114/114 (was 112). 6 key calls, 4 379 / 2 757 tokens, 125.1 neurons (~US$ 0.0014), rework 2 calls = 30.5% of build neurons, 0 API failures.
+- Details, receipts and FullCup observations: qa/rework.md (M2 sprint 3).

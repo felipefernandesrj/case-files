@@ -1,0 +1,18 @@
+# Task (M2 sprint 3): 2 new checks in test/case-select.mjs for the friendly unknown case error
+Facts: src/case.js now exports unknownCaseLine(id), which returns `Unknown case "<id>". Valid case ids: violin, night-train.`. CASE_ID=nope node src/server.js and node src/cli.js --case nope print exactly that one line to stderr and exit with code 2 (no stack trace).
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Empty lines INSIDE a NEW are part of NEW: keep writing NEW until it is complete, then <<<END>>>. Every OLD is unique in the file. No prose, no fences, no em-dashes, no thinking aloud. 2-space indentation, plain ES2020.
+
+Block 1, test/case-select.mjs. OLD is exactly this 1 line:
+import { loadCase, CASES, caseFileFor } from '../src/case.js';
+NEW is exactly this 1 line:
+import { loadCase, CASES, caseFileFor, unknownCaseLine } from '../src/case.js';
+
+Block 2, test/case-select.mjs. OLD is exactly this 1 line:
+console.log(`\n${passed} passed, ${failed} failed`);
+NEW is: two new tests, each followed by one empty line, then that same OLD line as the last line. Use the existing `test(name, fn)` with `await test(...)` and the existing `assert(cond, msg)`, exactly like the tests above them. Write each test body in full.
+Test 8, name "unknown CASE_ID gives one friendly line and exit code 2":
+  const r = spawnSync(process.execPath, ['src/server.js'], { env: { ...process.env, CASE_ID: 'nope', PORT: '0' }, encoding: 'utf8', timeout: 10000 });
+  then assert r.status === 2 (message 'server should exit 2'); assert r.stderr.trim() === unknownCaseLine('nope') (message 'stderr is not the friendly line'); assert r.stderr.trim().split('\n').length === 1 (message 'more than one line'); assert r.stderr.includes('violin') && r.stderr.includes('night-train') (message 'valid ids missing'); assert !r.stderr.includes('    at ') && !r.stderr.includes('Error:') (message 'stack trace printed'); assert !r.stdout.includes('listening') (message 'server started').
+Test 9, name "CLI --case with an unknown id gives one friendly line and exit code 2":
+  const r = spawnSync(process.execPath, ['src/cli.js', '--case', 'Night-Train'], { input: 'quit\n', encoding: 'utf8', timeout: 10000 });
+  then assert r.status === 2 (message 'cli should exit 2'); assert r.stderr.trim() === unknownCaseLine('Night-Train') (message 'stderr is not the friendly line'); assert !r.stderr.includes('    at ') (message 'stack trace printed'); assert r.stdout.trim() === '' (message 'cli printed a case').

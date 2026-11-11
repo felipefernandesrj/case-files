@@ -522,3 +522,28 @@ Receipts (seal-by 2026-11-12T00:05:00Z), 7 chat: build 01M73ZXN0R8A3J8VZE4AEVHYM
 - Seal check (signed out, curl https://qa.fullcup.ai/receipts/<id>, 2026-11-11 00:23Z): all 10 M2s1 receipts HTTP 200, Genuine receipt, Sealed at 2026-11-11 00:05:25 UTC, one of 12 in the signed root of 2026-11-10. Exact cost: 01M72NRCX1X2EZASSMTQP2SDPW $0.000949, 01M72NVRKSW176ZY3MFBA6B26T $0.000689, 01M72NXQQ0N4DYXTM04RYT28MG $0.000365, 01M72NZ0EM2M0RE01QBPY54FQJ $0.000287, 01M72P0G79M201C0NNYPGKWYJ1 $0.000648, 01M72P2Q5QDBQTJY3C3HVTTZ54 $0.000054, 01M72P3XPF1066JA2FYWMB58AB $0.000311, 01M72P54E85ENNJSGXJG0KJBCP $0.000202 (gemma-4-26b-a4b-it); 01M72P67XGGGA762NA2K6SG7W1 $0.000167, 01M72P69JMT9BDP0QHZQKKK4K4 $0.000170 (llama-4-scout-17b-16e-instruct). Sum $0.003842 matches the ~US$0.0038 estimate. Snips seal-*.snip.txt.
 - Reproduced again: no per-call cost in the chat response (7 of 7 cost null), duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id same value (7 of 7), enable_thinking=false honoured (5 of 5), cached_tokens 0.
 - No new FullCup anomaly.
+
+## M2 sprint 3: friendly error for an unknown case id (v0.4.3), 2026-11-11 12:15-12:18 UTC (09:15-09:18 BRT)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 600 to 2000, via the Cup key. Live smoke llama-4-scout (Night Train by id, PT, 1 call). M2 in progress; not in the page; M2 not declared.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 189 | src/case.js unknownCaseLine(id); server.js main block and cli.js catch unknown_case, print the line to stderr, exit 2 (5 edits) | 200 | 12.9 s | 899 / 496 | 21.70 | src/case.js, src/server.js, src/cli.js | accepted first try 5/5; other errors still rethrown |
+| 190 | test/case-select.mjs 2 new checks (server CASE_ID=nope, CLI --case Night-Train) | 200 | 13.1 s | 838 / 501 | 21.28 | test/case-select.mjs | accepted 2/2, 9/9 pass, but both tests indented 2 extra spaces |
+| 191 | rework: indentation of the 2 new tests | 200 | 23.8 s | 631 / 785 | 27.15 | test/case-select.mjs | rework, accepted; whole 17 line block rewritten, cost more than the original call |
+| live | Night Train by id, PT Victor + correct accuse | 200 x1 key call | 3.6 s | 481 / 54 | 15.98 | - | PT, in character (sleeper 7, heard Tomás singing in car 4, matches his facts), no invented people; one English word kept ("a sleeper 7"); accuse Inês correct, score 100 |
+| 192 | CHANGELOG 0.4.3, package 0.4.3, README M2 sprint 3, SPEC test list + totals + Case engine | 200 | 18.3 s | 1224 / 797 | 32.86 | 4 files (7 edits) | accepted 7/7, full sentences this time; the first CHANGELOG bullet quoted the example message as bare text |
+| 193 | rework: example message in backticks | 200 | 5.5 s | 306 / 124 | 6.16 | CHANGELOG.md | rework, accepted |
+
+Totals: 6 key calls (5 build + 1 live), 4 379 in / 2 757 out tokens, 125.13 neurons, about US$ 0.0014 at $0.011/1k neurons. Build only: 5 calls, 3 898 / 2 703 tokens, 109.15 neurons. Wasted 0; rework 2 (191, 193) = 33.31 neurons (30.5% of build, was 13.0% in sprint 2). 0 API failures, slowest 23.8 s.
+Manual lines: 0 product, 0 docs (qa/rework.md, docs/BUILD_LOG.md are PO logs). Harness: tools/smoke-m2s3.mjs (copy of smoke-m2s2 with one step). Prompts 189-193 written by the agent.
+npm test: 114/114 (was 112; e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 9 (+2), keyboard 13); no keyboard flake, 2 full runs.
+Mutation: server rethrowing fails the CASE_ID check; CLI exiting 0 fails the CLI check; a line without the valid ids fails the CASE_ID check (qa/m2s3-probes/manual-check.txt).
+Manual check: CASE_ID=nope node src/server.js and node src/cli.js --case nope print `Unknown case "nope". Valid case ids: violin, night-train.` and exit 2; CASE_ID=night-train still starts.
+Verdict: worth it, tiny and safe. Rework up to 30.5%, almost all a cosmetic indent fix. Lessons: (1) when a NEW inserts top-level code before a column 0 line, say "column 0" explicitly, gemma copied the indent of the block body it was describing; (2) an indent-only rework makes the model echo the whole block, so it costs more than the original; cheaper to state indentation up front; (3) example messages inside docs need "in backticks" in the prompt.
+Receipts (seal-by 2026-11-12T00:05:00Z), 6 chat: build 01M758GFHJTZV664VCHY1F3PQX (189), 01M758HEBCSY4KX7Z41KCPNGGZ (190), 01M758J5R5NE1W4ZFY0FYP2D55 (191), 01M758MKQANJ9NT9Z9N0A1YB71 (192), 01M758NE8C24CG0F62GCAAFAZK (193); live 01M758KRCCC3VQB2TGG70X204B (PT Victor). Build ids in qa/build-log.json (label m2s3-*); live in qa/key-usage-log.json (purpose m2s3-smoke:*), qa/live-smoke-m2s3.json.
+
+### FullCup observations, M2 sprint 3 (evidence qa/m2s3-probes/)
+- Seal check of the 7 M2s2 receipts not due yet (sealed after 2026-11-12 00:05Z); skipped.
+- Reproduced again: no per-call cost in the chat response (6 of 6 cost null), duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id same value (6 of 6), enable_thinking=false honoured (5 of 5), cached_tokens 0.
+- No new FullCup anomaly.

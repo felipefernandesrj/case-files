@@ -1,0 +1,39 @@
+# Task (M2 sprint 3, v0.4.3): docs and version for the friendly unknown case error
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW. Empty lines INSIDE a NEW are part of NEW: keep writing until NEW has the stated number of lines, then <<<END>>>. Every OLD is unique in the file. Plain English, no prose outside blocks, no fences, no em-dashes, no thinking aloud, no commit hashes. Every bullet is a full sentence that starts with a capital letter; do not copy these facts as fragments.
+
+Facts (write them in your own full sentences): Before this sprint, starting the game server with an unknown case id (CASE_ID=nope node src/server.js) or the command line version with an unknown id (node src/cli.js --case nope) crashed with a long stack trace. Now both print one clear line, for example: Unknown case "nope". Valid case ids: violin, night-train. Then they exit with code 2. Other startup errors are not hidden. The line comes from the new function unknownCaseLine(id) in src/case.js. Two new checks in test/case-select.mjs cover the server and the command line version, so that file now has 9 checks and the suite has 114 checks in total (was 112). A short live test in Portuguese against The Night Train still passed after the change. The page still opens The Vanishing Violin and has no case picker yet, and M2 is not delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly these 3 lines:
+# Changelog
+
+## 0.4.2 (M2 sprint 2, load a case by id behind a flag)
+NEW is 9 lines: line 1 "# Changelog", line 2 empty, line 3 "## 0.4.3 (M2 sprint 3, friendly error for an unknown case id)", lines 4 to 7 four full sentence bullets starting with "- " (what used to happen and what happens now including the example line and exit code 2; where the line comes from and that other errors are not hidden; the 2 new checks and the new total of 114; the page is unchanged and M2 is not delivered), line 8 empty, line 9 "## 0.4.2 (M2 sprint 2, load a case by id behind a flag)".
+
+Block 2, package.json. OLD is exactly this 1 line:
+  "version": "0.4.2",
+NEW is exactly this 1 line:
+  "version": "0.4.3",
+
+Block 3, README.md. OLD is exactly this fragment:
+**M2 in progress (v0.4.2, sprint 2).**
+NEW is exactly this fragment:
+**M2 in progress (v0.4.3, sprint 3).**
+
+Block 4, README.md. OLD is exactly this fragment:
+has no case picker yet. 112 automated checks.
+NEW is exactly this fragment:
+has no case picker yet. An unknown case id now stops with one clear line that lists the valid ids. 114 automated checks.
+
+Block 5, docs/SPEC.md. OLD is exactly this 1 line:
+7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page)
+NEW is exactly this 1 line:
+7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page, friendly one line error and exit code 2 for an unknown id in the server and the CLI)
+
+Block 6, docs/SPEC.md. OLD is exactly this 1 line:
+Total checks: 112 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 7, keyboard: 13).
+NEW is exactly this 1 line:
+Total checks: 114 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 9, keyboard: 13).
+
+Block 7, docs/SPEC.md. OLD is exactly this 1 line:
+- Flag: createServer({ caseId }), CASE_ID for node src/server.js and --case for the CLI, default The Vanishing Violin, not exposed in the page.
+NEW is exactly 2 lines: line 1 the same line unchanged; line 2 a full sentence bullet starting with "- `unknownCaseLine(id)`: " that says it returns the one line message naming the id and the valid ids, and that node src/server.js and the CLI print it to stderr and exit with code 2 instead of a stack trace when the id is unknown.

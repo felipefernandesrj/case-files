@@ -1,4 +1,5 @@
 import { createServer } from './server.js';
+import { unknownCaseLine } from './case.js';
 import { readFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -45,11 +46,18 @@ for (let i = 0; i < args.length; i++) {
 }
 
 // Start server on random port
-const server = await createServer({
-  caseFile: 'content/case.json',
-  caseId,
-  mock: true,
-});
+let server;
+try {
+  server = await createServer({
+    caseFile: 'content/case.json',
+    caseId,
+    mock: true,
+  });
+} catch (err) {
+  if (err.code !== 'unknown_case') throw err;
+  console.error(unknownCaseLine(caseId));
+  process.exit(2);
+}
 await new Promise((resolve) => server.listen(0, resolve));
 const address = server.address();
 const baseUrl = `http://localhost:${address.port}`;

@@ -13,6 +13,11 @@ export function loadCase(file = 'content/case.json') {
   return JSON.parse(readFileSync(path, 'utf8'));
 }
 
+/** One line for people: names the unknown case id and lists the valid ids. */
+export function unknownCaseLine(id) {
+  return `Unknown case "${String(id)}". Valid case ids: ${Object.keys(CASES).join(', ')}.`;
+}
+
 /** Known cases: id -> case file (relative to the project root). */
 export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' });
 

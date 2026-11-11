@@ -1,0 +1,57 @@
+# Task (M2 sprint 3): a friendly one-line error for an unknown case id in the server and the CLI
+Today CASE_ID=nope node src/server.js and node src/cli.js --case nope crash with an unhandled stack trace. They must instead print exactly one line to stderr that names the bad id and lists the valid ids, and exit with code 2. Any other error keeps its old behaviour (rethrow).
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Keep writing NEW until it has the stated number of lines, then <<<END>>>. Every OLD is unique in the file. No prose, no fences, no em-dashes, no thinking aloud. 2-space indentation, plain ES2020.
+
+Block 1, src/case.js. OLD is exactly this 1 line:
+/** Known cases: id -> case file (relative to the project root). */
+NEW is exactly 8 lines:
+line 1: /** One line for people: names the unknown case id and lists the valid ids. */
+line 2: export function unknownCaseLine(id) {
+line 3:   return `Unknown case "${String(id)}". Valid case ids: ${Object.keys(CASES).join(', ')}.`;
+line 4: }
+line 5: (empty)
+line 6: /** Known cases: id -> case file (relative to the project root). */
+(that is 6 lines; lines 7 and 8 do not exist, stop after line 6.)
+
+Block 2, src/server.js. OLD is exactly this 1 line:
+import { loadCase, caseFileFor, publicCase, systemPrompt, capWords } from './case.js';
+NEW is exactly this 1 line:
+import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWords } from './case.js';
+
+Block 3, src/server.js. OLD is exactly this 1 line:
+  createServer({ caseFile: 'content/case.json', caseId: process.env.CASE_ID || undefined });
+NEW is exactly these 7 lines:
+  try {
+    createServer({ caseFile: 'content/case.json', caseId: process.env.CASE_ID || undefined });
+  } catch (err) {
+    if (err.code !== 'unknown_case') throw err;
+    console.error(unknownCaseLine(process.env.CASE_ID));
+    process.exit(2);
+  }
+
+Block 4, src/cli.js. OLD is exactly this 1 line:
+import { createServer } from './server.js';
+NEW is exactly these 2 lines:
+import { createServer } from './server.js';
+import { unknownCaseLine } from './case.js';
+
+Block 5, src/cli.js. OLD is exactly these 5 lines:
+const server = await createServer({
+  caseFile: 'content/case.json',
+  caseId,
+  mock: true,
+});
+NEW is exactly these 13 lines:
+let server;
+try {
+  server = await createServer({
+    caseFile: 'content/case.json',
+    caseId,
+    mock: true,
+  });
+} catch (err) {
+  if (err.code !== 'unknown_case') throw err;
+  console.error(unknownCaseLine(caseId));
+  process.exit(2);
+}
+(that is 12 lines; stop after the closing "}" line.)

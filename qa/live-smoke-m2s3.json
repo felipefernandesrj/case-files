@@ -1,0 +1,46 @@
+[
+ {
+  "status": {
+   "mode": "live",
+   "caseId": "case-night-train-002"
+  }
+ },
+ {
+  "lang": "pt",
+  "suspect": "victor",
+  "q": "Onde você estava quando as luzes apagaram no túnel?",
+  "status": 200,
+  "questions": 1,
+  "answer": "Eu estava na minha cabine-leito, a sleeper 7. Durante o apagão, ouvi o Tomás cantando no vagão 4, longe do vagão de bagagem. Não me afastei da minha cabine durante a noite.",
+  "words": 32,
+  "ptHint": true,
+  "confesses": null,
+  "namesOutsideCast": [
+   "Eu",
+   "Durante",
+   "Não"
+  ],
+  "upstreamMs": 3569,
+  "receipt": "01M758KRCCC3VQB2TGG70X204B",
+  "dupHeader": true,
+  "sealBy": "2026-11-12T00:05:00.000Z",
+  "cost": null,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "usage": {
+   "prompt_tokens": 481,
+   "completion_tokens": 54,
+   "total_tokens": 535,
+   "neurons": 15.97909164428711,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": 200,
+  "correct": true,
+  "culpritName": "Inês Duarte",
+  "score": 100,
+  "questions": 1
+ }
+]

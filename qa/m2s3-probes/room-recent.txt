@@ -1,0 +1,3 @@
+Room 7y8V7b5z, read only, nothing posted. Checked 2026-11-11 12:17Z (09:17 BRT).
+GET {relayUrl}/healthz and /recent (relay bargains-medication-until-guam from session.json) and the newer tunnel ebook-mpegs-carlos-glucose: both fail at TLS (unexpected EOF, curl 35 / HTTP 000); name resolves but no tunnel answers. qa.fullcup.ai answers from the same box at the same time, so the box egress works.
+Consistent with Felipi's computer being offline (tunnels failed at 02:09 BRT today). Room unreachable: item C delivery status unknown this run.

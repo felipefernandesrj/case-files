@@ -1,0 +1,5 @@
+<<<REPLACE CHANGELOG.md>>>
+- Starting the game server or the CLI with an unknown case id used to crash with a long stack trace, but now they print a single line like Unknown case "nope". Valid case ids: violin, night-train. and exit with code 2.
+=====
+- Starting the game server or the CLI with an unknown case id used to crash with a long stack trace, but now they print a single line like `Unknown case "nope". Valid case ids: violin, night-train.` and then exit with code 2.
+<<<END>>>

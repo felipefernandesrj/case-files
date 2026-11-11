@@ -1,0 +1,6 @@
+# Rework (M2 sprint 3): the first CHANGELOG 0.4.3 bullet quotes the example message as bare text, so its full stops run into the sentence; put it in backticks
+Output ONLY one literal edit block. Format: <<<REPLACE CHANGELOG.md>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW. No prose, no fences, no em-dashes, no thinking aloud, no commit hashes.
+
+OLD is exactly this 1 line:
+- Starting the game server or the CLI with an unknown case id used to crash with a long stack trace, but now they print a single line like Unknown case "nope". Valid case ids: violin, night-train. and exit with code 2.
+NEW is exactly 1 bullet line starting with "- Starting the game server" that says the same thing, with the example message written inside backticks as `Unknown case "nope". Valid case ids: violin, night-train.` and ending with "and then exit with code 2."
