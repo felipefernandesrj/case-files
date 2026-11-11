@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.5 (visual V2, layout fix and gothic-noir icon set)
+- The header, main stage and dock share one centered 1120px shell, so the 1280 desktop chrome lines up with the content. On a 390-wide phone the case plays as one step at a time with a sticky bottom HUD (Briefing, Locations, Suspects, Interrogate, Board, Accuse). Tablet (768) uses two columns; desktop uses a sidebar plus stage.
+- The cabinet header shows the pack title "Case Files"; the case title appears only after a file is open. Location labels keep light type on a dark scrim so they stay WCAG AA, including the selected room.
+- A self-made SVG icon sprite (public/assets/icons.svg, also inlined in the page) covers navigation, roles, rooms, evidence types, timeline marks, verdict and status. Icons sit next to visible text labels and are aria-hidden. test/icons.mjs checks that every referenced icon id exists in the sprite and that referenced icon paths do not 404 (including a guard for rotate-ccw).
+
 ## 0.4.4 (visual V1, gothic-noir player with case picker)
 - The web player uses a gothic-noir skin (ink, paper, lamp amber) with 44px targets, a visible focus ring, and reduced-motion support. Portraits, rooms and title cards are CSS placeholders; generated art is not in this sprint.
 - The page can open The Vanishing Violin or The Night Train without restarting the server: GET /api/cases, GET /api/case?case=, and POST /api/session { case }. The process CASE_ID flag remains the default case for /api/status and for clients that omit the query.

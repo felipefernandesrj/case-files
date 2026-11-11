@@ -106,9 +106,10 @@ This executes:
 5. `node test/scoreboard.mjs` (Scoreboard, personal best, version check)
 6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not the default case)
 7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page, friendly one line error and exit code 2 for an unknown id in the server and the CLI)
-8. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+8. `node test/icons.mjs` (icon sprite ids and no 404 on referenced icon paths, including rotate-ccw)
+9. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 114 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 9, keyboard: 13).
+Total checks: 119 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, keyboard: 13).
 
 ### Case engine (`src/case.js`, M2)
 - `CASES` and `caseFileFor(id)`: frozen registry containing violin (content/case.json) and night-train (content/cases/night-train.json) that throws unknown_case for any other IDs.

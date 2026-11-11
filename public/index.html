@@ -6,61 +6,199 @@
 <title>Case Files</title>
 <link rel="stylesheet" href="/css/game.css">
 </head>
-<body>
+<body data-view="play" data-layout="desktop">
+<svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-briefing" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 8h6l2 2h10v9.5H3z"/><path d="M3 8V5.5h6l2 2"/><path d="M8 14h8M8 17h5"/>
+  </symbol>
+  <symbol id="i-locations" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/>
+  </symbol>
+  <symbol id="i-suspects" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="8" r="3.2"/><path d="M5 19.5c.6-3.6 3.2-5.5 7-5.5s6.4 1.9 7 5.5"/>
+  </symbol>
+  <symbol id="i-talk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 6.5h14v9H9l-4 3.5z"/>
+  </symbol>
+  <symbol id="i-board" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="4" width="17" height="13.5" rx="1"/><path d="M8 8.5h8M8 12h5"/><circle cx="17" cy="19" r="1.4"/><path d="M17 17.6V16"/>
+  </symbol>
+  <symbol id="i-accuse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 13.5h10l-1.2 6H9.2z"/><path d="M6 13.5h14"/><path d="M11 4v7M11 4l5 2.2v5"/>
+  </symbol>
+  <symbol id="i-score" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8"/><path d="M12 6.5v11M8 8.5l8 7M16 8.5l-8 7"/>
+  </symbol>
+  <symbol id="i-files" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9h7l1.5 2H21v8.5H3z"/><path d="M3 9V6h7l1.5 2"/>
+  </symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 16.5V21"/><path d="M8.5 10.5l3.5 6 3.5-6"/><circle cx="12" cy="8" r="3"/>
+  </symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 6l12 12M18 6L6 18"/>
+  </symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 3 3.6 6 3.6 8.5S14.4 17 12 20.5C9.6 17 8.4 14 8.4 12S9.6 6.5 12 3.5z"/>
+  </symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 7.5 4.5 5 7 2.5"/><path d="M4.5 5h9.2a6.3 6.3 0 1 1-1.8 12.3"/>
+  </symbol>
+  <symbol id="i-role-conductor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 20V7.5M8 7.5c0-2 1.8-3.5 4-3.5"/><path d="M11 20h6M12.5 10.5h5v3h-5z"/>
+  </symbol>
+  <symbol id="i-role-violinist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 16.5c0 2 1.6 3.5 4 3.5s4-1.5 4-3.5c0-2.8-4-8-4-11.5 0 3.5-4 8.7-4 11.5z"/><path d="M12 5.5V2.5M9.5 19.5h5"/>
+  </symbol>
+  <symbol id="i-role-janitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.5v11"/><path d="M7 20.5c0-3 2.2-5 5-5s5 2 5 5"/><path d="M8.5 14.5h7"/>
+  </symbol>
+  <symbol id="i-role-train-conductor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="6" y="8" width="12" height="6.5" rx="1"/><path d="M8 8V6h8v2M7 14.5v3h10v-3M9 18.5v2M15 18.5v2"/>
+  </symbol>
+  <symbol id="i-role-jeweller" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 9.5 12 4.5l4 5-4 10z"/><path d="M8 9.5h8"/>
+  </symbol>
+  <symbol id="i-role-porter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="7" y="9" width="10" height="9" rx="1"/><path d="M9 9V7.5a3 3 0 0 1 6 0V9M7 13h10"/>
+  </symbol>
+  <symbol id="i-role-chef" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 11c-1.6 0-2.5-1.5-2.5-3S7 5 8.5 5c.3-1.5 1.5-2.5 3.5-2.5S15.2 3.5 15.5 5c1.5 0 3 .8 3 3s-.9 3-2.5 3"/><path d="M8 11v9h8v-9M9.5 20v1.5h5V20"/>
+  </symbol>
+  <symbol id="i-loc-academy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20h16M6 20V10l6-5 6 5v10"/><path d="M10 20v-5h4v5"/>
+  </symbol>
+  <symbol id="i-loc-office" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5" y="6" width="14" height="14" rx="0.5"/><path d="M5 10h14M9 6V4h6v2M9 14h2M13 14h2M9 17h2M13 17h2"/>
+  </symbol>
+  <symbol id="i-loc-instrument" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="6" y="7" width="12" height="13" rx="1"/><path d="M9 7V5.5h6V7"/><circle cx="12" cy="14" r="2.2"/>
+  </symbol>
+  <symbol id="i-loc-rehearsal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 18V11l4-2v9M11 18V9l4-2v11M17 18V8l2-1"/><path d="M4 18h16"/>
+  </symbol>
+  <symbol id="i-loc-hallway" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20V8l8-4 8 4v12"/><path d="M10 20v-6h4v6"/>
+  </symbol>
+  <symbol id="i-loc-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="10" width="17" height="7" rx="1.5"/><path d="M6.5 10V8h6v2M8 17.5v2M16 17.5v2M3.5 13.5H21"/>
+  </symbol>
+  <symbol id="i-loc-dining" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 18h16M6 16h12"/><path d="M7 16c0-4 2.2-7 5-7s5 3 5 7"/><circle cx="12" cy="8" r="1"/>
+  </symbol>
+  <symbol id="i-loc-sleeper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 17.5V11h8.5v6.5M12.5 14H20v3.5"/><path d="M3 17.5h18M7 11V8.5h4V11"/>
+  </symbol>
+  <symbol id="i-loc-luggage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5" y="8" width="14" height="11" rx="1"/><path d="M9 8V6h6v2M5 12h14"/>
+  </symbol>
+  <symbol id="i-loc-tunnel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 19.5V12A9 9 0 0 1 21 12v7.5"/><path d="M3 19.5h18M12 12v7.5"/>
+  </symbol>
+  <symbol id="i-loc-platform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 17h18M5 17V9l14 3v5"/><path d="M3 20h18"/>
+  </symbol>
+  <symbol id="i-ev-fingerprint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20.5c0-6 6-6 6-11.5A6 6 0 0 0 6 9.5"/><path d="M12 20.5c0-4.2-3.5-4.5-3.5-9"/><path d="M12 20.5c0-2.6 2.2-3 2.2-6"/>
+  </symbol>
+  <symbol id="i-ev-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="8" cy="14" r="3.5"/><path d="M11.2 12.8 20 5.5M17 5.5h3v3"/>
+  </symbol>
+  <symbol id="i-ev-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 8.5h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/><path d="M9 8.5v11"/>
+  </symbol>
+  <symbol id="i-ev-letter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="6" width="16" height="12" rx="1"/><path d="M4 8l8 6 8-6"/>
+  </symbol>
+  <symbol id="i-ev-necklace" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 8c0-3 2.2-5 5-5s5 2 5 5"/><circle cx="12" cy="16" r="3.5"/><path d="M7 8c1 4 2.5 5.5 5 5.5S16 12 17 8"/>
+  </symbol>
+  <symbol id="i-ev-violin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 15c0 2.4 1.5 4 3 4s3-1.6 3-4c0-3-3-7.5-3-11 0 3.5-3 8-3 11z"/><path d="M12 4V2.5M10 18.5h4"/>
+  </symbol>
+  <symbol id="i-ev-watch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="13" r="7"/><path d="M12 13V9.5M12 13l3 2M9 3.5h6"/>
+  </symbol>
+  <symbol id="i-ev-footprint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="11" cy="8" rx="3" ry="4"/><circle cx="15.2" cy="14.2" r="1.1"/><circle cx="13.6" cy="16.4" r="1.1"/><circle cx="11.2" cy="17.4" r="1.1"/><circle cx="8.7" cy="16.2" r="1.1"/>
+  </symbol>
+  <symbol id="i-tl-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v4M12 16.5v4"/>
+  </symbol>
+  <symbol id="i-tl-gap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3.5"/><path d="M5 12h14"/>
+  </symbol>
+  <symbol id="i-questions" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 8.5a3 3 0 1 1 3.3 3.3C11.2 13 11 14 11 15"/><path d="M11 18.5h.1"/><circle cx="12" cy="12" r="8.5"/>
+  </symbol>
+  <symbol id="i-locked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="6" y="11" width="12" height="9" rx="1"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/>
+  </symbol>
+  <symbol id="i-unlocked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="6" y="11" width="12" height="9" rx="1"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0"/>
+  </symbol>
+  <symbol id="i-verdict-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8.5"/><path d="M8 12.5 11 16l5.5-7"/>
+  </symbol>
+  <symbol id="i-verdict-wrong" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8.5"/><path d="M9 9l6 6M15 9l-6 6"/>
+  </symbol>
+</svg>
+<div class="shell">
 <header>
-  <h1 id="title">Case Files</h1>
+  <h1 id="title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="">Case Files</span></h1>
   <div class="hud-tools">
-    <button id="len" aria-pressed="true">EN</button>
-    <button id="lpt" aria-pressed="false">PT</button>
-    <button id="restart-btn" type="button">Start over</button>
+    <button id="len" aria-pressed="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">EN</span></button>
+    <button id="lpt" aria-pressed="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">PT</span></button>
+    <button id="restart-btn" type="button" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-restart"></use></svg> <span data-label="">Start over</span></button>
   </div>
 </header>
 
 <section id="cabinet" hidden>
   <p class="stamp" id="cabinet-stamp">Field office</p>
-  <h2 id="cabinet-title">Case Files</h2>
+  <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
   <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
   <div id="cabinet-list"></div>
 </section>
 
 <main id="play">
-  <section id="briefing" aria-labelledby="title">
+  <section id="briefing" class="panel is-on" data-panel="briefing" aria-labelledby="title">
     <p class="stamp" id="brief-stamp">Case file</p>
     <section id="intro"></section>
   </section>
 
 
-  <section id="suspects">
-    <h2 id="suspects-title">Suspects</h2>
+  <section id="suspects" class="panel" data-panel="suspects">
+    <h2 id="suspects-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-label="">Suspects</span></h2>
     <div id="suspect-buttons"></div>
   </section>
 
-  <section id="conversation">
-    <h2 id="conversation-title">Conversation</h2>
+  <section id="conversation" class="panel" data-panel="talk">
+    <h2 id="conversation-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="">Conversation</span></h2>
     <div id="log" role="log" aria-live="polite"></div>
     <form id="ask-form">
       <label for="q" id="question-label">Question</label>
       <div class="ask-row">
         <input type="text" id="q" maxlength="500" required>
-        <button type="submit" id="ask-btn">Ask</button>
+        <button type="submit" id="ask-btn" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="">Ask</span></button>
       </div>
     </form>
     <p id="questions-used" aria-live="polite"></p>
   </section>
 
-  <section id="player-section">
+  <section id="player-section" class="panel" data-panel="accuse">
     <label for="player" id="player-label">Your name</label>
     <input type="text" id="player" maxlength="24" placeholder="anon">
   </section>
 
-  <section id="accuse-section">
-    <h2 id="accuse-title">Accuse</h2>
+  <section id="accuse-section" class="panel" data-panel="accuse">
+    <h2 id="accuse-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-label="">Accuse</span></h2>
     <div id="accuse-buttons"></div>
   </section>
 
 
-  <section id="rooms" aria-labelledby="rooms-title">
-    <h2 id="rooms-title" class="visually-in-section">Locations</h2>
+  <section id="rooms" class="panel" data-panel="locations" aria-labelledby="rooms-title">
+    <h2 id="rooms-title" class="visually-in-section with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-label="">Locations</span></h2>
     <div id="room-buttons"></div>
   </section>
   <style>
@@ -69,28 +207,28 @@
     #rooms-title { margin: 0 0 0.5rem; grid-column: 1 / -1; }
   </style>
 
-  <section id="timeline" hidden aria-labelledby="timeline-title">
-    <h2 id="timeline-title">Timetable</h2>
+  <section id="timeline" class="panel" hidden data-panel="locations" aria-labelledby="timeline-title">
+    <h2 id="timeline-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-tl-marker"></use></svg> <span data-label="">Timetable</span></h2>
     <div id="timeline-rail"></div>
   </section>
 
-  <section id="board" hidden aria-labelledby="board-title">
-    <h2 id="board-title">Evidence board</h2>
+  <section id="board" class="panel" data-panel="board" aria-labelledby="board-title">
+    <h2 id="board-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="">Evidence board</span></h2>
     <div id="board-grid"></div>
   </section>
 
-  <section id="verdict" role="status" aria-live="assertive" tabindex="-1" hidden></section>
-  <section id="err" role="alert" hidden></section>
+  <section id="verdict" class="panel" data-panel="accuse" role="status" aria-live="assertive" tabindex="-1" hidden></section>
+  <section id="err" class="panel" data-panel="accuse" role="alert" hidden></section>
 
-  <section id="best-section" aria-labelledby="best-title">
-    <h2 id="best-title"></h2>
+  <section id="best-section" class="panel" data-panel="accuse" aria-labelledby="best-title">
+    <h2 id="best-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label=""></span></h2>
     <p id="best-en"></p>
     <p id="best-pt"></p>
     <button id="reset-best" type="button">Reset Best</button>
     <p id="best-status" role="status"></p>
   </section>
-  <section id="scores-section" hidden>
-    <h2 id="scores-title">Scoreboard</h2>
+  <section id="scores-section" class="panel" data-panel="accuse" hidden>
+    <h2 id="scores-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="">Scoreboard</span></h2>
     <table>
       <caption id="scores-caption">Top 10 Players</caption>
       <thead>
@@ -105,7 +243,7 @@
     </table>
   </section>
 
-  <section id="credits" aria-labelledby="credits-title" tabindex="-1" hidden>
+  <section id="credits" class="panel" data-panel="accuse" aria-labelledby="credits-title" tabindex="-1" hidden>
     <h2 id="credits-title"></h2>
     <ul id="credits-list"></ul>
     <p id="credits-note"></p>
@@ -113,9 +251,18 @@
 </main>
 
 <nav id="dock" aria-label="Case tools">
-  <button type="button" id="files-btn" class="icon-btn">Files</button>
-  <button type="button" id="board-btn" class="icon-btn">Board</button>
+  <div id="steps" role="tablist" aria-label="Case steps">
+    <button type="button" role="tab" id="step-briefing" data-step="briefing" aria-selected="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-briefing"></use></svg> <span data-step-label="briefing">Briefing</span></button>
+    <button type="button" role="tab" id="step-locations" data-step="locations" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-step-label="locations">Locations</span></button>
+    <button type="button" role="tab" id="step-suspects" data-step="suspects" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-step-label="suspects">Suspects</span></button>
+    <button type="button" role="tab" id="step-talk" data-step="talk" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-step-label="talk">Interrogate</span></button>
+    <button type="button" role="tab" id="step-board" data-step="board" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-step-label="board">Board</span></button>
+    <button type="button" role="tab" id="step-accuse" data-step="accuse" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-step-label="accuse">Accuse</span></button>
+  </div>
+  <button type="button" id="files-btn" class="icon-btn with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Files</span></button>
+  <button type="button" id="board-btn" class="icon-btn with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="">Board</span></button>
 </nav>
+</div>
 
 <script type="module">
 const API = '/api';
@@ -138,7 +285,8 @@ const UI = {
     emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
     cabinetLead: 'Two closed rooms. Open a file, ask the questions, name who did it.',
     cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
-    unpin: 'Remove pin'
+    unpin: 'Remove pin',
+    steps: { briefing: 'Briefing', locations: 'Locations', suspects: 'Suspects', talk: 'Interrogate', board: 'Board', accuse: 'Accuse' }
   },
   pt: {
     pack: 'Dossiês', files: 'Arquivos', board: 'Quadro', boardTitle: 'Quadro de evidências',
@@ -146,9 +294,91 @@ const UI = {
     emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
     cabinetLead: 'Dois cômodos fechados. Abra um dossiê, faça as perguntas, diga quem foi.',
     cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
-    unpin: 'Retirar'
+    unpin: 'Retirar',
+    steps: { briefing: 'Dossiê', locations: 'Locais', suspects: 'Suspeitos', talk: 'Interrogar', board: 'Quadro', accuse: 'Acusar' }
   }
 };
+
+const ROOM_ICONS = {
+  'academy-exterior': 'i-loc-academy',
+  'instrument-room': 'i-loc-instrument',
+  'rehearsal-hall': 'i-loc-rehearsal',
+  'hallway': 'i-loc-hallway',
+  'exterior': 'i-loc-train',
+  'luggage-safe': 'i-loc-luggage',
+  'dining-kitchen': 'i-loc-dining',
+  'sleeper-corridor': 'i-loc-sleeper',
+  'tunnel': 'i-loc-tunnel',
+  'port-elling': 'i-loc-platform'
+};
+const ROLE_ICONS = {
+  lorenzo: 'i-role-conductor',
+  maya: 'i-role-violinist',
+  carlos: 'i-role-janitor',
+  helena: 'i-role-train-conductor',
+  victor: 'i-role-jeweller',
+  tomas: 'i-role-porter',
+  ines: 'i-role-chef'
+};
+const PIN_ICONS = {
+  'instrument-room': 'i-ev-violin',
+  'rehearsal-hall': 'i-ev-violin',
+  'academy-exterior': 'i-ev-footprint',
+  'hallway': 'i-ev-fingerprint',
+  'luggage-safe': 'i-ev-necklace',
+  'dining-kitchen': 'i-ev-key',
+  'sleeper-corridor': 'i-ev-watch',
+  'tunnel': 'i-ev-footprint',
+  'port-elling': 'i-ev-ticket',
+  'exterior': 'i-ev-ticket'
+};
+function iconSvg(id, cls) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', cls || 'icon');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', '#' + id);
+  svg.appendChild(use);
+  return svg;
+}
+function setText(elOrId, text) {
+  const el = typeof elOrId === 'string' ? document.getElementById(elOrId) : elOrId;
+  if (!el) return;
+  let lab = el.querySelector('[data-label]');
+  if (!lab) {
+    const keep = el.querySelector('svg.icon');
+    lab = document.createElement('span');
+    lab.setAttribute('data-label', '');
+    el.innerHTML = '';
+    if (keep) el.appendChild(keep);
+    el.appendChild(lab);
+  }
+  lab.textContent = text;
+}
+function applyLayout() {
+  const w = window.innerWidth;
+  document.body.dataset.layout = w >= 1280 ? 'desktop' : (w >= 768 ? 'tablet' : 'phone');
+}
+applyLayout();
+window.addEventListener('resize', applyLayout);
+function showStep(name) {
+  if (!name) return;
+  document.querySelectorAll('#play > .panel').forEach(el => {
+    el.classList.toggle('is-on', el.dataset.panel === name);
+  });
+  document.querySelectorAll('#steps [data-step]').forEach(b => {
+    b.setAttribute('aria-selected', b.dataset.step === name ? 'true' : 'false');
+  });
+}
+function syncTitle() {
+  const pack = (UI[lang] && UI[lang].pack) || 'Case Files';
+  const cabinetOn = document.getElementById('cabinet') && !document.getElementById('cabinet').hidden;
+  const title = cabinetOn ? pack : ((caseData && caseData.title) || pack);
+  setText('title', title);
+  document.title = title;
+}
+
 function setGameOver(on){
   gameOver = !!on;
   const q = document.getElementById('q');
@@ -175,25 +405,29 @@ async function setLang(newLang) {
   
   // Basic UI
   document.getElementById('question-label').textContent = newLang === 'pt' ? 'Pergunta' : 'Question';
-  document.getElementById('ask-btn').textContent = newLang === 'pt' ? 'Perguntar' : 'Ask';
+  setText('ask-btn', newLang === 'pt' ? 'Perguntar' : 'Ask');
   document.getElementById('player-label').textContent = newLang === 'pt' ? 'Seu nome' : 'Your name';
-  document.getElementById('suspects-title').textContent = newLang === 'pt' ? 'Suspeitos' : 'Suspects';
-  document.getElementById('conversation-title').textContent = newLang === 'pt' ? 'Conversa' : 'Conversation';
-  document.getElementById('accuse-title').textContent = newLang === 'pt' ? 'Acusar' : 'Accuse';
-  document.getElementById('title').textContent = (caseData && caseData.title) ? caseData.title : UI[newLang].pack;
-  document.getElementById('restart-btn').textContent = LABELS[newLang].startOver;
-  document.getElementById('files-btn').textContent = UI[newLang].files;
-  document.getElementById('board-btn').textContent = UI[newLang].board;
-  document.getElementById('board-title').textContent = UI[newLang].boardTitle;
-  document.getElementById('rooms-title').textContent = UI[newLang].rooms;
-  document.getElementById('timeline-title').textContent = UI[newLang].timeline;
-  document.getElementById('cabinet-title').textContent = UI[newLang].pack;
+  setText('suspects-title', newLang === 'pt' ? 'Suspeitos' : 'Suspects');
+  setText('conversation-title', newLang === 'pt' ? 'Conversa' : 'Conversation');
+  setText('accuse-title', newLang === 'pt' ? 'Acusar' : 'Accuse');
+  setText('restart-btn', LABELS[newLang].startOver);
+  setText('files-btn', UI[newLang].files);
+  setText('board-btn', UI[newLang].board);
+  setText('board-title', UI[newLang].boardTitle);
+  setText('rooms-title', UI[newLang].rooms);
+  setText('timeline-title', UI[newLang].timeline);
+  setText('cabinet-title', UI[newLang].pack);
+  document.querySelectorAll('[data-step-label]').forEach(s => {
+    const key = s.getAttribute('data-step-label');
+    if (UI[newLang].steps && UI[newLang].steps[key]) s.textContent = UI[newLang].steps[key];
+  });
+  syncTitle();
   document.getElementById('cabinet-lead').textContent = UI[newLang].cabinetLead;
   document.getElementById('cabinet-stamp').textContent = UI[newLang].cabinetStamp;
   document.getElementById('brief-stamp').textContent = UI[newLang].briefStamp;
 
   // Scoreboard
-  document.getElementById('scores-title').textContent = newLang === 'pt' ? 'Placar' : 'Scoreboard';
+  setText('scores-title', newLang === 'pt' ? 'Placar' : 'Scoreboard');
   document.getElementById('scores-caption').textContent = newLang === 'pt' ? '10 melhores jogadores' : 'Top 10 Players';
   document.getElementById('th-player').textContent = newLang === 'pt' ? 'Jogador' : 'Player';
   document.getElementById('th-score').textContent = newLang === 'pt' ? 'Pontos' : 'Score';
@@ -252,7 +486,7 @@ function initials(name) {
 function renderCase() {
   if (!caseData) return;
   document.getElementById('intro').innerHTML = `<p>${caseData.intro}</p>`;
-  document.getElementById('title').textContent = caseData.title || UI[lang].pack;
+  syncTitle();
   document.documentElement.setAttribute('data-accent', caseData.file === 'violin' ? 'salon' : 'rails');
   const btnContainer = document.getElementById('suspect-buttons');
   btnContainer.innerHTML = '';
@@ -266,8 +500,10 @@ function renderCase() {
     who.className = 'who';
     who.textContent = s.name;
     const role = document.createElement('span');
-    role.className = 'role';
-    role.textContent = s.role || '';
+    role.className = 'role with-icon';
+    const roleIcon = ROLE_ICONS[s.id];
+    if (roleIcon) role.appendChild(iconSvg(roleIcon, 'icon badge-icon'));
+    role.appendChild(document.createTextNode(s.role || ''));
     btn.appendChild(face);
     btn.appendChild(who);
     if (s.role) btn.appendChild(role);
@@ -294,7 +530,8 @@ function renderRooms() {
     btn.setAttribute('aria-pressed', currentRoom === r.id ? 'true' : 'false');
     const name = document.createElement('span');
     name.className = 'room-name';
-    name.textContent = r.name;
+    name.appendChild(iconSvg(ROOM_ICONS[r.id] || 'i-locations'));
+    name.appendChild(document.createTextNode(r.name));
     btn.appendChild(name);
     btn.addEventListener('click', () => inspectRoom(r));
     wrap.appendChild(btn);
@@ -323,6 +560,7 @@ function renderTimeline() {
     b.type = 'button';
     b.className = 'tl-stop';
     if (t.id) b.dataset.id = t.id;
+    b.appendChild(iconSvg(t.gap ? 'i-tl-gap' : 'i-tl-marker'));
     const tm = document.createElement('strong');
     tm.textContent = t.time || '';
     b.appendChild(tm);
@@ -336,16 +574,18 @@ function renderBoard() {
   grid.innerHTML = '';
   if (!pins.length) {
     const empty = document.createElement('p');
-    empty.className = 'ev-empty';
-    empty.textContent = UI[lang].emptyBoard;
+    empty.className = 'ev-empty with-icon';
+    empty.appendChild(iconSvg('i-pin'));
+    empty.appendChild(document.createTextNode(UI[lang].emptyBoard));
     grid.appendChild(empty);
     return;
   }
   pins.forEach((p, i) => {
     const tile = document.createElement('button');
     tile.type = 'button';
-    tile.className = 'ev-tile';
-    tile.textContent = p.label;
+    tile.className = 'ev-tile with-icon';
+    tile.appendChild(iconSvg(PIN_ICONS[p.id] || 'i-pin'));
+    tile.appendChild(document.createTextNode(p.label));
     tile.setAttribute('aria-label', UI[lang].unpin + ': ' + p.label);
     tile.addEventListener('click', () => { pins.splice(i, 1); renderBoard(); });
     grid.appendChild(tile);
@@ -363,12 +603,15 @@ function renderCabinet() {
     const art = document.createElement('div');
     art.className = 'folder-art';
     art.setAttribute('aria-hidden', 'true');
+    art.appendChild(iconSvg(item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
     const title = document.createElement('strong');
     title.textContent = item.title;
     const hook = document.createElement('span');
     hook.textContent = item.hook;
     const go = document.createElement('span');
-    go.textContent = UI[lang].openFile;
+    go.className = 'with-icon';
+    go.appendChild(iconSvg('i-unlocked'));
+    go.appendChild(document.createTextNode(UI[lang].openFile));
     btn.appendChild(art);
     btn.appendChild(title);
     btn.appendChild(hook);
@@ -381,6 +624,8 @@ function renderCabinet() {
 function showCabinet() {
   document.getElementById('cabinet').hidden = false;
   document.getElementById('play').hidden = true;
+  document.body.dataset.view = 'cabinet';
+  syncTitle();
   const first = document.querySelector('#cabinet-list button');
   if (first) first.focus();
 }
@@ -388,6 +633,8 @@ function showCabinet() {
 function showPlay() {
   document.getElementById('cabinet').hidden = true;
   document.getElementById('play').hidden = false;
+  document.body.dataset.view = 'play';
+  syncTitle();
 }
 
 async function openPackFile(id) {
@@ -410,7 +657,6 @@ async function openPackFile(id) {
   document.getElementById('credits').hidden = true;
   document.getElementById('scores-section').hidden = true;
   document.getElementById('err').hidden = true;
-  document.getElementById('board').hidden = true;
   document.getElementById('best-status').textContent = '';
   await loadCase();
   renderQuestions();
@@ -419,6 +665,7 @@ async function openPackFile(id) {
   renderAccuseButtons();
   renderConversation();
   showPlay();
+  showStep('briefing');
   const first = document.querySelector('#suspect-buttons button');
   if (first) first.focus();
 }
@@ -429,13 +676,18 @@ document.getElementById('files-btn').addEventListener('click', async () => {
   showCabinet();
 });
 document.getElementById('board-btn').addEventListener('click', () => {
-  const board = document.getElementById('board');
-  board.hidden = !board.hidden;
-  if (!board.hidden) {
-    renderBoard();
-    document.getElementById('board-title').focus?.();
-    board.scrollIntoView({ block: 'nearest' });
-  }
+  showPlay();
+  showStep('board');
+  renderBoard();
+  document.getElementById('board-title').focus?.();
+  document.getElementById('board').scrollIntoView({ block: 'nearest' });
+});
+document.getElementById('steps').addEventListener('click', (ev) => {
+  const btn = ev.target.closest('[data-step]');
+  if (!btn) return;
+  showPlay();
+  showStep(btn.dataset.step);
+  if (btn.dataset.step === 'board') renderBoard();
 });
 
 function selectSuspect(id) {
@@ -445,6 +697,7 @@ function selectSuspect(id) {
   document.querySelectorAll('#suspect-buttons button').forEach(b=>{
     b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
   });
+  showStep('talk');
   document.getElementById('q').focus();
   renderConversation();
 }
@@ -541,7 +794,16 @@ function renderAccuseButtons(){
   container.innerHTML = '';
   caseData.suspects.forEach(s=>{
     const btn = document.createElement('button');
-    btn.textContent = (lang==='pt'?'Acusar ':'Accuse ') + s.name;
+    btn.className = 'with-icon';
+    const ico = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    ico.setAttribute('class', 'icon');
+    ico.setAttribute('aria-hidden', 'true');
+    ico.setAttribute('focusable', 'false');
+    const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    use.setAttribute('href', '#i-accuse');
+    ico.appendChild(use);
+    btn.appendChild(ico);
+    btn.appendChild(document.createTextNode((lang==='pt'?'Acusar ':'Accuse ') + s.name));
     btn.addEventListener('click',()=>{
       if (gameOver) return;
       if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
@@ -611,11 +873,25 @@ function renderVerdict(moveFocus = true) {
   verdict.hidden = false;
   const { correct, culpritName, solution, score } = lastAccuseResult;
   verdict.classList.toggle('ok', !!correct);
-  verdict.innerHTML = `
-    <p>${correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!')}</p>
-    <p>${lang==='pt'?'Culpado':'Culprit'}: ${culpritName}</p>
-    <p>${lang==='pt'?'Solução':'Solution'}: ${solution}</p>
-    <p>${lang==='pt'?'Pontuação':'Score'}: ${score}</p>`;
+  const stamp = correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!');
+  verdict.innerHTML = '';
+  const p1 = document.createElement('p');
+  p1.className = 'verdict-stamp';
+  p1.appendChild(iconSvg(correct ? 'i-verdict-ok' : 'i-verdict-wrong'));
+  p1.appendChild(document.createTextNode(stamp));
+  const p2 = document.createElement('p');
+  p2.textContent = (lang==='pt'?'Culpado':'Culprit') + ': ' + culpritName;
+  const p3 = document.createElement('p');
+  p3.textContent = (lang==='pt'?'Solução':'Solution') + ': ' + solution;
+  const p4 = document.createElement('p');
+  p4.className = 'with-icon';
+  p4.appendChild(iconSvg('i-score'));
+  p4.appendChild(document.createTextNode((lang==='pt'?'Pontuação':'Score') + ': ' + score));
+  verdict.appendChild(p1);
+  verdict.appendChild(p2);
+  verdict.appendChild(p3);
+  verdict.appendChild(p4);
+  showStep('accuse');
   if (moveFocus) verdict.focus();
 }
 
@@ -628,12 +904,16 @@ function showError(msg){
 
 let questionsUsed = 0;
 function renderQuestions() {
-  document.getElementById('questions-used').textContent = questionsText(lang, questionsUsed);
+  const el = document.getElementById('questions-used');
+  el.innerHTML = '';
+  el.appendChild(iconSvg('i-questions'));
+  el.appendChild(iconSvg(gameOver ? 'i-locked' : 'i-unlocked'));
+  el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
 }
 
 function renderBest() {
   const b = readBest(store);
-  document.getElementById('best-title').textContent = LABELS[lang].bestTitle;
+  setText('best-title', LABELS[lang].bestTitle);
   document.getElementById('reset-best').textContent = LABELS[lang].reset;
   document.getElementById('best-en').textContent = bestText('en', b.en, lang);
   document.getElementById('best-pt').textContent = bestText('pt', b.pt, lang);
@@ -685,6 +965,7 @@ async function restartGame(){
   renderCase();
   renderAccuseButtons();
   renderConversation();
+  if (typeof showStep === 'function') showStep('briefing');
   const first = document.querySelector('#suspect-buttons button');
   if (first) first.focus();
   else document.getElementById('q').focus();

@@ -109,6 +109,7 @@ await send('Page.enable');
 await send('Runtime.enable');
 await send('DOM.enable');
 await send('Input.enable');
+await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
 await send('Page.navigate', { url: baseUrl + '/' });
 await waitFor(async () => (await evaluate('document.readyState')) === 'complete');
 await waitFor(async () => (await evaluate('document.querySelectorAll("#accuse-buttons button").length')) >= 3);
