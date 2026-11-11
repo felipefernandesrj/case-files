@@ -42,10 +42,57 @@ export function caseFileFor(id) {
  * @param {'en'|'pt'} lang
  * @returns {Object}
  */
+/** Rooms shown in the web player (public labels only). */
+export const ROOMS = Object.freeze({
+  violin: Object.freeze([
+    { id: 'academy-exterior', en: 'Aurora Music Academy', pt: 'Academia de Música Aurora' },
+    { id: 'instrument-room', en: 'Instrument room', pt: 'Sala de instrumentos' },
+    { id: 'rehearsal-hall', en: 'Rehearsal hall', pt: 'Sala de ensaio' },
+    { id: 'hallway', en: 'Hallway', pt: 'Corredor' },
+  ]),
+  'night-train': Object.freeze([
+    { id: 'exterior', en: 'The Southern Star', pt: 'O Southern Star' },
+    { id: 'luggage-safe', en: 'Luggage car', pt: 'Vagão de bagagem' },
+    { id: 'dining-kitchen', en: 'Dining car kitchen', pt: 'Cozinha do vagão-restaurante' },
+    { id: 'sleeper-corridor', en: 'Sleeper corridor', pt: 'Corredor das cabines-leito' },
+    { id: 'tunnel', en: 'Black Ridge Tunnel', pt: 'Túnel Black Ridge' },
+    { id: 'port-elling', en: 'Port Elling', pt: 'Port Elling' },
+  ]),
+});
+
+/** Engine file key for a loaded case object. */
+export function fileKeyOf(c) {
+  if (c?.id === 'case-violin-001') return 'violin';
+  if (c?.id === 'case-night-train-002') return 'night-train';
+  return 'violin';
+}
+
+/** Public pack list for the case picker (titles and hooks only). */
+export function listPack(lang) {
+  const l = lang === 'pt' ? 'pt' : 'en';
+  return Object.entries(CASES).map(([id, file]) => {
+    const c = loadCase(file);
+    const intro = c.intro?.[l] ?? '';
+    const hook = intro.split(/(?<=[.?!])\s/)[0] || intro;
+    return { id, title: c.title?.[l] ?? '', hook };
+  });
+}
+
 export function publicCase(c, lang) {
   const l = lang === 'pt' ? 'pt' : 'en';
+  const file = fileKeyOf(c);
+  const rooms = (ROOMS[file] || []).map(r => ({ id: r.id, name: r[l] }));
+  const timeline = Array.isArray(c.timeline)
+    ? c.timeline.map(t => ({
+        id: t.id,
+        time: t.time,
+        stop: t.stop?.[l] ?? '',
+        event: t.event?.[l] ?? '',
+      }))
+    : [];
   return {
     id: c.id,
+    file,
     title: c.title?.[l] ?? '',
     intro: c.intro?.[l] ?? '',
     suspects: (c.suspects ?? []).map(s => ({
@@ -54,6 +101,8 @@ export function publicCase(c, lang) {
       role: s.role?.[l] ?? '',
       persona: s.persona?.[l] ?? '',
     })),
+    rooms,
+    timeline,
   };
 }
 

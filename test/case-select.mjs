@@ -157,5 +157,45 @@ await test('CLI --case with an unknown id gives one friendly line and exit code 
   assert(r.stdout.trim() === '', 'cli printed a case');
 });
 
+
+await test('GET /api/cases lists both files without secrets', async () => {
+  const { server, base } = await start({ caseFile: 'content/case.json' });
+  try {
+    const en = await getJ(base, '/api/cases?lang=en');
+    assert(en.status === 200, 'status not 200');
+    const ids = en.body.cases.map((c) => c.id);
+    assert(ids.includes('violin') && ids.includes('night-train'), 'ids missing');
+    assert(en.body.cases.length === 2, 'count');
+    const txt = JSON.stringify(en.body).toLowerCase();
+    assert(!txt.includes('culprit') && !txt.includes('facts'), 'secrets leaked');
+    const pt = await getJ(base, '/api/cases?lang=pt');
+    assert(pt.body.cases.some((c) => c.title === nt.title.pt), 'pt title missing');
+  } finally {
+    server.close();
+  }
+});
+
+await test('a session can open the night train without a process flag', async () => {
+  const { server, base } = await start({ caseFile: 'content/case.json' });
+  try {
+    const def = await getJ(base, '/api/status');
+    assert(def.body.caseId === violin.id, 'default status should stay the violin');
+    const pub = await getJ(base, '/api/case?lang=en&case=night-train');
+    assert(pub.body.title === nt.title.en, 'query case title');
+    assert(pub.body.suspects.length === 4, 'query case suspects');
+    assert(!JSON.stringify(pub.body).toLowerCase().includes('culprit'), 'secrets leaked');
+    const sess = await postJ(base, '/api/session', { case: 'night-train' });
+    assert(sess.status === 200 && sess.body.sessionId, 'session failed');
+    const sid = sess.body.sessionId;
+    const ask1 = await postJ(base, '/api/ask', { sessionId: sid, suspectId: 'helena', question: 'Where were you?', lang: 'en' });
+    assert(ask1.status === 200, 'ask failed');
+    const ask2 = await postJ(base, '/api/ask', { sessionId: sid, suspectId: 'maya', question: 'Hi', lang: 'en' });
+    assert(ask2.status === 400, 'should reject violin suspect');
+  } finally {
+    server.close();
+  }
+});
+
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

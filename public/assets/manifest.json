@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "placeholder": true,
+  "note": "V1 placeholders only. Generation on QA fills these after CupScopeExtended. No paid calls in this sprint.",
+  "items": [
+    {
+      "id": "pack-title",
+      "path": "assets/titles/pack-title.png",
+      "model": "lucid-origin",
+      "size": "1024x1024",
+      "purpose": "Pack title card",
+      "placeholder": true
+    },
+    {
+      "id": "violin-title",
+      "path": "assets/titles/violin-title.png",
+      "model": "lucid-origin",
+      "size": "1024x1024",
+      "purpose": "Vanishing Violin title card",
+      "placeholder": true
+    },
+    {
+      "id": "night-train-title",
+      "path": "assets/titles/night-train-title.png",
+      "model": "lucid-origin",
+      "size": "1024x1024",
+      "purpose": "Night Train title card",
+      "placeholder": true
+    },
+    {
+      "id": "tex-desk",
+      "path": "assets/tex/desk.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Desk blotter texture",
+      "placeholder": true
+    },
+    {
+      "id": "tex-cork",
+      "path": "assets/tex/cork.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Evidence board cork",
+      "placeholder": true
+    },
+    {
+      "id": "tex-paper",
+      "path": "assets/tex/dossier-paper.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Dossier paper texture",
+      "placeholder": true
+    },
+    {
+      "id": "verdict-closed",
+      "path": "assets/loc/verdict-closed.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Verdict atmosphere, case closed",
+      "placeholder": true
+    },
+    {
+      "id": "verdict-wrong",
+      "path": "assets/loc/verdict-wrong.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Verdict atmosphere, wrong charge",
+      "placeholder": true
+    },
+    {
+      "id": "violin-academy",
+      "path": "assets/loc/violin-academy-exterior.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Aurora Music Academy exterior",
+      "placeholder": true
+    },
+    {
+      "id": "violin-instrument",
+      "path": "assets/loc/violin-instrument-room.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Instrument room",
+      "placeholder": true
+    },
+    {
+      "id": "violin-rehearsal",
+      "path": "assets/loc/violin-rehearsal-hall.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Rehearsal hall",
+      "placeholder": true
+    },
+    {
+      "id": "violin-hallway",
+      "path": "assets/loc/violin-hallway-cart.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Academy hallway and cart",
+      "placeholder": true
+    },
+    {
+      "id": "nt-exterior",
+      "path": "assets/loc/night-train-exterior.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Southern Star exterior",
+      "placeholder": true
+    },
+    {
+      "id": "nt-luggage",
+      "path": "assets/loc/night-train-luggage-safe.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Luggage car and safe",
+      "placeholder": true
+    },
+    {
+      "id": "nt-kitchen",
+      "path": "assets/loc/night-train-dining-kitchen.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Dining car kitchen",
+      "placeholder": true
+    },
+    {
+      "id": "nt-sleeper",
+      "path": "assets/loc/night-train-sleeper-corridor.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Sleeper corridor",
+      "placeholder": true
+    },
+    {
+      "id": "nt-tunnel",
+      "path": "assets/loc/night-train-tunnel.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Black Ridge Tunnel",
+      "placeholder": true
+    },
+    {
+      "id": "nt-port",
+      "path": "assets/loc/night-train-port-elling.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Port Elling platform",
+      "placeholder": true
+    },
+    {
+      "id": "ch-lorenzo",
+      "path": "assets/characters/violin-lorenzo.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Lorenzo expression sheet",
+      "placeholder": true
+    },
+    {
+      "id": "ch-maya",
+      "path": "assets/characters/violin-maya.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Maya expression sheet",
+      "placeholder": true
+    },
+    {
+      "id": "ch-carlos",
+      "path": "assets/characters/violin-carlos.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Carlos expression sheet",
+      "placeholder": true
+    },
+    {
+      "id": "ch-helena",
+      "path": "assets/characters/night-train-helena.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Helena expression sheet",
+      "placeholder": true
+    },
+    {
+      "id": "ch-victor",
+      "path": "assets/characters/night-train-victor.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Victor expression sheet",
+      "placeholder": true
+    },
+    {
+      "id": "ch-tomas",
+      "path": "assets/characters/night-train-tomas.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Tomas expression sheet",
+      "placeholder": true
+    },
+    {
+      "id": "ch-ines",
+      "path": "assets/characters/night-train-ines.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Ines expression sheet",
+      "placeholder": true
+    },
+    {
+      "id": "ev-violin",
+      "path": "assets/evidence/violin-items.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Violin evidence atlas",
+      "placeholder": true
+    },
+    {
+      "id": "ev-nt",
+      "path": "assets/evidence/night-train-items.png",
+      "model": "flux-1-schnell",
+      "size": "1024x1024",
+      "purpose": "Night Train evidence atlas",
+      "placeholder": true
+    }
+  ]
+}

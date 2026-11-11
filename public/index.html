@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="salon">
 <head>
 <meta charset="UTF-8">
-<title>FullCup Mystery</title>
-<style>
-  body{font-family:sans-serif;margin:0;padding:1rem;background:#f5f5f5;color:#222}
-  header,main,footer{max-width:800px;margin:auto}
-  button{margin:0.2rem;padding:0.5rem 1rem;background:#fff;border:1px solid #888;border-radius:4px;cursor:pointer}
-  button[aria-pressed="true"]{background:#e0e0ff}
-  button:disabled{opacity:0.5;cursor:not-allowed}
-  input,textarea{padding:0.4rem;font-size:1rem;width:100%;box-sizing:border-box}
-  #log{background:#fff;padding:0.5rem;border:1px solid #ccc;min-height:150px;overflow-y:auto;margin-top:0.5rem}
-  #verdict{margin-top:1rem;padding:1rem;background:#e0ffe0;border:1px solid #0a0}
-  #err{margin-top:1rem;padding:1rem;background:#ffe0e0;border:1px solid #a00}
-  table{width:100%;border-collapse:collapse;margin-top:0.5rem}
-  th,td{border:1px solid #999;padding:0.3rem;text-align:left}
-  [role="log"] p{margin:0.3rem 0}
-  button:focus-visible{outline:3px solid #0066ff}
-  #credits{margin-top:2rem;padding:1rem;border-top:1px solid #ccc}
-  #credits-note{font-style:italic;font-size:0.9rem;color:#555}
-  #best-section{margin-top:1rem}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Files</title>
+<link rel="stylesheet" href="/css/game.css">
 </head>
 <body>
 <header>
-  <h1 id="title">FullCup Mystery</h1>
-  <div>
+  <h1 id="title">Case Files</h1>
+  <div class="hud-tools">
     <button id="len" aria-pressed="true">EN</button>
     <button id="lpt" aria-pressed="false">PT</button>
     <button id="restart-btn" type="button">Start over</button>
   </div>
 </header>
-<main>
-  <section id="intro"></section>
+
+<section id="cabinet" hidden>
+  <p class="stamp" id="cabinet-stamp">Field office</p>
+  <h2 id="cabinet-title">Case Files</h2>
+  <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+  <div id="cabinet-list"></div>
+</section>
+
+<main id="play">
+  <section id="briefing" aria-labelledby="title">
+    <p class="stamp" id="brief-stamp">Case file</p>
+    <section id="intro"></section>
+  </section>
+
 
   <section id="suspects">
     <h2 id="suspects-title">Suspects</h2>
@@ -44,8 +40,10 @@
     <div id="log" role="log" aria-live="polite"></div>
     <form id="ask-form">
       <label for="q" id="question-label">Question</label>
-      <input type="text" id="q" maxlength="500" required>
-      <button type="submit" id="ask-btn">Ask</button>
+      <div class="ask-row">
+        <input type="text" id="q" maxlength="500" required>
+        <button type="submit" id="ask-btn">Ask</button>
+      </div>
     </form>
     <p id="questions-used" aria-live="polite"></p>
   </section>
@@ -58,6 +56,27 @@
   <section id="accuse-section">
     <h2 id="accuse-title">Accuse</h2>
     <div id="accuse-buttons"></div>
+  </section>
+
+
+  <section id="rooms" aria-labelledby="rooms-title">
+    <h2 id="rooms-title" class="visually-in-section">Locations</h2>
+    <div id="room-buttons"></div>
+  </section>
+  <style>
+    #rooms { display: grid; }
+    #room-buttons { display: contents; }
+    #rooms-title { margin: 0 0 0.5rem; grid-column: 1 / -1; }
+  </style>
+
+  <section id="timeline" hidden aria-labelledby="timeline-title">
+    <h2 id="timeline-title">Timetable</h2>
+    <div id="timeline-rail"></div>
+  </section>
+
+  <section id="board" hidden aria-labelledby="board-title">
+    <h2 id="board-title">Evidence board</h2>
+    <div id="board-grid"></div>
   </section>
 
   <section id="verdict" role="status" aria-live="assertive" tabindex="-1" hidden></section>
@@ -93,6 +112,11 @@
   </section>
 </main>
 
+<nav id="dock" aria-label="Case tools">
+  <button type="button" id="files-btn" class="icon-btn">Files</button>
+  <button type="button" id="board-btn" class="icon-btn">Board</button>
+</nav>
+
 <script type="module">
 const API = '/api';
 import { readBest, recordResult, resetBest, bestText, questionsText, LABELS } from '/best.js';
@@ -103,6 +127,28 @@ let caseData = null;
 let selectedSuspect = null;
 let lastAccuseResult = null;
 let gameOver = false;
+let openFile = '';
+let packList = [];
+let pins = [];
+let currentRoom = null;
+const UI = {
+  en: {
+    pack: 'Case Files', files: 'Files', board: 'Board', boardTitle: 'Evidence board',
+    rooms: 'Locations', timeline: 'Timetable', inspect: 'Inspect', pin: 'Pin',
+    emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
+    cabinetLead: 'Two closed rooms. Open a file, ask the questions, name who did it.',
+    cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
+    unpin: 'Remove pin'
+  },
+  pt: {
+    pack: 'Dossiês', files: 'Arquivos', board: 'Quadro', boardTitle: 'Quadro de evidências',
+    rooms: 'Locais', timeline: 'Horário', inspect: 'Examinar', pin: 'Fixar',
+    emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
+    cabinetLead: 'Dois cômodos fechados. Abra um dossiê, faça as perguntas, diga quem foi.',
+    cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
+    unpin: 'Retirar'
+  }
+};
 function setGameOver(on){
   gameOver = !!on;
   const q = document.getElementById('q');
@@ -134,8 +180,17 @@ async function setLang(newLang) {
   document.getElementById('suspects-title').textContent = newLang === 'pt' ? 'Suspeitos' : 'Suspects';
   document.getElementById('conversation-title').textContent = newLang === 'pt' ? 'Conversa' : 'Conversation';
   document.getElementById('accuse-title').textContent = newLang === 'pt' ? 'Acusar' : 'Accuse';
-  document.getElementById('title').textContent = newLang === 'pt' ? 'Mistério FullCup' : 'FullCup Mystery';
+  document.getElementById('title').textContent = (caseData && caseData.title) ? caseData.title : UI[newLang].pack;
   document.getElementById('restart-btn').textContent = LABELS[newLang].startOver;
+  document.getElementById('files-btn').textContent = UI[newLang].files;
+  document.getElementById('board-btn').textContent = UI[newLang].board;
+  document.getElementById('board-title').textContent = UI[newLang].boardTitle;
+  document.getElementById('rooms-title').textContent = UI[newLang].rooms;
+  document.getElementById('timeline-title').textContent = UI[newLang].timeline;
+  document.getElementById('cabinet-title').textContent = UI[newLang].pack;
+  document.getElementById('cabinet-lead').textContent = UI[newLang].cabinetLead;
+  document.getElementById('cabinet-stamp').textContent = UI[newLang].cabinetStamp;
+  document.getElementById('brief-stamp').textContent = UI[newLang].briefStamp;
 
   // Scoreboard
   document.getElementById('scores-title').textContent = newLang === 'pt' ? 'Placar' : 'Scoreboard';
@@ -148,10 +203,12 @@ async function setLang(newLang) {
   renderQuestions();
   document.getElementById('best-status').textContent = gameOver ? LABELS[lang].gameOver : '';
 
+  await loadPackList();
   await loadCase();
   renderCase();
   renderAccuseButtons();
   renderConversation();
+  renderCabinet();
   if (lastAccuseResult) renderVerdict(false);
   if (!document.getElementById('credits').hidden) await loadCredits(false);
 }
@@ -163,29 +220,223 @@ async function init() {
   const sessRes = await fetch(API + '/session', {method:'POST'});
   const sessData = await sessRes.json();
   sessionId = sessData.sessionId;
+  if (sessData.file) openFile = sessData.file;
+  const wanted = new URLSearchParams(location.search).get('case');
+  if (wanted) openFile = wanted;
+  await loadPackList();
   await loadCase();
   await setLang('en');
 }
 
+async function loadPackList() {
+  try {
+    const res = await fetch(API + '/cases?lang=' + lang);
+    const data = await res.json();
+    packList = data.cases || [];
+  } catch {
+    packList = [];
+  }
+}
+
 async function loadCase() {
-  const res = await fetch(API + '/case?lang=' + lang);
+  const extra = openFile ? '&case=' + encodeURIComponent(openFile) : '';
+  const res = await fetch(API + '/case?lang=' + lang + extra);
   caseData = await res.json();
+  if (caseData && caseData.file) openFile = caseData.file;
+}
+
+function initials(name) {
+  return (name || '?').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
 }
 
 function renderCase() {
   if (!caseData) return;
   document.getElementById('intro').innerHTML = `<p>${caseData.intro}</p>`;
+  document.getElementById('title').textContent = caseData.title || UI[lang].pack;
+  document.documentElement.setAttribute('data-accent', caseData.file === 'violin' ? 'salon' : 'rails');
   const btnContainer = document.getElementById('suspect-buttons');
   btnContainer.innerHTML = '';
   caseData.suspects.forEach(s => {
     const btn = document.createElement('button');
-    btn.textContent = s.name;
+    const face = document.createElement('span');
+    face.className = 'portrait';
+    face.setAttribute('aria-hidden', 'true');
+    face.textContent = initials(s.name);
+    const who = document.createElement('span');
+    who.className = 'who';
+    who.textContent = s.name;
+    const role = document.createElement('span');
+    role.className = 'role';
+    role.textContent = s.role || '';
+    btn.appendChild(face);
+    btn.appendChild(who);
+    if (s.role) btn.appendChild(role);
     btn.dataset.id = s.id;
     btn.setAttribute('aria-pressed','false');
     btn.addEventListener('click',()=>selectSuspect(s.id));
     btnContainer.appendChild(btn);
   });
+  renderRooms();
+  renderTimeline();
+  renderBoard();
 }
+
+function renderRooms() {
+  const wrap = document.getElementById('room-buttons');
+  wrap.innerHTML = '';
+  const rooms = (caseData && caseData.rooms) || [];
+  rooms.forEach(r => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'room';
+    btn.dataset.room = r.id;
+    btn.dataset.id = r.id;
+    btn.setAttribute('aria-pressed', currentRoom === r.id ? 'true' : 'false');
+    const name = document.createElement('span');
+    name.className = 'room-name';
+    name.textContent = r.name;
+    btn.appendChild(name);
+    btn.addEventListener('click', () => inspectRoom(r));
+    wrap.appendChild(btn);
+  });
+}
+
+function inspectRoom(r) {
+  currentRoom = r.id;
+  renderRooms();
+  const label = r.name;
+  if (!pins.some(p => p.id === r.id)) {
+    pins.push({ id: r.id, label });
+    renderBoard();
+  }
+}
+
+function renderTimeline() {
+  const sec = document.getElementById('timeline');
+  const rail = document.getElementById('timeline-rail');
+  const items = (caseData && caseData.timeline) || [];
+  if (!items.length) { sec.hidden = true; rail.innerHTML = ''; return; }
+  sec.hidden = false;
+  rail.innerHTML = '';
+  items.forEach(t => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tl-stop';
+    if (t.id) b.dataset.id = t.id;
+    const tm = document.createElement('strong');
+    tm.textContent = t.time || '';
+    b.appendChild(tm);
+    b.appendChild(document.createTextNode((t.stop ? t.stop + '. ' : '') + (t.event || '')));
+    rail.appendChild(b);
+  });
+}
+
+function renderBoard() {
+  const grid = document.getElementById('board-grid');
+  grid.innerHTML = '';
+  if (!pins.length) {
+    const empty = document.createElement('p');
+    empty.className = 'ev-empty';
+    empty.textContent = UI[lang].emptyBoard;
+    grid.appendChild(empty);
+    return;
+  }
+  pins.forEach((p, i) => {
+    const tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'ev-tile';
+    tile.textContent = p.label;
+    tile.setAttribute('aria-label', UI[lang].unpin + ': ' + p.label);
+    tile.addEventListener('click', () => { pins.splice(i, 1); renderBoard(); });
+    grid.appendChild(tile);
+  });
+}
+
+function renderCabinet() {
+  const list = document.getElementById('cabinet-list');
+  list.innerHTML = '';
+  packList.forEach((item, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'folder-card';
+    btn.dataset.file = item.id;
+    const art = document.createElement('div');
+    art.className = 'folder-art';
+    art.setAttribute('aria-hidden', 'true');
+    const title = document.createElement('strong');
+    title.textContent = item.title;
+    const hook = document.createElement('span');
+    hook.textContent = item.hook;
+    const go = document.createElement('span');
+    go.textContent = UI[lang].openFile;
+    btn.appendChild(art);
+    btn.appendChild(title);
+    btn.appendChild(hook);
+    btn.appendChild(go);
+    btn.addEventListener('click', () => openPackFile(item.id));
+    list.appendChild(btn);
+  });
+}
+
+function showCabinet() {
+  document.getElementById('cabinet').hidden = false;
+  document.getElementById('play').hidden = true;
+  const first = document.querySelector('#cabinet-list button');
+  if (first) first.focus();
+}
+
+function showPlay() {
+  document.getElementById('cabinet').hidden = true;
+  document.getElementById('play').hidden = false;
+}
+
+async function openPackFile(id) {
+  const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: id })});
+  const sessData = await sessRes.json();
+  sessionId = sessData.sessionId;
+  openFile = id;
+  for (const k of Object.keys(histories)) delete histories[k];
+  pins = [];
+  currentRoom = null;
+  questionsUsed = 0;
+  selectedSuspect = null;
+  lastAccuseResult = null;
+  gameOver = false;
+  setGameOver(false);
+  document.getElementById('log').innerHTML = '';
+  const verdict = document.getElementById('verdict');
+  verdict.hidden = true;
+  verdict.innerHTML = '';
+  document.getElementById('credits').hidden = true;
+  document.getElementById('scores-section').hidden = true;
+  document.getElementById('err').hidden = true;
+  document.getElementById('board').hidden = true;
+  document.getElementById('best-status').textContent = '';
+  await loadCase();
+  renderQuestions();
+  renderBest();
+  renderCase();
+  renderAccuseButtons();
+  renderConversation();
+  showPlay();
+  const first = document.querySelector('#suspect-buttons button');
+  if (first) first.focus();
+}
+
+document.getElementById('files-btn').addEventListener('click', async () => {
+  await loadPackList();
+  renderCabinet();
+  showCabinet();
+});
+document.getElementById('board-btn').addEventListener('click', () => {
+  const board = document.getElementById('board');
+  board.hidden = !board.hidden;
+  if (!board.hidden) {
+    renderBoard();
+    document.getElementById('board-title').focus?.();
+    board.scrollIntoView({ block: 'nearest' });
+  }
+});
 
 function selectSuspect(id) {
   selectedSuspect = id;
@@ -307,7 +558,8 @@ function renderAccuseButtons(){
 async function loadScores(){
   const sec = document.getElementById('scores-section');
   const tbody = document.getElementById('scores-body');
-  const res = await fetch(API + '/scores');
+  const extra = (typeof openFile === 'string' && openFile) ? ('?case=' + encodeURIComponent(openFile)) : '';
+  const res = await fetch(API + '/scores' + extra);
   const data = await res.json();
   tbody.innerHTML = '';
   data.forEach((row,i)=>{
@@ -358,6 +610,7 @@ function renderVerdict(moveFocus = true) {
   const verdict = document.getElementById('verdict');
   verdict.hidden = false;
   const { correct, culpritName, solution, score } = lastAccuseResult;
+  verdict.classList.toggle('ok', !!correct);
   verdict.innerHTML = `
     <p>${correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!')}</p>
     <p>${lang==='pt'?'Culpado':'Culprit'}: ${culpritName}</p>
@@ -425,6 +678,8 @@ async function restartGame(){
   document.querySelectorAll('#accuse-buttons button').forEach(b => { b.disabled = false; });
   document.getElementById('restart-btn').disabled = false;
   document.getElementById('best-status').textContent = '';
+  pins = [];
+  currentRoom = null;
   renderQuestions();
   renderBest();
   renderCase();

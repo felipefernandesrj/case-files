@@ -1,9 +1,9 @@
 import { createServer as httpCreateServer } from 'node:http';
 import { createReadStream, readFileSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { resolve, dirname, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
-import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWords } from './case.js';
+import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWords, CASES, listPack } from './case.js';
 import { createProxy } from './proxy.js';
 import { mockAnswer } from './mock.js';
 import { friendly } from './messages.js';
@@ -49,13 +49,39 @@ function sendJSON(res, status, obj) {
  * @param {import('node/http').ServerResponse} res
  * @param {string} filePath
  */
-function sendFile(res, filePath) {
+function sendFile(res, filePath, type) {
   const stream = createReadStream(filePath);
   stream.on('error', () => {
     res.writeHead(404);
     res.end('Not found');
   });
+  if (type) res.setHeader('Content-Type', type);
   stream.pipe(res);
+}
+
+const PUBLIC_TYPES = {
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.json': 'application/json; charset=utf-8',
+  '.html': 'text/html; charset=utf-8',
+};
+
+const PUBLIC_ROOT_DIRS = ['css', 'fonts', 'icons', 'assets'];
+
+function safePublicFile(publicRoot, urlPath) {
+  const rel = urlPath.replace(/^\/+/, '');
+  const first = rel.split('/')[0];
+  if (!PUBLIC_ROOT_DIRS.includes(first) && rel !== 'best.js') return null;
+  const resolved = resolve(publicRoot, rel);
+  const root = resolve(publicRoot);
+  if (resolved !== root && !resolved.startsWith(root + sep)) return null;
+  return resolved;
 }
 
 /**
@@ -81,8 +107,23 @@ export function createServer({
   fetchImpl,
   mock,
 }) {
-  // Load case (synchronously)
-  const c = loadCase(caseId ? caseFileFor(caseId) : caseFile);
+  // Load case (synchronously). An unknown caseId still throws (caseFileFor) so startup stays the same.
+  // The default case is the process flag; sessions may open another file from the pack.
+  if (caseId) caseFileFor(caseId);
+  const pack = {};
+  for (const [k, f] of Object.entries(CASES)) pack[k] = loadCase(f);
+  const defaultKey = caseId || Object.keys(CASES).find((k) => CASES[k] === caseFile) || 'violin';
+  const defaultCase = pack[defaultKey] || loadCase(caseFile);
+  const c = defaultCase;
+
+  function resolveFile(raw) {
+    if (typeof raw !== 'string' || !Object.prototype.hasOwnProperty.call(pack, raw)) return null;
+    return raw;
+  }
+
+  function caseOfSession(sess) {
+    return (sess && sess.file && pack[sess.file]) || defaultCase;
+  }
 
   // Resolve key (synchronously)
   let finalKey = key;
@@ -143,26 +184,47 @@ export function createServer({
         return sendFile(res, bestPath);
       }
       if (req.method === 'GET' && pathname === '/') {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
         return sendFile(res, indexPath);
+      }
+      if (req.method === 'GET' && (pathname.startsWith('/css/') || pathname.startsWith('/fonts/') || pathname.startsWith('/icons/') || pathname.startsWith('/assets/'))) {
+        const publicRoot = resolve(__dirname, '..', 'public');
+        const file = safePublicFile(publicRoot, pathname);
+        if (!file) {
+          res.writeHead(404);
+          res.end('Not found');
+          return;
+        }
+        const type = PUBLIC_TYPES[extname(file).toLowerCase()] || 'application/octet-stream';
+        return sendFile(res, file, type);
       }
 
       if (req.method === 'GET' && pathname === '/api/status') {
         return sendJSON(res, 200, { mode: modeMock ? 'mock' : 'live', caseId: c.id });
       }
 
+      if (req.method === 'GET' && pathname === '/api/cases') {
+        return sendJSON(res, 200, { cases: listPack(queryLang) });
+      }
+
       if (req.method === 'GET' && pathname === '/api/case') {
         const lang = queryLang;
-        return sendJSON(res, 200, publicCase(c, lang));
+        const wanted = resolveFile(url.searchParams.get('case'));
+        const chosen = wanted ? pack[wanted] : c;
+        return sendJSON(res, 200, publicCase(chosen, lang));
       }
 
       if (req.method === 'POST' && pathname === '/api/session') {
+        const body = await readJSON(req).catch(() => ({}));
+        const wanted = resolveFile(body && body.case);
         const sessionId = randomUUID();
         sessions.set(sessionId, {
           history: new Map(),
           questions: 0,
           accused: false,
+          file: wanted || defaultKey,
         });
-        return sendJSON(res, 200, { sessionId });
+        return sendJSON(res, 200, { sessionId, file: wanted || defaultKey });
       }
 
       if (req.method === 'POST' && pathname === '/api/ask') {
@@ -174,7 +236,9 @@ export function createServer({
         if (!sessionId || !sessions.has(sessionId)) {
           return sendJSON(res, 400, { error: 'bad_request', message: 'unknown session' });
         }
-        const suspect = c.suspects.find((s) => s.id === suspectId);
+        const sess = sessions.get(sessionId);
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
         if (!suspect) {
           return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
         }
@@ -185,12 +249,11 @@ export function createServer({
           return sendJSON(res, 400, { error: 'bad_request', message: 'question too long' });
         }
 
-        const sess = sessions.get(sessionId);
         // question is counted only after a successful answer (sprint 6)
 
         // Build messages
         const messages = [];
-        messages.push({ role: 'system', content: systemPrompt(c, suspectId, lang) });
+        messages.push({ role: 'system', content: systemPrompt(play, suspectId, lang) });
 
         const hist = sess.history.get(suspectId) || [];
         for (const msg of hist) {
@@ -201,7 +264,7 @@ export function createServer({
         let answer;
         try {
           if (modeMock) {
-            answer = mockAnswer(c, suspectId, question, lang);
+            answer = mockAnswer(play, suspectId, question, lang);
           } else {
             answer = await proxy.chat(messages);
           }
@@ -235,15 +298,16 @@ export function createServer({
         if (sess.accused) {
           return sendJSON(res, 409, { error: 'bad_request', message: 'already accused' });
         }
-        const suspect = c.suspects.find((s) => s.id === suspectId);
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
         if (!suspect) {
           return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
         }
 
-        const correct = suspectId === c.culprit;
-        const culpritObj = c.suspects.find((s) => s.id === c.culprit);
+        const correct = suspectId === play.culprit;
+        const culpritObj = play.suspects.find((s) => s.id === play.culprit);
         const culpritName = culpritObj ? culpritObj.name : '';
-        const solution = c.solution?.[lang] ?? '';
+        const solution = play.solution?.[lang] ?? '';
         const playerName = typeof player === 'string' && player.trim() ? player.trim().slice(0, 24) : 'anon';
         const sc = scoreFor(correct, sess.questions);
         scoreboard.add({
@@ -252,7 +316,7 @@ export function createServer({
           questions: sess.questions,
           correct,
           lang,
-          caseId: c.id,
+          caseId: play.id,
         }).catch(() => {});
 
         sess.accused = true;
@@ -268,7 +332,9 @@ export function createServer({
       }
 
       if (req.method === 'GET' && pathname === '/api/scores') {
-        const top = scoreboard.top(10, c.id);
+        const wanted = resolveFile(url.searchParams.get('case'));
+        const chosen = wanted ? pack[wanted] : c;
+        const top = scoreboard.top(10, chosen.id);
         return sendJSON(res, 200, top);
       }
 
