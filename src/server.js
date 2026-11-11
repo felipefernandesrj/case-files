@@ -3,7 +3,7 @@ import { createReadStream, readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
-import { loadCase, publicCase, systemPrompt, capWords } from './case.js';
+import { loadCase, caseFileFor, publicCase, systemPrompt, capWords } from './case.js';
 import { createProxy } from './proxy.js';
 import { mockAnswer } from './mock.js';
 import { friendly } from './messages.js';
@@ -62,6 +62,7 @@ function sendFile(res, filePath) {
  * Create the game server.
  * @param {Object} opts
  * @param {string} opts.caseFile
+ * @param {string} [opts.caseId] flag: case id from CASES in src/case.js; when set it overrides caseFile
  * @param {string} [opts.scoreFile='data/scores.json']
  * @param {string} [opts.creditsFile='data/credits.json']
  * @param {string} [opts.key]
@@ -72,6 +73,7 @@ function sendFile(res, filePath) {
  */
 export function createServer({
   caseFile,
+  caseId,
   scoreFile = 'data/scores.json',
   creditsFile = 'data/credits.json',
   key,
@@ -80,7 +82,7 @@ export function createServer({
   mock,
 }) {
   // Load case (synchronously)
-  const c = loadCase(caseFile);
+  const c = loadCase(caseId ? caseFileFor(caseId) : caseFile);
 
   // Resolve key (synchronously)
   let finalKey = key;
@@ -324,5 +326,5 @@ export function createServer({
 // If run directly via `node src/server.js`
 if (import.meta.url === `file://${process.argv[1]}`) {
   // default options
-  createServer({ caseFile: 'content/case.json' });
+  createServer({ caseFile: 'content/case.json', caseId: process.env.CASE_ID || undefined });
 }

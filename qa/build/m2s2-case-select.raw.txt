@@ -1,0 +1,75 @@
+<<<REPLACE src/case.js>>>
+  return JSON.parse(readFileSync(path, 'utf8'));
+}
+=====
+  return JSON.parse(readFileSync(path, 'utf8'));
+}
+
+/** Known cases: id -> case file (relative to the project root). */
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' });
+
+/**
+ * Resolve a case id to its case file.
+ * @param {string} id
+ * @returns {string}
+ * @throws {Error} code 'unknown_case' for an id not in CASES
+ */
+export function caseFileFor(id) {
+<<<<END>>>
+<<<REPLACE src/server.js>>>
+import { loadCase, publicCase, systemPrompt, capWords } from './case.js';
+=====
+import { loadCase, caseFileFor, publicCase, systemPrompt, capWords } from './case.js';
+<<<END>>>
+<<<REPLACE src/server.js>>>
+ * @param {string} opts.caseFile
+=====
+ * @param {string} opts.caseFile
+ * @param {string} [opts.caseId] flag: case id from CASES in src/case.js; when set it overrides caseFile
+<<<END>>>
+<<<REPLACE src/server.js>>>
+  caseFile,
+  scoreFile = 'data/scores.json',
+=====
+  caseFile,
+  caseId,
+  scoreFile = 'data/scores.json',
+<<<END>>>
+<<<REPLACE src/server.js>>>
+  const c = loadCase(caseFile);
+=====
+  const c = loadCase(caseId ? caseFileFor(caseId) : caseFile);
+<<<END>>>
+<<<REPLACE src/server.js>>>
+  createServer({ caseFile: 'content/case.json' });
+=====
+  createServer({ caseFile: 'content/case.json', caseId: process.env.CASE_ID || undefined });
+<<<END>>>
+<<<REPLACE src/cli.js>>>
+let player = 'anon';
+=====
+let player = 'anon';
+let caseId; // flag: --case <id> (see CASES in src/case.js); default is the Violin
+<<<END>>>
+<<<REPLACE src/cli.js>>>
+  } else if (args[i] === '--player' && i + 1 < args.length) {
+    player = args[i + 1].slice(0, 24);
+    i++;
+  }
+=====
+  } else if (args[i] === '--player' && i + 1 < args.length) {
+    player = args[i + 1].slice(0, 24);
+    i++;
+  } else if (args[i] === '--case' && i + 1 < args.length) {
+    caseId = args[i + 1];
+    i++;
+  }
+<<<END>>>
+<<<REPLACE src/cli.js>>>
+  caseFile: 'content/case.json',
+  mock: true,
+=====
+  caseFile: 'content/case.json',
+  caseId,
+  mock: true,
+<<<END>>>

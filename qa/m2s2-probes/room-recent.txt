@@ -1,0 +1,8 @@
+Room 7y8V7b5z, GET {relayUrl}/recent (relay bargains-medication-until-guam), read only, nothing posted. Checked 2026-11-11 00:24Z (21:24 BRT 10/11).
+200 events 2026-11-10T07:29Z to 23:27:33Z; 163 since 11:27:30Z, all name "Felipi" (Claude session mirror), kinds prompt/tool_pre/tool_post/response.
+Since 11:27Z: 4 scheduled lane-health runs (08:22, 12:22, 16:22, 20:22 BRT) + 1 FULLCUP DAILY report (19:09Z).
+- 11:27Z lane-health: report could not reach lead session "Caveman ultra (fork)" (SendMessage/ListAgents unavailable).
+- 15:27Z: checker flagged PID 305344 as orphan loop; lead said it is the live FullCup-PO room watcher (armed since 22:14 BRT 09/11), do not kill. Nothing killed.
+- 19:09Z FULLCUP DAILY 16:00 BRT: ledger OK (QA checkpoint 2026-11-10, 43,666 events, signature not checked), services WATCH (qa.fullcup.ai 2.8 s), money OK (QA Global Jar $823.91, prod $0.00), Stripe WATCH (last prod webhook 61.8 days ago), Cloudflare OK.
+- 19:27Z and 23:27Z: lead says lane coverb-qa (129 commits ahead of master) "is already on QA and waits for your ok to push or merge"; copydrill-1105, copydrill-2, uxb4 parked; 23:27Z also 74 merged worktrees with 13 dirty files each, cleanup only if Felipi allows.
+Item C (declare-milestone commit fix): NO formal delivery message on QA. Regex declar|deck|slide|Case Files|af6cf65|item C|marco|NotebookLM matched only the watcher explanation. No regenerated M1 deck.

@@ -13,6 +13,24 @@ export function loadCase(file = 'content/case.json') {
   return JSON.parse(readFileSync(path, 'utf8'));
 }
 
+/** Known cases: id -> case file (relative to the project root). */
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' });
+
+/**
+ * Resolve a case id to its case file.
+ * @param {string} id
+ * @returns {string}
+ * @throws {Error} code 'unknown_case' for an id not in CASES
+ */
+export function caseFileFor(id) {
+  if (typeof id === 'string' && Object.prototype.hasOwnProperty.call(CASES, id)) {
+    return CASES[id];
+  }
+  const err = new Error(`unknown case: ${String(id)} (known: ${Object.keys(CASES).join(', ')})`);
+  err.code = 'unknown_case';
+  throw err;
+}
+
 /**
  * Return a public version of the case (no secrets).
  * @param {Object} c

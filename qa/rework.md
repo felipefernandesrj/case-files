@@ -496,3 +496,29 @@ Receipts (seal-by 2026-11-11T00:05:00Z), 10 chat: build 01M72NRCX1X2EZASSMTQP2SD
 - Seal check (signed out, curl https://qa.fullcup.ai/receipts/<id>): all 6 s17 receipts Genuine receipt, one of 6 in the signed root of 2026-11-09, Sealed at 2026-11-10 00:05:23 UTC. 01M7037B798DQXF3VHKHHYFJ2A $0.000057, 01M7037DZCN4VAQSM0R0J5P4D1 $0.000122, 01M7037KH3A3GK8T51GZD21307 $0.000241, 01M70389EATXWNAAA41H2HZ9J5 $0.000042 (gemma-4-26b-a4b-it); 01M7038JJGT5PTN1VPAHDV6BCK $0.000168, 01M7038NZKWJ3HV9328T97JVMC $0.000169 (llama-4-scout). Snips in seal-*.snip.txt.
 - Reproduced: no per-call cost (10 of 10 chat 200s, cost null), duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id same value (10 of 10), enable_thinking=false honoured (8 of 8), cached_tokens 0.
 - No new FullCup anomaly.
+
+## M2 sprint 2: load a case by id behind a flag (v0.4.2), 2026-11-11 00:25-00:31 UTC (21:25-21:31 BRT 10/11)
+Model gemma-4-26b-a4b-it, thinking off (chat_template_kwargs.enable_thinking=false), max_tokens 1000 to 4000, via the Cup key. Live smoke llama-4-scout (Night Train by id, PT). M2 in progress; not in the page; M2 not declared.
+
+| # | Step | Status | Time | Tokens in / out | Neurons | Files | Result |
+|---|---|---|---|---|---|---|---|
+| 184 | src/case.js CASES + caseFileFor; server.js caseId option + CASE_ID; cli.js --case (9 edits) | 200 | 16.4 s | 1201 / 728 | 30.77 | src/case.js, src/server.js, src/cli.js | accepted 9/9 hunks, but caseFileFor had no body: the model ended NEW right after "export function caseFileFor(id) {" and wrote "<<<<END>>>", leaving a stray "<" (SyntaxError on import) |
+| 185 | rework: caseFileFor body | 200 | 3.2 s | 310 / 123 | 6.17 | src/case.js | rework, accepted; rejects toString, ../package, '', undefined |
+| 186 | test/case-select.mjs (7 checks) + package.json script + rename night-train test 8 | 200 | 28.5 s | 1527 / 1962 | 67.39 | test/case-select.mjs, package.json, test/night-train.mjs | accepted first try, 7/7 |
+| 187 | CHANGELOG 0.4.2, package 0.4.2, README M2 sprint 2, SPEC test list + totals + Case engine | 200 | 10.9 s | 1308 / 793 | 33.52 | 4 files (5 edits) | accepted 5/5, but CHANGELOG bullets and one SPEC bullet copied the prompt shorthand (lowercase fragments) |
+| 188 | rework: full-sentence CHANGELOG bullets + SPEC CASES bullet | 200 | 8.1 s | 584 / 298 | 13.44 | CHANGELOG.md, docs/SPEC.md | rework, accepted 2/2 |
+| live | Night Train by id (caseId night-train), PT Helena + PT Inês + correct accuse | 200 x2 key calls | 4.1 / 1.5 s | 983 / 118 | 33.25 | - | both PT, in character, no confession, no invented people; accuse Inês correct, score 100 |
+
+Totals: 7 key calls (5 build + 2 live), 5 913 in / 4 022 out tokens, 184.54 neurons, about US$ 0.0020 at $0.011/1k neurons. Build only: 5 calls, 4 930 / 3 904 tokens, 151.29 neurons. Wasted 0; rework 2 (185, 188) = 19.61 neurons (13.0% of build, was 35.2% in sprint 1). 0 API failures, slowest 28.5 s.
+Manual lines: 0 product, 0 docs (qa/rework.md, docs/BUILD_LOG.md are PO logs). Harness: tools/smoke-m2s2.mjs. Prompts 184-188 written by the agent.
+npm test: 112/112 (was 105; e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 7 new, keyboard 13); no keyboard flake, 2 full runs.
+Mutation: server ignoring caseId fails 4 of 7 case-select checks; caseFileFor using CASES[id] (no own-property check) fails "unknown or path-like ids are rejected" on toString.
+Manual check: CASE_ID=night-train MOCK=1 node src/server.js serves caseId case-night-train-002; CASE_ID=nope and cli --case nope exit with an unhandled "unknown case" stack trace (works as a guard, not friendly; left for a later sprint).
+Live smoke notes: Helena says she keeps the safe key herself (consistent with her facts, she hides the dining car hook); Inês repeats her false kitchen alibi and mentions flour (a fair hint). No confession.
+Verdict: worth it, small and safe; rework down to 13%. Lessons: (1) when a NEW ends on an opening line like "function x(id) {", gemma treats that line as the end of NEW, so give the full body line count; (2) shorthand facts in a prompt get copied verbatim into docs, ask for full sentences up front.
+Receipts (seal-by 2026-11-12T00:05:00Z), 7 chat: build 01M73ZXN0R8A3J8VZE4AEVHYM8 (184), 01M73ZYPSNJ9P2XJQDC5E7H7VQ (185), 01M73ZZTAG3121CMCQGH5RWADX (186), 01M740646V33WCKR94JSYH19KX (187), 01M7406TK8KACBDHCG3X7ZRW9V (188); live 01M7401B9MRPS3SVG831BQ5046 (PT Helena), 01M7401EECT79SWA6WGHZ6E0MB (PT Inês). Build ids in qa/build-log.json (label m2s2-*); live in qa/key-usage-log.json (purpose m2s2-smoke:*), qa/live-smoke-m2s2.json.
+
+### FullCup observations, M2 sprint 2 (evidence qa/m2s2-probes/)
+- Seal check (signed out, curl https://qa.fullcup.ai/receipts/<id>, 2026-11-11 00:23Z): all 10 M2s1 receipts HTTP 200, Genuine receipt, Sealed at 2026-11-11 00:05:25 UTC, one of 12 in the signed root of 2026-11-10. Exact cost: 01M72NRCX1X2EZASSMTQP2SDPW $0.000949, 01M72NVRKSW176ZY3MFBA6B26T $0.000689, 01M72NXQQ0N4DYXTM04RYT28MG $0.000365, 01M72NZ0EM2M0RE01QBPY54FQJ $0.000287, 01M72P0G79M201C0NNYPGKWYJ1 $0.000648, 01M72P2Q5QDBQTJY3C3HVTTZ54 $0.000054, 01M72P3XPF1066JA2FYWMB58AB $0.000311, 01M72P54E85ENNJSGXJG0KJBCP $0.000202 (gemma-4-26b-a4b-it); 01M72P67XGGGA762NA2K6SG7W1 $0.000167, 01M72P69JMT9BDP0QHZQKKK4K4 $0.000170 (llama-4-scout-17b-16e-instruct). Sum $0.003842 matches the ~US$0.0038 estimate. Snips seal-*.snip.txt.
+- Reproduced again: no per-call cost in the chat response (7 of 7 cost null), duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id same value (7 of 7), enable_thinking=false honoured (5 of 5), cached_tokens 0.
+- No new FullCup anomaly.

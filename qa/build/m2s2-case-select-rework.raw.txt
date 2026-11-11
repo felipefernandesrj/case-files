@@ -1,0 +1,13 @@
+<<<REPLACE src/case.js>>>
+export function caseFileFor(id) {
+<
+=====
+export function caseFileFor(id) {
+  if (typeof id === 'string' && Object.prototype.hasOwnProperty.call(CASES, id)) {
+    return CASES[id];
+  }
+  const err = new Error(`unknown case: ${String(id)} (known: ${Object.keys(CASES).join(', ')})`);
+  err.code = 'unknown_case';
+  throw err;
+}
+<<<END>>>

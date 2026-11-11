@@ -1,0 +1,77 @@
+[
+ {
+  "status": {
+   "mode": "live",
+   "caseId": "case-night-train-002"
+  }
+ },
+ {
+  "lang": "pt",
+  "suspect": "helena",
+  "q": "Onde você estava quando as luzes apagaram no túnel, e quem guarda a chave do cofre?",
+  "status": 200,
+  "questions": 1,
+  "answer": "Eu estava indo para a cabine-leito 7 quando as luzes se apagaram no túnel. A chave do cofre fica comigo, eu a guardo pessoalmente. Não sei o que aconteceu com o colar, mas sei que eu tranquei o cofre em Alder Crossing.",
+  "words": 42,
+  "ptHint": true,
+  "confesses": null,
+  "namesOutsideCast": [
+   "Eu",
+   "Não",
+   "Alder",
+   "Crossing"
+  ],
+  "upstreamMs": 4149,
+  "receipt": "01M7401B9MRPS3SVG831BQ5046",
+  "dupHeader": true,
+  "sealBy": "2026-11-12T00:05:00.000Z",
+  "cost": null,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "usage": {
+   "prompt_tokens": 530,
+   "completion_tokens": 63,
+   "total_tokens": 593,
+   "neurons": 17.877273559570312,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "lang": "pt",
+  "suspect": "ines",
+  "q": "O que você estava fazendo durante o apagão no Túnel Black Ridge?",
+  "status": 200,
+  "questions": 2,
+  "answer": "Eu estava sozinha, limpando a cozinha, tentando aproveitar ao máximo aquele tempo para organizar tudo. É sempre um desafio manter tudo limpo e organizado em um trem, sabe? Estava com farinha para preparar pães frescos para o café da manhã.",
+  "words": 40,
+  "ptHint": true,
+  "confesses": false,
+  "namesOutsideCast": [
+   "Eu",
+   "Estava"
+  ],
+  "upstreamMs": 1486,
+  "receipt": "01M7401EECT79SWA6WGHZ6E0MB",
+  "dupHeader": true,
+  "sealBy": "2026-11-12T00:05:00.000Z",
+  "cost": null,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "usage": {
+   "prompt_tokens": 453,
+   "completion_tokens": 55,
+   "total_tokens": 508,
+   "neurons": 15.369091033935547,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": 200,
+  "correct": true,
+  "culpritName": "Inês Duarte",
+  "score": 100,
+  "questions": 2
+ }
+]

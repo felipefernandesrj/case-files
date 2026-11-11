@@ -1,0 +1,48 @@
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+
+## 0.4.1 (M2 sprint 1, Night Train case file)
+=====
+# Changelog
+
+## 0.4.2 (M2 sprint 2, load a case by id behind a flag)
+- registry and caseFileFor: frozen registry and error on unknown_case
+- server caseId / CASE_ID and CLI --case, default unchanged
+- new test/case-select.mjs 7 checks and the renamed night-train check, 112 checks
+- not in the page yet, M2 not delivered
+
+## 0.4.1 (M2 sprint 1, Night Train case file)
+<<<END>>>
+
+<<<REPLACE package.json>>>
+  "version": "0.4.1",
+=====
+  "version": "0.4.2",
+<<<END>>>
+
+<<<REPLACE README.md>>>
+**M2 in progress (v0.4.1, sprint 1).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks. It is not playable yet; the game still serves The Vanishing Violin. 105 automated checks.
+=====
+**M2 in progress (v0.4.2, sprint 2).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks and can now be loaded by id for testing (CASE_ID=night-train node src/server.js or node src/cli.js --case night-train), though the page still serves The Vanishing Violin and has no case picker yet. 112 automated checks.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not wired into the game)
+7. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Total checks: 105 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, keyboard: 13).
+=====
+6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not the default case)
+7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page)
+8. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Total checks: 112 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 7, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+### Case engine (`src/case.js`, M2)
+=====
+### Case engine (`src/case.js`, M2)
+- `CASES` and `caseFileFor(id)`: frozen registry and unknown_case error
+- Flag: createServer({ caseId }), CASE_ID for node src/server.js and --case for the CLI, default The Vanishing Violin, not exposed in the page.
+<<<END>>>

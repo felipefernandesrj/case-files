@@ -189,3 +189,12 @@ Model: @cf/google/gemma-4-26b-a4b-it via the QA Cup key, thinking off, max_token
 - Live smoke (tools/smoke-m2s1.mjs, llama-4-scout, Violin regression): EN Maya 200 41 words, correct accuse 100; PT Carlos 200 34 words, wrong accuse 0, no best. qa/live-smoke-m2s1.json.
 - Result: npm test 105/105 (was 97). 10 key calls, 9 277 / 8 999 tokens, 349.2 neurons (~US$ 0.0038), rework 4 calls = 35% of build neurons, 0 API failures.
 - Details, receipts and FullCup observations: qa/rework.md (M2 sprint 1).
+
+## M2 sprint 2 (v0.4.2, load a case by id behind a flag), 2026-11-11 00:25-00:31 UTC (21:25-21:31 BRT 10/11)
+Model: @cf/google/gemma-4-26b-a4b-it via the QA Cup key, thinking off. M2 in progress, not in the page, not declared.
+- Calls 184-185: src/case.js CASES registry + caseFileFor(id) (unknown_case for anything else), createServer({ caseId }) with CASE_ID for node src/server.js, CLI --case <id>. 185 added the caseFileFor body the first output left empty.
+- Call 186: test/case-select.mjs (7 checks) in npm test; Night Train test 8 renamed "not the default case (only reachable by id)".
+- Calls 187-188: CHANGELOG 0.4.2, package.json 0.4.2, README "M2 in progress (v0.4.2, sprint 2)", SPEC test list, totals and Case engine; 188 rewrote shorthand bullets as sentences.
+- Live smoke (tools/smoke-m2s2.mjs, llama-4-scout, Night Train by id): PT Helena 200 42 words, PT Inês 200 40 words, correct accuse score 100. qa/live-smoke-m2s2.json.
+- Result: npm test 112/112 (was 105). 7 key calls, 5 913 / 4 022 tokens, 184.5 neurons (~US$ 0.0020), rework 2 calls = 13% of build neurons, 0 API failures.
+- Details, receipts and FullCup observations: qa/rework.md (M2 sprint 2).

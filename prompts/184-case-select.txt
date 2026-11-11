@@ -1,0 +1,62 @@
+# Task (M2 sprint 2): load a case by id in the server and the CLI, behind a flag (the page does not change)
+A small case registry in src/case.js maps a case id to its file. createServer gets an optional caseId (the flag); without it nothing changes and The Vanishing Violin is served. node src/server.js reads the flag from the env var CASE_ID; the CLI reads it from --case <id>. The string night-train must NOT appear in src/server.js or src/cli.js (only in the registry in src/case.js).
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Empty lines INSIDE a NEW are part of NEW: keep writing NEW until it is complete, then <<<END>>>. Every OLD is unique in the file. No prose, no fences, no em-dashes, no thinking aloud. 2-space indentation, plain ES2020.
+
+Block 1, src/case.js. OLD is exactly these 2 lines (end of loadCase):
+  return JSON.parse(readFileSync(path, 'utf8'));
+}
+NEW is: those same 2 lines; one empty line; a JSDoc line block "/** Known cases: id -> case file (relative to the project root). */"; then
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' });
+then one empty line; then a JSDoc block (description "Resolve a case id to its case file.", @param {string} id, @returns {string}, @throws {Error} code 'unknown_case' for an id not in CASES); then
+export function caseFileFor(id) {
+with this behaviour: if typeof id === 'string' and Object.prototype.hasOwnProperty.call(CASES, id), return CASES[id]; otherwise create const err = new Error(`unknown case: ${String(id)} (known: ${Object.keys(CASES).join(', ')})`), set err.code = 'unknown_case' and throw err. Close the function with }.
+
+Block 2, src/server.js. OLD is exactly this 1 line:
+import { loadCase, publicCase, systemPrompt, capWords } from './case.js';
+NEW is exactly this 1 line:
+import { loadCase, caseFileFor, publicCase, systemPrompt, capWords } from './case.js';
+
+Block 3, src/server.js. OLD is exactly this 1 line:
+ * @param {string} opts.caseFile
+NEW is exactly these 2 lines:
+ * @param {string} opts.caseFile
+ * @param {string} [opts.caseId] flag: case id from CASES in src/case.js; when set it overrides caseFile
+
+Block 4, src/server.js. OLD is exactly these 2 lines:
+  caseFile,
+  scoreFile = 'data/scores.json',
+NEW is exactly these 3 lines:
+  caseFile,
+  caseId,
+  scoreFile = 'data/scores.json',
+
+Block 5, src/server.js. OLD is exactly this 1 line:
+  const c = loadCase(caseFile);
+NEW is exactly this 1 line:
+  const c = loadCase(caseId ? caseFileFor(caseId) : caseFile);
+
+Block 6, src/server.js. OLD is exactly this 1 line:
+  createServer({ caseFile: 'content/case.json' });
+NEW is exactly this 1 line:
+  createServer({ caseFile: 'content/case.json', caseId: process.env.CASE_ID || undefined });
+
+Block 7, src/cli.js. OLD is exactly this 1 line:
+let player = 'anon';
+NEW is exactly these 2 lines:
+let player = 'anon';
+let caseId; // flag: --case <id> (see CASES in src/case.js); default is the Violin
+
+Block 8, src/cli.js. OLD is exactly these 4 lines:
+  } else if (args[i] === '--player' && i + 1 < args.length) {
+    player = args[i + 1].slice(0, 24);
+    i++;
+  }
+NEW: the same first 3 lines, then an else-if branch for args[i] === '--case' && i + 1 < args.length that sets caseId = args[i + 1] and i++, then the closing }. 6 lines in total.
+
+Block 9, src/cli.js. OLD is exactly these 2 lines:
+  caseFile: 'content/case.json',
+  mock: true,
+NEW is exactly these 3 lines:
+  caseFile: 'content/case.json',
+  caseId,
+  mock: true,

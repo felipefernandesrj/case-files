@@ -30,6 +30,7 @@ async function getJSON(url) {
 const args = process.argv.slice(2);
 let lang = 'en';
 let player = 'anon';
+let caseId; // flag: --case <id> (see CASES in src/case.js); default is the Violin
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--lang' && i + 1 < args.length) {
     lang = args[i + 1] === 'pt' ? 'pt' : 'en';
@@ -37,12 +38,16 @@ for (let i = 0; i < args.length; i++) {
   } else if (args[i] === '--player' && i + 1 < args.length) {
     player = args[i + 1].slice(0, 24);
     i++;
+  } else if (args[i] === '--case' && i + 1 < args.length) {
+    caseId = args[i + 1];
+    i++;
   }
 }
 
 // Start server on random port
 const server = await createServer({
   caseFile: 'content/case.json',
+  caseId,
   mock: true,
 });
 await new Promise((resolve) => server.listen(0, resolve));

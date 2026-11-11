@@ -1,0 +1,15 @@
+# Rework (M2 sprint 2): the CHANGELOG 0.4.2 bullets and one SPEC bullet copied the task shorthand; rewrite them as full sentences in the style of the 0.4.1 entry
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW. No prose, no fences, no em-dashes, no thinking aloud, no commit hashes. Each NEW bullet is one line starting with "- " and a capital letter.
+
+Facts: src/case.js exports CASES, a frozen registry (violin -> content/case.json, night-train -> content/cases/night-train.json), and caseFileFor(id), which returns the file or throws an error with code unknown_case for any other id, including path-like ids such as ../package and inherited names such as toString. createServer({ caseId }) loads the case by id and overrides caseFile; node src/server.js reads the env var CASE_ID; the CLI takes --case <id>. Without the flag the game serves The Vanishing Violin as before. New test/case-select.mjs adds 7 checks; the Night Train check "not wired into the game yet" is renamed "not the default case (only reachable by id)"; 112 checks in total. The page has no case picker yet and M2 is not delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly these 4 lines:
+- registry and caseFileFor: frozen registry and error on unknown_case
+- server caseId / CASE_ID and CLI --case, default unchanged
+- new test/case-select.mjs 7 checks and the renamed night-train check, 112 checks
+- not in the page yet, M2 not delivered
+NEW is exactly 4 bullet lines, one per old bullet, same order, full sentences using the facts.
+
+Block 2, docs/SPEC.md. OLD is exactly this 1 line:
+- `CASES` and `caseFileFor(id)`: frozen registry and unknown_case error
+NEW is exactly 1 bullet line starting with "- `CASES` and `caseFileFor(id)`: " that names both registry entries with their files and says which ids throw unknown_case.

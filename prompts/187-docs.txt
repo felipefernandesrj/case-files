@@ -1,0 +1,35 @@
+# Task (M2 sprint 2, v0.4.2): docs and version for loading a case by id behind a flag
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW. Empty lines INSIDE a NEW are part of NEW: keep writing until NEW has the stated number of lines, then <<<END>>>. Every OLD is unique in the file. Plain English, no prose outside blocks, no fences, no em-dashes, no thinking aloud, no commit hashes.
+
+Facts: src/case.js now exports CASES (frozen registry: violin -> content/case.json, night-train -> content/cases/night-train.json) and caseFileFor(id), which throws an error with code unknown_case for any other id (also path-like ids and inherited names like toString). createServer({ caseId }) loads the case by id and overrides caseFile; node src/server.js reads it from the env var CASE_ID; the CLI takes --case <id>. Without the flag nothing changes and the game serves The Vanishing Violin. The page (public/index.html) has no case picker yet. New test/case-select.mjs has 7 checks (registry, rejected ids, default server, Night Train served without secrets, Night Train playable end to end in mock mode, unknown caseId fails at startup, CLI --case plus no picker in the page). Total checks now 112 (was 105). A live smoke in Portuguese against the Night Train prompt passed (2 suspects answered in Portuguese in character, correct accusation scored 100).
+
+Block 1, CHANGELOG.md. OLD is exactly these 3 lines:
+# Changelog
+
+## 0.4.1 (M2 sprint 1, Night Train case file)
+NEW is 9 lines: line 1 "# Changelog", line 2 empty, line 3 "## 0.4.2 (M2 sprint 2, load a case by id behind a flag)", lines 4 to 7 four bullets starting with "- " (registry and caseFileFor; server caseId / CASE_ID and CLI --case, default unchanged; new test/case-select.mjs 7 checks and the renamed night-train check, 112 checks; not in the page yet, M2 not delivered), line 8 empty, line 9 "## 0.4.1 (M2 sprint 1, Night Train case file)".
+
+Block 2, package.json. OLD is exactly this 1 line:
+  "version": "0.4.1",
+NEW is exactly this 1 line:
+  "version": "0.4.2",
+
+Block 3, README.md. OLD is exactly this 1 line:
+**M2 in progress (v0.4.1, sprint 1).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks. It is not playable yet; the game still serves The Vanishing Violin. 105 automated checks.
+NEW is exactly 1 line starting with "**M2 in progress (v0.4.2, sprint 2).** " that keeps the Night Train case file sentence, then says it can now be loaded by id for testing (CASE_ID=night-train npm start style: write it as `CASE_ID=night-train node src/server.js` or `node src/cli.js --case night-train`), that the page still serves The Vanishing Violin and has no case picker yet, and ends with "112 automated checks."
+
+Block 4, docs/SPEC.md. OLD is exactly these 4 lines:
+6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not wired into the game)
+7. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Total checks: 105 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, keyboard: 13).
+NEW is exactly these 5 lines:
+6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not the default case)
+7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page)
+8. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Total checks: 112 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 7, keyboard: 13).
+
+Block 5, docs/SPEC.md. OLD is exactly this 1 line:
+### Case engine (`src/case.js`, M2)
+NEW is 3 lines: line 1 the same heading, line 2 a bullet "- `CASES` and `caseFileFor(id)`: ..." describing the frozen registry and the unknown_case error, line 3 a bullet "- Flag: ..." describing createServer({ caseId }), CASE_ID for node src/server.js and --case for the CLI, default The Vanishing Violin, not exposed in the page.

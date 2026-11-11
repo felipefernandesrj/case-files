@@ -1,0 +1,7 @@
+# Rework (M2 sprint 2): src/case.js caseFileFor has no body (the previous output stopped after its first line and left a stray "<")
+Output ONLY one literal edit block. Format: <<<REPLACE src/case.js>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW. No prose, no fences, no em-dashes, no thinking aloud. 2-space indentation, plain ES2020.
+
+OLD is exactly these 2 lines:
+export function caseFileFor(id) {
+<
+NEW is the complete function, 7 lines, starting with the line "export function caseFileFor(id) {" and ending with the line "}". Behaviour: if typeof id === 'string' and Object.prototype.hasOwnProperty.call(CASES, id), return CASES[id]; otherwise const err = new Error(`unknown case: ${String(id)} (known: ${Object.keys(CASES).join(', ')})`); err.code = 'unknown_case'; throw err;

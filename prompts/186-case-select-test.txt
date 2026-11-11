@@ -1,0 +1,28 @@
+# Task (M2 sprint 2): new test file test/case-select.mjs for loading a case by id (flag), plus 2 small edits
+Output exactly three blocks, no prose, no fences, no em-dashes, no thinking aloud.
+
+Block 1: <<<FILE test/case-select.mjs>>> newline, full file, newline, <<<END>>>.
+ES module, Node 20, no dependencies. Imports: `import fs from 'node:fs';`, `import { once } from 'node:events';`, `import { spawnSync } from 'node:child_process';`, `import { createServer } from '../src/server.js';`, `import { loadCase, CASES, caseFileFor } from '../src/case.js';`.
+Harness exactly like the other test files: `let passed = 0, failed = 0;` an async `test(name, fn)` that prints `PASS ${name}` or `FAIL ${name}: ${err.message}` (console.error) and counts; `const assert = (cond, msg) => { if (!cond) throw new Error(msg); };`; at the end `console.log(`\n${passed} passed, ${failed} failed`);` and `process.exit(failed ? 1 : 0);`. Use top-level await. 2-space indentation.
+`const nt = loadCase('content/cases/night-train.json');` and `const violin = loadCase();`.
+Helper `async function start(opts)`: `const server = createServer({ scoreFile: null, mock: true, ...opts }); server.listen(0); await once(server, 'listening'); const base = `http://localhost:${server.address().port}`; return { server, base };`.
+Helpers `const getJ = (base, p) => fetch(base + p).then(async (r) => ({ status: r.status, body: await r.json() }));` and `const postJ = (base, p, b) => fetch(base + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then(async (r) => ({ status: r.status, body: await r.json() }));`.
+Every test that starts a server closes it in a finally block (`server.close()`).
+Exactly these 7 tests, in this order, with these names:
+1. "case registry maps known ids to files": JSON.stringify(Object.keys(CASES)) === JSON.stringify(['violin', 'night-train']); caseFileFor('violin') === 'content/case.json'; caseFileFor('night-train') === 'content/cases/night-train.json'; Object.isFrozen(CASES) is true.
+2. "unknown or path-like ids are rejected": for each id of ['nope', '../package', 'toString', '', undefined, 'Night-Train'], calling caseFileFor(id) throws an error whose code is 'unknown_case' (use try/catch with a flag `threw`; assert threw with a message naming the id via String(id)).
+3. "without the flag the server still serves the violin": start({ caseFile: 'content/case.json' }); GET /api/status has status 200, body.caseId === violin.id and body.mode === 'mock'; GET /api/case?lang=en has body.suspects.length === 3.
+4. "caseId night-train serves the night train without secrets": start({ caseFile: 'content/case.json', caseId: 'night-train' }); GET /api/status body.caseId === nt.id; for lang of ['en', 'pt'], GET `/api/case?lang=${lang}` has body.title === nt.title[lang] and body.suspects.length === 4, and const txt = JSON.stringify(body).toLowerCase() includes neither 'culprit' nor 'culpad' nor any suspect's s.facts.toLowerCase().
+5. "night train plays end to end in mock mode": start({ caseFile: 'content/case.json', caseId: 'night-train' }); POST /api/session gives sessionId; POST /api/ask { sessionId, suspectId: 'helena', question: 'Onde você estava no apagão?', lang: 'pt' } has status 200, a non-empty string body.answer and body.questions === 1; POST /api/ask with suspectId 'maya' (a Violin suspect) has status 400; POST /api/accuse { sessionId, suspectId: nt.culprit, player: 'case-select', lang: 'pt' } has status 200, body.correct === true, body.culpritName === 'Inês Duarte', body.solution === nt.solution.pt and body.score > 0.
+6. "unknown caseId fails at startup": calling createServer({ caseFile: 'content/case.json', caseId: 'nope', scoreFile: null, mock: true }) throws an error with code 'unknown_case' (try/catch with a flag).
+7. "CLI --case loads the night train and the page has no case picker": const r = spawnSync(process.execPath, ['src/cli.js', '--case', 'night-train', '--lang', 'pt'], { input: 'quit\n', encoding: 'utf8', timeout: 10000 }); r.status === 0 and r.stdout includes nt.title.pt and 'Inês Duarte'; const page = fs.readFileSync('public/index.html', 'utf8'); page includes neither 'night-train' nor 'caseId' nor 'CASE_ID'.
+
+Block 2: <<<REPLACE package.json>>> newline, OLD, newline, =====, newline, NEW, newline, <<<END>>>. OLD is exactly this fragment:
+ && node test/night-train.mjs && node test/keyboard.mjs"
+NEW is exactly this fragment:
+ && node test/night-train.mjs && node test/case-select.mjs && node test/keyboard.mjs"
+
+Block 3: <<<REPLACE test/night-train.mjs>>> newline, OLD, newline, =====, newline, NEW, newline, <<<END>>>. OLD is exactly this 1 line:
+await test('night train is not wired into the game yet', async () => {
+NEW is exactly this 1 line:
+await test('night train is not the default case (only reachable by id)', async () => {

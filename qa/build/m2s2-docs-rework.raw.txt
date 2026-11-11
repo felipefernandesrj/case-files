@@ -1,0 +1,17 @@
+<<<REPLACE CHANGELOG.md>>>
+- registry and caseFileFor: frozen registry and error on unknown_case
+- server caseId / CASE_ID and CLI --case, default unchanged
+- new test/case-select.mjs 7 checks and the renamed night-train check, 112 checks
+- not in the page yet, M2 not delivered
+=====
+- The CASES registry is frozen and caseFileFor(id) throws an unknown_case error for any invalid or path-like IDs.
+- The server now supports selecting a case via the caseId option, the CASE_ID environment variable, or the --case CLI flag, while defaulting to The Vanishing Violin.
+- A new test suite in test/case-select.mjs adds seven checks and renames the night-train check, bringing the total to 112 checks.
+- Case selection is not yet available on the web page as M2 is not delivered.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- `CASES` and `caseFileFor(id)`: frozen registry and unknown_case error
+=====
+- `CASES` and `caseFileFor(id)`: frozen registry containing violin (content/case.json) and night-train (content/cases/night-train.json) that throws unknown_case for any other IDs.
+<<<END>>>

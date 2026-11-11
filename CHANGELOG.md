@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.2 (M2 sprint 2, load a case by id behind a flag)
+- The CASES registry is frozen and caseFileFor(id) throws an unknown_case error for any invalid or path-like IDs.
+- The server now supports selecting a case via the caseId option, the CASE_ID environment variable, or the --case CLI flag, while defaulting to The Vanishing Violin.
+- A new test suite in test/case-select.mjs adds seven checks and renames the night-train check, bringing the total to 112 checks.
+- Case selection is not yet available on the web page as M2 is not delivered.
+
 ## 0.4.1 (M2 sprint 1, Night Train case file)
 - M2 "Case 2: The Night Train" is in progress. New case file content/cases/night-train.json: 4 suspects (Helena, Victor, Tomás, Inês) with EN and PT role, persona and alibi, a 5 stop timeline that crosses midnight, 5 clues, glossary and solution.
 - Shared case engine, step 1: fairPlay(c, { suspects }) takes the expected suspect count (default 3, so The Vanishing Violin is unchanged) and the new timelineCheck(c) checks stop order, EN and PT text, known suspects and one crime stop with the culprit.

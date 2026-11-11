@@ -121,7 +121,7 @@ await test('PT prompt lists all 4 suspects and keeps other facts private', async
   }
 });
 
-await test('night train is not wired into the game yet', async () => {
+await test('night train is not the default case (only reachable by id)', async () => {
   const server = fs.readFileSync('src/server.js', 'utf8');
   const cli = fs.readFileSync('src/cli.js', 'utf8');
   assert(server.includes('content/case.json'), 'server missing default case');
