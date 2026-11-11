@@ -1,0 +1,274 @@
+Edit public/css/game.css with literal <<<REPLACE public/css/game.css>>> blocks. Copy each OLD byte-for-byte. Separator is a line of exactly five equals signs =====. End each block with <<<END>>>. Output only the REPLACE blocks.
+
+1) Invalid CSS and icon rule — remove aria-hidden declaration:
+
+<<<REPLACE public/css/game.css>>>
+  stroke-linejoin: round;
+  aria-hidden: true;
+}
+=====
+  stroke-linejoin: round;
+}
+<<<END>>>
+
+2) html/body fill the viewport; [hidden] always wins; inputs readable:
+
+<<<REPLACE public/css/game.css>>>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--cf-bg);
+  color: var(--cf-text);
+  font-family: 'Palatino', 'Georgia', serif;
+  -webkit-font-smoothing: antialiased;
+}
+=====
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--cf-bg);
+  color: var(--cf-text);
+  font-family: 'Palatino', 'Georgia', serif;
+  -webkit-font-smoothing: antialiased;
+}
+input, textarea {
+  font: inherit;
+  min-height: var(--touch-min);
+  background: var(--cf-paper-bright);
+  color: var(--cf-text-on-paper);
+  border: 1px solid var(--cf-folder-dark);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+<<<END>>>
+
+3) Desktop grid rows and compact suspect buttons (use existing button markup, not .suspect-row):
+
+<<<REPLACE public/css/game.css>>>
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+      "summary stage pins"
+      "suspects stage pins"
+      "steps stage pins";
+    gap: 12px;
+    height: calc(100vh - 52px);
+  }
+
+  #case-summary { grid-area: summary; overflow: hidden; }
+  #suspects { grid-area: suspects; }
+  #steps { grid-area: steps; }
+  #play { grid-area: stage; min-height: 0; overflow: auto; }
+  #rail-right { grid-area: pins; }
+  #rail-right[hidden] { display: none; }
+
+  #steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #suspects .suspect-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 4px 0;
+  }
+
+  .portrait { width: 36px; height: 36px; border-radius: 4px; background: var(--cf-ink-soft); flex-shrink: 0; }
+}
+=====
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "summary stage pins"
+      "suspects stage pins"
+      "steps stage pins";
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+    height: auto;
+  }
+
+  #case-summary { grid-area: summary; overflow: hidden; font-size: 0.9rem; }
+  #suspects { grid-area: suspects; display: flex; flex-direction: column; min-height: 0; overflow: auto; }
+  #steps { grid-area: steps; position: static; transform: none; width: auto; }
+  #play { grid-area: stage; min-height: 0; overflow: auto; }
+  #rail-right { grid-area: pins; overflow: auto; }
+  #rail-right[hidden] { display: none !important; }
+
+  [data-layout="desktop"] #suspects { display: flex; }
+
+  #steps {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  #steps button { width: 100%; justify-content: flex-start; }
+
+  [data-layout="desktop"] #suspect-buttons { display: flex; flex-direction: column; gap: 4px; }
+  [data-layout="desktop"] #suspect-buttons button {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    min-height: var(--touch-min);
+    padding: 4px 8px;
+    text-align: left;
+  }
+  [data-layout="desktop"] .portrait { width: 36px; height: 36px; font-size: 0.85rem; margin: 0; }
+}
+.portrait { width: 36px; height: 36px; border-radius: 4px; background: var(--cf-ink-soft); flex-shrink: 0; display: grid; place-items: center; color: var(--cf-lamp); }
+<<<END>>>
+
+4) Room cards: #room-buttons is the grid, .room is one dark card with light text. 2 columns on tablet.
+
+<<<REPLACE public/css/game.css>>>
+.room {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.room[aria-pressed="true"] {
+  background: rgba(0,0,0,0.4);
+}
+
+.room[aria-pressed="true"] .room-label {
+  color: var(--cf-text);
+}
+=====
+#room-buttons { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 768px) { #room-buttons { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { #locations[data-loc="rooms"] #room-buttons { grid-template-columns: repeat(3, 1fr); } }
+.room {
+  min-height: 88px;
+  width: 100%;
+  border: 1px solid var(--cf-line);
+  border-radius: 4px;
+  padding: 12px;
+  text-align: left;
+  color: #F3EADF;
+  background:
+    linear-gradient(180deg, rgba(12,11,10,0.45) 0%, rgba(12,11,10,0.94) 58%),
+    #0C0B0A;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.room-name, .room .icon { color: #F3EADF; }
+.room .icon { color: #E8B86D; }
+.room[aria-pressed="true"] {
+  outline: 2px solid var(--cf-accent);
+  color: #F3EADF;
+  background:
+    linear-gradient(180deg, rgba(12,11,10,0.35) 0%, rgba(12,11,10,0.92) 58%),
+    #0C0B0A;
+}
+#locations[data-loc="time"] #rooms { display: none; }
+#locations[data-loc="rooms"] #timeline:not([hidden]) { display: none; }
+#loc-switch { display: flex; gap: 8px; margin-bottom: 8px; }
+#loc-switch[hidden] { display: none !important; }
+<<<END>>>
+
+5) Cabinet: hide when [hidden]; grid the list not the section; 2 columns from 768; folder cards are paper files.
+
+<<<REPLACE public/css/game.css>>>
+#cabinet {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  #cabinet { grid-template-columns: repeat(4, 1fr); }
+}
+
+.folder-card {
+  background: var(--cf-folder);
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  color: var(--cf-ink);
+  font-weight: bold;
+}
+=====
+#cabinet[hidden] { display: none !important; }
+#cabinet { padding: 16px 0 24px; }
+#cabinet-list { display: grid; gap: 16px; }
+@media (min-width: 768px) { #cabinet-list { grid-template-columns: 1fr 1fr; } }
+.folder-card {
+  min-height: 160px;
+  background: linear-gradient(180deg, var(--cf-folder) 0 28px, var(--cf-paper) 28px);
+  color: var(--cf-text-on-paper);
+  border: 1px solid var(--cf-folder-dark);
+  text-align: left;
+  padding: 32px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.folder-art { min-height: 48px; display: flex; align-items: center; justify-content: center; background: #1a1210; border-radius: 2px; }
+.folder-art .icon { color: var(--cf-lamp); width: 40px; height: 40px; }
+<<<END>>>
+
+6) Phone/tablet steps target the real buttons; add dock padding and safe area. Hide .tl-stop .icon (CSS bullet is used).
+
+<<<REPLACE public/css/game.css>>>
+  #steps .step-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0;
+    font-size: 0.62rem;
+  }
+=====
+  #steps button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 2px;
+    font-size: 0.62rem;
+    min-width: 0;
+    gap: 1px;
+  }
+  #steps { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  #play { padding-bottom: var(--dock-h); }
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+.tl-stop::before {
+=====
+.tl-stop .icon { display: none; }
+.tl-stop::before {
+<<<END>>>
+
+7) #log is the conversation paper box; hide Files label in the header on phone if needed; button pressed state must not lamp-fill rooms (already handled by .room rules). Add:
+
+<<<REPLACE public/css/game.css>>>
+/* Conversation & Board */
+#conversation {
+=====
+#log {
+  background: var(--cf-paper);
+  color: var(--cf-text-on-paper);
+  padding: 12px;
+  min-height: 120px;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+#suspect-buttons button { background: var(--cf-paper); color: var(--cf-text-on-paper); }
+#suspect-buttons button[aria-pressed="true"] { outline: 2px solid var(--cf-accent); }
+#files-btn [data-label] { /* keep accessible name */ }
+/* Conversation & Board */
+#conversation {
+<<<END>>>

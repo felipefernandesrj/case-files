@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.6 (visual V3, one-viewport game layout, key-produced UI)
+- On a 1280 by 800 desktop the open case is a three-column desk: a left file summary with compact suspect portraits and the step tabs, one center stage that shows a single step (Briefing, Locations, Suspects, Interrogate, Board, or Accuse), and an optional right rail of evidence pins. The personal best sits in a small header item and again on the verdict/accuse stage, not in a floating box. The same step model is used on every width, so a 768 by 1024 tablet keeps two columns where they fit and puts the step tabs under the stage, and a 390-wide phone uses short HUD labels (Brief/Places/People/Ask/Board/Accuse, and Caso/Locais/Pessoas/Interrogar/Quadro/Acusar in Portuguese) with Files as a cabinet icon in the header and enough bottom padding that content does not sit under the dock.
+- The Night Train Locations step opens on the timetable, drawn as a vertical railway line with stations at 768 and 1280, and a Time/Rooms toggle is available when a case has a timeline.
+- The gothic-noir chrome that shipped in this version (the icon sprite, the layout CSS, the page shell, and the layout JavaScript) was generated through the Cup text key. The earlier visual V1 and V2 commits were written by hand; their substantive UI was regenerated through the key in this pass so the shipped player is key-produced. Receipts and neuron cost are logged in the run notes. The automated suite still has 119 checks.
+
 ## 0.4.5 (visual V2, layout fix and gothic-noir icon set)
 - The header, main stage and dock share one centered 1120px shell, so the 1280 desktop chrome lines up with the content. On a 390-wide phone the case plays as one step at a time with a sticky bottom HUD (Briefing, Locations, Suspects, Interrogate, Board, Accuse). Tablet (768) uses two columns; desktop uses a sidebar plus stage.
 - The cabinet header shows the pack title "Case Files"; the case title appears only after a file is open. Location labels keep light type on a dark scrim so they stay WCAG AA, including the selected room.

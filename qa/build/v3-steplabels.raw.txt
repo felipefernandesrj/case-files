@@ -1,0 +1,8 @@
+<<<FILE public/index.html>>>
+<span data-step-label="briefing">Brief</span></button>
+      <button type="button" role="tab" id="step-locations" data-step="locations" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-step-label="locations">Places</span></button>
+      <button type="button" role="tab" id="step-suspects" data-step="suspects" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-step-label="suspects">People</span></button>
+      <button type="button" role="tab" id="step-talk" data-step="talk" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-step-label="talk">Ask</span></button>
+      <button type="button" role="tab" id="step-board" data-step="board" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-step-label="board">Board</span></button>
+      <button type="button" role="tab" id="step-accuse" data-step="accuse" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-step-label="accuse">Accuse</span></button>
+<<<END>>>

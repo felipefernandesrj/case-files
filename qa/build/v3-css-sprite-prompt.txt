@@ -1,0 +1,63 @@
+You are patching public/css/game.css for Case Files. Output ONLY one <<<REPLACE public/css/game.css>>> block. The separator line between OLD and NEW must be exactly five equals signs. Close with <<<END>>>.
+
+NEVER emit <<<FILE>>>. NEVER rewrite the whole stylesheet. If you emit FILE you will destroy the file. Only the one REPLACE below.
+
+OLD is this exact existing rule, including newlines:
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+NEW must keep that .icon rule unchanged, then add these rules after it:
+
+.svg-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#best-hud:empty {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  header {
+    height: auto;
+    min-height: 52px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  header h1 {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+  header .hud-tools {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    margin-left: auto;
+  }
+  #files-btn [data-label] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+}
+
+No other commentary.

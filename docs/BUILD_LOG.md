@@ -207,3 +207,7 @@ Model: @cf/google/gemma-4-26b-a4b-it via the QA Cup key, thinking off. M2 in pro
 - Live smoke (tools/smoke-m2s3.mjs, llama-4-scout, Night Train by id): PT Victor 200 32 words, correct accuse score 100. qa/live-smoke-m2s3.json.
 - Result: npm test 114/114 (was 112). 6 key calls, 4 379 / 2 757 tokens, 125.1 neurons (~US$ 0.0014), rework 2 calls = 30.5% of build neurons, 0 API failures.
 - Details, receipts and FullCup observations: qa/rework.md (M2 sprint 3).
+
+## Visual V3 (v0.4.6)
+
+Handwritten visual V1 (0da9fc5) and V2 (1f583da) were replaced in the working tree by Cup-key output for the shipped chrome: icon sprite, layout CSS, page shell and layout JavaScript (`@cf/google/gemma-4-26b-a4b-it`, workload via tools/build-via-key.mjs). Keyboard tests were also updated through the key for the new desktop tab order. Version, changelog and README status were recorded as project-owner notes. Receipts and neuron cost: `/workspace/casefiles-qa/run26/receipts.md`. Suite remains 119 checks. No live play smoke and no paid image calls in this pass.

@@ -1,0 +1,218 @@
+Edit public/index.html script with literal <<<REPLACE public/index.html>>> blocks. Each OLD must be copied byte-for-byte from this prompt. The separator is a line of exactly five equals signs: =====
+Do not write night-train, caseId, or CASE_ID. Output only the REPLACE blocks. Every block must end with <<<END>>>.
+
+1) Short step labels plus loc/pin strings:
+
+<<<REPLACE public/index.html>>>
+    unpin: 'Remove pin',
+    steps: { briefing: 'Briefing', locations: 'Locations', suspects: 'Suspects', talk: 'Interrogate', board: 'Board', accuse: 'Accuse' }
+  },
+=====
+    unpin: 'Remove pin', pins: 'Pins',
+    steps: { briefing: 'Brief', locations: 'Places', suspects: 'People', talk: 'Ask', board: 'Board', accuse: 'Accuse' }
+  },
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    unpin: 'Retirar',
+    steps: { briefing: 'Dossiê', locations: 'Locais', suspects: 'Suspeitos', talk: 'Interrogar', board: 'Quadro', accuse: 'Acusar' }
+  }
+=====
+    unpin: 'Retirar', pins: 'Alfinetes',
+    steps: { briefing: 'Caso', locations: 'Locais', suspects: 'Pessoas', talk: 'Interrogar', board: 'Quadro', accuse: 'Acusar' }
+  }
+<<<END>>>
+
+2) Desktop breakpoint 1024, showStep applies to every [data-panel], and add setLocView / renderDossier after showStep:
+
+<<<REPLACE public/index.html>>>
+function applyLayout() {
+  const w = window.innerWidth;
+  document.body.dataset.layout = w >= 1280 ? 'desktop' : (w >= 768 ? 'tablet' : 'phone');
+}
+applyLayout();
+window.addEventListener('resize', applyLayout);
+function showStep(name) {
+  if (!name) return;
+  document.querySelectorAll('#play > .panel').forEach(el => {
+    el.classList.toggle('is-on', el.dataset.panel === name);
+  });
+  document.querySelectorAll('#steps [data-step]').forEach(b => {
+    b.setAttribute('aria-selected', b.dataset.step === name ? 'true' : 'false');
+  });
+}
+=====
+function applyLayout() {
+  const w = window.innerWidth;
+  document.body.dataset.layout = w >= 1024 ? 'desktop' : (w >= 768 ? 'tablet' : 'phone');
+}
+applyLayout();
+window.addEventListener('resize', applyLayout);
+function showStep(name) {
+  if (!name) return;
+  document.body.dataset.step = name;
+  document.querySelectorAll('[data-panel]').forEach(el => {
+    el.classList.toggle('is-on', el.dataset.panel === name);
+  });
+  document.querySelectorAll('#steps [data-step]').forEach(b => {
+    b.setAttribute('aria-selected', b.dataset.step === name ? 'true' : 'false');
+  });
+  if (name === 'board' && typeof renderBoard === 'function') renderBoard();
+  if (name === 'suspects' && typeof renderDossier === 'function') renderDossier();
+}
+function setLocView(view) {
+  const loc = document.getElementById('locations');
+  if (!loc) return;
+  loc.dataset.loc = view;
+  const timeBtn = document.getElementById('loc-time');
+  const roomBtn = document.getElementById('loc-rooms');
+  if (timeBtn) timeBtn.setAttribute('aria-pressed', view === 'time' ? 'true' : 'false');
+  if (roomBtn) roomBtn.setAttribute('aria-pressed', view === 'rooms' ? 'true' : 'false');
+}
+function renderDossier() {
+  const body = document.getElementById('dossier-body');
+  if (!body || !caseData) return;
+  body.innerHTML = '';
+  const s = (caseData.suspects || []).find(x => x.id === selectedSuspect);
+  if (!s) {
+    body.textContent = lang === 'pt' ? 'Escolha um suspeito na lista.' : 'Choose a suspect from the list.';
+    return;
+  }
+  const face = document.createElement('span');
+  face.className = 'portrait';
+  face.setAttribute('aria-hidden', 'true');
+  face.textContent = initials(s.name);
+  const who = document.createElement('strong');
+  who.textContent = s.name;
+  const role = document.createElement('p');
+  role.className = 'role with-icon';
+  const iconId = ROLE_ICONS[s.id];
+  if (iconId) role.appendChild(iconSvg(iconId, 'icon badge-icon'));
+  role.appendChild(document.createTextNode(s.role || ''));
+  body.appendChild(face);
+  body.appendChild(who);
+  if (s.role) body.appendChild(role);
+}
+<<<END>>>
+
+3) setLang: drop board-btn, set files aria-label, summary stamp, dossier heading, loc labels, pin title:
+
+<<<REPLACE public/index.html>>>
+  setText('files-btn', UI[newLang].files);
+  setText('board-btn', UI[newLang].board);
+  setText('board-title', UI[newLang].boardTitle);
+=====
+  setText('files-btn', UI[newLang].files);
+  const filesBtn = document.getElementById('files-btn');
+  if (filesBtn) filesBtn.setAttribute('aria-label', UI[newLang].files);
+  setText('board-title', UI[newLang].boardTitle);
+  setText('dossier-heading', newLang === 'pt' ? 'Suspeitos' : 'Suspects');
+  setText('summary-stamp', UI[newLang].briefStamp);
+  if (document.getElementById('pin-rail-title')) setText('pin-rail-title', UI[newLang].pins || (newLang === 'pt' ? 'Alfinetes' : 'Pins'));
+  const locTimeLab = document.querySelector('#loc-time [data-label]');
+  const locRoomLab = document.querySelector('#loc-rooms [data-label]');
+  if (locTimeLab) locTimeLab.textContent = UI[newLang].timeline;
+  if (locRoomLab) locRoomLab.textContent = UI[newLang].rooms;
+<<<END>>>
+
+4) renderCase also fills the sidebar summary (keep the rest of the function as-is; only replace the intro line):
+
+<<<REPLACE public/index.html>>>
+  document.getElementById('intro').innerHTML = `<p>${caseData.intro}</p>`;
+  syncTitle();
+=====
+  document.getElementById('intro').innerHTML = `<p>${caseData.intro}</p>`;
+  const sum = document.getElementById('summary-intro');
+  if (sum) sum.textContent = caseData.intro || '';
+  if (typeof renderDossier === 'function') renderDossier();
+  syncTitle();
+<<<END>>>
+
+5) renderTimeline shows the toggle and defaults to timetable when a timeline exists:
+
+<<<REPLACE public/index.html>>>
+  if (!items.length) { sec.hidden = true; rail.innerHTML = ''; return; }
+  sec.hidden = false;
+=====
+  const sw = document.getElementById('loc-switch');
+  if (!items.length) { sec.hidden = true; rail.innerHTML = ''; if (sw) sw.hidden = true; setLocView('rooms'); return; }
+  sec.hidden = false;
+  if (sw) sw.hidden = false;
+  setLocView('time');
+<<<END>>>
+
+6) renderBoard also fills #pin-rail and unhides #rail-right when there are pins:
+
+<<<REPLACE public/index.html>>>
+function renderBoard() {
+  const grid = document.getElementById('board-grid');
+  grid.innerHTML = '';
+=====
+function renderBoard() {
+  const grid = document.getElementById('board-grid');
+  const rail = document.getElementById('pin-rail');
+  const side = document.getElementById('rail-right');
+  grid.innerHTML = '';
+  if (rail) rail.innerHTML = '';
+  if (side) side.hidden = pins.length === 0;
+<<<END>>>
+
+And after each ev-tile is appended, also append a compact pin to the rail if it exists. Replace the tile close:
+
+<<<REPLACE public/index.html>>>
+    tile.addEventListener('click', () => { pins.splice(i, 1); renderBoard(); });
+    grid.appendChild(tile);
+=====
+    tile.addEventListener('click', () => { pins.splice(i, 1); renderBoard(); });
+    grid.appendChild(tile);
+    if (rail) {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'with-icon';
+      chip.appendChild(iconSvg(PIN_ICONS[p.id] || 'i-pin'));
+      chip.appendChild(document.createTextNode(p.label));
+      chip.setAttribute('aria-label', UI[lang].unpin + ': ' + p.label);
+      chip.addEventListener('click', () => { pins.splice(i, 1); renderBoard(); });
+      rail.appendChild(chip);
+    }
+<<<END>>>
+
+7) Remove the board-btn listener (that button is gone). Add loc-switch clicks. Keep files and steps listeners:
+
+<<<REPLACE public/index.html>>>
+document.getElementById('board-btn').addEventListener('click', () => {
+  showPlay();
+  showStep('board');
+  renderBoard();
+  document.getElementById('board-title').focus?.();
+  document.getElementById('board').scrollIntoView({ block: 'nearest' });
+});
+document.getElementById('steps').addEventListener('click', (ev) => {
+=====
+document.getElementById('steps').addEventListener('click', (ev) => {
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  if (btn.dataset.step === 'board') renderBoard();
+});
+=====
+  if (btn.dataset.step === 'board') renderBoard();
+});
+const locSwitch = document.getElementById('loc-switch');
+if (locSwitch) locSwitch.addEventListener('click', (ev) => {
+  const b = ev.target.closest('[data-loc-view]');
+  if (b) setLocView(b.dataset.locView);
+});
+<<<END>>>
+
+8) renderBest also writes a one-line #best-hud (do not change how #best-title / #best-en / #best-pt are filled except keep setText):
+
+<<<REPLACE public/index.html>>>
+  document.getElementById('best-en').textContent = bestText('en', b.en, lang);
+  document.getElementById('best-pt').textContent = bestText('pt', b.pt, lang);
+=====
+  document.getElementById('best-en').textContent = bestText('en', b.en, lang);
+  document.getElementById('best-pt').textContent = bestText('pt', b.pt, lang);
+  const hud = document.getElementById('best-hud');
+  if (hud) hud.textContent = (lang === 'pt' ? b.pt : b.en) ? bestText(lang === 'pt' ? 'pt' : 'en', lang === 'pt' ? b.pt : b.en, lang) : '';
+<<<END>>>

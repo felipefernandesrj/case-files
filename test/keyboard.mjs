@@ -156,8 +156,7 @@ async function runStep(name, task) {
 
 // 1. Tab order and outline
 await runStep('tab-order', async () => {
-  const expectedOrder = ['len', 'lpt', 'restart-btn', ...suspectIds, 'q', 'ask-btn', 'player'];
-  for (let i = 0; i < 3; i++) expectedOrder.push(`accuse-${i}`);
+  const expectedOrder = ['len', 'lpt', 'restart-btn', 'files-btn', ...suspectIds];
   for (let i = 0; i < expectedOrder.length; i++) {
     await pressTab();
     const cur = await activeId();
@@ -235,6 +234,8 @@ await runStep('lang-pt', async () => {
 await runStep('lang-en', async () => {
   await evaluate(`document.getElementById('len').focus()`);
   await pressEnter();
+  await waitFor(async () => (await evaluate(`document.documentElement.lang`)) === 'en');
+  await waitFor(async () => (await evaluate(`document.getElementById('question-label').textContent`)) === 'Question');
   let la = await evaluate(`document.documentElement.lang`);
   let ql = await evaluate(`document.getElementById('question-label').textContent`);
   if (la !== 'en' || ql !== 'Question') throw new Error(`la=${la}, ql=${ql}`);
@@ -242,6 +243,9 @@ await runStep('lang-en', async () => {
 
 // 6. Accuse
 await runStep('verdict-then-credits', async () => {
+  await evaluate(`document.getElementById('step-accuse').click()`);
+  await waitFor(async () => (await evaluate(`document.getElementById('accuse-stage').classList.contains('is-on')`)) === true);
+  await waitFor(async () => (await evaluate(`document.querySelectorAll('#accuse-buttons button').length`)) >= 3);
   await evaluate(`document.getElementById('player').value = ''`);
   await evaluate(`document.getElementById('player').focus()`);
   await pressEnter();
@@ -311,6 +315,7 @@ await runStep('accessible-names', async () => {
 
 // 8. Accessibility: No Focus Trap
 await runStep('no-focus-trap', async () => {
+  await evaluate(`document.getElementById('step-accuse').click()`);
   await evaluate(`document.getElementById('player').focus()`);
   for(let i=0; i<10; i++) {
     const before = await activeId();

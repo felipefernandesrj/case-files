@@ -1,0 +1,55 @@
+Write the complete stylesheet public/css/game.css for the Case Files gothic-noir web player, version visual V3. Full file, not a patch.
+
+Output ONLY:
+<<<FILE public/css/game.css>>>
+...file...
+<<<END>>>
+
+You MUST close the file and emit <<<END>>>. Keep the file compact (about 400-550 lines), no long comments.
+
+Tokens:
+--cf-ink:#0C0B0A; --cf-ink-soft:#1A1714; --cf-paper:#E8DCC8; --cf-paper-bright:#F3EADF; --cf-folder:#C4A882; --cf-folder-dark:#8C6F4A; --cf-lamp:#E8B86D; --cf-lamp-dim:#B8894A; --cf-seal:#8C2F2B; --cf-seal-bright:#B54741; --cf-text:#F3EADF; --cf-text-dim:#C9BFAE; --cf-text-on-paper:#1A1714; --cf-line:rgba(232,184,109,.35); --cf-accent:var(--cf-lamp); --cf-focus:#E8B86D; --cf-bg:var(--cf-ink); --cf-blotter:#241F1A; --touch-min:44px; fonts: Palatino/Georgia display, ui-sans buttons, Courier stamp. html[data-accent="salon"] warmer; [data-accent="rails"] steel #8FA4B0 on #0E1418.
+
+Chrome: .icon 24px, fill none, stroke currentColor 1.75, round caps, aria-hidden. .with-icon inline-flex gap 8px. Buttons min 44px, focus 3px lamp outline. WCAG AA: light #F3EADF on near-black; paper text #1A1714 on paper. .room and .room[aria-pressed="true"] keep a dark scrim and light labels (never ink text, never solid lamp fill). .ev-empty paper with dark text.
+
+Layout — one step at a time in #play (all breakpoints). #play > .panel {display:none} except .panel.is-on.
+
+body[data-view="play"][data-layout="desktop"], same for tablet: html/body height 100%; overflow:hidden. .shell is a column flex, height 100%, width 100%, max-width 1280px, margin auto, padding-inline 16px.
+
+Desktop (body[data-layout="desktop"], width >=1024). Must fit 1280x800 with NO page scroll.
+#desk is grid: 240px 1fr 176px; rows 1fr; areas:
+"summary stage pins"
+"suspects stage pins"
+"steps stage pins"
+#case-summary grid-area summary (compact stamp + short intro, overflow hidden).
+#suspects grid-area suspects; always visible on desktop even if not .is-on; list is compact ROWS: button flex row, .portrait 36px, width 100%.
+#steps grid-area steps; vertical or wrap tabs, position static, not a bottom bar; each tab icon+short label, flex direction row.
+#play grid-area stage; min-height 0; overflow auto; only the active step shows.
+#rail-right grid-area pins; hidden when [hidden].
+header sticky, compact (~52px), not growing the page.
+#best-hud small one-line chip in the header. #best-section lives inside the Accuse stage, not a floating full-width box under the playfield.
+
+Tablet (body[data-layout="tablet"], 768-1023). Must fit 768x1024 without large empty gaps.
+No left rail (#case-summary and #rail-right hidden). #suspects is a stage panel (only when .is-on).
+#desk is a column: #play flex 1 min-height 0 overflow auto; #steps is a SINGLE row at the bottom (position fixed or in-flow at the end), one row only, no second Files/Board row.
+Rooms: 2-column grid. Suspects can be 2 columns of compact cards. Padding-bottom on #play equals dock height + safe-area.
+
+Phone (body[data-layout="phone"], <768). Same step model.
+#case-summary and #rail-right hidden. #suspects only when .is-on.
+--dock-h: calc(56px + env(safe-area-inset-bottom, 0px));
+#steps is position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:min(1280px,100%); one row of 6 equal tabs; icon above short label; font-size ~0.62rem; no ellipsis if possible; overflow visible.
+#play padding-bottom: var(--dock-h). Content must never sit under the dock.
+#files-btn is in the header (icon). There is no Files/Board second dock row and no #board-btn.
+[data-layout="phone"] #restart-btn [data-label] visually hidden; icon-only 44px button.
+
+Cabinet: body[data-view="cabinet"] hides #desk and #steps. #cabinet is a short folder picker (2 columns from 768 up), no min-height 100vh gap, no fixed dock. Header still visible (Files in header). Folder cards paper/folder colors, 44px hit.
+
+Locations: #locations[data-loc="time"] hides #rooms; [data-loc="rooms"] hides #timeline (unless [hidden]). #loc-switch is a compact two-button toggle.
+
+Timetable railway (all widths, especially 768/1280): #timeline-rail is a VERTICAL column, not a wrapping horizontal chip row. A 2px lamp-tinted line down the left. Each .tl-stop is full width, text left, a 10px circle on the line, no min-width 140px. Hide .tl-stop .icon if the CSS bullet is used.
+
+#conversation: paper log, ask row, questions-used with icons. #board cork stripe, ev-tiles paper. #verdict paper with seal border (.ok greener). #err dark red alert. Accuse stage can internally scroll if needed but should be compact (name, buttons, verdict, then best/scores/credits).
+
+html[data-accent] as above. prefers-reduced-motion: no animation/transition.
+
+Do not mention git, SHA, branch, or night-train in comments or CSS content strings.

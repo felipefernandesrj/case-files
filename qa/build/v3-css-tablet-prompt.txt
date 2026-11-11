@@ -1,0 +1,56 @@
+Edit public/css/game.css. One literal replace. Copy OLD byte-for-byte. Separator is a line of exactly five equals signs =====.
+
+On tablet, #steps is a sibling before #play in the DOM, so a column flex would put the tabs above the stage. Put the stage first (order) and the tabs at the bottom. Fit 768x1024 without page scroll or large gaps. Header is 52px.
+
+<<<REPLACE public/css/game.css>>>
+@media (min-width: 768px) and (max-width: 1023px) {
+  #desk {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  #case-summary, #rail-right { display: none; }
+  #suspects { display: none; }
+  #suspects.is-on { display: block; }
+  #play { flex: 1; min-height: 0; overflow: auto; }
+  #steps {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    background: var(--cf-ink-soft);
+    gap: 4px;
+    overflow-x: auto;
+  }
+}
+=====
+@media (min-width: 768px) and (max-width: 1023px) {
+  body[data-view="play"][data-layout="tablet"] {
+    height: 100vh;
+    overflow: hidden;
+  }
+  #desk {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    height: auto;
+  }
+  #case-summary, #rail-right { display: none; }
+  #suspects { display: none; }
+  #suspects.is-on { display: block; }
+  #play { flex: 1; min-height: 0; overflow: auto; order: 1; }
+  #steps {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    background: var(--cf-ink-soft);
+    gap: 4px;
+    overflow-x: auto;
+    order: 2;
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+  #steps button { flex: 1; }
+}
+<<<END>>>

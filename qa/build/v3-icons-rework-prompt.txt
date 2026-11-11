@@ -1,0 +1,17 @@
+Write the complete file public/assets/icons.svg again. Your previous output was cut off at i-ev-necklace because the path data was too long.
+
+Output ONLY:
+<<<FILE public/assets/icons.svg>>>
+...entire file...
+<<<END>>>
+
+Rules that keep the file short (mandatory):
+- One root <svg xmlns="http://www.w3.org/2000/svg">, then 45 <symbol>s, then close </svg>.
+- Each symbol uses viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round".
+- At most two <path>, <circle> or <rect> per symbol. Each d="..." under 70 characters. No long arc commands, no tiny decimals, no lucene-style 20-point outlines.
+- You MUST finish all 45 ids and emit <<<END>>>.
+
+Ids in this exact order:
+i-briefing (folder), i-locations (pin), i-suspects (silhouette), i-talk (bubble), i-board (board+pin), i-accuse (gavel), i-score (seal), i-files (drawer), i-pin (pin), i-close (X), i-lang (globe), i-restart (arc arrow), i-role-conductor (baton), i-role-violinist (violin), i-role-janitor (keys), i-role-train-conductor (cap), i-role-jeweller (gem), i-role-porter (bag), i-role-chef (cloche, not a sun), i-loc-academy (facade), i-loc-office (desk), i-loc-instrument (case), i-loc-rehearsal (stands), i-loc-hallway (door), i-loc-train (carriage), i-loc-dining (cloche+plate), i-loc-sleeper (bed), i-loc-luggage (suitcase), i-loc-tunnel (arch), i-loc-platform (lamp), i-ev-fingerprint (loops), i-ev-key, i-ev-ticket, i-ev-letter, i-ev-necklace, i-ev-violin, i-ev-watch, i-ev-footprint, i-tl-marker (diamond), i-tl-gap (dashed line), i-questions (question mark), i-locked, i-unlocked, i-verdict-ok (check), i-verdict-wrong (X).
+
+No text in the drawings. No night-train, caseId, CASE_ID, SHA, or commit strings.

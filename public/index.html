@@ -7,261 +7,305 @@
 <link rel="stylesheet" href="/css/game.css">
 </head>
 <body data-view="play" data-layout="desktop">
-<svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true" focusable="false">
+<svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <symbol id="i-briefing" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 8h6l2 2h10v9.5H3z"/><path d="M3 8V5.5h6l2 2"/><path d="M8 14h8M8 17h5"/>
+    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+    <line x1="12" y1="11" x2="12" y2="17" />
   </symbol>
   <symbol id="i-locations" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
   </symbol>
   <symbol id="i-suspects" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="8" r="3.2"/><path d="M5 19.5c.6-3.6 3.2-5.5 7-5.5s6.4 1.9 7 5.5"/>
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
   </symbol>
   <symbol id="i-talk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 6.5h14v9H9l-4 3.5z"/>
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
   </symbol>
   <symbol id="i-board" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="3.5" y="4" width="17" height="13.5" rx="1"/><path d="M8 8.5h8M8 12h5"/><circle cx="17" cy="19" r="1.4"/><path d="M17 17.6V16"/>
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+    <circle cx="12" cy="12" r="2" />
   </symbol>
   <symbol id="i-accuse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M8 13.5h10l-1.2 6H9.2z"/><path d="M6 13.5h14"/><path d="M11 4v7M11 4l5 2.2v5"/>
+    <path d="M10 2l4 4 4-4" />
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6" />
   </symbol>
   <symbol id="i-score" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="8"/><path d="M12 6.5v11M8 8.5l8 7M16 8.5l-8 7"/>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v12M8 10l4 2 4-2" />
   </symbol>
   <symbol id="i-files" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 9h7l1.5 2H21v8.5H3z"/><path d="M3 9V6h7l1.5 2"/>
+    <path d="M4 20h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H8l-4 4v12a2 2 0 0 0 2 2z" />
+    <line x1="12" y1="12" x2="12" y2="20" />
   </symbol>
   <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 16.5V21"/><path d="M8.5 10.5l3.5 6 3.5-6"/><circle cx="12" cy="8" r="3"/>
+    <circle cx="12" cy="12" r="1" />
+    <path d="M12 12l-4-8M12 12l4-8M12 12l0 10" />
   </symbol>
   <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M6 6l12 12M18 6L6 18"/>
+    <path d="M18 6L6 18M6 6l12 12" />
   </symbol>
   <symbol id="i-lang" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 3 3.6 6 3.6 8.5S14.4 17 12 20.5C9.6 17 8.4 14 8.4 12S9.6 6.5 12 3.5z"/>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z" />
   </symbol>
   <symbol id="i-restart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M7 7.5 4.5 5 7 2.5"/><path d="M4.5 5h9.2a6.3 6.3 0 1 1-1.8 12.3"/>
+    <path d="M23 4v6h-6M23 4l-9 9M23 4l-4 4" />
+    <path d="M1 12a11 11 0 0 1 11-11" />
   </symbol>
   <symbol id="i-role-conductor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M8 20V7.5M8 7.5c0-2 1.8-3.5 4-3.5"/><path d="M11 20h6M12.5 10.5h5v3h-5z"/>
+    <line x1="4" y1="18" x2="20" y2="18" />
+    <line x1="12" y1="6" x2="12" y2="18" />
   </symbol>
   <symbol id="i-role-violinist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M8 16.5c0 2 1.6 3.5 4 3.5s4-1.5 4-3.5c0-2.8-4-8-4-11.5 0 3.5-4 8.7-4 11.5z"/><path d="M12 5.5V2.5M9.5 19.5h5"/>
+    <path d="M7 4l3 16h4l3-16H7z" />
+    <path d="M10 20v4M14 20v4" />
   </symbol>
   <symbol id="i-role-janitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 3.5v11"/><path d="M7 20.5c0-3 2.2-5 5-5s5 2 5 5"/><path d="M8.5 14.5h7"/>
+    <circle cx="7" cy="7" r="2" />
+    <circle cx="17" cy="17" r="2" />
+    <path d="M7 7l3 3M17 17l-3-3" />
   </symbol>
   <symbol id="i-role-train-conductor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="6" y="8" width="12" height="6.5" rx="1"/><path d="M8 8V6h8v2M7 14.5v3h10v-3M9 18.5v2M15 18.5v2"/>
+    <path d="M2 18h20M6 18v-6a3 3 0 0 1 6 0v6M16 18v-6a3 3 0 0 1 6 0v6" />
   </symbol>
   <symbol id="i-role-jeweller" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M8 9.5 12 4.5l4 5-4 10z"/><path d="M8 9.5h8"/>
+    <path d="M12 2l3 5h5l-4 3 2 5-5-3-5 3 2-5-4-3h5z" />
   </symbol>
   <symbol id="i-role-porter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="7" y="9" width="10" height="9" rx="1"/><path d="M9 9V7.5a3 3 0 0 1 6 0V9M7 13h10"/>
+    <rect x="6" y="6" width="12" height="12" />
+    <path d="M6 12h12M12 6v12" />
   </symbol>
   <symbol id="i-role-chef" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M8 11c-1.6 0-2.5-1.5-2.5-3S7 5 8.5 5c.3-1.5 1.5-2.5 3.5-2.5S15.2 3.5 15.5 5c1.5 0 3 .8 3 3s-.9 3-2.5 3"/><path d="M8 11v9h8v-9M9.5 20v1.5h5V20"/>
+    <path d="M12 2c-4 0-7 3-7 7v7c0 2 2 4 4 4h6c2 0 4-2 4-4V9c0-4-3-7-7-7z" />
+    <path d="M6 16h12" />
   </symbol>
   <symbol id="i-loc-academy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 20h16M6 20V10l6-5 6 5v10"/><path d="M10 20v-5h4v5"/>
+    <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4" />
   </symbol>
   <symbol id="i-loc-office" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="5" y="6" width="14" height="14" rx="0.5"/><path d="M5 10h14M9 6V4h6v2M9 14h2M13 14h2M9 17h2M13 17h2"/>
+    <rect x="3" y="12" width="18" height="8" />
+    <path d="M12 12V4" />
   </symbol>
   <symbol id="i-loc-instrument" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="6" y="7" width="12" height="13" rx="1"/><path d="M9 7V5.5h6V7"/><circle cx="12" cy="14" r="2.2"/>
+    <rect x="4" y="4" width="16" height="16" />
+    <path d="M4 12h16" />
   </symbol>
   <symbol id="i-loc-rehearsal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 18V11l4-2v9M11 18V9l4-2v11M17 18V8l2-1"/><path d="M4 18h16"/>
+    <path d="M4 20h16M4 16h16M6 16v-8" />
   </symbol>
   <symbol id="i-loc-hallway" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 20V8l8-4 8 4v12"/><path d="M10 20v-6h4v6"/>
+    <rect x="8" y="4" width="8" height="16" />
+    <path d="M8 12h8" />
   </symbol>
   <symbol id="i-loc-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="3.5" y="10" width="17" height="7" rx="1.5"/><path d="M6.5 10V8h6v2M8 17.5v2M16 17.5v2M3.5 13.5H21"/>
+    <rect x="2" y="6" width="20" height="12" />
+    <circle cx="6" cy="18" r="2" />
+    <circle cx="18" cy="18" r="2" />
   </symbol>
   <symbol id="i-loc-dining" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 18h16M6 16h12"/><path d="M7 16c0-4 2.2-7 5-7s5 3 5 7"/><circle cx="12" cy="8" r="1"/>
+    <circle cx="12" cy="12" r="8" />
+    <path d="M12 12v6M8 12h8" />
   </symbol>
   <symbol id="i-loc-sleeper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 17.5V11h8.5v6.5M12.5 14H20v3.5"/><path d="M3 17.5h18M7 11V8.5h4V11"/>
+    <path d="M2 20V4h18v16M2 12h18" />
   </symbol>
   <symbol id="i-loc-luggage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="5" y="8" width="14" height="11" rx="1"/><path d="M9 8V6h6v2M5 12h14"/>
+    <rect x="4" y="7" width="16" height="13" />
+    <path d="M9 7V4h6v3" />
   </symbol>
   <symbol id="i-loc-tunnel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 19.5V12A9 9 0 0 1 21 12v7.5"/><path d="M3 19.5h18M12 12v7.5"/>
+    <path d="M2 22V10a10 10 0 0 1 20 0v12" />
   </symbol>
   <symbol id="i-loc-platform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 17h18M5 17V9l14 3v5"/><path d="M3 20h18"/>
+    <path d="M4 20h16M12 20V4" />
+    <circle cx="12" cy="4" r="2" />
   </symbol>
   <symbol id="i-ev-fingerprint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 20.5c0-6 6-6 6-11.5A6 6 0 0 0 6 9.5"/><path d="M12 20.5c0-4.2-3.5-4.5-3.5-9"/><path d="M12 20.5c0-2.6 2.2-3 2.2-6"/>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 3v18M3 12h18" />
   </symbol>
   <symbol id="i-ev-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="8" cy="14" r="3.5"/><path d="M11.2 12.8 20 5.5M17 5.5h3v3"/>
+    <circle cx="7" cy="7" r="3" />
+    <path d="M18 8l-4 4M14 4l4 4" />
   </symbol>
   <symbol id="i-ev-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 8.5h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/><path d="M9 8.5v11"/>
+    <rect x="3" y="6" width="18" height="12" />
+    <path d="M3 10h2M19 10h2M3 14h2M19 14h2" />
   </symbol>
   <symbol id="i-ev-letter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="4" y="6" width="16" height="12" rx="1"/><path d="M4 8l8 6 8-6"/>
+    <path d="M4 4h16v16H4z" />
+    <path d="M4 8h16M12 8v12" />
   </symbol>
   <symbol id="i-ev-necklace" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M7 8c0-3 2.2-5 5-5s5 2 5 5"/><circle cx="12" cy="16" r="3.5"/><path d="M7 8c1 4 2.5 5.5 5 5.5S16 12 17 8"/>
+    <path d="M4 4c8 0 16 8 16 12" />
+    <circle cx="12" cy="16" r="2" />
   </symbol>
   <symbol id="i-ev-violin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M9 15c0 2.4 1.5 4 3 4s3-1.6 3-4c0-3-3-7.5-3-11 0 3.5-3 8-3 11z"/><path d="M12 4V2.5M10 18.5h4"/>
+    <path d="M12 2v20M8 6h8M8 18h8" />
   </symbol>
   <symbol id="i-ev-watch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="13" r="7"/><path d="M12 13V9.5M12 13l3 2M9 3.5h6"/>
+    <circle cx="12" cy="12" r="8" />
+    <path d="M12 8v4l3 2" />
   </symbol>
   <symbol id="i-ev-footprint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <ellipse cx="11" cy="8" rx="3" ry="4"/><circle cx="15.2" cy="14.2" r="1.1"/><circle cx="13.6" cy="16.4" r="1.1"/><circle cx="11.2" cy="17.4" r="1.1"/><circle cx="8.7" cy="16.2" r="1.1"/>
+    <path d="M12 2v20M8 8h8M8 12h8M8 16h8" />
   </symbol>
   <symbol id="i-tl-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v4M12 16.5v4"/>
+    <path d="M12 2l4 6h-8z" />
+    <path d="M12 22l-4-6h8z" />
   </symbol>
   <symbol id="i-tl-gap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="3.5"/><path d="M5 12h14"/>
+    <line x1="2" y1="12" x2="22" y2="12" stroke-dasharray="4 4" />
   </symbol>
   <symbol id="i-questions" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M9 8.5a3 3 0 1 1 3.3 3.3C11.2 13 11 14 11 15"/><path d="M11 18.5h.1"/><circle cx="12" cy="12" r="8.5"/>
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+    <line x1="12" y1="17" x2="12" y2="21" />
   </symbol>
   <symbol id="i-locked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="6" y="11" width="12" height="9" rx="1"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/>
+    <rect x="7" y="11" width="10" height="8" />
+    <path d="M12 11V7a5 5 0 0 1 10 0v4" />
   </symbol>
   <symbol id="i-unlocked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="6" y="11" width="12" height="9" rx="1"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0"/>
+    <rect x="7" y="11" width="10" height="8" />
+    <path d="M12 11V7a5 5 0 0 0-10 0v4" />
   </symbol>
   <symbol id="i-verdict-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="8.5"/><path d="M8 12.5 11 16l5.5-7"/>
+    <path d="M20 6L9 17l-5-5" />
   </symbol>
   <symbol id="i-verdict-wrong" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="8.5"/><path d="M9 9l6 6M15 9l-6 6"/>
+    <path d="M18 6L6 18M6 6l12 12" />
   </symbol>
 </svg>
 <div class="shell">
-<header>
-  <h1 id="title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="">Case Files</span></h1>
-  <div class="hud-tools">
-    <button id="len" aria-pressed="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">EN</span></button>
-    <button id="lpt" aria-pressed="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">PT</span></button>
-    <button id="restart-btn" type="button" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-restart"></use></svg> <span data-label="">Start over</span></button>
+  <header>
+    <h1 id="title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="">Case Files</span></h1>
+    <p id="best-hud" class="best-hud" aria-live="polite"></p>
+    <div class="hud-tools">
+      <button id="len" aria-pressed="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">EN</span></button>
+      <button id="lpt" aria-pressed="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">PT</span></button>
+      <button id="restart-btn" type="button" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-restart"></use></svg> <span data-label="">Start over</span></button>
+      <button id="files-btn" class="with-icon" aria-label="Files"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Files</span></button>
+    </div>
+  </header>
+
+  <section id="cabinet" hidden>
+    <p class="stamp" id="cabinet-stamp">Field office</p>
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div>
+  </section>
+
+  <div id="desk">
+    <section id="case-summary">
+      <p class="stamp" id="summary-stamp">Case file</p>
+      <div id="summary-intro"></div>
+    </section>
+
+    <section id="suspects" class="panel" data-panel="suspects">
+      <h2 id="suspects-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-label="Suspects">Suspects</span></h2>
+      <div id="suspect-buttons"></div>
+    </section>
+
+    <nav id="steps" role="tablist" aria-label="Case steps">
+      <button type="button" role="tab" id="step-briefing" data-step="briefing" aria-selected="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-briefing"></use></svg> <span data-step-label="briefing">Brief</span></button>
+      <button type="button" role="tab" id="step-locations" data-step="locations" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-step-label="locations">Places</span></button>
+      <button type="button" role="tab" id="step-suspects" data-step="suspects" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-step-label="suspects">People</span></button>
+      <button type="button" role="tab" id="step-talk" data-step="talk" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-step-label="talk">Ask</span></button>
+      <button type="button" role="tab" id="step-board" data-step="board" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-step-label="board">Board</span></button>
+      <button type="button" role="tab" id="step-accuse" data-step="accuse" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-step-label="accuse">Accuse</span></button>
+    </nav>
+
+    <main id="play">
+      <section id="briefing" class="panel is-on" data-panel="briefing">
+        <p class="stamp" id="brief-stamp">Case file</p>
+        <div id="intro"></div>
+      </section>
+
+      <section id="dossier" class="panel" data-panel="suspects" aria-labelledby="dossier-heading">
+        <h2 id="dossier-heading" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-label="Suspects">Suspects</span></h2>
+        <div id="dossier-body"></div>
+      </section>
+
+      <section id="conversation" class="panel" data-panel="talk">
+        <h2 id="conversation-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="Conversation">Conversation</span></h2>
+        <div id="log" role="log" aria-live="polite"></div>
+        <form id="ask-form">
+          <label for="q" id="question-label">Question</label>
+          <div class="ask-row">
+            <input type="text" id="q" maxlength="500" required>
+            <button type="submit" id="ask-btn" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="Ask">Ask</span></button>
+          </div>
+        </form>
+        <p id="questions-used" aria-live="polite"></p>
+      </section>
+
+      <section id="locations" class="panel" data-panel="locations" data-loc="rooms" aria-labelledby="rooms-title">
+        <div id="loc-switch" hidden>
+          <button id="loc-time" data-loc-view="time" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-tl-marker"></use></svg> <span data-label="Time">Time</span></button>
+          <button id="loc-rooms" data-loc-view="rooms" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-label="Rooms">Rooms</span></button>
+        </div>
+        <section id="timeline" hidden aria-labelledby="timeline-title">
+          <h2 id="timeline-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-tl-marker"></use></svg> <span data-label="Timetable">Timetable</span></h2>
+          <div id="timeline-rail"></div>
+        </section>
+        <section id="rooms" aria-labelledby="rooms-title">
+          <h2 id="rooms-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-label="Locations">Locations</span></h2>
+          <div id="room-buttons"></div>
+        </section>
+      </section>
+
+      <section id="board" class="panel" data-panel="board" aria-labelledby="board-title">
+        <h2 id="board-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="Evidence board">Evidence board</span></h2>
+        <div id="board-grid"></div>
+      </section>
+
+      <section id="accuse-stage" class="panel" data-panel="accuse">
+        <div id="player-section">
+          <label for="player" id="player-label">Your name</label>
+          <input type="text" id="player" maxlength="24" placeholder="anon">
+        </div>
+        <div id="accuse-section">
+          <h2 id="accuse-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-label="Accuse">Accuse</span></h2>
+          <div id="accuse-buttons"></div>
+        </div>
+        <div id="verdict" role="status" aria-live="assertive" tabindex="-1" hidden></div>
+        <div id="err" role="alert" hidden></div>
+        <section id="best-section" aria-labelledby="best-title">
+          <h2 id="best-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="Best"></span></h2>
+          <p id="best-en"></p>
+          <p id="best-pt"></p>
+          <button id="reset-best" type="button">Reset Best</button>
+          <p id="best-status" role="status"></p>
+        </section>
+        <section id="scores-section" hidden>
+          <h2 id="scores-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="Scoreboard">Scoreboard</span></h2>
+          <table>
+            <caption id="scores-caption">Top 10 Players</caption>
+            <thead>
+              <tr>
+                <th id="th-player">Player</th>
+                <th id="th-score">Score</th>
+                <th id="th-questions">Questions</th>
+              </tr>
+            </thead>
+            <tbody id="scores-body"></tbody>
+          </table>
+        </section>
+        <section id="credits" aria-labelledby="credits-title" tabindex="-1" hidden>
+          <h2 id="credits-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="Credits">Credits</span></h2>
+          <ul id="credits-list"></ul>
+          <p id="credits-note"></p>
+        </section>
+      </section>
+    </main>
+
+    <aside id="rail-right" hidden>
+      <h2 id="pin-rail-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> <span data-label="Pinned">Pinned</span></h2>
+      <div id="pin-rail"></div>
+    </aside>
   </div>
-</header>
-
-<section id="cabinet" hidden>
-  <p class="stamp" id="cabinet-stamp">Field office</p>
-  <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
-  <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
-  <div id="cabinet-list"></div>
-</section>
-
-<main id="play">
-  <section id="briefing" class="panel is-on" data-panel="briefing" aria-labelledby="title">
-    <p class="stamp" id="brief-stamp">Case file</p>
-    <section id="intro"></section>
-  </section>
-
-
-  <section id="suspects" class="panel" data-panel="suspects">
-    <h2 id="suspects-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-label="">Suspects</span></h2>
-    <div id="suspect-buttons"></div>
-  </section>
-
-  <section id="conversation" class="panel" data-panel="talk">
-    <h2 id="conversation-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="">Conversation</span></h2>
-    <div id="log" role="log" aria-live="polite"></div>
-    <form id="ask-form">
-      <label for="q" id="question-label">Question</label>
-      <div class="ask-row">
-        <input type="text" id="q" maxlength="500" required>
-        <button type="submit" id="ask-btn" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="">Ask</span></button>
-      </div>
-    </form>
-    <p id="questions-used" aria-live="polite"></p>
-  </section>
-
-  <section id="player-section" class="panel" data-panel="accuse">
-    <label for="player" id="player-label">Your name</label>
-    <input type="text" id="player" maxlength="24" placeholder="anon">
-  </section>
-
-  <section id="accuse-section" class="panel" data-panel="accuse">
-    <h2 id="accuse-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-label="">Accuse</span></h2>
-    <div id="accuse-buttons"></div>
-  </section>
-
-
-  <section id="rooms" class="panel" data-panel="locations" aria-labelledby="rooms-title">
-    <h2 id="rooms-title" class="visually-in-section with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-label="">Locations</span></h2>
-    <div id="room-buttons"></div>
-  </section>
-  <style>
-    #rooms { display: grid; }
-    #room-buttons { display: contents; }
-    #rooms-title { margin: 0 0 0.5rem; grid-column: 1 / -1; }
-  </style>
-
-  <section id="timeline" class="panel" hidden data-panel="locations" aria-labelledby="timeline-title">
-    <h2 id="timeline-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-tl-marker"></use></svg> <span data-label="">Timetable</span></h2>
-    <div id="timeline-rail"></div>
-  </section>
-
-  <section id="board" class="panel" data-panel="board" aria-labelledby="board-title">
-    <h2 id="board-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="">Evidence board</span></h2>
-    <div id="board-grid"></div>
-  </section>
-
-  <section id="verdict" class="panel" data-panel="accuse" role="status" aria-live="assertive" tabindex="-1" hidden></section>
-  <section id="err" class="panel" data-panel="accuse" role="alert" hidden></section>
-
-  <section id="best-section" class="panel" data-panel="accuse" aria-labelledby="best-title">
-    <h2 id="best-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label=""></span></h2>
-    <p id="best-en"></p>
-    <p id="best-pt"></p>
-    <button id="reset-best" type="button">Reset Best</button>
-    <p id="best-status" role="status"></p>
-  </section>
-  <section id="scores-section" class="panel" data-panel="accuse" hidden>
-    <h2 id="scores-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="">Scoreboard</span></h2>
-    <table>
-      <caption id="scores-caption">Top 10 Players</caption>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th id="th-player">Player</th>
-          <th id="th-score">Score</th>
-          <th id="th-questions">Questions</th>
-        </tr>
-      </thead>
-      <tbody id="scores-body"></tbody>
-    </table>
-  </section>
-
-  <section id="credits" class="panel" data-panel="accuse" aria-labelledby="credits-title" tabindex="-1" hidden>
-    <h2 id="credits-title"></h2>
-    <ul id="credits-list"></ul>
-    <p id="credits-note"></p>
-  </section>
-</main>
-
-<nav id="dock" aria-label="Case tools">
-  <div id="steps" role="tablist" aria-label="Case steps">
-    <button type="button" role="tab" id="step-briefing" data-step="briefing" aria-selected="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-briefing"></use></svg> <span data-step-label="briefing">Briefing</span></button>
-    <button type="button" role="tab" id="step-locations" data-step="locations" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-step-label="locations">Locations</span></button>
-    <button type="button" role="tab" id="step-suspects" data-step="suspects" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-step-label="suspects">Suspects</span></button>
-    <button type="button" role="tab" id="step-talk" data-step="talk" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-step-label="talk">Interrogate</span></button>
-    <button type="button" role="tab" id="step-board" data-step="board" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-step-label="board">Board</span></button>
-    <button type="button" role="tab" id="step-accuse" data-step="accuse" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-step-label="accuse">Accuse</span></button>
-  </div>
-  <button type="button" id="files-btn" class="icon-btn with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Files</span></button>
-  <button type="button" id="board-btn" class="icon-btn with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="">Board</span></button>
-</nav>
 </div>
 
 <script type="module">
@@ -285,8 +329,8 @@ const UI = {
     emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
     cabinetLead: 'Two closed rooms. Open a file, ask the questions, name who did it.',
     cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
-    unpin: 'Remove pin',
-    steps: { briefing: 'Briefing', locations: 'Locations', suspects: 'Suspects', talk: 'Interrogate', board: 'Board', accuse: 'Accuse' }
+    unpin: 'Remove pin', pins: 'Pins',
+    steps: { briefing: 'Brief', locations: 'Places', suspects: 'People', talk: 'Ask', board: 'Board', accuse: 'Accuse' }
   },
   pt: {
     pack: 'Dossiês', files: 'Arquivos', board: 'Quadro', boardTitle: 'Quadro de evidências',
@@ -294,8 +338,8 @@ const UI = {
     emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
     cabinetLead: 'Dois cômodos fechados. Abra um dossiê, faça as perguntas, diga quem foi.',
     cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
-    unpin: 'Retirar',
-    steps: { briefing: 'Dossiê', locations: 'Locais', suspects: 'Suspeitos', talk: 'Interrogar', board: 'Quadro', accuse: 'Acusar' }
+    unpin: 'Retirar', pins: 'Alfinetes',
+    steps: { briefing: 'Caso', locations: 'Locais', suspects: 'Pessoas', talk: 'Interrogar', board: 'Quadro', accuse: 'Acusar' }
   }
 };
 
@@ -358,18 +402,54 @@ function setText(elOrId, text) {
 }
 function applyLayout() {
   const w = window.innerWidth;
-  document.body.dataset.layout = w >= 1280 ? 'desktop' : (w >= 768 ? 'tablet' : 'phone');
+  document.body.dataset.layout = w >= 1024 ? 'desktop' : (w >= 768 ? 'tablet' : 'phone');
 }
 applyLayout();
 window.addEventListener('resize', applyLayout);
 function showStep(name) {
   if (!name) return;
-  document.querySelectorAll('#play > .panel').forEach(el => {
+  document.body.dataset.step = name;
+  document.querySelectorAll('[data-panel]').forEach(el => {
     el.classList.toggle('is-on', el.dataset.panel === name);
   });
   document.querySelectorAll('#steps [data-step]').forEach(b => {
     b.setAttribute('aria-selected', b.dataset.step === name ? 'true' : 'false');
   });
+  if (name === 'board' && typeof renderBoard === 'function') renderBoard();
+  if (name === 'suspects' && typeof renderDossier === 'function') renderDossier();
+}
+function setLocView(view) {
+  const loc = document.getElementById('locations');
+  if (!loc) return;
+  loc.dataset.loc = view;
+  const timeBtn = document.getElementById('loc-time');
+  const roomBtn = document.getElementById('loc-rooms');
+  if (timeBtn) timeBtn.setAttribute('aria-pressed', view === 'time' ? 'true' : 'false');
+  if (roomBtn) roomBtn.setAttribute('aria-pressed', view === 'rooms' ? 'true' : 'false');
+}
+function renderDossier() {
+  const body = document.getElementById('dossier-body');
+  if (!body || !caseData) return;
+  body.innerHTML = '';
+  const s = (caseData.suspects || []).find(x => x.id === selectedSuspect);
+  if (!s) {
+    body.textContent = lang === 'pt' ? 'Escolha um suspeito na lista.' : 'Choose a suspect from the list.';
+    return;
+  }
+  const face = document.createElement('span');
+  face.className = 'portrait';
+  face.setAttribute('aria-hidden', 'true');
+  face.textContent = initials(s.name);
+  const who = document.createElement('strong');
+  who.textContent = s.name;
+  const role = document.createElement('p');
+  role.className = 'role with-icon';
+  const iconId = ROLE_ICONS[s.id];
+  if (iconId) role.appendChild(iconSvg(iconId, 'icon badge-icon'));
+  role.appendChild(document.createTextNode(s.role || ''));
+  body.appendChild(face);
+  body.appendChild(who);
+  if (s.role) body.appendChild(role);
 }
 function syncTitle() {
   const pack = (UI[lang] && UI[lang].pack) || 'Case Files';
@@ -412,8 +492,16 @@ async function setLang(newLang) {
   setText('accuse-title', newLang === 'pt' ? 'Acusar' : 'Accuse');
   setText('restart-btn', LABELS[newLang].startOver);
   setText('files-btn', UI[newLang].files);
-  setText('board-btn', UI[newLang].board);
+  const filesBtn = document.getElementById('files-btn');
+  if (filesBtn) filesBtn.setAttribute('aria-label', UI[newLang].files);
   setText('board-title', UI[newLang].boardTitle);
+  setText('dossier-heading', newLang === 'pt' ? 'Suspeitos' : 'Suspects');
+  setText('summary-stamp', UI[newLang].briefStamp);
+  if (document.getElementById('pin-rail-title')) setText('pin-rail-title', UI[newLang].pins || (newLang === 'pt' ? 'Alfinetes' : 'Pins'));
+  const locTimeLab = document.querySelector('#loc-time [data-label]');
+  const locRoomLab = document.querySelector('#loc-rooms [data-label]');
+  if (locTimeLab) locTimeLab.textContent = UI[newLang].timeline;
+  if (locRoomLab) locRoomLab.textContent = UI[newLang].rooms;
   setText('rooms-title', UI[newLang].rooms);
   setText('timeline-title', UI[newLang].timeline);
   setText('cabinet-title', UI[newLang].pack);
@@ -486,6 +574,9 @@ function initials(name) {
 function renderCase() {
   if (!caseData) return;
   document.getElementById('intro').innerHTML = `<p>${caseData.intro}</p>`;
+  const sum = document.getElementById('summary-intro');
+  if (sum) sum.textContent = caseData.intro || '';
+  if (typeof renderDossier === 'function') renderDossier();
   syncTitle();
   document.documentElement.setAttribute('data-accent', caseData.file === 'violin' ? 'salon' : 'rails');
   const btnContainer = document.getElementById('suspect-buttons');
@@ -552,8 +643,11 @@ function renderTimeline() {
   const sec = document.getElementById('timeline');
   const rail = document.getElementById('timeline-rail');
   const items = (caseData && caseData.timeline) || [];
-  if (!items.length) { sec.hidden = true; rail.innerHTML = ''; return; }
+  const sw = document.getElementById('loc-switch');
+  if (!items.length) { sec.hidden = true; rail.innerHTML = ''; if (sw) sw.hidden = true; setLocView('rooms'); return; }
   sec.hidden = false;
+  if (sw) sw.hidden = false;
+  setLocView('time');
   rail.innerHTML = '';
   items.forEach(t => {
     const b = document.createElement('button');
@@ -571,7 +665,11 @@ function renderTimeline() {
 
 function renderBoard() {
   const grid = document.getElementById('board-grid');
+  const rail = document.getElementById('pin-rail');
+  const side = document.getElementById('rail-right');
   grid.innerHTML = '';
+  if (rail) rail.innerHTML = '';
+  if (side) side.hidden = pins.length === 0;
   if (!pins.length) {
     const empty = document.createElement('p');
     empty.className = 'ev-empty with-icon';
@@ -589,6 +687,16 @@ function renderBoard() {
     tile.setAttribute('aria-label', UI[lang].unpin + ': ' + p.label);
     tile.addEventListener('click', () => { pins.splice(i, 1); renderBoard(); });
     grid.appendChild(tile);
+    if (rail) {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'with-icon';
+      chip.appendChild(iconSvg(PIN_ICONS[p.id] || 'i-pin'));
+      chip.appendChild(document.createTextNode(p.label));
+      chip.setAttribute('aria-label', UI[lang].unpin + ': ' + p.label);
+      chip.addEventListener('click', () => { pins.splice(i, 1); renderBoard(); });
+      rail.appendChild(chip);
+    }
   });
 }
 
@@ -675,19 +783,17 @@ document.getElementById('files-btn').addEventListener('click', async () => {
   renderCabinet();
   showCabinet();
 });
-document.getElementById('board-btn').addEventListener('click', () => {
-  showPlay();
-  showStep('board');
-  renderBoard();
-  document.getElementById('board-title').focus?.();
-  document.getElementById('board').scrollIntoView({ block: 'nearest' });
-});
 document.getElementById('steps').addEventListener('click', (ev) => {
   const btn = ev.target.closest('[data-step]');
   if (!btn) return;
   showPlay();
   showStep(btn.dataset.step);
   if (btn.dataset.step === 'board') renderBoard();
+});
+const locSwitch = document.getElementById('loc-switch');
+if (locSwitch) locSwitch.addEventListener('click', (ev) => {
+  const b = ev.target.closest('[data-loc-view]');
+  if (b) setLocView(b.dataset.locView);
 });
 
 function selectSuspect(id) {
@@ -917,6 +1023,8 @@ function renderBest() {
   document.getElementById('reset-best').textContent = LABELS[lang].reset;
   document.getElementById('best-en').textContent = bestText('en', b.en, lang);
   document.getElementById('best-pt').textContent = bestText('pt', b.pt, lang);
+  const hud = document.getElementById('best-hud');
+  if (hud) hud.textContent = (lang === 'pt' ? b.pt : b.en) ? bestText(lang === 'pt' ? 'pt' : 'en', lang === 'pt' ? b.pt : b.en, lang) : '';
 }
 
 document.getElementById('reset-best').addEventListener('click', () => {

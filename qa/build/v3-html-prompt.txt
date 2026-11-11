@@ -1,0 +1,157 @@
+Replace the page shell in public/index.html (header through the dock), keeping the inline SVG sprite and the <script type="module"> untouched.
+
+Output ONLY one block:
+
+<<<REPLACE public/index.html>>>
+(the OLD text, copied byte-for-byte from EXTRACT below, including the final blank line)
+=====
+(the NEW shell you write)
+<<<END>>>
+
+The OLD side MUST be an exact copy of EXTRACT. Do not trim or re-indent it.
+
+NEW shell requirements (gothic-noir player, visual V3). Keep every existing id unless this list removes it. Do not write the strings night-train, caseId, or CASE_ID anywhere.
+
+1. header still has #title (icon + span data-label). Add <p id="best-hud" class="best-hud" aria-live="polite"></p>. hud-tools: #len, #lpt, #restart-btn (keep Start over in a data-label span), then move #files-btn here as icon+span, aria-label="Files". Do not put #files-btn in a dock.
+
+2. #cabinet stays, hidden, with #cabinet-stamp, #cabinet-title, #cabinet-lead, #cabinet-list. Do not add hidden to #best-section later.
+
+3. After cabinet, a wrapper <div id="desk"> containing, in this order:
+   - <section id="case-summary"> with <p class="stamp" id="summary-stamp">Case file</p> and <div id="summary-intro"></div>
+   - <section id="suspects" class="panel" data-panel="suspects"> with #suspects-title (icon i-suspects) and #suspect-buttons
+   - <nav id="steps" role="tablist" aria-label="Case steps"> with six role=tab buttons, class with-icon, ids step-briefing, step-locations, step-suspects, step-talk, step-board, step-accuse, data-step matching briefing/locations/suspects/talk/board/accuse, aria-selected true only on briefing. Each has svg.icon use href="#i-..." (i-briefing, i-locations, i-suspects, i-talk, i-board, i-accuse) and <span data-step-label="..."> short EN labels: Brief, Places, People, Ask, Board, Accuse.
+   - <main id="play"> with these panels only:
+     * #briefing.panel.is-on data-panel="briefing": #brief-stamp, #intro
+     * #dossier.panel data-panel="suspects" aria-labelledby="dossier-heading": h2#dossier-heading (icon i-suspects, span data-label Suspects), #dossier-body
+     * #conversation.panel data-panel="talk": #conversation-title, #log (role=log aria-live=polite), form#ask-form with label#question-label, .ask-row input#q, button#ask-btn (icon i-talk), p#questions-used aria-live=polite
+     * #locations.panel data-panel="locations" data-loc="rooms": #loc-switch (hidden) with two buttons #loc-time data-loc-view="time" and #loc-rooms data-loc-view="rooms" (icons i-tl-marker and i-locations, spans data-label); then #timeline (hidden, aria-labelledby=timeline-title) with #timeline-title and #timeline-rail; then #rooms (aria-labelledby=rooms-title) with #rooms-title and #room-buttons
+     * #board.panel data-panel="board": #board-title, #board-grid
+     * #accuse-stage.panel data-panel="accuse" wrapping: #player-section (label#player-label, input#player), #accuse-section (h2#accuse-title, #accuse-buttons), #verdict (role=status aria-live=assertive tabindex=-1 hidden), #err (role=alert hidden), #best-section (NO hidden attribute, aria-labelledby=best-title; h2#best-title, p#best-en, p#best-pt, button#reset-best, p#best-status role=status), #scores-section (hidden; title, table with #scores-caption, #th-player, #th-score, #th-questions, tbody#scores-body), #credits (aria-labelledby=credits-title tabindex=-1 hidden; #credits-title, ul#credits-list, p#credits-note)
+   - <aside id="rail-right" hidden> with h2#pin-rail-title (icon i-pin) and #pin-rail
+   Close #desk, then close .shell. Do not add a bottom #dock. Do not include #board-btn.
+
+4. All icons: <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-..."></use></svg>. Visible text labels stay beside them. No <style> block inside the shell.
+
+EXTRACT (copy this verbatim as the OLD side):
+<div class="shell">
+<header>
+  <h1 id="title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="">Case Files</span></h1>
+  <div class="hud-tools">
+    <button id="len" aria-pressed="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">EN</span></button>
+    <button id="lpt" aria-pressed="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lang"></use></svg> <span data-label="">PT</span></button>
+    <button id="restart-btn" type="button" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-restart"></use></svg> <span data-label="">Start over</span></button>
+  </div>
+</header>
+
+<section id="cabinet" hidden>
+  <p class="stamp" id="cabinet-stamp">Field office</p>
+  <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+  <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+  <div id="cabinet-list"></div>
+</section>
+
+<main id="play">
+  <section id="briefing" class="panel is-on" data-panel="briefing" aria-labelledby="title">
+    <p class="stamp" id="brief-stamp">Case file</p>
+    <section id="intro"></section>
+  </section>
+
+
+  <section id="suspects" class="panel" data-panel="suspects">
+    <h2 id="suspects-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-label="">Suspects</span></h2>
+    <div id="suspect-buttons"></div>
+  </section>
+
+  <section id="conversation" class="panel" data-panel="talk">
+    <h2 id="conversation-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="">Conversation</span></h2>
+    <div id="log" role="log" aria-live="polite"></div>
+    <form id="ask-form">
+      <label for="q" id="question-label">Question</label>
+      <div class="ask-row">
+        <input type="text" id="q" maxlength="500" required>
+        <button type="submit" id="ask-btn" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="">Ask</span></button>
+      </div>
+    </form>
+    <p id="questions-used" aria-live="polite"></p>
+  </section>
+
+  <section id="player-section" class="panel" data-panel="accuse">
+    <label for="player" id="player-label">Your name</label>
+    <input type="text" id="player" maxlength="24" placeholder="anon">
+  </section>
+
+  <section id="accuse-section" class="panel" data-panel="accuse">
+    <h2 id="accuse-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-label="">Accuse</span></h2>
+    <div id="accuse-buttons"></div>
+  </section>
+
+
+  <section id="rooms" class="panel" data-panel="locations" aria-labelledby="rooms-title">
+    <h2 id="rooms-title" class="visually-in-section with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-label="">Locations</span></h2>
+    <div id="room-buttons"></div>
+  </section>
+  <style>
+    #rooms { display: grid; }
+    #room-buttons { display: contents; }
+    #rooms-title { margin: 0 0 0.5rem; grid-column: 1 / -1; }
+  </style>
+
+  <section id="timeline" class="panel" hidden data-panel="locations" aria-labelledby="timeline-title">
+    <h2 id="timeline-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-tl-marker"></use></svg> <span data-label="">Timetable</span></h2>
+    <div id="timeline-rail"></div>
+  </section>
+
+  <section id="board" class="panel" data-panel="board" aria-labelledby="board-title">
+    <h2 id="board-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="">Evidence board</span></h2>
+    <div id="board-grid"></div>
+  </section>
+
+  <section id="verdict" class="panel" data-panel="accuse" role="status" aria-live="assertive" tabindex="-1" hidden></section>
+  <section id="err" class="panel" data-panel="accuse" role="alert" hidden></section>
+
+  <section id="best-section" class="panel" data-panel="accuse" aria-labelledby="best-title">
+    <h2 id="best-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label=""></span></h2>
+    <p id="best-en"></p>
+    <p id="best-pt"></p>
+    <button id="reset-best" type="button">Reset Best</button>
+    <p id="best-status" role="status"></p>
+  </section>
+  <section id="scores-section" class="panel" data-panel="accuse" hidden>
+    <h2 id="scores-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-score"></use></svg> <span data-label="">Scoreboard</span></h2>
+    <table>
+      <caption id="scores-caption">Top 10 Players</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th id="th-player">Player</th>
+          <th id="th-score">Score</th>
+          <th id="th-questions">Questions</th>
+        </tr>
+      </thead>
+      <tbody id="scores-body"></tbody>
+    </table>
+  </section>
+
+  <section id="credits" class="panel" data-panel="accuse" aria-labelledby="credits-title" tabindex="-1" hidden>
+    <h2 id="credits-title"></h2>
+    <ul id="credits-list"></ul>
+    <p id="credits-note"></p>
+  </section>
+</main>
+
+<nav id="dock" aria-label="Case tools">
+  <div id="steps" role="tablist" aria-label="Case steps">
+    <button type="button" role="tab" id="step-briefing" data-step="briefing" aria-selected="true" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-briefing"></use></svg> <span data-step-label="briefing">Briefing</span></button>
+    <button type="button" role="tab" id="step-locations" data-step="locations" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-locations"></use></svg> <span data-step-label="locations">Locations</span></button>
+    <button type="button" role="tab" id="step-suspects" data-step="suspects" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-suspects"></use></svg> <span data-step-label="suspects">Suspects</span></button>
+    <button type="button" role="tab" id="step-talk" data-step="talk" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-step-label="talk">Interrogate</span></button>
+    <button type="button" role="tab" id="step-board" data-step="board" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-step-label="board">Board</span></button>
+    <button type="button" role="tab" id="step-accuse" data-step="accuse" aria-selected="false" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-step-label="accuse">Accuse</span></button>
+  </div>
+  <button type="button" id="files-btn" class="icon-btn with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Files</span></button>
+  <button type="button" id="board-btn" class="icon-btn with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="">Board</span></button>
+</nav>
+</div>
+
+
+END OF EXTRACT.

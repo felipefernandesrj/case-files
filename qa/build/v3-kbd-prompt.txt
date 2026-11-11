@@ -1,0 +1,36 @@
+Edit test/keyboard.mjs with literal <<<REPLACE test/keyboard.mjs>>> blocks. Copy each OLD byte-for-byte. The separator is a line of exactly five equals signs =====. End each block with <<<END>>>. Output only the REPLACE blocks.
+
+The desktop player (1280x800) now uses a step model: only the active stage panel is visible. The header has #files-btn after #restart-btn. Suspects stay in the left sidebar (always visible). Interrogate (#q, #ask-btn) and Accuse (#player, #accuse-buttons) are hidden until their step is shown.
+
+1) Initial tab order is header tools (including Files) then sidebar suspects, not the hidden interrogate/accuse fields:
+
+<<<REPLACE test/keyboard.mjs>>>
+  const expectedOrder = ['len', 'lpt', 'restart-btn', ...suspectIds, 'q', 'ask-btn', 'player'];
+  for (let i = 0; i < 3; i++) expectedOrder.push(`accuse-${i}`);
+=====
+  const expectedOrder = ['len', 'lpt', 'restart-btn', 'files-btn', ...suspectIds];
+<<<END>>>
+
+2) Before focusing #player or the accuse buttons, open the Accuse step:
+
+<<<REPLACE test/keyboard.mjs>>>
+await runStep('verdict-then-credits', async () => {
+  await evaluate(`document.getElementById('player').value = ''`);
+  await evaluate(`document.getElementById('player').focus()`);
+=====
+await runStep('verdict-then-credits', async () => {
+  await evaluate(`document.getElementById('step-accuse').click()`);
+  await evaluate(`document.getElementById('player').value = ''`);
+  await evaluate(`document.getElementById('player').focus()`);
+<<<END>>>
+
+3) no-focus-trap also needs the Accuse step visible so #player can take focus:
+
+<<<REPLACE test/keyboard.mjs>>>
+await runStep('no-focus-trap', async () => {
+  await evaluate(`document.getElementById('player').focus()`);
+=====
+await runStep('no-focus-trap', async () => {
+  await evaluate(`document.getElementById('step-accuse').click()`);
+  await evaluate(`document.getElementById('player').focus()`);
+<<<END>>>

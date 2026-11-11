@@ -1,0 +1,58 @@
+Write the complete file public/assets/icons.svg (full file, not a patch).
+
+It is a gothic-noir SVG sprite for the Case Files web player. Output ONLY:
+<<<FILE public/assets/icons.svg>>>
+...file...
+<<<END>>>
+
+Requirements:
+- One <svg xmlns="http://www.w3.org/2000/svg"> root containing only <symbol> elements.
+- Exactly these 45 symbol ids, each with viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round".
+- Simple, readable 24px line icons (2-5 paths each). No text, no bitmap, no filters, no css, no night-train / caseId / CASE_ID / commit / SHA strings.
+
+Ids and meaning:
+i-briefing closed case folder
+i-locations map pin
+i-suspects person silhouette
+i-talk speech bubble
+i-board evidence board with a pin
+i-accuse gavel
+i-score wax seal
+i-files file drawer
+i-pin loose pin
+i-close X close mark
+i-lang language / globe
+i-restart circular restart arrow
+i-role-conductor baton
+i-role-violinist small violin
+i-role-janitor keys
+i-role-train-conductor peaked cap
+i-role-jeweller gem
+i-role-porter suitcase
+i-role-chef cloche
+i-loc-academy academy facade
+i-loc-office desk
+i-loc-instrument instrument case
+i-loc-rehearsal music hall / stands
+i-loc-hallway corridor / door
+i-loc-train railway carriage
+i-loc-dining dining cloche and plate (not a sun)
+i-loc-sleeper berth / bed
+i-loc-luggage suitcase with a handle
+i-loc-tunnel arched tunnel
+i-loc-platform platform and lamp
+i-ev-fingerprint fingerprint loops
+i-ev-key key
+i-ev-ticket ticket stub
+i-ev-letter envelope
+i-ev-necklace pendant
+i-ev-violin violin
+i-ev-watch pocket watch
+i-ev-footprint footprint
+i-tl-marker station diamond
+i-tl-gap dashed gap
+i-questions question mark in a ring
+i-locked closed padlock
+i-unlocked open padlock
+i-verdict-ok check in a stamp
+i-verdict-wrong X in a stamp

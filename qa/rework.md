@@ -547,3 +547,9 @@ Receipts (seal-by 2026-11-12T00:05:00Z), 6 chat: build 01M758GFHJTZV664VCHY1F3PQ
 - Seal check of the 7 M2s2 receipts not due yet (sealed after 2026-11-12 00:05Z); skipped.
 - Reproduced again: no per-call cost in the chat response (6 of 6 cost null), duplicate receipt headers x-fullcup-receipt + x-fullcup-receipt-id same value (6 of 6), enable_thinking=false honoured (5 of 5), cached_tokens 0.
 - No new FullCup anomaly.
+
+## Visual V3 (v0.4.6, Cup text key)
+
+V1 (0da9fc5, v0.4.4) and V2 (1f583da, v0.4.5) were handwritten. This pass regenerated the shipped chrome (icons.svg, game.css, page shell, layout JS) through qa-api.fullcup.ai with @cf/google/gemma-4-26b-a4b-it so the player UI is key-produced. Receipts and cost: see /workspace/casefiles-qa/run26/receipts.md.
+
+Rework and wasted calls: first icons output truncated (no apply); HTML used === instead of ===== (NEW applied from the receipt); a later steplabels <<<FILE>>> overwrote index.html (restored from the saved shell + REPARSE of v3-js, no new debit); tablet CSS also arrived as <<<FILE>>> and overwrote game.css (restored by REPARSE of v3-css and v3-css-rework, then the tablet NEW was applied from that receipt). Formal rework that applied cleanly: icons-rework, css-rework, kbd-rework. No live play smoke in this pass.

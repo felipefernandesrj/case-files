@@ -1,0 +1,34 @@
+Edit test/keyboard.mjs with literal <<<REPLACE test/keyboard.mjs>>> blocks. Copy each OLD byte-for-byte. Separator is a line of exactly five equals signs =====. End each block with <<<END>>>. Output only the REPLACE blocks.
+
+setLang is async (it fetches the case). After switching language, wait until the UI has finished updating before opening Accuse. After opening the Accuse tab, wait until the accuse stage is visible and has 3 buttons before focusing them.
+
+<<<REPLACE test/keyboard.mjs>>>
+await runStep('lang-en', async () => {
+  await evaluate(`document.getElementById('len').focus()`);
+  await pressEnter();
+  let la = await evaluate(`document.documentElement.lang`);
+  let ql = await evaluate(`document.getElementById('question-label').textContent`);
+  if (la !== 'en' || ql !== 'Question') throw new Error(`la=${la}, ql=${ql}`);
+});
+=====
+await runStep('lang-en', async () => {
+  await evaluate(`document.getElementById('len').focus()`);
+  await pressEnter();
+  await waitFor(async () => (await evaluate(`document.getElementById('question-label').textContent`)) === 'Question');
+  let la = await evaluate(`document.documentElement.lang`);
+  let ql = await evaluate(`document.getElementById('question-label').textContent`);
+  if (la !== 'en' || ql !== 'Question') throw new Error(`la=${la}, ql=${ql}`);
+});
+<<<END>>>
+
+<<<REPLACE test/keyboard.mjs>>>
+  await evaluate(`document.getElementById('step-accuse').click()`);
+  await evaluate(`document.getElementById('player').value = ''`);
+  await evaluate(`document.getElementById('player').focus()`);
+=====
+  await evaluate(`document.getElementById('step-accuse').click()`);
+  await waitFor(async () => (await evaluate(`document.getElementById('accuse-stage').classList.contains('is-on')`)) === true);
+  await waitFor(async () => (await evaluate(`document.querySelectorAll('#accuse-buttons button').length`)) >= 3);
+  await evaluate(`document.getElementById('player').value = ''`);
+  await evaluate(`document.getElementById('player').focus()`);
+<<<END>>>

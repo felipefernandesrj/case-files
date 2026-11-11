@@ -6894,5 +6894,620 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "v3-icons",
+  "at": "2026-11-11T14:02:49.229Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 103909,
+  "usage": {
+   "prompt_tokens": 624,
+   "completion_tokens": 5000,
+   "total_tokens": 5624,
+   "neurons": 142.03636169433594,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75EK5YP2X1WFSGDSJXFRK63",
+   "x-fullcup-receipt-id": "01M75EK5YP2X1WFSGDSJXFRK63",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794405720"
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "v3-icons-rework",
+  "at": "2026-11-11T14:05:12.594Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 117241,
+  "usage": {
+   "prompt_tokens": 657,
+   "completion_tokens": 5131,
+   "total_tokens": 5788,
+   "neurons": 145.9091033935547,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75EQ25CZK9GY6K537BFACNB",
+   "x-fullcup-receipt-id": "01M75EQ25CZK9GY6K537BFACNB",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794405840"
+  },
+  "files": [
+   {
+    "path": "public/assets/icons.svg",
+    "lines": 171
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-css",
+  "at": "2026-11-11T14:06:24.031Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 38044,
+  "usage": {
+   "prompt_tokens": 1630,
+   "completion_tokens": 3094,
+   "total_tokens": 4724,
+   "neurons": 99.20000457763672,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75EVN9X4ZQNCBHYE4FHRBX0",
+   "x-fullcup-receipt-id": "01M75EVN9X4ZQNCBHYE4FHRBX0",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794405960"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "lines": 376
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-html",
+  "at": "2026-11-11T14:09:07.850Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 109142,
+  "usage": {
+   "prompt_tokens": 3754,
+   "completion_tokens": 5214,
+   "total_tokens": 8968,
+   "neurons": 176.3272705078125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75EYGB6WXDJ2MHN0B07AN21",
+   "x-fullcup-receipt-id": "01M75EYGB6WXDJ2MHN0B07AN21",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794406080"
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "v3-js",
+  "at": "2026-11-11T14:11:42.489Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 51156,
+  "usage": {
+   "prompt_tokens": 2753,
+   "completion_tokens": 2377,
+   "total_tokens": 5130,
+   "neurons": 89.85453796386719,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75F4ZE6M8KW732YRG2EN7B1",
+   "x-fullcup-receipt-id": "01M75F4ZE6M8KW732YRG2EN7B1",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794406260"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 51
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-css-rework",
+  "at": "2026-11-11T14:13:27.790Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 69104,
+  "usage": {
+   "prompt_tokens": 3010,
+   "completion_tokens": 2699,
+   "total_tokens": 5709,
+   "neurons": 100.97273254394531,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75F7MTEKD16TTH3WRXXW42J",
+   "x-fullcup-receipt-id": "01M75F7MTEKD16TTH3WRXXW42J",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794406380"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 21
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 39
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 31
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 17
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 13
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-kbd",
+  "at": "2026-11-11T14:13:49.309Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 8442,
+  "usage": {
+   "prompt_tokens": 588,
+   "completion_tokens": 322,
+   "total_tokens": 910,
+   "neurons": 14.127272605895996,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75FA5HPQ30Q3K06FS4SQX6E",
+   "x-fullcup-receipt-id": "01M75FA5HPQ30Q3K06FS4SQX6E",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794406440"
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/keyboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "test/keyboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-kbd-rework",
+  "at": "2026-11-11T14:16:46.715Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10950,
+  "usage": {
+   "prompt_tokens": 577,
+   "completion_tokens": 433,
+   "total_tokens": 1010,
+   "neurons": 17.05454444885254,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75FFG40X14J6G53T9BJTPRP",
+   "x-fullcup-receipt-id": "01M75FFG40X14J6G53T9BJTPRP",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794406620"
+  },
+  "files": [
+   {
+    "path": "test/keyboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "test/keyboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-steplabels",
+  "at": "2026-11-11T14:18:12.632Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 9730,
+  "usage": {
+   "prompt_tokens": 1003,
+   "completion_tokens": 439,
+   "total_tokens": 1442,
+   "neurons": 21.09090805053711,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75FJ4ZAZPD6E5M4YJB8WA6Q",
+   "x-fullcup-receipt-id": "01M75FJ4ZAZPD6E5M4YJB8WA6Q",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794406740"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "lines": 6
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-js-reparse",
+  "at": "2026-11-11T14:18:46.537Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 51
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-css-tablet",
+  "at": "2026-11-11T14:18:56.650Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3636,
+  "usage": {
+   "prompt_tokens": 646,
+   "completion_tokens": 295,
+   "total_tokens": 941,
+   "neurons": 13.918182373046875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75FKNTJJY5B40RXQQ7D43FZ",
+   "x-fullcup-receipt-id": "01M75FKNTJJY5B40RXQQ7D43FZ",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794406740"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "lines": 30
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-css-reparse",
+  "at": "2026-11-11T14:19:12.871Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "lines": 376
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-css-rework-reparse",
+  "at": "2026-11-11T14:19:12.912Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 21
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 39
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 31
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 17
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 13
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v3-css-sprite",
+  "at": "2026-11-11T14:23:31.892Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 12247,
+  "usage": {
+   "prompt_tokens": 539,
+   "completion_tokens": 446,
+   "total_tokens": 985,
+   "neurons": 17.063636779785156,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75FVT7WNEJJ472R9M34DAA9",
+   "x-fullcup-receipt-id": "01M75FVT7WNEJJ472R9M34DAA9",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794407040"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 53
+   }
+  ],
+  "skipped": []
  }
 ]
