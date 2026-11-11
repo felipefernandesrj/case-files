@@ -211,3 +211,7 @@ Model: @cf/google/gemma-4-26b-a4b-it via the QA Cup key, thinking off. M2 in pro
 ## Visual V3 (v0.4.6)
 
 Handwritten visual V1 (0da9fc5) and V2 (1f583da) were replaced in the working tree by Cup-key output for the shipped chrome: icon sprite, layout CSS, page shell and layout JavaScript (`@cf/google/gemma-4-26b-a4b-it`, workload via tools/build-via-key.mjs). Keyboard tests were also updated through the key for the new desktop tab order. Version, changelog and README status were recorded as project-owner notes. Receipts and neuron cost: `/workspace/casefiles-qa/run26/receipts.md`. Suite remains 119 checks. No live play smoke and no paid image calls in this pass.
+
+## Visual V4 (v0.4.7)
+
+M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, timetable rail, stamps/suspect rows/hourglass, folder tabs). Game mechanics, motion and generated art are scheduled in `/workspace/casefiles-qa/run26/milestones-visual.md`, not in this version. Product CSS/HTML/SVG/JS went through the Cup text key (`@cf/google/gemma-4-26b-a4b-it`). Receipts: `/workspace/casefiles-qa/run26/receipts.md`. Suite remains 119 checks. No live play smoke and no paid image calls.

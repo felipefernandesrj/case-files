@@ -171,6 +171,9 @@
     <rect x="7" y="11" width="10" height="8" />
     <path d="M12 11V7a5 5 0 0 0-10 0v4" />
   </symbol>
+  <symbol id="i-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 4h14M5 20h14M12 4v16M8 8l4 4 4-4" />
+  </symbol>
   <symbol id="i-verdict-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20 6L9 17l-5-5" />
   </symbol>
@@ -656,9 +659,13 @@ function renderTimeline() {
     if (t.id) b.dataset.id = t.id;
     b.appendChild(iconSvg(t.gap ? 'i-tl-gap' : 'i-tl-marker'));
     const tm = document.createElement('strong');
+    tm.className = 'tl-time';
     tm.textContent = t.time || '';
     b.appendChild(tm);
-    b.appendChild(document.createTextNode((t.stop ? t.stop + '. ' : '') + (t.event || '')));
+    const ev = document.createElement('span');
+    ev.className = 'tl-event';
+    ev.textContent = (t.stop ? t.stop + '. ' : '') + (t.event || '');
+    b.appendChild(ev);
     rail.appendChild(b);
   });
 }
@@ -1012,8 +1019,7 @@ let questionsUsed = 0;
 function renderQuestions() {
   const el = document.getElementById('questions-used');
   el.innerHTML = '';
-  el.appendChild(iconSvg('i-questions'));
-  el.appendChild(iconSvg(gameOver ? 'i-locked' : 'i-unlocked'));
+  el.appendChild(iconSvg('i-hourglass'));
   el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
 }
 

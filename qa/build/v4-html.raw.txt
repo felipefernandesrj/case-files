@@ -1,0 +1,36 @@
+<<<REPLACE public/index.html>>>
+function renderQuestions() {
+  const el = document.getElementById('questions-used');
+  el.innerHTML = '';
+  el.appendChild(iconSvg('i-questions'));
+  el.appendChild(iconSvg(gameOver ? 'i-locked' : 'i-unlocked'));
+  el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
+}
+=====
+function renderQuestions() {
+  const el = document.getElementById('questions-used');
+  el.innerHTML = '';
+  el.appendChild(iconSvg('i-hourglass'));
+  el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    b.appendChild(iconSvg(t.gap ? 'i-tl-gap' : 'i-tl-marker'));
+    const tm = document.createElement('strong');
+    tm.textContent = t.time || '';
+    b.appendChild(tm);
+    b.appendChild(document.createTextNode((t.stop ? t.stop + '. ' : '') + (t.event || '')));
+    rail.appendChild(b);
+=====
+    b.appendChild(iconSvg(t.gap ? 'i-tl-gap' : 'i-tl-marker'));
+    const tm = document.createElement('strong');
+    tm.className = 'tl-time';
+    tm.textContent = t.time || '';
+    b.appendChild(tm);
+    const ev = document.createElement('span');
+    ev.className = 'tl-event';
+    ev.textContent = (t.stop ? t.stop + '. ' : '') + (t.event || '');
+    b.appendChild(ev);
+    rail.appendChild(b);
+<<<END>>>

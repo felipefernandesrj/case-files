@@ -7509,5 +7509,103 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "v4-icons",
+  "at": "2026-11-11T14:27:46.075Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 12350,
+  "usage": {
+   "prompt_tokens": 503,
+   "completion_tokens": 463,
+   "total_tokens": 966,
+   "neurons": 17.200000762939453,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75G3JG3MTAS6WV84BR1FYZT",
+   "x-fullcup-receipt-id": "01M75G3JG3MTAS6WV84BR1FYZT",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794407280"
+  },
+  "files": [
+   {
+    "path": "public/assets/icons.svg",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v4-html",
+  "at": "2026-11-11T14:28:04.991Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 11012,
+  "usage": {
+   "prompt_tokens": 584,
+   "completion_tokens": 402,
+   "total_tokens": 986,
+   "neurons": 16.272727966308594,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75G462G70M8G3EQ632VX6EV",
+   "x-fullcup-receipt-id": "01M75G462G70M8G3EQ632VX6EV",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794407280"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "v4-css",
+  "at": "2026-11-11T14:34:45.939Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 96329,
+  "usage": {
+   "prompt_tokens": 3572,
+   "completion_tokens": 3640,
+   "total_tokens": 7212,
+   "neurons": 131.74545288085938,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M75GDTJPXZKPB87TFZ2G3VG2",
+   "x-fullcup-receipt-id": "01M75GDTJPXZKPB87TFZ2G3VG2",
+   "x-fullcup-seal-by": "2026-11-12T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794407640"
+  },
+  "files": [],
+  "skipped": []
  }
 ]

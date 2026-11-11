@@ -1,0 +1,32 @@
+Patch public/assets/icons.svg only. Output exactly one REPLACE block, then stop.
+
+Format (the separator line must be exactly five equals signs):
+<<<REPLACE public/assets/icons.svg>>>
+OLD
+=====
+NEW
+<<<END>>>
+
+NEVER emit <<<FILE>>>. NEVER rewrite the whole sprite. If you emit FILE you will destroy the file.
+
+Task: insert one new symbol, id="i-hourglass", immediately before the existing i-verdict-ok symbol. Keep every existing symbol unchanged, including i-questions, i-locked and i-unlocked.
+
+The new symbol must:
+- use viewBox="0 0 24 24"
+- fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+- be a clear classic hourglass (two bulbs meeting at a waist, with a top and bottom cap line)
+- be visually distinct from every existing symbol (do not copy i-questions, which is a question mark)
+
+OLD is this exact existing tail of the file:
+
+  <symbol id="i-verdict-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 6L9 17l-5-5" />
+  </symbol>
+  <symbol id="i-verdict-wrong" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 6L6 18M6 6l12 12" />
+  </symbol>
+</svg>
+
+NEW is that same tail, with the new i-hourglass symbol inserted before i-verdict-ok, and the file still ending with </svg>.
+
+No commentary.

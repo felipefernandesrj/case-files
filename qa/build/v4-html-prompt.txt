@@ -1,0 +1,52 @@
+Patch public/index.html only. Output exactly two REPLACE blocks, then stop. Each block uses this format, with a separator line of exactly five equals signs:
+
+<<<REPLACE public/index.html>>>
+OLD
+=====
+NEW
+<<<END>>>
+
+NEVER emit <<<FILE>>> (a FILE block would overwrite the whole page). NEVER rewrite the file. No commentary. Do not add the strings night-train, caseId, or CASE_ID.
+
+Block 1 — replace the questions counter icons with a single hourglass:
+
+OLD (exact):
+function renderQuestions() {
+  const el = document.getElementById('questions-used');
+  el.innerHTML = '';
+  el.appendChild(iconSvg('i-questions'));
+  el.appendChild(iconSvg(gameOver ? 'i-locked' : 'i-unlocked'));
+  el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
+}
+
+NEW:
+function renderQuestions() {
+  const el = document.getElementById('questions-used');
+  el.innerHTML = '';
+  el.appendChild(iconSvg('i-hourglass'));
+  el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
+}
+
+Block 2 — wrap timetable time and event in separate elements so CSS can place stations on the rail:
+
+OLD (exact):
+    b.appendChild(iconSvg(t.gap ? 'i-tl-gap' : 'i-tl-marker'));
+    const tm = document.createElement('strong');
+    tm.textContent = t.time || '';
+    b.appendChild(tm);
+    b.appendChild(document.createTextNode((t.stop ? t.stop + '. ' : '') + (t.event || '')));
+    rail.appendChild(b);
+
+NEW:
+    b.appendChild(iconSvg(t.gap ? 'i-tl-gap' : 'i-tl-marker'));
+    const tm = document.createElement('strong');
+    tm.className = 'tl-time';
+    tm.textContent = t.time || '';
+    b.appendChild(tm);
+    const ev = document.createElement('span');
+    ev.className = 'tl-event';
+    ev.textContent = (t.stop ? t.stop + '. ' : '') + (t.event || '');
+    b.appendChild(ev);
+    rail.appendChild(b);
+
+No other edits.

@@ -1,0 +1,212 @@
+Patch public/css/game.css only for Case Files visual V4 polish (layout + gothic-noir). Output ONLY <<<REPLACE public/css/game.css>>> blocks. Each block uses a separator line of exactly five equals signs and ends with <<<END>>>.
+
+NEVER emit <<<FILE>>> (a FILE block would destroy the stylesheet). No commentary. No markdown fences. Do not add the strings night-train, caseId, or CASE_ID. Keep every layout contract not replaced (desktop #desk grid, tablet #play order 1 / #steps order 2, phone dock, [hidden] !important, .svg-sprite hidden, 44px targets, focus rings, reduced-motion).
+
+Emit these six REPLACE blocks, in this order, with OLD copied exactly.
+
+Block 1 — tokens and atmosphere. OLD:
+:root {
+  --cf-ink: #0C0B0A;
+  --cf-ink-soft: #1A1714;
+  --cf-paper: #E8DCC8;
+  --cf-paper-bright: #F3EADF;
+  --cf-folder: #C4A882;
+  --cf-folder-dark: #8C6F4A;
+  --cf-lamp: #E8B86D;
+  --cf-lamp-dim: #B8894A;
+  --cf-seal: #8C2F2B;
+  --cf-seal-bright: #B54741;
+  --cf-text: #F3EADF;
+  --cf-text-dim: #C9BFAE;
+  --cf-text-on-paper: #1A1714;
+  --cf-line: rgba(232, 184, 109, 0.35);
+  --cf-accent: var(--cf-lamp);
+  --cf-focus: #E8B86D;
+  --cf-bg: var(--cf-ink);
+  --cf-blotter: #241F1A;
+  --touch-min: 44px;
+}
+
+NEW: the same tokens plus --glow-lamp: 0 0 40px rgba(232, 184, 109, 0.18); --shadow-file: 4px 6px 0 rgba(0, 0, 0, 0.45); --paper-fiber: repeating-linear-gradient(0deg, rgba(26,23,20,0.045) 0 1px, transparent 1px 4px);
+
+Block 2 — body, inputs, and paper cards. OLD:
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--cf-bg);
+  color: var(--cf-text);
+  font-family: 'Palatino', 'Georgia', serif;
+  -webkit-font-smoothing: antialiased;
+}
+input, textarea {
+  font: inherit;
+  min-height: var(--touch-min);
+  background: var(--cf-paper-bright);
+  color: var(--cf-text-on-paper);
+  border: 1px solid var(--cf-folder-dark);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+
+NEW: body uses an ink background with a soft lamp-amber radial glow near the top, a faint 1px grain repeating-linear-gradient, and a dark vignette radial at the bottom edge (no animation). Inputs and textarea sit on parchment (paper color plus var(--paper-fiber)), ink text, lamp-gold border, and a slight lamp glow on focus. Also add .paper, .folder-card, .ev-tile using parchment + fiber + var(--shadow-file) if you include those selectors here only when they do not already appear later; prefer not to duplicate .folder-card.
+
+Block 3 — delete the early phone header query that is overridden by the later header { height: 52px } rule. OLD is this exact block (keep #best-hud:empty above it untouched by starting OLD at the @media line):
+
+@media (max-width: 767px) {
+  header {
+    height: auto;
+    min-height: 52px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  header h1 {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+  header .hud-tools {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    margin-left: auto;
+  }
+  #files-btn [data-label] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+}
+
+NEW: a short comment /* phone header rules come after the general header rule */ and nothing else.
+
+Block 4 — general header plus the correct phone header AFTER it, and stage fill. OLD:
+header {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--cf-bg);
+}
+
+#best-hud {
+  font-size: 0.75rem;
+  background: var(--cf-blotter);
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: var(--cf-accent);
+  border: 1px solid var(--cf-line);
+}
+
+/* Play State */
+#play > .panel { display: none; }
+#play > .panel.is-on { display: block; }
+
+NEW must include:
+- header as above, plus a hairline bottom border using var(--cf-line), and height auto with min-height 52px (so it can wrap).
+- #best-hud unchanged, still :empty is already hidden earlier.
+- #desk { flex: 1; min-height: 0; display: contents; } only if that would break the desktop grid — do NOT set display:contents. Instead add no #desk display here; keep desktop/tablet media as the place #desk is displayed. You may add #desk { flex: 1; min-height: 0; } without a display value.
+- #play { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+- #play > .panel { display: none; }
+- #play > .panel.is-on { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+- After the header block, a @media (max-width: 767px) for the header ONLY: header height auto, flex-wrap wrap, gap 8px, padding 8px 0; header h1 / #title flex 1 1 100%, width 100%, min-width 0, margin 0, font-size 1.35rem, line-height 1.15 (its own first row); .hud-tools flex 1 1 100%, width 100%, nowrap, justify-content flex-end, gap 4px (second row); .hud-tools button width and min-width 44px, padding 0; hide #len .icon and #lpt .icon so EN/PT letters stay visible in 44px buttons; hide the visible text of #restart-btn and #files-btn with the 1px clip/absolute pattern (keep accessible names).
+
+Block 5 — timetable, conversation (not a flat beige box), questions used, suspects. OLD:
+#timeline-rail {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 20px;
+}
+
+#timeline-rail::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--cf-line);
+}
+
+.tl-stop {
+  position: relative;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.tl-stop .icon { display: none; }
+.tl-stop::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cf-lamp);
+}
+
+#log {
+  background: var(--cf-paper);
+  color: var(--cf-text-on-paper);
+  padding: 12px;
+  min-height: 120px;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+#suspect-buttons button { background: var(--cf-paper); color: var(--cf-text-on-paper); }
+#suspect-buttons button[aria-pressed="true"] { outline: 2px solid var(--cf-accent); }
+#files-btn [data-label] { /* keep accessible name */ }
+/* Conversation & Board */
+#conversation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 12px;
+}
+
+.log-entry { margin-bottom: 12px; }
+
+NEW:
+- #timeline-rail is a column, position relative, no large centered card, no extra background box, padding-left 0.
+- #timeline-rail::before is a 2px vertical lamp-dim line in the rail gutter (left: calc(4.5em + 10px) or equivalent).
+- .tl-stop is a 3-column grid: 4.5em time, 16px gutter, 1fr event; width 100%; text-align left; transparent background; padding 8px 0; min-height 44px.
+- .tl-stop .icon { display: none; }
+- .tl-time { grid-column: 1; font-family: "Courier New", ui-monospace, monospace; color: var(--cf-lamp); }
+- .tl-stop::before is the station dot in grid-column 2 (position relative; left auto; top 0.4em; transform none; 10px lamp circle).
+- .tl-event { grid-column: 3; text-align: left; color: var(--cf-text); }
+- Same structure at all widths. Do not jam time into the event (no 21:10Alder).
+- #conversation is an ink-dark blotter panel (background var(--cf-blotter), lamp hairline, var(--glow-lamp), padding 16px) and a column flex that fills the stage (flex 1; min-height 0; height 100%; gap 12px).
+- #log is a dark well (var(--cf-ink-soft), light text), flex 1, min-height 0, max-height none, overflow auto — not a flat beige rectangle.
+- .log-entry is an individual parchment slip (paper + fiber, ink text, small shadow), margin-bottom 8px.
+- #ask-form and #questions-used { flex-shrink: 0; } so the composer stays at the bottom.
+- #questions-used is a small caption, flex row, 24px icon + text, color var(--cf-text-dim).
+- #suspect-buttons button: parchment + fiber, ink text, display grid columns 44px 1fr / rows auto auto, min-height 44px, text-align left, gap 0 8px, padding 6px 8px. .portrait grid-row 1 / span 2, 44px. .who grid-column 2 row 1. .role grid-column 2 row 2, smaller dim text. aria-pressed true gets a lamp outline.
+- Keep #files-btn [data-label] as a comment or omit; phone hiding is in block 4.
+
+Block 6 — hide desktop duplicate stamp, short-step placeholder, folder tabs. OLD:
+#verdict {
+  border: 4px double var(--cf-seal);
+  padding: 24px;
+  text-align: center;
+}
+
+NEW: keep that #verdict rule, then add:
+- @media (min-width: 1024px) { [data-layout="desktop"] #brief-stamp { display: none; } }
+- @media (min-width: 768px) { #briefing.is-on, #accuse-stage.is-on { justify-content: center; align-items: center; text-align: center; } #briefing.is-on::before { content: ""; width: 160px; height: 120px; margin-bottom: 16px; background: var(--cf-paper); background-image: var(--paper-fiber), radial-gradient(circle at 70% 30%, rgba(140,47,43,0.45) 0 14px, transparent 15px); box-shadow: var(--glow-lamp), var(--shadow-file); border: 1px solid var(--cf-folder-dark); } Do not center #conversation or #locations. }
+- Desktop folder tabs: @media (min-width: 1024px) { #steps button { justify-content: flex-start; width: 100%; background: var(--cf-blotter); border: 1px solid var(--cf-line); border-radius: 8px 0 0 8px; box-shadow: inset 3px 0 0 var(--cf-folder-dark); } #steps button[aria-selected="true"] { background: var(--cf-ink-soft); color: var(--cf-lamp); border-color: var(--cf-lamp-dim); box-shadow: inset 3px 0 0 var(--cf-seal); } }
+- Tablet bottom tabs: @media (min-width: 768px) and (max-width: 1023px) { #steps button { border-radius: 8px 8px 0 0; border: 1px solid var(--cf-line); background: var(--cf-blotter); } #steps button[aria-selected="true"] { color: var(--cf-lamp); box-shadow: inset 0 3px 0 var(--cf-seal); } }
+
+No other files.

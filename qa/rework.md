@@ -553,3 +553,7 @@ Receipts (seal-by 2026-11-12T00:05:00Z), 6 chat: build 01M758GFHJTZV664VCHY1F3PQ
 V1 (0da9fc5, v0.4.4) and V2 (1f583da, v0.4.5) were handwritten. This pass regenerated the shipped chrome (icons.svg, game.css, page shell, layout JS) through qa-api.fullcup.ai with @cf/google/gemma-4-26b-a4b-it so the player UI is key-produced. Receipts and cost: see /workspace/casefiles-qa/run26/receipts.md.
 
 Rework and wasted calls: first icons output truncated (no apply); HTML used === instead of ===== (NEW applied from the receipt); a later steplabels <<<FILE>>> overwrote index.html (restored from the saved shell + REPARSE of v3-js, no new debit); tablet CSS also arrived as <<<FILE>>> and overwrote game.css (restored by REPARSE of v3-css and v3-css-rework, then the tablet NEW was applied from that receipt). Formal rework that applied cleanly: icons-rework, css-rework, kbd-rework. No live play smoke in this pass.
+
+## Visual V4 (v0.4.7, Cup text key, polish only)
+
+Layout polish items 1–6. Mechanics, motion and generated art are scheduled in /workspace/casefiles-qa/run26/milestones-visual.md. Icons and HTML applied cleanly. The CSS REPLACE call did not auto-apply (malformed framing); NEW blocks from that receipt were applied from the raw file. Receipts: run26/receipts.md. 119/119 checks.
