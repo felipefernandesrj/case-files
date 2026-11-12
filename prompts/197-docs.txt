@@ -1,0 +1,39 @@
+# Task (M2 sprint 4, v0.4.8): docs and version for the per-case call cap and worst-case spend test
+Output ONLY literal edit blocks. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. Every block starts with exactly three < characters, like <<<REPLACE CHANGELOG.md>>>. The line right after ===== is the first line of NEW. Empty lines INSIDE a NEW are part of NEW: keep writing until NEW has the stated number of lines, then <<<END>>>. Every OLD is unique in the file. Plain English, no prose outside blocks, no fences, no em-dashes, no thinking aloud, no commit hashes. Every bullet is a full sentence that starts with a capital letter; do not copy these facts as fragments. Put code names, file names and example messages in backticks.
+
+Facts (write them in your own full sentences): A backer asked how much one game can cost. Each playthrough (one game session) now has a cap on model calls. A case can set its own cap with a whole number field maxCalls from 1 to 100; without it the default is 20 (DEFAULT_MAX_CALLS in the new file src/budget.js). Every question that reaches the model counts, even if the model call fails, because a failed call may still cost. Once the cap is reached, the server answers 429 with error call_cap and a friendly message in English or Portuguese, makes no model call, and the player can still accuse or start a new game, which gets a fresh cap. The English message is: You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game. The new function worstCaseSpend computes the worst-case cost of one playthrough: every call is assumed to use the full max_tokens of 300 and to resend the longest system prompt plus the whole history so far, counting one token per character, at the published price of the play model llama-4-scout (US$0.27 per million input tokens and US$0.85 per million output tokens). The documented ceiling is US$0.10 per playthrough (PLAYTHROUGH_CEILING_USD). Today the worst case is about US$0.061 for The Vanishing Violin and US$0.060 for The Night Train. A new test file test/budget.mjs has 8 checks, so the suite has 127 checks in total (was 119). A short live question in Portuguese through the Cup key still got a normal answer under the cap. M2 is not delivered.
+
+Block 1, CHANGELOG.md. OLD is exactly these 3 lines:
+# Changelog
+
+## 0.4.7 (visual V4, gothic-noir polish of the one-viewport layout)
+NEW is exactly 7 lines: line 1 "# Changelog", line 2 empty, line 3 "## 0.4.8 (M2 sprint 4, per-case call cap and worst-case spend test)", line 4 one bullet about the cap, the default, what counts, and what the player sees and can still do (include the English message in backticks), line 5 one bullet about worstCaseSpend, the assumptions, the price, the ceiling, today's worst case per case, and the 8 checks in test/budget.mjs with the new total, line 6 empty, line 7 "## 0.4.7 (visual V4, gothic-noir polish of the one-viewport layout)".
+
+Block 2, package.json. OLD is exactly this 1 line:
+  "version": "0.4.7",
+NEW is exactly this 1 line:
+  "version": "0.4.8",
+
+Block 3, README.md. OLD is exactly this fragment:
+**M2 in progress (v0.4.7, visual V4 polish).**
+NEW is exactly this fragment:
+**M2 in progress (v0.4.8, sprint 4).**
+
+Block 4, README.md. OLD is exactly this fragment:
+lists the valid ids. 119 automated checks.
+NEW is exactly this fragment, written as: "lists the valid ids. " then one or two sentences saying each game now has a cap on model calls (20 by default, maxCalls per case) with a friendly message when it is reached, and the worst case for one game is tested to stay under US$0.10, then " 127 automated checks."
+
+Block 5, docs/SPEC.md. OLD is exactly this 1 line:
+9. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+NEW is exactly these 2 lines:
+9. `node test/budget.mjs` (per-case call cap per playthrough, friendly call_cap message, failed calls count, fresh cap per session, worst-case spend under the ceiling for every case, hand-computed formula check)
+10. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+
+Block 6, docs/SPEC.md. OLD is exactly this 1 line:
+Total checks: 119 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, keyboard: 13).
+NEW is exactly this 1 line:
+Total checks: 127 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, budget: 8, keyboard: 13).
+
+Block 7, docs/SPEC.md. OLD is exactly this 1 line:
+### Case engine (`src/case.js`, M2)
+NEW is exactly 6 lines: line 1 "### Play budget (`src/budget.js`, M2 sprint 4)", line 2 a bullet starting "- `maxCallsFor(c)`: " about maxCalls 1 to 100 and the default of 20, line 3 a bullet starting "- Cap in `/api/ask`: " about counting every call that reaches the model, the 429 call_cap answer with no model call, and that accuse and a new session still work, line 4 a bullet starting "- `worstCaseSpend({ calls, maxTokens, systemChars })`: " about the assumptions, the llama-4-scout price and the US$0.10 ceiling (`PLAYTHROUGH_CEILING_USD`), line 5 empty, line 6 "### Case engine (`src/case.js`, M2)".

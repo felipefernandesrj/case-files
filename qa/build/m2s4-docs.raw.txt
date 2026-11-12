@@ -1,0 +1,55 @@
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+
+## 0.4.7 (visual V4, gothic-noir polish of the one-viewport layout)
+=====
+# Changelog
+
+## 0.4.8 (M2 sprint 4, per-case call cap and worst-case spend test)
+* Each playthrough now has a cap on model calls which can be set per case via `maxCalls` from 1 to 100 or defaults to 20 via `DEFAULT_MAX_CALLS` in `src/budget.js`, where every question that reaches the model counts even if the call fails, and once the cap is reached the server returns a 429 with error `call_cap` and the message `You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game.`, though the player can still accuse or start a new game to get a fresh cap.
+* The new `worstCaseSpend` function computes the worst-case cost of one playthrough by assuming every call uses the full `max_tokens` of 300 and resends the longest system prompt plus the full history (one token per character) at the `llama-4-scout` price of US$0.27 per million input tokens and US$0.85 per million output tokens, ensuring the cost stays under the `PLAYTHROUGH_CEILING_USD` of US$0.10; current worst cases are about US$0.061 for `The Vanishing Violin` and US$0.060 for `The Night Train`, and this is verified by 8 new checks in `test/budget.mjs` bringing the total to 127 checks.
+
+## 0.4.7 (visual V4, gothic-noir polish of the one-viewport layout)
+<<<END>>>
+
+<<<REPLACE package.json>>>
+  "version": "0.4.7",
+=====
+  "version": "0.4.8",
+<<<END>>>
+
+<<<REPLACE README.md>>>
+**M2 in progress (v0.4.7, visual V4 polish).**
+=====
+**M2 in progress (v0.4.8, sprint 4).**
+<<<END>>>
+
+<<<REPLACE README.md>>>
+lists the valid ids. 119 automated checks.
+=====
+lists the valid ids. Each game now has a cap on model calls, which defaults to 20 unless a specific `maxCalls` is set for the case, and reaches a friendly message when the limit is hit. The worst case for one game is tested to stay under US$0.10. 127 automated checks.
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+9. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+=====
+9. `node test/budget.mjs` (per-case call cap per playthrough, friendly call_cap message, failed calls count, fresh cap per session, worst-case spend under the ceiling for every case, hand-computed formula check)
+10. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 119 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, keyboard: 13).
+=====
+Total checks: 127 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, budget: 8, keyboard: 13).
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+### Case engine (`src/case.js`, M2)
+=====
+### Play budget (`src/budget.js`, M2 sprint 4)
+- `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.
+- Cap in `/api/ask`: Every question that reaches the model counts toward the cap even if the call fails; if reached, the server returns a 429 with `call_cap` and no model call is made, but the player can still accuse or start a new session.
+- `worstCaseSpend({ calls, maxTokens, systemChars })`: Calculates the highest possible cost by assuming each call uses `maxTokens` of 300 and resends the system prompt and full history at the `llama-4-scout` price to ensure it remains under the `PLAYTHROUGH_CEILING_USD` of US$0.10.
+
+### Case engine (`src/case.js`, M2)
+<<<END>>>

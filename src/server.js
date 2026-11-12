@@ -7,6 +7,7 @@ import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWo
 import { createProxy } from './proxy.js';
 import { mockAnswer } from './mock.js';
 import { friendly } from './messages.js';
+import { maxCallsFor } from './budget.js';
 import { createScoreboard, scoreFor } from './scoreboard.js';
 
 /**
@@ -221,6 +222,7 @@ export function createServer({
         sessions.set(sessionId, {
           history: new Map(),
           questions: 0,
+          calls: 0,
           accused: false,
           file: wanted || defaultKey,
         });
@@ -248,6 +250,12 @@ export function createServer({
         if (question.length > 500) {
           return sendJSON(res, 400, { error: 'bad_request', message: 'question too long' });
         }
+
+        // per-case cap on model calls per playthrough (M2 sprint 4): no model call once capped
+        if (sess.calls >= maxCallsFor(play)) {
+          return sendJSON(res, 429, { error: 'call_cap', message: friendly('call_cap', lang), questions: sess.questions });
+        }
+        sess.calls += 1;
 
         // question is counted only after a successful answer (sprint 6)
 

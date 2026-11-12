@@ -557,3 +557,23 @@ Rework and wasted calls: first icons output truncated (no apply); HTML used === 
 ## Visual V4 (v0.4.7, Cup text key, polish only)
 
 Layout polish items 1–6. Mechanics, motion and generated art are scheduled in /workspace/casefiles-qa/run26/milestones-visual.md. Icons and HTML applied cleanly. The CSS REPLACE call did not auto-apply (malformed framing); NEW blocks from that receipt were applied from the raw file. Receipts: run26/receipts.md. 119/119 checks.
+
+## M2 sprint 4 (v0.4.8, per-case call cap + worst-case spend test, 2026-11-11 21:19-21:23 BRT)
+Promise to backer Giovana Macedo (run 25 reply): a per-case generation cap and a worst-case spend test before M3.
+Calls 194-198 (gemma-4-26b-a4b-it, thinking off, max_tokens 300-3000) + 1 live llama-4-scout smoke.
+- 194 src/budget.js (PLAY_MODEL, PLAY_PRICE 0.27/0.85 USD per 1M from the Cloudflare model page, DEFAULT_MAX_CALLS 20, PLAYTHROUGH_CEILING_USD 0.10, maxCallsFor, worstCaseSpend), friendly('call_cap') EN/PT, server cap in /api/ask (sess.calls counted before the model call, 429 call_cap, no model call once capped). Applied clean.
+- 195 test/budget.mjs 7 checks + package.json test script + messages JSDoc. The 2 edits came framed as `<REPLACE path>` (single brackets) and were not applied; re-parsed from the same receipt with the framing fixed (label m2s4-call-cap-test-reframe, content verbatim, no new call).
+- 196 rework: mutation M4 (worst case without input tokens) passed all 7 checks, so one hand-computed formula check was added (8 checks). After it, M4 and M5 fail.
+- 197 CHANGELOG 0.4.8, package 0.4.8, README, SPEC list/totals/Play budget. 198 rework: SPEC total dropped "icons: 3", CHANGELOG bullets used "*", README "reaches a friendly message".
+npm test: 127/127 (was 119; budget 8 new), 2 full runs + 1 pre-commit run, no keyboard flake.
+Mutations (qa/m2s4-probes/mutation-check.txt): M1 cap check disabled fails 2/7; M2 default 1000 fails 4/7 (worst case US$108.87 over 0.10); M3 only successful calls counted fails 1/7; M4 input tokens dropped fails the formula check (after 196); M5 resent answers dropped fails the formula check.
+Worst case today: Violin 20 calls x 300 max_tokens, system 2180 chars, US$0.0606; Night Train 20 x 300, 1976 chars, US$0.0595 (ceiling US$0.10).
+Live smoke (tools/smoke-m2s4.mjs, Night Train by id, PT, 1 call): Helena 200 45 words, consistent with the case (sleeper 7, Black Ridge tunnel, talking with Victor), cap 20; accuse Inês correct score 100. qa/live-smoke-m2s4.json.
+Key: 6 calls (5 build + 1 live), 5,980 / 4,406 tokens, 185.78 neurons, ~US$0.0020. Rework 2 calls (196, 198) = 16.40 neurons, 9.8% of build neurons (168.04). 0 wasted, 0 API failures, 1 re-parse.
+Receipts (seal-by 2026-11-13T00:05:00Z): build 01M76HYZ9HD4PMHGETGYCBZ3R9 (194), 01M76J01DBRFPJBK37CN16CY7V (195), 01M76J2ZYCMBQAVHR0S3Z6WNBY (196), 01M76J4MBSJ81NZ08J58GS8PC9 (197), 01M76J5VEF4N1XZSM6DQMR2VRX (198); live 01M76J65DA82FZ71D5VBM8FRYV (PT Helena).
+Known limit (not in scope): the cap is per session, so Start over gives a fresh cap; a per-day or per-player cap would be a later sprint.
+
+### FullCup observations, M2 sprint 4 (evidence qa/m2s4-probes/)
+- Seal check (signed out curl, 2026-11-12 00:18Z): all 13 pending receipts (7 M2s2 + 6 M2s3) HTTP 200, Genuine receipt, Sealed at 2026-11-12 00:05:23 UTC, one of 30 in the signed root of 2026-11-11. Exact costs M2s2 sum $0.002031 (logged ~$0.0020), M2s3 sum $0.001377 (logged ~$0.0014). Models match (gemma for build, llama-4-scout for live).
+- Reproduced again: cost null in the chat response (6/6), duplicate receipt headers (6/6), enable_thinking=false honoured (5/5), cached_tokens 0.
+- No new FullCup anomaly.

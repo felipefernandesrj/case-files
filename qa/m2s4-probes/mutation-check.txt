@@ -1,0 +1,21 @@
+M1 cap check disabled in server:
+FAIL the server stops calling the model at the cap: should be 429
+FAIL failed model calls count toward the cap: capped should be 429
+5 passed, 2 failed
+M2 default cap raised to 1000:
+FAIL default cap is DEFAULT_MAX_CALLS and a case can set its own maxCalls: default cap mismatch
+FAIL the server stops calling the model at the cap: should be 429
+FAIL failed model calls count toward the cap: capped should be 429
+FAIL worst-case spend of one playthrough stays under the documented ceiling for every case: violin worst case 108.8706 over 0.1
+3 passed, 4 failed
+M3 only successful calls counted:
+FAIL failed model calls count toward the cap: capped should be 429
+6 passed, 1 failed
+M4 worst case drops input tokens:
+7 passed, 0 failed
+M4 (after call 196) worst case drops input tokens:
+FAIL worst-case formula matches a hand-computed playthrough: got 0.00017
+7 passed, 1 failed
+M5 worst case drops resent answers from history:
+FAIL worst-case formula matches a hand-computed playthrough: got 0.0007505000000000001
+7 passed, 1 failed

@@ -1,0 +1,65 @@
+# Task (M2 sprint 4): tests for the per-case call cap and the worst-case spend of one playthrough
+Output 1 FILE block and 2 literal edit blocks, nothing else.
+FILE format: <<<FILE path>>> newline, full file content, newline, <<<END>>>.
+Edit format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Every OLD is unique in the file. No prose, no fences, no em-dashes, no thinking aloud. 2-space indentation, plain ES2020, top-level statements at column 0.
+
+FILE test/budget.mjs. Write the whole file in the same style as this header, which you must copy exactly as its first lines:
+import { once } from 'node:events';
+import { createServer } from '../src/server.js';
+import { loadCase, systemPrompt, CASES } from '../src/case.js';
+import { friendly } from '../src/messages.js';
+import { PLAY_MODEL, DEFAULT_MAX_CALLS, PLAYTHROUGH_CEILING_USD, maxCallsFor, worstCaseSpend } from '../src/budget.js';
+
+let passed = 0, failed = 0;
+const assert = (cond, msg) => { if (!cond) throw new Error(msg); };
+const test = async (name, fn) => {
+  try {
+    await fn();
+    console.log(`PASS ${name}`);
+    passed++;
+  } catch (err) {
+    console.error(`FAIL ${name}: ${err.message}`);
+    failed++;
+  }
+};
+
+// Fake model: counts calls and keeps the last payload. fail=true answers 502.
+const fake = { calls: 0, payload: null, fail: false };
+const fetchImpl = async (url, opts) => {
+  fake.calls += 1;
+  fake.payload = JSON.parse(opts.body);
+  if (fake.fail) return new Response(JSON.stringify({ error: { message: 'boom' } }), { status: 502, headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify({ choices: [{ message: { content: 'I was in the hall all evening.' } }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+};
+const server = createServer({ caseFile: 'content/case.json', scoreFile: null, key: 'test-key', baseUrl: 'http://fake.local/v1', fetchImpl, mock: false });
+server.listen(0);
+await once(server, 'listening');
+const P = `http://localhost:${server.address().port}/api`;
+const post = (p, b) => fetch(P + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then(async (r) => ({ status: r.status, body: await r.json() }));
+const violin = loadCase();
+const suspectId = violin.suspects[0].id;
+const ask = (sessionId, lang = 'en') => post('/ask', { sessionId, suspectId, question: 'Where were you?', lang });
+
+Then these 7 tests, in this order, each with await test('name', async () => { ... });
+1. 'default cap is DEFAULT_MAX_CALLS and a case can set its own maxCalls': assert DEFAULT_MAX_CALLS === 20; for every file in Object.values(CASES) assert maxCallsFor(loadCase(file)) === 20; assert maxCallsFor({ maxCalls: 5 }) === 5; for each bad value of [0, -1, '5', 2.5, 101, null] assert maxCallsFor({ maxCalls: bad }) === 20.
+2. 'call_cap has a friendly EN and PT message': const en = friendly('call_cap', 'en'), pt = friendly('call_cap', 'pt'); assert both are non-empty strings, en !== pt, /accusation/.test(en), /acusação/.test(pt).
+3. 'the server stops calling the model at the cap': fake.calls = 0; fake.fail = false; const sid = (await post('/session', {})).body.sessionId; loop 20 times: const a = await ask(sid); assert a.status === 200. Then const capped = await ask(sid); assert capped.status === 429, capped.body.error === 'call_cap', capped.body.message === friendly('call_cap', 'en'), capped.body.questions === 20; assert fake.calls === 20 (message `model called ${fake.calls} times`). Then const pt = await ask(sid, 'pt'); assert pt.status === 429 and pt.body.message === friendly('call_cap', 'pt'); assert fake.calls === 20.
+4. 'accusing still works after the cap': using a new session, ask 20 times, then const v = await post('/accuse', { sessionId: sid, suspectId: violin.culprit, player: 'cap-test', lang: 'en' }); assert v.status === 200 and v.body.correct === true.
+5. 'a new playthrough gets a fresh cap': fake.calls = 0; new session; const a = await ask(sid); assert a.status === 200 and fake.calls === 1.
+6. 'failed model calls count toward the cap': fake.calls = 0; fake.fail = true; new session; loop 20 times: const a = await ask(sid); assert a.status === 502. Then const capped = await ask(sid); assert capped.status === 429 and capped.body.error === 'call_cap'; assert fake.calls === 20; finally set fake.fail = false.
+7. 'worst-case spend of one playthrough stays under the documented ceiling for every case': assert fake.payload.model === PLAY_MODEL (message `play model is ${fake.payload.model}`); const maxTokens = fake.payload.max_tokens; assert Number.isInteger(maxTokens) && maxTokens > 0; for each [id, file] of Object.entries(CASES): const c = loadCase(file); let systemChars = 0; for each suspect s of c.suspects and each lang of ['en', 'pt'] systemChars = Math.max(systemChars, systemPrompt(c, s.id, lang).length); const calls = maxCallsFor(c); const usd = worstCaseSpend({ calls, maxTokens, systemChars }); console.log(`  worst case ${id}: ${calls} calls x ${maxTokens} max_tokens, system ${systemChars} chars, US$ ${usd.toFixed(4)} (ceiling ${PLAYTHROUGH_CEILING_USD})`); assert usd > 0 and usd < PLAYTHROUGH_CEILING_USD (message `${id} worst case ${usd} over ${PLAYTHROUGH_CEILING_USD}`).
+
+End the file with exactly these 3 lines:
+server.close();
+console.log(`\n${passed} passed, ${failed} failed`);
+process.exit(failed ? 1 : 0);
+
+Block 1, package.json. OLD is exactly this fragment:
+ && node test/keyboard.mjs"
+NEW is exactly this fragment:
+ && node test/budget.mjs && node test/keyboard.mjs"
+
+Block 2, src/messages.js. OLD is exactly this 1 line:
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'bad_request'} code
+NEW is exactly this 1 line:
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'} code

@@ -4920,5 +4920,33 @@
    "x-ratelimit-reset": "1794399420"
   },
   "error": null
+ },
+ {
+  "at": "2026-11-12T00:23:10.884Z",
+  "purpose": "m2s4-smoke:pt:helena",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "status": 200,
+  "ms": 1969,
+  "usage": {
+   "prompt_tokens": 518,
+   "completion_tokens": 65,
+   "total_tokens": 583,
+   "neurons": 17.737274169921875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M76J65DA82FZ71D5VBM8FRYV",
+   "x-fullcup-receipt-id": "01M76J65DA82FZ71D5VBM8FRYV",
+   "x-fullcup-seal-by": "2026-11-13T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794443040"
+  },
+  "error": null
  }
 ]

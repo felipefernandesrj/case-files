@@ -1,0 +1,22 @@
+# Task (M2 sprint 4, rework of 197): three small doc fixes
+Output ONLY these 4 literal edit blocks, copied exactly. Format: <<<REPLACE path>>> newline, OLD, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. Every block starts with exactly three < characters. No prose, no fences, no thinking aloud.
+
+Block 1, docs/SPEC.md. OLD is exactly this fragment:
+case-select: 11, budget: 8,
+NEW is exactly this fragment:
+case-select: 11, icons: 3, budget: 8,
+
+Block 2, CHANGELOG.md. OLD is exactly this fragment:
+* Each playthrough now has a cap
+NEW is exactly this fragment:
+- Each playthrough now has a cap
+
+Block 3, CHANGELOG.md. OLD is exactly this fragment:
+* The new `worstCaseSpend` function
+NEW is exactly this fragment:
+- The new `worstCaseSpend` function
+
+Block 4, README.md. OLD is exactly this fragment:
+and reaches a friendly message when the limit is hit.
+NEW is exactly this fragment:
+and shows a friendly message when the limit is reached.

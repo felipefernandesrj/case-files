@@ -215,3 +215,10 @@ Handwritten visual V1 (0da9fc5) and V2 (1f583da) were replaced in the working tr
 ## Visual V4 (v0.4.7)
 
 M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, timetable rail, stamps/suspect rows/hourglass, folder tabs). Game mechanics, motion and generated art are scheduled in `/workspace/casefiles-qa/run26/milestones-visual.md`, not in this version. Product CSS/HTML/SVG/JS went through the Cup text key (`@cf/google/gemma-4-26b-a4b-it`). Receipts: `/workspace/casefiles-qa/run26/receipts.md`. Suite remains 119 checks. No live play smoke and no paid image calls.
+
+## M2 sprint 4 (v0.4.8)
+
+- Scope: per-case cap on model calls per playthrough (`maxCalls`, default 20, 429 `call_cap` with EN/PT message, no model call once capped, failed calls count) and a worst-case spend test for one playthrough of each case (ceiling US$0.10; today Violin US$0.0606, Night Train US$0.0595).
+- Calls 194-198 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off), plus 1 live llama-4-scout smoke (tools/smoke-m2s4.mjs, PT Helena 200, correct accuse score 100).
+- Result: npm test 127/127 (was 119). 6 key calls, 5 980 / 4 406 tokens, 185.8 neurons (~US$ 0.0020), rework 2 calls = 9.8% of build neurons, 0 API failures, 1 re-parse (195 edit framing).
+- Details, receipts and FullCup observations: qa/rework.md (M2 sprint 4).

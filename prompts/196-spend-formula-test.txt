@@ -1,0 +1,14 @@
+# Task (M2 sprint 4): one more check so the worst-case formula cannot silently drop input tokens
+Output ONLY 1 literal edit block. Format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. Start the block with exactly three < characters: <<<REPLACE test/budget.mjs>>>. The line right after ===== is the first line of NEW. No prose, no fences, no em-dashes, no thinking aloud. Top-level code at column 0, 2-space indentation inside.
+
+Block 1, test/budget.mjs. OLD is exactly this 1 line:
+server.close();
+NEW is exactly these 8 lines:
+line 1: await test('worst-case formula matches a hand-computed playthrough', async () => {
+line 2:   // 2 calls: input 1000+50 then 1000+150+50 = 2250 tokens at 0.27, output 2 x 100 at 0.85 => 777.5 / 1e6
+line 3:   const usd = worstCaseSpend({ calls: 2, maxTokens: 100, systemChars: 1000, questionChars: 50 });
+line 4:   assert(Math.abs(usd - 0.0007775) < 1e-12, `got ${usd}`);
+line 5: });
+line 6: (empty)
+line 7: server.close();
+(that is 7 lines; stop after line 7.)

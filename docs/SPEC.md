@@ -107,9 +107,15 @@ This executes:
 6. `node test/night-train.mjs` (Night Train case file: fair play with 4 suspects, timeline, privacy; not the default case)
 7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page, friendly one line error and exit code 2 for an unknown id in the server and the CLI)
 8. `node test/icons.mjs` (icon sprite ids and no 404 on referenced icon paths, including rotate-ccw)
-9. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+9. `node test/budget.mjs` (per-case call cap per playthrough, friendly call_cap message, failed calls count, fresh cap per session, worst-case spend under the ceiling for every case, hand-computed formula check)
+10. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 119 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, keyboard: 13).
+Total checks: 127 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, budget: 8, keyboard: 13).
+
+### Play budget (`src/budget.js`, M2 sprint 4)
+- `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.
+- Cap in `/api/ask`: Every question that reaches the model counts toward the cap even if the call fails; if reached, the server returns a 429 with `call_cap` and no model call is made, but the player can still accuse or start a new session.
+- `worstCaseSpend({ calls, maxTokens, systemChars })`: Calculates the highest possible cost by assuming each call uses `maxTokens` of 300 and resends the system prompt and full history at the `llama-4-scout` price to ensure it remains under the `PLAYTHROUGH_CEILING_USD` of US$0.10.
 
 ### Case engine (`src/case.js`, M2)
 - `CASES` and `caseFileFor(id)`: frozen registry containing violin (content/case.json) and night-train (content/cases/night-train.json) that throws unknown_case for any other IDs.

@@ -1,0 +1,71 @@
+# Task (M2 sprint 4): a per-case cap on model calls per playthrough, and the worst-case spend formula
+A playthrough is one session. Each /api/ask that reaches the answer step uses one model call (live or mock). Once a session has used its case's cap, /api/ask must answer 429 with error "call_cap" and a friendly EN/PT message, and must NOT call the model. Failed model calls still count (they may still cost).
+Output 1 FILE block and 4 literal edit blocks, nothing else.
+FILE format: <<<FILE path>>> newline, full file content, newline, <<<END>>>.
+Edit format: <<<REPLACE path>>> newline, OLD exactly as given, newline, ===== (exactly five =) on its own line, newline, NEW, newline, <<<END>>>. The line right after ===== is the first line of NEW; do NOT put an empty line after =====. Every OLD is unique in the file. Copy code exactly as given, keep the indentation shown. No prose, no fences, no em-dashes, no thinking aloud. 2-space indentation, plain ES2020.
+
+FILE src/budget.js, exactly this content (top-level lines start at column 0):
+// Per-case generation cap and worst-case spend for one playthrough (M2 sprint 4).
+
+/** Model used for suspect answers (src/proxy.js default) and its Workers AI price in USD per 1M tokens. */
+export const PLAY_MODEL = '@cf/meta/llama-4-scout-17b-16e-instruct';
+export const PLAY_PRICE = Object.freeze({ inPerM: 0.27, outPerM: 0.85 });
+
+/** Model calls allowed in one playthrough (one session) when a case sets no maxCalls. */
+export const DEFAULT_MAX_CALLS = 20;
+
+/** Documented ceiling for the worst-case spend of one playthrough of any case, in USD. */
+export const PLAYTHROUGH_CEILING_USD = 0.1;
+
+/** Calls allowed in one playthrough of case c: its maxCalls (whole number 1 to 100) or DEFAULT_MAX_CALLS. */
+export function maxCallsFor(c) {
+  const n = c && c.maxCalls;
+  return Number.isInteger(n) && n >= 1 && n <= 100 ? n : DEFAULT_MAX_CALLS;
+}
+
+/**
+ * Worst-case USD for one playthrough: every call answers with maxTokens and resends the system
+ * prompt plus the whole history so far. One token is counted per character, an upper bound.
+ */
+export function worstCaseSpend({ calls, maxTokens, systemChars, questionChars = 500, price = PLAY_PRICE }) {
+  let usd = 0;
+  for (let k = 0; k < calls; k++) {
+    const input = systemChars + k * (questionChars + maxTokens) + questionChars;
+    usd += (input * price.inPerM + maxTokens * price.outPerM) / 1e6;
+  }
+  return usd;
+}
+
+Block 1, src/messages.js. OLD is exactly these 2 lines:
+    bad_request: {
+      en: 'The question could not be read, please type it again.',
+NEW is exactly these 6 lines:
+    call_cap: {
+      en: 'You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game.',
+      pt: 'Você usou todas as perguntas deste caso nesta partida. Faça sua acusação ou toque em Nova partida para jogar de novo.',
+    },
+    bad_request: {
+      en: 'The question could not be read, please type it again.',
+
+Block 2, src/server.js. OLD is exactly this 1 line:
+import { friendly } from './messages.js';
+NEW is exactly these 2 lines:
+import { friendly } from './messages.js';
+import { maxCallsFor } from './budget.js';
+
+Block 3, src/server.js. OLD is exactly this 1 line:
+          questions: 0,
+NEW is exactly these 2 lines:
+          questions: 0,
+          calls: 0,
+
+Block 4, src/server.js. OLD is exactly this 1 line:
+        // question is counted only after a successful answer (sprint 6)
+NEW is exactly these 7 lines (8 spaces before "if", "return" has 10, the closing "}" has 8):
+        // per-case cap on model calls per playthrough (M2 sprint 4): no model call once capped
+        if (sess.calls >= maxCallsFor(play)) {
+          return sendJSON(res, 429, { error: 'call_cap', message: friendly('call_cap', lang), questions: sess.questions });
+        }
+        sess.calls += 1;
+
+        // question is counted only after a successful answer (sprint 6)

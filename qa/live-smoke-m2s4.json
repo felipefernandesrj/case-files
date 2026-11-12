@@ -1,0 +1,49 @@
+[
+ {
+  "status": {
+   "mode": "live",
+   "caseId": "case-night-train-002"
+  },
+  "cap": 20
+ },
+ {
+  "lang": "pt",
+  "suspect": "helena",
+  "q": "O que você viu depois da meia-noite?",
+  "status": 200,
+  "questions": 1,
+  "answer": "Depois da meia-noite, eu estava indo para a cabine-leito 7 quando as luzes se apagaram no túnel de Black Ridge. Quando as luzes voltaram, eu estava do lado de fora dessa cabine conversando com o Victor. Não vi nada suspeito relacionado ao cofre nesse momento.",
+  "words": 45,
+  "ptHint": true,
+  "confesses": null,
+  "namesOutsideCast": [
+   "Depois",
+   "Black",
+   "Ridge",
+   "Quando",
+   "Não"
+  ],
+  "upstreamMs": 1969,
+  "receipt": "01M76J65DA82FZ71D5VBM8FRYV",
+  "dupHeader": true,
+  "sealBy": "2026-11-13T00:05:00.000Z",
+  "cost": null,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "usage": {
+   "prompt_tokens": 518,
+   "completion_tokens": 65,
+   "total_tokens": 583,
+   "neurons": 17.737274169921875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": 200,
+  "correct": true,
+  "culpritName": "Inês Duarte",
+  "score": 100,
+  "questions": 1
+ }
+]

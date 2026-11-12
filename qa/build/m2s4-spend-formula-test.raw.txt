@@ -1,0 +1,11 @@
+<<<REPLACE test/budget.mjs>>>
+server.close();
+=====
+await test('worst-case formula matches a hand-computed playthrough', async () => {
+  // 2 calls: input 1000+50 then 1000+150+50 = 2250 tokens at 0.27, output 2 x 100 at 0.85 => 777.5 / 1e6
+  const usd = worstCaseSpend({ calls: 2, maxTokens: 100, systemChars: 1000, questionChars: 50 });
+  assert(Math.abs(usd - 0.0007775) < 1e-12, `got ${usd}`);
+});
+
+server.close();
+<<<END>>>

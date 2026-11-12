@@ -1,0 +1,20 @@
+<<<REPLACE docs/SPEC.md>>>
+case-select: 11, budget: 8,
+=====
+case-select: 11, icons: 3, budget: 8,
+<<<END>>>
+<<<REPLACE CHANGELOG.md>>>
+* Each playthrough now has a cap
+=====
+- Each playthrough now has a cap
+<<<END>>>
+<<<REPLACE CHANGELOG.md>>>
+* The new `worstCaseSpend` function
+=====
+- The new `worstCaseSpend` function
+<<<END>>>
+<<<REPLACE README.md>>>
+and reaches a friendly message when the limit is hit.
+=====
+and shows a friendly message when the limit is reached.
+<<<END>>>

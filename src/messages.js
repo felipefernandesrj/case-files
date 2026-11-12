@@ -1,6 +1,6 @@
 /**
  * Friendly messages for client‑facing errors.
- * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'bad_request'} code
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'} code
  * @param {'en'|'pt'} lang
  * @returns {string}
  */
@@ -21,6 +21,10 @@ export function friendly(code, lang) {
     upstream: {
       en: 'The suspects could not answer right now, please ask again in a moment. Your question was not counted.',
       pt: 'Os suspeitos não puderam responder agora, por favor tente novamente em um momento. Sua pergunta não foi contabilizada.',
+    },
+    call_cap: {
+      en: 'You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game.',
+      pt: 'Você usou todas as perguntas deste caso nesta partida. Faça sua acusação ou toque em Nova partida para jogar de novo.',
     },
     bad_request: {
       en: 'The question could not be read, please type it again.',

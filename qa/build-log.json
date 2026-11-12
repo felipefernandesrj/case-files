@@ -7607,5 +7607,271 @@
   },
   "files": [],
   "skipped": []
+ },
+ {
+  "label": "m2s4-call-cap",
+  "at": "2026-11-12T00:19:21.219Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 6170,
+  "usage": {
+   "prompt_tokens": 1201,
+   "completion_tokens": 810,
+   "total_tokens": 2011,
+   "neurons": 33.009090423583984,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M76HYZ9HD4PMHGETGYCBZ3R9",
+   "x-fullcup-receipt-id": "01M76HYZ9HD4PMHGETGYCBZ3R9",
+   "x-fullcup-seal-by": "2026-11-13T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794442800"
+  },
+  "files": [
+   {
+    "path": "src/budget.js",
+    "lines": 30
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s4-call-cap-test",
+  "at": "2026-11-12T00:20:36.522Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 47037,
+  "usage": {
+   "prompt_tokens": 1910,
+   "completion_tokens": 2099,
+   "total_tokens": 4009,
+   "neurons": 74.60908508300781,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M76J01DBRFPJBK37CN16CY7V",
+   "x-fullcup-receipt-id": "01M76J01DBRFPJBK37CN16CY7V",
+   "x-fullcup-seal-by": "2026-11-13T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794442800"
+  },
+  "files": [
+   {
+    "path": "test/budget.mjs",
+    "lines": 130
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s4-call-cap-test-reframe",
+  "at": "2026-11-12T00:20:50.942Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": [
+   "test/budget.mjs"
+  ],
+  "note": "REPARSE of m2s4-call-cap-test receipt 01M76J01DBRFPJBK37CN16CY7V: model framed 2 edits as <REPLACE path> (single brackets); framing fixed, content verbatim, no new call"
+ },
+ {
+  "label": "m2s4-spend-formula-test",
+  "at": "2026-11-12T00:21:32.179Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 5752,
+  "usage": {
+   "prompt_tokens": 440,
+   "completion_tokens": 189,
+   "total_tokens": 629,
+   "neurons": 9.154544830322266,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M76J2ZYCMBQAVHR0S3Z6WNBY",
+   "x-fullcup-receipt-id": "01M76J2ZYCMBQAVHR0S3Z6WNBY",
+   "x-fullcup-seal-by": "2026-11-13T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794442920"
+  },
+  "files": [
+   {
+    "path": "test/budget.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s4-docs",
+  "at": "2026-11-12T00:22:49.045Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 28846,
+  "usage": {
+   "prompt_tokens": 1578,
+   "completion_tokens": 1088,
+   "total_tokens": 2666,
+   "neurons": 44.01818084716797,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M76J4MBSJ81NZ08J58GS8PC9",
+   "x-fullcup-receipt-id": "01M76J4MBSJ81NZ08J58GS8PC9",
+   "x-fullcup-seal-by": "2026-11-13T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794442980"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2s4-docs-rework",
+  "at": "2026-11-12T00:23:05.133Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 5103,
+  "usage": {
+   "prompt_tokens": 333,
+   "completion_tokens": 155,
+   "total_tokens": 488,
+   "neurons": 7.254545211791992,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M76J5VEF4N1XZSM6DQMR2VRX",
+   "x-fullcup-receipt-id": "01M76J5VEF4N1XZSM6DQMR2VRX",
+   "x-fullcup-seal-by": "2026-11-13T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794443040"
+  },
+  "files": [
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
  }
 ]

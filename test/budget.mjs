@@ -1,0 +1,136 @@
+import { once } from 'node:events';
+import { createServer } from '../src/server.js';
+import { loadCase, systemPrompt, CASES } from '../src/case.js';
+import { friendly } from '../src/messages.js';
+import { PLAY_MODEL, DEFAULT_MAX_CALLS, PLAYTHROUGH_CEILING_USD, maxCallsFor, worstCaseSpend } from '../src/budget.js';
+
+let passed = 0, failed = 0;
+const assert = (cond, msg) => { if (!cond) throw new Error(msg); };
+const test = async (name, fn) => {
+  try {
+    await fn();
+    console.log(`PASS ${name}`);
+    passed++;
+  } catch (err) {
+    console.error(`FAIL ${name}: ${err.message}`);
+    failed++;
+  }
+};
+
+// Fake model: counts calls and keeps the last payload. fail=true answers 502.
+const fake = { calls: 0, payload: null, fail: false };
+const fetchImpl = async (url, opts) => {
+  fake.calls += 1;
+  fake.payload = JSON.parse(opts.body);
+  if (fake.fail) return new Response(JSON.stringify({ error: { message: 'boom' } }), { status: 502, headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify({ choices: [{ message: { content: 'I was in the hall all evening.' } }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+};
+const server = createServer({ caseFile: 'content/case.json', scoreFile: null, key: 'test-key', baseUrl: 'http://fake.local/v1', fetchImpl, mock: false });
+server.listen(0);
+await once(server, 'listening');
+const P = `http://localhost:${server.address().port}/api`;
+const post = (p, b) => fetch(P + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then(async (r) => ({ status: r.status, body: await r.json() }));
+const violin = loadCase();
+const suspectId = violin.suspects[0].id;
+const ask = (sessionId, lang = 'en') => post('/ask', { sessionId, suspectId, question: 'Where were you?', lang });
+
+await test('default cap is DEFAULT_MAX_CALLS and a case can set its own maxCalls', async () => {
+  assert(DEFAULT_MAX_CALLS === 20, 'default cap mismatch');
+  for (const file of Object.values(CASES)) {
+    assert(maxCallsFor(loadCase(file)) === 20, `case ${file} should have default cap`);
+  }
+  assert(maxCallsFor({ maxCalls: 5 }) === 5, 'custom maxCalls not respected');
+  for (const bad of [0, -1, '5', 2.5, 101, null]) {
+    assert(maxCallsFor({ maxCalls: bad }) === 20, `bad maxCalls ${bad} should reset to default`);
+  }
+});
+
+await test('call_cap has a friendly EN and PT message', async () => {
+  const en = friendly('call_cap', 'en'), pt = friendly('call_cap', 'pt');
+  assert(en.length > 0 && pt.length > 0, 'messages empty');
+  assert(en !== pt, 'messages identical');
+  assert(/accusation/.test(en), 'en missing accusation');
+  assert(/acusação/.test(pt), 'pt missing acusação');
+});
+
+await test('the server stops calling the model at the cap', async () => {
+  fake.calls = 0;
+  fake.fail = false;
+  const sid = (await post('/session', {})).body.sessionId;
+  for (let i = 0; i < 20; i++) {
+    const a = await ask(sid);
+    assert(a.status === 200, `call ${i} failed`);
+  }
+  const capped = await ask(sid);
+  assert(capped.status === 429, 'should be 429');
+  assert(capped.body.error === 'call_cap', 'wrong error code');
+  assert(capped.body.message === friendly('call_cap', 'en'), 'wrong message');
+  assert(capped.body.questions === 20, 'wrong question count');
+  assert(fake.calls === 20, `model called ${fake.calls} times`);
+  const pt = await ask(sid, 'pt');
+  assert(pt.status === 429, 'pt session should be 429');
+  assert(pt.body.message === friendly('call_cap', 'pt'), 'pt message mismatch');
+  assert(fake.calls === 20, 'calls increased after cap');
+});
+
+await test('accusing still works after the cap', async () => {
+  const sid = (await post('/session', {})).body.sessionId;
+  for (let i = 0; i < 20; i++) await ask(sid);
+  const v = await post('/accuse', { sessionId: sid, suspectId: violin.culprit, player: 'cap-test', lang: 'en' });
+  assert(v.status === 200, 'accuse failed after cap');
+  assert(v.body.correct === true, 'accuse logic broken');
+});
+
+await test('a new playthrough gets a fresh cap', async () => {
+  fake.calls = 0;
+  const sid = (await post('/session', {})).body.sessionId;
+  const a = await ask(sid);
+  assert(a.status === 200 && fake.calls === 1, 'new session did not reset calls');
+});
+
+await test('failed model calls count toward the cap', async () => {
+  fake.calls = 0;
+  fake.fail = true;
+  const sid = (await post('/session', {})).body.sessionId;
+  for (let i = 0; i < 20; i++) {
+    const a = await ask(sid);
+    assert(a.status === 502, 'should have failed');
+  }
+  const capped = await ask(sid);
+  assert(capped.status === 429, 'capped should be 429');
+  assert(capped.body.error === 'call_cap', 'error should be call_cap');
+  assert(fake.calls === 20, 'failed calls not counted');
+  fake.fail = false;
+});
+
+await test('worst-case spend of one playthrough stays under the documented ceiling for every case', async () => {
+  // Trigger one valid call to populate fake.payload
+  const sid = (await post('/session', {})).body.sessionId;
+  await ask(sid);
+  assert(fake.payload.model === PLAY_MODEL, `play model is ${fake.payload.model}`);
+  const maxTokens = fake.payload.max_tokens;
+  assert(Number.isInteger(maxTokens) && maxTokens > 0, 'invalid max_tokens');
+  for (const [id, file] of Object.entries(CASES)) {
+    const c = loadCase(file);
+    let systemChars = 0;
+    for (const s of c.suspects) {
+      for (const lang of ['en', 'pt']) {
+        systemChars = Math.max(systemChars, systemPrompt(c, s.id, lang).length);
+      }
+    }
+    const calls = maxCallsFor(c);
+    const usd = worstCaseSpend({ calls, maxTokens, systemChars });
+    console.log(`  worst case ${id}: ${calls} calls x ${maxTokens} max_tokens, system ${systemChars} chars, US$ ${usd.toFixed(4)} (ceiling ${PLAYTHROUGH_CEILING_USD})`);
+    assert(usd > 0 && usd < PLAYTHROUGH_CEILING_USD, `${id} worst case ${usd} over ${PLAYTHROUGH_CEILING_USD}`);
+  }
+});
+
+await test('worst-case formula matches a hand-computed playthrough', async () => {
+  // 2 calls: input 1000+50 then 1000+150+50 = 2250 tokens at 0.27, output 2 x 100 at 0.85 => 777.5 / 1e6
+  const usd = worstCaseSpend({ calls: 2, maxTokens: 100, systemChars: 1000, questionChars: 50 });
+  assert(Math.abs(usd - 0.0007775) < 1e-12, `got ${usd}`);
+});
+
+server.close();
+console.log(`\n${passed} passed, ${failed} failed`);
+process.exit(failed ? 1 : 0);
