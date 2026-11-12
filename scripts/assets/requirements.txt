@@ -1,6 +1,19 @@
-# Local, unpaid pipeline only. Install in a venv; do not commit the venv or weights.
-pillow>=11
-numpy>=2
-rembg[cpu]>=2.0.87
-cairosvg>=2.7
-# rembg model used: u2net (Apache-2.0). Do not use bria-rmbg (CC BY-NC 4.0).
+# Local, unpaid asset pipeline only. Install in a venv; never commit the venv or weights.
+# Pinned for reproducible keys/mattes. Licences: see THIRD_PARTY_NOTICES.md.
+pillow==13.0.0
+numpy==2.5.4
+scipy==1.18.1
+cairosvg==2.9.1
+# Fallback segmentation (only used when the key cannot clear a plate)
+rembg[cpu]==2.0.87
+onnxruntime==1.31.1
+huggingface_hub==2.4.0
+transformers==5.22.2
+timm==1.0.31
+kornia==0.9.0
+einops==0.8.2
+safetensors==0.8.0
+# CPU wheels: pip install --index-url https://download.pytorch.org/whl/cpu torch==2.15.0 torchvision==0.29.2
+torch==2.15.0
+torchvision==0.29.2
+# Never: rembg "bria-rmbg" (RMBG-2.0, CC BY-NC 4.0). Not used: isnet-general-use (weight licence unclear).

@@ -1,0 +1,122 @@
+<<<REPLACE public/index.html>>>
+  'port-elling': 'i-loc-platform'
+};
+===
+  'port-elling': 'i-loc-platform'
+};
+const LOC_ART = {
+  'academy-exterior': 'violin-academy-exterior',
+  'instrument-room': 'violin-instrument-room',
+  'rehearsal-hall': 'violin-rehearsal-hall',
+  'hallway': 'violin-hallway-cart',
+  'exterior': 'night-train-exterior',
+  'luggage-safe': 'night-train-luggage-safe',
+  'dining-kitchen': 'night-train-dining-kitchen',
+  'sleeper-corridor': 'night-train-sleeper-corridor',
+  'tunnel': 'night-train-tunnel',
+  'port-elling': 'night-train-port-elling'
+};
+function artCase() { return caseData && caseData.file === 'violin' ? 'violin' : 'night-train'; }
+function setPortrait(el, id, mood) {
+  el.style.backgroundImage = `url(/assets/characters/${artCase()}-${id}-${mood || 'neutral'}.png)`;
+  el.classList.add('has-art');
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  face.textContent = initials(s.name);
+  const who = document.createElement('strong');
+===
+  face.textContent = initials(s.name);
+  setPortrait(face, s.id, 'neutral');
+  const who = document.createElement('strong');
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    face.textContent = initials(s.name);
+    const who = document.createElement('span');
+===
+    face.textContent = initials(s.name);
+    setPortrait(face, s.id, 'neutral');
+    const who = document.createElement('span');
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    btn.setAttribute('aria-pressed', currentRoom === r.id ? 'true' : 'false');
+===
+    btn.setAttribute('aria-pressed', currentRoom === r.id ? 'true' : 'false');
+    if (LOC_ART[r.id]) {
+      btn.style.setProperty('--room-art', `url(/assets/loc/${LOC_ART[r.id]}.png)`);
+    }
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    art.setAttribute('aria-hidden', 'true');
+===
+    art.setAttribute('aria-hidden', 'true');
+    art.style.backgroundImage = `url(/assets/titles/${item.id === 'violin' ? 'violin' : 'night-train'}-stage.png)`;
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  verdict.classList.toggle('ok', !!correct);
+===
+  verdict.classList.toggle('ok', !!correct);
+  verdict.style.setProperty('--verdict-art', `url(/assets/loc/violin-verdict-${correct ? 'closed' : 'wrong'}.png)`);
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+.portrait { width: 36px; height: 36px; border-radius: 4px; background: var(--cf-ink-soft); flex-shrink: 0; display: grid; place-items: center; color: var(--cf-lamp); }
+===
+.portrait { width: 36px; height: 36px; border-radius: 4px; background: var(--cf-ink-soft); flex-shrink: 0; display: grid; place-items: center; color: var(--cf-lamp); }
+.portrait.has-art { background-size: cover; background-position: center; background-repeat: no-repeat; image-rendering: pixelated; color: transparent; font-size: 0; background-color: var(--cf-ink-soft); }
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+  background:
+    linear-gradient(180deg, rgba(12,11,10,0.45) 0%, rgba(12,11,10,0.94) 58%),
+    #0C0B0A;
+===
+  background:
+    var(--room-art, none) center / cover no-repeat,
+    linear-gradient(180deg, rgba(12,11,10,0.45) 0%, rgba(12,11,10,0.94) 58%),
+    #0C0B0A;
+  image-rendering: pixelated;
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+  background:
+    linear-gradient(180deg, rgba(12,11,10,0.35) 0%, rgba(12,11,10,0.92) 58%),
+    #0C0B0A;
+===
+  background:
+    var(--room-art, none) center / cover no-repeat,
+    linear-gradient(180deg, rgba(12,11,10,0.35) 0%, rgba(12,11,10,0.92) 58%),
+    #0C0B0A;
+  image-rendering: pixelated;
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+.folder-art { min-height: 48px; display: flex; align-items: center; justify-content: center; background: #1a1210; border-radius: 2px; }
+===
+.folder-art { min-height: 120px; display: flex; align-items: center; justify-content: center; background: #1a1210; border-radius: 2px; background-size: cover; background-position: center; image-rendering: pixelated; }
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+#verdict {
+  border: 4px double var(--cf-seal);
+===
+#verdict {
+  border: 4px double var(--cf-seal);
+  background: linear-gradient(rgba(12,11,10,0.78), rgba(12,11,10,0.9)), var(--verdict-art, none) center / cover no-repeat;
+  image-rendering: pixelated;
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+  background-image: radial-gradient(var(--cf-line) 1px, transparent 0);
+  background-size: 20px 20px;
+===
+  background-image: url(/assets/tex/cork.png);
+  background-size: 256px 256px;
+  background-color: #1a1210;
+  image-rendering: pixelated;
+<<<END>>>

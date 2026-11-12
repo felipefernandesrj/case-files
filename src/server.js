@@ -67,6 +67,7 @@ const PUBLIC_TYPES = {
   '.woff': 'font/woff',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
+  '.webp': 'image/webp',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.json': 'application/json; charset=utf-8',

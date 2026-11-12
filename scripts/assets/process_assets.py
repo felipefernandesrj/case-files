@@ -9,8 +9,9 @@ and a manifest.
 This script does not call FullCup, flux, or any paid API. Game UI and image
 prompts still go through the Cup key; this is the free local finishing step.
 
-Default rembg model is u2net (Apache-2.0). Never use rembg's default
-bria-rmbg here (CC BY-NC 4.0 / paid commercial agreement).
+Auto mode: border-sampled flood key first, ToonOut (MIT) segmentation fallback, see
+bgremove.py and THIRD_PARTY_NOTICES.md. Never use rembg's default bria-rmbg
+(CC BY-NC 4.0 / paid commercial agreement).
 """
 
 from __future__ import annotations
@@ -53,7 +54,8 @@ CHROMA_GREEN = (0, 255, 0)
 DEFAULT_SIZES = (128, 64, 32)
 DEFAULT_GRID = 64
 REMBG_SAFE_MODELS = (
-    "u2net",  # Apache-2.0 (U-2-Net); default fallback
+    "toonout",  # MIT (BiRefNet fine-tune); default fallback via bgremove.py
+    "u2net",  # Apache-2.0 (U-2-Net)
     "u2netp",
     "silueta",
     "birefnet-general-lite",  # MIT (code + weights), heavier RAM
@@ -134,12 +136,19 @@ def ffmpeg_colorkey(
     return load_rgba(dest)
 
 
-def rembg_remove(im: Image.Image, model: str = "u2net") -> Image.Image:
+def rembg_remove(im: Image.Image, model: str = "toonout") -> Image.Image:
     if model not in REMBG_SAFE_MODELS:
         raise ValueError(
             f"Refusing model {model!r}. Use one of {REMBG_SAFE_MODELS} "
             "(not bria-rmbg: non-commercial without a BRIA agreement)."
         )
+    if model == "toonout":
+        import bgremove
+
+        a = bgremove.model_matte(im, "toonout")
+        out = im.convert("RGBA")
+        out.putalpha(Image.fromarray(a))
+        return out
     from rembg import new_session, remove
 
     session = rembg_remove._sessions.get(model)
@@ -296,7 +305,7 @@ def process_one(
     t_lo: float = 0.10,
     t_hi: float = 0.22,
     despill: bool = True,
-    rembg_model: str = "u2net",
+    rembg_model: str = "toonout",
     pixel_art: bool = True,
     grid: int = DEFAULT_GRID,
     sizes: tuple[int, ...] = DEFAULT_SIZES,
@@ -325,16 +334,21 @@ def process_one(
         work = run_chroma(work)  # drop leftover chroma if the plate used a green screen
         method = f"rembg:{rembg_model}+chromakey"
     else:
-        work = run_chroma(src)
-        method = "chromakey"
+        # auto: key first when the border is a clean green, segmentation model as fallback
+        # (bgremove.py; default ToonOut, MIT). Exact-#00FF00 chroma stays as a last resort
+        # for synthetic fixtures whose key is pure green.
+        import bgremove
+
+        fallback = rembg_model if rembg_model in bgremove.FALLBACK_MODELS else bgremove.DEFAULT_FALLBACK
+        work, info = bgremove.remove_background(src, model=fallback, allow_model=allow_rembg, accept=acceptable)
+        method = info["method"]
+        notes.extend(info["notes"])
         ok, why = acceptable(work)
-        if not ok and allow_rembg:
-            notes.append(f"chromakey rejected: {why}")
-            rb = rembg_remove(src, rembg_model)
-            work = run_chroma(rb)
-            method = f"chromakey+rembg:{rembg_model}"
-        elif not ok:
-            notes.append(f"chromakey weak, rembg skipped: {why}")
+        if not ok:
+            alt = run_chroma(src)
+            if acceptable(alt)[0]:
+                notes.append(f"{method} rejected ({why}); exact chroma used")
+                work, method = alt, "chromakey"
 
     work = trim_and_pad(work)
     if pixel_art:
@@ -426,7 +440,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--t-lo", type=float, default=0.10)
     p.add_argument("--t-hi", type=float, default=0.22)
     p.add_argument("--no-despill", action="store_true")
-    p.add_argument("--rembg-model", default="u2net", choices=REMBG_SAFE_MODELS)
+    p.add_argument("--rembg-model", "--fallback-model", dest="rembg_model", default="toonout", choices=REMBG_SAFE_MODELS)
     p.add_argument("--no-rembg", action="store_true")
     p.add_argument("--pixel-art", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--grid", type=int, default=DEFAULT_GRID)

@@ -1,0 +1,57 @@
+Conserve as many tokens as possible and be fast.
+
+Wire generated pixel-art files into a browser game. Output ONLY edit blocks in this exact format, one per change, OLD copied byte-for-byte from the snippets below:
+<<<REPLACE path>>>
+OLD
+=====
+NEW
+<<<END>>>
+
+Files served by the server (all exist):
+- Portraits: /assets/characters/{caseKey}-{suspectId}-neutral.png (also -speaking, -guarded, -charged). caseKey is 'violin' when caseData.file === 'violin', else 'night-train'.
+- Room stills: /assets/loc/{name}.png with name from this map: academy-exterior→violin-academy-exterior, instrument-room→violin-instrument-room, rehearsal-hall→violin-rehearsal-hall, hallway→violin-hallway-cart, exterior→night-train-exterior, luggage-safe→night-train-luggage-safe, dining-kitchen→night-train-dining-kitchen, sleeper-corridor→night-train-sleeper-corridor, tunnel→night-train-tunnel, port-elling→night-train-port-elling.
+- Stage cards: /assets/titles/violin-stage.png and /assets/titles/night-train-stage.png
+- Verdict backgrounds: /assets/loc/violin-verdict-closed.png (correct) and /assets/loc/violin-verdict-wrong.png (wrong)
+
+Changes required:
+1. public/index.html: after the ROOM_ICONS object add `const LOC_ART = {...}` (the map above) and two helpers: `function artCase(){ return caseData && caseData.file === 'violin' ? 'violin' : 'night-train'; }` and `function setPortrait(el, id, mood){ el.style.backgroundImage = `url(/assets/characters/${artCase()}-${id}-${mood||'neutral'}.png)`; el.classList.add('has-art'); }`. Keep the initials text (fallback).
+2. In renderDossier and in renderCase suspect buttons call setPortrait(face, s.id, 'neutral') right after face.textContent is set.
+3. In renderRooms, if LOC_ART[r.id] exists: btn.style.setProperty('--room-art', `url(/assets/loc/${LOC_ART[r.id]}.png)`).
+4. In renderCabinet: art.style.backgroundImage = `url(/assets/titles/${item.id === 'violin' ? 'violin' : 'night-train'}-stage.png)`.
+5. In renderVerdict after verdict.classList.toggle line: verdict.style.setProperty('--verdict-art', `url(/assets/loc/violin-verdict-${correct ? 'closed' : 'wrong'}.png)`).
+6. public/css/game.css: (a) `.portrait.has-art` gets background-size cover, center, no-repeat, image-rendering pixelated, color transparent, font-size 0, background-color var(--cf-ink-soft). (b) .room and .room[aria-pressed="true"] background: keep their gradient as first layer, add `var(--room-art, none) center / cover no-repeat` before `#0C0B0A`, plus image-rendering: pixelated. (c) .folder-art: min-height 120px, background-size cover, background-position center, image-rendering pixelated. (d) #verdict: background linear-gradient(rgba(12,11,10,0.78), rgba(12,11,10,0.9)), var(--verdict-art, none) center / cover no-repeat; image-rendering pixelated. (e) #board: replace the radial-gradient background-image with url(/assets/tex/cork.png) and background-size 256px 256px plus image-rendering pixelated, keeping the base colour.
+
+Snippets (OLD must be copied exactly):
+[public/index.html]
+  'port-elling': 'i-loc-platform'
+};
+[public/index.html, renderDossier]
+  face.textContent = initials(s.name);
+  const who = document.createElement('strong');
+[public/index.html, renderCase]
+    face.textContent = initials(s.name);
+    const who = document.createElement('span');
+[public/index.html, renderRooms]
+    btn.setAttribute('aria-pressed', currentRoom === r.id ? 'true' : 'false');
+[public/index.html, renderCabinet]
+    art.setAttribute('aria-hidden', 'true');
+[public/index.html, renderVerdict]
+  verdict.classList.toggle('ok', !!correct);
+[public/css/game.css]
+.portrait { width: 36px; height: 36px; border-radius: 4px; background: var(--cf-ink-soft); flex-shrink: 0; display: grid; place-items: center; color: var(--cf-lamp); }
+[public/css/game.css]
+  background:
+    linear-gradient(180deg, rgba(12,11,10,0.45) 0%, rgba(12,11,10,0.94) 58%),
+    #0C0B0A;
+[public/css/game.css]
+  background:
+    linear-gradient(180deg, rgba(12,11,10,0.35) 0%, rgba(12,11,10,0.92) 58%),
+    #0C0B0A;
+[public/css/game.css]
+.folder-art { min-height: 48px; display: flex; align-items: center; justify-content: center; background: #1a1210; border-radius: 2px; }
+[public/css/game.css]
+#verdict {
+  border: 4px double var(--cf-seal);
+[public/css/game.css]
+  background-image: radial-gradient(var(--cf-line) 1px, transparent 0);
+  background-size: 20px 20px;

@@ -1,223 +1,1392 @@
 {
-  "version": 1,
-  "placeholder": true,
-  "note": "V1 placeholders only. Generation on QA fills these after CupScopeExtended. No paid calls in this sprint.",
+  "version": 2,
+  "placeholder": false,
+  "generator": "flux-1-schnell via the Case Files Cup key (QA)",
+  "bg_removal": {
+    "primary": "flood-key (bgremove.py)",
+    "fallback_model": "toonout",
+    "notices": "scripts/assets/THIRD_PARTY_NOTICES.md"
+  },
+  "note": "Receipt ids are for the public cost log; never shown to players.",
   "items": [
     {
-      "id": "pack-title",
-      "path": "assets/titles/pack-title.png",
-      "model": "lucid-origin",
-      "size": "1024x1024",
-      "purpose": "Pack title card",
-      "placeholder": true
+      "id": "characters/night-train-helena",
+      "kind": "sheet",
+      "receipt_id": "01M76M12ZCM7MW1XWNDQA56NMP",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M12ZCM7MW1XWNDQA56NMP"
+      },
+      "files": {
+        "neutral": "assets/characters/night-train-helena-neutral.png",
+        "speaking": "assets/characters/night-train-helena-speaking.png",
+        "guarded": "assets/characters/night-train-helena-guarded.png",
+        "charged": "assets/characters/night-train-helena-charged.png",
+        "sheet": "assets/characters/night-train-helena.png"
+      },
+      "slice": "2x2 grid",
+      "method": [
+        "model:toonout"
+      ]
     },
     {
-      "id": "violin-title",
-      "path": "assets/titles/violin-title.png",
-      "model": "lucid-origin",
-      "size": "1024x1024",
-      "purpose": "Vanishing Violin title card",
-      "placeholder": true
+      "id": "characters/night-train-ines",
+      "kind": "sheet",
+      "receipt_id": "01M76M1Y3PQY5S3S96J6G00W6K",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M1Y3PQY5S3S96J6G00W6K",
+        "r1": "01M76MG63VJZFDY6CQK1D8260X"
+      },
+      "files": {
+        "neutral": "assets/characters/night-train-ines-neutral.png",
+        "speaking": "assets/characters/night-train-ines-speaking.png",
+        "guarded": "assets/characters/night-train-ines-guarded.png",
+        "charged": "assets/characters/night-train-ines-charged.png",
+        "sheet": "assets/characters/night-train-ines.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "flood-key"
+      ]
     },
     {
-      "id": "night-train-title",
-      "path": "assets/titles/night-train-title.png",
-      "model": "lucid-origin",
-      "size": "1024x1024",
-      "purpose": "Night Train title card",
-      "placeholder": true
+      "id": "characters/night-train-tomas",
+      "kind": "sheet",
+      "receipt_id": "01M76M1NKXWHT0C75CBPEG9CME",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M1NKXWHT0C75CBPEG9CME"
+      },
+      "files": {
+        "neutral": "assets/characters/night-train-tomas-neutral.png",
+        "speaking": "assets/characters/night-train-tomas-speaking.png",
+        "guarded": "assets/characters/night-train-tomas-guarded.png",
+        "charged": "assets/characters/night-train-tomas-charged.png",
+        "sheet": "assets/characters/night-train-tomas.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "model:toonout"
+      ]
     },
     {
-      "id": "tex-desk",
-      "path": "assets/tex/desk.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Desk blotter texture",
-      "placeholder": true
+      "id": "characters/night-train-victor",
+      "kind": "sheet",
+      "receipt_id": "01M76MG3XA88EJ96KE6F5GVJDZ",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M1C8692RNCX3PKKKRBGMD",
+        "r1": "01M76MG3XA88EJ96KE6F5GVJDZ"
+      },
+      "files": {
+        "neutral": "assets/characters/night-train-victor-neutral.png",
+        "speaking": "assets/characters/night-train-victor-speaking.png",
+        "guarded": "assets/characters/night-train-victor-guarded.png",
+        "charged": "assets/characters/night-train-victor-charged.png",
+        "sheet": "assets/characters/night-train-victor.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "flood-key"
+      ]
     },
     {
-      "id": "tex-cork",
-      "path": "assets/tex/cork.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Evidence board cork",
-      "placeholder": true
+      "id": "characters/violin-carlos",
+      "kind": "sheet",
+      "receipt_id": "01M76M0THBY7W13PSA9TEGWF1G",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M0THBY7W13PSA9TEGWF1G"
+      },
+      "files": {
+        "neutral": "assets/characters/violin-carlos-neutral.png",
+        "speaking": "assets/characters/violin-carlos-speaking.png",
+        "guarded": "assets/characters/violin-carlos-guarded.png",
+        "charged": "assets/characters/violin-carlos-charged.png",
+        "sheet": "assets/characters/violin-carlos.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "flood-key"
+      ]
     },
     {
-      "id": "tex-paper",
-      "path": "assets/tex/dossier-paper.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Dossier paper texture",
-      "placeholder": true
+      "id": "characters/violin-lorenzo",
+      "kind": "sheet",
+      "receipt_id": "01M76M050KKC07WT2R7KX52DPB",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M050KKC07WT2R7KX52DPB"
+      },
+      "files": {
+        "neutral": "assets/characters/violin-lorenzo-neutral.png",
+        "speaking": "assets/characters/violin-lorenzo-speaking.png",
+        "guarded": "assets/characters/violin-lorenzo-guarded.png",
+        "charged": "assets/characters/violin-lorenzo-charged.png",
+        "sheet": "assets/characters/violin-lorenzo.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "model:toonout"
+      ]
     },
     {
-      "id": "verdict-closed",
-      "path": "assets/loc/verdict-closed.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Verdict atmosphere, case closed",
-      "placeholder": true
+      "id": "characters/violin-maya",
+      "kind": "sheet",
+      "receipt_id": "01M76M0GX2Q3TJWGFTE613VADT",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M0GX2Q3TJWGFTE613VADT"
+      },
+      "files": {
+        "neutral": "assets/characters/violin-maya-neutral.png",
+        "speaking": "assets/characters/violin-maya-speaking.png",
+        "guarded": "assets/characters/violin-maya-guarded.png",
+        "charged": "assets/characters/violin-maya-charged.png",
+        "sheet": "assets/characters/violin-maya.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "flood-key"
+      ]
     },
     {
-      "id": "verdict-wrong",
-      "path": "assets/loc/verdict-wrong.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Verdict atmosphere, wrong charge",
-      "placeholder": true
+      "id": "cutscene/night-train",
+      "kind": "still",
+      "receipt_id": "01M76M8RD9HMM5B7RAZM19BBSV",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M8RD9HMM5B7RAZM19BBSV"
+      },
+      "files": {
+        "panel_1": "assets/cutscene/night-train-1.png",
+        "panel_2": "assets/cutscene/night-train-2.png",
+        "panel_3": "assets/cutscene/night-train-3.png",
+        "panel_4": "assets/cutscene/night-train-4.png",
+        "native": "assets/cutscene/night-train.png"
+      },
+      "method": "pixel-finish (no key)"
     },
     {
-      "id": "violin-academy",
-      "path": "assets/loc/violin-academy-exterior.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Aurora Music Academy exterior",
-      "placeholder": true
+      "id": "cutscene/violin",
+      "kind": "still",
+      "receipt_id": "01M76M8FEN5W7E3RTSJECZZQC1",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M8FEN5W7E3RTSJECZZQC1"
+      },
+      "files": {
+        "panel_1": "assets/cutscene/violin-1.png",
+        "panel_2": "assets/cutscene/violin-2.png",
+        "panel_3": "assets/cutscene/violin-3.png",
+        "panel_4": "assets/cutscene/violin-4.png",
+        "native": "assets/cutscene/violin.png"
+      },
+      "method": "pixel-finish (no key)"
     },
     {
-      "id": "violin-instrument",
-      "path": "assets/loc/violin-instrument-room.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Instrument room",
-      "placeholder": true
+      "id": "evidence/night-train-items",
+      "kind": "sheet-items",
+      "receipt_id": "01M76M2ZK1N3JQPJWSPA7AC18C",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M2ZK1N3JQPJWSPA7AC18C"
+      },
+      "files": {
+        "night-train-apron-door": "assets/evidence/night-train-apron-door.png",
+        "night-train-flour-safe": "assets/evidence/night-train-flour-safe.png",
+        "night-train-necklace": "assets/evidence/night-train-necklace.png",
+        "night-train-mailbags": "assets/evidence/night-train-mailbags.png",
+        "sheet": "assets/evidence/night-train-items.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "flood-key"
+      ]
     },
     {
-      "id": "violin-rehearsal",
-      "path": "assets/loc/violin-rehearsal-hall.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Rehearsal hall",
-      "placeholder": true
+      "id": "evidence/violin-items",
+      "kind": "sheet-items",
+      "receipt_id": "01M76NA11SAGZBX8SJ4R1EHGB8",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M2PYE0CY4GA7D4BV04589",
+        "r1": "01M76NA11SAGZBX8SJ4R1EHGB8"
+      },
+      "files": {
+        "violin-lock-ajar": "assets/evidence/violin-lock-ajar.png",
+        "violin-lock-scratch": "assets/evidence/violin-lock-scratch.png",
+        "violin-cart-compartment": "assets/evidence/violin-cart-compartment.png",
+        "violin-stradivarius-case": "assets/evidence/violin-stradivarius-case.png",
+        "sheet": "assets/evidence/violin-items.png"
+      },
+      "slice": "subject blobs",
+      "method": [
+        "flood-key"
+      ]
     },
     {
-      "id": "violin-hallway",
-      "path": "assets/loc/violin-hallway-cart.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Academy hallway and cart",
-      "placeholder": true
+      "id": "i-accuse",
+      "kind": "icon",
+      "receipt_id": "01M76KBGPQ3CVFPN5JG91M9X3E",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KBGPQ3CVFPN5JG91M9X3E"
+      },
+      "files": {
+        "png_32": "assets/icons/i-accuse-32.png",
+        "png_64": "assets/icons/i-accuse-64.png",
+        "png_128": "assets/icons/i-accuse-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "nt-exterior",
-      "path": "assets/loc/night-train-exterior.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Southern Star exterior",
-      "placeholder": true
+      "id": "i-board",
+      "kind": "icon",
+      "receipt_id": "01M76MDA0VRW7FZXKXKTJ1CQRG",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KBDRHRQHM8NE8NGXHWAXV",
+        "r1": "01M76MDA0VRW7FZXKXKTJ1CQRG"
+      },
+      "files": {
+        "png_32": "assets/icons/i-board-32.png",
+        "png_64": "assets/icons/i-board-64.png",
+        "png_128": "assets/icons/i-board-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "nt-luggage",
-      "path": "assets/loc/night-train-luggage-safe.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Luggage car and safe",
-      "placeholder": true
+      "id": "i-briefing",
+      "kind": "icon",
+      "receipt_id": "01M76KAJN1N7X5XXTBTS34DTJQ",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KAJN1N7X5XXTBTS34DTJQ"
+      },
+      "files": {
+        "png_32": "assets/icons/i-briefing-32.png",
+        "png_64": "assets/icons/i-briefing-64.png",
+        "png_128": "assets/icons/i-briefing-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "nt-kitchen",
-      "path": "assets/loc/night-train-dining-kitchen.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Dining car kitchen",
-      "placeholder": true
+      "id": "i-close",
+      "kind": "icon",
+      "receipt_id": "01M76KBWNQGQEZGC35V5HHH6RH",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KBWNQGQEZGC35V5HHH6RH"
+      },
+      "files": {
+        "png_32": "assets/icons/i-close-32.png",
+        "png_64": "assets/icons/i-close-64.png",
+        "png_128": "assets/icons/i-close-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "nt-sleeper",
-      "path": "assets/loc/night-train-sleeper-corridor.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Sleeper corridor",
-      "placeholder": true
+      "id": "i-ev-fingerprint",
+      "kind": "icon",
+      "receipt_id": "01M76MFZQQVM7GVE88XMYS9MNX",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KCYD1846KFV34CBPANHVX",
+        "r1": "01M76MFZQQVM7GVE88XMYS9MNX"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-fingerprint-32.png",
+        "png_64": "assets/icons/i-ev-fingerprint-64.png",
+        "png_128": "assets/icons/i-ev-fingerprint-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "nt-tunnel",
-      "path": "assets/loc/night-train-tunnel.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Black Ridge Tunnel",
-      "placeholder": true
+      "id": "i-ev-footprint",
+      "kind": "icon",
+      "receipt_id": "01M76KWKJ2JB9J70XM6H86B97S",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KWKJ2JB9J70XM6H86B97S"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-footprint-32.png",
+        "png_64": "assets/icons/i-ev-footprint-64.png",
+        "png_128": "assets/icons/i-ev-footprint-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "nt-port",
-      "path": "assets/loc/night-train-port-elling.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Port Elling platform",
-      "placeholder": true
+      "id": "i-ev-key",
+      "kind": "icon",
+      "receipt_id": "01M76KD0TDA695825WS8CH7ENQ",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KD0TDA695825WS8CH7ENQ"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-key-32.png",
+        "png_64": "assets/icons/i-ev-key-64.png",
+        "png_128": "assets/icons/i-ev-key-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ch-lorenzo",
-      "path": "assets/characters/violin-lorenzo.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Lorenzo expression sheet",
-      "placeholder": true
+      "id": "i-ev-letter",
+      "kind": "icon",
+      "receipt_id": "01M76KVFGB1QFF91SY4CBGJ580",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KVFGB1QFF91SY4CBGJ580"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-letter-32.png",
+        "png_64": "assets/icons/i-ev-letter-64.png",
+        "png_128": "assets/icons/i-ev-letter-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ch-maya",
-      "path": "assets/characters/violin-maya.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Maya expression sheet",
-      "placeholder": true
+      "id": "i-ev-necklace",
+      "kind": "icon",
+      "receipt_id": "01M76KVRGNKS9HWK952CD4QVA5",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KVRGNKS9HWK952CD4QVA5"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-necklace-32.png",
+        "png_64": "assets/icons/i-ev-necklace-64.png",
+        "png_128": "assets/icons/i-ev-necklace-128.png"
+      },
+      "method": "model:toonout+flood-key",
+      "notes": [
+        "flood-key rejected: green spill remains (0.047)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ch-carlos",
-      "path": "assets/characters/violin-carlos.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Carlos expression sheet",
-      "placeholder": true
+      "id": "i-ev-ticket",
+      "kind": "icon",
+      "receipt_id": "01M76KV65W40TQMTCX0YS3HKCT",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KV65W40TQMTCX0YS3HKCT"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-ticket-32.png",
+        "png_64": "assets/icons/i-ev-ticket-64.png",
+        "png_128": "assets/icons/i-ev-ticket-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ch-helena",
-      "path": "assets/characters/night-train-helena.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Helena expression sheet",
-      "placeholder": true
+      "id": "i-ev-violin",
+      "kind": "icon",
+      "receipt_id": "01M76KW0YQPA648T1QRM2D9YNZ",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KW0YQPA648T1QRM2D9YNZ"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-violin-32.png",
+        "png_64": "assets/icons/i-ev-violin-64.png",
+        "png_128": "assets/icons/i-ev-violin-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ch-victor",
-      "path": "assets/characters/night-train-victor.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Victor expression sheet",
-      "placeholder": true
+      "id": "i-ev-watch",
+      "kind": "icon",
+      "receipt_id": "01M76KW9QZ06YCWJYKT3V3ZJDE",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KW9QZ06YCWJYKT3V3ZJDE"
+      },
+      "files": {
+        "png_32": "assets/icons/i-ev-watch-32.png",
+        "png_64": "assets/icons/i-ev-watch-64.png",
+        "png_128": "assets/icons/i-ev-watch-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ch-tomas",
-      "path": "assets/characters/night-train-tomas.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Tomas expression sheet",
-      "placeholder": true
+      "id": "i-files",
+      "kind": "icon",
+      "receipt_id": "01M76MDC1118FFKTJRHZS3PC8V",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KBPM0GMQGVS3P47ASRQ2C",
+        "r1": "01M76MDC1118FFKTJRHZS3PC8V"
+      },
+      "files": {
+        "png_32": "assets/icons/i-files-32.png",
+        "png_64": "assets/icons/i-files-64.png",
+        "png_128": "assets/icons/i-files-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ch-ines",
-      "path": "assets/characters/night-train-ines.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Ines expression sheet",
-      "placeholder": true
+      "id": "i-hourglass",
+      "kind": "icon",
+      "receipt_id": "01M76KXPY1AGS86TTR32C4CBTV",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KXPY1AGS86TTR32C4CBTV"
+      },
+      "files": {
+        "png_32": "assets/icons/i-hourglass-32.png",
+        "png_64": "assets/icons/i-hourglass-64.png",
+        "png_128": "assets/icons/i-hourglass-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ev-violin",
-      "path": "assets/evidence/violin-items.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Violin evidence atlas",
-      "placeholder": true
+      "id": "i-lang",
+      "kind": "icon",
+      "receipt_id": "01M76KGWJ7566CE45CC6THG723",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KGWJ7566CE45CC6THG723"
+      },
+      "files": {
+        "png_32": "assets/icons/i-lang-32.png",
+        "png_64": "assets/icons/i-lang-64.png",
+        "png_128": "assets/icons/i-lang-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
     },
     {
-      "id": "ev-nt",
-      "path": "assets/evidence/night-train-items.png",
-      "model": "flux-1-schnell",
-      "size": "1024x1024",
-      "purpose": "Night Train evidence atlas",
-      "placeholder": true
+      "id": "i-loc-academy",
+      "kind": "icon",
+      "receipt_id": "01M76KRBADJTCQ8YTW1RZDY2TE",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KRBADJTCQ8YTW1RZDY2TE"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-academy-32.png",
+        "png_64": "assets/icons/i-loc-academy-64.png",
+        "png_128": "assets/icons/i-loc-academy-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-dining",
+      "kind": "icon",
+      "receipt_id": "01M76KCHAT3R7M2706RNQVBTFC",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KCHAT3R7M2706RNQVBTFC"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-dining-32.png",
+        "png_64": "assets/icons/i-loc-dining-64.png",
+        "png_128": "assets/icons/i-loc-dining-128.png"
+      },
+      "method": "model:toonout",
+      "notes": [
+        "border not clean (p95=3.3)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-hallway",
+      "kind": "icon",
+      "receipt_id": "01M76KCC6K33AMBZ2WGTVFA80P",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KCC6K33AMBZ2WGTVFA80P"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-hallway-32.png",
+        "png_64": "assets/icons/i-loc-hallway-64.png",
+        "png_128": "assets/icons/i-loc-hallway-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-instrument",
+      "kind": "icon",
+      "receipt_id": "01M76KRY0PAPVPBW17TWF11XM7",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KRY0PAPVPBW17TWF11XM7"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-instrument-32.png",
+        "png_64": "assets/icons/i-loc-instrument-64.png",
+        "png_128": "assets/icons/i-loc-instrument-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-luggage",
+      "kind": "icon",
+      "receipt_id": "01M76KCPMCK70HBTSYVEJ1BQR0",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KCPMCK70HBTSYVEJ1BQR0"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-luggage-32.png",
+        "png_64": "assets/icons/i-loc-luggage-64.png",
+        "png_128": "assets/icons/i-loc-luggage-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-office",
+      "kind": "icon",
+      "receipt_id": "01M76KRMH2XJF5J2CS53WJCWES",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KRMH2XJF5J2CS53WJCWES"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-office-32.png",
+        "png_64": "assets/icons/i-loc-office-64.png",
+        "png_128": "assets/icons/i-loc-office-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-platform",
+      "kind": "icon",
+      "receipt_id": "01M76KCVXX7FQHYXRQH9B3ZR18",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KCVXX7FQHYXRQH9B3ZR18"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-platform-32.png",
+        "png_64": "assets/icons/i-loc-platform-64.png",
+        "png_128": "assets/icons/i-loc-platform-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-rehearsal",
+      "kind": "icon",
+      "receipt_id": "01M76MF6GR5AVEB053XA44W85K",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KC9K8ZSZXKFHZR9QEMB80",
+        "r1": "01M76MF6GR5AVEB053XA44W85K"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-rehearsal-32.png",
+        "png_64": "assets/icons/i-loc-rehearsal-64.png",
+        "png_128": "assets/icons/i-loc-rehearsal-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-sleeper",
+      "kind": "icon",
+      "receipt_id": "01M76KCKWPK8VBW9WTBZPCXZFA",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KCKWPK8VBW9WTBZPCXZFA"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-sleeper-32.png",
+        "png_64": "assets/icons/i-loc-sleeper-64.png",
+        "png_128": "assets/icons/i-loc-sleeper-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-train",
+      "kind": "icon",
+      "receipt_id": "01M76MF8ZFM97RYYX8WQ3XBYPN",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KCEWZ4G8BX2C3YZGHPX10",
+        "r1": "01M76MF8ZFM97RYYX8WQ3XBYPN"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-train-32.png",
+        "png_64": "assets/icons/i-loc-train-64.png",
+        "png_128": "assets/icons/i-loc-train-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-loc-tunnel",
+      "kind": "icon",
+      "receipt_id": "01M76MFWGR03JE92C6PNGKKSXM",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KCSF6W192SXY6BHDH3T6Y",
+        "r1": "01M76MFWGR03JE92C6PNGKKSXM"
+      },
+      "files": {
+        "png_32": "assets/icons/i-loc-tunnel-32.png",
+        "png_64": "assets/icons/i-loc-tunnel-64.png",
+        "png_128": "assets/icons/i-loc-tunnel-128.png"
+      },
+      "method": "model:toonout",
+      "notes": [
+        "border not clean (p95=158.0)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-locations",
+      "kind": "icon",
+      "receipt_id": "01M76KB4K3XSFNAK2N0TG71G8Y",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KB4K3XSFNAK2N0TG71G8Y"
+      },
+      "files": {
+        "png_32": "assets/icons/i-locations-32.png",
+        "png_64": "assets/icons/i-locations-64.png",
+        "png_128": "assets/icons/i-locations-128.png"
+      },
+      "method": "model:toonout",
+      "notes": [
+        "border not clean (p95=2.4)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-locked",
+      "kind": "icon",
+      "receipt_id": "01M76KXZNGQJZ6M4GSP7QN823Q",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KXZNGQJZ6M4GSP7QN823Q"
+      },
+      "files": {
+        "png_32": "assets/icons/i-locked-32.png",
+        "png_64": "assets/icons/i-locked-64.png",
+        "png_128": "assets/icons/i-locked-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-pin",
+      "kind": "icon",
+      "receipt_id": "01M76KBSY9RD8YPK8HHQKEREMZ",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KBSY9RD8YPK8HHQKEREMZ"
+      },
+      "files": {
+        "png_32": "assets/icons/i-pin-32.png",
+        "png_64": "assets/icons/i-pin-64.png",
+        "png_128": "assets/icons/i-pin-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-questions",
+      "kind": "icon",
+      "receipt_id": "01M76KXE64NKFXPW0239REYXKV",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KXE64NKFXPW0239REYXKV"
+      },
+      "files": {
+        "png_32": "assets/icons/i-questions-32.png",
+        "png_64": "assets/icons/i-questions-64.png",
+        "png_128": "assets/icons/i-questions-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-restart",
+      "kind": "icon",
+      "receipt_id": "01M76KH5655KG31VWQ0VNZ8B37",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KH5655KG31VWQ0VNZ8B37",
+        "r1": "01M76MEFBGSDVAA0DB4V8057K3"
+      },
+      "files": {
+        "png_32": "assets/icons/i-restart-32.png",
+        "png_64": "assets/icons/i-restart-64.png",
+        "png_128": "assets/icons/i-restart-128.png"
+      },
+      "method": "model:toonout",
+      "notes": [
+        "border not clean (p95=3.0)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-role-chef",
+      "kind": "icon",
+      "receipt_id": "01M76KR241Q6TRC6N9A281MK4Y",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KR241Q6TRC6N9A281MK4Y"
+      },
+      "files": {
+        "png_32": "assets/icons/i-role-chef-32.png",
+        "png_64": "assets/icons/i-role-chef-64.png",
+        "png_128": "assets/icons/i-role-chef-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-role-conductor",
+      "kind": "icon",
+      "receipt_id": "01M76MF1F3FCPJ544Z1TF5VJK0",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KHZBMZMT8T3513MZFH6AJ",
+        "r1": "01M76MF1F3FCPJ544Z1TF5VJK0"
+      },
+      "files": {
+        "png_32": "assets/icons/i-role-conductor-32.png",
+        "png_64": "assets/icons/i-role-conductor-64.png",
+        "png_128": "assets/icons/i-role-conductor-128.png"
+      },
+      "method": "model:toonout+flood-key",
+      "notes": [
+        "flood-key rejected: subject too thin (opaque=0.015)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-role-janitor",
+      "kind": "icon",
+      "receipt_id": "01M76KJH7DEBRKCPJCVR6YD6D7",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KJH7DEBRKCPJCVR6YD6D7"
+      },
+      "files": {
+        "png_32": "assets/icons/i-role-janitor-32.png",
+        "png_64": "assets/icons/i-role-janitor-64.png",
+        "png_128": "assets/icons/i-role-janitor-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-role-jeweller",
+      "kind": "icon",
+      "receipt_id": "01M76KQFCM71PT1HBF2P6QCMJJ",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KQFCM71PT1HBF2P6QCMJJ"
+      },
+      "files": {
+        "png_32": "assets/icons/i-role-jeweller-32.png",
+        "png_64": "assets/icons/i-role-jeweller-64.png",
+        "png_128": "assets/icons/i-role-jeweller-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-role-porter",
+      "kind": "icon",
+      "receipt_id": "01M76KQS9KDCE1852R4MTZRBVE",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KQS9KDCE1852R4MTZRBVE"
+      },
+      "files": {
+        "png_32": "assets/icons/i-role-porter-32.png",
+        "png_64": "assets/icons/i-role-porter-64.png",
+        "png_128": "assets/icons/i-role-porter-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-role-train-conductor",
+      "kind": "icon",
+      "receipt_id": "01M76MF3PQ6CM9N03EJR8CW31J",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KJT156QQGX8P05D52M8RS",
+        "r1": "01M76MF3PQ6CM9N03EJR8CW31J"
+      },
+      "files": {
+        "png_32": "assets/icons/i-role-train-conductor-32.png",
+        "png_64": "assets/icons/i-role-train-conductor-64.png",
+        "png_128": "assets/icons/i-role-train-conductor-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-role-violinist",
+      "kind": "icon",
+      "receipt_id": "01M76KJ82DQMCBP4DN50R2MZ9B",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KJ82DQMCBP4DN50R2MZ9B"
+      },
+      "files": {
+        "png_32": "assets/icons/i-role-violinist-32.png",
+        "png_64": "assets/icons/i-role-violinist-64.png",
+        "png_128": "assets/icons/i-role-violinist-128.png"
+      },
+      "method": "model:toonout",
+      "notes": [
+        "border not clean (p95=3.0)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-score",
+      "kind": "icon",
+      "receipt_id": "01M76KBM20XE2051TQF83C7Y2Q",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KBM20XE2051TQF83C7Y2Q"
+      },
+      "files": {
+        "png_32": "assets/icons/i-score-32.png",
+        "png_64": "assets/icons/i-score-64.png",
+        "png_128": "assets/icons/i-score-128.png"
+      },
+      "method": "model:toonout",
+      "notes": [
+        "border not clean (p95=3.0)"
+      ],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-suspects",
+      "kind": "icon",
+      "receipt_id": "01M76MD3YA9NWETEQ9KYSJ3RVN",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KB84B71QJXQGAG8GY8M3P",
+        "r1": "01M76MD3YA9NWETEQ9KYSJ3RVN"
+      },
+      "files": {
+        "png_32": "assets/icons/i-suspects-32.png",
+        "png_64": "assets/icons/i-suspects-64.png",
+        "png_128": "assets/icons/i-suspects-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-talk",
+      "kind": "icon",
+      "receipt_id": "01M76MD716774M6RXEZ2PV2R9F",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KFDXRN6JS001P37HSQQH1",
+        "r1": "01M76MD716774M6RXEZ2PV2R9F"
+      },
+      "files": {
+        "png_32": "assets/icons/i-talk-32.png",
+        "png_64": "assets/icons/i-talk-64.png",
+        "png_128": "assets/icons/i-talk-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-tl-gap",
+      "kind": "icon",
+      "receipt_id": "01M76KX5SZX9NP4QWSZ0REJCXF",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KX5SZX9NP4QWSZ0REJCXF"
+      },
+      "files": {
+        "png_32": "assets/icons/i-tl-gap-32.png",
+        "png_64": "assets/icons/i-tl-gap-64.png",
+        "png_128": "assets/icons/i-tl-gap-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-tl-marker",
+      "kind": "icon",
+      "receipt_id": "01M76KWWGHG8E0KN9B88207BZT",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KWWGHG8E0KN9B88207BZT"
+      },
+      "files": {
+        "png_32": "assets/icons/i-tl-marker-32.png",
+        "png_64": "assets/icons/i-tl-marker-64.png",
+        "png_128": "assets/icons/i-tl-marker-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-unlocked",
+      "kind": "icon",
+      "receipt_id": "01M76MG1YAFC6TSRYBD0BZQDPS",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76KY93AT64XQHG63P0H2NA3",
+        "r1": "01M76MG1YAFC6TSRYBD0BZQDPS"
+      },
+      "files": {
+        "png_32": "assets/icons/i-unlocked-32.png",
+        "png_64": "assets/icons/i-unlocked-64.png",
+        "png_128": "assets/icons/i-unlocked-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-verdict-ok",
+      "kind": "icon",
+      "receipt_id": "01M76KYJ6Z984THB8F3NAVDN2T",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KYJ6Z984THB8F3NAVDN2T"
+      },
+      "files": {
+        "png_32": "assets/icons/i-verdict-ok-32.png",
+        "png_64": "assets/icons/i-verdict-ok-64.png",
+        "png_128": "assets/icons/i-verdict-ok-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "i-verdict-wrong",
+      "kind": "icon",
+      "receipt_id": "01M76KZVZQTH55949FP50WAK4S",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76KZVZQTH55949FP50WAK4S"
+      },
+      "files": {
+        "png_32": "assets/icons/i-verdict-wrong-32.png",
+        "png_64": "assets/icons/i-verdict-wrong-64.png",
+        "png_128": "assets/icons/i-verdict-wrong-128.png"
+      },
+      "method": "flood-key",
+      "notes": [],
+      "ok": true,
+      "quality": "ok",
+      "residual_green": 0.0
+    },
+    {
+      "id": "loc/night-train-dining-kitchen",
+      "kind": "still",
+      "receipt_id": "01M76M69QR9NZD66GG8RW28M6C",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M69QR9NZD66GG8RW28M6C"
+      },
+      "files": {
+        "native": "assets/loc/night-train-dining-kitchen.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/night-train-exterior",
+      "kind": "still",
+      "receipt_id": "01M76M5QBTCNE2VG2GNQYA7772",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M5QBTCNE2VG2GNQYA7772"
+      },
+      "files": {
+        "native": "assets/loc/night-train-exterior.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/night-train-luggage-safe",
+      "kind": "still",
+      "receipt_id": "01M76M612BEPET5NKXTZXG3981",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M612BEPET5NKXTZXG3981"
+      },
+      "files": {
+        "native": "assets/loc/night-train-luggage-safe.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/night-train-port-elling",
+      "kind": "still",
+      "receipt_id": "01M76M73ZVGJV2XNF1B6J8GFSX",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M73ZVGJV2XNF1B6J8GFSX"
+      },
+      "files": {
+        "native": "assets/loc/night-train-port-elling.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/night-train-sleeper-corridor",
+      "kind": "still",
+      "receipt_id": "01M76M6J6M2WHX7XM0M3E8XQ2Q",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M6J6M2WHX7XM0M3E8XQ2Q"
+      },
+      "files": {
+        "native": "assets/loc/night-train-sleeper-corridor.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/night-train-tunnel",
+      "kind": "still",
+      "receipt_id": "01M76M6TW0QEVRSP4R0QGS9GNC",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M6TW0QEVRSP4R0QGS9GNC"
+      },
+      "files": {
+        "native": "assets/loc/night-train-tunnel.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/violin-academy-exterior",
+      "kind": "still",
+      "receipt_id": "01M76M4MC1S3EGAR1FV49SPQHG",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M4MC1S3EGAR1FV49SPQHG"
+      },
+      "files": {
+        "native": "assets/loc/violin-academy-exterior.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/violin-hallway-cart",
+      "kind": "still",
+      "receipt_id": "01M76MH81NKN099S5G0FJ12CE0",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M5EH0ET4YXQ141MC1DCDF",
+        "r1": "01M76MH81NKN099S5G0FJ12CE0"
+      },
+      "files": {
+        "native": "assets/loc/violin-hallway-cart.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/violin-instrument-room",
+      "kind": "still",
+      "receipt_id": "01M76MH3EZNVQWG3F8X9GSCMA6",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M4WXVWQZZ7GMK75M5FYWE",
+        "r1": "01M76MH3EZNVQWG3F8X9GSCMA6"
+      },
+      "files": {
+        "native": "assets/loc/violin-instrument-room.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/violin-rehearsal-hall",
+      "kind": "still",
+      "receipt_id": "01M76MH5PGQFR121SR1VTD19ZS",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M55C53EGGFC0BTK8DZBJY",
+        "r1": "01M76MH5PGQFR121SR1VTD19ZS"
+      },
+      "files": {
+        "native": "assets/loc/violin-rehearsal-hall.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/violin-verdict-closed",
+      "kind": "still",
+      "receipt_id": "01M76M42ZBJMWBN59TMAMCP0K8",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M42ZBJMWBN59TMAMCP0K8"
+      },
+      "files": {
+        "native": "assets/loc/violin-verdict-closed.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "loc/violin-verdict-wrong",
+      "kind": "still",
+      "receipt_id": "01M76M4BS5CN9E6XPG3R7W2VRV",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M4BS5CN9E6XPG3R7W2VRV"
+      },
+      "files": {
+        "native": "assets/loc/violin-verdict-wrong.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "tex/cork",
+      "kind": "still",
+      "receipt_id": "01M76MGY25EQD14MQCP8XPHR0M",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M3H0TK249KN28128TK4C6",
+        "r1": "01M76MGY25EQD14MQCP8XPHR0M"
+      },
+      "files": {
+        "native": "assets/tex/cork.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "tex/desk",
+      "kind": "still",
+      "receipt_id": "01M76M380QCDWF944D4XSQEFQF",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M380QCDWF944D4XSQEFQF",
+        "r1": "01M76MG8GGVJSCGHCFR5WJGBFT"
+      },
+      "files": {
+        "native": "assets/tex/desk.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "tex/dossier-paper",
+      "kind": "still",
+      "receipt_id": "01M76MH0FYGACC9CKZMCQWH64A",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M3T4XN3DT5J7XSAH0R1XH",
+        "r1": "01M76MH0FYGACC9CKZMCQWH64A"
+      },
+      "files": {
+        "native": "assets/tex/dossier-paper.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "tex/select-frame",
+      "kind": "still",
+      "receipt_id": "01M76MHA5WA1CK0Y91ZX7ZEW0G",
+      "attempt": "r1",
+      "attempts": {
+        "orig": "01M76M7N2SH23BJN66C99G2V26",
+        "r1": "01M76MHA5WA1CK0Y91ZX7ZEW0G"
+      },
+      "files": {
+        "native": "assets/tex/select-frame.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "tex/title-rain",
+      "kind": "still",
+      "receipt_id": "01M76M7CF86M9SNZFWS3WP09G2",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M7CF86M9SNZFWS3WP09G2"
+      },
+      "files": {
+        "native": "assets/tex/title-rain.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "titles/night-train-stage",
+      "kind": "still",
+      "receipt_id": "01M76M8748RTRR86FWF8QHEACK",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M8748RTRR86FWF8QHEACK"
+      },
+      "files": {
+        "native": "assets/titles/night-train-stage.png"
+      },
+      "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "titles/violin-stage",
+      "kind": "still",
+      "receipt_id": "01M76M7Y1JBHK1R8E2TPEHGZK8",
+      "attempt": "orig",
+      "attempts": {
+        "orig": "01M76M7Y1JBHK1R8E2TPEHGZK8"
+      },
+      "files": {
+        "native": "assets/titles/violin-stage.png"
+      },
+      "method": "pixel-finish (no key)"
     }
-  ]
+  ],
+  "atlas": {
+    "image": "assets/icons/icons-64.png",
+    "map": "assets/icons/icons-64.json",
+    "cell": 64,
+    "count": 46
+  }
 }

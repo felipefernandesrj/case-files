@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Case Files</title>
 <link rel="stylesheet" href="/css/game.css">
+<link rel="stylesheet" href="/css/pixel-icons.css">
 </head>
 <body data-view="play" data-layout="desktop">
 <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -358,6 +359,19 @@ const ROOM_ICONS = {
   'tunnel': 'i-loc-tunnel',
   'port-elling': 'i-loc-platform'
 };
+// Pixel-art plates live at /assets/loc/<case file>-<room>.png (see assets/manifest.json).
+const LOC_ART_ROOM = { hallway: 'hallway-cart' };
+// Art is optional: a case without plates keeps the initials / gradients (images only apply once loaded).
+function artCase() { return caseData && /^[a-z0-9-]+$/.test(caseData.file || '') ? caseData.file : null; }
+function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onload = () => apply(url); im.src = url; }
+function locArt(roomId) { const c = artCase(); return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
+function setPortrait(el, id, mood) {
+  const c = artCase();
+  whenArt(c && `/assets/characters/${c}-${id}-${mood || 'neutral'}.png`, (url) => {
+    el.style.backgroundImage = `url(${url})`;
+    el.classList.add('has-art');
+  });
+}
 const ROLE_ICONS = {
   lorenzo: 'i-role-conductor',
   maya: 'i-role-violinist',
@@ -443,6 +457,7 @@ function renderDossier() {
   face.className = 'portrait';
   face.setAttribute('aria-hidden', 'true');
   face.textContent = initials(s.name);
+  setPortrait(face, s.id, 'neutral');
   const who = document.createElement('strong');
   who.textContent = s.name;
   const role = document.createElement('p');
@@ -590,6 +605,7 @@ function renderCase() {
     face.className = 'portrait';
     face.setAttribute('aria-hidden', 'true');
     face.textContent = initials(s.name);
+    setPortrait(face, s.id, 'neutral');
     const who = document.createElement('span');
     who.className = 'who';
     who.textContent = s.name;
@@ -622,6 +638,9 @@ function renderRooms() {
     btn.dataset.room = r.id;
     btn.dataset.id = r.id;
     btn.setAttribute('aria-pressed', currentRoom === r.id ? 'true' : 'false');
+    {
+      whenArt(locArt(r.id), (url) => btn.style.setProperty('--room-art', `url(${url})`));
+    }
     const name = document.createElement('span');
     name.className = 'room-name';
     name.appendChild(iconSvg(ROOM_ICONS[r.id] || 'i-locations'));
@@ -718,6 +737,7 @@ function renderCabinet() {
     const art = document.createElement('div');
     art.className = 'folder-art';
     art.setAttribute('aria-hidden', 'true');
+    whenArt(/^[a-z0-9-]+$/.test(item.id || '') && `/assets/titles/${item.id}-stage.png`, (url) => { art.style.backgroundImage = `url(${url})`; });
     art.appendChild(iconSvg(item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
     const title = document.createElement('strong');
     title.textContent = item.title;
@@ -986,6 +1006,7 @@ function renderVerdict(moveFocus = true) {
   verdict.hidden = false;
   const { correct, culpritName, solution, score } = lastAccuseResult;
   verdict.classList.toggle('ok', !!correct);
+  verdict.style.setProperty('--verdict-art', `url(/assets/loc/violin-verdict-${correct ? 'closed' : 'wrong'}.png)`);
   const stamp = correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!');
   verdict.innerHTML = '';
   const p1 = document.createElement('p');

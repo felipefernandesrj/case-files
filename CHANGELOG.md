@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.4.9 (M1 art via the Cup key: pixel-art icons, portraits, locations)
+- The game now ships generated pixel art. All of it was produced through the Cup key with `flux-1-schnell` (98 billed images, US$ 0.186298, receipts in the run notes) and finished locally by `scripts/assets`:
+  - 46 icons at 32, 64 and 128 px in PNG and WebP, plus an atlas;
+  - four moods (neutral, speaking, guarded, charged) for each of the 7 suspects;
+  - 8 evidence cutouts;
+  - 10 location plates;
+  - the two case covers for the file cabinet;
+  - verdict, cork, desk and paper textures;
+  - two 4-panel cutscenes.
+  - `public/assets/manifest.json` (v2) lists every file with its FullCup receipt id.
+- Where the art appears:
+  - Suspect portraits show the character art.
+  - Location buttons show the room plate under a dark scrim, so labels stay readable.
+  - The file cabinet shows each case's cover.
+  - The verdict stage and the evidence board get textures.
+  - Icons render as pixel art through `public/css/pixel-icons.css`, which is generated from the manifest. The SVG sprite stays as the forced-colours fallback.
+  - An image is applied only after it loads, so a case without art keeps the old look.
+  - The server now serves `.webp`.
+- Background removal is now `scripts/assets/bgremove.py`:
+  - flood-key on clean plates;
+  - ToonOut (MIT) as the model fallback;
+  - pinned requirements and `THIRD_PARTY_NOTICES.md`;
+  - a new `test_bgremove.py` with 13 checks.
+- `test/icons.mjs` gains a manifest check: every listed file exists and has a receipt, every sprite icon has a PNG, and every suspect, room and cover for both cases is served as `image/png`. The automated suite now has 128 checks.
+
 ## 0.4.8 (M2 sprint 4, per-case call cap and worst-case spend test)
 - Each playthrough now has a cap on model calls which can be set per case via `maxCalls` from 1 to 100 or defaults to 20 via `DEFAULT_MAX_CALLS` in `src/budget.js`, where every question that reaches the model counts even if the call fails, and once the cap is reached the server returns a 429 with error `call_cap` and the message `You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game.`, though the player can still accuse or start a new game to get a fresh cap.
 - The new `worstCaseSpend` function computes the worst-case cost of one playthrough by assuming every call uses the full `max_tokens` of 300 and resends the longest system prompt plus the full history (one token per character) at the `llama-4-scout` price of US$0.27 per million input tokens and US$0.85 per million output tokens, ensuring the cost stays under the `PLAYTHROUGH_CEILING_USD` of US$0.10; current worst cases are about US$0.061 for `The Vanishing Violin` and US$0.060 for `The Night Train`, and this is verified by 8 new checks in `test/budget.mjs` bringing the total to 127 checks.

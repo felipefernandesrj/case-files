@@ -279,6 +279,7 @@ header {
   [data-layout="desktop"] .portrait { width: 36px; height: 36px; font-size: 0.85rem; margin: 0; }
 }
 .portrait { width: 36px; height: 36px; border-radius: 4px; background: var(--cf-ink-soft); flex-shrink: 0; display: grid; place-items: center; color: var(--cf-lamp); }
+.portrait.has-art { background-size: cover; background-position: center; background-repeat: no-repeat; image-rendering: pixelated; color: transparent; font-size: 0; background-color: var(--cf-ink-soft); }
 
 /* Tablet Layout */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -392,8 +393,10 @@ header {
   text-align: left;
   color: #F3EADF;
   background:
-    linear-gradient(180deg, rgba(12,11,10,0.45) 0%, rgba(12,11,10,0.94) 58%),
+    linear-gradient(180deg, rgba(12,11,10,0.10) 0%, rgba(12,11,10,0.85) 72%),
+    var(--room-art, none) center / cover no-repeat,
     #0C0B0A;
+  image-rendering: pixelated;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -404,8 +407,10 @@ header {
   outline: 2px solid var(--cf-accent);
   color: #F3EADF;
   background:
-    linear-gradient(180deg, rgba(12,11,10,0.35) 0%, rgba(12,11,10,0.92) 58%),
+    linear-gradient(180deg, rgba(12,11,10,0.10) 0%, rgba(12,11,10,0.85) 72%),
+    var(--room-art, none) center / cover no-repeat,
     #0C0B0A;
+  image-rendering: pixelated;
 }
 #locations[data-loc="time"] #rooms { display: none; }
 #locations[data-loc="rooms"] #timeline:not([hidden]) { display: none; }
@@ -543,8 +548,10 @@ header {
 
 #board {
   background: #3d2b1f; /* Cork color */
-  background-image: radial-gradient(var(--cf-line) 1px, transparent 0);
-  background-size: 20px 20px;
+  background-image: url(/assets/tex/cork.png);
+  background-size: 256px 256px;
+  background-color: #1a1210;
+  image-rendering: pixelated;
   padding: 20px;
   min-height: 200px;
 }
@@ -560,6 +567,8 @@ header {
 /* Verdicts */
 #verdict {
   border: 4px double var(--cf-seal);
+  background: linear-gradient(rgba(12,11,10,0.78), rgba(12,11,10,0.9)), var(--verdict-art, none) center / cover no-repeat;
+  image-rendering: pixelated;
   padding: 24px;
   text-align: center;
 }
@@ -643,7 +652,7 @@ body[data-view="cabinet"] #steps {
   flex-direction: column;
   gap: 8px;
 }
-.folder-art { min-height: 48px; display: flex; align-items: center; justify-content: center; background: #1a1210; border-radius: 2px; }
+.folder-art { align-self: stretch; width: 100%; min-height: 120px; display: flex; align-items: center; justify-content: center; background: #1a1210; border-radius: 2px; background-size: cover; background-position: center; image-rendering: pixelated; }
 .folder-art .icon { color: var(--cf-lamp); width: 40px; height: 40px; }
 
 /* Utility */
