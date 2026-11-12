@@ -1,0 +1,13 @@
+<<<REPLACE public/index.html>>>
+  visitedSteps.clear();
+  visitedSteps.add('briefing');
+  renderProgress();
+=====
+  if (typeof visitedSteps !== 'undefined') {
+    visitedSteps.clear();
+    visitedSteps.add('briefing');
+  }
+  if (typeof renderProgress === 'function') {
+    renderProgress();
+  }
+<<<END>>>

@@ -1,0 +1,5 @@
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 127 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, budget: 8, keyboard: 13).
+=====
+Total checks 136 with icons 4 and a new progress: 8 entry placed after budget; every other count unchanged, same format.
+<<<END>>>

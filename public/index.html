@@ -305,9 +305,15 @@
       </section>
     </main>
 
-    <aside id="rail-right" hidden>
+    <aside id="rail-right">
+      <section id="case-progress" aria-labelledby="progress-title">
+        <h2 id="progress-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="Case progress">Case progress</span></h2>
+        <ol id="progress-list"></ol>
+        <p id="progress-count" aria-live="polite"></p>
+      </section>
       <h2 id="pin-rail-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> <span data-label="Pinned">Pinned</span></h2>
       <div id="pin-rail"></div>
+      <p id="pin-empty" class="pin-empty">Pin clues from rooms to see them here.</p>
     </aside>
   </div>
 </div>
@@ -325,6 +331,28 @@ let gameOver = false;
 let openFile = '';
 let packList = [];
 let pins = [];
+const visitedSteps = new Set(['briefing']);
+const STEP_ORDER = ['briefing', 'locations', 'suspects', 'talk', 'board', 'accuse'];
+function renderProgress() {
+  const list = document.getElementById('progress-list');
+  const countEl = document.getElementById('progress-count');
+  if (!list) return;
+  list.textContent = '';
+  STEP_ORDER.forEach(step => {
+    const el = document.querySelector(`[data-step-label="${step}"]`);
+    if (!el) return;
+    const li = document.createElement('li');
+    const isVisited = visitedSteps.has(step);
+    const isCurrent = document.body.dataset.step === step;
+    li.className = isVisited ? 'done' : 'todo';
+    li.setAttribute('data-done', isVisited);
+    if (isCurrent) li.setAttribute('aria-current', 'step');
+    const labelText = el.textContent;
+    li.textContent = (isVisited ? '✓ ' : '○ ') + labelText;
+    list.appendChild(li);
+  });
+  if (countEl) countEl.textContent = `${visitedSteps.size}/6`;
+}
 let currentRoom = null;
 const UI = {
   en: {
@@ -432,6 +460,8 @@ function showStep(name) {
   document.querySelectorAll('#steps [data-step]').forEach(b => {
     b.setAttribute('aria-selected', b.dataset.step === name ? 'true' : 'false');
   });
+  visitedSteps.add(name);
+  if (typeof renderProgress === 'function') renderProgress();
   if (name === 'board' && typeof renderBoard === 'function') renderBoard();
   if (name === 'suspects' && typeof renderDossier === 'function') renderDossier();
 }
@@ -516,6 +546,9 @@ async function setLang(newLang) {
   setText('dossier-heading', newLang === 'pt' ? 'Suspeitos' : 'Suspects');
   setText('summary-stamp', UI[newLang].briefStamp);
   if (document.getElementById('pin-rail-title')) setText('pin-rail-title', UI[newLang].pins || (newLang === 'pt' ? 'Alfinetes' : 'Pins'));
+  setText('progress-title', newLang === 'pt' ? 'Progresso do caso' : 'Case progress');
+  const pinEmptyEl = document.getElementById('pin-empty');
+  if (pinEmptyEl) pinEmptyEl.textContent = newLang === 'pt' ? 'Fixe pistas dos cômodos para vê-las aqui.' : 'Pin clues from rooms to see them here.';
   const locTimeLab = document.querySelector('#loc-time [data-label]');
   const locRoomLab = document.querySelector('#loc-rooms [data-label]');
   if (locTimeLab) locTimeLab.textContent = UI[newLang].timeline;
@@ -528,6 +561,7 @@ async function setLang(newLang) {
     if (UI[newLang].steps && UI[newLang].steps[key]) s.textContent = UI[newLang].steps[key];
   });
   syncTitle();
+  if (typeof renderProgress === 'function') renderProgress();
   document.getElementById('cabinet-lead').textContent = UI[newLang].cabinetLead;
   document.getElementById('cabinet-stamp').textContent = UI[newLang].cabinetStamp;
   document.getElementById('brief-stamp').textContent = UI[newLang].briefStamp;
@@ -596,6 +630,7 @@ function renderCase() {
   if (sum) sum.textContent = caseData.intro || '';
   if (typeof renderDossier === 'function') renderDossier();
   syncTitle();
+  if (typeof renderProgress === 'function') renderProgress();
   document.documentElement.setAttribute('data-accent', caseData.file === 'violin' ? 'salon' : 'rails');
   const btnContainer = document.getElementById('suspect-buttons');
   btnContainer.innerHTML = '';
@@ -695,7 +730,8 @@ function renderBoard() {
   const side = document.getElementById('rail-right');
   grid.innerHTML = '';
   if (rail) rail.innerHTML = '';
-  if (side) side.hidden = pins.length === 0;
+  const pinEmpty = document.getElementById('pin-empty');
+  if (pinEmpty) pinEmpty.hidden = pins.length > 0;
   if (!pins.length) {
     const empty = document.createElement('p');
     empty.className = 'ev-empty with-icon';
@@ -761,6 +797,7 @@ function showCabinet() {
   document.getElementById('play').hidden = true;
   document.body.dataset.view = 'cabinet';
   syncTitle();
+  if (typeof renderProgress === 'function') renderProgress();
   const first = document.querySelector('#cabinet-list button');
   if (first) first.focus();
 }
@@ -770,6 +807,7 @@ function showPlay() {
   document.getElementById('play').hidden = false;
   document.body.dataset.view = 'play';
   syncTitle();
+  if (typeof renderProgress === 'function') renderProgress();
 }
 
 async function openPackFile(id) {
@@ -785,6 +823,13 @@ async function openPackFile(id) {
   lastAccuseResult = null;
   gameOver = false;
   setGameOver(false);
+  if (typeof visitedSteps !== 'undefined') {
+    visitedSteps.clear();
+    visitedSteps.add('briefing');
+  }
+  if (typeof renderProgress === 'function') {
+    renderProgress();
+  }
   document.getElementById('log').innerHTML = '';
   const verdict = document.getElementById('verdict');
   verdict.hidden = true;
@@ -1025,6 +1070,13 @@ function renderVerdict(moveFocus = true) {
   verdict.appendChild(p2);
   verdict.appendChild(p3);
   verdict.appendChild(p4);
+  if (correct) {
+    const stamp = document.createElement('div');
+    stamp.className = 'case-closed-stamp';
+    stamp.setAttribute('aria-hidden', 'true');
+    stamp.textContent = lang === 'pt' ? 'CASO ENCERRADO' : 'CASE CLOSED';
+    verdict.appendChild(stamp);
+  }
   showStep('accuse');
   if (moveFocus) verdict.focus();
 }
@@ -1079,6 +1131,13 @@ async function restartGame(){
   lastAccuseResult = null;
   gameOver = false;
   setGameOver(false);
+  if (typeof visitedSteps !== 'undefined') {
+    visitedSteps.clear();
+    visitedSteps.add('briefing');
+  }
+  if (typeof renderProgress === 'function') {
+    renderProgress();
+  }
   document.getElementById('log').innerHTML = '';
   const verdict = document.getElementById('verdict');
   verdict.hidden = true;

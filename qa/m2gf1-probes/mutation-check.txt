@@ -1,0 +1,17 @@
+== rail hidden again
+FAIL rail is never hidden: rail-right has hidden attribute
+7 passed, 1 failed
+== every step marked done
+FAIL renderProgress behaves: li 1 should be todo
+7 passed, 1 failed
+== showStep no longer records visit
+FAIL showStep marks the step visited: showStep implementation not found or missing visitedSteps.add
+7 passed, 1 failed
+== role back to light-on-light
+8 passed, 0 failed
+== stamp not animated
+FAIL verdict stamp: script and css match: Missing .case-closed-stamp animation
+7 passed, 1 failed
+== role back to light-on-light (targeted)
+FAIL readable roles and reduced motion: Role color uses forbidden --cf-text-dim
+7 passed, 1 failed

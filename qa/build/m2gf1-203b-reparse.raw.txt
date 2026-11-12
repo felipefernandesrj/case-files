@@ -1,0 +1,53 @@
+<<<REPLACE test/progress.mjs>>>
+  const renderMatch = html.match(/function renderProgress\(\) \{[\s\S]*?\}/);
+  if (!renderMatch) throw new Error('renderProgress function not found');
+  const renderFnSource = renderMatch[0];
+=====
+  const renderFnSource = fnSource('renderProgress') + '\nreturn renderProgress();';
+<<<END>>>
+
+<<<REPLACE test/progress.mjs>>>
+  const renderMatch = html.match(/function renderProgress\(\) \{[\s\S]*?\}/);
+  const runner = new Function('visitedSteps', 'STEP_ORDER', 'document', renderMatch[0]);
+=====
+  const runner = new Function('visitedSteps', 'STEP_ORDER', 'document', fnSource('renderProgress') + '\nreturn renderProgress();');
+<<<END>>>
+
+<<<REPLACE test/progress.mjs>>>
+  const visitedSteps = new Set();
+  const runner = new Function('visitedSteps', 'name', showStepMatch[0].replace('function showStep(name) {', '').replace('}', ''));
+  runner(visitedSteps, 'locations');
+  if (!visitedSteps.has('locations')) throw new Error('Step not added to Set');
+=====
+  const src = fnSource('showStep');
+  if (!src.includes('visitedSteps.add(name)') || !src.includes('renderProgress')) {
+    throw new Error('showStep implementation incorrect');
+  }
+<<<END>>>
+
+<<<REPLACE test/progress.mjs>>>
+// 5. renderProgress returns without throwing when #progress-list is missing
+=====
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`${name} function not found`);
+  let depth = 0;
+  let endIdx = -1;
+  let foundFirstBrace = false;
+  for (let i = startIdx; i < html.length; i++) {
+    if (html[i] === '{') {
+      depth++;
+      foundFirstBrace = true;
+    } else if (html[i] === '}') {
+      depth--;
+    }
+    if (foundFirstBrace && depth === 0) {
+      endIdx = i;
+      break;
+    }
+  }
+  if (endIdx === -1) throw new Error(`Could not find end of ${name}`);
+  return html.substring(startIdx, endIdx + 1);
+}
+// 5. renderProgress returns without throwing when #progress-list is missing
+<<<END>>>

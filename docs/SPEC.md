@@ -108,9 +108,10 @@ This executes:
 7. `node test/case-select.mjs` (load a case by id behind a flag: registry, rejected ids, server caseId, CLI --case, no picker in the page, friendly one line error and exit code 2 for an unknown id in the server and the CLI)
 8. `node test/icons.mjs` (icon sprite ids and no 404 on referenced icon paths, including rotate-ccw)
 9. `node test/budget.mjs` (per-case call cap per playthrough, friendly call_cap message, failed calls count, fresh cap per session, worst-case spend under the ceiling for every case, hand-computed formula check)
-10. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+10. `node test/progress.mjs` (Case progress tracker in the desktop rail (never hidden, six steps in order, ticks and counter, safe without its list, visits recorded), CASE CLOSED stamp text and animation, readable suspect roles, reduced motion)
+11. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 127 (e2e: 42, proxy: 12, consistency: 4, capacity: 6, scoreboard: 20, night-train: 8, case-select: 11, icons: 3, budget: 8, keyboard: 13).
+Total checks: 136 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

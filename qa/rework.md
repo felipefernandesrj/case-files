@@ -577,3 +577,18 @@ Known limit (not in scope): the cap is per session, so Start over gives a fresh 
 - Seal check (signed out curl, 2026-11-12 00:18Z): all 13 pending receipts (7 M2s2 + 6 M2s3) HTTP 200, Genuine receipt, Sealed at 2026-11-12 00:05:23 UTC, one of 30 in the signed root of 2026-11-11. Exact costs M2s2 sum $0.002031 (logged ~$0.0020), M2s3 sum $0.001377 (logged ~$0.0014). Models match (gemma for build, llama-4-scout for live).
 - Reproduced again: cost null in the chat response (6/6), duplicate receipt headers (6/6), enable_thinking=false honoured (5/5), cached_tokens 0.
 - No new FullCup anomaly.
+
+## M2 game feel sprint 1 (v0.4.10), 2026-11-12 09:17-09:26 BRT
+- Bugs reproduced before building (headless Chrome 1280x800, /workspace/casefiles-qa/run29/before-1280.png): suspect roles light grey on light paper (unreadable), desktop right column empty until the first pin.
+- 199 html (tracker, rail, verdict stamp): accepted. Block 1 OLD had a typo (`</div >`), 0 matches; re-parsed from the same receipt with the OLD typo fixed, no new call.
+- 200 css + i18n + reset: accepted. My prompt anchor `syncTitle();` matched 4 places, so renderProgress is called 4 times (harmless). The reset anchor matched 2 places (Start over and opening a file), both wanted.
+- 201 rework: keyboard harness evaluates restartGame alone, `visitedSteps is not defined`; guarded with typeof.
+- 202 test/progress.mjs: 3 of 8 checks broken (lazy regex stopped at the first brace, declaration never called).
+- 203 rework of the test: model wrote `OLD/=====/old/NEW/new` framing (0 matches); re-parsed with framing fixed, no new call. 8/8.
+- Mutations (qa/m2gf1-probes/mutation-check.txt): rail hidden, all steps done, showStep without add, role back to text-dim, stamp without animation each fail exactly one check. First role mutation hit another rule (sed), redone targeted.
+- 204 rework: screenshot showed the desktop verdict collapsed to ~40px (overflow hidden on a flex item drops min-height auto); flex-shrink 0 fixed it, re-verified at 1280 and 390.
+- 205 docs: accepted. 206 SPEC: emitted `<<<FILE>>>` instead of REPLACE and overwrote SPEC.md with 4 lines; caught, restored from git, re-parsed as REPLACE. 207 echoed my instruction as the totals line; 208 fixed it.
+- Key: 10 calls, 5,861/6,015 tokens, 217.04 neurons, ~US$0.0024. Rework 201, 203, 204, 207, 208 = 42.17 neurons, 19.4%. 0 API failures.
+- Receipts (seal-by 2026-11-13 00:05Z): 199 01M77V186JWF4893R1KX2B7NQD, 200 01M77V2Z8NBQMMEK7FKN0546RH, 201 01M77V41GK475GNFZRE2VB0GP9, 202 01M77V6DN5YK0W2Y6GQNNS7RRK, 203 01M77V8PPKQCDCR1Y35ZJ2E7AB, 204 01M77VB9D44C9WV8GVT71KX534, 205 01M77VCQWJ87VEE4M7H4EF20RF, 206 01M77VDW7DCJ2K4HJ99EMHPQVM, 207 01M77VEEZV23YATJQDZMWZJR54, 208 01M77VET97983G20X9PAY5JAD3.
+- Known left for next sprints: on desktop the stamp overlaps the Score line a little; suspicion bars, continue countdown, night-train-tomas double portrait, i-restart artefact, weak textures, briefing card is still a blank paper with a dot.
+- Prompt lessons: never use a generic anchor like `syncTitle();`; always show the block format with placeholder words that cannot be echoed; give the exact final text when it is a fixed line.

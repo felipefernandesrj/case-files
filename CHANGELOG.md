@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.10 (M2 game feel, sprint 1: case progress tracker and CASE CLOSED stamp)
+- The desktop right column is never empty any more. It shows a Case progress tracker with the six case steps (Brief, Places, People, Ask, Board, Accuse). A step is ticked with a short slide-in the first time the player opens it, the current step is highlighted, and a counter shows how many of the six are done (for example 3/6). It follows EN/PT and resets on Start over or when another case file is opened. Below it the Pins list shows a hint until the first clue is pinned.
+- A correct accusation now lands a red CASE CLOSED rubber stamp (CASO ENCERRADO in Portuguese) on the verdict with a stamp-down animation; it is skipped when the player asks for reduced motion.
+- Suspect roles on the light paper cards are now dark red and bold instead of light grey, so they are readable.
+- On desktop the verdict box no longer collapses inside the accuse stage.
+- New test/progress.mjs with 8 checks (rail never hidden, tracker ids, step order, tracker rendering, tracker safe without its list, visit recorded on step change, stamp text and animation, readable roles and reduced motion). The automated suite now has 136 checks.
+
 ## 0.4.9 (M1 art via the Cup key: pixel-art icons, portraits, locations)
 - The game now ships generated pixel art. All of it was produced through the Cup key with `flux-1-schnell` (98 billed images, US$ 0.186298, receipts in the run notes) and finished locally by `scripts/assets`:
   - 46 icons at 32, 64 and 128 px in PNG and WebP, plus an atlas;

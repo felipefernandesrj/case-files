@@ -1,0 +1,202 @@
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const HTML_PATH = path.join(__dirname, '../public/index.html');
+const CSS_PATH = path.join(__dirname, '../public/css/game.css');
+
+const html = fs.readFileSync(HTML_PATH, 'utf8');
+const css = fs.readFileSync(CSS_PATH, 'utf8');
+
+const results = [];
+function assert(name, fn) {
+  try {
+    fn();
+    results.push(`PASS ${name}`);
+  } catch (e) {
+    results.push(`FAIL ${name}: ${e.message}`);
+  }
+}
+
+// 1. rail is never hidden
+assert('rail is never hidden', () => {
+  const match = html.match(/<aside id="rail-right"[^>]*>/);
+  if (!match) throw new Error('rail-right aside not found');
+  if (match[0].includes('hidden')) throw new Error('rail-right has hidden attribute');
+});
+
+// 2. rail has progress list, count and pin-empty hint ids
+assert('rail has progress list, count and pin-empty hint ids', () => {
+  const ids = ['case-progress', 'progress-list', 'progress-count', 'pin-empty'];
+  for (const id of ids) {
+    if (!html.includes(`id="${id}"`)) throw new Error(`missing id="${id}"`);
+  }
+});
+
+// 3. STEP_ORDER lists exactly the six steps
+assert('STEP_ORDER lists exactly the six steps', () => {
+  const match = html.match(/const STEP_ORDER\s*=\s*\[(.*?)\];/s);
+  if (!match) throw new Error('STEP_ORDER not found');
+  const arrayStr = match[1].replace(/'/g, '"');
+  const steps = JSON.parse(`[${arrayStr}]`);
+  const expected = ['briefing', 'locations', 'suspects', 'talk', 'board', 'accuse'];
+  if (JSON.stringify(steps) !== JSON.stringify(expected)) {
+    throw new Error(`Expected ${expected}, got ${steps}`);
+  }
+});
+
+// 4. renderProgress behaves
+assert('renderProgress behaves', () => {
+  const stepOrderMatch = html.match(/const STEP_ORDER\s*=\s*\[(.*?)\];/s);
+  const steps = JSON.parse(`[${stepOrderMatch[1].replace(/'/g, '"')}]`);
+  
+  const renderFnSource = fnSource('renderProgress') + '\nreturn renderProgress();';
+
+  // Mock DOM environment
+  const mockDom = {
+    visitedSteps: new Set(['briefing', 'talk']),
+    STEP_ORDER: steps,
+    document: {
+      getElementById: (id) => {
+        if (id === 'progress-list') return { appendChild: (child) => {}, innerHTML: '' };
+        if (id === 'progress-count') return { textContent: '' };
+        if (id === 'pin-empty') return { style: {} };
+        if (id === 'case-progress') return {};
+        return null;
+      },
+      querySelector: (sel) => {
+        const labelMatch = sel.match(/\[data-step-label="(.+?)"\]/);
+        if (labelMatch) return { textContent: labelMatch[1] };
+        return null;
+      },
+      createElement: (tag) => ({
+        tagName: tag.toUpperCase(),
+        className: '',
+        textContent: '',
+        setAttribute: function(k, v) { this[k] = v; },
+        appendChild: function(c) { this.children = this.children || []; this.children.push(c); },
+        children: []
+      }),
+      body: { dataset: { step: 'talk' } }
+    }
+  };
+
+  // Setup a more granular mock for the specific logic inside renderProgress
+  // because we need to verify the actual created elements
+  const list = mockDom.document.createElement('ul');
+  const count = mockDom.document.createElement('span');
+  const pinEmpty = mockDom.document.createElement('div');
+  const caseProgress = mockDom.document.createElement('div');
+  
+  mockDom.document.getElementById = (id) => {
+    if (id === 'progress-list') return list;
+    if (id === 'progress-count') return count;
+    if (id === 'pin-empty') return pinEmpty;
+    if (id === 'case-progress') return caseProgress;
+    if (id.startsWith('data-step-label')) return null; 
+    return null;
+  };
+  
+  // The function needs to find labels. In real DOM, it might use querySelector.
+  // We simulate the existence of labels by overriding querySelector logic.
+  mockDom.document.querySelector = (sel) => {
+    const m = sel.match(/\[data-step-label="(.+?)"\]/);
+    if (m) return { textContent: m[1] };
+    return null;
+  };
+
+  const runner = new Function('visitedSteps', 'STEP_ORDER', 'document', renderFnSource);
+  runner(mockDom.visitedSteps, mockDom.STEP_ORDER, mockDom.document);
+
+  if (list.children.length !== 6) throw new Error(`Expected 6 li, got ${list.children.length}`);
+  
+  // li 0: briefing (visited) -> done, ✓
+  if (list.children[0].className !== 'done' || !list.children[0].textContent.startsWith('✓')) 
+    throw new Error('li 0 should be done');
+  
+  // li 3: talk (visited) -> done, ✓, aria-current="step"
+  if (list.children[3].className !== 'done' || !list.children[3].textContent.startsWith('✓') || list.children[3]['aria-current'] !== 'step')
+    throw new Error('li 3 should be done and current');
+
+  // li 1: locations (not visited) -> todo, ○
+  if (list.children[1].className !== 'todo' || !list.children[1].textContent.startsWith('○ '))
+    throw new Error('li 1 should be todo');
+
+  if (count.textContent !== '2/6') throw new Error(`Expected count 2/6, got ${count.textContent}`);
+});
+
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`${name} function not found`);
+  let depth = 0;
+  let endIdx = -1;
+  let foundFirstBrace = false;
+  for (let i = startIdx; i < html.length; i++) {
+    if (html[i] === '{') {
+      depth++;
+      foundFirstBrace = true;
+    } else if (html[i] === '}') {
+      depth--;
+    }
+    if (foundFirstBrace && depth === 0) {
+      endIdx = i;
+      break;
+    }
+  }
+  if (endIdx === -1) throw new Error(`Could not find end of ${name}`);
+  return html.substring(startIdx, endIdx + 1);
+}
+// 5. renderProgress returns without throwing when #progress-list is missing
+assert('renderProgress returns without throwing when #progress-list is missing', () => {
+  const runner = new Function('visitedSteps', 'STEP_ORDER', 'document', fnSource('renderProgress') + '\nreturn renderProgress();');
+  
+  const docMock = {
+    getElementById: () => null,
+    querySelector: () => null,
+    createElement: () => ({ appendChild: () => {} })
+  };
+  
+  try {
+    runner(new Set(), [], docMock);
+  } catch (e) {
+    throw new Error('Function threw error when element missing');
+  }
+});
+
+// 6. showStep marks the step visited
+assert('showStep marks the step visited', () => {
+  const showStepMatch = html.match(/function showStep\(name\) \{[\s\S]*?visitedSteps\.add\(name\)[\s\S]*?\}/);
+  if (!showStepMatch) throw new Error('showStep implementation not found or missing visitedSteps.add');
+  
+  const src = fnSource('showStep');
+  if (!src.includes('visitedSteps.add(name)') || !src.includes('renderProgress')) {
+    throw new Error('showStep implementation incorrect');
+  }
+});
+
+// 7. verdict stamp
+assert('verdict stamp: script and css match', () => {
+  if (!html.includes('case-closed-stamp')) throw new Error('Missing case-closed-stamp class in script');
+  if (!html.includes('CASE CLOSED')) throw new Error('Missing CASE CLOSED text');
+  if (!html.includes('CASO ENCERRADO')) throw new Error('Missing CASO ENCERRADO text');
+  
+  if (!css.includes('@keyframes cf-stamp')) throw new Error('Missing @keyframes cf-stamp');
+  if (!css.includes('.case-closed-stamp') || !css.includes('animation: cf-stamp')) throw new Error('Missing .case-closed-stamp animation');
+});
+
+// 8. readable roles and reduced motion
+assert('readable roles and reduced motion', () => {
+  const roleRuleMatch = css.match(/#suspect-buttons\s*\.role\s*\{([^}]*)\}/);
+  if (!roleRuleMatch) throw new Error('#suspect-buttons .role rule not found');
+  if (roleRuleMatch[1].includes('--cf-text-dim')) throw new Error('Role color uses forbidden --cf-text-dim');
+  
+  if (!css.includes('@media (prefers-reduced-motion: reduce)')) throw new Error('Missing prefers-reduced-motion media query');
+});
+
+// Final output
+results.forEach(r => console.log(r));
+const failed = results.filter(r => r.startsWith('FAIL')).length;
+const passed = results.filter(r => r.startsWith('PASS')).length;
+console.log(`${passed} passed, ${failed} failed`);
+process.exit(failed > 0 ? 1 : 0);

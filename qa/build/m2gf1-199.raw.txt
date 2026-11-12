@@ -1,0 +1,75 @@
+<<<REPLACE public/index.html>>>
+    <aside id="rail-right" hidden>
+      <h2 id="pin-rail-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> <span data-label="Pinned">Pinned</span></h2>
+      <div id="pin-rail"></div >
+    </aside>
+=====
+    <aside id="rail-right">
+      <section id="case-progress" aria-labelledby="progress-title">
+        <h2 id="progress-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="Case progress">Case progress</span></h2>
+        <ol id="progress-list"></ol>
+        <p id="progress-count" aria-live="polite"></p>
+      </section>
+      <h2 id="pin-rail-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> <span data-label="Pinned">Pinned</span></h2>
+      <div id="pin-rail"></div>
+      <p id="pin-empty" class="pin-empty">Pin clues from rooms to see them here.</p>
+    </aside>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+let pins = [];
+=====
+let pins = [];
+const visitedSteps = new Set(['briefing']);
+const STEP_ORDER = ['briefing', 'locations', 'suspects', 'talk', 'board', 'accuse'];
+function renderProgress() {
+  const list = document.getElementById('progress-list');
+  const countEl = document.getElementById('progress-count');
+  if (!list) return;
+  list.textContent = '';
+  STEP_ORDER.forEach(step => {
+    const el = document.querySelector(`[data-step-label="${step}"]`);
+    if (!el) return;
+    const li = document.createElement('li');
+    const isVisited = visitedSteps.has(step);
+    const isCurrent = document.body.dataset.step === step;
+    li.className = isVisited ? 'done' : 'todo';
+    li.setAttribute('data-done', isVisited);
+    if (isCurrent) li.setAttribute('aria-current', 'step');
+    const labelText = el.textContent;
+    li.textContent = (isVisited ? '✓ ' : '○ ') + labelText;
+    list.appendChild(li);
+  });
+  if (countEl) countEl.textContent = `${visitedSteps.size}/6`;
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  if (name === 'board' && typeof renderBoard === 'function') renderBoard();
+=====
+  visitedSteps.add(name);
+  if (typeof renderProgress === 'function') renderProgress();
+  if (name === 'board' && typeof renderBoard === 'function') renderBoard();
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  if (side) side.hidden = pins.length === 0;
+=====
+  const pinEmpty = document.getElementById('pin-empty');
+  if (pinEmpty) pinEmpty.hidden = pins.length > 0;
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  verdict.appendChild(p4);
+  showStep('accuse');
+=====
+  verdict.appendChild(p4);
+  if (correct) {
+    const stamp = document.createElement('div');
+    stamp.className = 'case-closed-stamp';
+    stamp.setAttribute('aria-hidden', 'true');
+    stamp.textContent = lang === 'pt' ? 'CASO ENCERRADO' : 'CASE CLOSED';
+    verdict.appendChild(stamp);
+  }
+  showStep('accuse');
+<<<END>>>

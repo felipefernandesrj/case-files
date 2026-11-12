@@ -1,0 +1,8 @@
+{
+ "1280-progress": "done:✓ Brief | done:✓ Places | done:✓ People | todo:○ Ask | todo:○ Board | todo:○ Accuse count=3/6 railVisible=block",
+ "1280-roleColor": "rgb(140, 47, 43)",
+ "1280-stamp": "CASE CLOSED anim=cf-stamp",
+ "390-progress": "done:✓ Brief | done:✓ Places | done:✓ People | todo:○ Ask | todo:○ Board | todo:○ Accuse count=3/6 railVisible=none",
+ "390-roleColor": "rgb(140, 47, 43)",
+ "390-stamp": "CASE CLOSED anim=cf-stamp"
+}

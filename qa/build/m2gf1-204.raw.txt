@@ -1,0 +1,5 @@
+<<<REPLACE public/css/game.css>>>
+#verdict { position: relative; overflow: hidden; }
+=====
+#verdict { position: relative; overflow: hidden; flex-shrink: 0; width: 100%; box-sizing: border-box; }
+<<<END>>>

@@ -1,0 +1,17 @@
+<<<REPLACE public/index.html>>>
+    <aside id="rail-right" hidden>
+      <h2 id="pin-rail-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> <span data-label="Pinned">Pinned</span></h2>
+      <div id="pin-rail"></div>
+    </aside>
+=====
+    <aside id="rail-right">
+      <section id="case-progress" aria-labelledby="progress-title">
+        <h2 id="progress-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-board"></use></svg> <span data-label="Case progress">Case progress</span></h2>
+        <ol id="progress-list"></ol>
+        <p id="progress-count" aria-live="polite"></p>
+      </section>
+      <h2 id="pin-rail-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg> <span data-label="Pinned">Pinned</span></h2>
+      <div id="pin-rail"></div>
+      <p id="pin-empty" class="pin-empty">Pin clues from rooms to see them here.</p>
+    </aside>
+<<<END>>>
