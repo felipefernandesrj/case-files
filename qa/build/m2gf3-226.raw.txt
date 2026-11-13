@@ -1,0 +1,29 @@
+<<<REPLACE test/hints.mjs>>>
+check('case files carry hints', async () => {
+=====
+check('case files carry hints', () => {
+<<<END>>>
+<<<REPLACE test/hints.mjs>>>
+    const c = await loadCase(f);
+    if
+=====
+    const c = loadCase(f);
+    if
+<<<END>>>
+<<<REPLACE test/hints.mjs>>>
+check('publicCase localises hints', async () => {
+=====
+check('publicCase localises hints', () => {
+<<<END>>>
+<<<REPLACE test/hints.mjs>>>
+    const c = await loadCase(f);
+    for (const l of ['en', 'pt']) {
+=====
+    const c = loadCase(f);
+    for (const l of ['en', 'pt']) {
+<<<END>>>
+<<<REPLACE test/hints.mjs>>>
+      const pc = await publicCase(c, l);
+=====
+      const pc = publicCase(c, l);
+<<<END>>>

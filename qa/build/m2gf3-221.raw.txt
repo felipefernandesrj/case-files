@@ -1,0 +1,280 @@
+<<<FILE test/hints.mjs>>>
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { publicCase, loadCase } from '../src/case.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const html = fs.readFileSync(join(__dirname, '../public/index.html'), 'utf8');
+const css = fs.readFileSync(join(__dirname, '../public/css/game.css'), 'utf8');
+
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`Function ${name} not found`);
+  let depth = 0;
+  for (let i = html.indexOf('{', startIdx); i < html.length; i++) {
+    if (html[i] === '{') depth++;
+    else if (html[i] === '}') { depth--; if (depth === 0) return html.substring(startIdx, i + 1); }
+  }
+  throw new Error(`Unmatched braces in ${name}`);
+}
+
+const results = [];
+function check(name, fn) { try { fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+
+class El {
+  constructor(tag) {
+    this.tagName = tag;
+    this.className = '';
+    this.textContent = '';
+    this.children = [];
+    this.attrs = {};
+    this.parent = null;
+    this.cls = new Set();
+    this.classList = {
+      add: c => this.cls.add(c),
+      remove: c => this.cls.delete(c),
+      contains: c => this.cls.has(c)
+    };
+  }
+  append(...nodes) {
+    for (const node of nodes) {
+      node.parent = this;
+      this.children.push(node);
+    }
+  }
+  appendChild(n) {
+    this.append(n);
+    return n;
+  }
+  removeChild(n) {
+    const i = this.children.indexOf(n);
+    if (i >= 0) this.children.splice(i, 1);
+    n.parent = null;
+    return n;
+  }
+  remove() {
+    if (this.parent) this.parent.removeChild(this);
+  }
+  get firstElementChild() {
+    return this.children[0] || null;
+  }
+  set innerHTML(v) {
+    this.children = [];
+  }
+  get innerHTML() {
+    return '';
+  }
+  setAttribute(k, v) {
+    this.attrs[k] = String(v);
+  }
+  getAttribute(k) {
+    return this.attrs[k];
+  }
+  addEventListener() {}
+  get text() {
+    return this.children.map(c => c.text !== undefined ? c.text : c.textContent).join('') || this.textContent;
+  }
+}
+
+function fakeTimers() {
+  let nextId = 1;
+  const timers = [];
+  return {
+    timers,
+    set: (fn, ms) => {
+      const entry = { id: nextId++, fn, ms, cleared: false };
+      timers.push(entry);
+      return entry.id;
+    },
+    clear: (id) => {
+      const t = timers.find(x => x.id === id);
+      if (t) t.cleared = true;
+    }
+  };
+}
+
+function hintApi(env) {
+  const src = [fnSource('stopHints'), fnSource('showToast'), fnSource('startHints')].join('\n').replace(/\bgameOver\b/g, 'isOver()').replace(/\bcaseData\b/g, 'getCase()').replace(/\blang\b/g, 'getLang()');
+  return new Function('document', 'setTimeout', 'clearTimeout', 'getLang', 'getCase', 'isOver', `let hintTimers = []; ${src} return { stopHints, showToast, startHints, timers: () => hintTimers };`)(env.doc, env.timers.set, env.timers.clear, env.getLang, env.getCase, env.isOver);
+}
+
+const EN = { hints: [{ id: 'h1', after: 45, text: 'A silhouette passed the window.' }, { id: 'h2', after: 100, text: 'A key ring jingles.' }] };
+const PT = { hints: [{ id: 'h1', after: 45, text: 'Uma silhueta passou pela janela.' }, { id: 'h2', after: 100, text: 'Um molho de chaves balança.' }] };
+
+check('toast markup', () => {
+  const target = `<div id="toasts" class="toasts" role="status" aria-live="polite"></div>`;
+  if (!html.includes(target)) throw new Error('Markup missing');
+  const mIdx = html.indexOf(target);
+  const sIdx = html.indexOf('<script type="module">');
+  const mainIdx = html.indexOf('</main>');
+  if (!(mIdx < sIdx && mIdx > mainIdx)) throw new Error('Markup position incorrect');
+});
+
+check('case files carry hints', async () => {
+  const files = ['content/case.json', 'content/cases/night-train.json'];
+  for (const f of files) {
+    const c = await loadCase(f);
+    if (!Array.isArray(c.hints) || c.hints.length !== 3) throw new Error(`${f} hints length error`);
+    const ids = c.hints.map(h => h.id);
+    if (new Set(ids).size !== 3) throw new Error(`${f} duplicate ids`);
+    for (let i = 0; i < 3; i++) {
+      if (typeof c.hints[i].after !== 'number' || c.hints[i].after <= 0) throw new Error(`${f} invalid after`);
+      if (i > 0 && c.hints[i].after <= c.hints[i-1].after) throw new Error(`${f} non-increasing after`);
+      if (!c.hints[i].text.en || !c.hints[i].text.pt) throw new Error(`${f} missing translations`);
+    }
+  }
+});
+
+check('publicCase localises hints', async () => {
+  const files = ['content/case.json', 'content/cases/night-train.json'];
+  for (const f of files) {
+    const c = await loadCase(f);
+    for (const l of ['en', 'pt']) {
+      const pc = await publicCase(c, l);
+      if (pc.hints.length !== 3) throw new Error(`Length mismatch for ${l}`);
+      pc.hints.forEach((h, i) => {
+        if (h.text !== c.hints[i].text[l]) throw new Error(`Text mismatch for ${l}`);
+        if (h.after !== c.hints[i].after) throw new Error(`After mismatch for ${l}`);
+      });
+    }
+  }
+});
+
+check('one timer per hint', () => {
+  const box = new El('div');
+  const doc = { getElementById: id => id === 'toasts' ? box : null, createElement: t => new El(t) };
+  const t = fakeTimers();
+  const api = hintApi({ doc, timers: t, getLang: () => 'en', getCase: () => EN, isOver: () => false });
+  api.startHints();
+  if (JSON.stringify(t.timers.map(x => x.ms)) !== '[45000,100000]') throw new Error(`Timer ms mismatch: ${t.timers.map(x => x.ms)}`);
+  if (api.timers().length !== 2) throw new Error('Timer count mismatch');
+});
+
+check('hint fires as an English toast', () => {
+  const box = new El('div');
+  const doc = { getElementById: id => id === 'toasts' ? box : null, createElement: t => new El(t) };
+  const t = fakeTimers();
+  const api = hintApi({ doc, timers: t, getLang: () => 'en', getCase: () => EN, isOver: () => false });
+  api.startHints();
+  t.timers[0].fn();
+  if (box.children.length !== 1) throw new Error('Toast count mismatch');
+  const toast = box.children[0];
+  if (!toast.classList.contains('toast')) throw new Error('Missing toast class');
+  if (toast.children[0].classList.contains('toast-kicker') === false || toast.children[0].textContent !== 'Hint') throw new Error('Kicker error');
+  if (toast.children[1].classList.contains('toast-text') === false || toast.children[1].textContent !== 'A silhouette passed the window.') throw new Error('Text error');
+});
+
+check('hint reads the current language', () => {
+  const box = new El('div');
+  const doc = { getElementById: id => id === 'toasts' ? box : null, createElement: t => new El(t) };
+  const t = fakeTimers();
+  let cur = EN, L = 'en';
+  const api = hintApi({ doc, timers: t, getLang: () => L, getCase: () => cur, isOver: () => false });
+  api.startHints();
+  cur = PT; L = 'pt';
+  t.timers[0].fn();
+  if (box.children[0].children[0].textContent !== 'Pista') throw new Error('PT Kicker error');
+  if (box.children[0].children[1].textContent !== 'Uma silhueta passou pela janela.') throw new Error('PT Text error');
+});
+
+check('no hint after the verdict', () => {
+  const box = new El('div');
+  const doc = { getElementById: id => id === 'toasts' ? box : null, createElement: t => new El(t) };
+  const t = fakeTimers();
+  const api = hintApi({ doc, timers: t, getLang: () => 'en', getCase: () => EN, isOver: () => true });
+  api.startHints();
+  t.timers.forEach(timer => timer.fn());
+  if (box.children.length !== 0) throw new Error('Toasts shown despite gameOver');
+});
+
+check('restart clears pending hints', () => {
+  const box = new El('div');
+  const doc = { getElementById: id => id === 'toasts' ? box : null, createElement: t => new El(t) };
+  const t = fakeTimers();
+  const api = hintApi({ doc, timers: t, getLang: () => 'en', getCase: () => EN, isOver: () => false });
+  api.startHints();
+  api.startHints();
+  if (t.timers[0].cleared !== true || t.timers[1].cleared !== true) throw new Error('Timers not cleared on restart');
+  if (api.timers().length !== 2) throw new Error('Timer count error on restart');
+  box.appendChild(new El('div'));
+  api.startHints();
+  if (box.children.length !== 0) throw new Error('Box not cleared on restart');
+});
+
+check('at most two toasts', () => {
+  const box = new El('div');
+  const doc = { getElementById: id => id === 'toasts' ? box : null, createElement: t => new El(t) };
+  const t = fakeTimers();
+  const api = hintApi({ doc, timers: t, getLang: () => 'en', getCase: () => EN, isOver: () => false });
+  api.showToast('a');
+  api.showToast('b');
+  api.showToast('c');
+  if (box.children.length !== 2) throw new Error('Should only keep 2 toasts');
+  const texts = box.children.map(toast => toast.children[1].textContent);
+  if (JSON.stringify(texts) !== '["b","c"]') throw new Error(`Expected ["b","c"] got ${JSON.stringify(texts)}`);
+});
+
+check('toast fades then goes', () => {
+  const box = new El('div');
+  const doc = { getElementById: id => id === 'toasts' ? box : null, createElement: t => new El(t) };
+  const t = fakeTimers();
+  const api = hintApi({ doc, timers: t, getLang: () => 'en', getCase: () => EN, isOver: () => false });
+  api.showToast('x');
+  const fadeTimer = t.timers.find(timer => timer.ms === 8000);
+  fadeTimer.fn();
+  if (!box.children[0].classList.contains('is-out') || box.children.length !== 1) throw new Error('Toast did not fade');
+  const removeTimer = t.timers.find(timer => timer.ms === 400);
+  removeTimer.fn();
+  if (box.children.length !== 0) throw new Error('Toast did not remove');
+});
+
+check('hints start on every new game', () => {
+  ['init', 'openPackFile', 'restartGame'].forEach(fn => {
+    if (!fnSource(fn).includes('startHints()')) throw new Error(`${fn} missing startHints()`);
+  });
+  if (!css.includes('.toasts {')) throw new Error('Missing .toasts style');
+  const toastsBlock = css.substring(css.indexOf('.toasts {'), css.indexOf('}', css.indexOf('.toasts {')));
+  if (!toastsBlock.includes('position: fixed')) throw new Error('Toasts not fixed');
+  if (!css.includes('bottom: calc(var(--dock-h)')) throw new Error('Toasts bottom missing');
+  const motionRule = css.substring(css.indexOf('prefers-reduced-motion'), css.indexOf('}', css.indexOf('prefers-reduced-motion')));
+  if (!motionRule.includes('.toast') || !motionRule.includes('animation: none')) throw new Error('Motion rule invalid');
+});
+
+check('pins follow the language', () => {
+  const grid = new El('div'), rail = new El('div'), side = new El('aside'), empty = new El('p');
+  const doc = { 
+    getElementById: id => ({ 'board-grid': grid, 'pin-rail': rail, 'rail-right': side, 'pin-empty': empty })[id] || null, 
+    createElement: t => new El(t), 
+    createTextNode: s => ({ text: s }) 
+  };
+  const src = fnSource('renderBoard');
+  const run = new Function('document', 'iconSvg', 'PIN_ICONS', 'UI', 'lang', 'pins', 'caseData', `${src} renderBoard();`);
+  run(doc, () => new El('svg'), {}, { pt: { unpin: 'Retirar', emptyBoard: 'Nada' } }, 'pt', 
+    [{ id: 'instrument-room', label: 'Instrument room' }, { id: 'gone', label: 'Old note' }], 
+    { rooms: [{ id: 'instrument-room', name: 'Sala de instrumentos' }] }
+  );
+  if (JSON.stringify(grid.children.map(c => c.text)) !== JSON.stringify(['Sala de instrumentos', 'Old note'])) throw new Error('Grid text mismatch');
+  if (JSON.stringify(rail.children.map(c => c.text)) !== JSON.stringify(['Sala de instrumentos', 'Old note'])) throw new Error('Rail text mismatch');
+  if (grid.children[0].getAttribute('aria-label') !== 'Retirar: Sala de instrumentos') throw new Error('Aria label mismatch');
+});
+
+results.forEach(r => console.log(r));
+const passed = results.filter(r => r.startsWith('PASS')).length;
+const failed = results.length - passed;
+console.log(`${passed} passed, ${failed} failed`);
+process.exit(failed > 0 ? 1 : 0);
+<<<END>>>
+
+<<<REPLACE package.json>>>
+"scripts": {
+  "test:scene": "node test/scene.mjs",
+  "test:keyboard": "node test/keyboard.mjs"
+}
+=====
+"scripts": {
+  "test:scene": "node test/scene.mjs",
+  "test:hints": "node test/hints.mjs",
+  "test:keyboard": "node test/keyboard.mjs"
+}
+<<<END>>>

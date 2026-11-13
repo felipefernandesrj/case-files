@@ -73,6 +73,15 @@
 - CSS: `.scene-layer` fades opacity over 700ms to 0.35 (a dimmed backdrop under a dark vignette); reduced motion removes the fade; the conversation panel and log are see-through while `has-scene` is set.
 - The CASE CLOSED stamp is a centred block below the Score line (margin 32px above), so its rotation never covers the score.
 
+## Web page: hint toasts and pin language (M2 game feel sprint 3)
+
+- Data: each case JSON has `hints`, an array of `{id, after, text{en,pt}}` where `after` is seconds from the start of a game; `publicCase(c, lang)` returns `hints` as `{id, after, text}` with text in that language.
+- Markup: `#toasts` (class `toasts`, role status, aria-live polite) is a direct child of body, right before the page script.
+- `startHints()` clears pending timers (`stopHints()`), empties `#toasts` and sets one timer per hint at `after * 1000` ms. When a timer fires it does nothing if `gameOver` is true; otherwise it reads the hint with the same id from the current `caseData` (so a language switch is respected) and calls `showToast(text)`. `init()`, `openPackFile(id)` and `restartGame()` call `startHints()`.
+- `showToast(text)` appends a `.toast` with a `.toast-kicker` (Hint or Pista) and a `.toast-text`, keeps at most two toasts, adds `is-out` after 8000 ms and removes the toast 400 ms later.
+- CSS: `.toasts` is fixed at the bottom centre (above `--dock-h` on phones), toasts slide in over 350 ms and fade out over 400 ms, no animation with reduced motion.
+- Pins: `renderBoard()` shows each pin with the name of the room with the same id in the current `caseData.rooms`, falling back to the stored label.
+
 ## Web page: closing screen
 
 When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
@@ -117,9 +126,10 @@ This executes:
 9. `node test/budget.mjs` (per-case call cap per playthrough, friendly call_cap message, failed calls count, fresh cap per session, worst-case spend under the ceiling for every case, hand-computed formula check)
 10. `node test/progress.mjs` (Case progress tracker in the desktop rail (never hidden, six steps in order, ticks and counter, safe without its list, visits recorded), CASE CLOSED stamp text and animation, readable suspect roles, reduced motion)
 11. `node test/scene.mjs` (scene backdrop: markup, driven by the room list, first room and caption, crossfade and no new fade for the same room, Portuguese caption, cleared on reset, dimmed backdrop with fade and reduced motion, CASE CLOSED stamp below the score)
-12. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+12. `node test/hints.mjs` (hint toasts: markup, hints in both case files, localised in the public case, one timer per hint, English toast, current language at fire time, none after the verdict, restart clears pending hints, at most two toasts, fade then removal, started on every new game with toast CSS, pins follow the language)
+13. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 144 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, keyboard 13).
+Total checks: 156 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.
@@ -127,6 +137,7 @@ Total checks: 144 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboar
 - `worstCaseSpend({ calls, maxTokens, systemChars })`: Calculates the highest possible cost by assuming each call uses `maxTokens` of 300 and resends the system prompt and full history at the `llama-4-scout` price to ensure it remains under the `PLAYTHROUGH_CEILING_USD` of US$0.10.
 
 ### Case engine (`src/case.js`, M2)
+- `hints`: optional array in a case JSON of `{id, after, text{en,pt}}` timed hint events; `publicCase` passes them on localised (an empty array when missing).
 - `CASES` and `caseFileFor(id)`: frozen registry containing violin (content/case.json) and night-train (content/cases/night-train.json) that throws unknown_case for any other IDs.
 - Flag: createServer({ caseId }), CASE_ID for node src/server.js and --case for the CLI, default The Vanishing Violin, not exposed in the page.
 - `unknownCaseLine(id)`: returns the one line message naming the id and the valid ids, and node src/server.js and the CLI print it to stderr and exit with code 2 instead of a stack trace when the id is unknown.

@@ -1,0 +1,67 @@
+<<<REPLACE public/index.html>>>
+<script type="module">
+=====
+
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+<script type="module">
+<<<END>>>
+<<<REPLACE public/index.html>>>
+let sceneFront = 0;
+=====
+let sceneFront = 0;
+let hintTimers = [];
+function stopHints() { hintTimers.forEach(t => clearTimeout(t)); hintTimers = []; }
+function showToast(text) {
+  const box = document.getElementById('toasts');
+  if (!box || !text) return;
+  const t = document.createElement('div');
+  t.className = 'toast';
+  const k = document.createElement('strong');
+  k.className = 'toast-kicker';
+  k.textContent = lang === 'pt' ? 'Pista' : 'Hint';
+  const s = document.createElement('span');
+  s.className = 'toast-text';
+  s.textContent = text;
+  t.append(k, s);
+  box.append(t);
+  while (box.children.length > 2) { box.removeChild(box.firstElementChild); }
+  setTimeout(() => { t.classList.add('is-out'); setTimeout(() => t.remove(), 400); }, 8000);
+}
+function startHints() {
+  stopHints();
+  const box = document.getElementById('toasts');
+  if (box) box.innerHTML = '';
+  const hints = (caseData && caseData.hints) || [];
+  for (const h of hints) {
+    const id = h.id;
+    hintTimers.push(setTimeout(() => {
+      if (gameOver) return;
+      const cur = ((caseData && caseData.hints) || []).find(x => x.id === id);
+      if (cur) showToast(cur.text);
+    }, (Number(h.after) || 0) * 1000));
+  }
+}
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  await setLang('en');
+=====
+  await setLang('en');
+  startHints();
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  showStep('briefing');
+=====
+  showStep('briefing');
+  startHints();
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  if (typeof showStep === 'function') showStep('briefing');
+=====
+  if (typeof showStep === 'function') showStep('briefing');
+  startHints();
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  pins.forEach((p, i) => {
+=====
+  pins.map(p => { const room = ((caseData && caseData.rooms) || []).find(r => r.id === p.id); return { id: p.id, label: room ? room.name : p.label }; }).forEach((p, i) => {
+<<<END>>>

@@ -1,0 +1,32 @@
+<<<REPLACE content/case.json>>>
+  ],
+  "glossary": [
+=====
+  ],
+  "hints": [
+    {"id": "h1", "after": 45, "text": {"en": "A silhouette pushing a cart passed the instrument room window.", "pt": "Uma silhueta empurrando um carrinho passou pela janela da sala de instrumentos."}},
+    {"id": "h2", "after": 100, "text": {"en": "In the hallway, a hollow wooden knock comes from a cleaning cart.", "pt": "No corredor, uma batida oca de madeira vem de um carrinho de limpeza."}},
+    {"id": "h3", "after": 160, "text": {"en": "Under the lamp, a fresh scratch shines on the violin case lock.", "pt": "Sob a lâmpada, um arranhão novo brilha na fechadura da caixa do violino."}}
+  ],
+  "glossary": [
+<<<END>>>
+<<<REPLACE content/cases/night-train.json>>>
+  ],
+  "glossary": [
+=====
+  ],
+  "hints": [
+    {"id": "h1", "after": 45, "text": {"en": "A silhouette in a white apron passed the luggage car window.", "pt": "Uma silhueta de avental branco passou pela janela do vagão de bagagem."}},
+    {"id": "h2", "after": 100, "text": {"en": "A key ring jingles on a hook in the dining car.", "pt": "Um molho de chaves balança num gancho do vagão-restaurante."}},
+    {"id": "h3", "after": 160, "text": {"en": "A trail of white dust leads from the kitchen toward the luggage car.", "pt": "Um rastro de pó branco vai da cozinha até o vagão de bagagem."}}
+  ],
+  "glossary": [
+<<<END>>>
+<<<REPLACE src/case.js>>>
+    rooms,
+    timeline,
+=====
+    rooms,
+    timeline,
+    hints: Array.isArray(c.hints) ? c.hints.map(h => ({ id: h.id, after: h.after, text: h.text?.[l] ?? '' })) : [],
+<<<END>>>

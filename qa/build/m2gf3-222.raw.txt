@@ -1,0 +1,17 @@
+<<<REPLACE test/hints.mjs>>>
+  if (!toast.classList.contains('toast')) throw new Error('Missing toast class');
+=====
+  if (toast.className !== 'toast') throw new Error(`Expected className toast, found ${toast.className}`);
+<<<END>>>
+<<<REPLACE test/hints.mjs>>>
+  const motionRule = css.substring(css.indexOf('prefers-reduced-motion'), css.indexOf('}', css.indexOf('prefers-reduced-motion')));
+  if (!motionRule.includes('.toast') || !motionRule.includes('animation: none')) throw new Error('Motion rule invalid');
+=====
+  const motionRule = css.split('\n').find(l => l.includes('prefers-reduced-motion') && l.includes('.toast'));
+  if (!motionRule || !motionRule.includes('animation: none')) throw new Error(`Expected a one-line reduced motion rule for .toast with animation: none, found ${motionRule}`);
+<<<END>>>
+<<<REPLACE package.json>>>
+node test/scene.mjs && node test/keyboard.mjs
+=====
+node test/scene.mjs && node test/hints.mjs && node test/keyboard.mjs
+<<<END>>>

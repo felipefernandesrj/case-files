@@ -398,7 +398,7 @@ async function run() {
     const makeRestart = () => new Function(
       'document', 'fetch', 'confirm', 'API', 'LABELS', 'lang', 'histories',
       'renderQuestions', 'renderBest', 'renderCase', 'renderAccuseButtons', 'renderConversation',
-      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 }; let gameOver = true; function setGameOver(on){ gameOver = !!on; }\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
+      'let sessionId = "old-sess"; let questionsUsed = 3; let selectedSuspect = "maya"; let lastAccuseResult = { score: 1 }; let gameOver = true; function setGameOver(on){ gameOver = !!on; } function startHints(){}\n' + src + '\nreturn { restartGame, get sessionId(){return sessionId}, get questionsUsed(){return questionsUsed}, get selectedSuspect(){return selectedSuspect}, get lastAccuseResult(){return lastAccuseResult}, histories };'
     )(
       fakeDoc, fakeFetch, fakeConfirm, '/api', LABELS, 'en', histories,
       () => { renders.q++; }, () => { renders.best++; }, () => { renders.case++; }, () => { renders.accuse++; }, () => { renders.conv++; }

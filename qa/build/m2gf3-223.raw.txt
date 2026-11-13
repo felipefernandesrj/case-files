@@ -1,0 +1,20 @@
+<<<REPLACE test/hints.mjs>>>
+  if (toast.children[0].classList.contains('toast-kicker') === false || toast.children[0].textContent !== 'Hint') throw new Error('Kicker error');
+=====
+  if (toast.children[0].className !== 'toast-kicker' || toast.children[0].textContent !== 'Hint') throw new Error(`Expected kicker Hint, found ${toast.children[0].className} ${toast.children[0].textContent}`);
+<<<END>>>
+<<<REPLACE test/hints.mjs>>>
+  if (toast.children[1].classList.contains('toast-text') === false || toast.children[1].textContent !== 'A silhouette passed the window.') throw new Error('Text error');
+=====
+  if (toast.children[1].className !== 'toast-text' || toast.children[1].textContent !== 'A silhouette passed the window.') throw new Error(`Expected toast text, found ${toast.children[1].className} ${toast.children[1].textContent}`);
+<<<END>>>
+<<<REPLACE public/index.html>>>
+</div>
+
+
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+=====
+</div>
+
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+<<<END>>>

@@ -320,6 +320,7 @@
   </div>
 </div>
 
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div>
 <script type="module">
 const API = '/api';
 import { readBest, recordResult, resetBest, bestText, questionsText, LABELS } from '/best.js';
@@ -397,6 +398,38 @@ function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onlo
 function locArt(roomId) { const c = artCase(); return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
 let sceneRoom = null;
 let sceneFront = 0;
+let hintTimers = [];
+function stopHints() { hintTimers.forEach(t => clearTimeout(t)); hintTimers = []; }
+function showToast(text) {
+  const box = document.getElementById('toasts');
+  if (!box || !text) return;
+  const t = document.createElement('div');
+  t.className = 'toast';
+  const k = document.createElement('strong');
+  k.className = 'toast-kicker';
+  k.textContent = lang === 'pt' ? 'Pista' : 'Hint';
+  const s = document.createElement('span');
+  s.className = 'toast-text';
+  s.textContent = text;
+  t.append(k, s);
+  box.append(t);
+  while (box.children.length > 2) { box.removeChild(box.firstElementChild); }
+  setTimeout(() => { t.classList.add('is-out'); setTimeout(() => t.remove(), 400); }, 8000);
+}
+function startHints() {
+  stopHints();
+  const box = document.getElementById('toasts');
+  if (box) box.innerHTML = '';
+  const hints = (caseData && caseData.hints) || [];
+  for (const h of hints) {
+    const id = h.id;
+    hintTimers.push(setTimeout(() => {
+      if (gameOver) return;
+      const cur = ((caseData && caseData.hints) || []).find(x => x.id === id);
+      if (cur) showToast(cur.text);
+    }, (Number(h.after) || 0) * 1000));
+  }
+}
 function syncScene() {
   const scene = document.getElementById('scene');
   if (!scene) return;
@@ -636,6 +669,7 @@ async function init() {
   await loadPackList();
   await loadCase();
   await setLang('en');
+  startHints();
 }
 
 async function loadPackList() {
@@ -777,7 +811,7 @@ function renderBoard() {
     grid.appendChild(empty);
     return;
   }
-  pins.forEach((p, i) => {
+  pins.map(p => { const room = ((caseData && caseData.rooms) || []).find(r => r.id === p.id); return { id: p.id, label: room ? room.name : p.label }; }).forEach((p, i) => {
     const tile = document.createElement('button');
     tile.type = 'button';
     tile.className = 'ev-tile with-icon';
@@ -883,6 +917,7 @@ async function openPackFile(id) {
   renderConversation();
   showPlay();
   showStep('briefing');
+  startHints();
   const first = document.querySelector('#suspect-buttons button');
   if (first) first.focus();
 }
@@ -1197,6 +1232,7 @@ async function restartGame(){
   renderAccuseButtons();
   renderConversation();
   if (typeof showStep === 'function') showStep('briefing');
+  startHints();
   const first = document.querySelector('#suspect-buttons button');
   if (first) first.focus();
   else document.getElementById('q').focus();

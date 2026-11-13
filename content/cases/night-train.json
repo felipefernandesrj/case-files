@@ -247,6 +247,11 @@
       }
     }
   ],
+  "hints": [
+    {"id": "h1", "after": 45, "text": {"en": "A silhouette in a white apron passed the luggage car window.", "pt": "Uma silhueta de avental branco passou pela janela do vagão de bagagem."}},
+    {"id": "h2", "after": 100, "text": {"en": "A key ring jingles on a hook in the dining car.", "pt": "Um molho de chaves balança num gancho do vagão-restaurante."}},
+    {"id": "h3", "after": 160, "text": {"en": "A trail of white dust leads from the kitchen toward the luggage car.", "pt": "Um rastro de pó branco vai da cozinha até o vagão de bagagem."}}
+  ],
   "glossary": [
     {
       "en": "train",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.12 (M2 game feel, sprint 3: timed hint toasts)
+- Timed hint events now appear as on-screen toasts while the player works the case. Each case file has three hints (for example "A silhouette pushing a cart passed the instrument room window." in The Vanishing Violin, or "A silhouette in a white apron passed the luggage car window." in The Night Train) that show up 45, 100 and 160 seconds into a game. A toast carries a Hint label (Pista in Portuguese), slides in at the bottom of the screen above the phone dock, stays for 8 seconds and fades out; at most two are on screen. Toasts are announced politely to screen readers and do not move when the player asks for reduced motion.
+- Hints follow the language of the moment they appear, stop after the verdict, and start again from zero on Start over and when another case file is opened.
+- Pins now follow the language: a room pinned in English shows its Portuguese name on the board and in the rail after a switch to Portuguese, and back.
+- New test/hints.mjs with 12 checks (toast markup, hints in both case files, hints in the public case per language, one timer per hint, English toast, current language at fire time, no hint after the verdict, restart clears pending hints, at most two toasts, fade then removal, hints start on every new game with toast CSS, pins follow the language). The automated suite now has 156 checks.
+
 ## 0.4.11 (M2 game feel, sprint 2: the room stays as the scene)
 - The room the player opens now stays on screen as the scene. Its pixel-art plate becomes a dimmed backdrop of the whole play area and stays there while the player questions suspects, reads the dossier, checks the board or accuses. Opening another room crossfades to the new plate. A small caption names the scene (Scene: Instrument room, or Cena: Sala de instrumentos in Portuguese) and follows the language switch. The fade is skipped when the player asks for reduced motion. Start over and opening another case file clear the scene. The conversation panel is see-through while a scene is shown so the room shows behind it. Checked at 1280 and 390 wide.
 - On desktop the CASE CLOSED stamp no longer overlaps the Score line; it now sits on its own line below the score.

@@ -1,0 +1,9 @@
+M1 no gameOver guard: no hint after the verdict
+M2 hint text captured at schedule time: hint reads the current language
+M3 startHints keeps old timers: restart clears pending hints
+M4 three toasts kept: at most two toasts
+M5 pins keep stored label: pins follow the language
+M6 publicCase drops hints: publicCase localises hints
+M7 kicker always English: hint reads the current language
+M8 restart does not start hints: hints start on every new game
+M9 toast never fades: toast fades then goes

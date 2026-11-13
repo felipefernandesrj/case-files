@@ -1,0 +1,15 @@
+{
+ "apiHints": "null",
+ "1280-en-pins": "rail=[] board=[] rooms=[]",
+ "1280-en-toast1": "no #toasts",
+ "1280-en-toast-later": "no #toasts",
+ "1280-pt-pins": "rail=[\"Instrument room\"] board=[\"Instrument room\"] rooms=[\"Academia de Música Aurora\",\"Sala de instrumentos\",\"Sala de ensaio\",\"Corredor\"]",
+ "1280-pt-toast1": "no #toasts",
+ "1280-pt-toast-later": "no #toasts",
+ "390-en-pins": "rail=[\"Instrument room\"] board=[\"Instrument room\"] rooms=[\"Aurora Music Academy\",\"Instrument room\",\"Rehearsal hall\",\"Hallway\"]",
+ "390-en-toast1": "no #toasts",
+ "390-en-toast-later": "no #toasts",
+ "390-pt-pins": "rail=[\"Instrument room\"] board=[\"Instrument room\"] rooms=[\"Academia de Música Aurora\",\"Sala de instrumentos\",\"Sala de ensaio\",\"Corredor\"]",
+ "390-pt-toast1": "no #toasts",
+ "390-pt-toast-later": "no #toasts"
+}

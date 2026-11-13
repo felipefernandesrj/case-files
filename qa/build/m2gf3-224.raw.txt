@@ -1,0 +1,5 @@
+<<<REPLACE test/scoreboard.mjs>>>
+function setGameOver(on){ gameOver = !!on; }\n
+=====
+function setGameOver(on){ gameOver = !!on; } function startHints(){}\n
+<<<END>>>

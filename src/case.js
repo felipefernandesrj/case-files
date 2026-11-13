@@ -103,6 +103,7 @@ export function publicCase(c, lang) {
     })),
     rooms,
     timeline,
+    hints: Array.isArray(c.hints) ? c.hints.map(h => ({ id: h.id, after: h.after, text: h.text?.[l] ?? '' })) : [],
   };
 }
 

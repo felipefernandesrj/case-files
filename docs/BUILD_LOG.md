@@ -236,3 +236,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 209-217 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (page-only change, checked in mock mode with headless Chrome screenshots at 1280 and 390).
 - Result: npm test 144/144 (was 136), new test/scene.mjs 8 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 2).
+
+## M2 game feel sprint 3 (v0.4.12)
+
+- Scope: timed hint events shown as on-screen toasts (three hints per case in the case JSON, served localised by publicCase, one timer per hint from the start of a game, current language at fire time, none after the verdict, restarted on Start over and on opening another file, at most two toasts, reduced motion respected); pins follow the current language on the board and in the rail.
+- Calls 218-227 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (no model prompt changed, checked in mock mode with headless Chrome screenshots at 1280 and 390 in English and Portuguese).
+- Result: npm test 156/156 (was 144), new test/hints.mjs 12 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 3).
