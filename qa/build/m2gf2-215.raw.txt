@@ -1,0 +1,12 @@
+<<<REPLACE test/scene.mjs>>>
+  api.sync(); // room a
+=====
+  api.sync(); // room a
+  const aLayer = layers.find(l => l.classList.contains('is-on'));
+<<<END>>>
+
+<<<REPLACE test/scene.mjs>>>
+  if (layers[0].classList.contains('is-on')) throw new Error('first layer still on');
+=====
+  if (!aLayer || aLayer === onLayer || aLayer.classList.contains('is-on')) throw new Error('room a layer still on');
+<<<END>>>

@@ -1,0 +1,7 @@
+<<<REPLACE public/css/game.css>>>
+#play.has-scene #conversation { background: rgba(36,31,26,0.72); }
+#play.has-scene #log { background: rgba(26,23,20,0.62); }
+=====
+#play.has-scene #conversation { background: rgba(36,31,26,0.5); }
+#play.has-scene #log { background: rgba(26,23,20,0.4); }
+<<<END>>>

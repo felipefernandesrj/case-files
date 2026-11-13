@@ -1,0 +1,210 @@
+<<<FILE test/scene.mjs>>>
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const htmlPath = join(__dirname, '../public/index.html');
+const cssPath = join(__dirname, '../public/css/game.css');
+
+const html = fs.readFileSync(htmlPath, 'utf8');
+const css = fs.readFileSync(cssPath, 'utf8');
+
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`Function ${name} not found`);
+  let depth = 0;
+  let firstBrace = -1;
+  for (let i = startIdx; i < html.length; i++) {
+    if (html[i] === '{') {
+      if (firstBrace === -1) firstBrace = i;
+      depth++;
+    } else if (html[i] === '}') {
+      depth--;
+      if (depth === 0) return html.substring(startIdx, i + 1);
+    }
+  }
+  throw new Error(`Unmatched braces in ${name}`);
+}
+
+const results = [];
+function check(name, fn) {
+  try {
+    fn();
+    results.push(`PASS ${name}`);
+  } catch (e) {
+    results.push(`FAIL ${name}: ${e.message}`);
+  }
+}
+
+function makeEl() {
+  const classes = new Set();
+  return {
+    classes,
+    style: {},
+    textContent: '',
+    hidden: true,
+    classList: {
+      add: (c) => classes.add(c),
+      remove: (c) => classes.delete(c),
+      contains: (c) => classes.has(c)
+    }
+  };
+}
+
+check('scene markup', () => {
+  if (!html.includes('<div id="scene" aria-hidden="true">')) throw new Error('missing scene div');
+  const layerMatches = html.match(/class="scene-layer"/g) || [];
+  if (layerMatches.length !== 2) throw new Error('should have 2 layers');
+  if (!html.includes('id="scene-label"')) throw new Error('missing label');
+  if (html.indexOf('id="scene"') < html.indexOf('<main id="play">')) throw new Error('scene before play');
+});
+
+check('renderRooms hooks the scene', () => {
+  const src = fnSource('renderRooms');
+  if (!src.includes('syncScene()')) throw new Error('renderRooms does not call syncScene');
+});
+
+check('first room shows', () => {
+  const layers = [makeEl(), makeEl()];
+  const scene = { querySelectorAll: () => layers, forEach: layers.forEach.bind(layers) };
+  const label = makeEl();
+  const play = makeEl();
+  const doc = { getElementById: id => ({ scene, 'scene-label': label, play })[id] || null };
+  const caseData = { rooms: [{ id: 'a', name: 'Hall' }, { id: 'b', name: 'Cellar' }] };
+  const getRoom = () => caseData.rooms.find(r => r.id === 'a');
+  const locArt = id => `/assets/loc/x-${id}.png`;
+  let artCalls = 0;
+  const whenArt = (url, apply) => { artCalls++; if (url) apply(url); };
+
+  const syncSrc = fnSource('syncScene').replace(/\bcurrentRoom\b/g, 'getRoom()');
+  const runner = new Function('document', 'caseData', 'getRoom', 'lang', 'locArt', 'whenArt', 
+    `let sceneRoom = null; let sceneFront = 0; ${syncSrc} return { sync: () => syncScene(), state: () => ({ sceneRoom, sceneFront }) };`
+  );
+  const api = runner(doc, caseData, getRoom, 'en', locArt, whenArt);
+  api.sync();
+
+  if (layers.filter(l => l.classList.contains('is-on')).length !== 1) throw new Error('not one layer on');
+  const onLayer = layers.find(l => l.classList.contains('is-on'));
+  if (!onLayer.style.backgroundImage.includes('x-a.png')) throw new Error('wrong image');
+  if (label.textContent !== 'Scene: Hall') throw new Error('wrong label text');
+  if (label.hidden !== false) throw new Error('label should be visible');
+  if (!play.classList.contains('has-scene')) throw new Error('play missing class');
+});
+
+check('crossfade and same room', () => {
+  const layers = [makeEl(), makeEl()];
+  const scene = { querySelectorAll: () => layers, forEach: layers.forEach.bind(layers) };
+  const label = makeEl();
+  const play = makeEl();
+  const doc = { getElementById: id => ({ scene, 'scene-label': label, play })[id] || null };
+  const caseData = { rooms: [{ id: 'a', name: 'Hall' }, { id: 'b', name: 'Cellar' }] };
+  
+  let currentRoomId = 'a';
+  const getRoom = () => caseData.rooms.find(r => r.id === currentRoomId);
+  const locArt = id => `/assets/loc/x-${id}.png`;
+  let artCalls = 0;
+  const whenArt = (url, apply) => { artCalls++; if (url) apply(url); };
+
+  const syncSrc = fnSource('syncScene').replace(/\bcurrentRoom\b/g, 'getRoom()');
+  const runner = new Function('document', 'caseData', 'getRoom', 'lang', 'locArt', 'whenArt', 
+    `let sceneRoom = null; let sceneFront = 0; ${syncSrc} return { sync: () => syncScene(), state: () => ({ sceneRoom, sceneFront }) };`
+  );
+  const api = runner(doc, caseData, getRoom, 'en', locArt, whenArt);
+  
+  api.sync(); // room a
+  currentRoomId = 'b';
+  api.sync(); // room b
+
+  if (layers.filter(l => l.classList.contains('is-on')).length !== 1) throw new Error('not one layer on');
+  const onLayer = layers.find(l => l.classList.contains('is-on'));
+  if (!onLayer.style.backgroundImage.includes('x-b.png')) throw new Error('wrong image b');
+  const offLayer = layers.find(l => !l.classList.contains('is-on'));
+  if (offLayer.style.backgroundImage.includes('x-a.png')) throw new Error('old layer still has image');
+  
+  const callsBefore = artCalls;
+  api.sync(); // room b again
+  if (artCalls !== callsBefore) throw new Error('whenArt called on same room');
+});
+
+check('Portuguese caption', () => {
+  const layers = [makeEl(), makeEl()];
+  const scene = { querySelectorAll: () => layers, forEach: layers.forEach.bind(layers) };
+  const label = makeEl();
+  const play = makeEl();
+  const doc = { getElementById: id => ({ scene, 'scene-label': label, play })[id] || null };
+  const caseData = { rooms: [{ id: 'a', name: 'Hall' }, { id: 'b', name: 'Cellar' }] };
+  const getRoom = () => caseData.rooms.find(r => r.id === 'b');
+  const locArt = id => `/assets/loc/x-${id}.png`;
+  const whenArt = (url, apply) => { if (url) apply(url); };
+
+  const syncSrc = fnSource('syncScene').replace(/\bcurrentRoom\b/g, 'getRoom()');
+  const runner = new Function('document', 'caseData', 'getRoom', 'lang', 'locArt', 'whenArt', 
+    `let sceneRoom = null; let sceneFront = 0; ${syncSrc} return { sync: () => syncScene(), state: () => ({ sceneRoom, sceneFront }) };`
+  );
+  const api = runner(doc, caseData, getRoom, 'pt', locArt, whenArt);
+  api.sync();
+  if (label.textContent !== 'Cena: Cellar') throw new Error(`expected Cena: Cellar, got ${label.textContent}`);
+});
+
+check('cleared on reset', () => {
+  const layers = [makeEl(), makeEl()];
+  const scene = { querySelectorAll: () => layers, forEach: layers.forEach.bind(layers) };
+  const label = makeEl();
+  const play = makeEl();
+  const doc = { getElementById: id => ({ scene, 'scene-label': label, play })[id] || null };
+  const caseData = { rooms: [{ id: 'a', name: 'Hall' }] };
+  let currentRoomId = 'a';
+  const getRoom = () => currentRoomId ? caseData.rooms.find(r => r.id === currentRoomId) : null;
+  const locArt = id => `/assets/loc/x-${id}.png`;
+  const whenArt = (url, apply) => { if (url) apply(url); };
+
+  const syncSrc = fnSource('syncScene').replace(/\bcurrentRoom\b/g, 'getRoom()');
+  const runner = new Function('document', 'caseData', 'getRoom', 'lang', 'locArt', 'whenArt', 
+    `let sceneRoom = null; let sceneFront = 0; ${syncSrc} return { sync: () => syncScene(), state: () => ({ sceneRoom, sceneFront }) };`
+  );
+  const api = runner(doc, caseData, getRoom, 'en', locArt, whenArt);
+  api.sync(); 
+  currentRoomId = null;
+  api.sync();
+
+  if (layers.some(l => l.classList.contains('is-on'))) throw new Error('layer still on');
+  if (label.textContent !== '') throw new Error('label not empty');
+  if (label.hidden !== true) throw new Error('label not hidden');
+  if (play.classList.contains('has-scene')) throw new Error('play has-scene remains');
+  if (api.state().sceneRoom !== null) throw new Error('sceneRoom not null');
+});
+
+check('css', () => {
+  if (!css.includes('.scene-layer {') || !css.includes('transition: opacity')) throw new Error('missing transition');
+  const isOnMatch = css.match(/\.scene-layer\.is-on\s*\{\s*opacity:\s*([\d.]+);?\s*\}/);
+  if (!isOnMatch || parseFloat(isOnMatch[1]) <= 0 || parseFloat(isOnMatch[1]) > 0.5) throw new Error('invalid opacity');
+  if (!css.includes('#play { position: relative; isolation: isolate; }')) throw new Error('missing play style');
+  const motionIdx = css.indexOf('@media (prefers-reduced-motion: reduce)');
+  if (motionIdx === -1) throw new Error('missing reduced motion');
+  const afterMotion = css.substring(motionIdx, motionIdx + 200);
+  if (!afterMotion.includes('.scene-layer')) throw new Error('reduced motion does not contain .scene-layer');
+});
+
+check('stamp below the score', () => {
+  const stampIdx = css.indexOf('.case-closed-stamp {');
+  if (stampIdx === -1) throw new Error('missing stamp rule');
+  const stampRule = css.substring(stampIdx, css.indexOf('}', stampIdx));
+  if (!stampRule.includes('display: block')) throw new Error('missing display: block');
+  if (stampRule.includes('inline-block')) throw new Error('contains inline-block');
+  const marginMatch = stampRule.match(/margin(?:-top)?:\s*(\d+)px/);
+  if (!marginMatch || parseInt(marginMatch[1]) < 28) throw new Error('margin too small');
+});
+
+results.forEach(r => console.log(r));
+const passed = results.filter(r => r.startsWith('PASS')).length;
+const failed = results.length - passed;
+console.log(`${passed} passed, ${failed} failed`);
+process.exit(failed > 0 ? 1 : 0);
+<<<END>>>
+
+<<<REPLACE package.json>>>
+node test/progress.mjs && node test/keyboard.mjs
+=====
+node test/progress.mjs && node test/scene.mjs && node test/keyboard.mjs
+<<<END>>>

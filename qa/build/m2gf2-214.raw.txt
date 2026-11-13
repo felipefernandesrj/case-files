@@ -1,0 +1,8 @@
+<<<REPLACE test/scene.mjs>>>
+  const offLayer = layers.find(l => !l.classList.contains('is-on'));
+  if (offLayer.style.backgroundImage.includes('x-a.png')) throw new Error('old layer still has image');
+=====
+  if (layers[0].classList.contains('is-on')) throw new Error('first layer still on');
+  api.sync(); // same room b, nothing may change
+  if (layers.find(l => l.classList.contains('is-on')) !== onLayer || !onLayer.style.backgroundImage.includes('x-b.png')) throw new Error('same room changed the on layer');
+<<<END>>>

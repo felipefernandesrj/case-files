@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.11 (M2 game feel, sprint 2: the room stays as the scene)
+- The room the player opens now stays on screen as the scene. Its pixel-art plate becomes a dimmed backdrop of the whole play area and stays there while the player questions suspects, reads the dossier, checks the board or accuses. Opening another room crossfades to the new plate. A small caption names the scene (Scene: Instrument room, or Cena: Sala de instrumentos in Portuguese) and follows the language switch. The fade is skipped when the player asks for reduced motion. Start over and opening another case file clear the scene. The conversation panel is see-through while a scene is shown so the room shows behind it. Checked at 1280 and 390 wide.
+- On desktop the CASE CLOSED stamp no longer overlaps the Score line; it now sits on its own line below the score.
+- New test/scene.mjs with 8 checks (scene markup, the room list drives the scene, first room shows with its caption, crossfade to a second room and no new fade for the same room, Portuguese caption, scene cleared on reset, dimmed backdrop with fade and reduced motion, stamp below the score). The automated suite now has 144 checks.
+
 ## 0.4.10 (M2 game feel, sprint 1: case progress tracker and CASE CLOSED stamp)
 - The desktop right column is never empty any more. It shows a Case progress tracker with the six case steps (Brief, Places, People, Ask, Board, Accuse). A step is ticked with a short slide-in the first time the player opens it, the current step is highlighted, and a counter shows how many of the six are done (for example 3/6). It follows EN/PT and resets on Start over or when another case file is opened. Below it the Pins list shows a hint until the first clue is pinned.
 - A correct accusation now lands a red CASE CLOSED rubber stamp (CASO ENCERRADO in Portuguese) on the verdict with a stamp-down animation; it is skipped when the player asks for reduced motion.

@@ -66,6 +66,13 @@
 - Ask hints: if Ask is pressed with no selectedSuspect, #best-status shows LABELS.pickSuspect (EN "Choose a suspect first." / PT "Escolha um suspeito primeiro.") instead of returning silently; if the question is empty, #best-status shows LABELS.emptyQuestion (EN "Type a question first." / PT "Digite uma pergunta primeiro.") and #q is focused. selectSuspect clears #best-status when it shows LABELS.en.pickSuspect or LABELS.pt.pickSuspect.
 - Best lines use the UI language wording (bestText(lang, entry, ui)) and a new best is announced in the role=status line.
 
+## Web page: scene backdrop (M2 game feel sprint 2)
+
+- Markup: the first children of `#play` are `#scene` (aria-hidden, two `.scene-layer` divs) and `#scene-label`.
+- `syncScene()` runs at the end of `renderRooms()`, so opening a room, Start over, opening another file and switching language all update it. With a current room it sets the caption to `Scene: <room name>` or `Cena: <room name>`, adds `has-scene` to `#play` and, only when the room changed, loads the plate with `locArt` and fades it in on the other layer while the old layer fades out. With no current room it clears both layers and hides the caption.
+- CSS: `.scene-layer` fades opacity over 700ms to 0.35 (a dimmed backdrop under a dark vignette); reduced motion removes the fade; the conversation panel and log are see-through while `has-scene` is set.
+- The CASE CLOSED stamp is a centred block below the Score line (margin 32px above), so its rotation never covers the score.
+
 ## Web page: closing screen
 
 When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
@@ -109,9 +116,10 @@ This executes:
 8. `node test/icons.mjs` (icon sprite ids and no 404 on referenced icon paths, including rotate-ccw)
 9. `node test/budget.mjs` (per-case call cap per playthrough, friendly call_cap message, failed calls count, fresh cap per session, worst-case spend under the ceiling for every case, hand-computed formula check)
 10. `node test/progress.mjs` (Case progress tracker in the desktop rail (never hidden, six steps in order, ticks and counter, safe without its list, visits recorded), CASE CLOSED stamp text and animation, readable suspect roles, reduced motion)
-11. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+11. `node test/scene.mjs` (scene backdrop: markup, driven by the room list, first room and caption, crossfade and no new fade for the same room, Portuguese caption, cleared on reset, dimmed backdrop with fade and reduced motion, CASE CLOSED stamp below the score)
+12. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 136 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, keyboard 13).
+Total checks: 144 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

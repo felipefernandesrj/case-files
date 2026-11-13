@@ -229,3 +229,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 199-208 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (page-only change, checked in mock mode with headless Chrome screenshots at 1280 and 390).
 - Result: npm test 136/136 (was 128), new test/progress.mjs 8 checks. 10 key calls, 5 861 / 6 015 tokens, 217.0 neurons (~US$ 0.0024), rework 5 calls = 19.4% of build neurons, 0 API failures, 3 re-parses (199 typo in OLD, 203 and 206 block framing).
 - Details and receipts: qa/rework.md (M2 game feel sprint 1).
+
+## M2 game feel sprint 2 (v0.4.11)
+
+- Scope: the opened room stays as a dimmed scene behind the play area (crossfade between rooms, EN/PT caption, reduced motion respected, cleared on Start over and on opening another file); the CASE CLOSED stamp no longer overlaps the Score line on desktop.
+- Calls 209-217 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (page-only change, checked in mock mode with headless Chrome screenshots at 1280 and 390).
+- Result: npm test 144/144 (was 136), new test/scene.mjs 8 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 2).

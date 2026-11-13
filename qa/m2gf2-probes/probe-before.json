@@ -1,0 +1,15 @@
+{
+ "1280-room": "no #scene playBg=none locPanelVisible=true",
+ "1280-talk": "no #scene playBg=none locPanelVisible=false",
+ "1280-crossfade-mid": "no #scene",
+ "1280-pt": "no #scene",
+ "1280-stamp": "stampTop=283.1 scoreBottom=335.6 gap=-52.5 overlapPx=24.0",
+ "1280-after-restart": "no #scene",
+ "390-room": "no #scene playBg=none locPanelVisible=true",
+ "390-talk": "no #scene playBg=none locPanelVisible=false",
+ "390-crossfade-mid": "no #scene",
+ "390-pt": "no #scene",
+ "390-stamp": "stampTop=532.1 scoreBottom=518.6 gap=13.5 overlapPx=0.0",
+ "390-after-restart": "no #scene",
+ "reduced-motion": "no #scene"
+}

@@ -222,6 +222,8 @@
     </nav>
 
     <main id="play">
+      <div id="scene" aria-hidden="true"><div class="scene-layer"></div><div class="scene-layer"></div></div>
+      <p id="scene-label" class="scene-label" hidden></p>
       <section id="briefing" class="panel is-on" data-panel="briefing">
         <p class="stamp" id="brief-stamp">Case file</p>
         <div id="intro"></div>
@@ -393,6 +395,40 @@ const LOC_ART_ROOM = { hallway: 'hallway-cart' };
 function artCase() { return caseData && /^[a-z0-9-]+$/.test(caseData.file || '') ? caseData.file : null; }
 function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onload = () => apply(url); im.src = url; }
 function locArt(roomId) { const c = artCase(); return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
+let sceneRoom = null;
+let sceneFront = 0;
+function syncScene() {
+  const scene = document.getElementById('scene');
+  if (!scene) return;
+  const layers = scene.querySelectorAll('.scene-layer');
+  const label = document.getElementById('scene-label');
+  const play = document.getElementById('play');
+  const room = (caseData && caseData.rooms || []).find(r => r.id === currentRoom);
+  if (!room) {
+    sceneRoom = null;
+    layers.forEach(l => l.classList.remove('is-on'));
+    if (label) { label.textContent = ''; label.hidden = true; }
+    if (play) play.classList.remove('has-scene');
+    return;
+  }
+  if (label) {
+    label.textContent = (lang === 'pt' ? 'Cena: ' : 'Scene: ') + room.name;
+    label.hidden = false;
+  }
+  if (play) play.classList.add('has-scene');
+  if (room.id === sceneRoom) return;
+  sceneRoom = room.id;
+  const want = room.id;
+  whenArt(locArt(room.id), (url) => {
+    if (sceneRoom !== want) return;
+    sceneFront = 1 - sceneFront;
+    const next = layers[sceneFront];
+    const prev = layers[1 - sceneFront];
+    next.style.backgroundImage = `url(${url})`;
+    next.classList.add('is-on');
+    if (prev) prev.classList.remove('is-on');
+  });
+}
 function setPortrait(el, id, mood) {
   const c = artCase();
   whenArt(c && `/assets/characters/${c}-${id}-${mood || 'neutral'}.png`, (url) => {
@@ -684,6 +720,7 @@ function renderRooms() {
     btn.addEventListener('click', () => inspectRoom(r));
     wrap.appendChild(btn);
   });
+  syncScene();
 }
 
 function inspectRoom(r) {

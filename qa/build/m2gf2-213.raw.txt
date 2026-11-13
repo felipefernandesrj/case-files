@@ -1,0 +1,20 @@
+<<<REPLACE test/scene.mjs>>>
+  const getRoom = () => caseData.rooms.find(r => r.id === 'a');
+=====
+  const getRoom = () => 'a';
+<<<END>>>
+<<<REPLACE test/scene.mjs>>>
+  const getRoom = () => caseData.rooms.find(r => r.id === currentRoomId);
+=====
+  const getRoom = () => currentRoomId;
+<<<END>>>
+<<<REPLACE test/scene.mjs>>>
+  const getRoom = () => caseData.rooms.find(r => r.id === 'b');
+=====
+  const getRoom = () => 'b';
+<<<END>>>
+<<<REPLACE test/scene.mjs>>>
+  const getRoom = () => currentRoomId ? caseData.rooms.find(r => r.id === currentRoomId) : null;
+=====
+  const getRoom = () => currentRoomId || null;
+<<<END>>>

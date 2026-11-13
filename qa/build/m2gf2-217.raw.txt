@@ -1,0 +1,21 @@
+<<<REPLACE docs/SPEC.md>>>
+11. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+=====
+11. `node test/scene.mjs` (scene backdrop: markup, driven by the room list, first room and caption, crossfade and no new fade for the same room, Portuguese caption, cleared on reset, dimmed backdrop with fade and reduced motion, CASE CLOSED stamp below the score)
+12. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 136 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, keyboard 13).
+=====
+Total checks: 144 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, keyboard 13).
+<<<END>>>
+<<<REPLACE CHANGELOG.md>>>
+ The automated suite now has 144 checks.
+
+
+## 0.4.10
+=====
+ The automated suite now has 144 checks.
+
+## 0.4.10
+<<<END>>>

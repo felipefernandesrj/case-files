@@ -1,0 +1,21 @@
+== M1 renderRooms no longer calls syncScene (public/index.html)
+FAIL renderRooms hooks the scene: renderRooms does not call syncScene
+7 passed, 1 failed
+== M2 no crossfade: same layer reused (no flip) (public/index.html)
+FAIL crossfade and same room: room a layer still on
+7 passed, 1 failed
+== M3 caption always English (public/index.html)
+FAIL Portuguese caption: expected Cena: Cellar, got Scene: Cellar
+7 passed, 1 failed
+== M4 scene kept after reset (public/index.html)
+FAIL cleared on reset: layer still on
+7 passed, 1 failed
+== M5 backdrop not dimmed (opacity 1) (public/css/game.css)
+FAIL css: invalid opacity
+7 passed, 1 failed
+== M6 stamp back to inline-block 16px (overlap bug) (public/css/game.css)
+FAIL stamp below the score: missing display: block
+7 passed, 1 failed
+== M7 no fade transition (public/css/game.css)
+FAIL css: missing transition
+7 passed, 1 failed

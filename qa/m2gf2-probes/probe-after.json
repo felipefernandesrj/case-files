@@ -1,0 +1,15 @@
+{
+ "1280-room": "layersOn=1 bg=url(\"/assets/loc/violin-instrument-room.png\") opacity=0.35 label=Scene: Instrument room playBg=none locPanelVisible=true",
+ "1280-talk": "layersOn=1 bg=url(\"/assets/loc/violin-instrument-room.png\") opacity=0.35 label=Scene: Instrument room playBg=none locPanelVisible=false",
+ "1280-crossfade-mid": "scene-layer is-on@0.20156 | scene-layer@0.14844",
+ "1280-pt": "layersOn=1 bg=url(\"/assets/loc/violin-rehearsal-hall.png\") opacity=0.35 label=Cena: Sala de ensaio",
+ "1280-stamp": "stampTop=315.1 scoreBottom=285.6 gap=29.5 overlapPx=0.0",
+ "1280-after-restart": "layersOn=0 bg= opacity= label=",
+ "390-room": "layersOn=1 bg=url(\"/assets/loc/violin-instrument-room.png\") opacity=0.35 label=Scene: Instrument room playBg=none locPanelVisible=true",
+ "390-talk": "layersOn=1 bg=url(\"/assets/loc/violin-instrument-room.png\") opacity=0.35 label=Scene: Instrument room playBg=none locPanelVisible=false",
+ "390-crossfade-mid": "scene-layer is-on@0.201594 | scene-layer@0.148406",
+ "390-pt": "layersOn=1 bg=url(\"/assets/loc/violin-rehearsal-hall.png\") opacity=0.35 label=Cena: Sala de ensaio",
+ "390-stamp": "stampTop=536.1 scoreBottom=506.6 gap=29.5 overlapPx=0.0",
+ "390-after-restart": "layersOn=0 bg= opacity= label=",
+ "reduced-motion": "transitionDuration=1e-05s"
+}
