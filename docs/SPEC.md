@@ -82,6 +82,12 @@
 - CSS: `.toasts` is fixed at the bottom centre (above `--dock-h` on phones), toasts slide in over 350 ms and fade out over 400 ms, no animation with reduced motion.
 - Pins: `renderBoard()` shows each pin with the name of the room with the same id in the current `caseData.rooms`, falling back to the stored label.
 
+## Web page: readable board heading and toast language (M2 game feel sprint 4)
+
+- CSS: `#board-title` sits on an ink plate (`background: rgba(12,11,10,0.88)`, `color: var(--cf-text)`, lamp left border, width fit-content); `.scene-label` uses `color: var(--cf-text)` on `rgba(12,11,10,0.88)`. Both keep at least 4.5:1 contrast even over the lightest page colour #F3EADF.
+- `showToast(text, id)` stores the hint id in `data-hint`; `startHints()` passes `cur.id`.
+- `relabelToasts()` rewrites the kicker (Hint or Pista) of every toast in `#toasts` and its text from the hint with the same id in the current `caseData.hints`; a toast with an unknown id keeps its text. It never adds or removes toasts. `setLang()` calls it after the case is reloaded in the new language.
+
 ## Web page: closing screen
 
 When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
@@ -127,9 +133,10 @@ This executes:
 10. `node test/progress.mjs` (Case progress tracker in the desktop rail (never hidden, six steps in order, ticks and counter, safe without its list, visits recorded), CASE CLOSED stamp text and animation, readable suspect roles, reduced motion)
 11. `node test/scene.mjs` (scene backdrop: markup, driven by the room list, first room and caption, crossfade and no new fade for the same room, Portuguese caption, cleared on reset, dimmed backdrop with fade and reduced motion, CASE CLOSED stamp below the score)
 12. `node test/hints.mjs` (hint toasts: markup, hints in both case files, localised in the public case, one timer per hint, English toast, current language at fire time, none after the verdict, restart clears pending hints, at most two toasts, fade then removal, started on every new game with toast CSS, pins follow the language)
-13. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+13. `node test/legibility.mjs` (board heading and scene caption on an ink plate with AA contrast, toast remembers its hint id, open toast switches language and back, unknown toast keeps its text, language switch relabels open toasts)
+14. `node test/keyboard.mjs` (Manual/Keyboard interaction)
 
-Total checks: 156 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, keyboard 13).
+Total checks: 164 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

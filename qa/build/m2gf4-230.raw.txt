@@ -1,0 +1,43 @@
+<<<REPLACE public/index.html>>>
+function showToast(text) {
+  const box = document.getElementById('toasts');
+=====
+function showToast(text, id) {
+  const box = document.getElementById('toasts');
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  t.className = 'toast';
+=====
+  t.className = 'toast';
+  if (id) t.setAttribute('data-hint', id);
+<<<END>>>
+<<<REPLACE public/index.html>>>
+      if (cur) showToast(cur.text);
+=====
+      if (cur) showToast(cur.text, cur.id);
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  renderCabinet();
+  if (lastAccuseResult) renderVerdict(false);
+=====
+  renderCabinet();
+  relabelToasts();
+  if (lastAccuseResult) renderVerdict(false);
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function setLang(newLang) {
+=====
+function relabelToasts() {
+  const box = document.getElementById('toasts');
+  if (!box) return;
+  const hints = (caseData && caseData.hints) || [];
+  for (const t of Array.from(box.children)) {
+    const cur = hints.find(x => x.id === t.getAttribute('data-hint'));
+    const k = t.children[0];
+    const s = t.children[1];
+    if (k) k.textContent = lang === 'pt' ? 'Pista' : 'Hint';
+    if (cur && s) s.textContent = cur.text;
+  }
+}
+async function setLang(newLang) {
+<<<END>>>

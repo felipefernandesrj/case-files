@@ -1,0 +1,9 @@
+M1 heading text back to lamp-dim: board heading on an ink plate
+M2 heading plate too thin: heading contrast passes AA
+M3 caption text back to lamp-dim: scene caption uses light text
+M4 caption plate too thin: caption contrast passes AA
+M5 toast drops its hint id: hint toast remembers its hint id
+M6 startHints passes no id: hint toast remembers its hint id
+M7 relabel keeps old kicker: open toast switches language; unknown toast keeps its text
+M8 relabel blanks unknown toasts: unknown toast keeps its text
+M9 setLang does not relabel: language switch relabels open toasts

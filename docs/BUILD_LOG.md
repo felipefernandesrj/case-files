@@ -243,3 +243,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 218-227 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (no model prompt changed, checked in mock mode with headless Chrome screenshots at 1280 and 390 in English and Portuguese).
 - Result: npm test 156/156 (was 144), new test/hints.mjs 12 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 3).
+
+## M2 game feel sprint 4 (v0.4.13)
+
+- Scope: readable Evidence board heading and scene caption (dark ink plate rgba(12,11,10,0.88) with light text, contrast from 1.68:1 and 2.15:1 to about 13.7:1, 1280 and 390, EN and PT); a hint toast already on screen follows a language switch (data-hint id on each toast, relabelToasts() after setLang reloads the case).
+- Calls 228-233 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (no model prompt changed, checked in mock mode with headless Chrome at 1280 and 390 in English and Portuguese, tools/probe-gf4.mjs).
+- Result: npm test 164/164 (was 156), new test/legibility.mjs 8 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 4).

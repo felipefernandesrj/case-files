@@ -1,0 +1,23 @@
+<<<REPLACE public/css/game.css>>>
+<<<.scene-label { position: absolute; top: 8px; right: 12px; z-index: 1; margin: 0; padding: 2px 8px; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cf-lamp-dim); background: rgba(12,11,10,0.6); border: 1px solid var(--cf-line); pointer-events: none; }
+=====
+.scene-label { position: absolute; top: 8px; right: 12px; z-index: 1; margin: 0; padding: 2px 8px; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cf-text); background: rgba(12,11,10,0.88); border: 1px solid var(--cf-lamp-dim); pointer-events: none; }
+<<<END>>>
+<<<REPLACE public/css/game.css>>>
+<<<.ev-tile {
+  background: var(--cf-paper);
+=====
+#board-title {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: 0;
+  padding: 4px 12px;
+  color: var(--cf-text);
+  background: rgba(12,11,10,0.88);
+  border-left: 3px solid var(--cf-lamp);
+  box-shadow: var(--shadow-file);
+}
+
+.ev-tile {
+  background: var(--cf-paper);
+<<<END>>>

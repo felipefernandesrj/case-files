@@ -400,11 +400,12 @@ let sceneRoom = null;
 let sceneFront = 0;
 let hintTimers = [];
 function stopHints() { hintTimers.forEach(t => clearTimeout(t)); hintTimers = []; }
-function showToast(text) {
+function showToast(text, id) {
   const box = document.getElementById('toasts');
   if (!box || !text) return;
   const t = document.createElement('div');
   t.className = 'toast';
+  if (id) t.setAttribute('data-hint', id);
   const k = document.createElement('strong');
   k.className = 'toast-kicker';
   k.textContent = lang === 'pt' ? 'Pista' : 'Hint';
@@ -426,7 +427,7 @@ function startHints() {
     hintTimers.push(setTimeout(() => {
       if (gameOver) return;
       const cur = ((caseData && caseData.hints) || []).find(x => x.id === id);
-      if (cur) showToast(cur.text);
+      if (cur) showToast(cur.text, cur.id);
     }, (Number(h.after) || 0) * 1000));
   }
 }
@@ -594,6 +595,18 @@ function setGameOver(on){
 }
 const histories = {}; // per suspectId [{q,a},...]
 
+function relabelToasts() {
+  const box = document.getElementById('toasts');
+  if (!box) return;
+  const hints = (caseData && caseData.hints) || [];
+  for (const t of Array.from(box.children)) {
+    const cur = hints.find(x => x.id === t.getAttribute('data-hint'));
+    const k = t.children[0];
+    const s = t.children[1];
+    if (k) k.textContent = lang === 'pt' ? 'Pista' : 'Hint';
+    if (cur && s) s.textContent = cur.text;
+  }
+}
 async function setLang(newLang) {
   lang = newLang;
   document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
@@ -652,6 +665,7 @@ async function setLang(newLang) {
   renderAccuseButtons();
   renderConversation();
   renderCabinet();
+  relabelToasts();
   if (lastAccuseResult) renderVerdict(false);
   if (!document.getElementById('credits').hidden) await loadCredits(false);
 }

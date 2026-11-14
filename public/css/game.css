@@ -558,6 +558,16 @@ header {
   min-height: 200px;
 }
 
+#board-title {
+  align-self: flex-start;
+  width: fit-content;
+  padding: 4px 12px;
+  color: var(--cf-text);
+  background: rgba(12,11,10,0.88);
+  border-left: 3px solid var(--cf-lamp);
+  box-shadow: var(--shadow-file);
+}
+
 .ev-tile {
   background: var(--cf-paper);
   color: var(--cf-text-on-paper);
@@ -675,7 +685,7 @@ body[data-view="cabinet"] #steps {
 #scene::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(12,11,10,0.2) 0%, rgba(12,11,10,0.85) 100%); }
 .scene-layer { position: absolute; inset: 0; background-position: center; background-size: cover; background-repeat: no-repeat; image-rendering: pixelated; opacity: 0; transition: opacity 700ms ease; }
 .scene-layer.is-on { opacity: 0.35; }
-.scene-label { position: absolute; top: 8px; right: 12px; z-index: 1; margin: 0; padding: 2px 8px; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cf-lamp-dim); background: rgba(12,11,10,0.6); border: 1px solid var(--cf-line); pointer-events: none; }
+.scene-label { position: absolute; top: 8px; right: 12px; z-index: 1; margin: 0; padding: 2px 8px; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cf-text); background: rgba(12,11,10,0.88); border: 1px solid var(--cf-lamp-dim); pointer-events: none; }
 .scene-label[hidden] { display: none; }
 #play.has-scene #conversation { background: rgba(36,31,26,0.5); }
 #play.has-scene #log { background: rgba(26,23,20,0.4); }

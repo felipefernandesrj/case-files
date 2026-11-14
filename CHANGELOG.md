@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.13 (M2 game feel, sprint 4: readable board heading and caption, toasts follow the language)
+- The Evidence board heading (Quadro de evidências in Portuguese) and the scene caption (Scene: Instrument room, or Cena: Sala de instrumentos) were light text on the light cork texture and hard to read (measured contrast 1.68:1 and 2.15:1). Both now sit on a dark ink plate with light text, about 13.7:1, well above the WCAG AA 4.5:1 minimum, checked at 1280 and 390 wide in English and Portuguese. The heading plate is only as wide as its text and keeps a small lamp-coloured edge.
+- A hint toast that is already on screen now switches language when the player switches EN/PT (before, only the next toast used the new language). Each toast remembers which hint it shows, and after the switch its label (Hint or Pista) and its text are rewritten in the new language. A toast whose hint is not in the case keeps its text.
+- New test/legibility.mjs with 8 checks (heading on an ink plate, light caption text, heading contrast AA, caption contrast AA, toast remembers its hint id, open toast switches language and back, unknown toast keeps its text, language switch relabels open toasts). The automated suite now has 164 checks.
+
 ## 0.4.12 (M2 game feel, sprint 3: timed hint toasts)
 - Timed hint events now appear as on-screen toasts while the player works the case. Each case file has three hints (for example "A silhouette pushing a cart passed the instrument room window." in The Vanishing Violin, or "A silhouette in a white apron passed the luggage car window." in The Night Train) that show up 45, 100 and 160 seconds into a game. A toast carries a Hint label (Pista in Portuguese), slides in at the bottom of the screen above the phone dock, stays for 8 seconds and fades out; at most two are on screen. Toasts are announced politely to screen readers and do not move when the player asks for reduced motion.
 - Hints follow the language of the moment they appear, stop after the verdict, and start again from zero on Start over and when another case file is opened.

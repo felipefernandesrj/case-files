@@ -1,0 +1,190 @@
+{
+ "1280-en": {
+  "heading": {
+   "text": "Evidence board",
+   "color": "rgb(243, 234, 223)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "box": [
+    288,
+    121,
+    768,
+    27
+   ],
+   "bgMedian": [
+    222,
+    175,
+    117
+   ],
+   "ratio": 1.68,
+   "passAA": false
+  },
+  "caption": {
+   "text": "Scene: Instrument room",
+   "color": "rgb(166, 124, 69)",
+   "bg": "rgba(12, 11, 10, 0.6)",
+   "shadow": "none",
+   "box": [
+    859,
+    89,
+    205,
+    18
+   ],
+   "bgMedian": [
+    95,
+    77,
+    53
+   ],
+   "ratio": 2.15,
+   "passAA": false
+  }
+ },
+ "1280-pt": {
+  "heading": {
+   "text": "Quadro de evidências",
+   "color": "rgb(243, 234, 223)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "box": [
+    288,
+    121,
+    768,
+    27
+   ],
+   "bgMedian": [
+    222,
+    175,
+    117
+   ],
+   "ratio": 1.68,
+   "passAA": false
+  },
+  "caption": {
+   "text": "Cena: Sala de instrumentos",
+   "color": "rgb(166, 124, 69)",
+   "bg": "rgba(12, 11, 10, 0.6)",
+   "shadow": "none",
+   "box": [
+    831,
+    89,
+    233,
+    18
+   ],
+   "bgMedian": [
+    95,
+    77,
+    53
+   ],
+   "ratio": 2.15,
+   "passAA": false
+  }
+ },
+ "390-en": {
+  "heading": {
+   "text": "Evidence board",
+   "color": "rgb(243, 234, 223)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "box": [
+    36,
+    134,
+    318,
+    27
+   ],
+   "bgMedian": [
+    222,
+    175,
+    118
+   ],
+   "ratio": 1.68,
+   "passAA": false
+  },
+  "caption": {
+   "text": "Scene: Instrument room",
+   "color": "rgb(166, 124, 69)",
+   "bg": "rgba(12, 11, 10, 0.6)",
+   "shadow": "none",
+   "box": [
+    157,
+    102,
+    205,
+    18
+   ],
+   "bgMedian": [
+    95,
+    77,
+    53
+   ],
+   "ratio": 2.15,
+   "passAA": false
+  }
+ },
+ "390-pt": {
+  "heading": {
+   "text": "Quadro de evidências",
+   "color": "rgb(243, 234, 223)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "box": [
+    36,
+    134,
+    318,
+    27
+   ],
+   "bgMedian": [
+    222,
+    175,
+    118
+   ],
+   "ratio": 1.68,
+   "passAA": false
+  },
+  "caption": {
+   "text": "Cena: Sala de instrumentos",
+   "color": "rgb(166, 124, 69)",
+   "bg": "rgba(12, 11, 10, 0.6)",
+   "shadow": "none",
+   "box": [
+    129,
+    102,
+    233,
+    18
+   ],
+   "bgMedian": [
+    95,
+    77,
+    53
+   ],
+   "ratio": 2.15,
+   "passAA": false
+  }
+ },
+ "1280-toast-switch": {
+  "en": [
+   {
+    "hint": null,
+    "text": "HintA silhouette pushing a cart passed the instrument room window."
+   }
+  ],
+  "pt": [
+   {
+    "hint": null,
+    "text": "HintA silhouette pushing a cart passed the instrument room window."
+   }
+  ]
+ },
+ "390-toast-switch": {
+  "en": [
+   {
+    "hint": null,
+    "text": "HintA silhouette pushing a cart passed the instrument room window."
+   }
+  ],
+  "pt": [
+   {
+    "hint": null,
+    "text": "HintA silhouette pushing a cart passed the instrument room window."
+   }
+  ]
+ }
+}

@@ -1,0 +1,8 @@
+<<<REPLACE public/css/game.css>>>
+  width: fit-content;
+  margin-top: 0;
+  padding: 4px 12px;
+=====
+  width: fit-content;
+  padding: 4px 12px;
+<<<END>>>
