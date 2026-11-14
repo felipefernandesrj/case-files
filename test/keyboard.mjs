@@ -254,7 +254,18 @@ await runStep('verdict-then-credits', async () => {
   await waitFor(async () => !(await evaluate(`document.getElementById('verdict').hidden`)));
   await waitFor(async () => !(await evaluate(`document.getElementById('credits').hidden`)));
   const focus = await evaluate(`document.activeElement.id`);
-  if (focus !== 'credits') throw new Error(`expected credits focus, got ${focus}`);
+  if (focus !== 'continue-yes') throw new Error(`expected continue-yes focus after a wrong verdict, got ${focus}`);
+  const hidden = await evaluate(`document.getElementById('verdict').innerText`);
+  if (hidden.includes('Culprit')) throw new Error(`culprit shown while the countdown runs: ${hidden}`);
+  await pressKey('Escape', 'Escape', 27);
+  await waitFor(async () => (await evaluate(`document.activeElement.id`)) === 'continue-close');
+  const over = await evaluate(`document.getElementById('continue-title').textContent`);
+  if (over !== 'GAME OVER') throw new Error(`expected GAME OVER, got ${over}`);
+  const shown = await evaluate(`document.getElementById('verdict').innerText`);
+  if (!shown.includes('Culprit')) throw new Error(`culprit not shown at game over: ${shown}`);
+  await pressKey('Escape', 'Escape', 27);
+  await waitFor(async () => (await evaluate(`document.activeElement.id`)) === 'restart-btn');
+  if (!(await evaluate(`document.getElementById('continue').hidden`))) throw new Error('continue box still visible after the second Escape');
 });
 
 // 7. Credits A11y

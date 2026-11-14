@@ -1,0 +1,16 @@
+<<<REPLACE public/index.html>>>
+<script type="module">
+=====
+<div id="continue" class="continue" role="group" aria-labelledby="continue-title" hidden>
+  <p id="continue-title" class="continue-title">CONTINUE?</p>
+  <p id="continue-num" class="continue-num" aria-hidden="true">9</p>
+  <p id="continue-note" class="continue-note"></p>
+  <div class="continue-actions">
+    <button id="continue-yes" type="button">Try again</button>
+    <button id="continue-no" type="button">Give up</button>
+    <button id="continue-close" type="button" hidden>Close</button>
+  </div>
+</div>
+<p id="continue-live" class="continue-live" aria-live="polite"></p>
+<script type="module">
+<<<END>>>

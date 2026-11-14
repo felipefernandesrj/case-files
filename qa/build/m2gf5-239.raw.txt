@@ -1,0 +1,5 @@
+<<<REPLACE test/continue.mjs>>>
+  must(r.includes('async function restartGame(skipConfirm = false){'), 'sig mismatch');
+=====
+  must(r.startsWith('function restartGame(skipConfirm = false){'), 'restartGame signature without skipConfirm');
+<<<END>>>

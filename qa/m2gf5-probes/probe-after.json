@@ -1,0 +1,312 @@
+{
+ "1280-en": {
+  "atVerdict": {
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE? 8 Try again Give up Close",
+   "box": [
+    460,
+    295,
+    360,
+    210
+   ],
+   "inView": true,
+   "num": "8",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up.",
+   "focus": "continue-yes",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE? 5 Try again Give up Close",
+   "box": [
+    460,
+    295,
+    360,
+    210
+   ],
+   "inView": true,
+   "num": "5",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up.",
+   "focus": "continue-yes",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "GAME OVER The culprit got away. Use Start over to reopen the case. Try again Give up Close",
+   "box": [
+    460,
+    308,
+    360,
+    185
+   ],
+   "inView": true,
+   "num": null,
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case.",
+   "focus": "continue-close",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  }
+ },
+ "1280-pt": {
+  "atVerdict": {
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR? 8 Tentar de novo Desistir Fechar",
+   "box": [
+    460,
+    295,
+    360,
+    210
+   ],
+   "inView": true,
+   "num": "8",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste.",
+   "focus": "continue-yes",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR? 5 Tentar de novo Desistir Fechar",
+   "box": [
+    460,
+    295,
+    360,
+    210
+   ],
+   "inView": true,
+   "num": "5",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste.",
+   "focus": "continue-yes",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "FIM DE JOGO O culpado escapou. Use Nova partida para reabrir o caso. Tentar de novo Desistir Fechar",
+   "box": [
+    460,
+    308,
+    360,
+    185
+   ],
+   "inView": true,
+   "num": null,
+   "live": "FIM DE JOGO. O culpado escapou. Use Nova partida para reabrir o caso.",
+   "focus": "continue-close",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  }
+ },
+ "390-en": {
+  "atVerdict": {
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE? 8 Try again Give up Close",
+   "box": [
+    16,
+    317,
+    358,
+    210
+   ],
+   "inView": true,
+   "num": "8",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up.",
+   "focus": "continue-yes",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE? 5 Try again Give up Close",
+   "box": [
+    16,
+    317,
+    358,
+    210
+   ],
+   "inView": true,
+   "num": "5",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up.",
+   "focus": "continue-yes",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "GAME OVER The culprit got away. Use Start over to reopen the case. Try again Give up Close",
+   "box": [
+    16,
+    330,
+    358,
+    185
+   ],
+   "inView": true,
+   "num": null,
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case.",
+   "focus": "continue-close",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  }
+ },
+ "390-pt": {
+  "atVerdict": {
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR? 8 Tentar de novo Desistir Fechar",
+   "box": [
+    16,
+    317,
+    358,
+    210
+   ],
+   "inView": true,
+   "num": "8",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste.",
+   "focus": "continue-yes",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR? 5 Tentar de novo Desistir Fechar",
+   "box": [
+    16,
+    317,
+    358,
+    210
+   ],
+   "inView": true,
+   "num": "5",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste.",
+   "focus": "continue-yes",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "FIM DE JOGO O culpado escapou. Use Nova partida para reabrir o caso. Tentar de novo Desistir Fechar",
+   "box": [
+    16,
+    330,
+    358,
+    185
+   ],
+   "inView": true,
+   "num": null,
+   "live": "FIM DE JOGO. O culpado escapou. Use Nova partida para reabrir o caso.",
+   "focus": "continue-close",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  }
+ },
+ "flows": {
+  "correct": {
+   "verdict": "Correct!Culprit: Carlos MendesSolution: The culprit is Carlo",
+   "continueBox": "hidden",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "afterEnter": {
+   "verdict": null,
+   "continueBox": "hidden",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "BUTTON",
+   "status": "",
+   "accuseDisabled": false
+  },
+  "afterEnterGame": {
+   "questions": "Questions used: 0",
+   "step": null,
+   "verdictHidden": true
+  },
+  "afterEsc": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "GAME OVER The culprit got away. Use Start over to reopen the case. Try again Give up Close",
+   "box": [
+    460,
+    308,
+    360,
+    185
+   ],
+   "inView": true,
+   "num": null,
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case.",
+   "focus": "continue-close",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "reducedMotion": {
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE? 7 Try again Give up Close",
+   "box": [
+    460,
+    295,
+    360,
+    210
+   ],
+   "inView": true,
+   "num": "7",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up.",
+   "focus": "continue-yes",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true,
+   "numAnimation": "none 1e-05s"
+  },
+  "reducedMotion2s": {
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE? 5 Try again Give up Close",
+   "box": [
+    460,
+    295,
+    360,
+    210
+   ],
+   "inView": true,
+   "num": "5",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up.",
+   "focus": "continue-yes",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "afterStartOver": {
+   "verdict": null,
+   "continueBox": "hidden",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "BUTTON",
+   "status": "",
+   "accuseDisabled": false
+  },
+  "afterNewFile": {
+   "verdict": null,
+   "continueBox": "hidden",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "BUTTON",
+   "status": "",
+   "accuseDisabled": false
+  },
+  "nightTrainStartOver": {
+   "suspects": [
+    "Accuse Helena Costa",
+    "Accuse Victor Hale",
+    "Accuse Tomás Reyes",
+    "Accuse Inês Duarte"
+   ],
+   "err": null,
+   "verdict": "Wrong!Score: 0"
+  }
+ }
+}

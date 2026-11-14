@@ -1,0 +1,237 @@
+{
+ "1280-en": {
+  "atVerdict": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  }
+ },
+ "1280-pt": {
+  "atVerdict": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  }
+ },
+ "390-en": {
+  "atVerdict": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  }
+ },
+ "390-pt": {
+  "atVerdict": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after3s": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  },
+  "after11s": {
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Fim de jogo. Use Nova partida para um novo caso.",
+   "accuseDisabled": true
+  }
+ },
+ "flows": {
+  "correct": {
+   "verdict": "Correct!Culprit: Carlos MendesSolution: The culprit is Carlo",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "afterEnter": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "afterEnterGame": {
+   "questions": "Questions used: 0",
+   "step": null,
+   "verdictHidden": false
+  },
+  "afterEsc": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "reducedMotion": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true,
+   "numAnimation": null
+  },
+  "reducedMotion2s": {
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos ",
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "credits",
+   "status": "Game over. Use Start over for a new case.",
+   "accuseDisabled": true
+  },
+  "afterStartOver": {
+   "verdict": null,
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "BUTTON",
+   "status": "",
+   "accuseDisabled": false
+  },
+  "afterNewFile": {
+   "verdict": null,
+   "continueBox": "no #continue",
+   "box": null,
+   "inView": null,
+   "num": null,
+   "live": null,
+   "focus": "BUTTON",
+   "status": "",
+   "accuseDisabled": false
+  },
+  "nightTrainStartOver": {
+   "suspects": [
+    "Accuse Helena Costa",
+    "Accuse Victor Hale",
+    "Accuse Tomás Reyes",
+    "Accuse Inês Duarte"
+   ],
+   "err": "unknown suspect",
+   "verdict": null
+  }
+ }
+}

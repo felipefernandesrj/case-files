@@ -1,0 +1,13 @@
+{
+ "?case=night-train": {
+  "title": "The Night Train",
+  "suspects": [
+   "Accuse Helena Costa",
+   "Accuse Victor Hale",
+   "Accuse Tomás Reyes",
+   "Accuse Inês Duarte"
+  ],
+  "err": null,
+  "verdict": "Wrong!Score: 0"
+ }
+}

@@ -88,6 +88,13 @@
 - `showToast(text, id)` stores the hint id in `data-hint`; `startHints()` passes `cur.id`.
 - `relabelToasts()` rewrites the kicker (Hint or Pista) of every toast in `#toasts` and its text from the hint with the same id in the current `caseData.hints`; a toast with an unknown id keeps its text. It never adds or removes toasts. `setLang()` calls it after the case is reloaded in the new language.
 
+## Web page: continue countdown (M2 game feel sprint 5)
+
+- Markup: `#continue` (role group, labelled by `#continue-title`, hidden by default) with `#continue-num` (aria-hidden), `#continue-note` and the buttons `#continue-yes`, `#continue-no`, `#continue-close`; a visually hidden `#continue-live` (aria-live polite) outside it.
+- State `contState` is 'off', 'run' or 'over'; `CONT_FROM = 9`. `accuse()` calls `startContinue()` only when the verdict is wrong, before `renderVerdict()`; on a wrong verdict the verdict and the credits do not take the focus. `startContinue()` shows 9, announces once, ticks every 1000 ms (pulse class `tick`), focuses Try again; after 0 it calls `endContinue()` (GAME OVER, `renderVerdict(false)`, announce, focus Close). While 'run', `renderVerdict()` leaves out the culprit and solution lines.
+- `continueGame()` (Try again) runs only while 'run': `stopContinue()` then `restartGame(true)` (no confirm). Give up and Escape call `endContinue()` while 'run'; Close and Escape while 'over' call `closeContinue()` (focus `#restart-btn`). `restartGame()`, `openPackFile()` stop it, `setLang()` relabels it with `renderContinue()`.
+- `restartGame()` posts `{ case: openFile }` to `/api/session`; `init()` posts the `?case=` value. Before, both posted no case and the session played the default file.
+
 ## Web page: closing screen
 
 When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
@@ -134,9 +141,10 @@ This executes:
 11. `node test/scene.mjs` (scene backdrop: markup, driven by the room list, first room and caption, crossfade and no new fade for the same room, Portuguese caption, cleared on reset, dimmed backdrop with fade and reduced motion, CASE CLOSED stamp below the score)
 12. `node test/hints.mjs` (hint toasts: markup, hints in both case files, localised in the public case, one timer per hint, English toast, current language at fire time, none after the verdict, restart clears pending hints, at most two toasts, fade then removal, started on every new game with toast CSS, pins follow the language)
 13. `node test/legibility.mjs` (board heading and scene caption on an ink plate with AA contrast, toast remembers its hint id, open toast switches language and back, unknown toast keeps its text, language switch relabels open toasts)
-14. `node test/keyboard.mjs` (Manual/Keyboard interaction)
+14. `node test/continue.mjs` (continue countdown: markup, 9 to 0 then GAME OVER, pulse, Portuguese labels, verdict reveal, Try again without confirm, Close focus, only after a wrong verdict, culprit hidden while counting, stop on Start over and new file, sessions carry the case id, Escape, reduced motion, language switch)
+15. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 164 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, keyboard 13).
+Total checks: 179 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

@@ -1,0 +1,234 @@
+<<<FILE test/continue.mjs>>>
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const html = fs.readFileSync(join(__dirname, '../public/index.html'), 'utf8');
+const css = fs.readFileSync(join(__dirname, '../public/css/game.css'), 'utf8');
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`Function ${name} not found`);
+  let depth = 0;
+  for (let i = html.indexOf('{', startIdx); i < html.length; i++) {
+    if (html[i] === '{') depth++;
+    else if (html[i] === '}') { depth--; if (depth === 0) return html.substring(startIdx, i + 1); }
+  }
+  throw new Error(`Unmatched braces in ${name}`);
+}
+const results = [];
+function check(name, fn) { try { fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+
+class El {
+  constructor(id) {
+    this.id = id;
+    this.className = '';
+    this.textContent = '';
+    this.hidden = false;
+    this.offsetWidth = 0;
+    this.cls = new Set();
+    this.classList = {
+      add: c => this.cls.add(c),
+      remove: c => this.cls.delete(c),
+      contains: c => this.cls.has(c)
+    };
+  }
+  focus() { El.focused = this.id; }
+}
+El.focused = null;
+
+function fakeIntervals() {
+  let idCounter = 0;
+  const list = [];
+  const set = (fn, ms) => {
+    const id = ++idCounter;
+    const entry = { id, fn, ms, cleared: false };
+    list.push(entry);
+    return id;
+  };
+  const clear = (id) => {
+    const entry = list.find(e => e.id === id);
+    if (entry) entry.cleared = true;
+  };
+  return { list, set, clear };
+}
+
+function contApi(opts) {
+  const ids = ['continue', 'continue-title', 'continue-num', 'continue-note', 'continue-yes', 'continue-no', 'continue-close', 'continue-live', 'restart-btn'];
+  const els = {};
+  ids.forEach(i => { els[i] = new El(i); });
+  const doc = { getElementById: i => els[i] || null };
+  const iv = fakeIntervals();
+  const calls = { verdict: [], restart: [] };
+  El.focused = null;
+  const from = html.match(/const CONT_FROM = (\d+);/);
+  if (!from) throw new Error('CONT_FROM not found');
+  const src = ['contLabels', 'renderContinue', 'contSay', 'startContinue', 'endContinue', 'stopContinue', 'closeContinue', 'continueGame'].map(fnSource).join('\n').replace(/\blastAccuseResult\b/g, 'getResult()').replace(/\blang\b/g, 'getLang()');
+  const api = new Function('document', 'setInterval', 'clearInterval', 'getLang', 'getResult', 'renderVerdict', 'restartGame', `const CONT_FROM = ${from[1]}; let contTimer = null; let contLeft = 0; let contState = 'off'; ${src} return { renderContinue, startContinue, endContinue, stopContinue, closeContinue, continueGame, get state() { return contState; }, get left() { return contLeft; } };`)(doc, iv.set, iv.clear, () => opts.lang, () => opts.result, (m) => calls.verdict.push(m), (s) => calls.restart.push(s));
+  return { api, els, iv, calls };
+}
+
+function must(cond, msg) { if (!cond) throw new Error(msg); }
+
+check('continue markup and live region', () => {
+  must(html.includes('id="continue" class="continue" role="group" aria-labelledby="continue-title" hidden'), 'missing continue div');
+  must(html.includes('id="continue-num" class="continue-num" aria-hidden="true"'), 'missing continue-num');
+  must(html.includes('<button id="continue-yes" type="button">'), 'missing continue-yes');
+  must(html.includes('<button id="continue-no" type="button">'), 'missing continue-no');
+  must(html.includes('<button id="continue-close" type="button" hidden>', 'missing continue-close'));
+  must(html.includes('id="continue-live" class="continue-live" aria-live="polite"'), 'missing continue-live');
+});
+
+check('countdown starts at 9 and focuses Try again', () => {
+  const { api, els, iv } = contApi({ lang: 'en', result: { correct: false } });
+  api.startContinue();
+  must(api.state === 'run', 'state not run');
+  must(els['continue'].hidden === false, 'box not visible');
+  must(els['continue-num'].textContent === '9', `expected 9, got ${els['continue-num'].textContent}`);
+  must(els['continue-title'].textContent === 'CONTINUE?', `expected title CONTINUE?, got ${els['continue-title'].textContent}`);
+  must(El.focused === 'continue-yes', 'focus not on continue-yes');
+  must(iv.list.length === 1 && iv.list[0].ms === 1000, 'interval mismatch');
+  must(els['continue-live'].textContent === 'Continue? You have 10 seconds. Enter tries the case again, Escape gives up.', 'live text mismatch');
+  must(els['continue-close'].hidden === true, 'close button should be hidden');
+});
+
+check('counts down to 0 then game over', () => {
+  const { api, els, iv } = contApi({ lang: 'en', result: { correct: false } });
+  api.startContinue();
+  for (let i = 0; i < 9; i++) iv.list[0].fn();
+  must(els['continue-num'].textContent === '0' && api.state === 'run', `expected 0 and run, got ${els['continue-num'].textContent} and ${api.state}`);
+  iv.list[0].fn();
+  must(api.state === 'over', 'state not over');
+  must(els['continue-title'].textContent === 'GAME OVER', 'title mismatch');
+  must(els['continue'].className === 'continue is-over', 'class mismatch');
+  must(iv.list[0].cleared === true, 'timer not cleared');
+  must(El.focused === 'continue-close', 'focus mismatch');
+  must(els['continue-yes'].hidden === true, 'yes button visible');
+  must(els['continue-no'].hidden === true, 'no button visible');
+  must(els['continue-close'].hidden === false, 'close button not visible');
+  must(els['continue-note'].textContent === 'The culprit got away. Use Start over to reopen the case.', 'note mismatch');
+  must(els['continue-live'].textContent === 'GAME OVER. The culprit got away. Use Start over to reopen the case.', 'live mismatch');
+});
+
+check('every tick restarts the pulse', () => {
+  const { api, els, iv } = contApi({ lang: 'en', result: { correct: false } });
+  api.startContinue();
+  must(els['continue-num'].cls.has('tick') === false, 'tick already present');
+  iv.list[0].fn();
+  must(els['continue-num'].cls.has('tick') === true && els['continue-num'].textContent === '8', 'tick or count mismatch');
+});
+
+check('Portuguese labels', () => {
+  const { api, els } = contApi({ lang: 'pt', result: { correct: false } });
+  api.startContinue();
+  must(els['continue-title'].textContent === 'CONTINUAR?', `title ${els['continue-title'].textContent}`);
+  must(els['continue-yes'].textContent === 'Tentar de novo', `yes ${els['continue-yes'].textContent}`);
+  must(els['continue-no'].textContent === 'Desistir', `no ${els['continue-no'].textContent}`);
+  must(els['continue-live'].textContent === 'Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste.', `live ${els['continue-live'].textContent}`);
+  api.endContinue();
+  must(els['continue-title'].textContent === 'FIM DE JOGO', `title ${els['continue-title'].textContent}`);
+  must(els['continue-close'].textContent === 'Fechar', `close ${els['continue-close'].textContent}`);
+  must(els['continue-note'].textContent === 'O culpado escapou. Use Nova partida para reabrir o caso.', `note ${els['continue-note'].textContent}`);
+});
+
+check('game over reveals the verdict', () => {
+  const { api, calls } = contApi({ lang: 'en', result: { correct: false } });
+  api.startContinue();
+  must(calls.verdict.length === 0, 'verdict called early');
+  api.endContinue();
+  must(calls.verdict.length === 1 && calls.verdict[0] === false, 'verdict mismatch');
+  const { api: api2, calls: calls2 } = contApi({ lang: 'en', result: null });
+  api2.startContinue();
+  api2.endContinue();
+  must(calls2.verdict.length === 0, 'verdict called without result');
+});
+
+check('Try again restarts the same case without asking', () => {
+  const { api, els, iv, calls } = contApi({ lang: 'en', result: { correct: false } });
+  api.startContinue();
+  api.continueGame();
+  must(calls.restart.length === 1 && calls.restart[0] === true, 'restart mismatch');
+  must(api.state === 'off', 'state not off');
+  must(els['continue'].hidden === true, 'box still visible');
+  must(iv.list[0].cleared === true, 'timer not cleared');
+  api.continueGame();
+  must(calls.restart.length === 1, 'restarted when off');
+});
+
+check('Close hides the box and returns focus', () => {
+  const { api, els } = contApi({ lang: 'en', result: { correct: false } });
+  api.startContinue();
+  api.endContinue();
+  api.closeContinue();
+  must(api.state === 'off', 'state not off');
+  must(els['continue'].hidden === true, 'box visible');
+  must(El.focused === 'restart-btn', 'focus mismatch');
+  must(els['continue-live'].textContent === '', 'live text not cleared');
+});
+
+check('only a wrong verdict starts the countdown', () => {
+  const s = fnSource('accuse');
+  const a = s.indexOf('if (!data.correct) startContinue();');
+  const b = s.indexOf('renderVerdict(!!data.correct);');
+  must(a !== -1 && b > a, 'logic error');
+  must(s.includes('await loadCredits(!!data.correct);'), 'missing credits');
+  must(!s.includes('renderVerdict(true)'), 'wrong verdict triggers countdown');
+});
+
+check('wrong verdict hides the culprit while counting', () => {
+  const s = fnSource('renderVerdict');
+  const a = s.indexOf("if (correct || contState !== 'run') {");
+  const b = s.indexOf('verdict.appendChild(p2);');
+  must(a !== -1 && b > a, 'verdict visibility logic error');
+});
+
+check('Start over and new file stop the countdown', () => {
+  const r = fnSource('restartGame');
+  must(r.includes('async function restartGame(skipConfirm = false){'), 'sig mismatch');
+  must(r.includes('if (!skipConfirm && !confirm(LABELS[lang].confirmRestart)) return;'), 'confirm missing');
+  must(r.includes('stopContinue();'), 'stopContinue missing');
+  must(fnSource('openPackFile').includes('stopContinue();'), 'openPackFile missing stop');
+  must(html.includes("document.getElementById('restart-btn').addEventListener('click', () => restartGame());"), 'listener missing');
+});
+
+check('new sessions carry the case id', () => {
+  must(fnSource('restartGame').includes('JSON.stringify({ case: openFile })'), 'restart case error');
+  must(fnSource('init').includes('JSON.stringify({ case: askedCase })'), 'init case error');
+});
+
+check('Escape gives up, then closes', () => {
+  const a = html.indexOf("if (e.key !== 'Escape' || contState === 'off') return;");
+  must(a !== -1, 'key listener missing');
+  const s = html.slice(a, a + 300);
+  must(s.includes("if (contState === 'run') endContinue();") && s.includes('else closeContinue();'), 'escape logic error');
+  must(html.indexOf("q.value = '';") !== -1 && html.indexOf("q.value = '';") < a, 'listener order error');
+});
+
+check('reduced motion drops the pulse, not the count', () => {
+  must(css.includes('.continue-num.tick { animation: cf-cont-tick'), 'animation missing');
+  const line = css.split('\n').find(l => l.includes('prefers-reduced-motion') && l.includes('.continue-num.tick'));
+  must(line && line.includes('animation: none'), `line mismatch: ${line}`);
+  must(!fnSource('startContinue').includes('matchMedia'), 'matchMedia used');
+});
+
+check('language switch relabels the box', () => {
+  must(fnSource('setLang').includes('renderContinue();'), 'relabels missing');
+});
+
+results.forEach(r => console.log(r));
+const passed = results.filter(r => r.startsWith('PASS')).length;
+const failed = results.length - passed;
+console.log(`${passed} passed, ${failed} failed`);
+process.exit(failed > 0 ? 1 : 0);
+<<<END>>>
+
+<<<REPLACE package.json>>>
+node test/legibility.mjs && node test/keyboard.mjs
+=====
+node test/legibility.mjs && node test/continue.mjs && node test/keyboard.mjs
+<<<END>>>
+
+<<<REPLACE test/scoreboard.mjs>>>
+function setGameOver(on){ gameOver = !!on; } function startHints(){}
+=====
+function setGameOver(on){ gameOver = !!on; } function startHints(){} function stopContinue(){} let openFile = "violin";
+<<<END>>>

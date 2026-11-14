@@ -1,0 +1,176 @@
+<<<REPLACE public/index.html>>>
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div >
+=====
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div >
+<div id="continue" class="continue" role="group" aria-labelledby="continue-title" hidden>
+  <p id="continue-title" class="continue-title">CONTINUE?</p>
+  <p id="continue-num" class="continue-num" aria-hidden="true">9</p>
+  <p id="continue-note" class="continue-note"></p>
+  <div class="continue-actions">
+    <button id="continue-yes" type="button">Try again</button>
+    <button id="continue-no" type="button">Give up</button>
+    <button id="continue-close" type="button" hidden>Close</button>
+  </div >
+</div >
+<p id="continue-live" class="continue-live" aria-live="polite"></p>
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    renderVerdict(true);
+    setGameOver(true);
+    await loadScores();
+    await loadCredits(true);
+=====
+    if (!data.correct) startContinue();
+    renderVerdict(!!data.correct);
+    setGameOver(true);
+    await loadScores();
+    await loadCredits(!!data.correct);
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  verdict.appendChild(p1);
+  verdict.appendChild(p2);
+  verdict.appendChild(p3);
+  verdict.appendChild(p4);
+=====
+  verdict.appendChild(p1);
+  if (correct || contState !== 'run') {
+    verdict.appendChild(p2);
+    verdict.appendChild(p3);
+  }
+  verdict.appendChild(p4);
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function restartGame(){
+  if (!confirm(LABELS[lang].confirmRestart)) return;
+  const sessRes = await fetch(API + '/session', {method:'POST'});
+=====
+async function restartGame(skipConfirm = false){
+  if (!skipConfirm && !confirm(LABELS[lang].confirmRestart)) return;
+  stopContinue();
+  const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: openFile })});
+<<<END>>>
+<<<REPLACE public/index.html>>>
+document.getElementById('restart-btn').addEventListener('click', restartGame);
+=====
+document.getElementById('restart-btn').addEventListener('click', () => restartGame());
+document.getElementById('continue-yes').addEventListener('click', continueGame);
+document.getElementById('continue-no').addEventListener('click', () => { if (contState === 'run') endContinue(); });
+document.getElementById('continue-close').addEventListener('click', closeContinue);
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' || contState === 'off') return;
+  e.preventDefault();
+  if (contState === 'run') endContinue();
+  else closeContinue();
+});
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function openPackFile(id) {
+=====
+async function openPackFile(id) {
+  stopContinue();
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  relabelToasts();
+  if (lastAccuseResult) renderVerdict(false);
+=====
+  relabelToasts();
+  renderContinue();
+  if (lastAccuseResult) renderVerdict(false);
+<<<END>>>
+<<<REPLACE public/index.html>>>
+async function init() {
+  const sessRes = await fetch(API + '/session', {method:'POST'});
+  const sessData = await sessRes.json();
+=====
+async function init() {
+  const askedCase = new URLSearchParams(location.search).get('case') || '';
+  const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: askedCase })});
+  const sessData = await sessRes.json();
+<<<END>>>
+<<<REPLACE public/index.html>>>
+function relabelToasts() {
+=====
+const CONT_FROM = 9;
+let contTimer = null;
+let contLeft = 0;
+let contState = 'off';
+function contLabels() {
+  return lang === 'pt'
+    ? { title: 'CONTINUAR?', yes: 'Tentar de novo', no: 'Desistir', close: 'Fechar', over: 'FIM DE JOGO', lost: 'O culpado escapou. Use Nova partida para reabrir o caso.', say: 'Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste.' }
+    : { title: 'CONTINUE?', yes: 'Try again', no: 'Give up', close: 'Close', over: 'GAME OVER', lost: 'The culprit got away. Use Start over to reopen the case.', say: 'Continue? You have 10 seconds. Enter tries the case again, Escape gives up.' };
+}
+function renderContinue() {
+  const box = document.getElementById('continue');
+  if (!box) return;
+  const L = contLabels();
+  box.hidden = contState === 'off';
+  box.className = contState === 'over' ? 'continue is-over' : 'continue';
+  document.getElementById('continue-title').textContent = contState === 'over' ? L.over : L.title;
+  const num = document.getElementById('continue-num');
+  num.hidden = contState !== 'run';
+  num.textContent = contState === 'run' ? String(contLeft) : '';
+  document.getElementById('continue-note').textContent = contState === 'over' ? L.lost : '';
+  const yes = document.getElementById('continue-yes');
+  const no = document.getElementById('continue-no');
+  const close = document.getElementById('continue-close');
+  yes.textContent = L.yes;
+  yes.hidden = contState !== 'run';
+  no.textContent = L.no;
+  no.hidden = contState !== 'run';
+  close.textContent = L.close;
+  close.hidden = contState !== 'over';
+}
+function contSay(text) {
+  const live = document.getElementById('continue-live');
+  if (live) live.textContent = text;
+}
+function startContinue() {
+  if (contTimer) clearInterval(contTimer);
+  contState = 'run';
+  contLeft = CONT_FROM;
+  renderContinue();
+  contSay(contLabels().say);
+  contTimer = setInterval(() => {
+    contLeft -= 1;
+    if (contLeft < 0) {
+      endContinue();
+      return;
+    }
+    renderContinue();
+    const num = document.getElementById('continue-num');
+    num.classList.remove('tick');
+    void num.offsetWidth;
+    num.classList.add('tick');
+  }, 1000);
+  document.getElementById('continue-yes').focus();
+}
+function endContinue() {
+  if (contTimer) clearInterval(contTimer);
+  contTimer = null;
+  contState = 'over';
+  contLeft = 0;
+  renderContinue();
+  if (lastAccuseResult) renderVerdict(false);
+  const L = contLabels();
+  contSay(L.over + '. ' + L.lost);
+  document.getElementById('continue-close').focus();
+}
+function stopContinue() {
+  if (contTimer) clearInterval(contTimer);
+  contTimer = null;
+  contState = 'off';
+  contLeft = 0;
+  renderContinue();
+  contSay('');
+}
+function closeContinue() {
+  stopContinue();
+  document.getElementById('restart-btn').focus();
+}
+function continueGame() {
+  if (contState !== 'run') return;
+  stopContinue();
+  restartGame(true);
+}
+function relabelToasts() {
+<<<END>>>

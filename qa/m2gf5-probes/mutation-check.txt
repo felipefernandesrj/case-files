@@ -1,0 +1,18 @@
+M1 countdown after any verdict: only a wrong verdict starts the countdown
+M2 countdown from 5: countdown starts at 9 and focuses Try again; counts down to 0 then game over; every tick restarts the pulse
+M3 game over at 1 instead of after 0: counts down to 0 then game over
+M4 no pulse class: every tick restarts the pulse
+M5 PT title in English: Portuguese labels
+M6 game over keeps culprit hidden: game over reveals the verdict
+M7 Try again asks to confirm: Try again restarts the same case without asking
+M8 Try again without run guard: Try again restarts the same case without asking
+M9 Close loses focus: Close hides the box and returns focus
+M10 Start over keeps the countdown: Start over and new file stop the countdown
+M11 Start over session without case: new sessions carry the case id
+M12 culprit shown while counting: wrong verdict hides the culprit while counting
+M13 reduced motion keeps the pulse: reduced motion drops the pulse, not the count
+M14 Escape always closes: Escape gives up, then closes
+M15 language switch skips the box: language switch relabels the box
+M16 stop keeps the announcement: Close hides the box and returns focus
+M17 countdown does not take focus: countdown starts at 9 and focuses Try again
+M18 new file keeps the countdown: Start over and new file stop the countdown

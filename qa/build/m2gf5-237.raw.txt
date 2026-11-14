@@ -1,0 +1,22 @@
+<<<REPLACE public/index.html>>>
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' || contState === 'off') return;
+  e.preventDefault();
+  if (contState === 'run') endContinue();
+  else closeContinue();
+});
+=====
+<<<END>>>
+<<<REPLACE public/index.html>>>
+});
+init();
+=====
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' || contState === 'off') return;
+  e.preventDefault();
+  if (contState === 'run') endContinue();
+  else closeContinue();
+});
+init();
+<<<END>>>

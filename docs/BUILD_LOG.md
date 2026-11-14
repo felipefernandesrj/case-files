@@ -250,3 +250,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 228-233 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (no model prompt changed, checked in mock mode with headless Chrome at 1280 and 390 in English and Portuguese, tools/probe-gf4.mjs).
 - Result: npm test 164/164 (was 156), new test/legibility.mjs 8 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 4).
+
+## M2 game feel sprint 5 (v0.4.14)
+
+- Scope: arcade CONTINUE countdown after a wrong verdict (9 to 0, Try again replays the same file without the confirm, Give up or Escape or the end of the count shows GAME OVER and reveals the culprit and solution, Close returns focus to Start over, one polite announcement at start and at game over, reduced motion drops only the pulse, never after a correct verdict, cleared by Start over and by opening another file, relabelled on a language switch); fix: Start over and ?case= links now create the session with the case id.
+- Calls 234-241 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (no model prompt changed, checked in mock mode with headless Chrome at 1280 and 390 in English and Portuguese, tools/probe-gf5.mjs and tools/probe-gf5-urlcase.mjs).
+- Result: npm test 179/179 (was 164), new test/continue.mjs 15 checks, test/keyboard.mjs step 6 updated.
+- Details and receipts: qa/rework.md (M2 game feel sprint 5).
