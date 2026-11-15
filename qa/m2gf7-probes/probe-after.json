@@ -1,0 +1,369 @@
+{
+ "1280-en": {
+  "talkRowsAfterLead": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "confirmBox": {
+   "checked": true,
+   "label": "Confirm before accusing",
+   "visible": true,
+   "rect": [
+    590,
+    490,
+    163,
+    44
+   ],
+   "stored": null
+  },
+  "defaultDialogs": [
+   "Accuse Carlos Mendes? You only get one accusation."
+  ],
+  "verdictShown": true
+ },
+ "1280-pt": {
+  "talkRowsAfterLead": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "confirmBox": {
+   "checked": true,
+   "label": "Confirmar antes de acusar",
+   "visible": true,
+   "rect": [
+    587,
+    490,
+    170,
+    44
+   ],
+   "stored": null
+  },
+  "defaultDialogs": [
+   "Acusar Carlos Mendes? Você só tem uma acusação."
+  ],
+  "verdictShown": true
+ },
+ "390-en": {
+  "talkRowsAfterLead": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "confirmBox": {
+   "checked": true,
+   "label": "Confirm before accusing",
+   "visible": true,
+   "rect": [
+    16,
+    546,
+    163,
+    44
+   ],
+   "stored": null
+  },
+  "defaultDialogs": [
+   "Accuse Carlos Mendes? You only get one accusation."
+  ],
+  "verdictShown": true
+ },
+ "390-pt": {
+  "talkRowsAfterLead": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": "",
+    "anims": []
+   }
+  ],
+  "confirmBox": {
+   "checked": true,
+   "label": "Confirmar antes de acusar",
+   "visible": true,
+   "rect": [
+    16,
+    546,
+    170,
+    44
+   ],
+   "stored": null
+  },
+  "defaultDialogs": [
+   "Acusar Carlos Mendes? Você só tem uma acusação."
+  ],
+  "verdictShown": true
+ },
+ "flows": {
+  "initial": {
+   "checked": true,
+   "label": "Confirm before accusing",
+   "visible": true,
+   "rect": [
+    590,
+    490,
+    163,
+    44
+   ],
+   "stored": null
+  },
+  "afterSpace": {
+   "checked": false,
+   "label": "Confirm before accusing",
+   "visible": true,
+   "rect": [
+    590,
+    490,
+    163,
+    44
+   ],
+   "stored": "off"
+  },
+  "focusId": "ask-confirm",
+  "afterReload": {
+   "checked": false,
+   "label": "Confirm before accusing",
+   "visible": true,
+   "rect": [
+    590,
+    490,
+    163,
+    44
+   ],
+   "stored": "off"
+  },
+  "skipDialogs": [],
+  "skipVerdict": true,
+  "afterStartOver": {
+   "checked": false,
+   "label": "Confirm before accusing",
+   "visible": true,
+   "rect": [
+    590,
+    490,
+    163,
+    44
+   ],
+   "stored": "off"
+  },
+  "ptLabel": {
+   "checked": false,
+   "label": "Confirmar antes de acusar",
+   "visible": true,
+   "rect": [
+    587,
+    490,
+    170,
+    44
+   ],
+   "stored": "off"
+  },
+  "turnedBackOn": {
+   "checked": true,
+   "label": "Confirmar antes de acusar",
+   "visible": true,
+   "rect": [
+    587,
+    490,
+    170,
+    44
+   ],
+   "stored": null
+  },
+  "backOnDialogs": [
+   "Acusar Carlos Mendes? Você só tem uma acusação."
+  ],
+  "liveEn": "New lead: points to Carlos Mendes",
+  "liveAfterPt": "Nova pista: aponta para Carlos Mendes",
+  "liveAfterStartOver": ""
+ }
+}

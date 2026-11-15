@@ -1,0 +1,159 @@
+// M2 game feel sprint 7: optional accuse confirm (remembered), suspicion flash only on screen, live line follows the language
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = path.join(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+const css = fs.readFileSync(path.join(root, 'public/css/game.css'), 'utf8');
+const results = [];
+async function check(name, fn) { try { await fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+function must(cond, msg) { if (!cond) throw new Error(msg); }
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`Function ${name} not found`);
+  let depth = 0;
+  for (let i = html.indexOf('{', startIdx); i < html.length; i++) {
+    if (html[i] === '{') depth++;
+    else if (html[i] === '}') { depth--; if (depth === 0) return html.substring(startIdx, i + 1); }
+  }
+  throw new Error(`Unmatched braces in ${name}`);
+}
+class El {
+  constructor(tag) { this.tag = tag; this.children = []; this.attrs = {}; this.dataset = {}; this.className = ''; this._text = ''; this.listeners = {}; this.checked = false; this.disabled = false; this.offsetParent = {}; }
+  set textContent(v) { this._text = String(v); this.children = []; }
+  get textContent() { return this._text + this.children.map(c => c.textContent).join(''); }
+  set innerHTML(v) { this._text = ''; this.children = []; }
+  appendChild(c) { this.children.push(c); return c; }
+  setAttribute(k, v) { this.attrs[k] = String(v); }
+  getAttribute(k) { return k in this.attrs ? this.attrs[k] : null; }
+  addEventListener(t, f) { this.listeners[t] = f; }
+  querySelectorAll() { return this.children.filter(c => c.tag === 'button'); }
+}
+function fakeStore(init = {}) {
+  const m = new Map(Object.entries(init));
+  return { getItem: k => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), removeItem: k => m.delete(k), map: m };
+}
+function confirmApi(store, lang = 'en') {
+  const box = new El('input'); const text = new El('span');
+  const doc = { getElementById: id => (id === 'ask-confirm' ? box : id === 'ask-confirm-text' ? text : null) };
+  const src = ['confirmOn', 'setConfirmOn', 'renderConfirmToggle'].map(fnSource).join('\n');
+  const api = new Function('document', 'store', 'lang', `const CONFIRM_KEY = 'cf-confirm-accuse'; ${src} return { confirmOn, setConfirmOn, renderConfirmToggle };`)(doc, store, lang);
+  return { api, box, text };
+}
+function accuseApi(store, opts = {}) {
+  const container = new El('div');
+  const doc = { getElementById: id => (id === 'accuse-buttons' ? container : null), createElement: t => new El(t), createElementNS: (ns, t) => new El(t), createTextNode: t => { const n = new El('#text'); n.textContent = t; return n; } };
+  const calls = { confirm: [], accuse: [] };
+  const confirmFn = msg => { calls.confirm.push(msg); return !!opts.answer; };
+  const caseData = { suspects: [{ id: 'carlos', name: 'Carlos Mendes' }] };
+  const LABELS = { en: { confirmAccuse: 'Accuse {name}? You only get one accusation.' } };
+  const src = ['confirmOn', 'renderAccuseButtons'].map(fnSource).join('\n');
+  new Function('document', 'store', 'confirm', 'accuse', 'caseData', 'LABELS', 'lang', 'gameOver', `const CONFIRM_KEY = 'cf-confirm-accuse'; ${src} renderAccuseButtons();`)(doc, store, confirmFn, id => calls.accuse.push(id), caseData, LABELS, 'en', !!opts.gameOver);
+  const btn = container.children[0];
+  return { click: () => btn.listeners.click(), calls };
+}
+function susApi() {
+  const titles = [new El('h3'), new El('h3')];
+  const lists = [new El('ul'), new El('ul')];
+  const live = new El('p');
+  const doc = { createElement: t => new El(t), getElementById: id => (id === 'suspicion-live' ? live : null), querySelectorAll: sel => (sel === '.sus-title' ? titles : sel === '.sus-list' ? lists : []) };
+  const caseData = { suspects: [{ id: 'lorenzo', name: 'Lorenzo Moretti' }, { id: 'maya', name: 'Maya Santos' }, { id: 'carlos', name: 'Carlos Mendes' }] };
+  const src = ['susLabels', 'susNote', 'renderSuspicion', 'susSaid', 'applyClue', 'relabelSuspicionLive'].map(fnSource).join('\n');
+  const api = new Function('document', 'caseData', `let lang = 'en'; let suspicion = {}; let susLast = null; const SUS_MAX = 3; ${src} return { renderSuspicion, applyClue, relabelSuspicionLive, setLang(l) { lang = l; } };`)(doc, caseData);
+  const row = (i, id) => lists[i].children.find(li => li.dataset.suspect === id);
+  return { api, lists, live, row };
+}
+
+await check('confirm is on by default, off only when stored off', () => {
+  must(confirmApi(fakeStore()).api.confirmOn() === true, 'empty store');
+  must(confirmApi(fakeStore({ 'cf-confirm-accuse': 'off' })).api.confirmOn() === false, 'stored off');
+  must(confirmApi(fakeStore({ 'cf-confirm-accuse': 'yes' })).api.confirmOn() === true, 'other value');
+  must(confirmApi(null).api.confirmOn() === true, 'no storage');
+  const broken = { getItem() { throw new Error('blocked'); } };
+  must(confirmApi(broken).api.confirmOn() === true, 'storage throws');
+});
+await check('unchecking remembers off, checking again turns the confirm back on', () => {
+  const st = fakeStore(); const c = confirmApi(st);
+  c.api.setConfirmOn(false);
+  must(st.map.get('cf-confirm-accuse') === 'off', 'stored ' + st.map.get('cf-confirm-accuse'));
+  must(c.box.checked === false && c.api.confirmOn() === false, 'unchecked');
+  c.api.setConfirmOn(true);
+  must(!st.map.has('cf-confirm-accuse'), 'key removed');
+  must(c.box.checked === true && c.api.confirmOn() === true, 'checked again');
+});
+await check('the toggle follows the stored choice and the language', () => {
+  const en = confirmApi(fakeStore({ 'cf-confirm-accuse': 'off' }), 'en');
+  en.api.renderConfirmToggle();
+  must(en.box.checked === false, 'restored off after reload');
+  must(en.text.textContent === 'Confirm before accusing', 'en ' + en.text.textContent);
+  const pt = confirmApi(fakeStore(), 'pt');
+  pt.api.renderConfirmToggle();
+  must(pt.box.checked === true, 'default checked');
+  must(pt.text.textContent === 'Confirmar antes de acusar', 'pt ' + pt.text.textContent);
+});
+await check('default: the accuse button asks first and accuses only on OK', () => {
+  const no = accuseApi(fakeStore(), { answer: false });
+  no.click();
+  must(no.calls.confirm.length === 1 && no.calls.confirm[0] === 'Accuse Carlos Mendes? You only get one accusation.', 'asked ' + JSON.stringify(no.calls.confirm));
+  must(no.calls.accuse.length === 0, 'cancel does not accuse');
+  const yes = accuseApi(fakeStore(), { answer: true });
+  yes.click();
+  must(yes.calls.accuse.join() === 'carlos', 'OK accuses');
+});
+await check('confirm off: the accuse button accuses at once', () => {
+  const a = accuseApi(fakeStore({ 'cf-confirm-accuse': 'off' }), { answer: false });
+  a.click();
+  must(a.calls.confirm.length === 0, 'no dialog');
+  must(a.calls.accuse.join() === 'carlos', 'accused ' + a.calls.accuse.join());
+  const over = accuseApi(fakeStore({ 'cf-confirm-accuse': 'off' }), { gameOver: true });
+  over.click();
+  must(over.calls.accuse.length === 0 && over.calls.confirm.length === 0, 'nothing after game over');
+});
+await check('markup, wiring and style of the toggle', () => {
+  must(html.includes('<div id="accuse-buttons"></div>\n          <label id="ask-confirm-row" class="ask-confirm" for="ask-confirm"><input type="checkbox" id="ask-confirm" checked> <span id="ask-confirm-text">Confirm before accusing</span></label>'), 'checkbox under the buttons, checked');
+  must(html.includes("document.getElementById('ask-confirm').addEventListener('change', (e) => setConfirmOn(e.target.checked));\nrenderConfirmToggle();"), 'change listener and first render');
+  const sl = fnSource('setLang');
+  must(sl.includes('renderConfirmToggle();') && sl.includes('relabelSuspicionLive();'), 'setLang relabels');
+  must(!fnSource('restartGame').includes('CONFIRM_KEY'), 'Start over keeps the choice');
+  must(/\.ask-confirm input\[type="checkbox"\]:focus-visible \{ outline: 3px solid var\(--cf-focus\)/.test(css), 'focus ring');
+  must(/\.ask-confirm \{[^}]*min-height: var\(--touch-min\)/.test(css), 'touch size');
+});
+await check('the flash is only added to a list on screen', () => {
+  const c = susApi();
+  c.lists[1].offsetParent = null;
+  c.api.applyClue({ id: 'c1', implicates: 'carlos', clears: null });
+  must(c.row(0, 'carlos').className.split(' ').includes('flash'), 'visible list flashes: ' + c.row(0, 'carlos').className);
+  must(!c.row(1, 'carlos').className.includes('flash'), 'hidden list does not: ' + c.row(1, 'carlos').className);
+  c.lists[1].offsetParent = {};
+  c.api.renderSuspicion();
+  must(!c.row(1, 'carlos').className.includes('flash'), 'opening the panel later does not replay it');
+});
+await check('the live line is rewritten in the new language', () => {
+  const c = susApi();
+  c.api.applyClue({ id: 'c1', implicates: 'carlos', clears: null });
+  must(c.live.textContent === 'New lead: points to Carlos Mendes', 'en ' + c.live.textContent);
+  c.api.setLang('pt'); c.api.relabelSuspicionLive();
+  must(c.live.textContent === 'Nova pista: aponta para Carlos Mendes', 'pt ' + c.live.textContent);
+  c.api.applyClue({ id: 'c4', implicates: null, clears: 'maya' });
+  c.api.setLang('en'); c.api.relabelSuspicionLive();
+  must(c.live.textContent === 'New lead: clears Maya Santos', 'last lead only ' + c.live.textContent);
+  c.api.applyClue({ id: 'z', implicates: null, clears: null });
+  must(c.live.textContent === 'New lead: clears Maya Santos', 'an empty clue keeps the last line ' + c.live.textContent);
+});
+await check('no live line to relabel: nothing is written', () => {
+  const c = susApi();
+  c.api.setLang('pt'); c.api.relabelSuspicionLive();
+  must(c.live.textContent === '', 'no lead yet');
+  c.api.applyClue({ id: 'c1', implicates: 'carlos', clears: null });
+  c.live.textContent = '';
+  c.api.setLang('en'); c.api.relabelSuspicionLive();
+  must(c.live.textContent === '', 'cleared by Start over stays empty');
+  c.api.applyClue({ id: 'z', implicates: null, clears: null });
+  must(c.live.textContent === '', 'empty clue says nothing');
+});
+
+results.forEach(r => console.log(r));
+const failed = results.filter(r => r.startsWith('FAIL')).length;
+console.log(`${results.length - failed} passed, ${failed} failed`);
+process.exit(failed ? 1 : 0);

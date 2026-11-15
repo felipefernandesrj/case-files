@@ -264,3 +264,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 242-247 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). Checked in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf6.mjs). No live play smoke (no model prompt changed).
 - Result: npm test 194/194 (was 179), new test/suspicion.mjs 15 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 6).
+
+## M2 game feel sprint 7 (v0.4.16)
+
+- Scope: an optional, remembered skip of the accuse confirmation (backer feedback from Raquel Mattos: the confirm step slows quick players). Checkbox "Confirm before accusing" under the accuse buttons, checked by default, localStorage cf-confirm-accuse, EN/PT, keyboard accessible, checking it again restores the dialog. Fixes from sprint 6: the suspicion row flash no longer replays when the Accuse step opens, and the live line of the last lead follows a language switch.
+- Calls 248-251 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf7.mjs). No live play smoke (no model prompt changed).
+- Result: npm test 203/203 (was 194), new test/quick-accuse.mjs 9 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 7).

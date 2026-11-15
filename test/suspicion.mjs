@@ -91,8 +91,8 @@ function clientApi(lang) {
     querySelectorAll: sel => (sel === '.sus-title' ? titles : sel === '.sus-list' ? lists : [])
   };
   const caseData = { suspects: [{ id: 'lorenzo', name: 'Lorenzo Moretti' }, { id: 'maya', name: 'Maya Santos' }, { id: 'carlos', name: 'Carlos Mendes' }] };
-  const src = ['susLabels', 'susNote', 'renderSuspicion', 'applyClue'].map(fnSource).join('\n');
-  const api = new Function('document', 'caseData', 'lang', `let suspicion = {}; const SUS_MAX = 3; ${src} return { renderSuspicion, applyClue, reset() { suspicion = {}; } };`)(doc, caseData, lang);
+  const src = ['susLabels', 'susNote', 'renderSuspicion', 'susSaid', 'applyClue'].map(fnSource).join('\n');
+  const api = new Function('document', 'caseData', 'lang', `let suspicion = {}; let susLast = null; const SUS_MAX = 3; ${src} return { renderSuspicion, applyClue, reset() { suspicion = {}; } };`)(doc, caseData, lang);
   const row = (i, id) => lists[i].children.find(li => li.dataset.suspect === id);
   const meter = li => li.children.find(c => c.attrs.role === 'meter');
   const pipsOn = li => meter(li).children.filter(p => p.className === 'sus-pip on').length;

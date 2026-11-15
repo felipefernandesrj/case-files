@@ -1,0 +1,103 @@
+<<<REPLACE public/index.html>>>
+          <div id="accuse-buttons"></div
+=====
+          <div id="accuse-buttons"></div>
+          <label id="ask-confirm-row" class="ask-confirm" for="ask-confirm"><input type="checkbox" id="ask-confirm" checked> <span id="ask-confirm-text">Confirm before accusing</span></label>
+<<<END>>>
+<<<REPLACE public/index.html>>>
+let suspicion = {};
+const SUS_MAX = 3;
+=====
+let suspicion = {};
+let susLast = null;
+const SUS_MAX = 3;
+const CONFIRM_KEY = 'cf-confirm-accuse';
+<<<END>>>
+<<<REPLACE public/index.html>>>
+      li.className = (st.cleared ? 'is-cleared' : (st.hits >= 2 ? 'is-hot' : '')) + (st.flash ? ' flash' : '');
+=====
+      li.className = (st.cleared ? 'is-cleared' : (st.hits >= 2 ? 'is-hot' : '')) + (st.flash && list.offsetParent !== null ? ' flash' : '');
+<<<END>>>
+<<<REPLACE public/index.html>>>
+function applyClue(clue) {
+  if (!clue || !caseData) return;
+  const L = susLabels();
+  const nameOf = id => ((caseData.suspects || []).find(s => s.id === id) || {}).name || id;
+  const get = id => suspicion[id] || (suspicion[id] = { hits: 0, cleared: false });
+  Object.values(suspicion).forEach(st => { st.flash = false; });
+  const said = [];
+  if (clue.implicates) { const st = get(clue.implicates); st.hits += 1; st.flash = true; said.push(L.lead.replace('{name}', nameOf(clue.implicates))); }
+  if (clue.clears) { const st = get(clue.clears); st.cleared = true; st.flash = true; said.push(L.clear.replace('{name}', nameOf(clue.clears))); }
+  renderSuspicion();
+  const live = document.getElementById('suspicion-live');
+  if (live && said.length) live.textContent = said.join('. ');
+}
+=====
+function susSaid(clue) {
+  const L = susLabels();
+  const nameOf = id => (((caseData && caseData.suspects) || []).find(s => s.id === id) || {}).name || id;
+  const said = [];
+  if (clue.implicates) said.push(L.lead.replace('{name}', nameOf(clue.implicates)));
+  if (clue.clears) said.push(L.clear.replace('{name}', nameOf(clue.clears)));
+  return said.join('. ');
+}
+function applyClue(clue) {
+  if (!clue || !caseData) return;
+  const get = id => suspicion[id] || (suspicion[id] = { hits: 0, cleared: false });
+  Object.values(suspicion).forEach(st => { st.flash = false; });
+  if (clue.implicates) { const st = get(clue.implicates); st.hits += 1; st.flash = true; }
+  if (clue.clears) { const st = get(clue.clears); st.cleared = true; st.flash = true; }
+  renderSuspicion();
+  const text = susSaid(clue);
+  if (!text) return;
+  susLast = { implicates: clue.implicates || null, clears: clue.clears || null };
+  const live = document.getElementById('suspicion-live');
+  if (live) live.textContent = text;
+}
+function relabelSuspicionLive() {
+  const live = document.getElementById('suspicion-live');
+  if (live && live.textContent && susLast) live.textContent = susSaid(susLast);
+}
+function confirmOn() {
+  try { return !(store && store.getItem(CONFIRM_KEY) === 'off'); } catch { return true; }
+}
+function setConfirmOn(on) {
+  try { if (store) { if (on) store.removeItem(CONFIRM_KEY); else store.setItem(CONFIRM_KEY, 'off'); } } catch {}
+  renderConfirmToggle();
+}
+function renderConfirmToggle() {
+  const box = document.getElementById('ask-confirm');
+  if (box) box.checked = confirmOn();
+  const text = document.getElementById('ask-confirm-text');
+  if (text) text.textContent = lang === 'pt' ? 'Confirmar antes de acusar' : 'Confirm before accusing';
+}
+<<<END>>>
+<<<REPLACE public/index.html>>>
+      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+=====
+      if (!confirmOn() || confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  relabelToasts();
+  renderContinue();
+=====
+  relabelToasts();
+  relabelSuspicionLive();
+  renderConfirmToggle();
+  renderContinue();
+<<<END>>>
+<<<REPLACE public/index.html>>>
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+=====
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+document.getElementById('ask-confirm').addEventListener('change', (e) => setConfirmOn(e.target.checked));
+renderConfirmToggle();
+<<<END>>>
+<<<REPLACE public/css/game.css>>>
+@media (prefers-reduced-motion: reduce) { .sus-list li.flash { animation: none; } .sus-pip { transition: none; } }
+=====
+@media (prefers-reduced-motion: reduce) { .sus-list li.flash { animation: none; } .sus-pip { transition: none; } }
+.ask-confirm { display: inline-flex; align-items: center; gap: 8px; min-height: var(--touch-min); margin-top: 8px; font-size: 0.85rem; color: var(--cf-text-dim); cursor: pointer; }
+.ask-confirm input[type="checkbox"] { width: 20px; height: 20px; min-height: 0; margin: 0; padding: 0; accent-color: #E2675E; cursor: pointer; }
+.ask-confirm input[type="checkbox"]:focus-visible { outline: 3px solid var(--cf-focus); outline-offset: 2px; }
+<<<END>>>

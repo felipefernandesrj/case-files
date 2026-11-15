@@ -1,0 +1,16 @@
+M1 stored off ignored: caught, 4 fail(s): confirm is on by default, off only when stored off: stored off | unchecking remembers off, checking again turns the confirm back o | the toggle follows the stored choice and the language: restored o | confirm off: the accuse button accuses at once: no dialog
+M2 click always confirms: caught, 1 fail(s): confirm off: the accuse button accuses at once: no dialog
+M3 click never confirms: caught, 1 fail(s): default: the accuse button asks first and accuses only on OK: ask
+M4 off not stored: caught, 1 fail(s): unchecking remembers off, checking again turns the confirm back o
+M5 checking again keeps off: caught, 1 fail(s): unchecking remembers off, checking again turns the confirm back o
+M6 checkbox not synced: caught, 2 fail(s): unchecking remembers off, checking again turns the confirm back o | the toggle follows the stored choice and the language: default ch
+M7 pt label English: caught, 1 fail(s): the toggle follows the stored choice and the language: pt Confirm
+M8 not checked by default: caught, 1 fail(s): markup, wiring and style of the toggle: checkbox under the button
+M9 no change listener: caught, 1 fail(s): markup, wiring and style of the toggle: change listener and first
+M10 hidden list flashes: caught, 1 fail(s): the flash is only added to a list on screen: hidden list does not
+M11 setLang skips live relabel: caught, 1 fail(s): markup, wiring and style of the toggle: setLang relabels
+M12 relabel writes empty line: caught, 1 fail(s): no live line to relabel: nothing is written: cleared by Start ove
+M13 last clue not kept: caught, 1 fail(s): the live line is rewritten in the new language: pt New lead: poin
+M14 game over not checked: caught, 1 fail(s): confirm off: the accuse button accuses at once: nothing after gam
+M15 no focus ring: caught, 1 fail(s): markup, wiring and style of the toggle: focus ring
+M16 empty clue still saved: caught, 1 fail(s): the live line is rewritten in the new language: an empty clue kee

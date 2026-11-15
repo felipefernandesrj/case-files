@@ -1,0 +1,5 @@
+<<<REPLACE public/index.html>>>
+Confirm before accusing</span></label>>
+=====
+Confirm before accusing</span></label>
+<<<END>>>

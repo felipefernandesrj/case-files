@@ -58,7 +58,7 @@
 - Stored in browser's localStorage under `casefiles:best:v1`.
 - Better result = higher score, or same score with fewer questions (wrong accusations never count).
 - Reset requires user confirmation; GET /best.js serves the storage module.
-- Accuse: the page shows a native confirm (EN "Accuse {name}? You only get one accusation." / PT "Acusar {name}? Você só tem uma acusação.") before POST /api/accuse; Cancel does nothing.
+- Accuse: the page shows a native confirm (EN "Accuse {name}? You only get one accusation." / PT "Acusar {name}? Você só tem uma acusação.") before POST /api/accuse; Cancel does nothing. The confirm is skipped only when the player unchecked "Confirm before accusing" (see quick accusations, sprint 7).
 - Ask busy: while POST /api/ask is in flight, #q and Accuse buttons are disabled, #ask-form has aria-busy=true, and the thinking line uses LABELS.thinking (EN "…thinking" / PT "…pensando"); on settle, controls re-enable, aria-busy clears, leftover thinking is removed, and #q is focused. The Start over button is disabled under the same busy lock.
 - Start over: #restart-btn (EN "Start over" / PT "Nova partida") shows a native confirm (EN "Start a new game? Your current questions will be lost." / PT "Começar um novo jogo? Suas perguntas atuais serão perdidas."); Cancel does nothing; Confirm POSTs /api/session, clears histories/questionsUsed/selectedSuspect/verdict/credits, re-enables Ask/Accuse, refreshes personal-best display without wiping it, and focuses the first suspect.
 - Escape: a document keydown listener for Escape clears #q.value and focuses #q only when document.activeElement (or event.target) is #q; it does not cancel accuse/restart confirms.
@@ -101,6 +101,14 @@
 - Markup: two `.suspicion` sections (`#suspicion-talk` after `#questions-used`, `#suspicion-accuse` before `#accuse-section`), each with `h3.sus-title` and `ul.sus-list`; one visually hidden `#suspicion-live` (aria-live polite) at the top of `#play`.
 - State `suspicion` maps a suspect id to `{ hits, cleared, flash }`; `SUS_MAX = 3`. `applyClue(clue)` (called by `askQuestion()` with `data.clue`) adds a hit to `implicates`, marks `clears` as cleared, flags the changed rows, renders and announces "New lead: points to {name}" / "New lead: clears {name}" (PT "Nova pista: aponta para / inocenta {name}").
 - `renderSuspicion()` (called by `renderCase()`, so also on a language switch) fills every `.sus-list`: per suspect a li (`is-hot` at two or more hits, `is-cleared`, `flash` once) with `.sus-name`, `.sus-bar` (role meter, aria-valuenow 0 to 3, 0 when cleared, aria-valuetext and aria-label "Suspicion on {name}") holding three `.sus-pip` (`on` when filled) and `.sus-note` ("No leads", "1 lead", "2 leads · prime suspect", "Cleared"; PT "Sem pistas", "1 pista", "2 pistas · principal suspeito", "Inocentado"). `restartGame()` and `openPackFile()` reset `suspicion` and the live line.
+
+## Web page: quick accusations (M2 game feel sprint 7)
+
+- Markup: `label#ask-confirm-row.ask-confirm[for=ask-confirm]` right after `#accuse-buttons`, holding `input#ask-confirm` (checkbox, `checked` in the markup) and `span#ask-confirm-text` (EN "Confirm before accusing" / PT "Confirmar antes de acusar").
+- `confirmOn()` is false only when localStorage `cf-confirm-accuse` is `off` (no storage or a storage error means on). `setConfirmOn(on)` removes the key when on, stores `off` when off, then `renderConfirmToggle()` sets the checkbox and the label in the current language. The checkbox `change` listener calls `setConfirmOn(checked)`; `renderConfirmToggle()` runs at load and in `setLang()`. Start over does not touch the choice.
+- An accuse button does nothing after the verdict; otherwise it calls `accuse(id)` when `!confirmOn()` or the native confirm returns true.
+- Suspicion fixes: `renderSuspicion()` adds `flash` only to a `.sus-list` whose `offsetParent` is not null (on screen), so a hidden panel never replays it. `applyClue()` keeps the last announced clue in `susLast` and writes `susSaid(clue)`; an empty clue changes nothing. `relabelSuspicionLive()` (called by `setLang()`) rewrites a non-empty live line in the current language.
+- CSS: `.ask-confirm` inline-flex, min-height `var(--touch-min)`; the checkbox is 20px with a 3px `var(--cf-focus)` focus ring.
 
 ## Web page: closing screen
 
@@ -150,9 +158,10 @@ This executes:
 13. `node test/legibility.mjs` (board heading and scene caption on an ink plate with AA contrast, toast remembers its hint id, open toast switches language and back, unknown toast keeps its text, language switch relabels open toasts)
 14. `node test/continue.mjs` (continue countdown: markup, 9 to 0 then GAME OVER, pulse, Portuguese labels, verdict reveal, Try again without confirm, Close focus, only after a wrong verdict, culprit hidden while counting, stop on Start over and new file, sessions carry the case id, Escape, reduced motion, language switch)
 15. `node test/suspicion.mjs` (suspicion bars: server clue found once per game by the asked suspect, keywords ignore case, Night Train; page rows in both panels, one lead, prime suspect, cleared, Portuguese, three pip cap, no clue, wiring and reduced motion)
-16. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+16. `node test/quick-accuse.mjs` (quick accusations: on by default, stored off, back on, reload and Portuguese label, accuse with and without the dialog, nothing after the verdict, markup and focus style, suspicion flash only on screen, live line language)
+17. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 194 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, keyboard 13).
+Total checks: 203 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

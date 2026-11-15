@@ -284,6 +284,7 @@
         <div id="accuse-section">
           <h2 id="accuse-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-label="Accuse">Accuse</span></h2>
           <div id="accuse-buttons"></div>
+          <label id="ask-confirm-row" class="ask-confirm" for="ask-confirm"><input type="checkbox" id="ask-confirm" checked> <span id="ask-confirm-text">Confirm before accusing</span></label>
         </div>
         <div id="verdict" role="status" aria-live="assertive" tabindex="-1" hidden></div>
         <div id="err" role="alert" hidden></div>
@@ -355,7 +356,9 @@ let openFile = '';
 let packList = [];
 let pins = [];
 let suspicion = {};
+let susLast = null;
 const SUS_MAX = 3;
+const CONFIRM_KEY = 'cf-confirm-accuse';
 const visitedSteps = new Set(['briefing']);
 const STEP_ORDER = ['briefing', 'locations', 'suspects', 'talk', 'board', 'accuse'];
 function susLabels() {
@@ -378,7 +381,7 @@ function renderSuspicion() {
       const st = suspicion[s.id] || { hits: 0, cleared: false };
       const n = st.cleared ? 0 : Math.min(st.hits, SUS_MAX);
       const li = document.createElement('li');
-      li.className = (st.cleared ? 'is-cleared' : (st.hits >= 2 ? 'is-hot' : '')) + (st.flash ? ' flash' : '');
+      li.className = (st.cleared ? 'is-cleared' : (st.hits >= 2 ? 'is-hot' : '')) + (st.flash && list.offsetParent !== null ? ' flash' : '');
       li.dataset.suspect = s.id;
       const name = document.createElement('span');
       name.className = 'sus-name';
@@ -407,18 +410,43 @@ function renderSuspicion() {
   });
   Object.values(suspicion).forEach(st => { st.flash = false; });
 }
+function susSaid(clue) {
+  const L = susLabels();
+  const nameOf = id => (((caseData && caseData.suspects) || []).find(s => s.id === id) || {}).name || id;
+  const said = [];
+  if (clue.implicates) said.push(L.lead.replace('{name}', nameOf(clue.implicates)));
+  if (clue.clears) said.push(L.clear.replace('{name}', nameOf(clue.clears)));
+  return said.join('. ');
+}
 function applyClue(clue) {
   if (!clue || !caseData) return;
-  const L = susLabels();
-  const nameOf = id => ((caseData.suspects || []).find(s => s.id === id) || {}).name || id;
   const get = id => suspicion[id] || (suspicion[id] = { hits: 0, cleared: false });
   Object.values(suspicion).forEach(st => { st.flash = false; });
-  const said = [];
-  if (clue.implicates) { const st = get(clue.implicates); st.hits += 1; st.flash = true; said.push(L.lead.replace('{name}', nameOf(clue.implicates))); }
-  if (clue.clears) { const st = get(clue.clears); st.cleared = true; st.flash = true; said.push(L.clear.replace('{name}', nameOf(clue.clears))); }
+  if (clue.implicates) { const st = get(clue.implicates); st.hits += 1; st.flash = true; }
+  if (clue.clears) { const st = get(clue.clears); st.cleared = true; st.flash = true; }
   renderSuspicion();
+  const text = susSaid(clue);
+  if (!text) return;
+  susLast = { implicates: clue.implicates || null, clears: clue.clears || null };
   const live = document.getElementById('suspicion-live');
-  if (live && said.length) live.textContent = said.join('. ');
+  if (live) live.textContent = text;
+}
+function relabelSuspicionLive() {
+  const live = document.getElementById('suspicion-live');
+  if (live && live.textContent && susLast) live.textContent = susSaid(susLast);
+}
+function confirmOn() {
+  try { return !(store && store.getItem(CONFIRM_KEY) === 'off'); } catch { return true; }
+}
+function setConfirmOn(on) {
+  try { if (store) { if (on) store.removeItem(CONFIRM_KEY); else store.setItem(CONFIRM_KEY, 'off'); } } catch {}
+  renderConfirmToggle();
+}
+function renderConfirmToggle() {
+  const box = document.getElementById('ask-confirm');
+  if (box) box.checked = confirmOn();
+  const text = document.getElementById('ask-confirm-text');
+  if (text) text.textContent = lang === 'pt' ? 'Confirmar antes de acusar' : 'Confirm before accusing';
 }
 function renderProgress() {
   const list = document.getElementById('progress-list');
@@ -832,6 +860,8 @@ async function setLang(newLang) {
   renderConversation();
   renderCabinet();
   relabelToasts();
+  relabelSuspicionLive();
+  renderConfirmToggle();
   renderContinue();
   if (lastAccuseResult) renderVerdict(false);
   if (!document.getElementById('credits').hidden) await loadCredits(false);
@@ -1245,7 +1275,7 @@ function renderAccuseButtons(){
     btn.appendChild(document.createTextNode((lang==='pt'?'Acusar ':'Accuse ') + s.name));
     btn.addEventListener('click',()=>{
       if (gameOver) return;
-      if (confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
+      if (!confirmOn() || confirm(LABELS[lang].confirmAccuse.replace('{name}', s.name))) {
         accuse(s.id);
       }
     });
@@ -1437,6 +1467,8 @@ document.getElementById('continue-yes').addEventListener('click', continueGame);
 document.getElementById('continue-no').addEventListener('click', () => { if (contState === 'run') endContinue(); });
 document.getElementById('continue-close').addEventListener('click', closeContinue);
 document.getElementById('ask-form').addEventListener('submit',askQuestion);
+document.getElementById('ask-confirm').addEventListener('change', (e) => setConfirmOn(e.target.checked));
+renderConfirmToggle();
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
   const q = document.getElementById('q');

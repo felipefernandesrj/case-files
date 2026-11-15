@@ -729,6 +729,9 @@ body[data-view="cabinet"] #steps {
 @keyframes cf-sus-flash { 0% { background: rgba(232,184,109,0.45); } 100% { background: transparent; } }
 .sus-live { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 @media (prefers-reduced-motion: reduce) { .sus-list li.flash { animation: none; } .sus-pip { transition: none; } }
+.ask-confirm { display: inline-flex; align-items: center; gap: 8px; min-height: var(--touch-min); margin-top: 8px; font-size: 0.85rem; color: var(--cf-text-dim); cursor: pointer; }
+.ask-confirm input[type="checkbox"] { width: 20px; height: 20px; min-height: 0; margin: 0; padding: 0; accent-color: #E2675E; cursor: pointer; }
+.ask-confirm input[type="checkbox"]:focus-visible { outline: 3px solid var(--cf-focus); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .continue-num, .continue-num.tick { animation: none; } }
 /* Utility */
 .hidden { display: none !important; }

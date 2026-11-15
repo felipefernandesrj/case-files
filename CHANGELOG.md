@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.16 (M2 game feel, sprint 7: quicker accusations)
+- Backer feedback: the accuse confirmation slowed down quick players. A checkbox "Confirm before accusing" ("Confirmar antes de acusar") now sits under the accuse buttons. It is checked by default, so nothing changes unless you uncheck it; unchecked, an accuse button accuses at once with no dialog. The choice is remembered in this browser (localStorage key cf-confirm-accuse), survives Start over and a reload, and checking the box again brings the confirmation back. It is a normal labelled checkbox (Tab to reach it, Space to toggle, visible focus ring, 44px tall touch target).
+- Fix: the one-time flash of a suspicion row no longer replays when you open the Accuse step later. The flash is only added to a Suspicion panel that is on screen when the lead is found.
+- Fix: after a language switch, the screen reader line of the last lead is rewritten in the new language ("New lead: points to Carlos Mendes" becomes "Nova pista: aponta para Carlos Mendes"). It stays empty after Start over.
+- New test/quick-accuse.mjs with 9 checks (default on, stored off, turning it back on, reload and language, accuse with and without the dialog, no accusation after the verdict, markup and focus style, flash only on screen, live line language). The automated suite now has 203 checks.
+
 ## 0.4.15 (M2 game feel, sprint 6: suspicion bars)
 - A Suspicion panel (Suspeita in Portuguese) now sits under the conversation and above the accuse buttons, at 1280 and 390. Each suspect has a row with a three pip meter. When a question finds a clue, the pips of the suspect it points to fill up (1 lead, 2 leads; 1 pista, 2 pistas), two or more leads mark the prime suspect (red edge), and a clue that clears someone marks that row Cleared (Inocentado) in green with the name struck through. The row that changed flashes once.
 - The server now says which clue a question found: POST /api/ask returns `clue` ({ id, implicates, clears } or null). A question finds a clue when it contains one of the clue keywords of the suspect being asked, ignoring case, and each clue counts once per game.

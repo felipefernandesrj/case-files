@@ -1,0 +1,180 @@
+{
+ "1280-en": {
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "confirmBox": null,
+  "defaultDialogs": [
+   "Accuse Carlos Mendes? You only get one accusation."
+  ],
+  "verdictShown": true
+ },
+ "1280-pt": {
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "confirmBox": null,
+  "defaultDialogs": [
+   "Acusar Carlos Mendes? Você só tem uma acusação."
+  ],
+  "verdictShown": true
+ },
+ "390-en": {
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "confirmBox": null,
+  "defaultDialogs": [
+   "Accuse Carlos Mendes? You only get one accusation."
+  ],
+  "verdictShown": true
+ },
+ "390-pt": {
+  "accuseRowsBeforeOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": []
+   }
+  ],
+  "accuseRowsAfterOpen": [
+   {
+    "s": "lorenzo",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "maya",
+    "cls": "",
+    "anims": []
+   },
+   {
+    "s": "carlos",
+    "cls": " flash",
+    "anims": [
+     "cf-sus-flash:running"
+    ]
+   }
+  ],
+  "confirmBox": null,
+  "defaultDialogs": [
+   "Acusar Carlos Mendes? Você só tem uma acusação."
+  ],
+  "verdictShown": true
+ },
+ "flows": {
+  "initial": null,
+  "liveEn": "New lead: points to Carlos Mendes",
+  "liveAfterPt": "New lead: points to Carlos Mendes",
+  "liveAfterStartOver": ""
+ }
+}
