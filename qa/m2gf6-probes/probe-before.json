@@ -1,0 +1,326 @@
+{
+ "1280-en": {
+  "start": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Questions used: 0"
+  },
+  "afterLock": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 1
+   },
+   "questions": "Questions used: 1"
+  },
+  "afterNervous": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Maya seemed focused on her practice and had no reason to steal the instrument.",
+    "questions": 2
+   },
+   "questions": "Questions used: 2"
+  },
+  "afterCart": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "The lock had a faint scratch, and I noticed the janitor's cart had a hidden wooden compartment.",
+    "questions": 3
+   },
+   "questions": "Questions used: 3"
+  },
+  "afterLockAgain": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4
+   },
+   "questions": "Questions used: 4"
+  },
+  "accuseStep": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4
+   },
+   "questions": "Questions used: 4"
+  }
+ },
+ "1280-pt": {
+  "start": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Perguntas feitas: 0"
+  },
+  "afterLock": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 1
+   },
+   "questions": "Perguntas feitas: 1"
+  },
+  "afterNervous": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Maya parecia concentrada em sua prática e não tinha motivo para roubar o instrumento.",
+    "questions": 2
+   },
+   "questions": "Perguntas feitas: 2"
+  },
+  "afterCart": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "A fechadura tinha um arranhão leve, e notei que o carrinho do zelador tinha um compartimento de madeira escondido.",
+    "questions": 3
+   },
+   "questions": "Perguntas feitas: 3"
+  },
+  "afterLockAgain": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4
+   },
+   "questions": "Perguntas feitas: 4"
+  },
+  "accuseStep": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4
+   },
+   "questions": "Perguntas feitas: 4"
+  }
+ },
+ "390-en": {
+  "start": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Questions used: 0"
+  },
+  "afterLock": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 1
+   },
+   "questions": "Questions used: 1"
+  },
+  "afterNervous": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Maya seemed focused on her practice and had no reason to steal the instrument.",
+    "questions": 2
+   },
+   "questions": "Questions used: 2"
+  },
+  "afterCart": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "The lock had a faint scratch, and I noticed the janitor's cart had a hidden wooden compartment.",
+    "questions": 3
+   },
+   "questions": "Questions used: 3"
+  },
+  "afterLockAgain": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4
+   },
+   "questions": "Questions used: 4"
+  },
+  "accuseStep": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4
+   },
+   "questions": "Questions used: 4"
+  }
+ },
+ "390-pt": {
+  "start": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Perguntas feitas: 0"
+  },
+  "afterLock": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 1
+   },
+   "questions": "Perguntas feitas: 1"
+  },
+  "afterNervous": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Maya parecia concentrada em sua prática e não tinha motivo para roubar o instrumento.",
+    "questions": 2
+   },
+   "questions": "Perguntas feitas: 2"
+  },
+  "afterCart": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "A fechadura tinha um arranhão leve, e notei que o carrinho do zelador tinha um compartimento de madeira escondido.",
+    "questions": 3
+   },
+   "questions": "Perguntas feitas: 3"
+  },
+  "afterLockAgain": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4
+   },
+   "questions": "Perguntas feitas: 4"
+  },
+  "accuseStep": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4
+   },
+   "questions": "Perguntas feitas: 4"
+  }
+ },
+ "flows": {
+  "before": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw Lorenzo arrive earlier, but after I entered the room he was already away, not near the case.",
+    "questions": 2
+   },
+   "questions": "Questions used: 2"
+  },
+  "afterSwitchPt": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw Lorenzo arrive earlier, but after I entered the room he was already away, not near the case.",
+    "questions": 2
+   },
+   "questions": "Perguntas feitas: 2"
+  },
+  "afterStartOver": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw Lorenzo arrive earlier, but after I entered the room he was already away, not near the case.",
+    "questions": 2
+   },
+   "questions": "Perguntas feitas: 0"
+  },
+  "reducedMotion": {
+   "pip": null,
+   "row": null
+  },
+  "motion": {
+   "row": null
+  },
+  "afterNewFile": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 1
+   },
+   "questions": "Questions used: 0"
+  },
+  "nightTrainApron": {
+   "sections": 0,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "Right after the tunnel I saw someone in a white chef's apron leave the luggage car.",
+    "questions": 1
+   },
+   "questions": "Questions used: 1"
+  }
+ }
+}

@@ -1,0 +1,123 @@
+<<<REPLACE public/index.html>>>
+        <p id="questions-used" aria-live="polite"></p>
+=====
+        <p id="questions-used" aria-live="polite"></p>
+        <section id="suspicion-talk" class="suspicion" aria-labelledby="suspicion-title-talk">
+          <h3 id="suspicion-title-talk" class="sus-title">Suspicion</h3>
+          <ul class="sus-list"></ul>
+        </section>
+<<<END>>>
+<<<REPLACE public/index.html>>>
+        <div id="accuse-section">
+=====
+        <section id="suspicion-accuse" class="suspicion" aria-labelledby="suspicion-title-accuse">
+          <h3 id="suspicion-title-accuse" class="sus-title">Suspicion</h3>
+          <ul class="sus-list"></ul>
+        </section>
+        <div id="accuse-section">
+<<<END>>>
+<<<REPLACE public/index.html>>>
+      <section id="briefing" class="panel is-on" data-panel="briefing">
+=====
+      <p id="suspicion-live" class="sus-live" aria-live="polite"></p>
+      <section id="briefing" class="panel is-on" data-panel="briefing">
+<<<END>>>
+<<<REPLACE public/index.html>>>
+let pins = [];
+=====
+let pins = [];
+let suspicion = {};
+const SUS_MAX = 3;
+<<<END>>>
+<<<REPLACE public/index.html>>>
+function renderProgress() {
+=====
+function susLabels() {
+  return lang === 'pt'
+    ? { title: 'Suspeita', cleared: 'Inocentado', none: 'Sem pistas', leads: '{n} pista(s)', prime: 'principal suspeito', meter: 'Suspeita sobre {name}', lead: 'Nova pista: aponta para {name}', clear: 'Nova pista: inocenta {name}' }
+    : { title: 'Suspicion', cleared: 'Cleared', none: 'No leads', leads: '{n} lead(s)', prime: 'prime suspect', meter: 'Suspicion on {name}', lead: 'New lead: points to {name}', clear: 'New lead: clears {name}' };
+}
+function susNote(st) {
+  const L = susLabels();
+  if (st.cleared) return L.cleared;
+  if (!st.hits) return L.none;
+  return L.leads.replace('{n}', st.hits) + (st.hits >= 2 ? ' · ' + L.prime : '');
+}
+function renderSuspicion() {
+  const L = susLabels();
+  document.querySelectorAll('.sus-title').forEach(t => { t.textContent = L.title; });
+  document.querySelectorAll('.sus-list').forEach(list => {
+    list.textContent = '';
+    ((caseData && caseData.suspects) || []).forEach(s => {
+      const st = suspicion[s.id] || { hits: 0, cleared: false };
+      const n = st.cleared ? 0 : Math.min(st.hits, SUS_MAX);
+      const li = document.createElement('li');
+      li.className = (st.cleared ? 'is-cleared' : (st.hits >= 2 ? 'is-hot' : '')) + (st.flash ? ' flash' : '');
+      li.dataset.suspect = s.id;
+      const name = document.createElement('span');
+      name.className = 'sus-name';
+      name.textContent = s.name;
+      const bar = document.createElement('span');
+      bar.className = 'sus-bar';
+      bar.setAttribute('role', 'meter');
+      bar.setAttribute('aria-valuemin', '0');
+      bar.setAttribute('aria-valuemax', String(SUS_MAX));
+      bar.setAttribute('aria-valuenow', String(n));
+      bar.setAttribute('aria-valuetext', susNote(st));
+      bar.setAttribute('aria-label', L.meter.replace('{name}', s.name));
+      for (let i = 0; i < SUS_MAX; i++) {
+        const pip = document.createElement('span');
+        pip.className = i < n ? 'sus-pip on' : 'sus-pip';
+        bar.appendChild(pip);
+      }
+      const note = document.createElement('span');
+      note.className = 'sus-note';
+      note.textContent = susNote(st);
+      li.appendChild(name);
+      li.appendChild(bar);
+      li.appendChild(note);
+      list.appendChild(li);
+    });
+  });
+}
+function applyClue(clue) {
+  if (!clue || !caseData) return;
+  const L = susLabels();
+  const nameOf = id => ((caseData.suspects || []).find(s => s.id === id) || {}).name || id;
+  const get = id => suspicion[id] || (suspicion[id] = { hits: 0, cleared: false });
+  Object.values(suspicion).forEach(st => { st.flash = false; });
+  const said = [];
+  if (clue.implicates) { const st = get(clue.implicates); st.hits += 1; st.flash = true; said.push(L.lead.replace('{name}', nameOf(clue.implicates))); }
+  if (clue.clears) { const st = get(clue.clears); st.cleared = true; st.flash = true; said.push(L.clear.replace('{name}', nameOf(clue.clears))); }
+  renderSuspicion();
+  const live = document.getElementById('suspicion-live');
+  if (live && said.length) live.textContent = said.join('. ');
+}
+function renderProgress() {
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    renderQuestions();
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+=====
+    renderQuestions();
+    applyClue(data.clue);
+    if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  if (typeof renderProgress === 'function') renderProgress();
+  document.documentElement.setAttribute('data-accent'
+=====
+  if (typeof renderProgress === 'function') renderProgress();
+  renderSuspicion();
+  document.documentElement.setAttribute('data-accent'
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  stopContinue();
+  const sessRes = await fetch(API + '/session'
+=====
+  stopContinue();
+  suspicion = {};
+  const live = document.getElementById('suspicion-live');
+  if (live) live.textContent = '';
+  const sessRes = await fetch(API + '/session'
+<<<END>>>

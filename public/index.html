@@ -224,6 +224,7 @@
     <main id="play">
       <div id="scene" aria-hidden="true"><div class="scene-layer"></div><div class="scene-layer"></div></div>
       <p id="scene-label" class="scene-label" hidden></p>
+      <p id="suspicion-live" class="sus-live" aria-live="polite"></p>
       <section id="briefing" class="panel is-on" data-panel="briefing">
         <p class="stamp" id="brief-stamp">Case file</p>
         <div id="intro"></div>
@@ -245,6 +246,10 @@
           </div>
         </form>
         <p id="questions-used" aria-live="polite"></p>
+        <section id="suspicion-talk" class="suspicion" aria-labelledby="suspicion-title-talk">
+          <h3 id="suspicion-title-talk" class="sus-title">Suspicion</h3>
+          <ul class="sus-list"></ul>
+        </section>
       </section>
 
       <section id="locations" class="panel" data-panel="locations" data-loc="rooms" aria-labelledby="rooms-title">
@@ -272,6 +277,10 @@
           <label for="player" id="player-label">Your name</label>
           <input type="text" id="player" maxlength="24" placeholder="anon">
         </div>
+        <section id="suspicion-accuse" class="suspicion" aria-labelledby="suspicion-title-accuse">
+          <h3 id="suspicion-title-accuse" class="sus-title">Suspicion</h3>
+          <ul class="sus-list"></ul>
+        </section>
         <div id="accuse-section">
           <h2 id="accuse-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span data-label="Accuse">Accuse</span></h2>
           <div id="accuse-buttons"></div>
@@ -345,8 +354,72 @@ let gameOver = false;
 let openFile = '';
 let packList = [];
 let pins = [];
+let suspicion = {};
+const SUS_MAX = 3;
 const visitedSteps = new Set(['briefing']);
 const STEP_ORDER = ['briefing', 'locations', 'suspects', 'talk', 'board', 'accuse'];
+function susLabels() {
+  return lang === 'pt'
+    ? { title: 'Suspeita', cleared: 'Inocentado', none: 'Sem pistas', lead1: '1 pista', leads: '{n} pistas', prime: 'principal suspeito', meter: 'Suspeita sobre {name}', lead: 'Nova pista: aponta para {name}', clear: 'Nova pista: inocenta {name}' }
+    : { title: 'Suspicion', cleared: 'Cleared', none: 'No leads', lead1: '1 lead', leads: '{n} leads', prime: 'prime suspect', meter: 'Suspicion on {name}', lead: 'New lead: points to {name}', clear: 'New lead: clears {name}' };
+}
+function susNote(st) {
+  const L = susLabels();
+  if (st.cleared) return L.cleared;
+  if (!st.hits) return L.none;
+  return (st.hits === 1 ? L.lead1 : L.leads.replace('{n}', st.hits)) + (st.hits >= 2 ? ' · ' + L.prime : '');
+}
+function renderSuspicion() {
+  const L = susLabels();
+  document.querySelectorAll('.sus-title').forEach(t => { t.textContent = L.title; });
+  document.querySelectorAll('.sus-list').forEach(list => {
+    list.textContent = '';
+    ((caseData && caseData.suspects) || []).forEach(s => {
+      const st = suspicion[s.id] || { hits: 0, cleared: false };
+      const n = st.cleared ? 0 : Math.min(st.hits, SUS_MAX);
+      const li = document.createElement('li');
+      li.className = (st.cleared ? 'is-cleared' : (st.hits >= 2 ? 'is-hot' : '')) + (st.flash ? ' flash' : '');
+      li.dataset.suspect = s.id;
+      const name = document.createElement('span');
+      name.className = 'sus-name';
+      name.textContent = s.name;
+      const bar = document.createElement('span');
+      bar.className = 'sus-bar';
+      bar.setAttribute('role', 'meter');
+      bar.setAttribute('aria-valuemin', '0');
+      bar.setAttribute('aria-valuemax', String(SUS_MAX));
+      bar.setAttribute('aria-valuenow', String(n));
+      bar.setAttribute('aria-valuetext', susNote(st));
+      bar.setAttribute('aria-label', L.meter.replace('{name}', s.name));
+      for (let i = 0; i < SUS_MAX; i++) {
+        const pip = document.createElement('span');
+        pip.className = i < n ? 'sus-pip on' : 'sus-pip';
+        bar.appendChild(pip);
+      }
+      const note = document.createElement('span');
+      note.className = 'sus-note';
+      note.textContent = susNote(st);
+      li.appendChild(name);
+      li.appendChild(bar);
+      li.appendChild(note);
+      list.appendChild(li);
+    });
+  });
+  Object.values(suspicion).forEach(st => { st.flash = false; });
+}
+function applyClue(clue) {
+  if (!clue || !caseData) return;
+  const L = susLabels();
+  const nameOf = id => ((caseData.suspects || []).find(s => s.id === id) || {}).name || id;
+  const get = id => suspicion[id] || (suspicion[id] = { hits: 0, cleared: false });
+  Object.values(suspicion).forEach(st => { st.flash = false; });
+  const said = [];
+  if (clue.implicates) { const st = get(clue.implicates); st.hits += 1; st.flash = true; said.push(L.lead.replace('{name}', nameOf(clue.implicates))); }
+  if (clue.clears) { const st = get(clue.clears); st.cleared = true; st.flash = true; said.push(L.clear.replace('{name}', nameOf(clue.clears))); }
+  renderSuspicion();
+  const live = document.getElementById('suspicion-live');
+  if (live && said.length) live.textContent = said.join('. ');
+}
 function renderProgress() {
   const list = document.getElementById('progress-list');
   const countEl = document.getElementById('progress-count');
@@ -810,6 +883,7 @@ function renderCase() {
   if (typeof renderDossier === 'function') renderDossier();
   syncTitle();
   if (typeof renderProgress === 'function') renderProgress();
+  renderSuspicion();
   document.documentElement.setAttribute('data-accent', caseData.file === 'violin' ? 'salon' : 'rails');
   const btnContainer = document.getElementById('suspect-buttons');
   btnContainer.innerHTML = '';
@@ -992,6 +1066,9 @@ function showPlay() {
 
 async function openPackFile(id) {
   stopContinue();
+  suspicion = {};
+  const live = document.getElementById('suspicion-live');
+  if (live) live.textContent = '';
   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: id })});
   const sessData = await sessRes.json();
   sessionId = sessData.sessionId;
@@ -1108,6 +1185,7 @@ async function askQuestion(e){
     const answer = data.answer;
     questionsUsed = data.questions;
     renderQuestions();
+    applyClue(data.clue);
     if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
     histories[selectedSuspect].push({q:question,a:answer});
     renderConversation();
@@ -1308,6 +1386,9 @@ document.getElementById('reset-best').addEventListener('click', () => {
 async function restartGame(skipConfirm = false){
   if (!skipConfirm && !confirm(LABELS[lang].confirmRestart)) return;
   stopContinue();
+  suspicion = {};
+  const live = document.getElementById('suspicion-live');
+  if (live) live.textContent = '';
   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: openFile })});
   const sessData = await sessRes.json();
   sessionId = sessData.sessionId;

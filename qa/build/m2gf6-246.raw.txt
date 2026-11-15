@@ -1,0 +1,48 @@
+<<<REPLACE public/index.html>>>
+leads: '{n} pista(s)', prime:
+=====
+lead1: '1 pista', leads: '{n} pistas', prime:
+<<<END>>>
+<<<REPLACE public/index.html>>>
+leads: '{n} lead(s)', prime:
+=====
+lead1: '1 lead', leads: '{n} leads', prime:
+<<<END>>>
+<<<REPLACE public/index.html>>>
+  return L.leads.replace('{n}', st.hits) + (st.hits >= 2 ? ' · ' + L.prime : '');
+=====
+  return (st.hits === 1 ? L.lead1 : L.leads.replace('{n}', st.hits)) + (st.hits >= 2 ? ' · ' + L.prime : '');
+<<<END>>>
+<<<REPLACE public/index.html>>>
+      list.appendChild(li);
+    });
+  });
+}
+=====
+      list.appendChild(li);
+    });
+  });
+  Object.values(suspicion).forEach(st => { st.flash = false; });
+}
+<<<END>>>
+<<<REPLACE test/suspicion.mjs>>>
+  must(c.note(li) === '1 lead(s)', 'note ' + c.note(li));
+=====
+  must(c.note(li) === '1 lead', 'note ' + c.note(li));
+  c.api.renderSuspicion();
+  must(!c.row(0, 'carlos').className.includes('flash'), 'flash is used once');
+<<<END>>>
+<<<REPLACE test/suspicion.mjs>>>
+  must(c.note(li) === '2 lead(s) · prime suspect', 'note ' + c.note(li));
+  must(c.meter(li).getAttribute('aria-valuetext') === '2 lead(s) · prime suspect', 'valuetext');
+=====
+  must(c.note(li) === '2 leads · prime suspect', 'note ' + c.note(li));
+  must(c.meter(li).getAttribute('aria-valuetext') === '2 leads · prime suspect', 'valuetext');
+<<<END>>>
+<<<REPLACE test/suspicion.mjs>>>
+  must(c.note(c.row(0, 'lorenzo')) === 'Inocentado', 'cleared');
+=====
+  must(c.note(c.row(0, 'lorenzo')) === 'Inocentado', 'cleared');
+  c.api.applyClue({ id: 'c2', implicates: 'carlos', clears: null });
+  must(c.note(c.row(0, 'carlos')) === '1 pista', 'one pt');
+<<<END>>>

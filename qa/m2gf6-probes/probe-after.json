@@ -1,0 +1,1023 @@
+{
+ "1280-en": {
+  "start": {
+   "sections": 2,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Questions used: 0"
+  },
+  "afterLock": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosNo leads",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": ""
+    },
+    {
+     "text": "Carlos Mendes1 lead",
+     "now": "1",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": " flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 1,
+    "clue": {
+     "id": "c1",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Questions used: 1"
+  },
+  "afterNervous": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared flash"
+    },
+    {
+     "text": "Carlos Mendes1 lead",
+     "now": "1",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": ""
+    }
+   ],
+   "live": "New lead: clears Maya Santos",
+   "lastAsk": {
+    "answer": "Maya seemed focused on her practice and had no reason to steal the instrument.",
+    "questions": 2,
+    "clue": {
+     "id": "c4",
+     "implicates": null,
+     "clears": "maya"
+    }
+   },
+   "questions": "Questions used: 2"
+  },
+  "afterCart": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 leads · prime suspect",
+     "now": "2",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "The lock had a faint scratch, and I noticed the janitor's cart had a hidden wooden compartment.",
+    "questions": 3,
+    "clue": {
+     "id": "c2",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Questions used: 3"
+  },
+  "afterLockAgain": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 leads · prime suspect",
+     "now": "2",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Questions used: 4"
+  },
+  "accuseStep": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     563,
+     218,
+     218,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 leads · prime suspect",
+     "now": "2",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Questions used: 4"
+  }
+ },
+ "1280-pt": {
+  "start": {
+   "sections": 2,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Perguntas feitas: 0"
+  },
+  "afterLock": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": ""
+    },
+    {
+     "text": "Carlos Mendes1 pista",
+     "now": "1",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": " flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 1,
+    "clue": {
+     "id": "c1",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Perguntas feitas: 1"
+  },
+  "afterNervous": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared flash"
+    },
+    {
+     "text": "Carlos Mendes1 pista",
+     "now": "1",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": ""
+    }
+   ],
+   "live": "Nova pista: inocenta Maya Santos",
+   "lastAsk": {
+    "answer": "Maya parecia concentrada em sua prática e não tinha motivo para roubar o instrumento.",
+    "questions": 2,
+    "clue": {
+     "id": "c4",
+     "implicates": null,
+     "clears": "maya"
+    }
+   },
+   "questions": "Perguntas feitas: 2"
+  },
+  "afterCart": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 pistas · principal suspeito",
+     "now": "2",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "A fechadura tinha um arranhão leve, e notei que o carrinho do zelador tinha um compartimento de madeira escondido.",
+    "questions": 3,
+    "clue": {
+     "id": "c2",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Perguntas feitas: 3"
+  },
+  "afterLockAgain": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 pistas · principal suspeito",
+     "now": "2",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Perguntas feitas: 4"
+  },
+  "accuseStep": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     563,
+     218,
+     218,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 pistas · principal suspeito",
+     "now": "2",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Perguntas feitas: 4"
+  }
+ },
+ "390-en": {
+  "start": {
+   "sections": 2,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Questions used: 0"
+  },
+  "afterLock": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     484,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosNo leads",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": ""
+    },
+    {
+     "text": "Carlos Mendes1 lead",
+     "now": "1",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": " flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 1,
+    "clue": {
+     "id": "c1",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Questions used: 1"
+  },
+  "afterNervous": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     570,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared flash"
+    },
+    {
+     "text": "Carlos Mendes1 lead",
+     "now": "1",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": ""
+    }
+   ],
+   "live": "New lead: clears Maya Santos",
+   "lastAsk": {
+    "answer": "Maya seemed focused on her practice and had no reason to steal the instrument.",
+    "questions": 2,
+    "clue": {
+     "id": "c4",
+     "implicates": null,
+     "clears": "maya"
+    }
+   },
+   "questions": "Questions used: 2"
+  },
+  "afterCart": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     502,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 leads · prime suspect",
+     "now": "2",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "The lock had a faint scratch, and I noticed the janitor's cart had a hidden wooden compartment.",
+    "questions": 3,
+    "clue": {
+     "id": "c2",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Questions used: 3"
+  },
+  "afterLockAgain": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     656,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 leads · prime suspect",
+     "now": "2",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Questions used: 4"
+  },
+  "accuseStep": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     16,
+     150,
+     358,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiNo leads",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosCleared",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 leads · prime suspect",
+     "now": "2",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "New lead: points to Carlos Mendes",
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Questions used: 4"
+  }
+ },
+ "390-pt": {
+  "start": {
+   "sections": 2,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": null,
+   "questions": "Perguntas feitas: 0"
+  },
+  "afterLock": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     521,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": ""
+    },
+    {
+     "text": "Carlos Mendes1 pista",
+     "now": "1",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": " flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 1,
+    "clue": {
+     "id": "c1",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Perguntas feitas: 1"
+  },
+  "afterNervous": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     625,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared flash"
+    },
+    {
+     "text": "Carlos Mendes1 pista",
+     "now": "1",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": ""
+    }
+   ],
+   "live": "Nova pista: inocenta Maya Santos",
+   "lastAsk": {
+    "answer": "Maya parecia concentrada em sua prática e não tinha motivo para roubar o instrumento.",
+    "questions": 2,
+    "clue": {
+     "id": "c4",
+     "implicates": null,
+     "clears": "maya"
+    }
+   },
+   "questions": "Perguntas feitas: 2"
+  },
+  "afterCart": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     539,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 pistas · principal suspeito",
+     "now": "2",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "A fechadura tinha um arranhão leve, e notei que o carrinho do zelador tinha um compartimento de madeira escondido.",
+    "questions": 3,
+    "clue": {
+     "id": "c2",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Perguntas feitas: 3"
+  },
+  "afterLockAgain": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     33,
+     711,
+     324,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 pistas · principal suspeito",
+     "now": "2",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Perguntas feitas: 4"
+  },
+  "accuseStep": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     16,
+     150,
+     358,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": ""
+    },
+    {
+     "text": "Maya SantosInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Carlos Mendes2 pistas · principal suspeito",
+     "now": "2",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": "is-hot flash"
+    }
+   ],
+   "live": "Nova pista: aponta para Carlos Mendes",
+   "lastAsk": {
+    "answer": "Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+    "questions": 4,
+    "clue": null
+   },
+   "questions": "Perguntas feitas: 4"
+  }
+ },
+ "flows": {
+  "before": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiCleared",
+     "now": "0",
+     "label": "Suspicion on Lorenzo Moretti",
+     "cls": "is-cleared flash"
+    },
+    {
+     "text": "Maya SantosNo leads",
+     "now": "0",
+     "label": "Suspicion on Maya Santos",
+     "cls": ""
+    },
+    {
+     "text": "Carlos Mendes1 lead",
+     "now": "1",
+     "label": "Suspicion on Carlos Mendes",
+     "cls": ""
+    }
+   ],
+   "live": "New lead: clears Lorenzo Moretti",
+   "lastAsk": {
+    "answer": "I saw Lorenzo arrive earlier, but after I entered the room he was already away, not near the case.",
+    "questions": 2,
+    "clue": {
+     "id": "c3",
+     "implicates": null,
+     "clears": "lorenzo"
+    }
+   },
+   "questions": "Questions used: 2"
+  },
+  "afterSwitchPt": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     603,
+     774,
+     180
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Lorenzo MorettiInocentado",
+     "now": "0",
+     "label": "Suspeita sobre Lorenzo Moretti",
+     "cls": "is-cleared"
+    },
+    {
+     "text": "Maya SantosSem pistas",
+     "now": "0",
+     "label": "Suspeita sobre Maya Santos",
+     "cls": ""
+    },
+    {
+     "text": "Carlos Mendes1 pista",
+     "now": "1",
+     "label": "Suspeita sobre Carlos Mendes",
+     "cls": ""
+    }
+   ],
+   "live": "New lead: clears Lorenzo Moretti",
+   "lastAsk": {
+    "answer": "I saw Lorenzo arrive earlier, but after I entered the room he was already away, not near the case.",
+    "questions": 2,
+    "clue": {
+     "id": "c3",
+     "implicates": null,
+     "clears": "lorenzo"
+    }
+   },
+   "questions": "Perguntas feitas: 2"
+  },
+  "afterStartOver": {
+   "sections": 2,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw Lorenzo arrive earlier, but after I entered the room he was already away, not near the case.",
+    "questions": 2,
+    "clue": {
+     "id": "c3",
+     "implicates": null,
+     "clears": "lorenzo"
+    }
+   },
+   "questions": "Perguntas feitas: 0"
+  },
+  "reducedMotion": {
+   "pip": "1e-05s none",
+   "row": "none"
+  },
+  "motion": {
+   "row": "cf-sus-flash"
+  },
+  "afterNewFile": {
+   "sections": 2,
+   "visibleSections": [],
+   "rows": [],
+   "live": null,
+   "lastAsk": {
+    "answer": "I saw the case lock slightly ajar, but I thought it was just an oversight.",
+    "questions": 1,
+    "clue": {
+     "id": "c1",
+     "implicates": "carlos",
+     "clears": null
+    }
+   },
+   "questions": "Questions used: 0"
+  },
+  "nightTrainApron": {
+   "sections": 2,
+   "visibleSections": [
+    [
+     285,
+     554,
+     774,
+     229
+    ]
+   ],
+   "rows": [
+    {
+     "text": "Helena CostaNo leads",
+     "now": "0",
+     "label": "Suspicion on Helena Costa",
+     "cls": ""
+    },
+    {
+     "text": "Victor HaleNo leads",
+     "now": "0",
+     "label": "Suspicion on Victor Hale",
+     "cls": ""
+    },
+    {
+     "text": "Tomás ReyesNo leads",
+     "now": "0",
+     "label": "Suspicion on Tomás Reyes",
+     "cls": ""
+    },
+    {
+     "text": "Inês Duarte1 lead",
+     "now": "1",
+     "label": "Suspicion on Inês Duarte",
+     "cls": " flash"
+    }
+   ],
+   "live": "New lead: points to Inês Duarte",
+   "lastAsk": {
+    "answer": "Right after the tunnel I saw someone in a white chef's apron leave the luggage car.",
+    "questions": 1,
+    "clue": {
+     "id": "c1",
+     "implicates": "ines",
+     "clears": null
+    }
+   },
+   "questions": "Questions used: 1"
+  }
+ }
+}

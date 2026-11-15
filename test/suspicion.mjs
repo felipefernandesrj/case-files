@@ -1,0 +1,185 @@
+// M2 game feel sprint 6: suspicion bars (server clue detection + client meter rendering)
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createServer } from '../src/server.js';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = path.join(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+const css = fs.readFileSync(path.join(root, 'public/css/game.css'), 'utf8');
+const results = [];
+async function check(name, fn) { try { await fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+function must(cond, msg) { if (!cond) throw new Error(msg); }
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`Function ${name} not found`);
+  let depth = 0;
+  for (let i = html.indexOf('{', startIdx); i < html.length; i++) {
+    if (html[i] === '{') depth++;
+    else if (html[i] === '}') { depth--; if (depth === 0) return html.substring(startIdx, i + 1); }
+  }
+  throw new Error(`Unmatched braces in ${name}`);
+}
+
+// server
+const server = createServer({ caseFile: path.join(root, 'content/case.json'), scoreFile: path.join(os.tmpdir(), `sus-${Date.now()}.json`), mock: true });
+await new Promise(r => server.listen(0, r));
+const base = `http://127.0.0.1:${server.address().port}/api`;
+const post = async (p, body) => (await fetch(base + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })).json();
+const session = async (file) => (await post('/session', file ? { case: file } : {})).sessionId;
+const ask = (sessionId, suspectId, question) => post('/ask', { sessionId, suspectId, question, lang: 'en' });
+
+await check('ask finds a clue and says who it implicates', async () => {
+  const s = await session();
+  const r = await ask(s, 'lorenzo', 'Was the lock open?');
+  must(r.clue && r.clue.id === 'c1' && r.clue.implicates === 'carlos' && r.clue.clears === null, JSON.stringify(r.clue));
+});
+await check('a clue counts once per session', async () => {
+  const s = await session();
+  await ask(s, 'lorenzo', 'Was the lock open?');
+  const r = await ask(s, 'lorenzo', 'The lock again?');
+  must(r.clue === null, JSON.stringify(r.clue));
+  must(r.questions === 2, 'questions ' + r.questions);
+});
+await check('a question with no keyword finds nothing', async () => {
+  const s = await session();
+  const r = await ask(s, 'carlos', 'What is your favourite colour?');
+  must(Object.prototype.hasOwnProperty.call(r, 'clue') && r.clue === null, JSON.stringify(r));
+});
+await check('a clearing clue says who it clears', async () => {
+  const s = await session();
+  const r = await ask(s, 'lorenzo', 'Was the violinist nervous?');
+  must(r.clue && r.clue.id === 'c4' && r.clue.clears === 'maya' && r.clue.implicates === null, JSON.stringify(r.clue));
+});
+await check('only the suspect who holds the clue gives it', async () => {
+  const s = await session();
+  const r = await ask(s, 'maya', 'Was the lock open?');
+  must(r.clue === null, JSON.stringify(r.clue));
+});
+await check('a new session finds the clue again, keywords ignore case', async () => {
+  const s1 = await session();
+  await ask(s1, 'lorenzo', 'Was the lock open?');
+  const s2 = await session();
+  const r = await ask(s2, 'lorenzo', 'WAS THE LOCK OPEN?');
+  must(r.clue && r.clue.id === 'c1', JSON.stringify(r.clue));
+});
+await check('Night Train session uses its own clues', async () => {
+  const s = await session('night-train');
+  const r = await ask(s, 'tomas', 'Did you see the chef apron?');
+  must(r.clue && r.clue.implicates === 'ines', JSON.stringify(r.clue));
+});
+server.close();
+
+// client
+class El {
+  constructor(tag) { this.tag = tag; this.children = []; this.attrs = {}; this.dataset = {}; this.className = ''; this._text = ''; }
+  set textContent(v) { this._text = String(v); this.children = []; }
+  get textContent() { return this._text + this.children.map(c => c.textContent).join(''); }
+  appendChild(c) { this.children.push(c); return c; }
+  setAttribute(k, v) { this.attrs[k] = String(v); }
+  getAttribute(k) { return k in this.attrs ? this.attrs[k] : null; }
+  find(pred) { const out = []; const walk = n => { n.children.forEach(c => { if (pred(c)) out.push(c); walk(c); }); }; walk(this); return out; }
+}
+function clientApi(lang) {
+  const titles = [new El('h3'), new El('h3')];
+  const lists = [new El('ul'), new El('ul')];
+  const live = new El('p');
+  const doc = {
+    createElement: t => new El(t),
+    getElementById: id => (id === 'suspicion-live' ? live : null),
+    querySelectorAll: sel => (sel === '.sus-title' ? titles : sel === '.sus-list' ? lists : [])
+  };
+  const caseData = { suspects: [{ id: 'lorenzo', name: 'Lorenzo Moretti' }, { id: 'maya', name: 'Maya Santos' }, { id: 'carlos', name: 'Carlos Mendes' }] };
+  const src = ['susLabels', 'susNote', 'renderSuspicion', 'applyClue'].map(fnSource).join('\n');
+  const api = new Function('document', 'caseData', 'lang', `let suspicion = {}; const SUS_MAX = 3; ${src} return { renderSuspicion, applyClue, reset() { suspicion = {}; } };`)(doc, caseData, lang);
+  const row = (i, id) => lists[i].children.find(li => li.dataset.suspect === id);
+  const meter = li => li.children.find(c => c.attrs.role === 'meter');
+  const pipsOn = li => meter(li).children.filter(p => p.className === 'sus-pip on').length;
+  const note = li => li.children.find(c => c.className === 'sus-note').textContent;
+  return { api, titles, lists, live, row, meter, pipsOn, note };
+}
+await check('renderSuspicion draws one row per suspect in both lists', () => {
+  const c = clientApi('en');
+  c.api.renderSuspicion();
+  must(c.titles.every(t => t.textContent === 'Suspicion'), 'title');
+  must(c.lists.every(l => l.children.length === 3), 'rows');
+  const li = c.row(1, 'carlos');
+  must(c.meter(li).getAttribute('aria-valuenow') === '0' && c.meter(li).getAttribute('aria-valuemax') === '3', 'meter attrs');
+  must(c.meter(li).children.length === 3 && c.pipsOn(li) === 0, 'pips');
+  must(c.note(li) === 'No leads', 'note ' + c.note(li));
+  must(c.meter(li).getAttribute('aria-label') === 'Suspicion on Carlos Mendes', 'label');
+});
+await check('a lead fills one pip, flashes the row and is announced', () => {
+  const c = clientApi('en');
+  c.api.applyClue({ id: 'c1', implicates: 'carlos', clears: null });
+  const li = c.row(0, 'carlos');
+  must(c.pipsOn(li) === 1 && c.meter(li).getAttribute('aria-valuenow') === '1', 'one pip');
+  must(li.className.split(' ').includes('flash'), 'flash class: ' + li.className);
+  must(!c.row(0, 'maya').className.includes('flash'), 'only the changed row flashes');
+  must(c.live.textContent === 'New lead: points to Carlos Mendes', 'live ' + c.live.textContent);
+  must(c.note(li) === '1 lead', 'note ' + c.note(li));
+  c.api.renderSuspicion();
+  must(!c.row(0, 'carlos').className.includes('flash'), 'flash is used once');
+});
+await check('two leads mark the prime suspect', () => {
+  const c = clientApi('en');
+  c.api.applyClue({ id: 'c1', implicates: 'carlos', clears: null });
+  c.api.applyClue({ id: 'c2', implicates: 'carlos', clears: null });
+  const li = c.row(1, 'carlos');
+  must(li.className.split(' ').includes('is-hot'), 'is-hot: ' + li.className);
+  must(c.note(li) === '2 leads · prime suspect', 'note ' + c.note(li));
+  must(c.meter(li).getAttribute('aria-valuetext') === '2 leads · prime suspect', 'valuetext');
+});
+await check('a clearing clue marks the row Cleared with an empty meter', () => {
+  const c = clientApi('en');
+  c.api.applyClue({ id: 'x', implicates: 'maya', clears: null });
+  c.api.applyClue({ id: 'c4', implicates: null, clears: 'maya' });
+  const li = c.row(0, 'maya');
+  must(li.className.split(' ').includes('is-cleared'), 'is-cleared: ' + li.className);
+  must(c.pipsOn(li) === 0 && c.meter(li).getAttribute('aria-valuenow') === '0', 'empty meter');
+  must(c.note(li) === 'Cleared', 'note ' + c.note(li));
+  must(c.live.textContent === 'New lead: clears Maya Santos', 'live ' + c.live.textContent);
+});
+await check('Portuguese labels', () => {
+  const c = clientApi('pt');
+  c.api.renderSuspicion();
+  must(c.titles[0].textContent === 'Suspeita', 'title');
+  must(c.note(c.row(0, 'lorenzo')) === 'Sem pistas', 'none');
+  c.api.applyClue({ id: 'c3', implicates: null, clears: 'lorenzo' });
+  must(c.live.textContent === 'Nova pista: inocenta Lorenzo Moretti', 'live ' + c.live.textContent);
+  must(c.note(c.row(0, 'lorenzo')) === 'Inocentado', 'cleared');
+  c.api.applyClue({ id: 'c2', implicates: 'carlos', clears: null });
+  must(c.note(c.row(0, 'carlos')) === '1 pista', 'one pt');
+  c.api.applyClue({ id: 'c1', implicates: 'carlos', clears: null });
+  must(c.meter(c.row(0, 'carlos')).getAttribute('aria-label') === 'Suspeita sobre Carlos Mendes', 'label');
+});
+await check('the meter never shows more than three pips', () => {
+  const c = clientApi('en');
+  for (let i = 0; i < 5; i++) c.api.applyClue({ id: 'x' + i, implicates: 'carlos', clears: null });
+  const li = c.row(0, 'carlos');
+  must(c.pipsOn(li) === 3 && c.meter(li).getAttribute('aria-valuenow') === '3', 'capped');
+});
+await check('no clue changes nothing and announces nothing', () => {
+  const c = clientApi('en');
+  c.api.renderSuspicion();
+  c.api.applyClue(null);
+  must(c.live.textContent === '', 'live');
+  must(c.lists[0].children.every(li => c.pipsOn(li) === 0), 'pips');
+});
+await check('page wiring: ask, render, reset, markup and reduced motion', () => {
+  must(fnSource('askQuestion').includes('applyClue(data.clue);'), 'askQuestion');
+  must(fnSource('renderCase').includes('renderSuspicion();'), 'renderCase');
+  for (const f of ['restartGame', 'openPackFile']) {
+    const s = fnSource(f);
+    must(s.includes('suspicion = {};') && s.includes("getElementById('suspicion-live')"), f);
+  }
+  must((html.match(/<ul class="sus-list"><\/ul>/g) || []).length === 2, 'two lists');
+  must(html.includes('<p id="suspicion-live" class="sus-live" aria-live="polite"></p>'), 'live region');
+  must(/prefers-reduced-motion: reduce\)\s*\{\s*\.sus-list li\.flash \{ animation: none; \}/.test(css), 'reduced motion');
+});
+
+results.forEach(r => console.log(r));
+const failed = results.filter(r => r.startsWith('FAIL')).length;
+console.log(`${results.length - failed} passed, ${failed} failed`);
+process.exit(failed ? 1 : 0);

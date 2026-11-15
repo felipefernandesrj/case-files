@@ -1,0 +1,12 @@
+M1 server never records found: caught, 1 fail(s): a clue counts once per session: {"id":"c1","implicates"
+M2 server ignores suspect: caught, 1 fail(s): only the suspect who holds the clue gives it: {"id":"c1
+M3 server case-sensitive: caught, 1 fail(s): a new session finds the clue again, keywords ignore cas
+M4 server drops clears: caught, 1 fail(s): a clearing clue says who it clears: {"id":"c4","implica
+M5 client SUS cap removed: caught, 1 fail(s): the meter never shows more than three pips: capped
+M6 cleared keeps pips: caught, 1 fail(s): a clearing clue marks the row Cleared with an empty met
+M7 no hot class: caught, 1 fail(s): two leads mark the prime suspect: is-hot:  flash
+M8 no live text: caught, 3 fail(s): a lead fills one pip, flashes the row and is announced: | a clearing clue marks the row Cleared with an empty met | Portuguese labels: live 
+M9 flash not consumed: caught, 1 fail(s): a lead fills one pip, flashes the row and is announced:
+M10 ask does not apply clue: caught, 1 fail(s): page wiring: ask, render, reset, markup and reduced mot
+M11 start over keeps bars: caught, 1 fail(s): page wiring: ask, render, reset, markup and reduced mot
+M12 pt label wrong: caught, 1 fail(s): Portuguese labels: one pt

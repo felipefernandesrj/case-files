@@ -257,3 +257,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 234-241 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). No live play smoke (no model prompt changed, checked in mock mode with headless Chrome at 1280 and 390 in English and Portuguese, tools/probe-gf5.mjs and tools/probe-gf5-urlcase.mjs).
 - Result: npm test 179/179 (was 164), new test/continue.mjs 15 checks, test/keyboard.mjs step 6 updated.
 - Details and receipts: qa/rework.md (M2 game feel sprint 5).
+
+## M2 game feel sprint 6 (v0.4.15)
+
+- Scope: suspicion bars (Felipi approved on 2026-11-14 showing which suspect each clue points to). The server returns the found clue on /api/ask (keyword of the asked suspect's clue, case-insensitive, once per game); the page shows a Suspicion panel under the conversation and above the accuse buttons with a three pip meter per suspect, prime suspect at two leads, Cleared rows, a one-time flash, a polite announcement, EN/PT, reduced motion, reset on Start over and new file.
+- Calls 242-247 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). Checked in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf6.mjs). No live play smoke (no model prompt changed).
+- Result: npm test 194/194 (was 179), new test/suspicion.mjs 15 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 6).

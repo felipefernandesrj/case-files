@@ -293,7 +293,7 @@ async function run() {
     const askQuestionObs = new Function(
       'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
       'renderQuestions', 'renderConversation', 'showError',
-      'let questionsUsed = 0; let gameOver = false;\n' + src + '\nreturn askQuestion;'
+      'let questionsUsed = 0; let gameOver = false; function applyClue(){}\n' + src + '\nreturn askQuestion;'
     )(
       fakeDoc, observingFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
       () => { calls.renderQuestions++; },
@@ -324,7 +324,7 @@ async function run() {
     const askFail = new Function(
       'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
       'renderQuestions', 'renderConversation', 'showError',
-      'let questionsUsed = 0; let gameOver = false;\n' + src + '\nreturn askQuestion;'
+      'let questionsUsed = 0; let gameOver = false; function applyClue(){}\n' + src + '\nreturn askQuestion;'
     )(
       fakeDoc2,
       async () => ({ ok: false, json: async () => ({ message: 'busy' }) }),

@@ -95,6 +95,13 @@
 - `continueGame()` (Try again) runs only while 'run': `stopContinue()` then `restartGame(true)` (no confirm). Give up and Escape call `endContinue()` while 'run'; Close and Escape while 'over' call `closeContinue()` (focus `#restart-btn`). `restartGame()`, `openPackFile()` stop it, `setLang()` relabels it with `renderContinue()`.
 - `restartGame()` posts `{ case: openFile }` to `/api/session`; `init()` posts the `?case=` value. Before, both posted no case and the session played the default file.
 
+## Web page: suspicion bars (M2 game feel sprint 6)
+
+- Server: each session has `found` (a Set of clue ids). After a successful answer, POST /api/ask looks for the first clue of the asked suspect that is not found yet and whose keyword appears in the question (lower case on both sides); it is added to `found` and returned as `clue: { id, implicates, clears }`, otherwise `clue: null`.
+- Markup: two `.suspicion` sections (`#suspicion-talk` after `#questions-used`, `#suspicion-accuse` before `#accuse-section`), each with `h3.sus-title` and `ul.sus-list`; one visually hidden `#suspicion-live` (aria-live polite) at the top of `#play`.
+- State `suspicion` maps a suspect id to `{ hits, cleared, flash }`; `SUS_MAX = 3`. `applyClue(clue)` (called by `askQuestion()` with `data.clue`) adds a hit to `implicates`, marks `clears` as cleared, flags the changed rows, renders and announces "New lead: points to {name}" / "New lead: clears {name}" (PT "Nova pista: aponta para / inocenta {name}").
+- `renderSuspicion()` (called by `renderCase()`, so also on a language switch) fills every `.sus-list`: per suspect a li (`is-hot` at two or more hits, `is-cleared`, `flash` once) with `.sus-name`, `.sus-bar` (role meter, aria-valuenow 0 to 3, 0 when cleared, aria-valuetext and aria-label "Suspicion on {name}") holding three `.sus-pip` (`on` when filled) and `.sus-note` ("No leads", "1 lead", "2 leads · prime suspect", "Cleared"; PT "Sem pistas", "1 pista", "2 pistas · principal suspeito", "Inocentado"). `restartGame()` and `openPackFile()` reset `suspicion` and the live line.
+
 ## Web page: closing screen
 
 When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
@@ -142,9 +149,10 @@ This executes:
 12. `node test/hints.mjs` (hint toasts: markup, hints in both case files, localised in the public case, one timer per hint, English toast, current language at fire time, none after the verdict, restart clears pending hints, at most two toasts, fade then removal, started on every new game with toast CSS, pins follow the language)
 13. `node test/legibility.mjs` (board heading and scene caption on an ink plate with AA contrast, toast remembers its hint id, open toast switches language and back, unknown toast keeps its text, language switch relabels open toasts)
 14. `node test/continue.mjs` (continue countdown: markup, 9 to 0 then GAME OVER, pulse, Portuguese labels, verdict reveal, Try again without confirm, Close focus, only after a wrong verdict, culprit hidden while counting, stop on Start over and new file, sessions carry the case id, Escape, reduced motion, language switch)
-15. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+15. `node test/suspicion.mjs` (suspicion bars: server clue found once per game by the asked suspect, keywords ignore case, Night Train; page rows in both panels, one lead, prime suspect, cleared, Portuguese, three pip cap, no clue, wiring and reduced motion)
+16. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 179 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, keyboard 13).
+Total checks: 194 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

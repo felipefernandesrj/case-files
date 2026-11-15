@@ -1,0 +1,14 @@
+gf4 01M7BPZ9VSKVHWM0DEVAKTSWVN HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000198 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf4 01M7BPZVV93CQ9FY0KBTZWABGA HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000197 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf4 01M7BQ0QHM1YVHHZ6FFADXHRXM HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000198 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf4 01M7BQ253N4G8RS5RVC1MBT5GV HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.001198 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf4 01M7BQ820SMWEDK7RF5WDS5D5Y HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000052 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf4 01M7BQAT02R53NDBEGBQ52BPKT HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000593 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0FB7HMMMX2EHQBYBAJJ81 HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000813 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0H6FNSBSW5MX5HWS5EVGY HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000114 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0HZ5VQ6YZG0V4QQVVM4RJ HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000335 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0K2X95TXREVW45EY7NZ8S HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000094 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0S3Z5XY38E7ETKHMXPZYC HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.001485 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0VWWKVY6YE27EXMRYDKYQ HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000050 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0WYNP74JK6HZAXPYAX99Q HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000181 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it
+gf5 01M7D0ZG2DX8AE4YQ364G6DH2V HTTP 200 | Genuine receipt | Sealed at 2026-11-15 00:05:42 UTC | Exact cost $0.000777 | one of 14 in the signed root of 2026-11-14 | gemma-4-26b-a4b-it

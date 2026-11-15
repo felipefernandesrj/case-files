@@ -225,6 +225,7 @@ export function createServer({
           questions: 0,
           calls: 0,
           accused: false,
+          found: new Set(),
           file: wanted || defaultKey,
         });
         return sendJSON(res, 200, { sessionId, file: wanted || defaultKey });
@@ -293,7 +294,16 @@ export function createServer({
         sess.history.set(suspectId, newHist);
 
         sess.questions += 1;
-        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions });
+        // suspicion bars (M2 game feel sprint 6): a question that hits a keyword of one of this suspect's clues finds that clue once per session
+        const lowerQ = question.toLowerCase();
+        const found = sess.found || (sess.found = new Set());
+        const hit = (play.clues || []).find((cl) => cl.from === suspectId && !found.has(cl.id) && (cl.keywords || []).some((k) => lowerQ.includes(String(k).toLowerCase())));
+        let clue = null;
+        if (hit) {
+          found.add(hit.id);
+          clue = { id: hit.id, implicates: hit.implicates ?? null, clears: hit.clears ?? null };
+        }
+        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions, clue });
       }
 
       if (req.method === 'POST' && pathname === '/api/accuse') {
