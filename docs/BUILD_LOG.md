@@ -271,3 +271,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 248-251 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf7.mjs). No live play smoke (no model prompt changed).
 - Result: npm test 203/203 (was 194), new test/quick-accuse.mjs 9 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 7).
+
+## M2 game feel sprint 8 (v0.4.17)
+
+- Scope: talking portraits. Each answer in the Conversation log gets the suspect's portrait as a speaker avatar; the newest answer is revealed a few characters at a time while the mouth opens and closes (two frame sheet per suspect built locally by scripts/assets/talk_frames.py from the neutral portrait, CSS steps animation, no model call at play time). Screen readers get the full line at once; reduced motion shows it at once with a still face; a click on the log finishes the line.
+- Calls 252-255 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf8.mjs). No live play smoke (no model prompt changed).
+- Result: npm test 213/213 (was 203), new test/talk.mjs 10 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 8).

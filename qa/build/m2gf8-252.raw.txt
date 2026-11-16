@@ -1,0 +1,126 @@
+<<<FILE public/css/game.css>>>
+.ask-confirm input[type="checkbox"]:focus-visible { outline: 3px solid var(--cf-focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { #log .speaker.is-talking { animation: none; } }
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+function renderConversation() {
+  const log = document.getElementById('log');
+  log.innerHTML = '';
+  if (!selectedSuspect) return;
+  const hist = histories[selectedSuspect] || [];
+  hist.forEach(pair=>{
+    const pQ = document.createElement('p');
+    pQ.textContent = (lang==='pt'?'Pergunta: ':'Q: ') + pair.q;
+    const pA = document.createElement('p');
+    pA.textContent = (lang==='pt'?'Resposta: ':'A: ') + pair.a;
+    log.appendChild(pQ);
+    log.appendChild(pA);
+  });
+}
+=====
+const TALK_STEP_MS = 30;
+const TALK_CHARS = 2;
+let talkTimer = null;
+let talkDone = null;
+function prefersReducedMotion() {
+  return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+function speakerFace(id) {
+  const face = document.createElement('span');
+  face.className = 'portrait speaker';
+  face.setAttribute('aria-hidden', 'true');
+  const s = caseData && (caseData.suspects || []).find(x => x.id === id);
+  face.textContent = initials(s ? s.name : id);
+  const c = artCase();
+  whenArt(c && `/assets/characters/${c}-${id}-talk.png`, (url) => {
+    face.style.setProperty('--talk-sheet', `url(${url})`);
+    face.classList.add('has-art', 'has-talk');
+  });
+  return face;
+}
+function stopTalk() {
+  if (talkTimer) clearInterval(talkTimer);
+  talkTimer = null;
+  if (talkDone) {
+    const done = talkDone;
+    talkDone = null;
+    done();
+  }
+}
+function startTalk(face, shown) {
+  stopTalk();
+  const full = shown.textContent;
+  if (!full || prefersReducedMotion()) return;
+  let n = 0;
+  shown.textContent = '';
+  face.classList.add('is-talking');
+  talkDone = () => {
+    shown.textContent = full;
+    face.classList.remove('is-talking');
+  };
+  talkTimer = setInterval(() => {
+    n += TALK_CHARS;
+    shown.textContent = full.slice(0, n);
+    if (n >= full.length) stopTalk();
+  }, TALK_STEP_MS);
+}
+function renderConversation(animateLast) {
+  stopTalk();
+  const log = document.getElementById('log');
+  log.innerHTML = '';
+  if (!selectedSuspect) return;
+  const hist = histories[selectedSuspect] || [];
+  hist.forEach((pair, i) => {
+    const pQ = document.createElement('p');
+    pQ.textContent = (lang==='pt'?'Pergunta: ':'Q: ') + pair.q;
+    const pA = document.createElement('p');
+    pA.className = 'answer';
+    const line = (lang==='pt'?'Resposta: ':'A: ') + pair.a;
+    const face = speakerFace(selectedSuspect);
+    const said = document.createElement('span');
+    said.className = 'sr-only';
+    said.textContent = line;
+    const shown = document.createElement('span');
+    shown.className = 'answer-text';
+    shown.setAttribute('aria-hidden', 'true');
+    shown.textContent = line;
+    pA.appendChild(face);
+    pA.appendChild(said);
+    pA.appendChild(shown);
+    log.appendChild(pQ);
+    log.appendChild(pA);
+    if (animateLast && i === hist.length - 1) startTalk(face, shown);
+  });
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    renderConversation();
+  }catch(err){
+=====
+    renderConversation(true);
+  }catch(err){
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+=====
+document.getElementById('ask-form').addEventListener('submit',askQuestion);
+document.getElementById('log').addEventListener('click', () => { if (talkTimer) stopTalk(); });
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+.ask-confirm input[type="checkbox"]:focus-visible { outline: 3px solid var(--cf-focus); outline-offset: 2px; }
+=====
+.ask-confirm input[type="checkbox"]:focus-visible { outline: 3px solid var(--cf-focus); outline-offset: 2px; }
+#log p.answer { display: flex; align-items: flex-start; gap: 10px; }
+#log .speaker { width: 48px; height: 48px; margin: 0; font-size: 0.8rem; }
+[data-layout="desktop"] #log .speaker { width: 56px; height: 56px; }
+#log .speaker.has-talk { background-image: var(--talk-sheet); background-size: 200% 100%; background-position: 0 0; }
+#log .speaker.is-talking { animation: cf-talk 240ms steps(1, end) infinite; }
+@keyframes cf-talk { 0% { background-position: 0 0; } 50% { background-position: 100% 0; } 100% { background-position: 100% 0; } }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { #log .speaker.is-talking { animation: none; } }
+<<<END>>>

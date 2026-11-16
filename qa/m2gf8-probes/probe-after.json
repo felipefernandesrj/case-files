@@ -1,0 +1,422 @@
+{
+ "1280-en": {
+  "landedMs": 15,
+  "atLanding": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 0,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "at400ms": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.A: I s",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 6,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "done": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.A: I saw th",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0px 0px",
+   "anims": [],
+   "shown": 77,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  }
+ },
+ "1280-pt": {
+  "landedMs": 15,
+  "atLanding": {
+   "lines": 2,
+   "text": "LMResposta: Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 0,
+   "full": 86,
+   "srText": "Resposta: Vi a fechadura da caixa um pouco aberta, mas achei",
+   "shownHidden": "true"
+  },
+  "at400ms": {
+   "lines": 2,
+   "text": "LMResposta: Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.Re",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 6,
+   "full": 86,
+   "srText": "Resposta: Vi a fechadura da caixa um pouco aberta, mas achei",
+   "shownHidden": "true"
+  },
+  "done": {
+   "lines": 2,
+   "text": "LMResposta: Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.Re",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0px 0px",
+   "anims": [],
+   "shown": 86,
+   "full": 86,
+   "srText": "Resposta: Vi a fechadura da caixa um pouco aberta, mas achei",
+   "shownHidden": "true"
+  }
+ },
+ "390-en": {
+  "landedMs": 15,
+  "atLanding": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.",
+   "speaker": true,
+   "rect": [
+    45,
+    252,
+    48,
+    48
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 0,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "at400ms": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.A: I",
+   "speaker": true,
+   "rect": [
+    45,
+    252,
+    48,
+    48
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 4,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "done": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.A: I saw th",
+   "speaker": true,
+   "rect": [
+    45,
+    252,
+    48,
+    48
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0px 0px",
+   "anims": [],
+   "shown": 77,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  }
+ },
+ "390-pt": {
+  "landedMs": 15,
+  "atLanding": {
+   "lines": 2,
+   "text": "LMResposta: Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.",
+   "speaker": true,
+   "rect": [
+    45,
+    252,
+    48,
+    48
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 0,
+   "full": 86,
+   "srText": "Resposta: Vi a fechadura da caixa um pouco aberta, mas achei",
+   "shownHidden": "true"
+  },
+  "at400ms": {
+   "lines": 2,
+   "text": "LMResposta: Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.Re",
+   "speaker": true,
+   "rect": [
+    45,
+    252,
+    48,
+    48
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 4,
+   "full": 86,
+   "srText": "Resposta: Vi a fechadura da caixa um pouco aberta, mas achei",
+   "shownHidden": "true"
+  },
+  "done": {
+   "lines": 2,
+   "text": "LMResposta: Vi a fechadura da caixa um pouco aberta, mas achei que fosse só um descuido.Re",
+   "speaker": true,
+   "rect": [
+    45,
+    252,
+    48,
+    48
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0px 0px",
+   "anims": [],
+   "shown": 86,
+   "full": 86,
+   "srText": "Resposta: Vi a fechadura da caixa um pouco aberta, mas achei",
+   "shownHidden": "true"
+  }
+ },
+ "flows": {
+  "reducedAtLanding": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.A: I saw th",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0%",
+   "anims": [],
+   "shown": 77,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "revealMs": 1160,
+  "beforeClick": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 0,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "afterClick": {
+   "lines": 2,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.A: I saw th",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0px 0px",
+   "anims": [],
+   "shown": 77,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "beforeSwitch": {
+   "lines": 6,
+   "text": "LMA: I saw the case lock slightly ajar, but I thought it was just an oversight.",
+   "speaker": true,
+   "rect": [
+    297,
+    451,
+    56,
+    56
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 0,
+   "full": 77,
+   "srText": "A: I saw the case lock slightly ajar, but I thought it was j",
+   "shownHidden": "true"
+  },
+  "afterSwitch": {
+   "lines": 6,
+   "text": "LMResposta: I saw the case lock slightly ajar, but I thought it was just an oversight.Resp",
+   "speaker": true,
+   "rect": [
+    297,
+    451,
+    56,
+    56
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0px 0px",
+   "anims": [],
+   "shown": 84,
+   "full": 84,
+   "srText": "Resposta: I saw the case lock slightly ajar, but I thought i",
+   "shownHidden": "true"
+  },
+  "historyBack": {
+   "lines": 6,
+   "text": "LMResposta: I saw the case lock slightly ajar, but I thought it was just an oversight.Resp",
+   "speaker": true,
+   "rect": [
+    297,
+    451,
+    56,
+    56
+   ],
+   "talking": false,
+   "hasTalk": true,
+   "bg": "assets/characters/violin-lorenzo-talk.png\")",
+   "bgPos": "0px 0px",
+   "anims": [],
+   "shown": 84,
+   "full": 84,
+   "srText": "Resposta: I saw the case lock slightly ajar, but I thought i",
+   "shownHidden": "true"
+  },
+  "historyLines": 3,
+  "talkingInHistory": 0,
+  "ntSuspect": "helena",
+  "ntAtLanding": {
+   "lines": 2,
+   "text": "HCA: I have no comment on that.",
+   "speaker": true,
+   "rect": [
+    297,
+    239,
+    56,
+    56
+   ],
+   "talking": true,
+   "hasTalk": true,
+   "bg": "assets/characters/night-train-helena-talk.png\")",
+   "bgPos": "0% 0px",
+   "anims": [
+    "cf-talk:running"
+   ],
+   "shown": 0,
+   "full": 29,
+   "srText": "A: I have no comment on that.",
+   "shownHidden": "true"
+  }
+ }
+}

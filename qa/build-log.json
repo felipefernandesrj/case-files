@@ -10526,5 +10526,239 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "m2gf8-252",
+  "at": "2026-11-16T00:08:12.208Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 21049,
+  "usage": {
+   "prompt_tokens": 2809,
+   "completion_tokens": 1576,
+   "total_tokens": 4385,
+   "neurons": 68.51818084716797,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7GTWZPABGH6ZHJSRJ99WE33",
+   "x-fullcup-receipt-id": "01M7GTWZPABGH6ZHJSRJ99WE33",
+   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794787680"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "lines": 3
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 74
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf8-252b",
+  "at": "2026-11-16T00:08:26.978Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf8-253",
+  "at": "2026-11-16T00:08:57.186Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 21200,
+  "usage": {
+   "prompt_tokens": 1269,
+   "completion_tokens": 1014,
+   "total_tokens": 2283,
+   "neurons": 39.19091033935547,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7GTYB6PRS62MXG33JSZK1NM",
+   "x-fullcup-receipt-id": "01M7GTYB6PRS62MXG33JSZK1NM",
+   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794787740"
+  },
+  "files": [
+   {
+    "path": "scripts/assets/talk_frames.py",
+    "lines": 77
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf8-254",
+  "at": "2026-11-16T00:10:49.946Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 104236,
+  "usage": {
+   "prompt_tokens": 4819,
+   "completion_tokens": 4524,
+   "total_tokens": 9343,
+   "neurons": 167.19091796875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7GTZ84AR2D6PX82Q67M2ZHW",
+   "x-fullcup-receipt-id": "01M7GTZ84AR2D6PX82Q67M2ZHW",
+   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794787800"
+  },
+  "files": [
+   {
+    "path": "test/talk.mjs",
+    "lines": 182
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf8-255",
+  "at": "2026-11-16T00:13:45.210Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 35416,
+  "usage": {
+   "prompt_tokens": 2081,
+   "completion_tokens": 1693,
+   "total_tokens": 3774,
+   "neurons": 65.09090423583984,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7GV6PVHGWHHMKN35V7V1E7W",
+   "x-fullcup-receipt-id": "01M7GV6PVHGWHHMKN35V7V1E7W",
+   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794788040"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/BUILD_LOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "scripts/assets/README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
  }
 ]

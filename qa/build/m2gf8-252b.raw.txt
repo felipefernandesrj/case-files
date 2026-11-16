@@ -1,0 +1,13 @@
+<<<REPLACE public/css/game.css>>>
+.ask-confirm input[type="checkbox"]:focus-visible { outline: 3px solid var(--cf-focus); outline-offset: 2px; }
+=====
+.ask-confirm input[type="checkbox"]:focus-visible { outline: 3px solid var(--cf-focus); outline-offset: 2px; }
+#log p.answer { display: flex; align-items: flex-start; gap: 10px; }
+#log .speaker { width: 48px; height: 48px; margin: 0; font-size: 0.8rem; }
+[data-layout="desktop"] #log .speaker { width: 56px; height: 56px; }
+#log .speaker.has-talk { background-image: var(--talk-sheet); background-size: 200% 100%; background-position: 0 0; }
+#log .speaker.is-talking { animation: cf-talk 240ms steps(1, end) infinite; }
+@keyframes cf-talk { 0% { background-position: 0 0; } 50% { background-position: 100% 0; } 100% { background-position: 100% 0; } }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { #log .speaker.is-talking { animation: none; } }
+<<<END>>>

@@ -14,6 +14,7 @@ This folder is **pipeline infrastructure**, not game content. Nothing here calls
   - `manifest.json` (v2, with the FullCup receipt id per asset).
 - Icon CSS: `gen_icon_css.py` writes `public/css/pixel-icons.css` from the manifest. The SVG sprite stays as the fallback for forced-colours mode.
 - Single-file CLI: `process_assets.py`. Fixtures: `make_fixtures.py`.
+- Talking portraits: `talk_frames.py` writes `<case>-<id>-talk.png` (two frames, neutral and mouth open) from each neutral portrait for the Conversation log. Mouth centres are measured by hand in the script; rerun it after a portrait changes.
 - Tests: `test_bgremove.py` and `test_process_assets.py`. Set `CF_TEST_MODEL=1` to also run ToonOut, which downloads about 885 MB once.
 - Licences: `THIRD_PARTY_NOTICES.md`. Benchmark and forum research: `/workspace/casefiles-qa/run26/bgremoval/benchmark.md`.
 

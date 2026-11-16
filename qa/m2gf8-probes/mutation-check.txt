@@ -1,0 +1,23 @@
+M1 no speaker avatar: caught, 6 fail(s): every answer line gets a speaker avatar, a screen reader copy and a visible | the speaker uses the two frame talk sheet of the open case: Cannot read pro | the new answer is revealed a few characters at a time while the mouth moves | a re-render (suspect switch, language) shows history at once and finishes a | stopTalk (click on the log) shows the whole line and stops the mouth: Canno | reduced motion shows the line at once with a still face: Cannot read proper
+M2 no screen reader copy: caught, 3 fail(s): every answer line gets a speaker avatar, a screen reader copy and a visible | the new answer is revealed a few characters at a time while the mouth moves | a re-render (suspect switch, language) shows history at once and finishes a
+M3 shown copy not aria-hidden: caught, 1 fail(s): every answer line gets a speaker avatar, a screen reader copy and a visible
+M4 wrong sheet name: caught, 1 fail(s): the speaker uses the two frame talk sheet of the open case: url /assets/cha
+M5 has-talk never set: caught, 1 fail(s): the speaker uses the two frame talk sheet of the open case: classes portrai
+M6 never talks: caught, 1 fail(s): the new answer is revealed a few characters at a time while the mouth moves
+M7 mouth never stops: caught, 3 fail(s): the new answer is revealed a few characters at a time while the mouth moves | a re-render (suspect switch, language) shows history at once and finishes a | stopTalk (click on the log) shows the whole line and stops the mouth: stopp
+M8 no reveal (full at once): caught, 1 fail(s): the new answer is revealed a few characters at a time while the mouth moves
+M9 reduced motion ignored: caught, 1 fail(s): reduced motion shows the line at once with a still face: full at once
+M10 every render animates: caught, 2 fail(s): every answer line gets a speaker avatar, a screen reader copy and a visible | a re-render (suspect switch, language) shows history at once and finishes a
+M11 askQuestion does not animate: caught, 1 fail(s): askQuestion animates only the new answer: askQuestion
+M12 re-render keeps old timer: caught, 1 fail(s): a re-render (suspect switch, language) shows history at once and finishes a
+M13 stopTalk leaves line cut: caught, 3 fail(s): the new answer is revealed a few characters at a time while the mouth moves | a re-render (suspect switch, language) shows history at once and finishes a | stopTalk (click on the log) shows the whole line and stops the mouth: full
+M14 no click to finish: caught, 1 fail(s): stopTalk (click on the log) shows the whole line and stops the mouth: log c
+M15 pt prefix lost: caught, 1 fail(s): a re-render (suspect switch, language) shows history at once and finishes a
+M16 css no reduced motion stop: caught, 1 fail(s): CSS: mouth frames swap with steps, the sheet is two frames wide, reduced mo
+M17 css sheet not two frames: caught, 1 fail(s): CSS: mouth frames swap with steps, the sheet is two frames wide, reduced mo
+M18 css smooth slide: caught, 1 fail(s): CSS: mouth frames swap with steps, the sheet is two frames wide, reduced mo
+M19 script misses a suspect: caught, 1 fail(s): talk_frames.py is local only and covers every suspect: mouth for night-trai
+M20 talk sheet without mouth (right = neutral): caught, 1 fail(s): talk sheets: 256x128, left frame is the neutral portrait, right frame only 
+M21 talk sheet missing: caught, 2 fail(s): talk sheets: 256x128, left frame is the neutral portrait, right frame only  | talk_frames.py is local only and covers every suspect: content/cases/night-
+M22 mouth drawn in the wrong place (whole face shifted): caught, 1 fail(s): talk sheets: 256x128, left frame is the neutral portrait, right frame only 
+baseline after restore: 10 passed, 0 failed

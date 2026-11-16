@@ -1169,18 +1169,78 @@ function selectSuspect(id) {
   renderConversation();
 }
 
-function renderConversation() {
+const TALK_STEP_MS = 30;
+const TALK_CHARS = 2;
+let talkTimer = null;
+let talkDone = null;
+function prefersReducedMotion() {
+  return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+function speakerFace(id) {
+  const face = document.createElement('span');
+  face.className = 'portrait speaker';
+  face.setAttribute('aria-hidden', 'true');
+  const s = caseData && (caseData.suspects || []).find(x => x.id === id);
+  face.textContent = initials(s ? s.name : id);
+  const c = artCase();
+  whenArt(c && `/assets/characters/${c}-${id}-talk.png`, (url) => {
+    face.style.setProperty('--talk-sheet', `url(${url})`);
+    face.classList.add('has-art', 'has-talk');
+  });
+  return face;
+}
+function stopTalk() {
+  if (talkTimer) clearInterval(talkTimer);
+  talkTimer = null;
+  if (talkDone) {
+    const done = talkDone;
+    talkDone = null;
+    done();
+  }
+}
+function startTalk(face, shown) {
+  stopTalk();
+  const full = shown.textContent;
+  if (!full || prefersReducedMotion()) return;
+  let n = 0;
+  shown.textContent = '';
+  face.classList.add('is-talking');
+  talkDone = () => {
+    shown.textContent = full;
+    face.classList.remove('is-talking');
+  };
+  talkTimer = setInterval(() => {
+    n += TALK_CHARS;
+    shown.textContent = full.slice(0, n);
+    if (n >= full.length) stopTalk();
+  }, TALK_STEP_MS);
+}
+function renderConversation(animateLast) {
+  stopTalk();
   const log = document.getElementById('log');
   log.innerHTML = '';
   if (!selectedSuspect) return;
   const hist = histories[selectedSuspect] || [];
-  hist.forEach(pair=>{
+  hist.forEach((pair, i) => {
     const pQ = document.createElement('p');
     pQ.textContent = (lang==='pt'?'Pergunta: ':'Q: ') + pair.q;
     const pA = document.createElement('p');
-    pA.textContent = (lang==='pt'?'Resposta: ':'A: ') + pair.a;
+    pA.className = 'answer';
+    const line = (lang==='pt'?'Resposta: ':'A: ') + pair.a;
+    const face = speakerFace(selectedSuspect);
+    const said = document.createElement('span');
+    said.className = 'sr-only';
+    said.textContent = line;
+    const shown = document.createElement('span');
+    shown.className = 'answer-text';
+    shown.setAttribute('aria-hidden', 'true');
+    shown.textContent = line;
+    pA.appendChild(face);
+    pA.appendChild(said);
+    pA.appendChild(shown);
     log.appendChild(pQ);
     log.appendChild(pA);
+    if (animateLast && i === hist.length - 1) startTalk(face, shown);
   });
 }
 
@@ -1218,7 +1278,7 @@ async function askQuestion(e){
     applyClue(data.clue);
     if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
     histories[selectedSuspect].push({q:question,a:answer});
-    renderConversation();
+    renderConversation(true);
   }catch(err){
     showError(err.message||'Error');
   }finally{
@@ -1467,6 +1527,7 @@ document.getElementById('continue-yes').addEventListener('click', continueGame);
 document.getElementById('continue-no').addEventListener('click', () => { if (contState === 'run') endContinue(); });
 document.getElementById('continue-close').addEventListener('click', closeContinue);
 document.getElementById('ask-form').addEventListener('submit',askQuestion);
+document.getElementById('log').addEventListener('click', () => { if (talkTimer) stopTalk(); });
 document.getElementById('ask-confirm').addEventListener('change', (e) => setConfirmOn(e.target.checked));
 renderConfirmToggle();
 document.addEventListener('keydown', (e) => {

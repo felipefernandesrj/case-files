@@ -1,0 +1,190 @@
+<<<FILE test/talk.mjs>>>
+// M2 game feel sprint 8: talking portrait in the Conversation log (speaker avatar, mouth frames, line reveal, reduced motion)
+import fs from 'node:fs';
+import path from 'node:path';
+import zlib from 'node:zlib';
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = path.join(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+const css = fs.readFileSync(path.join(root, 'public/css/game.css'), 'utf8');
+const results = [];
+async function check(name, fn) { try { await fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+function must(cond, msg) { if (!cond) throw new Error(msg); }
+function fnSource(name) {
+  const startIdx = html.indexOf(`function ${name}(`);
+  if (startIdx === -1) throw new Error(`Function ${name} not found`);
+  let depth = 0;
+  for (let i = html.indexOf('{', startIdx); i < html.length; i++) {
+    if (html[i] === '{') depth++;
+    else if (html[i] === '}') { depth--; if (depth === 0) return html.substring(startIdx, i + 1); }
+  }
+  throw new Error(`Unmatched braces in ${name}`);
+}
+class El {
+  constructor(tag) { this.tag = tag; this.children = []; this.attrs = {}; this.className = ''; this._text = ''; this.props = {}; const self = this; this.style = { setProperty(k, v) { self.props[k] = v; } }; this.classList = { add: (...c) => { const s = new Set(self.className.split(' ').filter(Boolean)); c.forEach(x => s.add(x)); self.className = [...s].join(' '); }, remove: (...c) => { self.className = self.className.split(' ').filter(x => x && !c.includes(x)).join(' '); }, contains: c => self.className.split(' ').includes(c) }; }
+  set textContent(v) { this._text = String(v); this.children = []; }
+  get textContent() { return this._text + this.children.map(c => c.textContent).join(''); }
+  set innerHTML(v) { this._text = ''; this.children = []; }
+  appendChild(c) { this.children.push(c); return c; }
+  setAttribute(k, v) { this.attrs[k] = String(v); }
+  getAttribute(k) { return k in this.attrs ? this.attrs[k] : null; }
+  find(cls) { return this.children.find(c => c.className.split(' ').includes(cls)); }
+}
+function talkApi(opts = {}) {
+  const log = new El('div');
+  const arts = [];
+  const timers = new Map(); let tid = 0;
+  const doc = { getElementById: id => (id === 'log' ? log : null), createElement: t => new El(t) };
+  const win = { matchMedia: q => ({ matches: !!opts.reduced && /prefers-reduced-motion: reduce/.test(q) }) };
+  const whenArt = (url, apply) => { arts.push(url); if (url && opts.artLoads !== false) apply(url); };
+  const histories = { lorenzo: opts.hist || [{ q: 'Where were you?', a: 'In the hall.' }, { q: 'Was the lock open?', a: 'I saw the case lock slightly ajar.' }] };
+  const caseData = opts.noCase ? null : { file: 'violin', suspects: [{ id: 'lorenzo', name: 'Lorenzo Moretti' }] };
+  const src = ['prefersReducedMotion', 'speakerFace', 'stopTalk', 'startTalk', 'renderConversation', 'initials', 'artCase'].map(fnSource).join('\n');
+  const api = new Function('document', 'window', 'whenArt', 'setInterval', 'clearInterval', 'histories', 'caseData',
+    `let lang = ${JSON.stringify(opts.lang || 'en')}; let selectedSuspect = 'lorenzo'; const TALK_STEP_MS = 30; const TALK_CHARS = 2; let talkTimer = null; let talkDone = null; ${src} return { renderConversation, stopTalk, timer: () => talkTimer };`
+  )(doc, win, whenArt, (f, ms) => { const i = ++tid; timers.set(i, { f, ms }); return i; }, i => timers.delete(i), histories, caseData);
+  const tick = n => { for (let k = 0; k < n; k++) for (const t of [...timers.values()]) t.f(); };
+  const answers = () => log.children.filter(c => c.className === 'answer');
+  return { api, log, arts, timers, tick, answers };
+}
+function png(file) {
+  const b = fs.readFileSync(file);
+  must(b.readUInt32BE(0) === 0x89504e47, 'not a png: ' + file);
+  let w = 0, h = 0, type = 0, depth = 0; const idat = [];
+  for (let o = 8; o < b.length;) {
+    const len = b.readUInt32BE(o); const t = b.toString('ascii', o + 4, o + 8); const d = b.subarray(o + 8, o + 8 + len);
+    if (t === 'IHDR') { w = d.readUInt32BE(0); h = d.readUInt32BE(4); depth = d[8]; type = d[9]; }
+    if (t === 'IDAT') idat.push(d);
+    o += 12 + len;
+  }
+  must(depth === 8 && (type === 6 || type === 2), `unsupported png ${file} depth ${depth} type ${type}`);
+  const bpp = type === 6 ? 4 : 3; const raw = zlib.inflateSync(Buffer.concat(idat)); const stride = w * bpp;
+  const px = Buffer.alloc(h * stride);
+  for (let y = 0; y < h; y++) {
+    const f = raw[y * (stride + 1)];
+    for (let x = 0; x < stride; x++) {
+      const v = raw[y * (stride + 1) + 1 + x]; const a = x >= bpp ? px[y * stride + x - bpp] : 0; const up = y ? px[(y - 1) * stride + x] : 0; const c = y && x >= bpp ? px[(y - 1) * stride + x - bpp] : 0;
+      let r = v;
+      if (f === 1) r = v + a; else if (f === 2) r = v + up; else if (f === 3) r = v + ((a + up) >> 1);
+      else if (f === 4) { const p = a + up - c; const pa = Math.abs(p - a), pb = Math.abs(p - up), pc = Math.abs(p - c); r = v + (pa <= pb && pa <= pc ? a : pb <= pc ? up : c); }
+      px[y * stride + x] = r & 255;
+    }
+  }
+  return { w, h, bpp, at: (x, y) => [...px.subarray(y * stride + x * bpp, y * stride + x * bpp + bpp)].concat(bpp === 3 ? [255] : []) };
+}
+const CHARS = ['violin-lorenzo', 'violin-maya', 'violin-carlos', 'night-train-helena', 'night-train-ines', 'night-train-tomas', 'night-train-victor'];
+
+await check('every answer line gets a speaker avatar, a screen reader copy and a visible copy', () => {
+  const t = talkApi(); t.api.renderConversation();
+  must(t.log.children.length === 4, 'lines ' + t.log.children.length);
+  const a = t.answers()[1]; must(a, 'answer p');
+  const face = a.find('speaker'); const said = a.find('sr-only'); const shown = a.find('answer-text');
+  must(face && face.className.includes('portrait') && face.getAttribute('aria-hidden') === 'true', 'face');
+  must(face._text === 'LM', 'initials ' + face._text);
+  must(said && said.textContent === 'A: I saw the case lock slightly ajar.', 'said ' + (said && said.textContent));
+  must(shown && shown.getAttribute('aria-hidden') === 'true' && shown.textContent === said.textContent, 'shown');
+  must(t.log.children[0].textContent === 'Q: Where were you?', 'question line');
+});
+await check('the speaker uses the two frame talk sheet of the open case', () => {
+  const t = talkApi(); t.api.renderConversation();
+  must(t.arts.includes('/assets/characters/violin-lorenzo-talk.png'), 'url ' + t.arts.join(','));
+  const face = t.answers()[0].find('speaker');
+  must(face.props['--talk-sheet'] === 'url(/assets/characters/violin-lorenzo-talk.png)', 'var ' + face.props['--talk-sheet']);
+  must(face.classList.contains('has-talk') && face.classList.contains('has-art'), 'classes ' + face.className);
+  const n = talkApi({ artLoads: false }); n.api.renderConversation();
+  const f2 = n.answers()[0].find('speaker');
+  must(!f2.classList.contains('has-talk') && f2._text === 'LM', 'initials stay when the sheet does not load');
+  const z = talkApi({ noCase: true }); z.api.renderConversation();
+  must(z.arts.every(u => !u), 'no url without a case');
+});
+await check('the new answer is revealed a few characters at a time while the mouth moves', () => {
+  const t = talkApi(); t.api.renderConversation(true);
+  const last = t.answers()[1]; const face = last.find('speaker'); const shown = last.find('answer-text');
+  const full = 'A: I saw the case lock slightly ajar.';
+  must(t.timers.size === 1 && [...t.timers.values()][0].ms === 30, 'one 30 ms timer');
+  must(shown.textContent === '' && face.classList.contains('is-talking'), 'starts empty and talking');
+  must(last.find('sr-only').textContent === full, 'screen reader copy is full from the start');
+  t.tick(3); must(shown.textContent === full.slice(0, 6), 'after 3 ticks: ' + shown.textContent);
+  must(!t.answers()[0].find('speaker').classList.contains('is-talking'), 'older answer does not talk');
+  t.tick(30);
+  must(shown.textContent === full && !face.classList.contains('is-talking'), 'done: ' + shown.textContent);
+  must(t.timers.size === 0 && t.api.timer() === null, 'timer cleared');
+});
+await check('a re-render (suspect switch, language) shows history at once and finishes a line in progress', () => {
+  const t = talkApi(); t.api.renderConversation(true); t.tick(2);
+  const oldFace = t.answers()[1].find('speaker'); const oldShown = t.answers()[1].find('answer-text');
+  t.api.renderConversation();
+  must(oldShown.textContent === 'A: I saw the case lock slightly ajar.' && !oldFace.classList.contains('is-talking'), 'old line finished');
+  must(t.timers.size === 0, 'no timer after plain render');
+  must(t.answers().every(a => a.find('answer-text').textContent === a.find('sr-only').textContent && !a.find('speaker').classList.contains('is-talking')), 'history static');
+  const p = talkApi({ lang: 'pt' }); p.api.renderConversation();
+  must(p.answers()[1].find('sr-only').textContent === 'Resposta: I saw the case lock slightly ajar.', 'pt prefix');
+  must(p.log.children[0].textContent === 'Pergunta: Where were you?', 'pt question');
+});
+await check('stopTalk (click on the log) shows the whole line and stops the mouth', () => {
+  const t = talkApi(); t.api.renderConversation(true); t.tick(1);
+  const last = t.answers()[1];
+  t.api.stopTalk();
+  must(last.find('answer-text').textContent === 'A: I saw the case lock slightly ajar.', 'full');
+  must(!last.find('speaker').classList.contains('is-talking') && t.timers.size === 0, 'stopped');
+  t.api.stopTalk();
+  must(/document\.getElementById\('log'\)\.addEventListener\('click', \(\) => \{ if \(talkTimer\) stopTalk\(\); \}\);/.test(html), 'log click listener');
+});
+await check('reduced motion shows the line at once with a still face', () => {
+  const t = talkApi({ reduced: true }); t.api.renderConversation(true);
+  const last = t.answers()[1];
+  must(last.find('answer-text').textContent === 'A: I saw the case lock slightly ajar.', 'full at once');
+  must(!last.find('speaker').classList.contains('is-talking') && t.timers.size === 0, 'no animation, no timer');
+});
+await check('askQuestion animates only the new answer', () => {
+  const src = fnSource('askQuestion');
+  must(src.includes('renderConversation(true);'), 'askQuestion');
+  must(!fnSource('selectSuspect').includes('renderConversation(true)'), 'selectSuspect does not replay');
+  const e = talkApi({ hist: [] }); e.api.renderConversation(true);
+  must(e.log.children.length === 0 && e.timers.size === 0, 'empty history');
+});
+await check('CSS: mouth frames swap with steps, the sheet is two frames wide, reduced motion stops it', () => {
+  must(/#log \.speaker\.is-talking \{ animation: cf-talk \d+ms steps\(1, end\) infinite; \}/.test(css), 'animation');
+  must(/@keyframes cf-talk \{ 0% \{ background-position: 0 0; \} 50% \{ background-position: 100% 0; \}/.test(css), 'keyframes');
+  must(/#log \.speaker\.has-talk \{ background-image: var\(--talk-sheet\); background-size: 200% 100%;/.test(css), 'sheet');
+  must(/@media \(prefers-reduced-motion: reduce\) \{ #log \.speaker\.is-talking \{ animation: none; \} \}/.test(css), 'reduced motion');
+  must(/\.sr-only \{[^}]*clip: rect\(0 0 0 0\)/.test(css), 'sr-only');
+  must(/#log p\.answer \{ display: flex;/.test(css), 'answer row');
+});
+await check('talk sheets: 256x128, left frame is the neutral portrait, right frame only opens the mouth', () => {
+  for (const c of CHARS) {
+    const sheet = png(path.join(root, 'public/assets/characters', `${c}-talk.png`));
+    const neutral = png(path.join(root, 'public/assets/characters', `${c}-neutral.png`));
+    must(sheet.w === 256 && sheet.h === 128 && neutral.w === 128, `${c} size ${sheet.w}x${sheet.h}`);
+    let same = true, diff = 0, minY = 999, maxY = -1;
+    for (let y = 0; y < 128; y++) for (let x = 0; x < 128; x++) {
+      const n = neutral.at(x, y).join(); if (sheet.at(x, y).join() !== n) same = false;
+      if (sheet.at(x + 128, y).join() !== n) { diff++; minY = Math.min(minY, y); maxY = Math.max(maxY, y); }
+    }
+    must(same, `${c} left frame differs from neutral`);
+    must(diff >= 6 && diff <= 80, `${c} mouth pixels ${diff}`);
+    must(minY >= 50 && maxY <= 100 && maxY - minY <= 5, `${c} mouth rows ${minY}-${maxY}`);
+  }
+});
+await check('talk_frames.py is local only and covers every suspect', () => {
+  const py = fs.readFileSync(path.join(root, 'scripts/assets/talk_frames.py'), 'utf8');
+  must(!/import (requests|urllib|http)|urlopen|fetch\(/.test(py), 'no network');
+  for (const c of CHARS) must(py.includes(`'${c}':`), 'mouth for ' + c);
+  for (const f of ['content/case.json', 'content/cases/night-train.json']) {
+    const data = JSON.parse(fs.readFileSync(path.join(root, f), 'utf8'));
+    for (const s of data.suspects) must(fs.existsSync(path.join(root, 'public/assets/characters', `${f.includes('night') ? 'night-train' : 'violin'}-${s.id}-talk.png`)), `${f} ${s.id}`);
+  }
+});
+
+const failed = results.filter(r => r.startsWith('FAIL'));
+results.forEach(r => console.log(r));
+console.log(`${results.length - failed.length} passed, ${failed.length} failed`);
+process.exit(failed.length ? 1 : 0);
+<<<END>>>
+
+<<<REPLACE package.json>>>
+node test/quick-accuse.mjs && node test/keyboard.mjs
+=====
+node test/quick-accuse.mjs && node test/talk.mjs && node test/keyboard.mjs
+<<<END>>>

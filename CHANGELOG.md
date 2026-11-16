@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.17 (M2 game feel, sprint 8: talking portraits)
+- Every answer in the Conversation log now has the suspect's portrait next to it as a speaker avatar (56px on desktop, 48px on phone). While a new answer is revealed, a few characters at a time (about 1.2 seconds for a two line answer), the portrait's mouth opens and closes; when the line is complete the face is still again.
+- The mouth frames are local sprite sheets, not new model calls: scripts/assets/talk_frames.py (CPU only) takes the neutral portrait of each suspect and writes <case>-<id>-talk.png, a two frame sheet (neutral, then the same face with the mouth open). The page swaps the two frames with a CSS steps() animation. Nothing extra is called while you play.
+- Only the newest answer talks. Older answers, a suspect switch and a language switch show the lines at once. A click on the conversation finishes the line in progress.
+- Accessibility: screen readers get the full answer at once from a hidden copy (the typed copy is aria-hidden), so the log is not read letter by letter. With reduced motion the answer appears at once and the face does not move.
+- New test/talk.mjs with 10 checks (avatar and copies, talk sheet of the open case, reveal and mouth, re-render finishes the line, click to finish, reduced motion, only new answers talk, CSS frames, sheet pixels, script coverage). The automated suite now has 213 checks.
+
 ## 0.4.16 (M2 game feel, sprint 7: quicker accusations)
 - Backer feedback: the accuse confirmation slowed down quick players. A checkbox "Confirm before accusing" ("Confirmar antes de acusar") now sits under the accuse buttons. It is checked by default, so nothing changes unless you uncheck it; unchecked, an accuse button accuses at once with no dialog. The choice is remembered in this browser (localStorage key cf-confirm-accuse), survives Start over and a reload, and checking the box again brings the confirmation back. It is a normal labelled checkbox (Tab to reach it, Space to toggle, visible focus ring, 44px tall touch target).
 - Fix: the one-time flash of a suspicion row no longer replays when you open the Accuse step later. The flash is only added to a Suspicion panel that is on screen when the lead is found.

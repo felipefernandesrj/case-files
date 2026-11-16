@@ -110,6 +110,14 @@
 - Suspicion fixes: `renderSuspicion()` adds `flash` only to a `.sus-list` whose `offsetParent` is not null (on screen), so a hidden panel never replays it. `applyClue()` keeps the last announced clue in `susLast` and writes `susSaid(clue)`; an empty clue changes nothing. `relabelSuspicionLive()` (called by `setLang()`) rewrites a non-empty live line in the current language.
 - CSS: `.ask-confirm` inline-flex, min-height `var(--touch-min)`; the checkbox is 20px with a 3px `var(--cf-focus)` focus ring.
 
+## Web page: talking portraits (M2 game feel sprint 8)
+
+- `renderConversation(animateLast)` writes, per question, `p` "Q: ..." / "Pergunta: ..." and `p.answer` holding `span.portrait.speaker` (aria-hidden, initials until the sheet loads), `span.sr-only` with the full line and `span.answer-text` (aria-hidden) with the visible line ("A: ..." / "Resposta: ..."). It calls `stopTalk()` first. Only `askQuestion()` passes `true`, and then only the last answer talks.
+- `speakerFace(id)` loads `/assets/characters/<case>-<id>-talk.png` with `whenArt()` and sets `--talk-sheet` plus `has-art has-talk`.
+- `startTalk(face, shown)` empties the visible copy, adds `is-talking` and every `TALK_STEP_MS` (30) adds `TALK_CHARS` (2) characters; at the end `stopTalk()` writes the full line and removes `is-talking`. With `prefers-reduced-motion: reduce` it does nothing (line already full). A click on `#log` calls `stopTalk()` while a line is in progress.
+- CSS: `#log p.answer` flex row; `#log .speaker` 48px (56px on desktop); `.has-talk` uses the sheet at `background-size: 200% 100%`; `.is-talking` runs `cf-talk` 240ms `steps(1, end)` infinite (frame 1 at 0 0, frame 2 at 100% 0); reduced motion sets `animation: none`.
+- Assets: `scripts/assets/talk_frames.py` (CPU, no network) reads each `<case>-<id>-neutral.png` (128px), finds the lip line near a hand measured mouth centre and writes the 256x128 sheet: left the neutral frame unchanged, right the same frame with a small dark open mouth.
+
 ## Web page: closing screen
 
 When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
@@ -159,9 +167,10 @@ This executes:
 14. `node test/continue.mjs` (continue countdown: markup, 9 to 0 then GAME OVER, pulse, Portuguese labels, verdict reveal, Try again without confirm, Close focus, only after a wrong verdict, culprit hidden while counting, stop on Start over and new file, sessions carry the case id, Escape, reduced motion, language switch)
 15. `node test/suspicion.mjs` (suspicion bars: server clue found once per game by the asked suspect, keywords ignore case, Night Train; page rows in both panels, one lead, prime suspect, cleared, Portuguese, three pip cap, no clue, wiring and reduced motion)
 16. `node test/quick-accuse.mjs` (quick accusations: on by default, stored off, back on, reload and Portuguese label, accuse with and without the dialog, nothing after the verdict, markup and focus style, suspicion flash only on screen, live line language)
-17. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+17. `node test/talk.mjs` (talking portraits: speaker avatar with screen reader and visible copies, talk sheet of the open case, reveal and mouth frames, re-render finishes the line, click to finish, reduced motion, only new answers talk, CSS frames, sheet pixels, script coverage)
+18. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 203 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, keyboard 13).
+Total checks: 213 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.
