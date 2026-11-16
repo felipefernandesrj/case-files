@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.18 (M2 game feel, sprint 9: a story for a wrong verdict)
+- A wrong verdict now has consequences. When the CONTINUE? countdown ends (Give up, Escape or the count reaching 0), the verdict shows a newspaper clipping from the next morning: what happened to the innocent suspect you accused, and how the real culprit got away. Every innocent suspect of both cases has their own story in English and Portuguese (5 stories, 10 texts).
+- The stories live in each case file under `aftermath` and are only sent by the server with the answer to a wrong accusation, never with the case itself. They are not shown during the countdown, so Try again stays a real second chance.
+- The clipping slides in once. A language switch shows the other language without replaying it, and with reduced motion it simply appears. The GAME OVER announcement for screen readers now reads the headline too.
+- The GAME OVER box now sits at the bottom of the screen (above the bottom bar on phones) instead of the centre, so it no longer covers the verdict.
+- New test/aftermath.mjs with 14 checks (a story for every innocent and none for the culprit, sizes and clean punctuation, names, no leak in the public case, accuse response for both cases, shown only after GAME OVER, language switch without replay, announcement, styles and docking). The automated suite now has 227 checks.
+
 ## 0.4.17 (M2 game feel, sprint 8: talking portraits)
 - Every answer in the Conversation log now has the suspect's portrait next to it as a speaker avatar (56px on desktop, 48px on phone). While a new answer is revealed, a few characters at a time (about 1.2 seconds for a two line answer), the portrait's mouth opens and closes; when the line is complete the face is still again.
 - The mouth frames are local sprite sheets, not new model calls: scripts/assets/talk_frames.py (CPU only) takes the neutral portrait of each suspect and writes <case>-<id>-talk.png, a two frame sheet (neutral, then the same face with the mouth open). The page swaps the two frames with a CSS steps() animation. Nothing extra is called while you play.

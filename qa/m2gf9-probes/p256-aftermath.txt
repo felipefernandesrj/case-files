@@ -1,0 +1,17 @@
+Write the "wrong verdict" aftermath stories for two detective cases in a browser game. When the player accuses an innocent suspect and gives up, the game shows a short newspaper-style consequence story: what happens to the innocent person who was wrongly accused, and how the real culprit gets away with it.
+
+Case "violin" (The Vanishing Violin, Aurora Music Academy). Real culprit: Carlos Mendes, janitor, stole the Stradivarius to pay for his daughter's surgery and hid it in his cleaning cart. Innocent suspects: lorenzo = Lorenzo Moretti (conductor), maya = Maya Santos (violin prodigy).
+Case "night-train" (The Night Train, overnight train Southern Star, between Alder Crossing and Port Elling). Real culprit: Inês Duarte, dining car chef, took the Duchess's sapphire necklace during the tunnel blackout with a copied key and hid it in a flour tin. Innocent suspects: helena = Helena Costa (train conductor), victor = Victor Hale (jeweller, passenger), tomas = Tomás Reyes (night porter).
+
+Rules for every story:
+- English "en" and Brazilian Portuguese "pt" with the same content.
+- "headline": a newspaper headline, max 8 words, no final period.
+- "body": exactly 3 sentences, 45 to 70 words in total. Sentence 1: the consequence for the wrongly accused person (specific to their job). Sentence 2: the real culprit quietly gets away, with one concrete detail from the case (the cart, the flour tin, the station). Sentence 3: a lasting consequence that makes the player want to try again.
+- Noir tone, no gore, no em-dash or en-dash characters, no semicolons, plain ASCII quotes.
+- Never reveal the motive word for word.
+
+Output one file:
+<<<FILE qa/m2gf9-probes/aftermath.gen.json>>>
+{"violin":{"lorenzo":{"en":{"headline":"...","body":"..."},"pt":{"headline":"...","body":"..."}},"maya":{...}},"night-train":{"helena":{...},"victor":{...},"tomas":{...}}}
+<<<END>>>
+Valid JSON only inside the file.

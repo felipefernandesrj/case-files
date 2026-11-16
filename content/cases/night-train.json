@@ -297,5 +297,37 @@
   "solution": {
     "en": "Inês Duarte took the necklace during the tunnel blackout with a copied key and hid it in a flour tin; the apron seen by Tomás and the flour on the safe point to her; Helena, Victor and Tomás are cleared by each other's accounts.",
     "pt": "Inês Duarte pegou o colar durante o apagão no túnel com uma chave copiada e o escondeu em uma lata de farinha; o avental visto por Tomás e a farinha no cofre a incriminam; Helena, Victor e Tomás estão inocentados pelos depoimentos uns dos outros."
+  },
+  "aftermath": {
+    "helena": {
+      "en": {
+        "headline": "Train chief loses rail licence",
+        "body": "Helena Costa was stripped of her rail licence on Friday after a sapphire necklace vanished from the locked safe in the luggage car during the tunnel blackout. The thief was Inês Duarte, the dining car chef, who concealed the gem inside a flour tin and slipped away unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+      },
+      "pt": {
+        "headline": "Chefe de trem perde a licença ferroviária",
+        "body": "Helena Costa perdeu sua licença ferroviária na sexta-feira quando um colar de safira desapareceu do cofre trancado no vagão de bagagem durante o apagão no túnel. A ladra foi Inês Duarte, a cozinheira do vagão-restaurante, que escondeu a joia dentro de uma lata de farinha e fugiu despercebida. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+      }
+    },
+    "victor": {
+      "en": {
+        "headline": "Jeweller facing charges for grand theft",
+        "body": "Victor Hale watched his renowned jewellery business crumble on Tuesday after the theft of a priceless sapphire necklace was exposed. The necklace had been taken from the locked safe in the luggage car during the tunnel blackout by Inês Duarte, the dining car chef, who hid it in a flour tin. Somewhere, the real thief is still smiling. Reopen the file?"
+      },
+      "pt": {
+        "headline": "Joalheiro enfrenta acusações de grande roubo",
+        "body": "Victor Hale viu seu prestigiado negócio de joias desmoronar na terça-feira quando o roubo de um colar de safira de valor incalculável foi revelado. O colar foi retirado do cofre trancado no vagão de bagagem durante o apagão no túnel por Inês Duarte, a cozinheira do vagão-restaurante, que o escondeu numa lata de farinha. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+      }
+    },
+    "tomas": {
+      "en": {
+        "headline": "Night porter banished from the rails",
+        "body": "Tomás Reyes was dismissed as night porter on Wednesday after the necklace theft was traced to his shift. In reality the gem was stolen from the locked safe in the luggage car during a tunnel blackout by Inês Duarte, the dining car chef, who slipped it into a flour tin and escaped. Somewhere, the real thief is still smiling. Reopen the file?"
+      },
+      "pt": {
+        "headline": "Carregador noturno banido dos trilhos",
+        "body": "Tomás Reyes foi demitido como carregador noturno na quarta-feira depois que o roubo do colar foi atribuído ao seu turno. Na verdade a joia foi tirada do cofre trancado no vagão de bagagem durante o apagão no túnel por Inês Duarte, a cozinheira do vagão-restaurante, que a escondeu numa lata de farinha e fugiu. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+      }
+    }
   }
 }

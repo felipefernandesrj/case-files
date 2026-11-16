@@ -1,0 +1,77 @@
+<<<REPLACE src/server.js>>>
+          culprit: c.culprit,
+          culpritName,
+          solution,
+          score: sc,
+          questions: sess.questions,
+=====
+          culprit: c.culprit,
+          culpritName,
+          solution,
+          accusedName: suspect.name,
+          aftermath: correct ? null : (play.aftermath?.[suspectId] ?? null),
+          score: sc,
+          questions: sess.questions,
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    verdict.appendChild(p4);
+  }
+  if (correct) {
+=====
+    verdict.appendChild(p4);
+  }
+  const am = !correct && contState !== 'run' && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
+  if (am) {
+    const paper = document.createElement('div');
+    paper.className = 'aftermath';
+    if (lastAccuseResult.amShown) paper.classList.add('is-static');
+    lastAccuseResult.amShown = true;
+    const k = document.createElement('p');
+    k.className = 'aftermath-kicker';
+    k.textContent = lang === 'pt' ? 'Jornal da manhã seguinte' : "The next morning's paper";
+    const h = document.createElement('p');
+    h.className = 'aftermath-headline';
+    h.textContent = am.headline;
+    const b = document.createElement('p');
+    b.className = 'aftermath-body';
+    b.textContent = am.body;
+    paper.appendChild(k);
+    paper.appendChild(h);
+    paper.appendChild(b);
+    verdict.appendChild(paper);
+  }
+  if (correct) {
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  renderContinue();
+  if (lastAccuseResult) renderVerdict(false);
+  const L = contLabels();
+  contSay(L.over + '. ' + L.lost);
+  document.getElementById('continue-close').focus();
+=====
+  renderContinue();
+  if (lastAccuseResult) renderVerdict(false);
+  const L = contLabels();
+  const am = lastAccuseResult && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
+  contSay(L.over + '. ' + (am ? am.headline + '. ' : '') + L.lost);
+  document.getElementById('continue-close').focus();
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+  }
+}
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+  }
+}
+.aftermath { margin: 20px auto 4px; max-width: 520px; padding: 14px 18px 16px; background: #e9dfc8; color: #1d1a16; border: 1px solid #b9a988; box-shadow: 0 6px 18px rgba(0,0,0,0.45); text-align: left; transform: rotate(-1.2deg); animation: cf-paper 700ms cubic-bezier(.2,1.2,.4,1) both; }
+.aftermath.is-static { animation: none; }
+.aftermath-kicker { margin: 0 0 6px; padding-bottom: 4px; border-bottom: 2px solid #1d1a16; font-family: monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #1d1a16; }
+.aftermath-headline { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 1.35rem; line-height: 1.2; color: #1d1a16; }
+.aftermath-body { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 0.98rem; line-height: 1.45; color: #1d1a16; }
+@keyframes cf-paper { 0% { opacity: 0; transform: translateY(24px) rotate(-14deg) scale(0.6); } 100% { opacity: 1; transform: rotate(-1.2deg); } }
+@media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }
+<<<END>>>

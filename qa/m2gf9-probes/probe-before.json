@@ -1,0 +1,114 @@
+{
+ "1280-en": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE?",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up."
+  },
+  "gameOver": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart",
+   "continueBox": "GAME OVER",
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case."
+  },
+  "afterLangSwitch": {
+   "paper": null,
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his ",
+   "continueBox": "FIM DE JOGO",
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case."
+  }
+ },
+ "1280-pt": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR?",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste."
+  },
+  "gameOver": {
+   "paper": null,
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo ",
+   "continueBox": "FIM DE JOGO",
+   "live": "FIM DE JOGO. O culpado escapou. Use Nova partida para reabrir o caso."
+  },
+  "afterLangSwitch": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do s",
+   "continueBox": "GAME OVER",
+   "live": "FIM DE JOGO. O culpado escapou. Use Nova partida para reabrir o caso."
+  }
+ },
+ "390-en": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE?",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up."
+  },
+  "gameOver": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart",
+   "continueBox": "GAME OVER",
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case."
+  },
+  "afterLangSwitch": {
+   "paper": null,
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his ",
+   "continueBox": "FIM DE JOGO",
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case."
+  }
+ },
+ "390-pt": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR?",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste."
+  },
+  "gameOver": {
+   "paper": null,
+   "verdict": "Você errou!Culpado: Carlos MendesSolução: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo ",
+   "continueBox": "FIM DE JOGO",
+   "live": "FIM DE JOGO. O culpado escapou. Use Nova partida para reabrir o caso."
+  },
+  "afterLangSwitch": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do s",
+   "continueBox": "GAME OVER",
+   "live": "FIM DE JOGO. O culpado escapou. Use Nova partida para reabrir o caso."
+  }
+ },
+ "extra": {
+  "correct": {
+   "paper": null,
+   "verdict": "Correct!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his ca",
+   "continueBox": "hidden",
+   "live": null
+  },
+  "reducedMotionMaya": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart",
+   "continueBox": "GAME OVER",
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case."
+  },
+  "timeout": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart",
+   "continueBox": "GAME OVER",
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case."
+  },
+  "afterClose": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart",
+   "continueBox": "hidden",
+   "live": null
+  },
+  "nightTrainVictor": {
+   "paper": null,
+   "verdict": "Wrong!Culprit: Inês DuarteSolution: Inês Duarte took the necklace during the tunnel blackout with a copied key and hid it in a flour tin; the apron seen by Tomá",
+   "continueBox": "GAME OVER",
+   "live": "GAME OVER. The culprit got away. Use Start over to reopen the case."
+  }
+ }
+}

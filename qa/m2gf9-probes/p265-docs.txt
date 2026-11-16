@@ -1,0 +1,100 @@
+Update docs, package.json and one test check for v0.4.18 (M2 game feel sprint 9: wrong verdict aftermath). Output ONLY literal search/replace blocks, each:
+<<<REPLACE path>>>
+OLD
+=====
+NEW
+<<<END>>>
+Every block below is final text; copy OLD and NEW exactly, character for character.
+
+1) package.json OLD:
+  "version": "0.4.17",
+NEW:
+  "version": "0.4.18",
+
+2) package.json OLD:
+node test/talk.mjs && node test/keyboard.mjs
+NEW:
+node test/talk.mjs && node test/aftermath.mjs && node test/keyboard.mjs
+
+3) CHANGELOG.md OLD:
+# Changelog
+
+## 0.4.17 (M2 game feel, sprint 8: talking portraits)
+NEW:
+# Changelog
+
+## 0.4.18 (M2 game feel, sprint 9: a story for a wrong verdict)
+- A wrong verdict now has consequences. When the CONTINUE? countdown ends (Give up, Escape or the count reaching 0), the verdict shows a newspaper clipping from the next morning: what happened to the innocent suspect you accused, and how the real culprit got away. Every innocent suspect of both cases has their own story in English and Portuguese (5 stories, 10 texts).
+- The stories live in each case file under `aftermath` and are only sent by the server with the answer to a wrong accusation, never with the case itself. They are not shown during the countdown, so Try again stays a real second chance.
+- The clipping slides in once. A language switch shows the other language without replaying it, and with reduced motion it simply appears. The GAME OVER announcement for screen readers now reads the headline too.
+- The GAME OVER box now sits at the bottom of the screen (above the bottom bar on phones) instead of the centre, so it no longer covers the verdict.
+- New test/aftermath.mjs with 14 checks (a story for every innocent and none for the culprit, sizes and clean punctuation, names, no leak in the public case, accuse response for both cases, shown only after GAME OVER, language switch without replay, announcement, styles and docking). The automated suite now has 227 checks.
+
+## 0.4.17 (M2 game feel, sprint 8: talking portraits)
+
+4) README.md OLD:
+**M2 in progress (v0.4.17, game feel sprint 8).**
+NEW:
+**M2 in progress (v0.4.18, game feel sprint 9).**
+
+5) README.md OLD:
+(local two frame sprites, no extra model calls; reduced motion shows the line at once).
+NEW:
+(local two frame sprites, no extra model calls; reduced motion shows the line at once). After GAME OVER on a wrong verdict, a next morning newspaper clipping tells what happened to the innocent suspect you accused and how the culprit got away (one story per innocent suspect, EN and PT).
+
+6) README.md OLD:
+213 automated checks.
+NEW:
+227 automated checks.
+
+7) docs/SPEC.md OLD:
+
+## Web page: closing screen
+NEW:
+
+## Web page: wrong verdict aftermath (M2 game feel sprint 9)
+- Content: each case file has `aftermath[suspectId] = { en: { headline, body }, pt: { headline, body } }` for every innocent suspect (none for the culprit). Headline up to 9 words, body 40 to 75 words naming the accused and the real culprit and no other suspect, no dashes or semicolons. `publicCase()` never includes it.
+- API: `POST /api/accuse` also returns `accusedName` and `aftermath` (both languages of the accused suspect's story on a wrong verdict, `null` on a correct one).
+- `renderVerdict()` appends `div.aftermath` (`p.aftermath-kicker` "The next morning's paper" / "Jornal da manhã seguinte", `p.aftermath-headline`, `p.aftermath-body`) only when the verdict is wrong and the CONTINUE? countdown is not running (`contState !== 'run'`), so after Give up, Escape, timeout or Close. The first render animates; later renders (language switch) add `is-static`. `endContinue()` announces "GAME OVER. <headline>. The culprit got away...".
+- CSS: newspaper clipping (paper #e9dfc8, ink #1d1a16, Georgia serif, rotate(-1.2deg)), `cf-paper` slide-in 700ms, none with reduced motion. `.continue.is-over` docks at the bottom (16px, or 12px above `--dock-h` on phones) so it does not cover the clipping.
+
+## Web page: closing screen
+
+8) docs/SPEC.md OLD:
+18. `node test/keyboard.mjs`
+NEW:
+18. `node test/aftermath.mjs` (wrong verdict aftermath: a story for every innocent and none for the culprit, sizes and punctuation, names, no leak in the public case, accuse response for both cases, shown only after GAME OVER, language switch without replay, announcement, styles and docking)
+19. `node test/keyboard.mjs`
+
+9) docs/SPEC.md OLD:
+Total checks: 213 (
+NEW:
+Total checks: 227 (
+
+10) docs/SPEC.md OLD:
+talk 10, keyboard 13).
+NEW:
+talk 10, aftermath 14, keyboard 13).
+
+11) docs/BUILD_LOG.md OLD:
+- Details and receipts: qa/rework.md (M2 game feel sprint 8).
+NEW:
+- Details and receipts: qa/rework.md (M2 game feel sprint 8).
+
+## M2 game feel sprint 9 (v0.4.18)
+
+- Scope: a story for a wrong verdict. After GAME OVER the verdict shows a next morning newspaper clipping about the innocent suspect you accused and the culprit who got away (5 stories, EN and PT, in the case files under `aftermath`, sent only with a wrong accusation). The GAME OVER box docks at the bottom so it does not cover the verdict.
+- Calls 256-265 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off, and `@cf/openai/gpt-oss-120b` for story rework). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf9.mjs). No live play smoke (no model prompt changed).
+- Result: npm test 227/227 (was 213), new test/aftermath.mjs 14 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 9).
+
+12) test/aftermath.mjs OLD:
+  must(/@keyframes cf-paper/.test(css), 'keyframes');
+NEW:
+  must(/@keyframes cf-paper/.test(css), 'keyframes');
+  must(/\.continue\.is-over \{ top: auto; bottom: 16px;/.test(css) && /\.continue\.is-over \{ bottom: calc\(var\(--dock-h\) \+ 12px\); \}/.test(css), 'GAME OVER box docked');
+
+13) test/aftermath.mjs OLD:
+await check('paper styles: readable, animated once, still for reduced motion', () => {
+NEW:
+await check('paper styles: readable, animated once, still for reduced motion, GAME OVER box docked', () => {

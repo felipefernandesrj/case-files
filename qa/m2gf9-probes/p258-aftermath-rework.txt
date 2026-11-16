@@ -1,0 +1,70 @@
+Revise this JSON file of wrong-verdict aftermath stories. Problems found when checking it:
+1. Every body is 25 to 30 words. Each body must be exactly 3 sentences and 45 to 70 words. Make sentence 1 specific (what happened to the accused, where, when), keep the concrete case detail in sentence 2, and make sentence 3 a hook that invites another try.
+2. Use the game's Portuguese job titles exactly: Helena Costa is "chefe de trem" (not "condutora"), Tomás Reyes is "carregador noturno" (not "mensageiro"), Inês Duarte is "a cozinheira do vagão-restaurante", Carlos Mendes is "o zelador", Lorenzo is "o maestro", Maya is "a violinista prodígio".
+3. Headlines in Portuguese use sentence case (only the first word and names capitalised).
+Keep the same keys, the noir tone, en and pt with the same content, no em-dash, en-dash or semicolon.
+
+IMPORTANT: the Portuguese job titles above go ONLY in the "pt" strings. English strings stay 100% English (conductor, violin prodigy, janitor, train conductor, night porter, dining car chef). Count the words of each body before writing it: 45 to 70 words.
+
+Current file:
+{
+  "violin": {
+    "lorenzo": {
+      "en": {
+        "headline": "Conductor Dismissed Amidst Academy Scandal",
+        "body": "Lorenzo Moretti lost his podium and his reputation forever. Carlos Mendes quietly wheeled the stolen instrument away in his cleaning cart. The academy remains silent while the music dies."
+      },
+      "pt": {
+        "headline": "Maestro é Demitido em Meio ao Escândalo",
+        "body": "Lorenzo Moretti perdeu seu pódio e sua reputação para sempre. Carlos Mendes levou o instrumento roubado em seu carrinho de limpeza. A academia permanece em silêncio enquanto a música morre."
+      }
+    },
+    "maya": {
+      "en": {
+        "headline": "Prodigy's Career Ends in Shame",
+        "body": "Maya Santos can no longer perform on any professional stage. The janitor escaped the scene with the violin hidden in his cart. A beautiful talent is lost to a lie."
+      },
+      "pt": {
+        "headline": "Carreira de Prodígio Termina em Vergonha",
+        "body": "Maya Santos não pode mais tocar em palcos profissionais. O zelador escapou da cena com o violino no carrinho. Um talento belo se perde em uma mentira."
+      }
+    }
+  },
+  "night-train": {
+    "helena": {
+      "en": {
+        "headline": "Conductor Stripped Of Her Rail License",
+        "body": "Helena Costa will never command a train again. Inês Duarte escaped the station with the sapphire hidden in a flour tin. The darkness of the tunnel hides the truth."
+      },
+      "pt": {
+        "headline": "Condutora Perde Sua Licença Ferroviária",
+        "body": "Helena Costa nunca mais comandará um trem. Inês Duarte escapou da estação com a safira na lata de farinha. A escuridão do túnel esconde a verdade."
+      }
+    },
+    "victor": {
+      "en": {
+        "headline": "Jeweller Facing Charges For Grand Theft",
+        "body": "Victor Hale saw his precious business crumble into dust. The chef moved through the dining car with the stolen treasure. Justice failed to catch the true thief."
+      },
+      "pt": {
+        "headline": "Joalheiro Enfrenta Acusações de Grande Roubo",
+        "body": "Victor Hale viu seu negócio precioso desmoronar. A chef passou pelo vagão restaurante com o tesouro roubado. A justiça falhou em pegar o verdadeiro ladrão."
+      }
+    },
+    "tomas": {
+      "en": {
+        "headline": "Night Porter Banished From The Rails",
+        "body": "Tomás Reyes lost his livelihood and his dignity. Inês Duarte slipped away unnoticed with the necklace in a flour tin. The Southern Star carries secrets toward the dawn."
+      },
+      "pt": {
+        "headline": "Mensageiro Banido Das Linhas Ferroviárias",
+        "body": "Tomás Reyes perdeu seu sustento e sua dignidade. Inês Duarte escapou sem ser notada com o colar na farinha. O Southern Star carrega segredos rumo ao amanhecer."
+      }
+    }
+  }
+}
+
+Output the whole revised file:
+<<<FILE qa/m2gf9-probes/aftermath.gen.json>>>
+...valid JSON...
+<<<END>>>

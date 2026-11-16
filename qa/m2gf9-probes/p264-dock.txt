@@ -1,0 +1,6 @@
+Checked in headless Chrome: at GAME OVER the fixed, centred `.continue` box (z-index 120) covers the new `.aftermath` newspaper clipping at 1280 and at 390, so the story cannot be read until the player presses Close. Fix in public/css/game.css only: once the box is in the over state, dock it at the bottom of the viewport instead of the centre (16px from the bottom, keep the horizontal centring with translateX(-50%)), and on phones (max-width: 767px) put it 12px above the bottom dock using the existing --dock-h custom property. Exactly two new lines appended after the last line of the file, one rule per line, in this style:
+.continue.is-over { top: auto; bottom: 16px; transform: translateX(-50%); }
+@media (max-width: 767px) { .continue.is-over { bottom: calc(var(--dock-h) + 12px); } }
+Format: <<<REPLACE public/css/game.css>>> OLD ===== NEW <<<END>>>, where OLD is exactly the current last line of the file:
+@media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }
+and NEW is that same line followed by the two new lines.

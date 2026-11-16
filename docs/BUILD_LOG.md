@@ -278,3 +278,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 252-255 through the Cup key (`@cf/google/gemma-4-26b-a4b-it`, thinking off). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf8.mjs). No live play smoke (no model prompt changed).
 - Result: npm test 213/213 (was 203), new test/talk.mjs 10 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 8).
+
+## M2 game feel sprint 9 (v0.4.18)
+
+- Scope: a story for a wrong verdict. After GAME OVER the verdict shows a next morning newspaper clipping about the innocent suspect you accused and the culprit who got away (5 stories, EN and PT, in the case files under `aftermath`, sent only with a wrong accusation). The GAME OVER box docks at the bottom so it does not cover the verdict.
+- Calls 256-265 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off, and `@cf/openai/gpt-oss-120b` for story rework). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf9.mjs). No live play smoke (no model prompt changed).
+- Result: npm test 227/227 (was 213), new test/aftermath.mjs 14 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 9).

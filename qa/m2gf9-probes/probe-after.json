@@ -1,0 +1,270 @@
+{
+ "1280-en": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE?",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up."
+  },
+  "gameOver": {
+   "paper": [
+    "The next morning's paper",
+    "Conductor dismissed amidst academy scandal",
+    "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    410,
+    368,
+    524,
+    216
+   ],
+   "anim": "cf-paper",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "GAME OVER. Conductor dismissed amidst academy scandal. The culprit got away. Use Start over to reopen the case."
+  },
+  "afterLangSwitch": {
+   "paper": [
+    "Jornal da manhã seguinte",
+    "Maestro é demitido em meio ao escândalo",
+    "Lorenzo Moretti foi demitido de seu cargo de maestro na academia na segunda-feira depois que o sumiço do violino foi denunciado. Enquanto todos olhavam para o acusado, o zelador Carlos Mendes discretamente colocou o violino em seu carrinho de limpeza, sem ser percebido. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+   ],
+   "cls": "aftermath is-static",
+   "rect": [
+    410,
+    332,
+    524,
+    216
+   ],
+   "anim": "none",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "GAME OVER. Conductor dismissed amidst academy scandal. The culprit got away. Use Start over to reopen the case."
+  }
+ },
+ "1280-pt": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR?",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste."
+  },
+  "gameOver": {
+   "paper": [
+    "Jornal da manhã seguinte",
+    "Maestro é demitido em meio ao escândalo",
+    "Lorenzo Moretti foi demitido de seu cargo de maestro na academia na segunda-feira depois que o sumiço do violino foi denunciado. Enquanto todos olhavam para o acusado, o zelador Carlos Mendes discretamente colocou o violino em seu carrinho de limpeza, sem ser percebido. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    410,
+    357,
+    524,
+    216
+   ],
+   "anim": "cf-paper",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "FIM DE JOGO. Maestro é demitido em meio ao escândalo. O culpado escapou. Use Nova partida para reabrir o caso."
+  },
+  "afterLangSwitch": {
+   "paper": [
+    "The next morning's paper",
+    "Conductor dismissed amidst academy scandal",
+    "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath is-static",
+   "rect": [
+    410,
+    332,
+    524,
+    216
+   ],
+   "anim": "none",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "FIM DE JOGO. Maestro é demitido em meio ao escândalo. O culpado escapou. Use Nova partida para reabrir o caso."
+  }
+ },
+ "390-en": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Wrong!Score: 0",
+   "continueBox": "CONTINUE?",
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up."
+  },
+  "gameOver": {
+   "paper": [
+    "The next morning's paper",
+    "Conductor dismissed amidst academy scandal",
+    "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    41,
+    874,
+    308,
+    306
+   ],
+   "anim": "cf-paper",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "GAME OVER. Conductor dismissed amidst academy scandal. The culprit got away. Use Start over to reopen the case."
+  },
+  "afterLangSwitch": {
+   "paper": [
+    "Jornal da manhã seguinte",
+    "Maestro é demitido em meio ao escândalo",
+    "Lorenzo Moretti foi demitido de seu cargo de maestro na academia na segunda-feira depois que o sumiço do violino foi denunciado. Enquanto todos olhavam para o acusado, o zelador Carlos Mendes discretamente colocou o violino em seu carrinho de limpeza, sem ser percebido. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+   ],
+   "cls": "aftermath is-static",
+   "rect": [
+    41,
+    270,
+    309,
+    329
+   ],
+   "anim": "none",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "GAME OVER. Conductor dismissed amidst academy scandal. The culprit got away. Use Start over to reopen the case."
+  }
+ },
+ "390-pt": {
+  "duringCountdown": {
+   "paper": null,
+   "verdict": "Você errou!Pontuação: 0",
+   "continueBox": "CONTINUAR?",
+   "live": "Continuar? Você tem 10 segundos. Enter tenta o caso de novo, Esc desiste."
+  },
+  "gameOver": {
+   "paper": [
+    "Jornal da manhã seguinte",
+    "Maestro é demitido em meio ao escândalo",
+    "Lorenzo Moretti foi demitido de seu cargo de maestro na academia na segunda-feira depois que o sumiço do violino foi denunciado. Enquanto todos olhavam para o acusado, o zelador Carlos Mendes discretamente colocou o violino em seu carrinho de limpeza, sem ser percebido. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    41,
+    892,
+    309,
+    329
+   ],
+   "anim": "cf-paper",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "FIM DE JOGO. Maestro é demitido em meio ao escândalo. O culpado escapou. Use Nova partida para reabrir o caso."
+  },
+  "afterLangSwitch": {
+   "paper": [
+    "The next morning's paper",
+    "Conductor dismissed amidst academy scandal",
+    "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath is-static",
+   "rect": [
+    41,
+    258,
+    308,
+    306
+   ],
+   "anim": "none",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "FIM DE JOGO. Maestro é demitido em meio ao escândalo. O culpado escapou. Use Nova partida para reabrir o caso."
+  }
+ },
+ "extra": {
+  "correct": {
+   "paper": null,
+   "verdict": "Correct!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his ca",
+   "continueBox": "hidden",
+   "live": null
+  },
+  "reducedMotionMaya": {
+   "paper": [
+    "The next morning's paper",
+    "Prodigy's career ends in shame",
+    "Maya Santos was barred from performing on any professional stage after the violin theft was reported on Thursday. As the crowd focused on the accused prodigy, janitor Carlos Mendes gently pushed the stolen violin into his cleaning cart, unchallenged. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    410,
+    313,
+    524,
+    216
+   ],
+   "anim": "none",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "GAME OVER. Prodigy's career ends in shame. The culprit got away. Use Start over to reopen the case."
+  },
+  "timeout": {
+   "paper": [
+    "The next morning's paper",
+    "Conductor dismissed amidst academy scandal",
+    "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    410,
+    302,
+    524,
+    216
+   ],
+   "anim": "cf-paper",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "GAME OVER. Conductor dismissed amidst academy scandal. The culprit got away. Use Start over to reopen the case."
+  },
+  "afterClose": {
+   "paper": [
+    "The next morning's paper",
+    "Conductor dismissed amidst academy scandal",
+    "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    410,
+    302,
+    524,
+    216
+   ],
+   "anim": "cf-paper",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": ""
+  },
+  "nightTrainVictor": {
+   "paper": [
+    "The next morning's paper",
+    "Jeweller facing charges for grand theft",
+    "Victor Hale watched his renowned jewellery business crumble on Tuesday after the theft of a priceless sapphire necklace was exposed. The necklace had been taken from the locked safe in the luggage car during the tunnel blackout by Inês Duarte, the dining car chef, who hid it in a flour tin. Somewhere, the real thief is still smiling. Reopen the file?"
+   ],
+   "cls": "aftermath",
+   "rect": [
+    410,
+    393,
+    524,
+    216
+   ],
+   "anim": "cf-paper",
+   "bg": "rgb(233, 223, 200)",
+   "color": "rgb(29, 26, 22)",
+   "headFont": "Georgia, \"Times New ",
+   "live": "GAME OVER. Jeweller facing charges for grand theft. The culprit got away. Use Start over to reopen the case."
+  }
+ }
+}

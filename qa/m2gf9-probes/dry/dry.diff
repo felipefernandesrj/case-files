@@ -1,0 +1,309 @@
+diff --git a/content/case.json b/content/case.json
+index 3c0e32f..c4ad8f1 100644
+--- a/content/case.json
++++ b/content/case.json
+@@ -144,5 +144,27 @@
+   "solution": {
+     "en": "The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",
+     "pt": "O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos."
++  },
++  "aftermath": {
++    "lorenzo": {
++      "en": {
++        "headline": "Conductor dismissed amidst academy scandal",
++        "body": "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
++      },
++      "pt": {
++        "headline": "Maestro é demitido em meio ao escândalo",
++        "body": "Lorenzo Moretti foi demitido de seu cargo de maestro na academia na segunda-feira depois que o sumiço do violino foi denunciado. Enquanto todos olhavam para o acusado, o zelador Carlos Mendes discretamente colocou o violino em seu carrinho de limpeza, sem ser percebido. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
++      }
++    },
++    "maya": {
++      "en": {
++        "headline": "Prodigy's career ends in shame",
++        "body": "Maya Santos was barred from performing on any professional stage after the violin theft was reported on Thursday. As the crowd focused on the accused prodigy, janitor Carlos Mendes gently pushed the stolen violin into his cleaning cart, unchallenged. Somewhere, the real thief is still smiling. Reopen the file?"
++      },
++      "pt": {
++        "headline": "Carreira de prodígio termina em vergonha",
++        "body": "Maya Santos ficou proibida de tocar em qualquer palco profissional depois que o roubo do violino foi denunciado na quinta-feira. Enquanto a multidão se concentrava na violinista acusada, o zelador Carlos Mendes deslizou o violino roubado para seu carrinho de limpeza, sem objeções. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
++      }
++    }
+   }
+ }
+diff --git a/content/cases/night-train.json b/content/cases/night-train.json
+index e4c3939..1d82f60 100644
+--- a/content/cases/night-train.json
++++ b/content/cases/night-train.json
+@@ -297,5 +297,37 @@
+   "solution": {
+     "en": "Inês Duarte took the necklace during the tunnel blackout with a copied key and hid it in a flour tin; the apron seen by Tomás and the flour on the safe point to her; Helena, Victor and Tomás are cleared by each other's accounts.",
+     "pt": "Inês Duarte pegou o colar durante o apagão no túnel com uma chave copiada e o escondeu em uma lata de farinha; o avental visto por Tomás e a farinha no cofre a incriminam; Helena, Victor e Tomás estão inocentados pelos depoimentos uns dos outros."
++  },
++  "aftermath": {
++    "helena": {
++      "en": {
++        "headline": "Train chief loses rail licence",
++        "body": "Helena Costa was stripped of her rail licence on Friday after a sapphire necklace vanished from the locked safe in the luggage car during the tunnel blackout. The thief was Inês Duarte, the dining car chef, who concealed the gem inside a flour tin and slipped away unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
++      },
++      "pt": {
++        "headline": "Chefe de trem perde a licença ferroviária",
++        "body": "Helena Costa perdeu sua licença ferroviária na sexta-feira quando um colar de safira desapareceu do cofre trancado no vagão de bagagem durante o apagão no túnel. A ladra foi Inês Duarte, a cozinheira do vagão-restaurante, que escondeu a joia dentro de uma lata de farinha e fugiu despercebida. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
++      }
++    },
++    "victor": {
++      "en": {
++        "headline": "Jeweller facing charges for grand theft",
++        "body": "Victor Hale watched his renowned jewellery business crumble on Tuesday after the theft of a priceless sapphire necklace was exposed. The necklace had been taken from the locked safe in the luggage car during the tunnel blackout by Inês Duarte, the dining car chef, who hid it in a flour tin. Somewhere, the real thief is still smiling. Reopen the file?"
++      },
++      "pt": {
++        "headline": "Joalheiro enfrenta acusações de grande roubo",
++        "body": "Victor Hale viu seu prestigiado negócio de joias desmoronar na terça-feira quando o roubo de um colar de safira de valor incalculável foi revelado. O colar foi retirado do cofre trancado no vagão de bagagem durante o apagão no túnel por Inês Duarte, a cozinheira do vagão-restaurante, que o escondeu numa lata de farinha. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
++      }
++    },
++    "tomas": {
++      "en": {
++        "headline": "Night porter banished from the rails",
++        "body": "Tomás Reyes was dismissed as night porter on Wednesday after the necklace theft was traced to his shift. In reality the gem was stolen from the locked safe in the luggage car during a tunnel blackout by Inês Duarte, the dining car chef, who slipped it into a flour tin and escaped. Somewhere, the real thief is still smiling. Reopen the file?"
++      },
++      "pt": {
++        "headline": "Carregador noturno banido dos trilhos",
++        "body": "Tomás Reyes foi demitido como carregador noturno na quarta-feira depois que o roubo do colar foi atribuído ao seu turno. Na verdade a joia foi tirada do cofre trancado no vagão de bagagem durante o apagão no túnel por Inês Duarte, a cozinheira do vagão-restaurante, que a escondeu numa lata de farinha e fugiu. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
++      }
++    }
+   }
+ }
+diff --git a/public/css/game.css b/public/css/game.css
+index 02ecbca..84080ef 100644
+--- a/public/css/game.css
++++ b/public/css/game.css
+@@ -752,3 +752,10 @@ body[data-view="cabinet"] #steps {
+     scroll-behavior: auto !important;
+   }
+ }
++.aftermath { margin: 20px auto 4px; max-width: 520px; padding: 14px 18px 16px; background: #e9dfc8; color: #1d1a16; border: 1px solid #b9a988; box-shadow: 0 6px 18px rgba(0,0,0,0.45); text-align: left; transform: rotate(-1.2deg); animation: cf-paper 700ms cubic-bezier(.2,1.2,.4,1) both; }
++.aftermath.is-static { animation: none; }
++.aftermath-kicker { margin: 0 0 6px; padding-bottom: 4px; border-bottom: 2px solid #1d1a16; font-family: monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #1d1a16; }
++.aftermath-headline { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 1.35rem; line-height: 1.2; color: #1d1a16; }
++.aftermath-body { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 0.98rem; line-height: 1.45; color: #1d1a16; }
++@keyframes cf-paper { 0% { opacity: 0; transform: translateY(24px) rotate(-14deg) scale(0.6); } 100% { opacity: 1; transform: rotate(-1.2deg); } }
++@media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }
+diff --git a/public/index.html b/public/index.html
+index 68f73bb..ac923fb 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -769,7 +769,8 @@ function endContinue() {
+   renderContinue();
+   if (lastAccuseResult) renderVerdict(false);
+   const L = contLabels();
+-  contSay(L.over + '. ' + L.lost);
++  const am = lastAccuseResult && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
++  contSay(L.over + '. ' + (am ? am.headline + '. ' : '') + L.lost);
+   document.getElementById('continue-close').focus();
+ }
+ function stopContinue() {
+@@ -1423,6 +1424,26 @@ function renderVerdict(moveFocus = true) {
+     verdict.appendChild(p3);
+   }
+   verdict.appendChild(p4);
++  const am = !correct && contState !== 'run' && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
++  if (am) {
++    const paper = document.createElement('div');
++    paper.className = 'aftermath';
++    if (lastAccuseResult.amShown) paper.classList.add('is-static');
++    lastAccuseResult.amShown = true;
++    const k = document.createElement('p');
++    k.className = 'aftermath-kicker';
++    k.textContent = lang === 'pt' ? 'Jornal da manhã seguinte' : "The next morning's paper";
++    const h = document.createElement('p');
++    h.className = 'aftermath-headline';
++    h.textContent = am.headline;
++    const b = document.createElement('p');
++    b.className = 'aftermath-body';
++    b.textContent = am.body;
++    paper.appendChild(k);
++    paper.appendChild(h);
++    paper.appendChild(b);
++    verdict.appendChild(paper);
++  }
+   if (correct) {
+     const stamp = document.createElement('div');
+     stamp.className = 'case-closed-stamp';
+diff --git a/qa/build-log.json b/qa/build-log.json
+index 3114181..878f3fe 100644
+--- a/qa/build-log.json
++++ b/qa/build-log.json
+@@ -10760,5 +10760,160 @@
+    }
+   ],
+   "skipped": []
++ },
++ {
++  "label": "m2gf9-256",
++  "at": "2026-11-16T11:52:46.256Z",
++  "model": "@cf/google/gemma-4-26b-a4b-it",
++  "status": 200,
++  "ms": 18454,
++  "usage": {
++   "prompt_tokens": 533,
++   "completion_tokens": 780,
++   "total_tokens": 1313,
++   "neurons": 26.118183135986328,
++   "prompt_tokens_details": {
++    "cached_tokens": 0
++   }
++  },
++  "headers": {
++   "x-fullcup-receipt": "01M7J375GX67BKBB28CF8DYZDP",
++   "x-fullcup-receipt-id": "01M7J375GX67BKBB28CF8DYZDP",
++   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
++   "x-ratelimit-limit": "60",
++   "x-ratelimit-remaining": "59",
++   "x-ratelimit-reset": "1794829980"
++  },
++  "files": [
++   {
++    "path": "qa/m2gf9-probes/aftermath.gen.json",
++    "lines": 56
++   }
++  ],
++  "skipped": []
++ },
++ {
++  "label": "m2gf9-257",
++  "at": "2026-11-16T11:53:10.390Z",
++  "model": "@cf/google/gemma-4-26b-a4b-it",
++  "status": 200,
++  "ms": 13200,
++  "usage": {
++   "prompt_tokens": 1083,
++   "completion_tokens": 857,
++   "total_tokens": 1940,
++   "neurons": 33.21818161010742,
++   "prompt_tokens_details": {
++    "cached_tokens": 0
++   }
++  },
++  "headers": {
++   "x-fullcup-receipt": "01M7J3822V9HA79CBQS0NKVT45",
++   "x-fullcup-receipt-id": "01M7J3822V9HA79CBQS0NKVT45",
++   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
++   "x-ratelimit-limit": "60",
++   "x-ratelimit-remaining": "58",
++   "x-ratelimit-reset": "1794829980"
++  },
++  "files": [
++   {
++    "path": "qa/m2gf9-probes/aftermath.gen.json",
++    "lines": 56
++   }
++  ],
++  "skipped": []
++ },
++ {
++  "label": "m2gf9-258",
++  "at": "2026-11-16T11:54:05.842Z",
++  "model": "@cf/openai/gpt-oss-120b",
++  "status": 200,
++  "ms": 48527,
++  "usage": {
++   "prompt_tokens": 1106,
++   "completion_tokens": 3663,
++   "total_tokens": 4769,
++   "neurons": 284.9406433105469,
++   "prompt_tokens_details": {
++    "cached_tokens": 0
++   }
++  },
++  "headers": {
++   "x-fullcup-receipt": "01M7J38P5E4KGJ260XHGDPN579",
++   "x-fullcup-receipt-id": "01M7J38P5E4KGJ260XHGDPN579",
++   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
++   "x-ratelimit-limit": "60",
++   "x-ratelimit-remaining": "59",
++   "x-ratelimit-reset": "1794830040"
++  },
++  "files": [
++   {
++    "path": "qa/m2gf9-probes/aftermath.gen.json",
++    "lines": 56
++   }
++  ],
++  "skipped": []
++ },
++ {
++  "label": "m2gf9-259",
++  "at": "2026-11-16T11:54:55.012Z",
++  "model": "@cf/openai/gpt-oss-120b",
++  "status": 200,
++  "ms": 34960,
++  "usage": {
++   "prompt_tokens": 1484,
++   "completion_tokens": 1417,
++   "total_tokens": 2901,
++   "neurons": 143.83151245117188,
++   "prompt_tokens_details": {
++    "cached_tokens": 0
++   }
++  },
++  "headers": {
++   "x-fullcup-receipt": "01M7J3AK3ZYDYAM0QD6957MME4",
++   "x-fullcup-receipt-id": "01M7J3AK3ZYDYAM0QD6957MME4",
++   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
++   "x-ratelimit-limit": "60",
++   "x-ratelimit-remaining": "59",
++   "x-ratelimit-reset": "1794830100"
++  },
++  "files": [
++   {
++    "path": "qa/m2gf9-probes/aftermath.gen.json",
++    "lines": 56
++   }
++  ],
++  "skipped": []
++ },
++ {
++  "label": "m2gf9-260",
++  "at": "2026-11-16T11:55:21.280Z",
++  "model": "@cf/openai/gpt-oss-120b",
++  "status": 200,
++  "ms": 13357,
++  "usage": {
++   "prompt_tokens": 716,
++   "completion_tokens": 1413,
++   "total_tokens": 2129,
++   "neurons": 119.12256622314453,
++   "prompt_tokens_details": {
++    "cached_tokens": 0
++   }
++  },
++  "headers": {
++   "x-fullcup-receipt": "01M7J3C246C81BAH750SQB6CTH",
++   "x-fullcup-receipt-id": "01M7J3C246C81BAH750SQB6CTH",
++   "x-fullcup-seal-by": "2026-11-17T00:05:00.000Z",
++   "x-ratelimit-limit": "60",
++   "x-ratelimit-remaining": "59",
++   "x-ratelimit-reset": "1794830160"
++  },
++  "files": [
++   {
++    "path": "qa/m2gf9-probes/violin.gen.json",
++    "lines": 22
++   }
++  ],
++  "skipped": []
+  }
+ ]
+\ No newline at end of file
+diff --git a/src/server.js b/src/server.js
+index 331b2fa..91362ef 100644
+--- a/src/server.js
++++ b/src/server.js
+@@ -345,6 +345,8 @@ export function createServer({
+           culprit: c.culprit,
+           culpritName,
+           solution,
++          accusedName: suspect.name,
++          aftermath: correct ? null : (play.aftermath?.[suspectId] ?? null),
+           score: sc,
+           questions: sess.questions,
+         });

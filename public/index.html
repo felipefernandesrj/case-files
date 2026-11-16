@@ -769,7 +769,8 @@ function endContinue() {
   renderContinue();
   if (lastAccuseResult) renderVerdict(false);
   const L = contLabels();
-  contSay(L.over + '. ' + L.lost);
+  const am = lastAccuseResult && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
+  contSay(L.over + '. ' + (am ? am.headline + '. ' : '') + L.lost);
   document.getElementById('continue-close').focus();
 }
 function stopContinue() {
@@ -1423,6 +1424,26 @@ function renderVerdict(moveFocus = true) {
     verdict.appendChild(p3);
   }
   verdict.appendChild(p4);
+  const am = !correct && contState !== 'run' && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
+  if (am) {
+    const paper = document.createElement('div');
+    paper.className = 'aftermath';
+    if (lastAccuseResult.amShown) paper.classList.add('is-static');
+    lastAccuseResult.amShown = true;
+    const k = document.createElement('p');
+    k.className = 'aftermath-kicker';
+    k.textContent = lang === 'pt' ? 'Jornal da manhã seguinte' : "The next morning's paper";
+    const h = document.createElement('p');
+    h.className = 'aftermath-headline';
+    h.textContent = am.headline;
+    const b = document.createElement('p');
+    b.className = 'aftermath-body';
+    b.textContent = am.body;
+    paper.appendChild(k);
+    paper.appendChild(h);
+    paper.appendChild(b);
+    verdict.appendChild(paper);
+  }
   if (correct) {
     const stamp = document.createElement('div');
     stamp.className = 'case-closed-stamp';

@@ -1,0 +1,58 @@
+<<<FILE qa/m2gf9-probes/aftermath.gen.json>>>
+{
+  "violin": {
+    "lorenzo": {
+      "en": {
+        "headline": "Conductor dismissed amidst academy scandal",
+        "body": "Lorenzo Moretti was dismissed from his conductor position at the academy on Monday after the missing violin was discovered. Investigation revealed that Carlos Mendes, the janitor, had hidden the instrument in his cleaning cart during the night shift. Will the next conductor uncover the truth before the music fades forever?"
+      },
+      "pt": {
+        "headline": "Maestro é demitido em meio ao escândalo",
+        "body": "Lorenzo Moretti foi demitido de seu cargo de maestro na academia na segunda‑feira, quando o violino desaparecido foi encontrado. A investigação mostrou que o zelador Carlos Mendes escondeu o instrumento no seu carrinho de limpeza durante o turno da noite. Será que o próximo maestro descobrirá o segredo antes que a música se perca?"
+      }
+    },
+    "maya": {
+      "en": {
+        "headline": "Prodigy's career ends in shame",
+        "body": "Maya Santos was barred from performing on any professional stage after the violin theft was reported on Thursday. The night porter, Tomás Reyes, slipped the stolen violin into his cart and vanished before security arrived. Can a new prodigy rise from the shadows and restore the concert hall’s glory?"
+      },
+      "pt": {
+        "headline": "Carreira de prodígio termina em vergonha",
+        "body": "Maya Santos ficou proibida de tocar em qualquer palco profissional depois que o roubo do violino foi denunciado na quinta‑feira. O carregador noturno Tomás Reyes escondeu o violino roubado em seu carrinho e desapareceu antes da chegada da segurança. Será que um novo prodígio surgirá das sombras para devolver o brilho ao salão?"
+      }
+    }
+  },
+  "night-train": {
+    "helena": {
+      "en": {
+        "headline": "Conductor stripped of her rail license",
+        "body": "Helena Costa was stripped of her rail license on Friday after a sapphire vanished from the dining car during her shift. Inês Duarte, the dining car chef, escaped the station with the gemstone concealed inside a flour tin. Will the next conductor uncover the hidden treasure before the train departs again?"
+      },
+      "pt": {
+        "headline": "Condutora perde sua licença ferroviária",
+        "body": "Helena Costa perdeu sua licença ferroviária na sexta‑feira, quando a safira desapareceu do vagão‑restaurante durante seu turno. A cozinheira do vagão‑restaurante Inês Duarte fugiu da estação com a pedra preciosa escondida dentro de uma lata de farinha. Será que o próximo chefe de trem encontrará o tesouro antes que o trem parta novamente?"
+      }
+    },
+    "victor": {
+      "en": {
+        "headline": "Jeweller facing charges for grand theft",
+        "body": "Victor Hale watched his renowned jewellery business crumble on Tuesday after the theft of a priceless sapphire was exposed. The chef, Inês Duarte, was seen moving through the dining car carrying the stolen gem concealed in a flour container. Can the next jeweller recover the loss and restore the shop’s reputation?"
+      },
+      "pt": {
+        "headline": "Joalheiro enfrenta acusações de grande roubo",
+        "body": "Victor Hale viu seu prestigiado negócio de joias desmoronar na terça‑feira, quando o roubo de uma safira de valor incalculável foi revelado. A cozinheira do vagão‑restaurante Inês Duarte foi observada atravessando o vagão com a pedra preciosa escondida dentro de um recipiente de farinha. Será que o próximo joalheiro conseguirá recuperar o prejuízo e restaurar a reputação da loja?"
+      }
+    },
+    "tomas": {
+      "en": {
+        "headline": "Night porter banished from the rails",
+        "body": "Tomás Reyes was dismissed as night porter on Wednesday after the necklace theft was traced to his shift. Inês Duarte, the dining car chef, slipped the necklace into a flour tin and left the station unnoticed. Will the next porter be able to clear his name and catch the real culprit?"
+      },
+      "pt": {
+        "headline": "Mensageiro banido das linhas ferroviárias",
+        "body": "Tomás Reyes foi demitido como carregador noturno na quarta‑feira, depois que o roubo do colar foi atribuído ao seu turno. A cozinheira do vagão‑restaurante Inês Duarte escondeu o colar dentro de uma lata de farinha e saiu da estação sem ser notada. Será que o próximo carregador noturno provará sua inocência e descobrirá o verdadeiro ladrão?"
+      }
+    }
+  }
+}
+<<<END>>>

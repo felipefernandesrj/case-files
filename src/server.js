@@ -345,6 +345,8 @@ export function createServer({
           culprit: c.culprit,
           culpritName,
           solution,
+          accusedName: suspect.name,
+          aftermath: correct ? null : (play.aftermath?.[suspectId] ?? null),
           score: sc,
           questions: sess.questions,
         });

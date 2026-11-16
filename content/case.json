@@ -144,5 +144,27 @@
   "solution": {
     "en": "The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",
     "pt": "O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos."
+  },
+  "aftermath": {
+    "lorenzo": {
+      "en": {
+        "headline": "Conductor dismissed amidst academy scandal",
+        "body": "Lorenzo Moretti was dismissed from his conductor post at the academy on Monday after the violin was reported missing. While all eyes stayed on the accused, Carlos Mendes, the janitor, silently rolled the violin onto his cleaning cart, unnoticed. Somewhere, the real thief is still smiling. Reopen the file?"
+      },
+      "pt": {
+        "headline": "Maestro é demitido em meio ao escândalo",
+        "body": "Lorenzo Moretti foi demitido de seu cargo de maestro na academia na segunda-feira depois que o sumiço do violino foi denunciado. Enquanto todos olhavam para o acusado, o zelador Carlos Mendes discretamente colocou o violino em seu carrinho de limpeza, sem ser percebido. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+      }
+    },
+    "maya": {
+      "en": {
+        "headline": "Prodigy's career ends in shame",
+        "body": "Maya Santos was barred from performing on any professional stage after the violin theft was reported on Thursday. As the crowd focused on the accused prodigy, janitor Carlos Mendes gently pushed the stolen violin into his cleaning cart, unchallenged. Somewhere, the real thief is still smiling. Reopen the file?"
+      },
+      "pt": {
+        "headline": "Carreira de prodígio termina em vergonha",
+        "body": "Maya Santos ficou proibida de tocar em qualquer palco profissional depois que o roubo do violino foi denunciado na quinta-feira. Enquanto a multidão se concentrava na violinista acusada, o zelador Carlos Mendes deslizou o violino roubado para seu carrinho de limpeza, sem objeções. Em algum lugar, o verdadeiro ladrão ainda sorri. Reabrir o arquivo?"
+      }
+    }
   }
 }

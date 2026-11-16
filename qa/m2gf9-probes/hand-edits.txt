@@ -1,0 +1,7 @@
+Hand edits after calls 256-260 (model kept contradicting the case facts), not via key:
+1x "after the missing violin was discovered" -> "after the violin was reported missing"
+1x "quando o violino desaparecido foi encontrado" -> "depois que o sumiço do violino foi denunciado"
+1x "on the blamed porter" -> "on the accused prodigy"
+1x "no carregador acusado" -> "na violinista acusada"
+1x "Mensageiro banido das linhas ferroviárias" -> "Carregador noturno banido dos trilhos"
+3x "‑" -> "-"

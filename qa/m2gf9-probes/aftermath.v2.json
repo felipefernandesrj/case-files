@@ -1,0 +1,56 @@
+{
+  "violin": {
+    "lorenzo": {
+      "en": {
+        "headline": "Maestro dismissed amidst academy scandal",
+        "body": "Lorenzo lost his podium and his reputation at the academy last winter. Carlos Mendes wheeled the stolen instrument away in his cleaning cart during the chaos. Will you find the missing melody next time?"
+      },
+      "pt": {
+        "headline": "Maestro é demitido em meio ao escândalo",
+        "body": "Lorenzo perdeu seu pódio e sua reputação na academia no inverno passado. Carlos Mendes levou o instrumento roubado em seu carrinho de limpeza durante o caos. Você encontrará a melodia perdida na próxima vez?"
+      }
+    },
+    "maya": {
+      "en": {
+        "headline": "Prodigy's career ends in shame",
+        "body": "Maya Santos can no longer perform on any professional stage after the trial. O zelador escaped the scene with the violin hidden in his cleaning cart. Can you uncover the truth behind this lie?"
+      },
+      "pt": {
+        "headline": "Carreira de prodígio termina em vergonha",
+        "body": "Maya Santos não pode mais tocar em palcos profissionais após o julgamento. O zelador escapou da cena com o violino escondido em seu carrinho de limpeza. Você pode descobrir a verdade por trás desta mentira?"
+      }
+    }
+  },
+  "night-train": {
+    "helena": {
+      "en": {
+        "headline": "Chefe de trem stripped of her license",
+        "body": "Helena Costa will never command a locomotive again after the theft. A cozinheira do vagão-restaurante escaped the station with the sapphire hidden in a flour tin. Do you dare to chase the truth?"
+      },
+      "pt": {
+        "headline": "Chefe de trem perde sua licença",
+        "body": "Helena Costa nunca mais comandará uma locomotiva após o roubo. A cozinheira do vagão-restaurante escapou da estação com a safira escondida em uma lata de farinha. Você ousa perseguir a verdade?"
+      }
+    },
+    "victor": {
+      "en": {
+        "headline": "Jeweller facing charges for grand theft",
+        "body": "Victor Hale saw his precious business crumble into dust last month. A cozinheira do vagão-restaurante moved through the dining car with the stolen treasure. Will you catch the real thief this time?"
+      },
+      "pt": {
+        "headline": "Joalheiro enfrenta acusações de grande roubo",
+        "body": "Victor Hale viu seu negócio precioso desmoronar no mês passado. A cozinheira do vagão-restaurante passou pelo vagão restaurante com o tesouro roubado. Você pegará o verdadeiro ladrão desta vez?"
+      }
+    },
+    "tomas": {
+      "en": {
+        "headline": "Carregador noturno banished from the rails",
+        "body": "Tomás Reyes lost his livelihood and his dignity on the Southern Star. A cozinheira do vagão-restaurante slipped away unnoticed with the necklace in a flour tin. Can you solve this mystery before dawn?"
+      },
+      "pt": {
+        "headline": "Carregador noturno banido das linhas ferroviárias",
+        "body": "Tomás Reyes perdeu seu sustento e sua dignidade no Southern Star. A cozinheira do vagão-restaurante escapou sem ser notada com o colar na farinha. Você pode resolver este mistério antes do amanhecer?"
+      }
+    }
+  }
+}

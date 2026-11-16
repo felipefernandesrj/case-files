@@ -1,0 +1,5 @@
+<<<REPLACE public/css/game.css>>>
+@media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }
+.continue.is-over { top: auto; bottom: 16px; transform: translateX(-50%); }
+@media (max-width: 767px) { .continue.is-over { bottom: calc(var(--dock-h) + 12px); } }
+<<<END>>>

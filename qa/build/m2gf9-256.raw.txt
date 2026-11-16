@@ -1,0 +1,58 @@
+<<<FILE qa/m2gf9-probes/aftermath.gen.json>>>
+{
+  "violin": {
+    "lorenzo": {
+      "en": {
+        "headline": "Conductor Dismissed Amidst Academy Scandal",
+        "body": "Lorenzo Moretti lost his podium and his reputation forever. Carlos Mendes quietly wheeled the stolen instrument away in his cleaning cart. The academy remains silent while the music dies."
+      },
+      "pt": {
+        "headline": "Maestro é Demitido em Meio ao Escândalo",
+        "body": "Lorenzo Moretti perdeu seu pódio e sua reputação para sempre. Carlos Mendes levou o instrumento roubado em seu carrinho de limpeza. A academia permanece em silêncio enquanto a música morre."
+      }
+    },
+    "maya": {
+      "en": {
+        "headline": "Prodigy's Career Ends in Shame",
+        "body": "Maya Santos can no longer perform on any professional stage. The janitor escaped the scene with the violin hidden in his cart. A beautiful talent is lost to a lie."
+      },
+      "pt": {
+        "headline": "Carreira de Prodígio Termina em Vergonha",
+        "body": "Maya Santos não pode mais tocar em palcos profissionais. O zelador escapou da cena com o violino no carrinho. Um talento belo se perde em uma mentira."
+      }
+    }
+  },
+  "night-train": {
+    "helena": {
+      "en": {
+        "headline": "Conductor Stripped Of Her Rail License",
+        "body": "Helena Costa will never command a train again. Inês Duarte escaped the station with the sapphire hidden in a flour tin. The darkness of the tunnel hides the truth."
+      },
+      "pt": {
+        "headline": "Condutora Perde Sua Licença Ferroviária",
+        "body": "Helena Costa nunca mais comandará um trem. Inês Duarte escapou da estação com a safira na lata de farinha. A escuridão do túnel esconde a verdade."
+      }
+    },
+    "victor": {
+      "en": {
+        "headline": "Jeweller Facing Charges For Grand Theft",
+        "body": "Victor Hale saw his precious business crumble into dust. The chef moved through the dining car with the stolen treasure. Justice failed to catch the true thief."
+      },
+      "pt": {
+        "headline": "Joalheiro Enfrenta Acusações de Grande Roubo",
+        "body": "Victor Hale viu seu negócio precioso desmoronar. A chef passou pelo vagão restaurante com o tesouro roubado. A justiça falhou em pegar o verdadeiro ladrão."
+      }
+    },
+    "tomas": {
+      "en": {
+        "headline": "Night Porter Banished From The Rails",
+        "body": "Tomás Reyes lost his livelihood and his dignity. Inês Duarte slipped away unnoticed with the necklace in a flour tin. The Southern Star carries secrets toward the dawn."
+      },
+      "pt": {
+        "headline": "Mensageiro Banido Das Linhas Ferroviárias",
+        "body": "Tomás Reyes perdeu seu sustento e sua dignidade. Inês Duarte escapou sem ser notada com o colar na farinha. O Southern Star carrega segredos rumo ao amanhecer."
+      }
+    }
+  }
+}
+<<<END>>>

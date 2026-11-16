@@ -1,0 +1,82 @@
+Implement "wrong verdict aftermath" for the Case Files browser game (Node, no deps). Content is done: each case JSON now has `aftermath[suspectId] = {en:{headline,body}, pt:{headline,body}}` for every innocent suspect. Make these exact changes, emitted as literal search/replace blocks, one block per change, in this format:
+<<<REPLACE path>>>
+OLD (copied exactly from the current file)
+=====
+NEW
+<<<END>>>
+
+1. src/server.js, in the /api/accuse JSON response, between `solution,` and `score: sc,` add two lines (10 spaces indent): `accusedName: suspect.name,` and `aftermath: correct ? null : (play.aftermath?.[suspectId] ?? null),`.
+2. public/index.html, function renderVerdict: right after `  verdict.appendChild(p4);` and before `  if (correct) {`, when the verdict is wrong and the CONTINUE countdown is not running (contState !== 'run') and lastAccuseResult.aftermath exists, build `div.aftermath` holding three paragraphs: p.aftermath-kicker ("The next morning's paper" / pt "Jornal da manhã seguinte"), p.aftermath-headline, p.aftermath-body, text from aftermath[lang === 'pt' ? 'pt' : 'en'] via textContent. If lastAccuseResult.amShown is already true add class is-static to the div, then set lastAccuseResult.amShown = true. Use createElement/appendChild only, 2-space indent, const am for the story.
+3. public/index.html, function endContinue: replace `  contSay(L.over + '. ' + L.lost);` with a const am (same lookup, guarded for null lastAccuseResult) and `  contSay(L.over + '. ' + (am ? am.headline + '. ' : '') + L.lost);`.
+4. public/css/game.css: append at the end, after the last line, (use the last line of the file as OLD and repeat it in NEW) a newspaper clipping: .aftermath { margin: 20px auto 4px; max-width: 520px; padding: 14px 18px 16px; background: #e9dfc8; color: #1d1a16; border: 1px solid #b9a988; box-shadow: 0 6px 18px rgba(0,0,0,0.45); text-align: left; transform: rotate(-1.2deg); animation: cf-paper 700ms cubic-bezier(.2,1.2,.4,1) both; }, .aftermath.is-static { animation: none; }, kicker (monospace 0.72rem, letter-spacing 0.18em, uppercase, 2px solid #1d1a16 bottom border, padding-bottom 4px, margin 0 0 6px), headline (Georgia serif bold 1.35rem, line-height 1.2, margin 0 0 8px), body (Georgia serif 0.98rem, line-height 1.45, margin 0), all three color #1d1a16; @keyframes cf-paper from opacity 0 translateY(24px) rotate(-14deg) scale(0.6) to opacity 1 rotate(-1.2deg); and `@media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }`. One rule per line.
+
+Reference diff of the intended result (reproduce it exactly):
+diff --git a/public/css/game.css b/public/css/game.css
+index 02ecbca..84080ef 100644
+--- a/public/css/game.css
++++ b/public/css/game.css
+@@ -752,3 +752,10 @@ body[data-view="cabinet"] #steps {
+     scroll-behavior: auto !important;
+   }
+ }
++.aftermath { margin: 20px auto 4px; max-width: 520px; padding: 14px 18px 16px; background: #e9dfc8; color: #1d1a16; border: 1px solid #b9a988; box-shadow: 0 6px 18px rgba(0,0,0,0.45); text-align: left; transform: rotate(-1.2deg); animation: cf-paper 700ms cubic-bezier(.2,1.2,.4,1) both; }
++.aftermath.is-static { animation: none; }
++.aftermath-kicker { margin: 0 0 6px; padding-bottom: 4px; border-bottom: 2px solid #1d1a16; font-family: monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #1d1a16; }
++.aftermath-headline { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 1.35rem; line-height: 1.2; color: #1d1a16; }
++.aftermath-body { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 0.98rem; line-height: 1.45; color: #1d1a16; }
++@keyframes cf-paper { 0% { opacity: 0; transform: translateY(24px) rotate(-14deg) scale(0.6); } 100% { opacity: 1; transform: rotate(-1.2deg); } }
++@media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }
+diff --git a/public/index.html b/public/index.html
+index 68f73bb..ac923fb 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -769,7 +769,8 @@ function endContinue() {
+   renderContinue();
+   if (lastAccuseResult) renderVerdict(false);
+   const L = contLabels();
+-  contSay(L.over + '. ' + L.lost);
++  const am = lastAccuseResult && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
++  contSay(L.over + '. ' + (am ? am.headline + '. ' : '') + L.lost);
+   document.getElementById('continue-close').focus();
+ }
+ function stopContinue() {
+@@ -1423,6 +1424,26 @@ function renderVerdict(moveFocus = true) {
+     verdict.appendChild(p3);
+   }
+   verdict.appendChild(p4);
++  const am = !correct && contState !== 'run' && lastAccuseResult.aftermath ? lastAccuseResult.aftermath[lang === 'pt' ? 'pt' : 'en'] : null;
++  if (am) {
++    const paper = document.createElement('div');
++    paper.className = 'aftermath';
++    if (lastAccuseResult.amShown) paper.classList.add('is-static');
++    lastAccuseResult.amShown = true;
++    const k = document.createElement('p');
++    k.className = 'aftermath-kicker';
++    k.textContent = lang === 'pt' ? 'Jornal da manhã seguinte' : "The next morning's paper";
++    const h = document.createElement('p');
++    h.className = 'aftermath-headline';
++    h.textContent = am.headline;
++    const b = document.createElement('p');
++    b.className = 'aftermath-body';
++    b.textContent = am.body;
++    paper.appendChild(k);
++    paper.appendChild(h);
++    paper.appendChild(b);
++    verdict.appendChild(paper);
++  }
+   if (correct) {
+     const stamp = document.createElement('div');
+     stamp.className = 'case-closed-stamp';
+diff --git a/src/server.js b/src/server.js
+index 331b2fa..91362ef 100644
+--- a/src/server.js
++++ b/src/server.js
+@@ -345,6 +345,8 @@ export function createServer({
+           culprit: c.culprit,
+           culpritName,
+           solution,
++          accusedName: suspect.name,
++          aftermath: correct ? null : (play.aftermath?.[suspectId] ?? null),
+           score: sc,
+           questions: sess.questions,
+         });

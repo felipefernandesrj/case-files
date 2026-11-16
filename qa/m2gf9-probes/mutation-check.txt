@@ -1,0 +1,12 @@
+M1 no contState guard: caught (1 failing)
+M2 no is-static: caught (1 failing)
+M3 server drops aftermath: caught (2 failing)
+M4 server sends it on correct: NOT CAUGHT
+M5 always EN: caught (1 failing)
+M6 headline not announced: caught (1 failing)
+M7 no docking: caught (1 failing)
+M8 reduced motion animates: caught (1 failing)
+M9 maya story missing: caught (2 failing)
+M10 em dash in story: caught (1 failing)
+M11 wrong culprit named: caught (1 failing)
+M12 publicCase leaks: caught (2 failing)

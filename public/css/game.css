@@ -752,3 +752,12 @@ body[data-view="cabinet"] #steps {
     scroll-behavior: auto !important;
   }
 }
+.aftermath { margin: 20px auto 4px; max-width: 520px; padding: 14px 18px 16px; background: #e9dfc8; color: #1d1a16; border: 1px solid #b9a988; box-shadow: 0 6px 18px rgba(0,0,0,0.45); text-align: left; transform: rotate(-1.2deg); animation: cf-paper 700ms cubic-bezier(.2,1.2,.4,1) both; }
+.aftermath.is-static { animation: none; }
+.aftermath-kicker { margin: 0 0 6px; padding-bottom: 4px; border-bottom: 2px solid #1d1a16; font-family: monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #1d1a16; }
+.aftermath-headline { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 1.35rem; line-height: 1.2; color: #1d1a16; }
+.aftermath-body { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 0.98rem; line-height: 1.45; color: #1d1a16; }
+@keyframes cf-paper { 0% { opacity: 0; transform: translateY(24px) rotate(-14deg) scale(0.6); } 100% { opacity: 1; transform: rotate(-1.2deg); } }
+@media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }
+.continue.is-over { top: auto; bottom: 16px; transform: translateX(-50%); }
+@media (max-width: 767px) { .continue.is-over { bottom: calc(var(--dock-h) + 12px); } }
