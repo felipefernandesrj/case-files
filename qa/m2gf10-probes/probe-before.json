@@ -1,0 +1,372 @@
+{
+ "1280-en": {
+  "correct": {
+   "lines": [
+    "Correct!",
+    "Culprit: Carlos Mendes",
+    "Solution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",
+    "Score: 100"
+   ],
+   "stamp": {
+    "text": "CASE CLOSED",
+    "rect": [
+     535,
+     133,
+     274,
+     87
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Your best in English: 100 points with 0 questions.",
+    "questions-used:Questions used: 0",
+    "verdict:Correct!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stol",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  },
+  "afterLangSwitch": {
+   "lines": [
+    "Você acertou!",
+    "Culpado: Carlos Mendes",
+    "Solução: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",
+    "Pontuação: 100"
+   ],
+   "stamp": {
+    "text": "CASO ENCERRADO",
+    "rect": [
+     504,
+     393,
+     335,
+     96
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "questions-used:Perguntas feitas: 0",
+    "verdict:Você acertou!Culpado: Carlos MendesSolução: The culprit is Carlos Mendes, the janitor. He ",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  }
+ },
+ "1280-pt": {
+  "correct": {
+   "lines": [
+    "Você acertou!",
+    "Culpado: Carlos Mendes",
+    "Solução: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos.",
+    "Pontuação: 100"
+   ],
+   "stamp": {
+    "text": "CASO ENCERRADO",
+    "rect": [
+     504,
+     107,
+     335,
+     96
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Seu recorde em português: 100 pontos com 0 perguntas.",
+    "questions-used:Perguntas feitas: 0",
+    "verdict:Você acertou!Culpado: Carlos MendesSolução: O culpado é Carlos Mendes, o zelador. Ele roub",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  },
+  "afterLangSwitch": {
+   "lines": [
+    "Correct!",
+    "Culprit: Carlos Mendes",
+    "Solution: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos.",
+    "Score: 100"
+   ],
+   "stamp": {
+    "text": "CASE CLOSED",
+    "rect": [
+     535,
+     397,
+     274,
+     87
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Your best in English: 100 points with 0 questions.",
+    "questions-used:Questions used: 0",
+    "verdict:Correct!Culprit: Carlos MendesSolution: O culpado é Carlos Mendes, o zelador. Ele roubou o",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  }
+ },
+ "390-en": {
+  "correct": {
+   "lines": [
+    "Correct!",
+    "Culprit: Carlos Mendes",
+    "Solution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",
+    "Score: 100"
+   ],
+   "stamp": {
+    "text": "CASE CLOSED",
+    "rect": [
+     58,
+     77,
+     274,
+     87
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Your best in English: 100 points with 0 questions.",
+    "questions-used:Questions used: 0",
+    "verdict:Correct!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stol",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  },
+  "afterLangSwitch": {
+   "lines": [
+    "Você acertou!",
+    "Culpado: Carlos Mendes",
+    "Solução: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",
+    "Pontuação: 100"
+   ],
+   "stamp": {
+    "text": "CASO ENCERRADO",
+    "rect": [
+     40,
+     376,
+     310,
+     121
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Seu recorde em português: 100 pontos com 0 perguntas.",
+    "questions-used:Perguntas feitas: 0",
+    "verdict:Você acertou!Culpado: Carlos MendesSolução: The culprit is Carlos Mendes, the janitor. He ",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  }
+ },
+ "390-pt": {
+  "correct": {
+   "lines": [
+    "Você acertou!",
+    "Culpado: Carlos Mendes",
+    "Solução: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos.",
+    "Pontuação: 100"
+   ],
+   "stamp": {
+    "text": "CASO ENCERRADO",
+    "rect": [
+     40,
+     5,
+     310,
+     121
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Seu recorde em português: 100 pontos com 0 perguntas.",
+    "questions-used:Perguntas feitas: 0",
+    "verdict:Você acertou!Culpado: Carlos MendesSolução: O culpado é Carlos Mendes, o zelador. Ele roub",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  },
+  "afterLangSwitch": {
+   "lines": [
+    "Correct!",
+    "Culprit: Carlos Mendes",
+    "Solution: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos.",
+    "Score: 100"
+   ],
+   "stamp": {
+    "text": "CASE CLOSED",
+    "rect": [
+     58,
+     363,
+     274,
+     87
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Your best in English: 100 points with 0 questions.",
+    "questions-used:Questions used: 0",
+    "verdict:Correct!Culprit: Carlos MendesSolution: O culpado é Carlos Mendes, o zelador. Ele roubou o",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  }
+ },
+ "extra": {
+  "reducedMotion": {
+   "lines": [
+    "Correct!",
+    "Culprit: Carlos Mendes",
+    "Solution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.",
+    "Score: 100"
+   ],
+   "stamp": {
+    "text": "CASE CLOSED",
+    "rect": [
+     535,
+     45,
+     274,
+     87
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Your best in English: 100 points with 0 questions.",
+    "questions-used:Questions used: 0",
+    "verdict:Correct!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stol",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  },
+  "wrongDuringCountdown": {
+   "lines": [
+    "Wrong!",
+    "Score: 0"
+   ],
+   "stamp": null,
+   "arrest": null,
+   "live": "Continue? You have 10 seconds. Enter tries the case again, Escape gives up.",
+   "ariaLive": [
+    "best-hud:Your best in English: 100 points with 0 questions.",
+    "questions-used:Questions used: 0",
+    "verdict:Wrong!Score: 0",
+    "progress-count:2/6",
+    "continue-live:Continue? You have 10 seconds. Enter tries the case again, Escape gives up."
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Carlos Mendes"
+   }
+  },
+  "nightTrainInes": {
+   "lines": [
+    "Correct!",
+    "Culprit: Inês Duarte",
+    "Solution: Inês Duarte took the necklace during the tunnel blackout with a copied key and hid it in a flour tin; the apron seen by Tomás and the flour on the safe point to her; Helena, Victor and Tomás are cleared by each other's accounts.",
+    "Score: 100"
+   ],
+   "stamp": {
+    "text": "CASE CLOSED",
+    "rect": [
+     535,
+     133,
+     274,
+     87
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Your best in English: 100 points with 0 questions.",
+    "questions-used:Questions used: 0",
+    "verdict:Correct!Culprit: Inês DuarteSolution: Inês Duarte took the necklace during the tunnel blac",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Inês Duarte"
+   }
+  },
+  "nightTrainInesPt390": {
+   "lines": [
+    "Você acertou!",
+    "Culpado: Inês Duarte",
+    "Solução: Inês Duarte pegou o colar durante o apagão no túnel com uma chave copiada e o escondeu em uma lata de farinha; o avental visto por Tomás e a farinha no cofre a incriminam; Helena, Victor e Tomás estão inocentados pelos depoimentos uns dos outros.",
+    "Pontuação: 100"
+   ],
+   "stamp": {
+    "text": "CASO ENCERRADO",
+    "rect": [
+     40,
+     49,
+     310,
+     121
+    ],
+    "anim": "cf-stamp",
+    "recreated": true
+   },
+   "arrest": null,
+   "live": null,
+   "ariaLive": [
+    "best-hud:Seu recorde em português: 100 pontos com 0 perguntas.",
+    "questions-used:Perguntas feitas: 0",
+    "verdict:Você acertou!Culpado: Inês DuarteSolução: Inês Duarte pegou o colar durante o apagão no tú",
+    "progress-count:2/6"
+   ],
+   "apiCulprit": {
+    "culprit": "carlos",
+    "culpritName": "Inês Duarte"
+   }
+  }
+ }
+}

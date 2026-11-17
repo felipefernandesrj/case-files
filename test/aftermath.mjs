@@ -100,9 +100,9 @@ class El {
 function runVerdict({ correct, state, lang, shown = false }) {
   const verdict = new El('div');
   const res = { correct, culpritName: 'Carlos Mendes', solution: 'x', score: 0, amShown: shown, aftermath: { en: { headline: 'EN head', body: 'EN body' }, pt: { headline: 'PT head', body: 'PT body' } } };
-  const fn = new Function('document', 'iconSvg', 'showStep', 'lastAccuseResult', 'contState', 'lang', fnSource('renderVerdict') + '\nrenderVerdict(false); return lastAccuseResult;');
+  const fn = new Function('document', 'iconSvg', 'showStep', 'lastAccuseResult', 'contState', 'lang', 'artCase', 'whenArt', fnSource('renderVerdict') + '\nrenderVerdict(false); return lastAccuseResult;');
   const doc = { getElementById: () => verdict, createElement: t => new El(t), createTextNode: t => ({ textContent: t }) };
-  fn(doc, () => new El('svg'), () => {}, res, state, lang);
+  fn(doc, () => new El('svg'), () => {}, res, state, lang, () => null, () => {});
   return { paper: verdict.children.find(c => c.className === 'aftermath'), res };
 }
 

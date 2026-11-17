@@ -342,9 +342,10 @@ export function createServer({
 
         return sendJSON(res, 200, {
           correct,
-          culprit: c.culprit,
+          culprit: play.culprit,
           culpritName,
           solution,
+          solutions: play.solution ?? null,
           accusedName: suspect.name,
           aftermath: correct ? null : (play.aftermath?.[suspectId] ?? null),
           score: sc,

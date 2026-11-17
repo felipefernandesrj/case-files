@@ -1,0 +1,127 @@
+// M2 game feel sprint 10: handcuffed culprit under the CASE CLOSED stamp on a correct verdict
+import fs from 'node:fs';
+import path from 'node:path';
+import { once } from 'node:events';
+import { fileURLToPath } from 'node:url';
+import { createServer } from '../src/server.js';
+
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const html = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+const css = fs.readFileSync(path.join(root, 'public/css/game.css'), 'utf8');
+const FILES = { violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' };
+const results = [];
+const must = (ok, msg) => { if (!ok) throw new Error(msg); };
+async function check(name, fn) { try { await fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+function fnSource(name) {
+  const i = html.indexOf(`function ${name}(`);
+  must(i !== -1, `function ${name} missing`);
+  let d = 0;
+  for (let k = html.indexOf('{', i); k < html.length; k++) {
+    if (html[k] === '{') d++;
+    else if (html[k] === '}' && --d === 0) return html.slice(i, k + 1);
+  }
+  throw new Error('unbalanced ' + name);
+}
+function pngInfo(file) {
+  const b = fs.readFileSync(file);
+  must(b.readUInt32BE(0) === 0x89504e47, file + ' not a PNG');
+  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20), colorType: b[25] };
+}
+
+await check('generated arrest sprites for both culprits: 128 and 256 px, RGBA, receipt in the manifest', () => {
+  const man = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/manifest.json'), 'utf8'));
+  for (const [id, f] of Object.entries(FILES)) {
+    const c = JSON.parse(fs.readFileSync(path.join(root, f), 'utf8'));
+    const base = path.join(root, `public/assets/characters/${id}-${c.culprit}-arrest`);
+    const one = pngInfo(base + '.png'); const two = pngInfo(base + '@2x.png');
+    must(one.w === 128 && one.h === 128 && one.colorType === 6, `${id} 1x ${one.w}x${one.h} type ${one.colorType}`);
+    must(two.w === 256 && two.h === 256 && two.colorType === 6, `${id} 2x`);
+    const item = man.items.find(i => i.id === `characters/${id}-${c.culprit}-arrest`);
+    must(item && /^01[0-9A-Z]{24}$/.test(item.receipt_id), `${id} manifest receipt`);
+  }
+});
+
+await check('accuse sends the culprit id of the session case and the solution in both languages', async () => {
+  const server = createServer({ caseFile: path.join(root, 'content/case.json'), mock: true });
+  server.listen(0); await once(server, 'listening');
+  const base = `http://localhost:${server.address().port}`;
+  const post = async (p, b) => (await fetch(base + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) })).json();
+  try {
+    const v = JSON.parse(fs.readFileSync(path.join(root, FILES.violin), 'utf8'));
+    let s = (await post('/api/session', {})).sessionId;
+    let d = await post('/api/accuse', { sessionId: s, suspectId: v.culprit, lang: 'en' });
+    must(d.correct && d.culprit === 'carlos', 'violin culprit ' + d.culprit);
+    must(d.solutions && d.solutions.en === v.solution.en && d.solutions.pt === v.solution.pt, 'solutions en+pt');
+    s = (await post('/api/session', { case: 'night-train' })).sessionId;
+    d = await post('/api/accuse', { sessionId: s, suspectId: 'ines', lang: 'pt' });
+    must(d.correct && d.culprit === 'ines', 'night train culprit ' + d.culprit);
+  } finally { server.close(); }
+});
+
+class El {
+  constructor(tag) { this.tag = tag; this.children = []; this.attrs = {}; this.textContent = ''; this.className = ''; this.hidden = false; this.style = { setProperty() {} }; const set = new Set(); this.cls = set; this.classList = { add: c => set.add(c), toggle: (c, on) => (on ? set.add(c) : set.delete(c)), contains: c => set.has(c) }; }
+  set innerHTML(v) { this.children = []; }
+  appendChild(c) { this.children.push(c); return c; }
+  insertBefore(c, ref) { const i = this.children.indexOf(ref); this.children.splice(i < 0 ? this.children.length : i, 0, c); return c; }
+  setAttribute(k, v) { this.attrs[k] = v; }
+  focus() {}
+}
+function runVerdict({ correct, lang, shown = false, culprit = 'carlos', art = 'violin', solutions }) {
+  const verdict = new El('div');
+  const res = { correct, culprit, culpritName: 'Carlos Mendes', solution: 'old', solutions, score: 100, ccShown: shown, aftermath: null };
+  const urls = [];
+  const whenArt = (url, apply) => { urls.push(url); if (url) apply(url); };
+  const fn = new Function('document', 'iconSvg', 'showStep', 'lastAccuseResult', 'contState', 'lang', 'artCase', 'whenArt', fnSource('renderVerdict') + '\nrenderVerdict(false); return lastAccuseResult;');
+  const doc = { getElementById: () => verdict, createElement: t => new El(t), createTextNode: t => ({ textContent: t }) };
+  fn(doc, () => new El('svg'), () => {}, res, 'off', lang, () => art, whenArt);
+  return { verdict, arrest: verdict.children.find(c => c.className === 'arrest'), res, urls };
+}
+
+await check('correct verdict: culprit sprite in handcuffs with the CASE CLOSED stamp on top', () => {
+  const { arrest, urls, res } = runVerdict({ correct: true, lang: 'en' });
+  must(arrest, 'no arrest block');
+  must(urls[0] === '/assets/characters/violin-carlos-arrest.png', 'url ' + urls[0]);
+  const [img, stamp, cap] = arrest.children;
+  must(img && img.className === 'arrest-sprite' && img.src === urls[0] && img.srcset === '/assets/characters/violin-carlos-arrest@2x.png 2x', 'sprite img');
+  must(img.alt === '' && img.width === 224 && img.height === 224, 'img alt/size');
+  must(stamp.className === 'case-closed-stamp' && stamp.textContent === 'CASE CLOSED' && stamp.attrs['aria-hidden'] === 'true', 'stamp');
+  must(cap.className === 'arrest-caption' && cap.textContent === 'Case closed: Carlos Mendes is led away in handcuffs.', 'caption');
+  must(arrest.cls.has('has-art') && !arrest.cls.has('is-static') && res.ccShown === true, 'first show animates');
+});
+
+await check('PT texts and no replay on a re-render', () => {
+  const { arrest } = runVerdict({ correct: true, lang: 'pt', shown: true });
+  must(arrest.children[1].textContent === 'CASO ENCERRADO', 'pt stamp');
+  must(arrest.children[2].textContent === 'Caso encerrado: Carlos Mendes sai com as mãos algemadas.', 'pt caption');
+  must(arrest.cls.has('is-static'), 'replayed');
+});
+
+await check('no sprite request for a wrong verdict, a case without art or an unsafe id; stamp still shown', () => {
+  const w = runVerdict({ correct: false, lang: 'en' });
+  must(!w.arrest && w.urls.length === 0, 'wrong verdict has an arrest');
+  for (const o of [{ art: null }, { culprit: '../x' }]) {
+    const r = runVerdict({ correct: true, lang: 'en', ...o });
+    must(r.urls.length === 1 && !r.urls[0], 'requested ' + r.urls[0]);
+    must(r.arrest && r.arrest.children.length === 2 && r.arrest.children[0].textContent === 'CASE CLOSED' && !r.arrest.cls.has('has-art'), 'stamp without art');
+  }
+});
+
+await check('Solution line follows the current language', () => {
+  const { verdict } = runVerdict({ correct: true, lang: 'pt', solutions: { en: 'EN sol', pt: 'PT sol' } });
+  must(verdict.children.some(c => c.textContent === 'Solução: PT sol'), 'pt solution');
+  const old = runVerdict({ correct: true, lang: 'pt' });
+  must(old.verdict.children.some(c => c.textContent === 'Solução: old'), 'fallback to solution');
+});
+
+await check('arrest styles: pixelated, stamp over the sprite, animated once, still for reduced motion', () => {
+  must(/\.arrest-sprite \{[^}]*image-rendering: pixelated;[^}]*animation: cf-arrest/.test(css), 'sprite rule');
+  must(/\.arrest\.has-art \.case-closed-stamp \{ position: absolute;/.test(css), 'stamp on top');
+  must(/\.arrest\.is-static \.arrest-sprite, \.arrest\.is-static \.case-closed-stamp \{ animation: none; \}/.test(css), 'static');
+  must(/@keyframes cf-arrest/.test(css), 'keyframes');
+  must(/@media \(prefers-reduced-motion: reduce\) \{ \.arrest-sprite, \.arrest \.case-closed-stamp \{ animation: none; \} \}/.test(css), 'reduced motion');
+});
+
+const failed = results.filter(r => r.startsWith('FAIL'));
+results.forEach(r => console.log(r));
+console.log(`${results.length - failed.length} passed, ${failed.length} failed`);
+process.exit(failed.length ? 1 : 0);

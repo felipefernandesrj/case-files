@@ -1,0 +1,15 @@
+{
+  "id": "night-train-ines",
+  "seed": 3811607,
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "steps": 4,
+  "prompt": "1990s Capcom CPS-2 beat-em-up arcade pixel art, Cadillacs and Dinosaurs era, gothic-noir detective mystery game, chunky pixels, bold 1-2 pixel ink-black outline, hard edges, no anti-aliasing, limited palette of ink black, cream parchment, lamp gold, wax-seal red, steel blue-grey, cool steel grey, ordered dithering, arrested culprit sprite, single centered figure from the waist up, woman in her late thirties, warm brown skin, dark hair tied up, clean white chef's jacket, defeated look, head bowed, both wrists locked together in shiny steel handcuffs with a short chain, cuffed hands held low in front of the waist and clearly visible, same costume as the fighter-select portrait, lighting from the upper left, whole figure visible with an empty margin, no other people, no text, pure flat solid #00FF00 chroma-key green background filling the whole frame.",
+  "http_status": 200,
+  "receipt_id": "01M7KD33YQ7QEHW3QSQP261Y4M",
+  "created_brt": "2026-11-16 21:04:18",
+  "secs": 2.9,
+  "seal_by": "2026-11-18 00:05Z",
+  "raw_path": "/workspace/casefiles-qa/run38/art/raw/arrest__night-train-ines.s3811607.jpg",
+  "cost_micro_usd": 1901,
+  "price_source": "unit_rate"
+}

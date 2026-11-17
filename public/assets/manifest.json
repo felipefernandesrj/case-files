@@ -1381,6 +1381,36 @@
         "native": "assets/titles/violin-stage.png"
       },
       "method": "pixel-finish (no key)"
+    },
+    {
+      "id": "characters/violin-carlos-arrest",
+      "kind": "sprite",
+      "receipt_id": "01M7KD6DSPF7KVYPKXSS947AGS",
+      "attempt": "orig",
+      "files": {
+        "arrest": "assets/characters/violin-carlos-arrest.png"
+      },
+      "method": "model:toonout",
+      "residual_green": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "characters/night-train-ines-arrest",
+      "kind": "sprite",
+      "receipt_id": "01M7KCXMKP5GP6J6AD6WH12KC2",
+      "attempt": "orig",
+      "files": {
+        "arrest": "assets/characters/night-train-ines-arrest.png"
+      },
+      "method": "model:toonout",
+      "residual_green": 0.0,
+      "size": [
+        128,
+        128
+      ]
     }
   ],
   "atlas": {

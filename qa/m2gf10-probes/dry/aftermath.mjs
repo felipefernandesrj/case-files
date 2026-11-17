@@ -1,0 +1,141 @@
+// M2 game feel sprint 9: wrong verdict aftermath (newspaper story after GAME OVER)
+import fs from 'node:fs';
+import path from 'node:path';
+import { once } from 'node:events';
+import { fileURLToPath } from 'node:url';
+import { createServer } from '../src/server.js';
+import { loadCase, publicCase } from '../src/case.js';
+
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const html = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+const css = fs.readFileSync(path.join(root, 'public/css/game.css'), 'utf8');
+const FILES = { violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' };
+const results = [];
+const must = (ok, msg) => { if (!ok) throw new Error(msg); };
+async function check(name, fn) { try { await fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+const words = s => s.trim().split(/\s+/).length;
+function fnSource(name) {
+  const i = html.indexOf(`function ${name}(`);
+  must(i !== -1, `function ${name} missing`);
+  let d = 0;
+  for (let k = html.indexOf('{', i); k < html.length; k++) {
+    if (html[k] === '{') d++;
+    else if (html[k] === '}' && --d === 0) return html.slice(i, k + 1);
+  }
+  throw new Error('unbalanced ' + name);
+}
+
+for (const [id, f] of Object.entries(FILES)) {
+  const c = JSON.parse(fs.readFileSync(path.join(root, f), 'utf8'));
+  const culprit = c.suspects.find(s => s.id === c.culprit);
+  const first = culprit.name.split(' ')[0];
+  await check(`${id}: a story for every innocent and none for the culprit`, () => {
+    must(c.aftermath && typeof c.aftermath === 'object', 'aftermath missing');
+    const innocents = c.suspects.filter(s => s.id !== c.culprit).map(s => s.id).sort();
+    must(Object.keys(c.aftermath).sort().join() === innocents.join(), 'keys ' + Object.keys(c.aftermath).join());
+  });
+  await check(`${id}: EN and PT headline and body, sized and clean`, () => {
+    for (const [sid, st] of Object.entries(c.aftermath)) for (const l of ['en', 'pt']) {
+      const x = st[l];
+      must(x && x.headline && x.body, `${sid} ${l} empty`);
+      must(words(x.headline) <= 9, `${sid} ${l} headline long`);
+      must(words(x.body) >= 40 && words(x.body) <= 75, `${sid} ${l} body ${words(x.body)} words`);
+      must(!/[\u2010-\u2015;]/.test(x.headline + x.body), `${sid} ${l} dash or semicolon`);
+    }
+  });
+  await check(`${id}: every story names the accused and the real culprit, no other suspect`, () => {
+    for (const [sid, st] of Object.entries(c.aftermath)) for (const l of ['en', 'pt']) {
+      const accused = c.suspects.find(s => s.id === sid).name.split(' ')[0];
+      const b = st[l].body;
+      must(b.includes(accused), `${sid} ${l} accused not named`);
+      must(b.includes(first), `${sid} ${l} culprit not named`);
+      for (const s of c.suspects) if (s.id !== sid && s.id !== c.culprit) must(!b.includes(s.name.split(' ')[0]), `${sid} ${l} names ${s.name}`);
+    }
+  });
+  await check(`${id}: the public case never carries the aftermath`, () => {
+    const pc = loadCase(path.join(root, f));
+    for (const l of ['en', 'pt']) must(!JSON.stringify(publicCase(pc, l)).includes(c.aftermath[Object.keys(c.aftermath)[0]][l].headline), 'leak ' + l);
+  });
+}
+
+await check('accuse returns the story of the wrongly accused, null when right', async () => {
+  const server = createServer({ caseFile: path.join(root, 'content/case.json'), mock: true });
+  server.listen(0); await once(server, 'listening');
+  const base = `http://localhost:${server.address().port}`;
+  const post = async (p, b) => (await fetch(base + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) })).json();
+  try {
+    const c = JSON.parse(fs.readFileSync(path.join(root, 'content/case.json'), 'utf8'));
+    const wrong = c.suspects.find(s => s.id !== c.culprit);
+    let s = (await post('/api/session', {})).sessionId;
+    let d = await post('/api/accuse', { sessionId: s, suspectId: wrong.id, lang: 'pt' });
+    must(!d.correct, 'should be wrong');
+    must(d.accusedName === wrong.name, 'accusedName');
+    must(d.aftermath && d.aftermath.en.headline === c.aftermath[wrong.id].en.headline && d.aftermath.pt.body === c.aftermath[wrong.id].pt.body, 'aftermath en+pt');
+    s = (await post('/api/session', {})).sessionId;
+    d = await post('/api/accuse', { sessionId: s, suspectId: c.culprit, lang: 'en' });
+    must(d.correct && d.aftermath === null, 'correct must carry null');
+  } finally { server.close(); }
+});
+
+await check('night train session gets its own aftermath', async () => {
+  const server = createServer({ caseFile: path.join(root, 'content/case.json'), mock: true });
+  server.listen(0); await once(server, 'listening');
+  const base = `http://localhost:${server.address().port}`;
+  const post = async (p, b) => (await fetch(base + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) })).json();
+  try {
+    const nt = JSON.parse(fs.readFileSync(path.join(root, FILES['night-train']), 'utf8'));
+    const s = (await post('/api/session', { case: 'night-train' })).sessionId;
+    const d = await post('/api/accuse', { sessionId: s, suspectId: 'victor', lang: 'en' });
+    must(d.aftermath && d.aftermath.en.headline === nt.aftermath.victor.en.headline, 'night train victor story');
+  } finally { server.close(); }
+});
+
+class El {
+  constructor(tag) { this.tag = tag; this.children = []; this.textContent = ''; this.className = ''; this.hidden = false; this.style = { setProperty() {} }; const set = new Set(); this.cls = set; this.classList = { add: c => set.add(c), toggle: (c, on) => (on ? set.add(c) : set.delete(c)), contains: c => set.has(c) }; }
+  set innerHTML(v) { this.children = []; }
+  appendChild(c) { this.children.push(c); return c; }
+  setAttribute() {}
+  focus() {}
+}
+function runVerdict({ correct, state, lang, shown = false }) {
+  const verdict = new El('div');
+  const res = { correct, culpritName: 'Carlos Mendes', solution: 'x', score: 0, amShown: shown, aftermath: { en: { headline: 'EN head', body: 'EN body' }, pt: { headline: 'PT head', body: 'PT body' } } };
+  const fn = new Function('document', 'iconSvg', 'showStep', 'lastAccuseResult', 'contState', 'lang', 'artCase', 'whenArt', fnSource('renderVerdict') + '\nrenderVerdict(false); return lastAccuseResult;');
+  const doc = { getElementById: () => verdict, createElement: t => new El(t), createTextNode: t => ({ textContent: t }) };
+  fn(doc, () => new El('svg'), () => {}, res, state, lang, () => null, () => {});
+  return { paper: verdict.children.find(c => c.className === 'aftermath'), res };
+}
+
+await check('renderVerdict shows the paper only after GAME OVER of a wrong verdict', () => {
+  must(!runVerdict({ correct: false, state: 'run', lang: 'en' }).paper, 'shown during countdown');
+  must(!runVerdict({ correct: true, state: 'off', lang: 'en' }).paper, 'shown on a correct verdict');
+  const { paper, res } = runVerdict({ correct: false, state: 'over', lang: 'en' });
+  must(paper, 'missing at GAME OVER');
+  must(paper.children.map(c => c.textContent).join('|') === "The next morning's paper|EN head|EN body", 'en texts');
+  must(!paper.cls.has('is-static') && res.amShown === true, 'first show animates');
+  must(runVerdict({ correct: false, state: 'off', lang: 'en' }).paper, 'kept after Close');
+});
+
+await check('re-render follows the language and does not replay the animation', () => {
+  const { paper } = runVerdict({ correct: false, state: 'over', lang: 'pt', shown: true });
+  must(paper.children.map(c => c.textContent).join('|') === 'Jornal da manhã seguinte|PT head|PT body', 'pt texts');
+  must(paper.cls.has('is-static'), 'replayed');
+});
+
+await check('GAME OVER announcement reads the headline', () => {
+  const src = fnSource('endContinue');
+  must(/am \? am\.headline/.test(src) && src.includes("contSay(L.over + '. ' + (am ? am.headline + '. ' : '') + L.lost)"), 'headline not announced');
+});
+
+await check('paper styles: readable, animated once, still for reduced motion, GAME OVER box docked', () => {
+  must(/\.aftermath \{[^}]*background: #e9dfc8[^}]*color: #1d1a16/.test(css), 'paper colours');
+  must(/\.aftermath\.is-static \{ animation: none; \}/.test(css), 'static');
+  must(/@media \(prefers-reduced-motion: reduce\) \{ \.aftermath \{ animation: none; \} \}/.test(css), 'reduced motion');
+  must(/@keyframes cf-paper/.test(css), 'keyframes');
+  must(/\.continue\.is-over \{ top: auto; bottom: 16px;/.test(css) && /\.continue\.is-over \{ bottom: calc\(var\(--dock-h\) \+ 12px\); \}/.test(css), 'GAME OVER box docked');
+});
+
+const failed = results.filter(r => r.startsWith('FAIL'));
+results.forEach(r => console.log(r));
+console.log(`${results.length - failed.length} passed, ${failed.length} failed`);
+process.exit(failed.length ? 1 : 0);

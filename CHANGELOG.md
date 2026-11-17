@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.19 (M2 game feel, sprint 10: the culprit in handcuffs)
+- A correct accusation now shows the culprit led away in handcuffs, with the CASE CLOSED stamp slammed on top of the sprite, and a line under it: "Case closed: Carlos Mendes is led away in handcuffs." (PT "Caso encerrado: Carlos Mendes sai com as mãos algemadas."). The stamp stays hidden from screen readers; the line is read with the verdict.
+- Two new sprites, one per culprit (Carlos Mendes for The Vanishing Violin, Inês Duarte for The Night Train), generated with flux-1-schnell through the Cup key on a chroma-key background in the same 90s arcade noir style, background removed with the integrated scripts/assets pipeline (ToonOut fallback, the figures touch the plate edge), pixel finished at 128 px like the portraits, 1x and 2x, receipts in public/assets/manifest.json. Nothing is generated while you play.
+- The sprite slides up, then the stamp lands. A language switch no longer replays the stamp (it did before), and with reduced motion both simply appear. A case without the sprite keeps the plain stamp.
+- Fixed: after a language switch the Solution line kept the language of the accusation. The server now sends the solution in both languages and the line follows the switch.
+- Fixed: the accuse answer always named the culprit id of the default case (Night Train games got "carlos"); it now uses the case of the session.
+- New test/arrest.mjs with 7 checks (sprites and receipts, accuse response for both cases, sprite and stamp order, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution language, styles and reduced motion). test/aftermath.mjs sandbox knows the two new globals. The automated suite now has 234 checks.
+
 ## 0.4.18 (M2 game feel, sprint 9: a story for a wrong verdict)
 - A wrong verdict now has consequences. When the CONTINUE? countdown ends (Give up, Escape or the count reaching 0), the verdict shows a newspaper clipping from the next morning: what happened to the innocent suspect you accused, and how the real culprit got away. Every innocent suspect of both cases has their own story in English and Portuguese (5 stories, 10 texts).
 - The stories live in each case file under `aftermath` and are only sent by the server with the answer to a wrong accusation, never with the case itself. They are not shown during the countdown, so Try again stays a real second chance.

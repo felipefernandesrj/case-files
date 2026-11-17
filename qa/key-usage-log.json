@@ -4948,5 +4948,243 @@
    "x-ratelimit-reset": "1794443040"
   },
   "error": null
+ },
+ {
+  "at": "2026-11-17T00:01:56Z",
+  "purpose": "m2gf10-art:night-train-ines:seed3811603",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 200,
+  "ms": 41100,
+  "usage": null,
+  "cost": 0.001901,
+  "headers": {
+   "x-fullcup-receipt": "01M7KCXMKP5GP6J6AD6WH12KC2",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true
+ },
+ {
+  "at": "2026-11-17T00:02:21Z",
+  "purpose": "m2gf10-art:night-train-ines:seed3811604",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 200,
+  "ms": 17300,
+  "usage": null,
+  "cost": 0.001901,
+  "headers": {
+   "x-fullcup-receipt": "01M7KCZ4CYWRSZGCED7P4WE7JS",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:02:33Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811601",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 1800,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:02:51Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811602",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 11200,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:03:50Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811605",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 2400,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:04:05Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811606",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 3300,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:04:18Z",
+  "purpose": "m2gf10-art:night-train-ines:seed3811607",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 200,
+  "ms": 2900,
+  "usage": null,
+  "cost": 0.001901,
+  "headers": {
+   "x-fullcup-receipt": "01M7KD33YQ7QEHW3QSQP261Y4M",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:04:32Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811608",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 1900,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:04:49Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811609",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 6600,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:05:04Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811610",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 3100,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:05:28Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811603",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 200,
+  "ms": 5400,
+  "usage": null,
+  "cost": 0.001901,
+  "headers": {
+   "x-fullcup-receipt": "01M7KD55ZC351G2FNXPWEP2GVY",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:05:38Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811611",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 502,
+  "ms": 2800,
+  "usage": null,
+  "cost": 0,
+  "headers": {},
+  "error": {
+   "error": "upstream_error",
+   "message": "The image model did not answer. Nothing was charged."
+  },
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:05:56Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811612",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 200,
+  "ms": 2800,
+  "usage": null,
+  "cost": 0.001901,
+  "headers": {
+   "x-fullcup-receipt": "01M7KD63P4B4XYGXXG7X2VD68V",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": false
+ },
+ {
+  "at": "2026-11-17T00:06:07Z",
+  "purpose": "m2gf10-art:violin-carlos:seed3811613",
+  "method": "POST",
+  "endpoint": "/images/generations",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "status": 200,
+  "ms": 3400,
+  "usage": null,
+  "cost": 0.001901,
+  "headers": {
+   "x-fullcup-receipt": "01M7KD6DSPF7KVYPKXSS947AGS",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true
  }
 ]

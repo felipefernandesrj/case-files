@@ -1,0 +1,74 @@
+Apply these documentation edits for Case Files v0.4.19 (M2 game feel sprint 10). Emit exactly these literal search/replace blocks, unchanged, in this order (exactly three < and > characters, a line of exactly five = between OLD and NEW, every block closed by <<<END>>>). Output only the blocks.
+
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+
+## 0.4.18 (M2 game feel, sprint 9: a story for a wrong verdict)
+=====
+# Changelog
+
+## 0.4.19 (M2 game feel, sprint 10: the culprit in handcuffs)
+- A correct accusation now shows the culprit led away in handcuffs, with the CASE CLOSED stamp slammed on top of the sprite, and a line under it: "Case closed: Carlos Mendes is led away in handcuffs." (PT "Caso encerrado: Carlos Mendes sai com as mãos algemadas."). The stamp stays hidden from screen readers; the line is read with the verdict.
+- Two new sprites, one per culprit (Carlos Mendes for The Vanishing Violin, Inês Duarte for The Night Train), generated with flux-1-schnell through the Cup key on a chroma-key background in the same 90s arcade noir style, background removed with the integrated scripts/assets pipeline (ToonOut fallback, the figures touch the plate edge), pixel finished at 128 px like the portraits, 1x and 2x, receipts in public/assets/manifest.json. Nothing is generated while you play.
+- The sprite slides up, then the stamp lands. A language switch no longer replays the stamp (it did before), and with reduced motion both simply appear. A case without the sprite keeps the plain stamp.
+- Fixed: after a language switch the Solution line kept the language of the accusation. The server now sends the solution in both languages and the line follows the switch.
+- Fixed: the accuse answer always named the culprit id of the default case (Night Train games got "carlos"); it now uses the case of the session.
+- New test/arrest.mjs with 7 checks (sprites and receipts, accuse response for both cases, sprite and stamp order, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution language, styles and reduced motion). test/aftermath.mjs sandbox knows the two new globals. The automated suite now has 234 checks.
+
+## 0.4.18 (M2 game feel, sprint 9: a story for a wrong verdict)
+<<<END>>>
+<<<REPLACE package.json>>>
+  "version": "0.4.18",
+=====
+  "version": "0.4.19",
+<<<END>>>
+<<<REPLACE README.md>>>
+**M2 in progress (v0.4.18, game feel sprint 9).**
+=====
+**M2 in progress (v0.4.19, game feel sprint 10).**
+<<<END>>>
+<<<REPLACE README.md>>>
+how the culprit got away (one story per innocent suspect, EN and PT).
+=====
+how the culprit got away (one story per innocent suspect, EN and PT). A correct accusation shows the culprit led away in handcuffs with the CASE CLOSED stamp on top (one generated sprite per culprit).
+<<<END>>>
+<<<REPLACE README.md>>>
+227 automated checks.
+=====
+234 automated checks.
+<<<END>>>
+<<<REPLACE docs/BUILD_LOG.md>>>
+- Result: npm test 227/227 (was 213), new test/aftermath.mjs 14 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 9).
+=====
+- Result: npm test 227/227 (was 213), new test/aftermath.mjs 14 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 9).
+
+## M2 game feel sprint 10 (v0.4.19)
+
+- Scope: the culprit in handcuffs under the CASE CLOSED stamp on a correct verdict (two flux sprites through the Cup key, background removed with scripts/assets), the stamp no longer replays on a language switch, the Solution line follows the language, and the accuse answer names the culprit of the session case.
+- Calls 266-268 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off) plus 6 billed flux-1-schnell images (2 kept). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf10.mjs). No live play smoke (no model prompt changed).
+- Result: npm test 234/234 (was 227), new test/arrest.mjs 7 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 10).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+## Web page: closing screen
+=====
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+- Art: `public/assets/characters/<case>-<culpritId>-arrest.png` (128 px) and `@2x.png` (256 px), generated through the Cup key and keyed by scripts/assets; listed in `public/assets/manifest.json` with their receipt ids.
+- API: `POST /api/accuse` returns `culprit` from the session case (not the default case) and `solutions` (`{ en, pt }`).
+- `renderVerdict()` on a correct verdict appends `div.arrest` holding the stamp (`aria-hidden`) and `p.arrest-caption` ("Case closed: <name> is led away in handcuffs." / "Caso encerrado: <name> sai com as mãos algemadas."). When the sprite of `artCase()` and a safe culprit id loads, `img.arrest-sprite` (alt empty, 224 px, srcset 2x) goes before the stamp and the block gets `has-art`, which puts the stamp on top of the sprite. The first render animates (`cf-arrest`, then the stamp after 420ms); later renders add `is-static`. The Solution line uses `solutions[lang]` when present.
+- CSS: pixelated sprite, stamp absolute over it with a dark plate, no animation with reduced motion.
+
+## Web page: closing screen
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+19. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+
+Total checks: 227 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, keyboard 13).
+=====
+19. `node test/arrest.mjs` (culprit in handcuffs: generated sprites and receipts, accuse response for both cases, sprite before the stamp, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution follows the language, styles and reduced motion)
+20. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+
+Total checks: 234 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, keyboard 13).
+<<<END>>>

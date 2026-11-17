@@ -1413,7 +1413,8 @@ function renderVerdict(moveFocus = true) {
   const p2 = document.createElement('p');
   p2.textContent = (lang==='pt'?'Culpado':'Culprit') + ': ' + culpritName;
   const p3 = document.createElement('p');
-  p3.textContent = (lang==='pt'?'Solução':'Solution') + ': ' + solution;
+  const sol = lastAccuseResult.solutions && lastAccuseResult.solutions[lang === 'pt' ? 'pt' : 'en'];
+  p3.textContent = (lang==='pt'?'Solução':'Solution') + ': ' + (sol || solution);
   const p4 = document.createElement('p');
   p4.className = 'with-icon';
   p4.appendChild(iconSvg('i-score'));
@@ -1445,11 +1446,33 @@ function renderVerdict(moveFocus = true) {
     verdict.appendChild(paper);
   }
   if (correct) {
+    const arrest = document.createElement('div');
+    arrest.className = 'arrest';
+    if (lastAccuseResult.ccShown) arrest.classList.add('is-static');
+    lastAccuseResult.ccShown = true;
     const stamp = document.createElement('div');
     stamp.className = 'case-closed-stamp';
     stamp.setAttribute('aria-hidden', 'true');
     stamp.textContent = lang === 'pt' ? 'CASO ENCERRADO' : 'CASE CLOSED';
-    verdict.appendChild(stamp);
+    const cap = document.createElement('p');
+    cap.className = 'arrest-caption';
+    cap.textContent = lang === 'pt' ? 'Caso encerrado: ' + culpritName + ' sai com as mãos algemadas.' : 'Case closed: ' + culpritName + ' is led away in handcuffs.';
+    arrest.appendChild(stamp);
+    arrest.appendChild(cap);
+    verdict.appendChild(arrest);
+    const c = artCase();
+    const cid = /^[a-z0-9-]+$/.test(lastAccuseResult.culprit || '') ? lastAccuseResult.culprit : null;
+    whenArt(c && cid && `/assets/characters/${c}-${cid}-arrest.png`, (url) => {
+      const img = document.createElement('img');
+      img.className = 'arrest-sprite';
+      img.src = url;
+      img.srcset = url.replace(/\.png$/, '@2x.png') + ' 2x';
+      img.alt = '';
+      img.width = 224;
+      img.height = 224;
+      arrest.insertBefore(img, stamp);
+      arrest.classList.add('has-art');
+    });
   }
   showStep('accuse');
   if (moveFocus) verdict.focus();

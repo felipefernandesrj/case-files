@@ -11167,5 +11167,174 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "m2gf10-266",
+  "at": "2026-11-17T00:15:24.691Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 28641,
+  "usage": {
+   "prompt_tokens": 2609,
+   "completion_tokens": 1353,
+   "total_tokens": 3962,
+   "neurons": 60.61818313598633,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7KDPNSH5JCNRXPMXXZH4QXS",
+   "x-fullcup-receipt-id": "01M7KDPNSH5JCNRXPMXXZH4QXS",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794874500"
+  },
+  "files": [
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 29
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "test/aftermath.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf10-267",
+  "at": "2026-11-17T00:16:36.726Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 61074,
+  "usage": {
+   "prompt_tokens": 2918,
+   "completion_tokens": 2758,
+   "total_tokens": 5676,
+   "neurons": 101.74545288085938,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7KDQVZ2GK7ASCC94KE2HX76",
+   "x-fullcup-receipt-id": "01M7KDQVZ2GK7ASCC94KE2HX76",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794874560"
+  },
+  "files": [
+   {
+    "path": "test/arrest.mjs",
+    "lines": 127
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf10-268",
+  "at": "2026-11-17T00:19:33.602Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 35775,
+  "usage": {
+   "prompt_tokens": 1888,
+   "completion_tokens": 1757,
+   "total_tokens": 3645,
+   "neurons": 65.08181762695312,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7KDY1E9YRRAZSGTZ811EVGF",
+   "x-fullcup-receipt-id": "01M7KDY1E9YRRAZSGTZ811EVGF",
+   "x-fullcup-seal-by": "2026-11-18T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794874740"
+  },
+  "files": [
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/BUILD_LOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   }
+  ],
+  "skipped": []
  }
 ]

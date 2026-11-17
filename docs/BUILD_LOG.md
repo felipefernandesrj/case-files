@@ -285,3 +285,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 256-265 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off, and `@cf/openai/gpt-oss-120b` for story rework). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf9.mjs). No live play smoke (no model prompt changed).
 - Result: npm test 227/227 (was 213), new test/aftermath.mjs 14 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 9).
+
+## M2 game feel sprint 10 (v0.4.19)
+
+- Scope: the culprit in handcuffs under the CASE CLOSED stamp on a correct verdict (two flux sprites through the Cup key, background removed with scripts/assets), the stamp no longer replays on a language switch, the Solution line follows the language, and the accuse answer names the culprit of the session case.
+- Calls 266-268 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off) plus 6 billed flux-1-schnell images (2 kept). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf10.mjs). No live play smoke (no model prompt changed).
+- Result: npm test 234/234 (was 227), new test/arrest.mjs 7 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 10).

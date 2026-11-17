@@ -1,0 +1,15 @@
+{
+  "id": "violin-carlos",
+  "seed": 3811603,
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "steps": 4,
+  "prompt": "1990s Capcom CPS-2 beat-em-up arcade pixel art, Cadillacs and Dinosaurs era, gothic-noir detective mystery game, chunky pixels, bold 1-2 pixel ink-black outline, hard edges, no anti-aliasing, limited palette of ink black, cream parchment, lamp gold, wax-seal red, steel blue-grey, warm wood varnish gold, ordered dithering, arrested culprit sprite, single centered figure from the waist up, man in his late fifties, short grey hair, grey janitor's jacket, defeated look, head bowed, both wrists locked together in shiny steel handcuffs with a short chain, cuffed hands held low in front of the waist and clearly visible, same costume as the fighter-select portrait, lighting from the upper left, whole figure visible with an empty margin, no other people, no text, pure flat solid #00FF00 chroma-key green background filling the whole frame.",
+  "http_status": 200,
+  "receipt_id": "01M7KD55ZC351G2FNXPWEP2GVY",
+  "created_brt": "2026-11-16 21:05:28",
+  "secs": 5.4,
+  "seal_by": "2026-11-18 00:05Z",
+  "raw_path": "/workspace/casefiles-qa/run38/art/raw/arrest__violin-carlos.s3811603.jpg",
+  "cost_micro_usd": 1901,
+  "price_source": "unit_rate"
+}

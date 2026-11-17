@@ -124,6 +124,12 @@
 - `renderVerdict()` appends `div.aftermath` (`p.aftermath-kicker` "The next morning's paper" / "Jornal da manhã seguinte", `p.aftermath-headline`, `p.aftermath-body`) only when the verdict is wrong and the CONTINUE? countdown is not running (`contState !== 'run'`), so after Give up, Escape, timeout or Close. The first render animates; later renders (language switch) add `is-static`. `endContinue()` announces "GAME OVER. <headline>. The culprit got away...".
 - CSS: newspaper clipping (paper #e9dfc8, ink #1d1a16, Georgia serif, rotate(-1.2deg)), `cf-paper` slide-in 700ms, none with reduced motion. `.continue.is-over` docks at the bottom (16px, or 12px above `--dock-h` on phones) so it does not cover the clipping.
 
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+- Art: `public/assets/characters/<case>-<culpritId>-arrest.png` (128 px) and `@2x.png` (256 px), generated through the Cup key and keyed by scripts/assets; listed in `public/assets/manifest.json` with their receipt ids.
+- API: `POST /api/accuse` returns `culprit` from the session case (not the default case) and `solutions` (`{ en, pt }`).
+- `renderVerdict()` on a correct verdict appends `div.arrest` holding the stamp (`aria-hidden`) and `p.arrest-caption` ("Case closed: <name> is led away in handcuffs." / "Caso encerrado: <name> sai com as mãos algemadas."). When the sprite of `artCase()` and a safe culprit id loads, `img.arrest-sprite` (alt empty, 224 px, srcset 2x) goes before the stamp and the block gets `has-art`, which puts the stamp on top of the sprite. The first render animates (`cf-arrest`, then the stamp after 420ms); later renders add `is-static`. The Solution line uses `solutions[lang]` when present.
+- CSS: pixelated sprite, stamp absolute over it with a dark plate, no animation with reduced motion.
+
 ## Web page: closing screen
 
 When the verdict is shown and the scoreboard loads, a closing screen (`#credits`) is rendered:
@@ -175,9 +181,10 @@ This executes:
 16. `node test/quick-accuse.mjs` (quick accusations: on by default, stored off, back on, reload and Portuguese label, accuse with and without the dialog, nothing after the verdict, markup and focus style, suspicion flash only on screen, live line language)
 17. `node test/talk.mjs` (talking portraits: speaker avatar with screen reader and visible copies, talk sheet of the open case, reveal and mouth frames, re-render finishes the line, click to finish, reduced motion, only new answers talk, CSS frames, sheet pixels, script coverage)
 18. `node test/aftermath.mjs` (wrong verdict aftermath: a story for every innocent and none for the culprit, sizes and punctuation, names, no leak in the public case, accuse response for both cases, shown only after GAME OVER, language switch without replay, announcement, styles and docking)
-19. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+19. `node test/arrest.mjs` (culprit in handcuffs: generated sprites and receipts, accuse response for both cases, sprite before the stamp, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution follows the language, styles and reduced motion)
+20. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 227 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, keyboard 13).
+Total checks: 234 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

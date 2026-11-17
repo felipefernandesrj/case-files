@@ -1,0 +1,80 @@
+<<<REPLACE src/server.js>>>
+          culprit: c.culprit,
+          culpritName,
+          solution,
+=====
+          culprit: play.culprit,
+          culpritName,
+          solution,
+          solutions: play.solution ?? null,
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  p3.textContent = (lang==='pt'?'Solução':'Solution') + ': ' + solution;
+=====
+  const sol = lastAccuseResult.solutions && lastAccuseResult.solutions[lang === 'pt' ? 'pt' : 'en'];
+  p3.textContent = (lang==='pt'?'Solução':'Solution') + ': ' + (sol || solution);
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  if (correct) {
+    const stamp = document.createElement('div');
+    stamp.className = 'case-closed-stamp';
+    stamp.setAttribute('aria-hidden', 'true');
+    stamp.textContent = lang === 'pt' ? 'CASO ENCERRADO' : 'CASE CLOSED';
+    verdict.appendChild(stamp);
+  }
+=====
+  if (correct) {
+    const arrest = document.createElement('div');
+    arrest.className = 'arrest';
+    if (lastAccuseResult.ccShown) arrest.classList.add('is-static');
+    lastAccuseResult.ccShown = true;
+    const stamp = document.createElement('div');
+    stamp.className = 'case-closed-stamp';
+    stamp.setAttribute('aria-hidden', 'true');
+    stamp.textContent = lang === 'pt' ? 'CASO ENCERRADO' : 'CASE CLOSED';
+    const cap = document.createElement('p');
+    cap.className = 'arrest-caption';
+    cap.textContent = lang === 'pt' ? 'Caso encerrado: ' + culpritName + ' sai com as mãos algemadas.' : 'Case closed: ' + culpritName + ' is led away in handcuffs.';
+    arrest.appendChild(stamp);
+    arrest.appendChild(cap);
+    verdict.appendChild(arrest);
+    const c = artCase();
+    const cid = /^[a-z0-9-]+$/.test(lastAccuseResult.culprit || '') ? lastAccuseResult.culprit : null;
+    whenArt(c && cid && `/assets/characters/${c}-${cid}-arrest.png`, (url) => {
+      const img = document.createElement('img');
+      img.className = 'arrest-sprite';
+      img.src = url;
+      img.srcset = url.replace(/\.png$/, '@2x.png') + ' 2x';
+      img.alt = '';
+      img.width = 224;
+      img.height = 224;
+      arrest.insertBefore(img, stamp);
+      arrest.classList.add('has-art');
+    });
+  }
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+@media (max-width: 767px) { .continue.is-over { bottom: calc(var(--dock-h) + 12px); } }
+=====
+@media (max-width: 767px) { .continue.is-over { bottom: calc(var(--dock-h) + 12px); } }
+.arrest { position: relative; width: 100%; max-width: 360px; margin: 24px auto 4px; }
+.arrest-sprite { display: block; width: 224px; height: 224px; margin: 0 auto; image-rendering: pixelated; animation: cf-arrest 520ms cubic-bezier(.2,1.2,.4,1) both; }
+.arrest.has-art .case-closed-stamp { position: absolute; left: 0; right: 0; top: 28px; margin: 0 auto; font-size: 1.25rem; white-space: nowrap; background: rgba(12,11,10,0.8); animation-delay: 420ms; }
+.arrest-caption { margin: 10px 0 0; font-weight: 700; color: var(--cf-text); }
+.arrest.is-static .arrest-sprite, .arrest.is-static .case-closed-stamp { animation: none; }
+@keyframes cf-arrest { 0% { opacity: 0; transform: translateY(28px); filter: brightness(2); } 100% { opacity: 1; transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) { .arrest-sprite, .arrest .case-closed-stamp { animation: none; } }
+<<<END>>>
+
+<<<REPLACE test/aftermath.mjs>>>
+  const fn = new Function('document', 'iconSvg', 'showStep', 'lastAccuseResult', 'contState', 'lang', fnSource('renderVerdict') + '\nrenderVerdict(false); return lastAccuseResult;');
+  const doc = { getElementById: () => verdict, createElement: t => new El(t), createTextNode: t => ({ textContent: t }) };
+  fn(doc, () => new El('svg'), () => {}, res, state, lang);
+=====
+  const fn = new Function('document', 'iconSvg', 'showStep', 'lastAccuseResult', 'contState', 'lang', 'artCase', 'whenArt', fnSource('renderVerdict') + '\nrenderVerdict(false); return lastAccuseResult;');
+  const doc = { getElementById: () => verdict, createElement: t => new El(t), createTextNode: t => ({ textContent: t }) };
+  fn(doc, () => new El('svg'), () => {}, res, state, lang, () => null, () => {});
+<<<END>>>

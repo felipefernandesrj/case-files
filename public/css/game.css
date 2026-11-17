@@ -761,3 +761,10 @@ body[data-view="cabinet"] #steps {
 @media (prefers-reduced-motion: reduce) { .aftermath { animation: none; } }
 .continue.is-over { top: auto; bottom: 16px; transform: translateX(-50%); }
 @media (max-width: 767px) { .continue.is-over { bottom: calc(var(--dock-h) + 12px); } }
+.arrest { position: relative; width: 100%; max-width: 360px; margin: 24px auto 4px; }
+.arrest-sprite { display: block; width: 224px; height: 224px; margin: 0 auto; image-rendering: pixelated; animation: cf-arrest 520ms cubic-bezier(.2,1.2,.4,1) both; }
+.arrest.has-art .case-closed-stamp { position: absolute; left: 0; right: 0; top: 28px; margin: 0 auto; font-size: 1.25rem; white-space: nowrap; background: rgba(12,11,10,0.8); animation-delay: 420ms; }
+.arrest-caption { margin: 10px 0 0; font-weight: 700; color: var(--cf-text); }
+.arrest.is-static .arrest-sprite, .arrest.is-static .case-closed-stamp { animation: none; }
+@keyframes cf-arrest { 0% { opacity: 0; transform: translateY(28px); filter: brightness(2); } 100% { opacity: 1; transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) { .arrest-sprite, .arrest .case-closed-stamp { animation: none; } }
