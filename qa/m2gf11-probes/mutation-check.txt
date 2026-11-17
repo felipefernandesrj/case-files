@@ -1,0 +1,7 @@
+M1 ask msg goes to #err: caught (4 FAIL)
+M2 raw server message: caught (1 FAIL)
+M3 no netError mapping: caught (3 FAIL)
+M4 ask msg not cleared before fetch: caught (1 FAIL)
+M5 pickSuspect back to best-status: caught (2 FAIL)
+M6 no PT for already_accused: caught (1 FAIL)
+M7 setLang keeps stale hint: caught (1 FAIL)

@@ -764,3 +764,18 @@ Known limit (not in scope): the cap is per session, so Start over gives a fresh 
 - Key: 3 code calls (266-268), 7,415/5,868 tokens, 227.45 neurons, ~US$0.0025 (227.45 x $0.011/1000 = $0.002502), plus art $0.011406 = $0.013908 total. Rework 0 calls = 0.0% (was 71.1%). 0 re-parses, 0 FILE overwrites, 0 hand applies. 10 unbilled image 502s.
 - Receipts (seal-by 2026-11-18 00:05Z): code 266 01M7KDPNSH5JCNRXPMXXZH4QXS, 267 01M7KDQVZ2GK7ASCC94KE2HX76, 268 01M7KDY1E9YRRAZSGTZ811EVGF; art 01M7KCXMKP5GP6J6AD6WH12KC2 (Ines kept), 01M7KCZ4CYWRSZGCED7P4WE7JS, 01M7KD33YQ7QEHW3QSQP261Y4M, 01M7KD55ZC351G2FNXPWEP2GVY, 01M7KD63P4B4XYGXXG7X2VD68V, 01M7KD6DSPF7KVYPKXSS947AGS (Carlos kept).
 - Prompt lessons: a reference diff plus "copy OLD from the - and space lines" gave 0 rework on gemma for 3 calls in a row; for flux, describe the costume colour of the existing portrait (cream jacket, dark red shirt) or the sprite drifts; plan for figures cut by the plate edge (the flood key will refuse them).
+
+## M2 game feel sprint 11 (v0.4.20), 2026-11-17 08:58-09:15 BRT
+- Housekeeping: git status clean at start (HEAD dfa4a55, v0.4.19, m1-via-key 22 ahead, not pushed). No product decision needed: backer "Prova Q5 Pagamento" asked about error messages on suspect select (comment on post 01M6W7W7).
+- Reproduced before building (tools/probe-gf11.mjs on HEAD, mock, headless Chrome 1280/390 EN/PT, run39/before-*.png, qa/m2gf11-probes/probe-before.json, repro-before.txt): 0 of 16 messages visible. Ask with no suspect, empty question, expired game and offline all wrote into #best-status / #err inside the Accuse panel, hidden while on Ask; the server sent raw English "unknown suspect" / "unknown session" / "already accused" even in PT; offline showed "Failed to fetch"; the "Type a question first" hint stayed stale in #best-status.
+- Dry run first (qa/m2gf11-probes/dry/): server codes + friendly EN/PT, #ask-msg under the form, showError(msg, 'ask'), netError mapping, clearing on select / lang / Start over / new file, CSS, test/errors.mjs (10 checks), all passing before any code call.
+- 269 code (gemma, thinking off): all 17 blocks had the format placeholder line "OLD (copied exactly from the current file)" echoed as the first OLD line, so 0 occurrences applied. Harness fix (tools/build-via-key.mjs, qa/m2gf11-probes/harness-fix.diff): strip that echoed line; REPARSE of the saved raw output (no new call) applied 17/17, byte identical to the dry run.
+- 270 test/errors.mjs FILE + package.json script: identical to the dry run.
+- 271 docs (CHANGELOG 0.4.20, package version, README x3, BUILD_LOG section, SPEC section + list + totals): 8/8 applied verbatim.
+- Mutations (qa/m2gf11-probes/mutation-check.txt): 7 of 7 caught.
+- npm test 244/244 (was 234; errors 10 new), 3 full runs + 1 after docs, all clean.
+- After (run39/after-*.png, probe-after.json): 16 of 16 messages visible under the question box at 1280 and 390, EN and PT, friendly text, no raw strings.
+- Key: 3 calls (269-271), 9,775/8,145 tokens, 311.00 neurons, ~US$0.0034 (311.00 x $0.011/1000 = $0.003421). Rework 0 calls = 0.0% (1 harness re-parse, no extra call). 0 hand edits in product, tests or docs.
+- Receipts (seal-by 2026-11-18 00:05Z): 269 01M7MP7M78QFJG24CV8SGR80BB, 270 01M7MPACBJJC8EQ4ZBZQP377KG, 271 01M7MPEZYJXYDTPHCQ6R6HG21P.
+- Prompt lessons: never put a descriptive placeholder like "OLD (copied ...)" inside the format example; gemma copies it literally. Write the example with real-looking text or describe the format in prose.
+- Known, not fixed: the Accuse panel #err still auto-hides after 5 s; a hint shown in one language is hidden (not translated) on a language switch.

@@ -1,0 +1,70 @@
+Apply these documentation edits for Case Files v0.4.20 (M2 game feel sprint 11). Emit exactly these literal search/replace blocks, unchanged, in this order (exactly three < and > characters, a line of exactly five = between OLD and NEW, every block closed by <<<END>>>). Output only the blocks. Do not add any placeholder line.
+
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+
+## 0.4.19 (M2 game feel, sprint 10: the culprit in handcuffs)
+=====
+# Changelog
+
+## 0.4.20 (M2 game feel, sprint 11: error messages you can see)
+- Asked by a backer: hints and errors on the Ask step were invisible. "Choose a suspect first", "Type a question first", server errors and network failures were written into the Accuse panel, which is hidden while you ask, so pressing Ask did nothing you could see (reproduced at 1280 and 390 in English and Portuguese). They now show right under the question box, in a box that screen readers announce, and stay until your next ask, a suspect change, a language switch, Start over or a new file.
+- The server no longer sends raw English strings such as "unknown suspect" or "unknown session". Every bad ask or accusation now answers with a code and a friendly line in the player's language (unknown suspect, expired game, empty question, question over 500 characters, second accusation).
+- A network failure or an error page from a proxy now reads "Could not reach the game. Check your connection and ask again; nothing was counted." (PT "Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.") instead of "Failed to fetch".
+- New test/errors.mjs with 10 checks. The automated suite now has 244 checks.
+
+## 0.4.19 (M2 game feel, sprint 10: the culprit in handcuffs)
+<<<END>>>
+<<<REPLACE package.json>>>
+  "version": "0.4.19",
+=====
+  "version": "0.4.20",
+<<<END>>>
+<<<REPLACE README.md>>>
+**M2 in progress (v0.4.19, game feel sprint 10).**
+=====
+**M2 in progress (v0.4.20, game feel sprint 11).**
+<<<END>>>
+<<<REPLACE README.md>>>
+with the CASE CLOSED stamp on top (one generated sprite per culprit).
+=====
+with the CASE CLOSED stamp on top (one generated sprite per culprit). Hints and errors on the Ask step (no suspect chosen, empty question, expired game, no connection) now show under the question box in the player's language.
+<<<END>>>
+<<<REPLACE README.md>>>
+234 automated checks.
+=====
+244 automated checks.
+<<<END>>>
+<<<REPLACE docs/BUILD_LOG.md>>>
+- Result: npm test 234/234 (was 227), new test/arrest.mjs 7 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 10).
+=====
+- Result: npm test 234/234 (was 227), new test/arrest.mjs 7 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 10).
+
+## M2 game feel sprint 11 (v0.4.20)
+
+- Scope: hints and errors of the Ask step shown under the question box instead of the hidden Accuse panel, friendly EN/PT server errors with codes, a translated network error. Asked by a backer (error messages on suspect select).
+- Calls 269-271 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf11.mjs): 0 of 16 messages visible before, 16 of 16 after. No live play smoke (no model prompt changed).
+- Result: npm test 244/244 (was 234), new test/errors.mjs 10 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 11).
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+=====
+## Web page: errors on the Ask step (M2 game feel sprint 11)
+- API: every 4xx from `POST /api/ask` and `POST /api/accuse` is `{ error: 'bad_request', code, message }` with `code` one of `unknown_suspect`, `unknown_session`, `empty_question`, `question_too_long`, `already_accused` and `message` = `friendly(code, lang)` from src/messages.js.
+- Page: `p#ask-msg.ask-msg` (`role="alert"`, hidden at start) sits right after `#ask-form` in the Conversation panel. `showError(msg, 'ask')` writes there and does not auto-hide; `showError(msg)` keeps writing `#err` in the Accuse panel and hides it after 5 s. `askQuestion()` sends `LABELS[lang].pickSuspect` and `LABELS[lang].emptyQuestion` there, clears it before the request, and maps a thrown Error (network, non JSON reply) to `LABELS[lang].netError`; accuse uses the same mapping on `#err`. `selectSuspect()`, `setLang()`, Start over and a new file hide `#ask-msg`.
+
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+20. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+
+Total checks: 234 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, keyboard 13).
+=====
+20. `node test/errors.mjs` (errors on the Ask step: friendly EN/PT lines for every code, server codes for bad asks and accusations, #ask-msg placement, netError labels, routing in askQuestion, offline, server error cleared on the next ask, non JSON reply, no suspect and empty question, clearing on select, language, Start over and new file)
+21. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+
+Total checks: 244 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, keyboard 13).
+<<<END>>>

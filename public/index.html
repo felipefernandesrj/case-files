@@ -245,6 +245,7 @@
             <button type="submit" id="ask-btn" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="Ask">Ask</span></button>
           </div>
         </form>
+        <p id="ask-msg" class="ask-msg" role="alert" hidden></p>
         <p id="questions-used" aria-live="polite"></p>
         <section id="suspicion-talk" class="suspicion" aria-labelledby="suspicion-title-talk">
           <h3 id="suspicion-title-talk" class="sus-title">Suspicion</h3>
@@ -804,6 +805,8 @@ function relabelToasts() {
 }
 async function setLang(newLang) {
   lang = newLang;
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
   document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
   document.getElementById('len').setAttribute('aria-pressed', newLang === 'en');
   document.getElementById('lpt').setAttribute('aria-pressed', newLang === 'pt');
@@ -1126,6 +1129,8 @@ async function openPackFile(id) {
   document.getElementById('credits').hidden = true;
   document.getElementById('scores-section').hidden = true;
   document.getElementById('err').hidden = true;
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
   document.getElementById('best-status').textContent = '';
   await loadCase();
   renderQuestions();
@@ -1162,6 +1167,8 @@ function selectSuspect(id) {
   selectedSuspect = id;
   const bs = document.getElementById('best-status');
   if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
   document.querySelectorAll('#suspect-buttons button').forEach(b=>{
     b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
   });
@@ -1248,9 +1255,9 @@ function renderConversation(animateLast) {
 async function askQuestion(e){
   e.preventDefault();
   if (gameOver) return;
-  if (!selectedSuspect) { document.getElementById('best-status').textContent = LABELS[lang].pickSuspect; return; }
+  if (!selectedSuspect) { showError(LABELS[lang].pickSuspect, 'ask'); return; }
   const question = document.getElementById('q').value.trim();
-  if (!question) { document.getElementById('best-status').textContent = LABELS[lang].emptyQuestion; document.getElementById('q').focus(); return; }
+  if (!question) { showError(LABELS[lang].emptyQuestion, 'ask'); document.getElementById('q').focus(); return; }
   const qInput = document.getElementById('q');
   const askBtn = document.getElementById('ask-btn');
   const askForm = document.getElementById('ask-form');
@@ -1261,6 +1268,8 @@ async function askQuestion(e){
   accuseBtns.forEach(b => { b.disabled = true; });
   if (restartBtn) restartBtn.disabled = true;
   askForm.setAttribute('aria-busy', 'true');
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) { askMsg.hidden = true; askMsg.textContent = ''; }
   const log = document.getElementById('log');
   const thinking = document.createElement('p');
   thinking.textContent = LABELS[lang].thinking;
@@ -1281,7 +1290,7 @@ async function askQuestion(e){
     histories[selectedSuspect].push({q:question,a:answer});
     renderConversation(true);
   }catch(err){
-    showError(err.message||'Error');
+    showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message, 'ask');
   }finally{
     if (thinking.parentNode) thinking.remove();
     askBtn.disabled = false;
@@ -1314,7 +1323,7 @@ async function accuse(suspectId){
     await loadScores();
     await loadCredits(!!data.correct);
   }catch(err){
-    showError(err.message||'Error');
+    showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message);
   }
 }
 
@@ -1478,11 +1487,12 @@ function renderVerdict(moveFocus = true) {
   if (moveFocus) verdict.focus();
 }
 
-function showError(msg){
-  const el = document.getElementById('err');
+function showError(msg, where){
+  const ask = where === 'ask' ? document.getElementById('ask-msg') : null;
+  const el = ask || document.getElementById('err');
   el.textContent = msg || (lang === 'pt' ? 'Erro' : 'Error');
   el.hidden = false;
-  setTimeout(()=>{el.hidden=true;},5000);
+  if (!ask) setTimeout(()=>{el.hidden=true;},5000);
 }
 
 let questionsUsed = 0;
@@ -1546,6 +1556,8 @@ async function restartGame(skipConfirm = false){
   document.getElementById('credits').hidden = true;
   document.getElementById('scores-section').hidden = true;
   document.getElementById('err').hidden = true;
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
   document.getElementById('ask-btn').disabled = false;
   document.getElementById('q').disabled = false;
   document.getElementById('q').value = '';

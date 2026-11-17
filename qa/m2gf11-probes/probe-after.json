@@ -1,0 +1,526 @@
+{
+ "1280-en": {
+  "noSuspect": {
+   "ask-msg": {
+    "text": "Choose a suspect first.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": {
+    "text": "Type a question first.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": {
+    "text": "This game has expired. Press Start over to open a new one; your best score is kept.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": {
+    "text": "Could not reach the game. Check your connection and ask again; nothing was counted.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ },
+ "1280-pt": {
+  "noSuspect": {
+   "ask-msg": {
+    "text": "Escolha um suspeito primeiro.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": {
+    "text": "Esta partida expirou. Toque em Nova partida para abrir outra; seu recorde continua salvo.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": {
+    "text": "Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ },
+ "390-en": {
+  "noSuspect": {
+   "ask-msg": {
+    "text": "Choose a suspect first.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": {
+    "text": "Type a question first.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": {
+    "text": "This game has expired. Press Start over to open a new one; your best score is kept.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": {
+    "text": "Could not reach the game. Check your connection and ask again; nothing was counted.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ },
+ "390-pt": {
+  "noSuspect": {
+   "ask-msg": {
+    "text": "Escolha um suspeito primeiro.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": {
+    "text": "Esta partida expirou. Toque em Nova partida para abrir outra; seu recorde continua salvo.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": {
+    "text": "Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": "alert"
+   },
+   "best-status": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ }
+}

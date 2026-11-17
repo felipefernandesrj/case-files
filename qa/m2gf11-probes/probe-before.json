@@ -1,0 +1,430 @@
+{
+ "1280-en": {
+  "noSuspect": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Choose a suspect first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Type a question first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Type a question first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "unknown session",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Type a question first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "Failed to fetch",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ },
+ "1280-pt": {
+  "noSuspect": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Escolha um suspeito primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "unknown session",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "Failed to fetch",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ },
+ "390-en": {
+  "noSuspect": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Choose a suspect first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Type a question first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Type a question first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "unknown session",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Type a question first.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "Failed to fetch",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Questions used: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ },
+ "390-pt": {
+  "noSuspect": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Escolha um suspeito primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "BODY"
+  },
+  "pickedOk": true,
+  "emptyQuestion": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "expiredSession": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "unknown session",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  },
+  "offline": {
+   "ask-msg": null,
+   "best-status": {
+    "text": "Digite uma pergunta primeiro.",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "status"
+   },
+   "err": {
+    "text": "Failed to fetch",
+    "visible": false,
+    "inViewport": false,
+    "panel": "accuse",
+    "role": "alert"
+   },
+   "questions-used": {
+    "text": "Perguntas feitas: 0",
+    "visible": true,
+    "inViewport": true,
+    "panel": "talk",
+    "role": null
+   },
+   "activePanel": "talk",
+   "focus": "q"
+  }
+ }
+}

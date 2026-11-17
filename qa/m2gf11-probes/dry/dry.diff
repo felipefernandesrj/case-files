@@ -1,0 +1,236 @@
+diff --git a/package.json b/package.json
+index 06d43ee..37881ff 100644
+--- a/package.json
++++ b/package.json
+@@ -3,7 +3,7 @@
+   "version": "0.4.19",
+   "type": "module",
+   "scripts": {
+-    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/keyboard.mjs"
++    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/keyboard.mjs"
+   },
+   "dependencies": {}
+ }
+diff --git a/public/best.js b/public/best.js
+index d22cea5..f98a127 100644
+--- a/public/best.js
++++ b/public/best.js
+@@ -119,7 +119,8 @@ export const LABELS = {
+     confirmRestart: 'Start a new game? Your current questions will be lost.',
+     gameOver: 'Game over. Use Start over for a new case.',
+     pickSuspect: 'Choose a suspect first.',
+-    emptyQuestion: 'Type a question first.'
++    emptyQuestion: 'Type a question first.',
++    netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.'
+   },
+   pt: {
+     bestTitle: 'Seu recorde',
+@@ -134,6 +135,7 @@ export const LABELS = {
+     confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
+     gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
+     pickSuspect: 'Escolha um suspeito primeiro.',
+-    emptyQuestion: 'Digite uma pergunta primeiro.'
++    emptyQuestion: 'Digite uma pergunta primeiro.',
++    netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.'
+   }
+ };
+diff --git a/public/css/game.css b/public/css/game.css
+index 9123a25..e614afb 100644
+--- a/public/css/game.css
++++ b/public/css/game.css
+@@ -768,3 +768,5 @@ body[data-view="cabinet"] #steps {
+ .arrest.is-static .arrest-sprite, .arrest.is-static .case-closed-stamp { animation: none; }
+ @keyframes cf-arrest { 0% { opacity: 0; transform: translateY(28px); filter: brightness(2); } 100% { opacity: 1; transform: none; filter: none; } }
+ @media (prefers-reduced-motion: reduce) { .arrest-sprite, .arrest .case-closed-stamp { animation: none; } }
++.ask-msg { margin: 8px 0 0; padding: 8px 12px; border-left: 4px solid #d9a441; background: rgba(217,164,65,0.12); color: var(--cf-text); font-weight: 700; }
++.ask-msg[hidden] { display: none; }
+diff --git a/public/index.html b/public/index.html
+index 772317a..6279386 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -245,6 +245,7 @@
+             <button type="submit" id="ask-btn" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-talk"></use></svg> <span data-label="Ask">Ask</span></button>
+           </div>
+         </form>
++        <p id="ask-msg" class="ask-msg" role="alert" hidden></p>
+         <p id="questions-used" aria-live="polite"></p>
+         <section id="suspicion-talk" class="suspicion" aria-labelledby="suspicion-title-talk">
+           <h3 id="suspicion-title-talk" class="sus-title">Suspicion</h3>
+@@ -804,6 +805,8 @@ function relabelToasts() {
+ }
+ async function setLang(newLang) {
+   lang = newLang;
++  const askMsg = document.getElementById('ask-msg');
++  if (askMsg) askMsg.hidden = true;
+   document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
+   document.getElementById('len').setAttribute('aria-pressed', newLang === 'en');
+   document.getElementById('lpt').setAttribute('aria-pressed', newLang === 'pt');
+@@ -1126,6 +1129,8 @@ async function openPackFile(id) {
+   document.getElementById('credits').hidden = true;
+   document.getElementById('scores-section').hidden = true;
+   document.getElementById('err').hidden = true;
++  const askMsg = document.getElementById('ask-msg');
++  if (askMsg) askMsg.hidden = true;
+   document.getElementById('best-status').textContent = '';
+   await loadCase();
+   renderQuestions();
+@@ -1162,6 +1167,8 @@ function selectSuspect(id) {
+   selectedSuspect = id;
+   const bs = document.getElementById('best-status');
+   if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
++  const askMsg = document.getElementById('ask-msg');
++  if (askMsg) askMsg.hidden = true;
+   document.querySelectorAll('#suspect-buttons button').forEach(b=>{
+     b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
+   });
+@@ -1248,9 +1255,9 @@ function renderConversation(animateLast) {
+ async function askQuestion(e){
+   e.preventDefault();
+   if (gameOver) return;
+-  if (!selectedSuspect) { document.getElementById('best-status').textContent = LABELS[lang].pickSuspect; return; }
++  if (!selectedSuspect) { showError(LABELS[lang].pickSuspect, 'ask'); return; }
+   const question = document.getElementById('q').value.trim();
+-  if (!question) { document.getElementById('best-status').textContent = LABELS[lang].emptyQuestion; document.getElementById('q').focus(); return; }
++  if (!question) { showError(LABELS[lang].emptyQuestion, 'ask'); document.getElementById('q').focus(); return; }
+   const qInput = document.getElementById('q');
+   const askBtn = document.getElementById('ask-btn');
+   const askForm = document.getElementById('ask-form');
+@@ -1261,6 +1268,8 @@ async function askQuestion(e){
+   accuseBtns.forEach(b => { b.disabled = true; });
+   if (restartBtn) restartBtn.disabled = true;
+   askForm.setAttribute('aria-busy', 'true');
++  const askMsg = document.getElementById('ask-msg');
++  if (askMsg) { askMsg.hidden = true; askMsg.textContent = ''; }
+   const log = document.getElementById('log');
+   const thinking = document.createElement('p');
+   thinking.textContent = LABELS[lang].thinking;
+@@ -1281,7 +1290,7 @@ async function askQuestion(e){
+     histories[selectedSuspect].push({q:question,a:answer});
+     renderConversation(true);
+   }catch(err){
+-    showError(err.message||'Error');
++    showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message, 'ask');
+   }finally{
+     if (thinking.parentNode) thinking.remove();
+     askBtn.disabled = false;
+@@ -1314,7 +1323,7 @@ async function accuse(suspectId){
+     await loadScores();
+     await loadCredits(!!data.correct);
+   }catch(err){
+-    showError(err.message||'Error');
++    showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message);
+   }
+ }
+ 
+@@ -1478,11 +1487,12 @@ function renderVerdict(moveFocus = true) {
+   if (moveFocus) verdict.focus();
+ }
+ 
+-function showError(msg){
+-  const el = document.getElementById('err');
++function showError(msg, where){
++  const ask = where === 'ask' ? document.getElementById('ask-msg') : null;
++  const el = ask || document.getElementById('err');
+   el.textContent = msg || (lang === 'pt' ? 'Erro' : 'Error');
+   el.hidden = false;
+-  setTimeout(()=>{el.hidden=true;},5000);
++  if (!ask) setTimeout(()=>{el.hidden=true;},5000);
+ }
+ 
+ let questionsUsed = 0;
+@@ -1546,6 +1556,8 @@ async function restartGame(skipConfirm = false){
+   document.getElementById('credits').hidden = true;
+   document.getElementById('scores-section').hidden = true;
+   document.getElementById('err').hidden = true;
++  const askMsg = document.getElementById('ask-msg');
++  if (askMsg) askMsg.hidden = true;
+   document.getElementById('ask-btn').disabled = false;
+   document.getElementById('q').disabled = false;
+   document.getElementById('q').value = '';
+diff --git a/src/messages.js b/src/messages.js
+index 5d00d3a..6d32459 100644
+--- a/src/messages.js
++++ b/src/messages.js
+@@ -1,6 +1,6 @@
+ /**
+  * Friendly messages for client‑facing errors.
+- * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'} code
++ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'|'unknown_suspect'|'unknown_session'|'empty_question'|'question_too_long'|'already_accused'} code
+  * @param {'en'|'pt'} lang
+  * @returns {string}
+  */
+@@ -30,6 +30,26 @@ export function friendly(code, lang) {
+       en: 'The question could not be read, please type it again.',
+       pt: 'A pergunta não pôde ser lida, por favor digite-a novamente.',
+     },
++    unknown_suspect: {
++      en: 'That suspect is not in this case file. Pick someone from People and ask again.',
++      pt: 'Esse suspeito não está neste dossiê. Escolha alguém em Pessoas e pergunte de novo.',
++    },
++    unknown_session: {
++      en: 'This game has expired. Press Start over to open a new one; your best score is kept.',
++      pt: 'Esta partida expirou. Toque em Nova partida para abrir outra; seu recorde continua salvo.',
++    },
++    empty_question: {
++      en: 'Type a question first.',
++      pt: 'Digite uma pergunta primeiro.',
++    },
++    question_too_long: {
++      en: 'That question is too long. Keep it under 500 characters.',
++      pt: 'Essa pergunta é longa demais. Use menos de 500 caracteres.',
++    },
++    already_accused: {
++      en: 'You already named a culprit in this game. Press Start over to play again.',
++      pt: 'Você já apontou um culpado nesta partida. Toque em Nova partida para jogar de novo.',
++    },
+   };
+ 
+   const entry = msgs[code];
+diff --git a/src/server.js b/src/server.js
+index a2efbe0..203e2ad 100644
+--- a/src/server.js
++++ b/src/server.js
+@@ -238,19 +238,19 @@ export function createServer({
+ 
+         // Validation
+         if (!sessionId || !sessions.has(sessionId)) {
+-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown session' });
++          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
+         }
+         const sess = sessions.get(sessionId);
+         const play = caseOfSession(sess);
+         const suspect = play.suspects.find((s) => s.id === suspectId);
+         if (!suspect) {
+-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
++          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_suspect', message: friendly('unknown_suspect', lang) });
+         }
+         if (!question || typeof question !== 'string' || !question.trim()) {
+-          return sendJSON(res, 400, { error: 'bad_request', message: 'empty question' });
++          return sendJSON(res, 400, { error: 'bad_request', code: 'empty_question', message: friendly('empty_question', lang) });
+         }
+         if (question.length > 500) {
+-          return sendJSON(res, 400, { error: 'bad_request', message: 'question too long' });
++          return sendJSON(res, 400, { error: 'bad_request', code: 'question_too_long', message: friendly('question_too_long', lang) });
+         }
+ 
+         // per-case cap on model calls per playthrough (M2 sprint 4): no model call once capped
+@@ -311,16 +311,16 @@ export function createServer({
+         const { sessionId, suspectId, player, lang: bodyLang } = body;
+         const lang = getLang(bodyLang);
+         if (!sessionId || !sessions.has(sessionId)) {
+-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown session' });
++          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
+         }
+         const sess = sessions.get(sessionId);
+         if (sess.accused) {
+-          return sendJSON(res, 409, { error: 'bad_request', message: 'already accused' });
++          return sendJSON(res, 409, { error: 'bad_request', code: 'already_accused', message: friendly('already_accused', lang) });
+         }
+         const play = caseOfSession(sess);
+         const suspect = play.suspects.find((s) => s.id === suspectId);
+         if (!suspect) {
+-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
++          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_suspect', message: friendly('unknown_suspect', lang) });
+         }
+ 
+         const correct = suspectId === play.culprit;

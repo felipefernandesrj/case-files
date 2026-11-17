@@ -1,0 +1,14 @@
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"","question":"W | 400 | {"error":"bad_request","message":"unknown suspect"}
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"nobody","questi | 400 | {"error":"bad_request","message":"unknown suspect"}
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"carlos","questi | 400 | {"error":"bad_request","message":"empty question"}
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"carlos","questi | 400 | {"error":"bad_request","message":"question too long"}
+/ask | {"sessionId":"gone","suspectId":"carlos","question":"Where?","lang":"en"} | 400 | {"error":"bad_request","message":"unknown session"}
+/accuse | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"nobody","lang": | 400 | {"error":"bad_request","message":"unknown suspect"}
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"","question":"W | 400 | {"error":"bad_request","message":"unknown suspect"}
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"nobody","questi | 400 | {"error":"bad_request","message":"unknown suspect"}
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"carlos","questi | 400 | {"error":"bad_request","message":"empty question"}
+/ask | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"carlos","questi | 400 | {"error":"bad_request","message":"question too long"}
+/ask | {"sessionId":"gone","suspectId":"carlos","question":"Where?","lang":"pt"} | 400 | {"error":"bad_request","message":"unknown session"}
+/accuse | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"nobody","lang": | 400 | {"error":"bad_request","message":"unknown suspect"}
+/accuse | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"carlos","lang": | 200 | {"correct":true,"culprit":"carlos","culpritName":"Carlos Mendes","solution":"O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgi
+/accuse | {"sessionId":"eb43f6fb-0640-4c03-9138-5317549cd8ec","suspectId":"carlos","lang": | 409 | {"error":"bad_request","message":"already accused"}

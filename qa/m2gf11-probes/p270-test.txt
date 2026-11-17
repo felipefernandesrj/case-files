@@ -1,0 +1,147 @@
+Add the test file for Case Files M2 game feel sprint 11 (visible, translated error messages around suspect select and asking) and register it. Output exactly two blocks and nothing else:
+1. The whole file test/errors.mjs as <<<FILE test/errors.mjs>>> ... <<<END>>> with exactly the content below (reproduce it verbatim, every character).
+2. One search/replace block for package.json: <<<REPLACE package.json>>>, then the OLD text `node test/arrest.mjs && node test/keyboard.mjs`, then a line of exactly five =, then the NEW text `node test/arrest.mjs && node test/errors.mjs && node test/keyboard.mjs`, then <<<END>>>. Do not write any placeholder line such as "OLD" before the old text.
+
+Content of test/errors.mjs:
+// M2 game feel sprint 11: error messages around suspect select and asking are visible, in the player's language, never raw
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createServer } from '../src/server.js';
+import { friendly } from '../src/messages.js';
+
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const html = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+const bestSrc = fs.readFileSync(path.join(root, 'public/best.js'), 'utf8');
+const { LABELS } = await import(path.join(root, 'public/best.js'));
+const results = [];
+const must = (ok, msg) => { if (!ok) throw new Error(msg); };
+async function check(name, fn) { try { await fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+function fnSource(name) {
+  const i = html.indexOf(`function ${name}(`);
+  must(i !== -1, `function ${name} missing`);
+  let d = 0;
+  for (let k = html.indexOf('{', i); k < html.length; k++) {
+    if (html[k] === '{') d++;
+    else if (html[k] === '}' && --d === 0) return html.slice(i, k + 1);
+  }
+  throw new Error('unbalanced ' + name);
+}
+const CODES = ['unknown_suspect', 'unknown_session', 'empty_question', 'question_too_long', 'already_accused'];
+const RAW = /^(unknown suspect|unknown session|empty question|question too long|already accused|Failed to fetch)$/;
+
+await check('friendly() has an EN and a different PT line for every new code', () => {
+  for (const c of CODES) {
+    const en = friendly(c, 'en'), pt = friendly(c, 'pt');
+    must(en && pt && en !== pt, `${c} missing or not translated`);
+  }
+});
+
+await check('server answers every bad ask or accuse with a code and the friendly line in the asked language', async () => {
+  const server = createServer({ caseFile: 'content/case.json', scoreFile: path.join(os.tmpdir(), `e-${Date.now()}.json`), mock: true });
+  await new Promise(r => server.listen(0, r));
+  const B = `http://127.0.0.1:${server.address().port}/api`;
+  const post = async (p, b) => { const r = await fetch(B + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }); return [r.status, await r.json()]; };
+  try {
+    const { sessionId } = await (await fetch(B + '/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })).json();
+    for (const lang of ['en', 'pt']) {
+      const cases = [
+        ['/ask', { sessionId, suspectId: 'nobody', question: 'Where?', lang }, 400, 'unknown_suspect'],
+        ['/ask', { sessionId: 'gone', suspectId: 'carlos', question: 'Where?', lang }, 400, 'unknown_session'],
+        ['/ask', { sessionId, suspectId: 'carlos', question: '  ', lang }, 400, 'empty_question'],
+        ['/ask', { sessionId, suspectId: 'carlos', question: 'x'.repeat(501), lang }, 400, 'question_too_long'],
+        ['/accuse', { sessionId, suspectId: 'nobody', lang }, 400, 'unknown_suspect'],
+        ['/accuse', { sessionId: 'gone', suspectId: 'carlos', lang }, 400, 'unknown_session'],
+      ];
+      for (const [p, b, st, code] of cases) {
+        const [s, j] = await post(p, b);
+        must(s === st && j.code === code && j.error === 'bad_request', `${p} ${code} ${lang}: ${s} ${JSON.stringify(j)}`);
+        must(j.message === friendly(code, lang) && !RAW.test(j.message), `${p} ${code} ${lang} message`);
+      }
+    }
+    await post('/accuse', { sessionId, suspectId: 'carlos', lang: 'pt' });
+    const [s, j] = await post('/accuse', { sessionId, suspectId: 'carlos', lang: 'pt' });
+    must(s === 409 && j.code === 'already_accused' && j.message === friendly('already_accused', 'pt'), 'second accusation');
+  } finally { server.close(); }
+});
+
+await check('#ask-msg is an alert inside the Conversation panel, right after the ask form', () => {
+  const conv = html.slice(html.indexOf('<section id="conversation"'), html.indexOf('<section id="locations"'));
+  const form = conv.indexOf('</form>'), msg = conv.indexOf('<p id="ask-msg"');
+  must(msg > form && form > 0, '#ask-msg not after the form in #conversation');
+  must(/<p id="ask-msg"[^>]*role="alert"[^>]*hidden/.test(conv), '#ask-msg role alert, hidden at start');
+});
+
+await check('netError label exists in EN and PT', () => {
+  must(LABELS.en.netError && LABELS.pt.netError && LABELS.en.netError !== LABELS.pt.netError, 'netError');
+  must(bestSrc.includes('netError'), 'best.js netError');
+});
+
+await check('askQuestion sends its hints and errors to the ask panel, never to the hidden Accuse panel', () => {
+  const src = fnSource('askQuestion');
+  must(src.includes("showError(LABELS[lang].pickSuspect, 'ask')"), 'pickSuspect to ask');
+  must(src.includes("showError(LABELS[lang].emptyQuestion, 'ask')"), 'emptyQuestion to ask');
+  must(!src.includes("getElementById('best-status')"), 'askQuestion still writes #best-status');
+  must(/catch\(err\)\{\s*showError\([^\n]*LABELS\[lang\]\.netError[^\n]*'ask'\)/.test(src), 'catch maps to ask panel');
+});
+
+function sandbox(fetchImpl) {
+  const el = (o = {}) => ({ disabled: false, value: '', hidden: true, textContent: '', attrs: {}, children: [], setAttribute(k, v) { this.attrs[k] = v; }, removeAttribute(k) { delete this.attrs[k]; }, focus() { this.focused = true; }, appendChild(c) { this.children.push(c); c.parentNode = this; }, remove() { if (this.parentNode) this.parentNode.children = this.parentNode.children.filter(x => x !== this); }, ...o });
+  const els = { q: el({ value: 'Where were you?' }), 'ask-btn': el(), 'ask-form': el(), log: el(), 'ask-msg': el(), err: el() };
+  const doc = { getElementById: id => els[id], querySelectorAll: () => [], createElement: () => el() };
+  const src = 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError');
+  const ask = new Function('document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories', 'renderQuestions', 'renderConversation',
+    'let questionsUsed = 0; let gameOver = false; function applyClue(){}\n' + src + '\nreturn askQuestion;')(doc, fetchImpl, '/api', LABELS, 'carlos', 'pt', 's', {}, () => {}, () => {});
+  return { ask, els };
+}
+
+await check('offline ask shows the PT netError under the form, not "Failed to fetch"', async () => {
+  const { ask, els } = sandbox(async () => { throw new TypeError('Failed to fetch'); });
+  await ask({ preventDefault() {} });
+  must(els['ask-msg'].hidden === false && els['ask-msg'].textContent === LABELS.pt.netError, `ask-msg ${els['ask-msg'].textContent}`);
+  must(els.err.hidden === true, '#err stays hidden');
+});
+
+await check('a server error shows its friendly message under the form; the next ask clears it', async () => {
+  let n = 0;
+  const { ask, els } = sandbox(async () => (++n === 1
+    ? { ok: false, json: async () => ({ error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', 'pt') }) }
+    : { ok: true, json: async () => ({ answer: 'Eu estava no corredor.', questions: 1 }) }));
+  await ask({ preventDefault() {} });
+  must(els['ask-msg'].hidden === false && els['ask-msg'].textContent === friendly('unknown_session', 'pt'), 'shown');
+  els.q.value = 'De novo?';
+  await ask({ preventDefault() {} });
+  must(els['ask-msg'].hidden === true, 'cleared on the next ask');
+});
+
+await check('a non JSON reply (proxy error page) is a netError too', async () => {
+  const { ask, els } = sandbox(async () => ({ ok: false, json: async () => { throw new SyntaxError('Unexpected token <'); } }));
+  await ask({ preventDefault() {} });
+  must(els['ask-msg'].textContent === LABELS.pt.netError, els['ask-msg'].textContent);
+});
+
+await check('no suspect and empty question hints land in #ask-msg', async () => {
+  const { els } = sandbox(async () => ({ ok: true, json: async () => ({}) }));
+  const el2 = sandbox(async () => ({}));
+  const noSus = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false;\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
+    { getElementById: id => el2.els[id] }, LABELS, 'en', null);
+  await noSus({ preventDefault() {} });
+  must(el2.els['ask-msg'].textContent === LABELS.en.pickSuspect && el2.els['ask-msg'].hidden === false, 'pickSuspect');
+  els.q.value = '   ';
+  const empty = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false;\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
+    { getElementById: id => els[id] }, LABELS, 'en', 'carlos');
+  await empty({ preventDefault() {} });
+  must(els['ask-msg'].textContent === LABELS.en.emptyQuestion && els.q.focused === true, 'emptyQuestion + focus');
+});
+
+await check('ask hint is cleared on suspect select, language switch, Start over and new file', () => {
+  must(fnSource('selectSuspect').includes("getElementById('ask-msg')"), 'selectSuspect');
+  must(fnSource('setLang').includes("getElementById('ask-msg')"), 'setLang');
+  must((html.match(/const askMsg = document\.getElementById\('ask-msg'\);\n  if \(askMsg\) askMsg\.hidden = true;/g) || []).length >= 4, 'restart and new file');
+});
+
+for (const r of results) console.log(r);
+const failed = results.filter(r => r.startsWith('FAIL')).length;
+console.log(`errors: ${results.length - failed} passed, ${failed} failed`);
+process.exit(failed ? 1 : 0);

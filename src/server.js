@@ -238,19 +238,19 @@ export function createServer({
 
         // Validation
         if (!sessionId || !sessions.has(sessionId)) {
-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown session' });
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
         }
         const sess = sessions.get(sessionId);
         const play = caseOfSession(sess);
         const suspect = play.suspects.find((s) => s.id === suspectId);
         if (!suspect) {
-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_suspect', message: friendly('unknown_suspect', lang) });
         }
         if (!question || typeof question !== 'string' || !question.trim()) {
-          return sendJSON(res, 400, { error: 'bad_request', message: 'empty question' });
+          return sendJSON(res, 400, { error: 'bad_request', code: 'empty_question', message: friendly('empty_question', lang) });
         }
         if (question.length > 500) {
-          return sendJSON(res, 400, { error: 'bad_request', message: 'question too long' });
+          return sendJSON(res, 400, { error: 'bad_request', code: 'question_too_long', message: friendly('question_too_long', lang) });
         }
 
         // per-case cap on model calls per playthrough (M2 sprint 4): no model call once capped
@@ -311,16 +311,16 @@ export function createServer({
         const { sessionId, suspectId, player, lang: bodyLang } = body;
         const lang = getLang(bodyLang);
         if (!sessionId || !sessions.has(sessionId)) {
-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown session' });
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
         }
         const sess = sessions.get(sessionId);
         if (sess.accused) {
-          return sendJSON(res, 409, { error: 'bad_request', message: 'already accused' });
+          return sendJSON(res, 409, { error: 'bad_request', code: 'already_accused', message: friendly('already_accused', lang) });
         }
         const play = caseOfSession(sess);
         const suspect = play.suspects.find((s) => s.id === suspectId);
         if (!suspect) {
-          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_suspect', message: friendly('unknown_suspect', lang) });
         }
 
         const correct = suspectId === play.culprit;

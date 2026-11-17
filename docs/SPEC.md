@@ -124,6 +124,10 @@
 - `renderVerdict()` appends `div.aftermath` (`p.aftermath-kicker` "The next morning's paper" / "Jornal da manhã seguinte", `p.aftermath-headline`, `p.aftermath-body`) only when the verdict is wrong and the CONTINUE? countdown is not running (`contState !== 'run'`), so after Give up, Escape, timeout or Close. The first render animates; later renders (language switch) add `is-static`. `endContinue()` announces "GAME OVER. <headline>. The culprit got away...".
 - CSS: newspaper clipping (paper #e9dfc8, ink #1d1a16, Georgia serif, rotate(-1.2deg)), `cf-paper` slide-in 700ms, none with reduced motion. `.continue.is-over` docks at the bottom (16px, or 12px above `--dock-h` on phones) so it does not cover the clipping.
 
+## Web page: errors on the Ask step (M2 game feel sprint 11)
+- API: every 4xx from `POST /api/ask` and `POST /api/accuse` is `{ error: 'bad_request', code, message }` with `code` one of `unknown_suspect`, `unknown_session`, `empty_question`, `question_too_long`, `already_accused` and `message` = `friendly(code, lang)` from src/messages.js.
+- Page: `p#ask-msg.ask-msg` (`role="alert"`, hidden at start) sits right after `#ask-form` in the Conversation panel. `showError(msg, 'ask')` writes there and does not auto-hide; `showError(msg)` keeps writing `#err` in the Accuse panel and hides it after 5 s. `askQuestion()` sends `LABELS[lang].pickSuspect` and `LABELS[lang].emptyQuestion` there, clears it before the request, and maps a thrown Error (network, non JSON reply) to `LABELS[lang].netError`; accuse uses the same mapping on `#err`. `selectSuspect()`, `setLang()`, Start over and a new file hide `#ask-msg`.
+
 ## Web page: culprit in handcuffs (M2 game feel sprint 10)
 - Art: `public/assets/characters/<case>-<culpritId>-arrest.png` (128 px) and `@2x.png` (256 px), generated through the Cup key and keyed by scripts/assets; listed in `public/assets/manifest.json` with their receipt ids.
 - API: `POST /api/accuse` returns `culprit` from the session case (not the default case) and `solutions` (`{ en, pt }`).
@@ -182,9 +186,10 @@ This executes:
 17. `node test/talk.mjs` (talking portraits: speaker avatar with screen reader and visible copies, talk sheet of the open case, reveal and mouth frames, re-render finishes the line, click to finish, reduced motion, only new answers talk, CSS frames, sheet pixels, script coverage)
 18. `node test/aftermath.mjs` (wrong verdict aftermath: a story for every innocent and none for the culprit, sizes and punctuation, names, no leak in the public case, accuse response for both cases, shown only after GAME OVER, language switch without replay, announcement, styles and docking)
 19. `node test/arrest.mjs` (culprit in handcuffs: generated sprites and receipts, accuse response for both cases, sprite before the stamp, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution follows the language, styles and reduced motion)
-20. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+20. `node test/errors.mjs` (errors on the Ask step: friendly EN/PT lines for every code, server codes for bad asks and accusations, #ask-msg placement, netError labels, routing in askQuestion, offline, server error cleared on the next ask, non JSON reply, no suspect and empty question, clearing on select, language, Start over and new file)
+21. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 234 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, keyboard 13).
+Total checks: 244 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

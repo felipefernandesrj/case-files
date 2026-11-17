@@ -1,6 +1,6 @@
 /**
  * Friendly messages for client‑facing errors.
- * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'} code
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'|'unknown_suspect'|'unknown_session'|'empty_question'|'question_too_long'|'already_accused'} code
  * @param {'en'|'pt'} lang
  * @returns {string}
  */
@@ -29,6 +29,26 @@ export function friendly(code, lang) {
     bad_request: {
       en: 'The question could not be read, please type it again.',
       pt: 'A pergunta não pôde ser lida, por favor digite-a novamente.',
+    },
+    unknown_suspect: {
+      en: 'That suspect is not in this case file. Pick someone from People and ask again.',
+      pt: 'Esse suspeito não está neste dossiê. Escolha alguém em Pessoas e pergunte de novo.',
+    },
+    unknown_session: {
+      en: 'This game has expired. Press Start over to open a new one; your best score is kept.',
+      pt: 'Esta partida expirou. Toque em Nova partida para abrir outra; seu recorde continua salvo.',
+    },
+    empty_question: {
+      en: 'Type a question first.',
+      pt: 'Digite uma pergunta primeiro.',
+    },
+    question_too_long: {
+      en: 'That question is too long. Keep it under 500 characters.',
+      pt: 'Essa pergunta é longa demais. Use menos de 500 caracteres.',
+    },
+    already_accused: {
+      en: 'You already named a culprit in this game. Press Start over to play again.',
+      pt: 'Você já apontou um culpado nesta partida. Toque em Nova partida para jogar de novo.',
     },
   };
 

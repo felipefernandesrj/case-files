@@ -1,0 +1,284 @@
+<<<REPLACE public/best.js>>>
+OLD (copied exactly from the current file)
+    confirmRestart: 'Start a new game? Your current questions will be lost.',
+    gameOver: 'Game over. Use Start over for a new case.',
+    pickSuspect: 'Choose a suspect first.',
+    emptyQuestion: 'Type a question first.'
+=====
+    confirmRestart: 'Start a new game? Your current questions will be lost.',
+    gameOver: 'Game over. Use Start over for a new case.',
+    pickSuspect: 'Choose a suspect first.',
+    emptyQuestion: 'Type a question first.',
+    netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.'
+<<<END>>>
+
+<<<REPLACE public/best.js>>>
+OLD (copied exactly from the current file)
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
+    pickSuspect: 'Escolha um suspeito primeiro.',
+    emptyQuestion: 'Digite uma pergunta primeiro.'
+=====
+    confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
+    pickSuspect: 'Escolha um suspeito primeiro.',
+    emptyQuestion: 'Digite uma pergunta primeiro.',
+    netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.'
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+OLD (copied exactly from the current file)
+@media (prefers-reduced-motion: reduce) { .arrest-sprite, .arrest .case-closed-stamp { animation: none; } }
+=====
+@media (prefers-reduced-motion: reduce) { .arrest-sprite, .arrest .case-closed-stamp { animation: none; } }
+.ask-msg { margin: 8px 0 0; padding: 8px 12px; border-left: 4px solid #d9a441; background: rgba(217,164,65,0.12); color: var(--cf-text); font-weight: 700; }
+.ask-msg[hidden] { display: none; }
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+          </div>
+        </form>
+        <p id="questions-used" aria-live="polite"></p>
+=====
+          </div>
+        </form>
+        <p id="ask-msg" class="ask-msg" role="alert" hidden></p>
+        <p id="questions-used" aria-live="polite"></p>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+async function setLang(newLang) {
+  lang = newLang;
+  document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
+=====
+async function setLang(newLang) {
+  lang = newLang;
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
+  document.documentElement.lang = newLang === 'pt' ? 'pt-BR' : 'en';
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+  document.getElementById('err').hidden = true;
+  document.getElementById('best-status').textContent = '';
+  await loadCase();
+=====
+  document.getElementById('err').hidden = true;
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
+  document.getElementById('best-status').textContent = '';
+  await loadCase();
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+  if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
+  document.querySelectorAll('#suspect-buttons button').forEach(b=>{
+=====
+  if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
+  document.querySelectorAll('#suspect-buttons button').forEach(b=>{
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+  if (gameOver) return;
+  if (!selectedSuspect) { document.getElementById('best-status').textContent = LABELS[lang].pickSuspect; return; }
+  const question = document.getElementById('q').value.trim();
+  if (!question) { document.getElementById('best-status').textContent = LABELS[lang].emptyQuestion; document.getElementById('q').focus(); return; }
+  const qInput = document.getElementById('q');
+=====
+  if (gameOver) return;
+  if (!selectedSuspect) { showError(LABELS[lang].pickSuspect, 'ask'); return; }
+  const question = document.getElementById('q').value.trim();
+  if (!question) { showError(LABELS[lang].emptyQuestion, 'ask'); document.getElementById('q').focus(); return; }
+  const qInput = document.getElementById('q');
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+  if (restartBtn) restartBtn.disabled = true;
+  askForm.setAttribute('aria-busy', 'true');
+  const log = document.getElementById('log');
+=====
+  if (restartBtn) restartBtn.disabled = true;
+  askForm.setAttribute('aria-busy', 'true');
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) { askMsg.hidden = true; askMsg.textContent = ''; }
+  const log = document.getElementById('log');
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+    histories[selectedSuspect].push({q:question,a:answer});
+    renderConversation(true);
+  }catch(err){
+    showError(err.message||'Error');
+  }finally{
+=====
+    histories[selectedSuspect].push({q:question,a:answer});
+    renderConversation(true);
+  }catch(err){
+    showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message, 'ask');
+  }finally{
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+    await loadScores();
+    await loadCredits(!!data.correct);
+  }catch(err){
+    showError(err.message||'Error');
+  }
+}
+=====
+    await loadScores();
+    await loadCredits(!!data.correct);
+  }catch(err){
+    showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message);
+  }
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+function showError(msg){
+  const el = document.getElementById('err');
+  el.textContent = msg || (lang === 'pt' ? 'Erro' : 'Error');
+  el.hidden = false;
+  setTimeout(()=>{el.hidden=true;},5000);
+}
+=====
+function showError(msg, where){
+  const ask = where === 'ask' ? document.getElementById('ask-msg') : null;
+  const el = ask || document.getElementById('err');
+  el.textContent = msg || (lang === 'pt' ? 'Erro' : 'Error');
+  el.hidden = false;
+  if (!ask) setTimeout(()=>{el.hidden=true;},5000);
+}
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+OLD (copied exactly from the current file)
+  document.getElementById('err').hidden = true;
+  document.getElementById('ask-btn').disabled = false;
+  document.getElementById('q').disabled = false;
+=====
+  document.getElementById('err').hidden = true;
+  const askMsg = document.getElementById('ask-msg');
+  if (askMsg) askMsg.hidden = true;
+  document.getElementById('ask-btn').disabled = false;
+  document.getElementById('q').disabled = false;
+<<<END>>>
+
+<<<REPLACE src/messages.js>>>
+OLD (copied exactly from the current file)
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'} code
+=====
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'|'unknown_suspect'|'unknown_session'|'empty_question'|'question_too_long'|'already_accused'} code
+<<<END>>>
+
+<<<REPLACE src/messages.js>>>
+OLD (copied exactly from the current file)
+      en: 'The question could not be read, please type it again.',
+      pt: 'A pergunta não pôde ser lida, por favor digite-a novamente.',
+    },
+=====
+      en: 'The question could not be read, please type it again.',
+      pt: 'A pergunta não pôde ser lida, por favor digite-a novamente.',
+    },
+    unknown_suspect: {
+      en: 'That suspect is not in this case file. Pick someone from People and ask again.',
+      pt: 'Esse suspeito não está neste dossiê. Escolha alguém em Pessoas e pergunte de novo.',
+    },
+    unknown_session: {
+      en: 'This game has expired. Press Start over to open a new one; your best score is kept.',
+      pt: 'Esta partida expirou. Toque em Nova partida para abrir outra; seu recorde continua salvo.',
+    },
+    empty_question: {
+      en: 'Type a question first.',
+      pt: 'Digite uma pergunta primeiro.',
+    },
+    question_too_long: {
+      en: 'That question is too long. Keep it under 500 characters.',
+      pt: 'Essa pergunta é longa demais. Use menos de 500 caracteres.',
+    },
+    already_accused: {
+      en: 'You already named a culprit in this game. Press Start over to play again.',
+      pt: 'Você já apontou um culpado nesta partida. Toque em Nova partida para jogar de novo.',
+    },
+<<<END>>>
+
+<<<REPLACE src/server.js>>>
+OLD (copied exactly from the current file)
+        // Validation
+        if (!sessionId || !sessions.has(sessionId)) {
+          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown session' });
+        }
+        const sess = sessions.get(sessionId);
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
+        if (!suspect) {
+          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
+        }
+        if (!question || typeof question !== 'string' || !question.trim()) {
+          return sendJSON(res, 400, { error: 'bad_request', message: 'empty question' });
+        }
+        if (question.length > 500) {
+          return sendJSON(res, 400, { error: 'bad_request', message: 'question too long' });
+        }
+=====
+        // Validation
+        if (!sessionId || !sessions.has(sessionId)) {
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
+        }
+        const sess = sessions.get(sessionId);
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
+        if (!suspect) {
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_suspect', message: friendly('unknown_suspect', lang) });
+        }
+        if (!question || typeof question !== 'string' || !question.trim()) {
+          return sendJSON(res, 400, { error: 'bad_request', code: 'empty_question', message: friendly('empty_question', lang) });
+        }
+        if (question.length > 500) {
+          return sendJSON(res, 400, { error: 'bad_request', code: 'question_too_long', message: friendly('question_too_long', lang) });
+        }
+<<<END>>>
+
+<<<REPLACE src/server.js>>>
+OLD (copied exactly from the current file)
+        const { sessionId, suspectId, player, lang: bodyLang } = body;
+        const lang = getLang(bodyLang);
+        if (!sessionId || !sessions.has(sessionId)) {
+          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown session' });
+        }
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'bad_request', message: 'already accused' });
+        }
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
+        if (!suspect) {
+          return sendJSON(res, 400, { error: 'bad_request', message: 'unknown suspect' });
+        }
+=====
+        const { sessionId, suspectId, player, lang: bodyLang } = body;
+        const lang = getLang(bodyLang);
+        if (!sessionId || !sessions.has(sessionId)) {
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
+        }
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'bad_request', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
+        if (!suspect) {
+          return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_suspect', message: friendly('unknown_suspect', lang) });
+        }
+<<<END>>>

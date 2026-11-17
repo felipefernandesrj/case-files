@@ -292,3 +292,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 266-268 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off) plus 6 billed flux-1-schnell images (2 kept). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf10.mjs). No live play smoke (no model prompt changed).
 - Result: npm test 234/234 (was 227), new test/arrest.mjs 7 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 10).
+
+## M2 game feel sprint 11 (v0.4.20)
+
+- Scope: hints and errors of the Ask step shown under the question box instead of the hidden Accuse panel, friendly EN/PT server errors with codes, a translated network error. Asked by a backer (error messages on suspect select).
+- Calls 269-271 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf11.mjs): 0 of 16 messages visible before, 16 of 16 after. No live play smoke (no model prompt changed).
+- Result: npm test 244/244 (was 234), new test/errors.mjs 10 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 11).

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.20 (M2 game feel, sprint 11: error messages you can see)
+- Asked by a backer: hints and errors on the Ask step were invisible. "Choose a suspect first", "Type a question first", server errors and network failures were written into the Accuse panel, which is hidden while you ask, so pressing Ask did nothing you could see (reproduced at 1280 and 390 in English and Portuguese). They now show right under the question box, in a box that screen readers announce, and stay until your next ask, a suspect change, a language switch, Start over or a new file.
+- The server no longer sends raw English strings such as "unknown suspect" or "unknown session". Every bad ask or accusation now answers with a code and a friendly line in the player's language (unknown suspect, expired game, empty question, question over 500 characters, second accusation).
+- A network failure or an error page from a proxy now reads "Could not reach the game. Check your connection and ask again; nothing was counted." (PT "Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.") instead of "Failed to fetch".
+- New test/errors.mjs with 10 checks. The automated suite now has 244 checks.
+
 ## 0.4.19 (M2 game feel, sprint 10: the culprit in handcuffs)
 - A correct accusation now shows the culprit led away in handcuffs, with the CASE CLOSED stamp slammed on top of the sprite, and a line under it: "Case closed: Carlos Mendes is led away in handcuffs." (PT "Caso encerrado: Carlos Mendes sai com as mãos algemadas."). The stamp stays hidden from screen readers; the line is read with the verdict.
 - Two new sprites, one per culprit (Carlos Mendes for The Vanishing Violin, Inês Duarte for The Night Train), generated with flux-1-schnell through the Cup key on a chroma-key background in the same 90s arcade noir style, background removed with the integrated scripts/assets pipeline (ToonOut fallback, the figures touch the plate edge), pixel finished at 128 px like the portraits, 1x and 2x, receipts in public/assets/manifest.json. Nothing is generated while you play.

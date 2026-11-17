@@ -119,7 +119,8 @@ export const LABELS = {
     confirmRestart: 'Start a new game? Your current questions will be lost.',
     gameOver: 'Game over. Use Start over for a new case.',
     pickSuspect: 'Choose a suspect first.',
-    emptyQuestion: 'Type a question first.'
+    emptyQuestion: 'Type a question first.',
+    netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -134,6 +135,7 @@ export const LABELS = {
     confirmRestart: 'Começar um novo jogo? Suas perguntas atuais serão perdidas.',
     gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
     pickSuspect: 'Escolha um suspeito primeiro.',
-    emptyQuestion: 'Digite uma pergunta primeiro.'
+    emptyQuestion: 'Digite uma pergunta primeiro.',
+    netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.'
   }
 };
