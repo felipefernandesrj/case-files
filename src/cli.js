@@ -6,6 +6,15 @@ import { fileURLToPath } from 'node:url';
 import readline from 'readline';
 import { randomUUID } from 'node:crypto';
 import { URLSearchParams } from 'node:url';
+import { budgetText } from '../public/best.js';
+
+// question budget in the terminal (M2 game feel sprint 13): the same budget as the web page, with commands instead of buttons
+const OUT_LINE = {
+  en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
+  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+};
+let questionBudget = 0;
+let questionsLeft = null;
 
 // Helper to perform fetch with JSON body
 async function postJSON(url, data) {
@@ -16,7 +25,9 @@ async function postJSON(url, data) {
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `HTTP ${res.status}`);
+    const e = new Error(err.message || `HTTP ${res.status}`);
+    e.code = err.code;
+    throw e;
   }
   return res.json();
 }
@@ -116,6 +127,12 @@ async function processCommand(line) {
           lang,
         });
         console.log(`\n${resp.answer}\n`);
+        if (resp.budget) {
+          questionBudget = resp.budget;
+          questionsLeft = resp.left;
+          console.log(budgetText(lang, questionsLeft, questionBudget));
+          if (questionsLeft === 0) console.log(OUT_LINE[lang]);
+        }
         const hist = histories.get(suspectId) || [];
         hist.push({ q: question, a: resp.answer });
         histories.set(suspectId, hist);
@@ -172,7 +189,10 @@ async function processCommand(line) {
       return true;
     }
   } catch (e) {
-    console.error('Error:', e.message);
+    if (e.code === 'out_of_questions') {
+      questionsLeft = 0;
+      console.log(OUT_LINE[lang]);
+    } else console.error('Error:', e.message);
   }
   return false;
 }
@@ -181,7 +201,12 @@ async function processCommand(line) {
 await displayIntro();
 
 // Create a session
-const { sessionId } = await postJSON(`${baseUrl}/api/session`, {});
+const { sessionId, budget } = await postJSON(`${baseUrl}/api/session`, {});
+if (budget) {
+  questionBudget = budget;
+  questionsLeft = budget;
+  console.log(budgetText(lang, questionsLeft, questionBudget));
+}
 
 let terminated = false;
 

@@ -5186,5 +5186,145 @@
   },
   "error": null,
   "kept": true
+ },
+ {
+  "at": "2026-11-18T12:02:07Z",
+  "purpose": "m2gf13-build:code (12 pairs: best.js, game.css, index.html, cli.js)",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 46596,
+  "usage": {
+   "prompt_tokens": 2735,
+   "completion_tokens": 1863,
+   "total_tokens": 4598,
+   "neurons": 75.6727294921875,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 0.000832,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7Q8GWHGEQ21FT12BTJMNP7B",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": false,
+  "label": "m2gf13-280"
+ },
+ {
+  "at": "2026-11-18T12:03:52Z",
+  "purpose": "m2gf13-build:tests (test/ask-lock.mjs FILE + package.json script)",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 73256,
+  "usage": {
+   "prompt_tokens": 3463,
+   "completion_tokens": 3144,
+   "total_tokens": 6607,
+   "neurons": 117.2272720336914,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 0.001289,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7Q8K8YMC78DWTKNH8804BHJ",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": false,
+  "label": "m2gf13-281"
+ },
+ {
+  "at": "2026-11-18T12:04:59Z",
+  "purpose": "m2gf13-build:docs (12 pairs: package version, README x3, CHANGELOG, BUILD_LOG, SPEC x2, HOW_TO_PLAY x4)",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 60569,
+  "usage": {
+   "prompt_tokens": 3437,
+   "completion_tokens": 2774,
+   "total_tokens": 6211,
+   "neurons": 106.9000015258789,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 0.001176,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7Q8NP7S9HDNV5TVJ1CTFWN5",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": false,
+  "label": "m2gf13-282"
+ },
+ {
+  "at": "2026-11-18T12:05:32Z",
+  "purpose": "m2gf13-build:rework CHANGELOG blank line (282 lost one)",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 4127,
+  "usage": {
+   "prompt_tokens": 305,
+   "completion_tokens": 126,
+   "total_tokens": 431,
+   "neurons": 6.2090911865234375,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 6.8e-05,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7Q8RDANVGNVFYGNA9P9N4GR",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": true,
+  "label": "m2gf13-283"
+ },
+ {
+  "at": "2026-11-18T12:07:26Z",
+  "purpose": "m2gf13-build:rework test gap (mutation M3) + CLI simplification + SPEC line",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 19036,
+  "usage": {
+   "prompt_tokens": 1297,
+   "completion_tokens": 799,
+   "total_tokens": 2096,
+   "neurons": 33.581817626953125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 0.000369,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7Q8VDZ1HGCGJ6CSWHFTFPZ4",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": true,
+  "label": "m2gf13-284"
  }
 ]

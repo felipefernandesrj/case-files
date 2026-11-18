@@ -1,0 +1,51 @@
+
+=== The Vanishing Violin ===
+
+During a rehearsal at the Aurora Music Academy, the priceless Stradivarius violin disappears from the instrument room. Three people were present that night: the charismatic conductor, a nervous violin prodigy, and the longtime janitor. Who took the priceless instrument?
+
+Suspects:
+- lorenzo: Lorenzo Moretti (Conductor)
+- maya: Maya Santos (Violinist)
+- carlos: Carlos Mendes (Janitor)
+
+
+I have no comment on that.
+
+
+I have no comment on that.
+
+
+I have no comment on that.
+
+
+I have no comment on that.
+
+
+I have no comment on that.
+
+
+I have no comment on that.
+
+
+I have no comment on that.
+
+
+I have no comment on that.
+
+Error: No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.
+
+=== Verdict ===
+Correct!
+Culprit: Carlos Mendes
+Solution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.
+Score: 75 (questions asked: 8)
+
+--- Top Scores ---
+1. tester - 100 pts (0 Q) [en]
+2. anon - 100 pts (0 Q) [en]
+3. anon - 100 pts (0 Q) [en]
+4. anon - 100 pts (1 Q) [en]
+5. anon - 100 pts (1 Q) [pt]
+6. anon - 75 pts (8 Q) [en]
+7. tester - 0 pts (0 Q) [en]
+8. anon - 0 pts (0 Q) [pt]

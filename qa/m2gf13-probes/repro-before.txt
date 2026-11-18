@@ -1,0 +1,6 @@
+M2 game feel sprint 13, reproduced on HEAD 0833f6e (v0.4.21) before any change, 2026-11-18 ~08:55 BRT.
+Probe: tools/probe-gf13.mjs, mock mode, headless Chrome, 1280x800 and 390x844, EN and PT (run41/before-*.png, qa/m2gf13-probes/probe-before.json).
+- Budget spent (8 of 8 answered, "Questions left: 0 of 8"): #q and #ask-btn are disabled but look the same as when open. Computed style diff open vs out: #q only cursor (text -> default); #ask-btn nothing (bg rgb(36,31,26), color rgb(243,234,223), cursor pointer even while disabled). No placeholder, no aria-disabled, no class on #ask-form. Same at 1280/390, EN/PT.
+- Game over (after an accusation): same, cursor only.
+- Reduced motion: no locked state to check (before count used a 0 s threshold that also counted the global 0.01 ms reduce rule; after probe uses > 1 ms).
+CLI (qa/m2gf13-probes/cli-before.txt): node src/cli.js never shows the budget; the 9th ask prints "Error: No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." (browser button names, raw Error prefix), PT the same with "Error:" + PT browser line. Server already refused past the budget.

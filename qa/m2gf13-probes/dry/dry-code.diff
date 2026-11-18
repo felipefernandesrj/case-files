@@ -1,0 +1,175 @@
+diff --git a/package.json b/package.json
+index 980df5e..53c17b2 100644
+--- a/package.json
++++ b/package.json
+@@ -3,7 +3,7 @@
+   "version": "0.4.21",
+   "type": "module",
+   "scripts": {
+-    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/keyboard.mjs"
++    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/keyboard.mjs"
+   },
+   "dependencies": {}
+ }
+diff --git a/public/best.js b/public/best.js
+index ea64993..1a50536 100644
+--- a/public/best.js
++++ b/public/best.js
+@@ -133,7 +133,9 @@ export const LABELS = {
+     emptyQuestion: 'Type a question first.',
+     netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.',
+     outOfQuestions: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
+-    toAccuse: 'Name the culprit'
++    toAccuse: 'Name the culprit',
++    outPlaceholder: 'Out of questions',
++    overPlaceholder: 'Game over'
+   },
+   pt: {
+     bestTitle: 'Seu recorde',
+@@ -151,6 +153,8 @@ export const LABELS = {
+     emptyQuestion: 'Digite uma pergunta primeiro.',
+     netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.',
+     outOfQuestions: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
+-    toAccuse: 'Apontar o culpado'
++    toAccuse: 'Apontar o culpado',
++    outPlaceholder: 'Sem perguntas',
++    overPlaceholder: 'Fim de jogo'
+   }
+ };
+diff --git a/public/css/game.css b/public/css/game.css
+index 938e374..ecdb844 100644
+--- a/public/css/game.css
++++ b/public/css/game.css
+@@ -782,3 +782,11 @@ body[data-view="cabinet"] #steps {
+ @keyframes cf-qb-low { 50% { opacity: 0.35; } }
+ @keyframes cf-qb-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+ @media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip:not(.is-spent), .q-budget.is-out { animation: none; transition: none; } }
++/* M2 game feel sprint 13: a locked question box (budget spent or game over) looks locked, text stays AA */
++#ask-form.is-locked #q, #ask-form.is-locked #ask-btn { background: var(--cf-ink-soft); background-image: none; color: var(--cf-text-dim); cursor: not-allowed; box-shadow: none; filter: none; }
++#ask-form.is-locked #q { border: 1px dashed var(--cf-lamp-dim); }
++#ask-form.is-locked #ask-btn { outline: 1px dashed var(--cf-lamp-dim); outline-offset: -1px; }
++#ask-form.is-locked #q::placeholder { color: var(--cf-text-dim); opacity: 1; font-style: italic; }
++#ask-form.is-locked #ask-btn .icon { opacity: 0.6; }
++#ask-form[aria-busy="true"] #q, #ask-form[aria-busy="true"] #ask-btn { cursor: progress; }
++@media (prefers-reduced-motion: reduce) { #ask-form #q, #ask-form #ask-btn { transition: none; } }
+diff --git a/public/index.html b/public/index.html
+index 7f3d8ba..48436f3 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -709,6 +709,7 @@ function setGameOver(on){
+     ask.disabled = false;
+     accuseBtns.forEach(b => { b.disabled = false; });
+   }
++  if (typeof renderAskLock === 'function') renderAskLock();
+ }
+ const histories = {}; // per suspectId [{q,a},...]
+ 
+@@ -1520,6 +1521,21 @@ let budgetLeftShown = null;
+ function budgetOut() {
+   return questionBudget > 0 && questionsUsed >= questionBudget;
+ }
++// locked question box (M2 game feel sprint 13): budget spent or game over looks locked, with a placeholder and aria-disabled
++function renderAskLock() {
++  const form = document.getElementById('ask-form');
++  const q = document.getElementById('q');
++  const ask = document.getElementById('ask-btn');
++  if (!form || !q || !ask) return;
++  const reason = gameOver ? 'over' : (budgetOut() ? 'out' : '');
++  form.classList.toggle('is-locked', !!reason);
++  form.dataset.lock = reason;
++  q.placeholder = reason === 'over' ? LABELS[lang].overPlaceholder : (reason === 'out' ? LABELS[lang].outPlaceholder : '');
++  for (const el of [q, ask]) {
++    if (reason) el.setAttribute('aria-disabled', 'true');
++    else el.removeAttribute('aria-disabled');
++  }
++}
+ function renderQuestions() {
+   const el = document.getElementById('questions-used');
+   el.innerHTML = '';
+@@ -1557,6 +1573,7 @@ function renderBudget(left) {
+     document.getElementById('ask-btn').disabled = true;
+     showError(LABELS[lang].outOfQuestions, 'ask');
+   }
++  if (typeof renderAskLock === 'function') renderAskLock();
+ }
+ document.getElementById('budget-accuse').addEventListener('click', () => {
+   showStep('accuse');
+diff --git a/src/cli.js b/src/cli.js
+index 0adb376..d216229 100644
+--- a/src/cli.js
++++ b/src/cli.js
+@@ -6,6 +6,15 @@ import { fileURLToPath } from 'node:url';
+ import readline from 'readline';
+ import { randomUUID } from 'node:crypto';
+ import { URLSearchParams } from 'node:url';
++import { budgetText } from '../public/best.js';
++
++// question budget in the terminal (M2 game feel sprint 13): the same budget as the web page, with commands instead of buttons
++const OUT_LINE = {
++  en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
++  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
++};
++let questionBudget = 0;
++let questionsLeft = null;
+ 
+ // Helper to perform fetch with JSON body
+ async function postJSON(url, data) {
+@@ -16,7 +25,9 @@ async function postJSON(url, data) {
+   });
+   if (!res.ok) {
+     const err = await res.json().catch(() => ({}));
+-    throw new Error(err.message || `HTTP ${res.status}`);
++    const e = new Error(err.message || `HTTP ${res.status}`);
++    e.code = err.code;
++    throw e;
+   }
+   return res.json();
+ }
+@@ -108,6 +119,8 @@ async function processCommand(line) {
+       const question = parts.slice(2).join(' ');
+       if (!suspectId || !question) {
+         console.log('Usage: ask <suspectId> <question>');
++      } else if (questionsLeft === 0) {
++        console.log(OUT_LINE[lang]);
+       } else {
+         const resp = await postJSON(`${baseUrl}/api/ask`, {
+           sessionId,
+@@ -116,6 +129,12 @@ async function processCommand(line) {
+           lang,
+         });
+         console.log(`\n${resp.answer}\n`);
++        if (resp.budget) {
++          questionBudget = resp.budget;
++          questionsLeft = resp.left;
++          console.log(budgetText(lang, questionsLeft, questionBudget));
++          if (questionsLeft === 0) console.log(OUT_LINE[lang]);
++        }
+         const hist = histories.get(suspectId) || [];
+         hist.push({ q: question, a: resp.answer });
+         histories.set(suspectId, hist);
+@@ -172,7 +191,10 @@ async function processCommand(line) {
+       return true;
+     }
+   } catch (e) {
+-    console.error('Error:', e.message);
++    if (e.code === 'out_of_questions') {
++      questionsLeft = 0;
++      console.log(OUT_LINE[lang]);
++    } else console.error('Error:', e.message);
+   }
+   return false;
+ }
+@@ -181,7 +203,12 @@ async function processCommand(line) {
+ await displayIntro();
+ 
+ // Create a session
+-const { sessionId } = await postJSON(`${baseUrl}/api/session`, {});
++const { sessionId, budget } = await postJSON(`${baseUrl}/api/session`, {});
++if (budget) {
++  questionBudget = budget;
++  questionsLeft = budget;
++  console.log(budgetText(lang, questionsLeft, questionBudget));
++}
+ 
+ let terminated = false;
+ 

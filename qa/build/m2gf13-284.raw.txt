@@ -1,0 +1,36 @@
+<<<REPLACE src/cli.js>>>
+        console.log('Usage: ask <suspectId> <question>');
+      } else if (questionsLeft === 0) {
+        console.log(OUT_LINE[lang]);
+      } else {
+=====
+        console.log('Usage: ask <suspectId> <question>');
+      } else {
+<<<END>>>
+<<<REPLACE test/ask-lock.mjs>>>
+}
+function runLock(state) {
+  const els = { 'ask-form': fakeEl(), q: fakeEl(), 'ask-btn': fakeEl() };
+  const document = { getElementById: (id) => els[id] || null };
+=====
+}
+function runLock(state, els = { 'ask-form': fakeEl(), q: fakeEl(), 'ask-btn': fakeEl() }) {
+  const document = { getElementById: (id) => els[id] || null };
+<<<END>>>
+<<<REPLACE test/ask-lock.mjs>>>
+  must(!('aria-disabled' in els.q.attrs) && !('aria-disabled' in els['ask-btn'].attrs), 'aria-disabled on an open game');
+});
+=====
+  must(!('aria-disabled' in els.q.attrs) && !('aria-disabled' in els['ask-btn'].attrs), 'aria-disabled on an open game');
+  const again = runLock({ lang: 'en', gameOver: false, out: false }, runLock({ lang: 'en', gameOver: true, out: true }));
+  must(!again['ask-form'].cls.has('is-locked') && again.q.placeholder === '', 'Start over kept the lock');
+  must(!('aria-disabled' in again.q.attrs) && !('aria-disabled' in again['ask-btn'].attrs), 'Start over kept aria-disabled');
+});
+<<<END>>>
+<<<REPLACE docs/SPEC.md>>>
+- CSS: locked box and Ask use `--cf-ink-soft` background and `--cf-text-dim` text (9.81:1), a dashed `--cf-lamp-dim` edge (outline on the button, no layout shift), `cursor: not-allowed`, an italic placeholder at full opacity and a dimmed icon; `aria-busy` shows `cursor: progress`; reduced motion removes the box transitions.
+- CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero, and for any later ask without calling the server, it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar); a server `out_of_questions` is shown the same way instead of "Error:".
+=====
+- CSS: locked box and Ask use `--cf-ink-soft` background and `--cf-text-dim` text (9.81:1), a dashed `--cf-lamp-dim` edge (outline on the button, no layout shift), `cursor: not-allowed`, an italic placeholder at full opacity and a dimmed icon; `aria-busy` shows `cursor: progress`; reduced motion removes the box transitions.
+- CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar), and a later ask, refused by the server with `out_of_questions` before any model call, prints the same line instead of "Error:".
+<<<END>>>

@@ -1,0 +1,8 @@
+<<<REPLACE CHANGELOG.md>>>
+- New test/ask-lock.mjs with 10 checks. The automated suite now has 265 checks.
+## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)
+=====
+- New test/ask-lock.mjs with 10 checks. The automated suite now has 265 checks.
+
+## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)
+<<<END>>>

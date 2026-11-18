@@ -1,0 +1,10 @@
+Fix one missing blank line in CHANGELOG.md of the Case Files game: the new 0.4.22 entry must be separated from the 0.4.21 heading by one empty line, like every other entry. Emit exactly one literal search/replace block: a line `<<<REPLACE CHANGELOG.md>>>`, the OLD text below verbatim, a line of exactly five = characters (=====), the NEW text below verbatim, and a line `<<<END>>>`. Do not add any other line, blank line or marker inside the block.
+
+OLD (two lines):
+- New test/ask-lock.mjs with 10 checks. The automated suite now has 265 checks.
+## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)
+
+NEW (three lines, the middle one empty):
+- New test/ask-lock.mjs with 10 checks. The automated suite now has 265 checks.
+
+## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)

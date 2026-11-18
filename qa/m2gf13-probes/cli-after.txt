@@ -1,0 +1,106 @@
+
+=== The Vanishing Violin ===
+
+During a rehearsal at the Aurora Music Academy, the priceless Stradivarius violin disappears from the instrument room. Three people were present that night: the charismatic conductor, a nervous violin prodigy, and the longtime janitor. Who took the priceless instrument?
+
+Suspects:
+- lorenzo: Lorenzo Moretti (Conductor)
+- maya: Maya Santos (Violinist)
+- carlos: Carlos Mendes (Janitor)
+
+Questions left: 8 of 8
+
+I have no comment on that.
+
+Questions left: 7 of 8
+
+I have no comment on that.
+
+Questions left: 6 of 8
+
+I have no comment on that.
+
+Questions left: 5 of 8
+
+I have no comment on that.
+
+Questions left: 4 of 8
+
+I have no comment on that.
+
+Questions left: 3 of 8
+
+I have no comment on that.
+
+Questions left: 2 of 8
+
+I have no comment on that.
+
+Questions left: 1 of 8
+
+I have no comment on that.
+
+Questions left: 0 of 8
+No questions left in this game. Name the culprit with: accuse <suspectId>
+No questions left in this game. Name the culprit with: accuse <suspectId>
+
+=== Verdict ===
+Correct!
+Culprit: Carlos Mendes
+Solution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.
+Score: 75 (questions asked: 8)
+
+--- Top Scores ---
+1. tester - 100 pts (0 Q) [en]
+2. anon - 100 pts (0 Q) [en]
+3. anon - 100 pts (0 Q) [en]
+4. anon - 100 pts (1 Q) [en]
+5. anon - 100 pts (1 Q) [pt]
+6. anon - 75 pts (8 Q) [en]
+7. anon - 75 pts (8 Q) [en]
+8. anon - 0 pts (0 Q) [pt]
+
+=== O Violino Desaparecido ===
+
+Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?
+
+Suspects:
+- lorenzo: Lorenzo Moretti (Maestro)
+- maya: Maya Santos (Violinista)
+- carlos: Carlos Mendes (Zelador)
+
+Perguntas restantes: 8 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 7 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 6 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 5 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 4 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 3 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 2 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 1 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 0 de 8
+Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>
+Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>

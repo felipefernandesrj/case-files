@@ -306,3 +306,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 272-279 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off, one rework on `@cf/openai/gpt-oss-120b`). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf12.mjs, tools/probe-gf12-extra.mjs): before, 20 questions answered with no budget on screen; after, 8 answered, Ask locked at 0 of 8 with the line and the button in both languages. No live play smoke (no model prompt changed).
 - Result: npm test 255/255 (was 244), new test/question-budget.mjs 11 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 12).
+
+## M2 game feel sprint 13 (v0.4.22)
+
+- Scope: the locked question box looks locked (muted colors, dashed edge, not-allowed cursor, "Out of questions" or "Game over" placeholder, aria-disabled) when the budget is spent or the game is over; the terminal game shows and respects the question budget.
+- Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf13.mjs): before, only the box cursor changed when locked; after, box and Ask change background, color, border and cursor, with placeholder and aria-disabled, contrast 9.81:1.
+- Result: npm test 265/265 (was 255), new test/ask-lock.mjs 10 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 13).

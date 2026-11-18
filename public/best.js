@@ -133,7 +133,9 @@ export const LABELS = {
     emptyQuestion: 'Type a question first.',
     netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.',
     outOfQuestions: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
-    toAccuse: 'Name the culprit'
+    toAccuse: 'Name the culprit',
+    outPlaceholder: 'Out of questions',
+    overPlaceholder: 'Game over'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -151,6 +153,8 @@ export const LABELS = {
     emptyQuestion: 'Digite uma pergunta primeiro.',
     netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.',
     outOfQuestions: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
-    toAccuse: 'Apontar o culpado'
+    toAccuse: 'Apontar o culpado',
+    outPlaceholder: 'Sem perguntas',
+    overPlaceholder: 'Fim de jogo'
   }
 };

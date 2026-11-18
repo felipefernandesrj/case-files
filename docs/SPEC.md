@@ -134,6 +134,11 @@
 - Page: `#questions-used` (live, polite) reads `budgetText(lang, left, budget)` ("Questions left: 5 of 8" / "Perguntas restantes: 5 de 8"). `div#q-budget.q-budget` (`aria-hidden`) holds one `span.qb-pip` per question; spent pips get `is-spent`, the one just spent gets `is-burning` (only when `left` drops, never on a re-render), the meter gets `is-low` at 2 left or fewer and `is-out` at 0. At 0 (`budgetOut()`) #q and Ask lock, `showError(LABELS[lang].outOfQuestions, 'ask')` and `button#budget-accuse` ("Name the culprit" / "Apontar o culpado") shows; it opens Accuse and focuses the first accuse button, and game over hides it. init, openPackFile and restartGame read the budget from the session.
 - CSS: square pips, `cf-qb-burn` 0.5 s, `cf-qb-low` blink 3 times, `cf-qb-shake` once; reduced motion turns all of them off.
 
+## Web page and CLI: locked question box (M2 game feel sprint 13)
+- Page: `renderAskLock()` sets `#ask-form.is-locked` and `data-lock` (`out` when the budget is spent, `over` after the verdict, which wins), the `#q` placeholder `LABELS[lang].outPlaceholder` ("Out of questions" / "Sem perguntas") or `overPlaceholder` ("Game over" / "Fim de jogo"), and `aria-disabled="true"` on `#q` and `#ask-btn`; an open game has no class, no placeholder and no aria-disabled. `setGameOver()` and `renderBudget()` call it, so Start over, Try again, a new file and a language switch refresh it.
+- CSS: locked box and Ask use `--cf-ink-soft` background and `--cf-text-dim` text (9.81:1), a dashed `--cf-lamp-dim` edge (outline on the button, no layout shift), `cursor: not-allowed`, an italic placeholder at full opacity and a dimmed icon; `aria-busy` shows `cursor: progress`; reduced motion removes the box transitions.
+- CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar), and a later ask, refused by the server with `out_of_questions` before any model call, prints the same line instead of "Error:".
+
 ## Web page: culprit in handcuffs (M2 game feel sprint 10)
 - Art: `public/assets/characters/<case>-<culpritId>-arrest.png` (128 px) and `@2x.png` (256 px), generated through the Cup key and keyed by scripts/assets; listed in `public/assets/manifest.json` with their receipt ids.
 - API: `POST /api/accuse` returns `culprit` from the session case (not the default case) and `solutions` (`{ en, pt }`).
@@ -194,9 +199,10 @@ This executes:
 19. `node test/arrest.mjs` (culprit in handcuffs: generated sprites and receipts, accuse response for both cases, sprite before the stamp, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution follows the language, styles and reduced motion)
 20. `node test/errors.mjs` (errors on the Ask step: friendly EN/PT lines for every code, server codes for bad asks and accusations, #ask-msg placement, netError labels, routing in askQuestion, offline, server error cleared on the next ask, non JSON reply, no suspect and empty question, clearing on select, language, Start over and new file)
 21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
-22. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+22. `node test/ask-lock.mjs` (locked question box: EN and PT placeholders, open, out and over states with aria-disabled, refresh from setGameOver and renderBudget, muted CSS with not-allowed cursor, AA contrast, busy cursor and reduced motion, CLI budget countdown and command line at zero, CLI in PT and Night Train 10)
+23. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 255 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, keyboard 13).
+Total checks: 265 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, ask-lock 10, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

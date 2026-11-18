@@ -709,6 +709,7 @@ function setGameOver(on){
     ask.disabled = false;
     accuseBtns.forEach(b => { b.disabled = false; });
   }
+  if (typeof renderAskLock === 'function') renderAskLock();
 }
 const histories = {}; // per suspectId [{q,a},...]
 
@@ -1520,6 +1521,21 @@ let budgetLeftShown = null;
 function budgetOut() {
   return questionBudget > 0 && questionsUsed >= questionBudget;
 }
+// locked question box (M2 game feel sprint 13): budget spent or game over looks locked, with a placeholder and aria-disabled
+function renderAskLock() {
+  const form = document.getElementById('ask-form');
+  const q = document.getElementById('q');
+  const ask = document.getElementById('ask-btn');
+  if (!form || !q || !ask) return;
+  const reason = gameOver ? 'over' : (budgetOut() ? 'out' : '');
+  form.classList.toggle('is-locked', !!reason);
+  form.dataset.lock = reason;
+  q.placeholder = reason === 'over' ? LABELS[lang].overPlaceholder : (reason === 'out' ? LABELS[lang].outPlaceholder : '');
+  for (const el of [q, ask]) {
+    if (reason) el.setAttribute('aria-disabled', 'true');
+    else el.removeAttribute('aria-disabled');
+  }
+}
 function renderQuestions() {
   const el = document.getElementById('questions-used');
   el.innerHTML = '';
@@ -1557,6 +1573,7 @@ function renderBudget(left) {
     document.getElementById('ask-btn').disabled = true;
     showError(LABELS[lang].outOfQuestions, 'ask');
   }
+  if (typeof renderAskLock === 'function') renderAskLock();
 }
 document.getElementById('budget-accuse').addEventListener('click', () => {
   showStep('accuse');

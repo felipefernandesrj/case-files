@@ -1,0 +1,212 @@
+Implement "a locked question box that looks locked" for the Case Files browser game (Node, no deps), plus the question budget in the terminal game. Today, when the question budget is spent or the game is over, the question box and the Ask button are disabled but look exactly like the enabled ones (only the cursor over the box changes), with no placeholder and no aria-disabled; the CLI never shows the budget and, past it, prints "Error:" with browser button names. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+1. public/best.js: outPlaceholder and overPlaceholder after toAccuse in LABELS.en and LABELS.pt (comma on the toAccuse line).
+2. public/css/game.css: 8 lines after the last reduced motion line of the question budget (locked box and Ask: muted colors, dashed edge, not-allowed cursor, placeholder, dimmed icon, busy cursor, reduced motion).
+3. public/index.html: setGameOver and renderBudget call renderAskLock when it exists; new renderAskLock() after budgetOut().
+4. src/cli.js: import budgetText, OUT_LINE and budget state; postJSON keeps the error code; ask refuses locally at zero; answers print the budget; out_of_questions prints the command line; the session start prints the budget.
+
+All 12 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 12 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file public/best.js
+[OLD 1]
+    outOfQuestions: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
+    toAccuse: 'Name the culprit'
+  },
+[/OLD 1]
+[NEW 1]
+    outOfQuestions: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
+    toAccuse: 'Name the culprit',
+    outPlaceholder: 'Out of questions',
+    overPlaceholder: 'Game over'
+  },
+[/NEW 1]
+
+Change 2, file public/best.js
+[OLD 2]
+    outOfQuestions: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
+    toAccuse: 'Apontar o culpado'
+  }
+[/OLD 2]
+[NEW 2]
+    outOfQuestions: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
+    toAccuse: 'Apontar o culpado',
+    outPlaceholder: 'Sem perguntas',
+    overPlaceholder: 'Fim de jogo'
+  }
+[/NEW 2]
+
+Change 3, file public/css/game.css
+[OLD 3]
+@media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip:not(.is-spent), .q-budget.is-out { animation: none; transition: none; } }
+
+[/OLD 3]
+[NEW 3]
+@media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip:not(.is-spent), .q-budget.is-out { animation: none; transition: none; } }
+/* M2 game feel sprint 13: a locked question box (budget spent or game over) looks locked, text stays AA */
+#ask-form.is-locked #q, #ask-form.is-locked #ask-btn { background: var(--cf-ink-soft); background-image: none; color: var(--cf-text-dim); cursor: not-allowed; box-shadow: none; filter: none; }
+#ask-form.is-locked #q { border: 1px dashed var(--cf-lamp-dim); }
+#ask-form.is-locked #ask-btn { outline: 1px dashed var(--cf-lamp-dim); outline-offset: -1px; }
+#ask-form.is-locked #q::placeholder { color: var(--cf-text-dim); opacity: 1; font-style: italic; }
+#ask-form.is-locked #ask-btn .icon { opacity: 0.6; }
+#ask-form[aria-busy="true"] #q, #ask-form[aria-busy="true"] #ask-btn { cursor: progress; }
+@media (prefers-reduced-motion: reduce) { #ask-form #q, #ask-form #ask-btn { transition: none; } }
+
+[/NEW 3]
+
+Change 4, file public/index.html
+[OLD 4]
+    accuseBtns.forEach(b => { b.disabled = false; });
+  }
+}
+const histories = {}; // per suspectId [{q,a},...]
+[/OLD 4]
+[NEW 4]
+    accuseBtns.forEach(b => { b.disabled = false; });
+  }
+  if (typeof renderAskLock === 'function') renderAskLock();
+}
+const histories = {}; // per suspectId [{q,a},...]
+[/NEW 4]
+
+Change 5, file public/index.html
+[OLD 5]
+}
+function renderQuestions() {
+[/OLD 5]
+[NEW 5]
+}
+// locked question box (M2 game feel sprint 13): budget spent or game over looks locked, with a placeholder and aria-disabled
+function renderAskLock() {
+  const form = document.getElementById('ask-form');
+  const q = document.getElementById('q');
+  const ask = document.getElementById('ask-btn');
+  if (!form || !q || !ask) return;
+  const reason = gameOver ? 'over' : (budgetOut() ? 'out' : '');
+  form.classList.toggle('is-locked', !!reason);
+  form.dataset.lock = reason;
+  q.placeholder = reason === 'over' ? LABELS[lang].overPlaceholder : (reason === 'out' ? LABELS[lang].outPlaceholder : '');
+  for (const el of [q, ask]) {
+    if (reason) el.setAttribute('aria-disabled', 'true');
+    else el.removeAttribute('aria-disabled');
+  }
+}
+function renderQuestions() {
+[/NEW 5]
+
+Change 6, file public/index.html
+[OLD 6]
+    showError(LABELS[lang].outOfQuestions, 'ask');
+  }
+}
+document.getElementById('budget-accuse').addEventListener('click', () => {
+[/OLD 6]
+[NEW 6]
+    showError(LABELS[lang].outOfQuestions, 'ask');
+  }
+  if (typeof renderAskLock === 'function') renderAskLock();
+}
+document.getElementById('budget-accuse').addEventListener('click', () => {
+[/NEW 6]
+
+Change 7, file src/cli.js
+[OLD 7]
+import { URLSearchParams } from 'node:url';
+
+[/OLD 7]
+[NEW 7]
+import { URLSearchParams } from 'node:url';
+import { budgetText } from '../public/best.js';
+
+// question budget in the terminal (M2 game feel sprint 13): the same budget as the web page, with commands instead of buttons
+const OUT_LINE = {
+  en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
+  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+};
+let questionBudget = 0;
+let questionsLeft = null;
+
+[/NEW 7]
+
+Change 8, file src/cli.js
+[OLD 8]
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `HTTP ${res.status}`);
+  }
+[/OLD 8]
+[NEW 8]
+    const err = await res.json().catch(() => ({}));
+    const e = new Error(err.message || `HTTP ${res.status}`);
+    e.code = err.code;
+    throw e;
+  }
+[/NEW 8]
+
+Change 9, file src/cli.js
+[OLD 9]
+        console.log('Usage: ask <suspectId> <question>');
+      } else {
+[/OLD 9]
+[NEW 9]
+        console.log('Usage: ask <suspectId> <question>');
+      } else if (questionsLeft === 0) {
+        console.log(OUT_LINE[lang]);
+      } else {
+[/NEW 9]
+
+Change 10, file src/cli.js
+[OLD 10]
+        console.log(`\n${resp.answer}\n`);
+        const hist = histories.get(suspectId) || [];
+[/OLD 10]
+[NEW 10]
+        console.log(`\n${resp.answer}\n`);
+        if (resp.budget) {
+          questionBudget = resp.budget;
+          questionsLeft = resp.left;
+          console.log(budgetText(lang, questionsLeft, questionBudget));
+          if (questionsLeft === 0) console.log(OUT_LINE[lang]);
+        }
+        const hist = histories.get(suspectId) || [];
+[/NEW 10]
+
+Change 11, file src/cli.js
+[OLD 11]
+  } catch (e) {
+    console.error('Error:', e.message);
+  }
+[/OLD 11]
+[NEW 11]
+  } catch (e) {
+    if (e.code === 'out_of_questions') {
+      questionsLeft = 0;
+      console.log(OUT_LINE[lang]);
+    } else console.error('Error:', e.message);
+  }
+[/NEW 11]
+
+Change 12, file src/cli.js
+[OLD 12]
+// Create a session
+const { sessionId } = await postJSON(`${baseUrl}/api/session`, {});
+
+[/OLD 12]
+[NEW 12]
+// Create a session
+const { sessionId, budget } = await postJSON(`${baseUrl}/api/session`, {});
+if (budget) {
+  questionBudget = budget;
+  questionsLeft = budget;
+  console.log(budgetText(lang, questionsLeft, questionBudget));
+}
+
+[/NEW 12]
+

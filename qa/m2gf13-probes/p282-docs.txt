@@ -1,0 +1,158 @@
+Update the docs of the Case Files game for version 0.4.22 (M2 game feel sprint 13: a locked question box that looks locked, and the question budget in the terminal game). Make these exact changes, emitted as literal search/replace blocks, one block per change. Some OLD texts are only part of a long line; copy them exactly as given, do not extend them.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+All 12 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 12 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file package.json
+[OLD 1]
+  "version": "0.4.21",
+[/OLD 1]
+[NEW 1]
+  "version": "0.4.22",
+[/NEW 1]
+
+Change 2, file README.md
+[OLD 2]
+**M2 in progress (v0.4.21, game feel sprint 12).**
+[/OLD 2]
+[NEW 2]
+**M2 in progress (v0.4.22, game feel sprint 13).**
+[/NEW 2]
+
+Change 3, file README.md
+[OLD 3]
+at zero Ask locks and a Name the culprit button opens Accuse.
+[/OLD 3]
+[NEW 3]
+at zero the question box and Ask look locked ("Out of questions") and a Name the culprit button opens Accuse; the terminal game counts the same budget.
+[/NEW 3]
+
+Change 4, file README.md
+[OLD 4]
+255 automated checks.
+[/OLD 4]
+[NEW 4]
+265 automated checks.
+[/NEW 4]
+
+Change 5, file CHANGELOG.md
+[OLD 5]
+# Changelog
+
+[/OLD 5]
+[NEW 5]
+# Changelog
+
+## 0.4.22 (M2 game feel, sprint 13: a locked question box that looks locked)
+- When the question budget is spent or the game is over, the question box and the Ask button now look locked instead of looking ready (before, only the cursor over the box changed). They turn dark and muted with a dashed edge, show a not-allowed cursor, and the box reads "Out of questions" (PT "Sem perguntas") or, after the verdict, "Game over" (PT "Fim de jogo"). The muted text keeps a 9.8:1 contrast, above the AA 4.5:1.
+- Both carry `aria-disabled="true"` while locked, and the lock clears on Start over, Try again and a new file. The placeholder follows a language switch. While an answer is on its way the cursor shows progress. Reduced motion turns the box transitions off.
+- The terminal game (node src/cli.js) now uses the same budget: it prints "Questions left: 8 of 8" at the start and after every answer, and at zero it says "No questions left in this game. Name the culprit with: accuse <suspectId>" (PT with acusar) instead of a raw error with browser button names. Accusing still works after the last question.
+- New test/ask-lock.mjs with 10 checks. The automated suite now has 265 checks.
+
+[/NEW 5]
+
+Change 6, file docs/BUILD_LOG.md
+[OLD 6]
+- Details and receipts: qa/rework.md (M2 game feel sprint 12).
+
+[/OLD 6]
+[NEW 6]
+- Details and receipts: qa/rework.md (M2 game feel sprint 12).
+
+## M2 game feel sprint 13 (v0.4.22)
+
+- Scope: the locked question box looks locked (muted colors, dashed edge, not-allowed cursor, "Out of questions" or "Game over" placeholder, aria-disabled) when the budget is spent or the game is over; the terminal game shows and respects the question budget.
+- Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf13.mjs): before, only the box cursor changed when locked; after, box and Ask change background, color, border and cursor, with placeholder and aria-disabled, contrast 9.81:1.
+- Result: npm test 265/265 (was 255), new test/ask-lock.mjs 10 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 13).
+
+[/NEW 6]
+
+Change 7, file docs/SPEC.md
+[OLD 7]
+
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+[/OLD 7]
+[NEW 7]
+
+## Web page and CLI: locked question box (M2 game feel sprint 13)
+- Page: `renderAskLock()` sets `#ask-form.is-locked` and `data-lock` (`out` when the budget is spent, `over` after the verdict, which wins), the `#q` placeholder `LABELS[lang].outPlaceholder` ("Out of questions" / "Sem perguntas") or `overPlaceholder` ("Game over" / "Fim de jogo"), and `aria-disabled="true"` on `#q` and `#ask-btn`; an open game has no class, no placeholder and no aria-disabled. `setGameOver()` and `renderBudget()` call it, so Start over, Try again, a new file and a language switch refresh it.
+- CSS: locked box and Ask use `--cf-ink-soft` background and `--cf-text-dim` text (9.81:1), a dashed `--cf-lamp-dim` edge (outline on the button, no layout shift), `cursor: not-allowed`, an italic placeholder at full opacity and a dimmed icon; `aria-busy` shows `cursor: progress`; reduced motion removes the box transitions.
+- CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero, and for any later ask without calling the server, it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar); a server `out_of_questions` is shown the same way instead of "Error:".
+
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+[/NEW 7]
+
+Change 8, file docs/SPEC.md
+[OLD 8]
+21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
+22. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+
+Total checks: 255 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, keyboard 13).
+
+[/OLD 8]
+[NEW 8]
+21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
+22. `node test/ask-lock.mjs` (locked question box: EN and PT placeholders, open, out and over states with aria-disabled, refresh from setGameOver and renderBudget, muted CSS with not-allowed cursor, AA contrast, busy cursor and reduced motion, CLI budget countdown and command line at zero, CLI in PT and Night Train 10)
+23. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+
+Total checks: 265 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, ask-lock 10, keyboard 13).
+
+[/NEW 8]
+
+Change 9, file docs/HOW_TO_PLAY.md
+[OLD 9]
+### Scoring
+Each case gives you a small budget of questions (8 for The Vanishing Violin, 10 for The Night Train), shown under the question box as "Questions left". Only answered questions count. When none are left, Ask locks and the Name the culprit button takes you to Accuse. A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
+
+[/OLD 9]
+[NEW 9]
+### Scoring
+Each case gives you a small budget of questions (8 for The Vanishing Violin, 10 for The Night Train), shown under the question box as "Questions left". Only answered questions count. When none are left, the question box shows "Out of questions", Ask locks and the Name the culprit button takes you to Accuse. A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
+
+[/NEW 9]
+
+Change 10, file docs/HOW_TO_PLAY.md
+[OLD 10]
+### Play in a terminal
+`node src/cli.js` (add `--lang pt` for Portuguese).
+
+[/OLD 10]
+[NEW 10]
+### Play in a terminal
+`node src/cli.js` (add `--lang pt` for Portuguese). The terminal shows the same question budget ("Questions left: 8 of 8"); when it reaches zero, use `accuse <suspectId>`.
+
+[/NEW 10]
+
+Change 11, file docs/HOW_TO_PLAY.md
+[OLD 11]
+### Pontuação
+Cada caso dá um pequeno limite de perguntas (8 em O Violino Desaparecido, 10 em O Trem Noturno), mostrado embaixo da caixa de pergunta como "Perguntas restantes". Só perguntas respondidas contam. Quando acabam, Perguntar fica bloqueado e o botão Apontar o culpado leva você a Acusar. Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
+
+[/OLD 11]
+[NEW 11]
+### Pontuação
+Cada caso dá um pequeno limite de perguntas (8 em O Violino Desaparecido, 10 em O Trem Noturno), mostrado embaixo da caixa de pergunta como "Perguntas restantes". Só perguntas respondidas contam. Quando acabam, a caixa de pergunta mostra "Sem perguntas", Perguntar fica bloqueado e o botão Apontar o culpado leva você a Acusar. Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
+
+[/NEW 11]
+
+Change 12, file docs/HOW_TO_PLAY.md
+[OLD 12]
+### Jogar no terminal
+`node src/cli.js --lang pt`
+
+[/OLD 12]
+[NEW 12]
+### Jogar no terminal
+`node src/cli.js --lang pt` (o terminal mostra o mesmo limite, "Perguntas restantes: 8 de 8"; quando chega a zero, use `acusar <suspectId>`)
+
+[/NEW 12]
+

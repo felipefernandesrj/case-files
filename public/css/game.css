@@ -782,3 +782,11 @@ body[data-view="cabinet"] #steps {
 @keyframes cf-qb-low { 50% { opacity: 0.35; } }
 @keyframes cf-qb-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
 @media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip:not(.is-spent), .q-budget.is-out { animation: none; transition: none; } }
+/* M2 game feel sprint 13: a locked question box (budget spent or game over) looks locked, text stays AA */
+#ask-form.is-locked #q, #ask-form.is-locked #ask-btn { background: var(--cf-ink-soft); background-image: none; color: var(--cf-text-dim); cursor: not-allowed; box-shadow: none; filter: none; }
+#ask-form.is-locked #q { border: 1px dashed var(--cf-lamp-dim); }
+#ask-form.is-locked #ask-btn { outline: 1px dashed var(--cf-lamp-dim); outline-offset: -1px; }
+#ask-form.is-locked #q::placeholder { color: var(--cf-text-dim); opacity: 1; font-style: italic; }
+#ask-form.is-locked #ask-btn .icon { opacity: 0.6; }
+#ask-form[aria-busy="true"] #q, #ask-form[aria-busy="true"] #ask-btn { cursor: progress; }
+@media (prefers-reduced-motion: reduce) { #ask-form #q, #ask-form #ask-btn { transition: none; } }

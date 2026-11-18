@@ -1,0 +1,288 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index d5335a2..8da704a 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,11 @@
+ # Changelog
+ 
++## 0.4.22 (M2 game feel, sprint 13: a locked question box that looks locked)
++- When the question budget is spent or the game is over, the question box and the Ask button now look locked instead of looking ready (before, only the cursor over the box changed). They turn dark and muted with a dashed edge, show a not-allowed cursor, and the box reads "Out of questions" (PT "Sem perguntas") or, after the verdict, "Game over" (PT "Fim de jogo"). The muted text keeps a 9.8:1 contrast, above the AA 4.5:1.
++- Both carry `aria-disabled="true"` while locked, and the lock clears on Start over, Try again and a new file. The placeholder follows a language switch. While an answer is on its way the cursor shows progress. Reduced motion turns the box transitions off.
++- The terminal game (node src/cli.js) now uses the same budget: it prints "Questions left: 8 of 8" at the start and after every answer, and at zero it says "No questions left in this game. Name the culprit with: accuse <suspectId>" (PT with acusar) instead of a raw error with browser button names. Accusing still works after the last question.
++- New test/ask-lock.mjs with 10 checks. The automated suite now has 265 checks.
++
+ ## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)
+ - Harder game, as Felipi asked: each case now has a small budget of answered questions, 8 for The Vanishing Violin and 10 for The Night Train (before, a game allowed 20 and nothing on screen said so; the limit showed only after the 21st question). Each budget is twice the fewest questions that solve the case fairly (two clues against the culprit plus one clearing clue per innocent suspect), and a test keeps it that way for every case.
+ - The Ask step shows "Questions left: 8 of 8" (PT "Perguntas restantes: 8 de 8") with one pip per question. A pip burns out on each answer, the last two blink red, and at zero the meter shakes once, Ask locks, a line says "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." and a "Name the culprit" button takes you to Accuse with the focus on the first suspect. Reduced motion turns every budget animation off. Screen readers hear the line, not the pips.
+diff --git a/README.md b/README.md
+index f1da710..0a7f36a 100644
+--- a/README.md
++++ b/README.md
+@@ -36,7 +36,7 @@ Then open http://localhost:3000. The key stays on the server, and the browser ne
+ 
+ **M1 Delivered (2026-11-09, v0.4.0).**
+ 
+-**M2 in progress (v0.4.21, game feel sprint 12).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks and can be loaded by id (CASE_ID=night-train, or node src/cli.js --case night-train). The web page has a gothic-noir case picker and a one-viewport game layout (sidebar plus stage plus optional pin rail on desktop; short phone HUD labels with Files in the header). Visual V4 restores parchment, lamp glow and wax-seal atmosphere, fixes the 390 header, fills the desktop/tablet stage, and lines the timetable up with the rail. The game now ships pixel art generated through the Cup key (portraits, rooms, case covers, icons). Game feel has started: a Case progress tracker in the desktop right column and an animated CASE CLOSED stamp on a correct accusation. The room the player opens now stays behind the play area as a dimmed scene and crossfades when another room is opened. Timed hint events now pop up as toasts during a game (three per case, in the current language, never after the verdict), and pinned rooms follow the language switch. The board heading and the scene caption now sit on a dark plate so they stay readable on the cork, and a hint toast already on screen switches language with the page. A wrong accusation now opens an arcade CONTINUE? countdown from 9 to 0: Try again replays the same file, Give up or the end of the count shows GAME OVER with the culprit and the solution. Suspicion bars now show, under the conversation and above the accuse buttons, which suspect each clue you found points to (three pips per suspect, prime suspect at two leads, Cleared when a clue clears someone). Quick players can uncheck "Confirm before accusing" under the accuse buttons to accuse without the dialog; the choice is remembered and the box is checked by default. Answers in the conversation now come with the suspect's portrait, whose mouth moves while the line is revealed (local two frame sprites, no extra model calls; reduced motion shows the line at once). After GAME OVER on a wrong verdict, a next morning newspaper clipping tells what happened to the innocent suspect you accused and how the culprit got away (one story per innocent suspect, EN and PT). A correct accusation shows the culprit led away in handcuffs with the CASE CLOSED stamp on top (one generated sprite per culprit). Hints and errors on the Ask step (no suspect chosen, empty question, expired game, no connection) now show under the question box in the player's language. The game is harder: each case has a visible budget of answered questions (8 for the Violin, 10 for the Night Train, twice the fewest questions that solve it), shown as pips that burn out; at zero Ask locks and a Name the culprit button opens Accuse. An unknown case id stops with one clear line that lists the valid ids. Each game now has a cap on model calls, which defaults to 20 unless a specific `maxCalls` is set for the case, and shows a friendly message when the limit is reached. The worst case for one game is tested to stay under US$0.10. 255 automated checks.
++**M2 in progress (v0.4.22, game feel sprint 13).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks and can be loaded by id (CASE_ID=night-train, or node src/cli.js --case night-train). The web page has a gothic-noir case picker and a one-viewport game layout (sidebar plus stage plus optional pin rail on desktop; short phone HUD labels with Files in the header). Visual V4 restores parchment, lamp glow and wax-seal atmosphere, fixes the 390 header, fills the desktop/tablet stage, and lines the timetable up with the rail. The game now ships pixel art generated through the Cup key (portraits, rooms, case covers, icons). Game feel has started: a Case progress tracker in the desktop right column and an animated CASE CLOSED stamp on a correct accusation. The room the player opens now stays behind the play area as a dimmed scene and crossfades when another room is opened. Timed hint events now pop up as toasts during a game (three per case, in the current language, never after the verdict), and pinned rooms follow the language switch. The board heading and the scene caption now sit on a dark plate so they stay readable on the cork, and a hint toast already on screen switches language with the page. A wrong accusation now opens an arcade CONTINUE? countdown from 9 to 0: Try again replays the same file, Give up or the end of the count shows GAME OVER with the culprit and the solution. Suspicion bars now show, under the conversation and above the accuse buttons, which suspect each clue you found points to (three pips per suspect, prime suspect at two leads, Cleared when a clue clears someone). Quick players can uncheck "Confirm before accusing" under the accuse buttons to accuse without the dialog; the choice is remembered and the box is checked by default. Answers in the conversation now come with the suspect's portrait, whose mouth moves while the line is revealed (local two frame sprites, no extra model calls; reduced motion shows the line at once). After GAME OVER on a wrong verdict, a next morning newspaper clipping tells what happened to the innocent suspect you accused and how the culprit got away (one story per innocent suspect, EN and PT). A correct accusation shows the culprit led away in handcuffs with the CASE CLOSED stamp on top (one generated sprite per culprit). Hints and errors on the Ask step (no suspect chosen, empty question, expired game, no connection) now show under the question box in the player's language. The game is harder: each case has a visible budget of answered questions (8 for the Violin, 10 for the Night Train, twice the fewest questions that solve it), shown as pips that burn out; at zero the question box and Ask look locked ("Out of questions") and a Name the culprit button opens Accuse; the terminal game counts the same budget. An unknown case id stops with one clear line that lists the valid ids. Each game now has a cap on model calls, which defaults to 20 unless a specific `maxCalls` is set for the case, and shows a friendly message when the limit is reached. The worst case for one game is tested to stay under US$0.10. 265 automated checks.
+ 
+ M1 scope as shipped: bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard (names shown as plain text), personal best per language (shown in your language, new best announced) with a confirmed reset, accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload), Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect), fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 97 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+ 
+diff --git a/docs/BUILD_LOG.md b/docs/BUILD_LOG.md
+index 2e33155..ecd469a 100644
+--- a/docs/BUILD_LOG.md
++++ b/docs/BUILD_LOG.md
+@@ -306,3 +306,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
+ - Calls 272-279 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off, one rework on `@cf/openai/gpt-oss-120b`). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf12.mjs, tools/probe-gf12-extra.mjs): before, 20 questions answered with no budget on screen; after, 8 answered, Ask locked at 0 of 8 with the line and the button in both languages. No live play smoke (no model prompt changed).
+ - Result: npm test 255/255 (was 244), new test/question-budget.mjs 11 checks.
+ - Details and receipts: qa/rework.md (M2 game feel sprint 12).
++
++## M2 game feel sprint 13 (v0.4.22)
++
++- Scope: the locked question box looks locked (muted colors, dashed edge, not-allowed cursor, "Out of questions" or "Game over" placeholder, aria-disabled) when the budget is spent or the game is over; the terminal game shows and respects the question budget.
++- Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf13.mjs): before, only the box cursor changed when locked; after, box and Ask change background, color, border and cursor, with placeholder and aria-disabled, contrast 9.81:1.
++- Result: npm test 265/265 (was 255), new test/ask-lock.mjs 10 checks.
++- Details and receipts: qa/rework.md (M2 game feel sprint 13).
+diff --git a/docs/HOW_TO_PLAY.md b/docs/HOW_TO_PLAY.md
+index 1ce3ef7..3795555 100644
+--- a/docs/HOW_TO_PLAY.md
++++ b/docs/HOW_TO_PLAY.md
+@@ -15,7 +15,7 @@ A priceless Stradivarius vanished from the instrument room of the Aurora Music A
+ 5. When you are ready, type your name (or "anon") and press the button with the suspect's name in the "Accuse" section. The game asks you to confirm; you only get one accusation per game.
+ 
+ ### Scoring
+-Each case gives you a small budget of questions (8 for The Vanishing Violin, 10 for The Night Train), shown under the question box as "Questions left". Only answered questions count. When none are left, Ask locks and the Name the culprit button takes you to Accuse. A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
++Each case gives you a small budget of questions (8 for The Vanishing Violin, 10 for The Night Train), shown under the question box as "Questions left". Only answered questions count. When none are left, the question box shows "Out of questions", Ask locks and the Name the culprit button takes you to Accuse. A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
+ 
+ ### Tips
+ * Ask where each person was and when.
+@@ -33,7 +33,7 @@ The game works with Tab and Enter. Escape clears the question box while it is fo
+ After the verdict, you will see a list of our wonderful backers. Every question creates a public receipt on FullCup so backers can see how the capacity is used.
+ 
+ ### Play in a terminal
+-`node src/cli.js` (add `--lang pt` for Portuguese).
++`node src/cli.js` (add `--lang pt` for Portuguese). The terminal shows the same question budget ("Questions left: 8 of 8"); when it reaches zero, use `accuse <suspectId>`.
+ 
+ <a id="portugues"></a>
+ ## Português
+@@ -49,7 +49,7 @@ Um Stradivarius de valor inestimável desapareceu da sala de instrumentos da Aca
+ 5. Quando estiver pronto, digite seu nome (ou "anon") e aperte o botão com o nome do suspeito na seção "Acusar". O jogo pede confirmação; você tem apenas uma acusação por jogo.
+ 
+ ### Pontuação
+-Cada caso dá um pequeno limite de perguntas (8 em O Violino Desaparecido, 10 em O Trem Noturno), mostrado embaixo da caixa de pergunta como "Perguntas restantes". Só perguntas respondidas contam. Quando acabam, Perguntar fica bloqueado e o botão Apontar o culpado leva você a Acusar. Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
++Cada caso dá um pequeno limite de perguntas (8 em O Violino Desaparecido, 10 em O Trem Noturno), mostrado embaixo da caixa de pergunta como "Perguntas restantes". Só perguntas respondidas contam. Quando acabam, a caixa de pergunta mostra "Sem perguntas", Perguntar fica bloqueado e o botão Apontar o culpado leva você a Acusar. Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
+ 
+ ### Dicas
+ * Pergunte onde cada pessoa estava e quando.
+@@ -67,4 +67,4 @@ O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela e
+ Após o veredito, você verá uma lista de nossos apoiadores. Cada pergunta cria um recibo público no FullCup para que os apoiadores vejam como a capacidade está sendo usada.
+ 
+ ### Jogar no terminal
+-`node src/cli.js --lang pt`
++`node src/cli.js --lang pt` (o terminal mostra o mesmo limite, "Perguntas restantes: 8 de 8"; quando chega a zero, use `acusar <suspectId>`)
+diff --git a/docs/SPEC.md b/docs/SPEC.md
+index f2d9bca..bf20290 100644
+--- a/docs/SPEC.md
++++ b/docs/SPEC.md
+@@ -134,6 +134,11 @@
+ - Page: `#questions-used` (live, polite) reads `budgetText(lang, left, budget)` ("Questions left: 5 of 8" / "Perguntas restantes: 5 de 8"). `div#q-budget.q-budget` (`aria-hidden`) holds one `span.qb-pip` per question; spent pips get `is-spent`, the one just spent gets `is-burning` (only when `left` drops, never on a re-render), the meter gets `is-low` at 2 left or fewer and `is-out` at 0. At 0 (`budgetOut()`) #q and Ask lock, `showError(LABELS[lang].outOfQuestions, 'ask')` and `button#budget-accuse` ("Name the culprit" / "Apontar o culpado") shows; it opens Accuse and focuses the first accuse button, and game over hides it. init, openPackFile and restartGame read the budget from the session.
+ - CSS: square pips, `cf-qb-burn` 0.5 s, `cf-qb-low` blink 3 times, `cf-qb-shake` once; reduced motion turns all of them off.
+ 
++## Web page and CLI: locked question box (M2 game feel sprint 13)
++- Page: `renderAskLock()` sets `#ask-form.is-locked` and `data-lock` (`out` when the budget is spent, `over` after the verdict, which wins), the `#q` placeholder `LABELS[lang].outPlaceholder` ("Out of questions" / "Sem perguntas") or `overPlaceholder` ("Game over" / "Fim de jogo"), and `aria-disabled="true"` on `#q` and `#ask-btn`; an open game has no class, no placeholder and no aria-disabled. `setGameOver()` and `renderBudget()` call it, so Start over, Try again, a new file and a language switch refresh it.
++- CSS: locked box and Ask use `--cf-ink-soft` background and `--cf-text-dim` text (9.81:1), a dashed `--cf-lamp-dim` edge (outline on the button, no layout shift), `cursor: not-allowed`, an italic placeholder at full opacity and a dimmed icon; `aria-busy` shows `cursor: progress`; reduced motion removes the box transitions.
++- CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero, and for any later ask without calling the server, it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar); a server `out_of_questions` is shown the same way instead of "Error:".
++
+ ## Web page: culprit in handcuffs (M2 game feel sprint 10)
+ - Art: `public/assets/characters/<case>-<culpritId>-arrest.png` (128 px) and `@2x.png` (256 px), generated through the Cup key and keyed by scripts/assets; listed in `public/assets/manifest.json` with their receipt ids.
+ - API: `POST /api/accuse` returns `culprit` from the session case (not the default case) and `solutions` (`{ en, pt }`).
+@@ -194,9 +199,10 @@ This executes:
+ 19. `node test/arrest.mjs` (culprit in handcuffs: generated sprites and receipts, accuse response for both cases, sprite before the stamp, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution follows the language, styles and reduced motion)
+ 20. `node test/errors.mjs` (errors on the Ask step: friendly EN/PT lines for every code, server codes for bad asks and accusations, #ask-msg placement, netError labels, routing in askQuestion, offline, server error cleared on the next ask, non JSON reply, no suspect and empty question, clearing on select, language, Start over and new file)
+ 21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
+-22. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
++22. `node test/ask-lock.mjs` (locked question box: EN and PT placeholders, open, out and over states with aria-disabled, refresh from setGameOver and renderBudget, muted CSS with not-allowed cursor, AA contrast, busy cursor and reduced motion, CLI budget countdown and command line at zero, CLI in PT and Night Train 10)
++23. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+ 
+-Total checks: 255 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, keyboard 13).
++Total checks: 265 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, ask-lock 10, keyboard 13).
+ 
+ ### Play budget (`src/budget.js`, M2 sprint 4)
+ - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.
+diff --git a/package.json b/package.json
+index 980df5e..ba9bc84 100644
+--- a/package.json
++++ b/package.json
+@@ -1,9 +1,9 @@
+ {
+   "name": "fullcup-mystery",
+-  "version": "0.4.21",
++  "version": "0.4.22",
+   "type": "module",
+   "scripts": {
+-    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/keyboard.mjs"
++    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/keyboard.mjs"
+   },
+   "dependencies": {}
+ }
+diff --git a/public/best.js b/public/best.js
+index ea64993..1a50536 100644
+--- a/public/best.js
++++ b/public/best.js
+@@ -133,7 +133,9 @@ export const LABELS = {
+     emptyQuestion: 'Type a question first.',
+     netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.',
+     outOfQuestions: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
+-    toAccuse: 'Name the culprit'
++    toAccuse: 'Name the culprit',
++    outPlaceholder: 'Out of questions',
++    overPlaceholder: 'Game over'
+   },
+   pt: {
+     bestTitle: 'Seu recorde',
+@@ -151,6 +153,8 @@ export const LABELS = {
+     emptyQuestion: 'Digite uma pergunta primeiro.',
+     netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.',
+     outOfQuestions: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
+-    toAccuse: 'Apontar o culpado'
++    toAccuse: 'Apontar o culpado',
++    outPlaceholder: 'Sem perguntas',
++    overPlaceholder: 'Fim de jogo'
+   }
+ };
+diff --git a/public/css/game.css b/public/css/game.css
+index 938e374..ecdb844 100644
+--- a/public/css/game.css
++++ b/public/css/game.css
+@@ -782,3 +782,11 @@ body[data-view="cabinet"] #steps {
+ @keyframes cf-qb-low { 50% { opacity: 0.35; } }
+ @keyframes cf-qb-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+ @media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip:not(.is-spent), .q-budget.is-out { animation: none; transition: none; } }
++/* M2 game feel sprint 13: a locked question box (budget spent or game over) looks locked, text stays AA */
++#ask-form.is-locked #q, #ask-form.is-locked #ask-btn { background: var(--cf-ink-soft); background-image: none; color: var(--cf-text-dim); cursor: not-allowed; box-shadow: none; filter: none; }
++#ask-form.is-locked #q { border: 1px dashed var(--cf-lamp-dim); }
++#ask-form.is-locked #ask-btn { outline: 1px dashed var(--cf-lamp-dim); outline-offset: -1px; }
++#ask-form.is-locked #q::placeholder { color: var(--cf-text-dim); opacity: 1; font-style: italic; }
++#ask-form.is-locked #ask-btn .icon { opacity: 0.6; }
++#ask-form[aria-busy="true"] #q, #ask-form[aria-busy="true"] #ask-btn { cursor: progress; }
++@media (prefers-reduced-motion: reduce) { #ask-form #q, #ask-form #ask-btn { transition: none; } }
+diff --git a/public/index.html b/public/index.html
+index 7f3d8ba..48436f3 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -709,6 +709,7 @@ function setGameOver(on){
+     ask.disabled = false;
+     accuseBtns.forEach(b => { b.disabled = false; });
+   }
++  if (typeof renderAskLock === 'function') renderAskLock();
+ }
+ const histories = {}; // per suspectId [{q,a},...]
+ 
+@@ -1520,6 +1521,21 @@ let budgetLeftShown = null;
+ function budgetOut() {
+   return questionBudget > 0 && questionsUsed >= questionBudget;
+ }
++// locked question box (M2 game feel sprint 13): budget spent or game over looks locked, with a placeholder and aria-disabled
++function renderAskLock() {
++  const form = document.getElementById('ask-form');
++  const q = document.getElementById('q');
++  const ask = document.getElementById('ask-btn');
++  if (!form || !q || !ask) return;
++  const reason = gameOver ? 'over' : (budgetOut() ? 'out' : '');
++  form.classList.toggle('is-locked', !!reason);
++  form.dataset.lock = reason;
++  q.placeholder = reason === 'over' ? LABELS[lang].overPlaceholder : (reason === 'out' ? LABELS[lang].outPlaceholder : '');
++  for (const el of [q, ask]) {
++    if (reason) el.setAttribute('aria-disabled', 'true');
++    else el.removeAttribute('aria-disabled');
++  }
++}
+ function renderQuestions() {
+   const el = document.getElementById('questions-used');
+   el.innerHTML = '';
+@@ -1557,6 +1573,7 @@ function renderBudget(left) {
+     document.getElementById('ask-btn').disabled = true;
+     showError(LABELS[lang].outOfQuestions, 'ask');
+   }
++  if (typeof renderAskLock === 'function') renderAskLock();
+ }
+ document.getElementById('budget-accuse').addEventListener('click', () => {
+   showStep('accuse');
+diff --git a/src/cli.js b/src/cli.js
+index 0adb376..d216229 100644
+--- a/src/cli.js
++++ b/src/cli.js
+@@ -6,6 +6,15 @@ import { fileURLToPath } from 'node:url';
+ import readline from 'readline';
+ import { randomUUID } from 'node:crypto';
+ import { URLSearchParams } from 'node:url';
++import { budgetText } from '../public/best.js';
++
++// question budget in the terminal (M2 game feel sprint 13): the same budget as the web page, with commands instead of buttons
++const OUT_LINE = {
++  en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
++  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
++};
++let questionBudget = 0;
++let questionsLeft = null;
+ 
+ // Helper to perform fetch with JSON body
+ async function postJSON(url, data) {
+@@ -16,7 +25,9 @@ async function postJSON(url, data) {
+   });
+   if (!res.ok) {
+     const err = await res.json().catch(() => ({}));
+-    throw new Error(err.message || `HTTP ${res.status}`);
++    const e = new Error(err.message || `HTTP ${res.status}`);
++    e.code = err.code;
++    throw e;
+   }
+   return res.json();
+ }
+@@ -108,6 +119,8 @@ async function processCommand(line) {
+       const question = parts.slice(2).join(' ');
+       if (!suspectId || !question) {
+         console.log('Usage: ask <suspectId> <question>');
++      } else if (questionsLeft === 0) {
++        console.log(OUT_LINE[lang]);
+       } else {
+         const resp = await postJSON(`${baseUrl}/api/ask`, {
+           sessionId,
+@@ -116,6 +129,12 @@ async function processCommand(line) {
+           lang,
+         });
+         console.log(`\n${resp.answer}\n`);
++        if (resp.budget) {
++          questionBudget = resp.budget;
++          questionsLeft = resp.left;
++          console.log(budgetText(lang, questionsLeft, questionBudget));
++          if (questionsLeft === 0) console.log(OUT_LINE[lang]);
++        }
+         const hist = histories.get(suspectId) || [];
+         hist.push({ q: question, a: resp.answer });
+         histories.set(suspectId, hist);
+@@ -172,7 +191,10 @@ async function processCommand(line) {
+       return true;
+     }
+   } catch (e) {
+-    console.error('Error:', e.message);
++    if (e.code === 'out_of_questions') {
++      questionsLeft = 0;
++      console.log(OUT_LINE[lang]);
++    } else console.error('Error:', e.message);
+   }
+   return false;
+ }
+@@ -181,7 +203,12 @@ async function processCommand(line) {
+ await displayIntro();
+ 
+ // Create a session
+-const { sessionId } = await postJSON(`${baseUrl}/api/session`, {});
++const { sessionId, budget } = await postJSON(`${baseUrl}/api/session`, {});
++if (budget) {
++  questionBudget = budget;
++  questionsLeft = budget;
++  console.log(budgetText(lang, questionsLeft, questionBudget));
++}
+ 
+ let terminated = false;
+ 

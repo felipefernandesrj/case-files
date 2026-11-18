@@ -1,0 +1,652 @@
+{
+ "1280-en": {
+  "open": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Ask",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Questions left: 8 of 8"
+  },
+  "out": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Out of questions",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Ask",
+   "formClass": "is-locked",
+   "askMsg": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "questionsUsed": "Questions left: 0 of 8"
+  },
+  "outChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "over": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Game over",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Ask",
+   "formClass": "is-locked",
+   "askMsg": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "questionsUsed": "Questions left: 0 of 8"
+  },
+  "overChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "restart": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Ask",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Questions left: 8 of 8"
+  }
+ },
+ "1280-pt": {
+  "open": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Perguntar",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Perguntas restantes: 8 de 8"
+  },
+  "out": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Sem perguntas",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Perguntar",
+   "formClass": "is-locked",
+   "askMsg": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "questionsUsed": "Perguntas restantes: 0 de 8"
+  },
+  "outChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "over": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Fim de jogo",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Perguntar",
+   "formClass": "is-locked",
+   "askMsg": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "questionsUsed": "Perguntas restantes: 0 de 8"
+  },
+  "overChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "restart": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Perguntar",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Perguntas restantes: 8 de 8"
+  }
+ },
+ "390-en": {
+  "open": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Ask",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Questions left: 8 of 8"
+  },
+  "out": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Out of questions",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Ask",
+   "formClass": "is-locked",
+   "askMsg": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "questionsUsed": "Questions left: 0 of 8"
+  },
+  "outChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "over": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Game over",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Ask",
+   "formClass": "is-locked",
+   "askMsg": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "questionsUsed": "Questions left: 0 of 8"
+  },
+  "overChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "restart": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Ask",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Questions left: 8 of 8"
+  }
+ },
+ "390-pt": {
+  "open": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Perguntar",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Perguntas restantes: 8 de 8"
+  },
+  "out": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Sem perguntas",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Perguntar",
+   "formClass": "is-locked",
+   "askMsg": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "questionsUsed": "Perguntas restantes: 0 de 8"
+  },
+  "outChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "over": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Fim de jogo",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Perguntar",
+   "formClass": "is-locked",
+   "askMsg": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "questionsUsed": "Perguntas restantes: 0 de 8"
+  },
+  "overChanged": {
+   "q": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ],
+   "ask": [
+    "bg",
+    "color",
+    "cursor",
+    "border"
+   ]
+  },
+  "restart": {
+   "q": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(243, 234, 223)",
+    "color": "rgb(26, 23, 20)",
+    "border": "rgb(217, 160, 91) solid",
+    "cursor": "text",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 15,
+    "placeholder": "",
+    "placeholderColor": "rgb(117, 117, 117)",
+    "placeholderContrast": null
+   },
+   "ask": {
+    "disabled": false,
+    "ariaDisabled": null,
+    "bg": "rgb(36, 31, 26)",
+    "color": "rgb(243, 234, 223)",
+    "border": "rgb(243, 234, 223) none",
+    "cursor": "pointer",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 13.72
+   },
+   "askLabel": "Perguntar",
+   "formClass": "",
+   "askMsg": "",
+   "questionsUsed": "Perguntas restantes: 8 de 8"
+  }
+ },
+ "reducedMotion": {
+  "look": {
+   "q": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(166, 124, 69) dashed",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81,
+    "placeholder": "Out of questions",
+    "placeholderColor": "rgb(201, 191, 174)",
+    "placeholderContrast": 9.81
+   },
+   "ask": {
+    "disabled": true,
+    "ariaDisabled": "true",
+    "bg": "rgb(26, 23, 20)",
+    "color": "rgb(201, 191, 174)",
+    "border": "rgb(201, 191, 174) none",
+    "cursor": "not-allowed",
+    "opacity": 1,
+    "filter": "none",
+    "contrast": 9.81
+   },
+   "askLabel": "Ask",
+   "formClass": "is-locked",
+   "askMsg": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "questionsUsed": "Questions left: 0 of 8"
+  },
+  "animatedOrTransitioning": 6
+ }
+}

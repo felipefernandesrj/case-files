@@ -1,0 +1,15 @@
+M1 no lock class: CAUGHT (1 fail) FAIL budget spent: locked, Out of questions placeholder, aria-disabled true on box and Ask: no locked class
+M2 game over loses to budget: CAUGHT (1 fail) FAIL game over wins over budget, PT placeholder follows the language: data-lock not over
+M3 aria-disabled never removed: CAUGHT (1 fail) FAIL open game: box not locked, no placeholder, no aria-disabled: Start over kept aria-disabled
+M4 placeholder kept on open game: CAUGHT (1 fail) FAIL open game: box not locked, no placeholder, no aria-disabled: placeholder on an open game
+M5 setGameOver no refresh: CAUGHT (1 fail) FAIL setGameOver and renderBudget refresh the lock (Start over, language switch, new file): setGameOver does n
+M6 cursor default: CAUGHT (1 fail) FAIL locked CSS: muted colors, not-allowed cursor, dashed border, placeholder visible: no not-allowed cursor
+M7 placeholder faded: CAUGHT (1 fail) FAIL locked CSS: muted colors, not-allowed cursor, dashed border, placeholder visible: placeholder rule missin
+M8 low contrast text-dim: CAUGHT (1 fail) FAIL locked text and placeholder keep AA contrast (4.5:1) on the locked background: contrast 1.86
+M9 no reduced motion rule: CAUGHT (1 fail) FAIL busy ask shows a progress cursor and reduced motion has no transition on the box: no reduced motion rule
+M10 PT placeholder English: CAUGHT (1 fail) FAIL LABELS have an out and a game over placeholder in EN and PT: PT not translated
+M11 CLI no out line at zero: CAUGHT (1 fail) FAIL CLI shows the budget, counts down and refuses past it with a command line, not a browser button: out line
+M12 CLI raw error: CAUGHT (1 fail) FAIL CLI shows the budget, counts down and refuses past it with a command line, not a browser button: out line
+M13 CLI no start budget: CAUGHT (2 fail) FAIL CLI shows the budget, counts down and refuses past it with a command line, not a browser button: no start
+M14 CLI loses error code: CAUGHT (1 fail) FAIL CLI shows the budget, counts down and refuses past it with a command line, not a browser button: out line
+caught 14/14

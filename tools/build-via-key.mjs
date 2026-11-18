@@ -26,7 +26,8 @@ for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*
   if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   m[2] = m[2].replace(/^OLD \(copied exactly from the current file\)\n/, ''); // sprint 11: the model echoed the format placeholder line
   const cur = fs.readFileSync(m[1], 'utf8'); const n = cur.split(m[2]).length - 1;
-  fs.writeFileSync(m[1], cur.split(m[2]).join(m[3])); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });
+  let next = cur.split(m[2]).join(m[3]); if (cur.endsWith('\n') && !next.endsWith('\n')) next += '\n'; // sprint 13: an edit at the end of a file keeps its final newline
+  fs.writeFileSync(m[1], next); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });
 }
 // apply_patch-style hunks inside <<<REPLACE path>>> ... <<<END>>> (lines ' ' context, '-' old, '+' new, '@@' separators)
 for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {

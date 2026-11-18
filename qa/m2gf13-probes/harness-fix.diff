@@ -1,0 +1,5 @@
+29c29,30
+<   fs.writeFileSync(m[1], cur.split(m[2]).join(m[3])); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });
+---
+>   let next = cur.split(m[2]).join(m[3]); if (cur.endsWith('\n') && !next.endsWith('\n')) next += '\n'; // sprint 13: an edit at the end of a file keeps its final newline
+>   fs.writeFileSync(m[1], next); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });

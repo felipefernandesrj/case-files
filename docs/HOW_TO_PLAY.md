@@ -15,7 +15,7 @@ A priceless Stradivarius vanished from the instrument room of the Aurora Music A
 5. When you are ready, type your name (or "anon") and press the button with the suspect's name in the "Accuse" section. The game asks you to confirm; you only get one accusation per game.
 
 ### Scoring
-Each case gives you a small budget of questions (8 for The Vanishing Violin, 10 for The Night Train), shown under the question box as "Questions left". Only answered questions count. When none are left, Ask locks and the Name the culprit button takes you to Accuse. A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
+Each case gives you a small budget of questions (8 for The Vanishing Violin, 10 for The Night Train), shown under the question box as "Questions left". Only answered questions count. When none are left, the question box shows "Out of questions", Ask locks and the Name the culprit button takes you to Accuse. A correct accusation scores 100 points if you asked 3 questions or fewer. Each extra question reduces your score by 5 points. The minimum score is 10. A wrong accusation scores 0. The verdict will reveal the solution. Top scores appear on the scoreboard. Your own best score for each language is kept in your browser; use "Reset my best scores" to clear it (you will be asked to confirm). When you beat your best, the game says "New personal best!".
 
 ### Tips
 * Ask where each person was and when.
@@ -33,7 +33,7 @@ The game works with Tab and Enter. Escape clears the question box while it is fo
 After the verdict, you will see a list of our wonderful backers. Every question creates a public receipt on FullCup so backers can see how the capacity is used.
 
 ### Play in a terminal
-`node src/cli.js` (add `--lang pt` for Portuguese).
+`node src/cli.js` (add `--lang pt` for Portuguese). The terminal shows the same question budget ("Questions left: 8 of 8"); when it reaches zero, use `accuse <suspectId>`.
 
 <a id="portugues"></a>
 ## Português
@@ -49,7 +49,7 @@ Um Stradivarius de valor inestimável desapareceu da sala de instrumentos da Aca
 5. Quando estiver pronto, digite seu nome (ou "anon") e aperte o botão com o nome do suspeito na seção "Acusar". O jogo pede confirmação; você tem apenas uma acusação por jogo.
 
 ### Pontuação
-Cada caso dá um pequeno limite de perguntas (8 em O Violino Desaparecido, 10 em O Trem Noturno), mostrado embaixo da caixa de pergunta como "Perguntas restantes". Só perguntas respondidas contam. Quando acabam, Perguntar fica bloqueado e o botão Apontar o culpado leva você a Acusar. Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
+Cada caso dá um pequeno limite de perguntas (8 em O Violino Desaparecido, 10 em O Trem Noturno), mostrado embaixo da caixa de pergunta como "Perguntas restantes". Só perguntas respondidas contam. Quando acabam, a caixa de pergunta mostra "Sem perguntas", Perguntar fica bloqueado e o botão Apontar o culpado leva você a Acusar. Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos. Cada pergunta extra reduz a pontuação em 5 pontos. A pontuação mínima é 10. Uma acusação errada vale 0. O veredito mostrará a solução. As melhores pontuações aparecem no placar. Seu recorde em cada idioma fica guardado no seu navegador; use "Apagar meus recordes" para limpar (o jogo pede confirmação). Quando você bate seu recorde, o jogo avisa "Novo recorde pessoal!".
 
 ### Dicas
 * Pergunte onde cada pessoa estava e quando.
@@ -67,4 +67,4 @@ O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela e
 Após o veredito, você verá uma lista de nossos apoiadores. Cada pergunta cria um recibo público no FullCup para que os apoiadores vejam como a capacidade está sendo usada.
 
 ### Jogar no terminal
-`node src/cli.js --lang pt`
+`node src/cli.js --lang pt` (o terminal mostra o mesmo limite, "Perguntas restantes: 8 de 8"; quando chega a zero, use `acusar <suspectId>`)

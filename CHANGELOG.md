@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.22 (M2 game feel, sprint 13: a locked question box that looks locked)
+- When the question budget is spent or the game is over, the question box and the Ask button now look locked instead of looking ready (before, only the cursor over the box changed). They turn dark and muted with a dashed edge, show a not-allowed cursor, and the box reads "Out of questions" (PT "Sem perguntas") or, after the verdict, "Game over" (PT "Fim de jogo"). The muted text keeps a 9.8:1 contrast, above the AA 4.5:1.
+- Both carry `aria-disabled="true"` while locked, and the lock clears on Start over, Try again and a new file. The placeholder follows a language switch. While an answer is on its way the cursor shows progress. Reduced motion turns the box transitions off.
+- The terminal game (node src/cli.js) now uses the same budget: it prints "Questions left: 8 of 8" at the start and after every answer, and at zero it says "No questions left in this game. Name the culprit with: accuse <suspectId>" (PT with acusar) instead of a raw error with browser button names. Accusing still works after the last question.
+- New test/ask-lock.mjs with 10 checks. The automated suite now has 265 checks.
+
 ## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)
 - Harder game, as Felipi asked: each case now has a small budget of answered questions, 8 for The Vanishing Violin and 10 for The Night Train (before, a game allowed 20 and nothing on screen said so; the limit showed only after the 21st question). Each budget is twice the fewest questions that solve the case fairly (two clues against the culprit plus one clearing clue per innocent suspect), and a test keeps it that way for every case.
 - The Ask step shows "Questions left: 8 of 8" (PT "Perguntas restantes: 8 de 8") with one pip per question. A pip burns out on each answer, the last two blink red, and at zero the meter shakes once, Ask locks, a line says "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." and a "Name the culprit" button takes you to Accuse with the focus on the first suspect. Reduced motion turns every budget animation off. Screen readers hear the line, not the pips.
