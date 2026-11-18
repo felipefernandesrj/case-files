@@ -1,0 +1,363 @@
+{
+ "1280-en": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 0,
+    "cls": "q-budget",
+    "anim": "none"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions left: 8 of 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Name the culprit"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 3,
+    "cls": "q-budget",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions left: 5 of 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Name the culprit"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 8,
+  "refusedAt": 9,
+  "refusal": "ask-disabled",
+  "end": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 8,
+    "cls": "q-budget is-out",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions left: 0 of 8"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game."
+   },
+   "goAccuse": {
+    "visible": true,
+    "text": "Name the culprit"
+   },
+   "askDisabled": true,
+   "qDisabled": true,
+   "logAnswers": 8
+  }
+ },
+ "1280-pt": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 0,
+    "cls": "q-budget",
+    "anim": "none"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas restantes: 8 de 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Apontar o culpado"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 3,
+    "cls": "q-budget",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas restantes: 5 de 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Apontar o culpado"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 8,
+  "refusedAt": 9,
+  "refusal": "ask-disabled",
+  "end": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 8,
+    "cls": "q-budget is-out",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas restantes: 0 de 8"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo."
+   },
+   "goAccuse": {
+    "visible": true,
+    "text": "Apontar o culpado"
+   },
+   "askDisabled": true,
+   "qDisabled": true,
+   "logAnswers": 8
+  }
+ },
+ "390-en": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 0,
+    "cls": "q-budget",
+    "anim": "none"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions left: 8 of 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Name the culprit"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 3,
+    "cls": "q-budget",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions left: 5 of 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Name the culprit"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 8,
+  "refusedAt": 9,
+  "refusal": "ask-disabled",
+  "end": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 8,
+    "cls": "q-budget is-out",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions left: 0 of 8"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game."
+   },
+   "goAccuse": {
+    "visible": true,
+    "text": "Name the culprit"
+   },
+   "askDisabled": true,
+   "qDisabled": true,
+   "logAnswers": 8
+  }
+ },
+ "390-pt": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 0,
+    "cls": "q-budget",
+    "anim": "none"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas restantes: 8 de 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Apontar o culpado"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 3,
+    "cls": "q-budget",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas restantes: 5 de 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Apontar o culpado"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 8,
+  "refusedAt": 9,
+  "refusal": "ask-disabled",
+  "end": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 8,
+    "cls": "q-budget is-out",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas restantes: 0 de 8"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo."
+   },
+   "goAccuse": {
+    "visible": true,
+    "text": "Apontar o culpado"
+   },
+   "askDisabled": true,
+   "qDisabled": true,
+   "logAnswers": 8
+  }
+ },
+ "fairPath": {
+  "afterClues": {
+   "budgetMeter": {
+    "visible": true,
+    "text": "",
+    "pips": 8,
+    "spent": 4,
+    "cls": "q-budget",
+    "anim": "cf-qb-burn"
+   },
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions left: 4 of 8"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": {
+    "visible": false,
+    "text": "Name the culprit"
+   },
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 2
+  },
+  "suspicion": [
+   "Lorenzo MorettiCleared",
+   "Maya SantosCleared",
+   "Carlos Mendes2 leads · prime suspect"
+  ],
+  "verdict": "Correct!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but though"
+ }
+}

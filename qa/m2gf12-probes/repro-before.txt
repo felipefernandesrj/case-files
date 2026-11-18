@@ -1,0 +1,5 @@
+Reproduced on HEAD f577bfb (v0.4.20) before building, tools/probe-gf12.mjs, mock mode, headless Chrome, 1280x800 and 390x844, EN and PT, 2026-11-17 21:00 BRT. Screens /workspace/casefiles-qa/run40/before-*.png, data probe-before.json.
+- No question budget on screen: only "Questions used: N" / "Perguntas feitas: N"; no meter, no "left".
+- 20 neutral questions answered in a row at every size and language; the limit appeared only as a reply to the 21st question (call_cap: "You have used all the questions for this case in this game..."), and Ask stayed enabled after that (askDisabled false), so the player could keep pressing it.
+- Fair path: 4 questions with the right keywords (lock, cart, Lorenzo near, Maya nervous) clear Lorenzo and Maya and give Carlos 2 leads (prime suspect); accusing Carlos is correct. So a game can be solved in 4 questions while 20 were allowed: nothing pushed the player to choose questions.
+- Measured difficulty change after the sprint: Violin 20 -> 8 answered questions (fair minimum 4), Night Train 20 -> 10 (fair minimum 5).

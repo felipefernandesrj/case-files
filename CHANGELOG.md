@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)
+- Harder game, as Felipi asked: each case now has a small budget of answered questions, 8 for The Vanishing Violin and 10 for The Night Train (before, a game allowed 20 and nothing on screen said so; the limit showed only after the 21st question). Each budget is twice the fewest questions that solve the case fairly (two clues against the culprit plus one clearing clue per innocent suspect), and a test keeps it that way for every case.
+- The Ask step shows "Questions left: 8 of 8" (PT "Perguntas restantes: 8 de 8") with one pip per question. A pip burns out on each answer, the last two blink red, and at zero the meter shakes once, Ask locks, a line says "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." and a "Name the culprit" button takes you to Accuse with the focus on the first suspect. Reduced motion turns every budget animation off. Screen readers hear the line, not the pips.
+- Fairness: failed model calls never spend the budget, you can always accuse after the last question, Start over and Try again give a full budget, and the score rule is unchanged.
+- The server refuses a question past the budget with `out_of_questions` (409, friendly EN/PT line) before any model call, and every answer reports `budget` and `left`. The call cap of 20 stays as the cost guard for failed calls.
+- New test/question-budget.mjs with 11 checks. The automated suite now has 255 checks.
+
 ## 0.4.20 (M2 game feel, sprint 11: error messages you can see)
 - Asked by a backer: hints and errors on the Ask step were invisible. "Choose a suspect first", "Type a question first", server errors and network failures were written into the Accuse panel, which is hidden while you ask, so pressing Ask did nothing you could see (reproduced at 1280 and 390 in English and Portuguese). They now show right under the question box, in a box that screen readers announce, and stay until your next ask, a suspect change, a language switch, Start over or a new file.
 - The server no longer sends raw English strings such as "unknown suspect" or "unknown session". Every bad ask or accusation now answers with a code and a friendly line in the player's language (unknown suspect, expired game, empty question, question over 500 characters, second accusation).

@@ -57,7 +57,11 @@ await test('the server stops calling the model at the cap', async () => {
   fake.calls = 0;
   fake.fail = false;
   const sid = (await post('/session', {})).body.sessionId;
-  for (let i = 0; i < 20; i++) {
+  // since sprint 12 the question budget (8 answers) ends a game first, so 13 failed calls plus 7 answers reach the cap of 20
+  fake.fail = true;
+  for (let i = 0; i < 13; i++) await ask(sid);
+  fake.fail = false;
+  for (let i = 0; i < 7; i++) {
     const a = await ask(sid);
     assert(a.status === 200, `call ${i} failed`);
   }
@@ -65,7 +69,7 @@ await test('the server stops calling the model at the cap', async () => {
   assert(capped.status === 429, 'should be 429');
   assert(capped.body.error === 'call_cap', 'wrong error code');
   assert(capped.body.message === friendly('call_cap', 'en'), 'wrong message');
-  assert(capped.body.questions === 20, 'wrong question count');
+  assert(capped.body.questions === 7, 'wrong question count');
   assert(fake.calls === 20, `model called ${fake.calls} times`);
   const pt = await ask(sid, 'pt');
   assert(pt.status === 429, 'pt session should be 429');

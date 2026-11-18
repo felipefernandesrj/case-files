@@ -87,7 +87,7 @@ function sandbox(fetchImpl) {
   const doc = { getElementById: id => els[id], querySelectorAll: () => [], createElement: () => el() };
   const src = 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError');
   const ask = new Function('document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories', 'renderQuestions', 'renderConversation',
-    'let questionsUsed = 0; let gameOver = false; function applyClue(){}\n' + src + '\nreturn askQuestion;')(doc, fetchImpl, '/api', LABELS, 'carlos', 'pt', 's', {}, () => {}, () => {});
+    'let questionsUsed = 0; let questionBudget = 0; let gameOver = false; function applyClue(){} function budgetOut(){ return false; }\n' + src + '\nreturn askQuestion;')(doc, fetchImpl, '/api', LABELS, 'carlos', 'pt', 's', {}, () => {}, () => {});
   return { ask, els };
 }
 
@@ -119,12 +119,12 @@ await check('a non JSON reply (proxy error page) is a netError too', async () =>
 await check('no suspect and empty question hints land in #ask-msg', async () => {
   const { els } = sandbox(async () => ({ ok: true, json: async () => ({}) }));
   const el2 = sandbox(async () => ({}));
-  const noSus = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false;\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
+  const noSus = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false; function budgetOut(){ return false; }\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
     { getElementById: id => el2.els[id] }, LABELS, 'en', null);
   await noSus({ preventDefault() {} });
   must(el2.els['ask-msg'].textContent === LABELS.en.pickSuspect && el2.els['ask-msg'].hidden === false, 'pickSuspect');
   els.q.value = '   ';
-  const empty = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false;\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
+  const empty = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false; function budgetOut(){ return false; }\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
     { getElementById: id => els[id] }, LABELS, 'en', 'carlos');
   await empty({ preventDefault() {} });
   must(els['ask-msg'].textContent === LABELS.en.emptyQuestion && els.q.focused === true, 'emptyQuestion + focus');

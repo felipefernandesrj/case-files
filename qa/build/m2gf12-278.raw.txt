@@ -1,0 +1,9 @@
+<<<REPLACE public/css/game.css>>>
+@media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip, .q-budget.is-out { animation: none; transition: none; } }
+=====
+@media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip:not(.is-spent), .q-budget.is-out { animation: none; transition: none; } }
+<<<REPLACE test/question-budget.mjs>>>
+  for (const sel of ['.qb-pip.is-burning', '.q-budget.is-low .qb-pip', '.q-budget.is-out']) must(rm.includes(sel), `reduced motion ${sel}`);
+=====
+  for (const sel of ['.qb-pip.is-burning', '.q-budget.is-low .qb-pip:not(.is-spent)', '.q-budget.is-out']) must(rm.includes(sel), `reduced motion ${sel}`);
+<<<END>>>

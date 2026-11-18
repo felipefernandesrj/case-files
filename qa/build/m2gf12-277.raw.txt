@@ -1,0 +1,15 @@
+<<<REPLACE test/question-budget.mjs>>>
+server.close();
+for (const r of results) console.log(r);
+=====
+await check('a meter first drawn mid-game (language switch or new page state) shows no burning pip', () => {
+  const { ids, api } = sandbox({ budget: 8, used: 3, over: false, lang: 'en' });
+  api.render();
+  const pips = ids['q-budget'].children;
+  must(pips.filter((p) => p.classList.contains('is-spent')).length === 3, 'spent');
+  must(!pips.some((p) => p.classList.contains('is-burning')), 'burn on first draw');
+});
+
+server.close();
+for (const r of results) console.log(r);
+<<<END>>>

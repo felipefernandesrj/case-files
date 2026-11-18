@@ -11,10 +11,10 @@ const r = REPARSE ? { status: 200, text: async () => JSON.stringify({ choices: [
 const ms0 = Date.now() - t0; let txt = await r.text(); let j = {};
 if (/^data: /m.test(txt)) { let c = '', u = null; for (const l of txt.split('\n')) { if (!l.startsWith('data: {')) continue; try { const k = JSON.parse(l.slice(6)); c += k.choices?.[0]?.delta?.content || ''; if (k.usage) u = k.usage; } catch {} } j = { choices: [{ message: { content: c } }], usage: u }; txt = c; } else { try { j = JSON.parse(txt); } catch {} }
 const ms = Date.now() - t0;
-const out = j.choices?.[0]?.message?.content || '';
+const out = (j.choices?.[0]?.message?.content || '').replace(/\n\[\/OLD \d+\]\n\[NEW \d+\]\n/g, '\n=====\n').replace(/^\[\/?(OLD|NEW) \d+\]\n/gm, ''); // sprint 12: the model echoed the [/OLD n] [NEW n] markers of the change list as the separator
 const files = [];
 const allow = process.env.ALLOW ? process.env.ALLOW.split(',') : null; const skipped = [];
-for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
+for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n((?:(?!<<<REPLACE |<<<FILE )[\s\S])*?)\n?(?:<<<END>>>|\[\/END>>>|\[\/FILE\]\n?(?=<<<)|(?=<<<REPLACE |<<<FILE ))/g)) { // sprint 12: a FILE block closed by a broken [/END>>> line must not swallow the next blocks
   if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   let body = m[2].replace(/^```[a-z]*\n/, '').replace(/\n```\s*$/, '');
   fs.mkdirSync(path.dirname(m[1]), { recursive: true }); fs.writeFileSync(m[1], body + '\n');
@@ -22,7 +22,7 @@ for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
 }
 // sprint 10: OLD may not cross a <<<END>>> (a hunk block before a ===== block was swallowed)
 // literal search/replace edits produced by the model: <<<REPLACE path>>>\nOLD\n=====\nNEW\n<<<END>>>
-for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*?)\n={5,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 4: a missing <<<END>>> before the next block ends the block
+for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*?)\n={3,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 12: gemma wrote 3 or 7 = signs; sprint 4: a missing <<<END>>> before the next block ends the block
   if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   m[2] = m[2].replace(/^OLD \(copied exactly from the current file\)\n/, ''); // sprint 11: the model echoed the format placeholder line
   const cur = fs.readFileSync(m[1], 'utf8'); const n = cur.split(m[2]).length - 1;
@@ -30,7 +30,7 @@ for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*
 }
 // apply_patch-style hunks inside <<<REPLACE path>>> ... <<<END>>> (lines ' ' context, '-' old, '+' new, '@@' separators)
 for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
-  if (!/^@@/m.test(m[2]) && !/\n={5,}\n/.test(m[2]) && /^(import|\/\/|<!doctype|<!DOCTYPE|\{)/.test(m[2])) { if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; } fs.writeFileSync(m[1], m[2] + '\n'); files.push({ path: m[1], lines: m[2].split('\n').length, fullViaReplace: true }); continue; }
+  if (!/^@@/m.test(m[2]) && !/\n={3,}\n/.test(m[2]) && /^(import|\/\/|<!doctype|<!DOCTYPE|\{)/.test(m[2]) && !(fs.existsSync(m[1]) && m[2].split('\n').length < fs.readFileSync(m[1], 'utf8').split('\n').length / 2)) { /* sprint 12: never overwrite an existing file with a block under half its size */ if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; } fs.writeFileSync(m[1], m[2] + '\n'); files.push({ path: m[1], lines: m[2].split('\n').length, fullViaReplace: true }); continue; }
   if (!/^@@/m.test(m[2])) continue; if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
   let cur = fs.readFileSync(m[1], 'utf8'); let ok = 0, bad = 0;
   for (const h of m[2].split(/^@@.*$/m)) {

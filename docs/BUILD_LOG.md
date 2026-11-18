@@ -299,3 +299,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Calls 269-271 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf11.mjs): 0 of 16 messages visible before, 16 of 16 after. No live play smoke (no model prompt changed).
 - Result: npm test 244/244 (was 234), new test/errors.mjs 10 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 11).
+
+## M2 game feel sprint 12 (v0.4.21)
+
+- Scope: harder game (asked by Felipi) through a per-case question budget you can see: 8 answered questions for the Violin, 10 for the Night Train, a pip meter, low and out states, a Name the culprit button, server refusal `out_of_questions` before any model call.
+- Calls 272-279 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off, one rework on `@cf/openai/gpt-oss-120b`). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf12.mjs, tools/probe-gf12-extra.mjs): before, 20 questions answered with no budget on screen; after, 8 answered, Ask locked at 0 of 8 with the line and the button in both languages. No live play smoke (no model prompt changed).
+- Result: npm test 255/255 (was 244), new test/question-budget.mjs 11 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 12).

@@ -1,0 +1,233 @@
+{
+ "1280-en": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions used: 0"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions used: 3"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 20,
+  "refusedAt": 21,
+  "refusal": "You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game.",
+  "end": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions used: 20"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game."
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 20
+  }
+ },
+ "1280-pt": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas feitas: 0"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas feitas: 3"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 20,
+  "refusedAt": 21,
+  "refusal": "Você usou todas as perguntas deste caso nesta partida. Faça sua acusação ou toque em Nova partida para jogar de novo.",
+  "end": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas feitas: 20"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "Você usou todas as perguntas deste caso nesta partida. Faça sua acusação ou toque em Nova partida para jogar de novo."
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 20
+  }
+ },
+ "390-en": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions used: 0"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions used: 3"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 20,
+  "refusedAt": 21,
+  "refusal": "You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game.",
+  "end": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions used: 20"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "You have used all the questions for this case in this game. Make your accusation, or press Start over for a new game."
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 20
+  }
+ },
+ "390-pt": {
+  "asks": [],
+  "pickedOk": true,
+  "start": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas feitas: 0"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 0
+  },
+  "after3": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas feitas: 3"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 3
+  },
+  "answered": 20,
+  "refusedAt": 21,
+  "refusal": "Você usou todas as perguntas deste caso nesta partida. Faça sua acusação ou toque em Nova partida para jogar de novo.",
+  "end": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Perguntas feitas: 20"
+   },
+   "askMsg": {
+    "visible": true,
+    "text": "Você usou todas as perguntas deste caso nesta partida. Faça sua acusação ou toque em Nova partida para jogar de novo."
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 20
+  }
+ },
+ "fairPath": {
+  "afterClues": {
+   "budgetMeter": null,
+   "questionsUsed": {
+    "visible": true,
+    "text": "Questions used: 4"
+   },
+   "askMsg": {
+    "visible": false,
+    "text": ""
+   },
+   "goAccuse": null,
+   "askDisabled": false,
+   "qDisabled": false,
+   "logAnswers": 2
+  },
+  "suspicion": [
+   "Lorenzo MorettiCleared",
+   "Maya SantosCleared",
+   "Carlos Mendes2 leads · prime suspect"
+  ],
+  "verdict": "Correct!Culprit: Carlos MendesSolution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but though"
+ }
+}

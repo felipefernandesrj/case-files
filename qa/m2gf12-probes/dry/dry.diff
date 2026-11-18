@@ -1,0 +1,437 @@
+diff --git a/content/case.json b/content/case.json
+index c4ad8f1..148b053 100644
+--- a/content/case.json
++++ b/content/case.json
+@@ -9,6 +9,7 @@
+     "pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?"
+   },
+   "culprit": "carlos",
++  "questionBudget": 8,
+   "suspects": [
+     {
+       "id": "lorenzo",
+diff --git a/content/cases/night-train.json b/content/cases/night-train.json
+index 1d82f60..a43d6c7 100644
+--- a/content/cases/night-train.json
++++ b/content/cases/night-train.json
+@@ -9,6 +9,7 @@
+     "pt": "No trem noturno Southern Star, o colar de safira da Duquesa desaparece do cofre trancado no vagão de bagagem entre Alder Crossing e Port Elling. Quatro pessoas tinham motivos para estar por perto. Quem roubou?"
+   },
+   "culprit": "ines",
++  "questionBudget": 10,
+   "suspects": [
+     {
+       "id": "helena",
+diff --git a/package.json b/package.json
+index 03b234e..4f392fa 100644
+--- a/package.json
++++ b/package.json
+@@ -3,7 +3,7 @@
+   "version": "0.4.20",
+   "type": "module",
+   "scripts": {
+-    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/keyboard.mjs"
++    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/keyboard.mjs"
+   },
+   "dependencies": {}
+ }
+diff --git a/public/best.js b/public/best.js
+index f98a127..ea64993 100644
+--- a/public/best.js
++++ b/public/best.js
+@@ -104,6 +104,17 @@ export function questionsText(lang, n) {
+   return lang === 'pt' ? `Perguntas feitas: ${n}` : `Questions used: ${n}`;
+ }
+ 
++/**
++ * Questions left in this game, for the question budget meter (M2 game feel sprint 12).
++ * @param {'en'|'pt'} lang
++ * @param {number} left
++ * @param {number} budget
++ * @returns {string}
++ */
++export function budgetText(lang, left, budget) {
++  return lang === 'pt' ? `Perguntas restantes: ${left} de ${budget}` : `Questions left: ${left} of ${budget}`;
++}
++
+ /** @type {{ en: object, pt: object }} */
+ export const LABELS = {
+   en: {
+@@ -120,7 +131,9 @@ export const LABELS = {
+     gameOver: 'Game over. Use Start over for a new case.',
+     pickSuspect: 'Choose a suspect first.',
+     emptyQuestion: 'Type a question first.',
+-    netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.'
++    netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.',
++    outOfQuestions: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
++    toAccuse: 'Name the culprit'
+   },
+   pt: {
+     bestTitle: 'Seu recorde',
+@@ -136,6 +149,8 @@ export const LABELS = {
+     gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
+     pickSuspect: 'Escolha um suspeito primeiro.',
+     emptyQuestion: 'Digite uma pergunta primeiro.',
+-    netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.'
++    netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.',
++    outOfQuestions: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
++    toAccuse: 'Apontar o culpado'
+   }
+ };
+diff --git a/public/css/game.css b/public/css/game.css
+index e614afb..03a5b6d 100644
+--- a/public/css/game.css
++++ b/public/css/game.css
+@@ -770,3 +770,15 @@ body[data-view="cabinet"] #steps {
+ @media (prefers-reduced-motion: reduce) { .arrest-sprite, .arrest .case-closed-stamp { animation: none; } }
+ .ask-msg { margin: 8px 0 0; padding: 8px 12px; border-left: 4px solid #d9a441; background: rgba(217,164,65,0.12); color: var(--cf-text); font-weight: 700; }
+ .ask-msg[hidden] { display: none; }
++.q-budget { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 8px; }
++.q-budget[hidden], .budget-accuse[hidden] { display: none; }
++.qb-pip { width: 14px; height: 14px; border: 2px solid #d9a441; background: #d9a441; box-shadow: inset -2px -2px 0 rgba(0,0,0,0.35); transition: background 0.3s, border-color 0.3s; }
++.qb-pip.is-spent { background: transparent; border-color: rgba(217,164,65,0.35); box-shadow: none; }
++.qb-pip.is-burning { animation: cf-qb-burn 0.5s steps(4) both; }
++.q-budget.is-low .qb-pip:not(.is-spent) { background: #c0392b; border-color: #e74c3c; animation: cf-qb-low 1s steps(2) 3; }
++.q-budget.is-out { animation: cf-qb-shake 0.4s steps(4) 1; }
++.budget-accuse { margin: 4px 0 8px; font-weight: 700; }
++@keyframes cf-qb-burn { 0% { transform: scale(1.6); background: #fff3c4; border-color: #fff3c4; } 100% { transform: none; } }
++@keyframes cf-qb-low { 50% { opacity: 0.35; } }
++@keyframes cf-qb-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
++@media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip, .q-budget.is-out { animation: none; transition: none; } }
+diff --git a/public/index.html b/public/index.html
+index 6279386..7f3d8ba 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -247,6 +247,8 @@
+         </form>
+         <p id="ask-msg" class="ask-msg" role="alert" hidden></p>
+         <p id="questions-used" aria-live="polite"></p>
++        <div id="q-budget" class="q-budget" aria-hidden="true" hidden></div>
++        <button type="button" id="budget-accuse" class="budget-accuse with-icon" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span>Name the culprit</span></button>
+         <section id="suspicion-talk" class="suspicion" aria-labelledby="suspicion-title-talk">
+           <h3 id="suspicion-title-talk" class="sus-title">Suspicion</h3>
+           <ul class="sus-list"></ul>
+@@ -345,7 +347,7 @@
+ <p id="continue-live" class="continue-live" aria-live="polite"></p>
+ <script type="module">
+ const API = '/api';
+-import { readBest, recordResult, resetBest, bestText, questionsText, LABELS } from '/best.js';
++import { readBest, recordResult, resetBest, bestText, questionsText, budgetText, LABELS } from '/best.js';
+ const store = (() => { try { return window.localStorage; } catch { return null; } })();
+ let lang = 'en';
+ let sessionId = null;
+@@ -700,6 +702,8 @@ function setGameOver(on){
+     ask.disabled = true;
+     accuseBtns.forEach(b => { b.disabled = true; });
+     document.getElementById('best-status').textContent = LABELS[lang].gameOver;
++    const go = document.getElementById('budget-accuse');
++    if (go) go.hidden = true;
+   } else {
+     q.disabled = false;
+     ask.disabled = false;
+@@ -879,6 +883,7 @@ async function init() {
+   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: askedCase })});
+   const sessData = await sessRes.json();
+   sessionId = sessData.sessionId;
++  questionBudget = sessData.budget || 0;
+   if (sessData.file) openFile = sessData.file;
+   const wanted = new URLSearchParams(location.search).get('case');
+   if (wanted) openFile = wanted;
+@@ -1106,6 +1111,7 @@ async function openPackFile(id) {
+   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: id })});
+   const sessData = await sessRes.json();
+   sessionId = sessData.sessionId;
++  questionBudget = sessData.budget || 0;
+   openFile = id;
+   for (const k of Object.keys(histories)) delete histories[k];
+   pins = [];
+@@ -1169,6 +1175,7 @@ function selectSuspect(id) {
+   if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
+   const askMsg = document.getElementById('ask-msg');
+   if (askMsg) askMsg.hidden = true;
++  renderQuestions();
+   document.querySelectorAll('#suspect-buttons button').forEach(b=>{
+     b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
+   });
+@@ -1255,6 +1262,7 @@ function renderConversation(animateLast) {
+ async function askQuestion(e){
+   e.preventDefault();
+   if (gameOver) return;
++  if (budgetOut()) return;
+   if (!selectedSuspect) { showError(LABELS[lang].pickSuspect, 'ask'); return; }
+   const question = document.getElementById('q').value.trim();
+   if (!question) { showError(LABELS[lang].emptyQuestion, 'ask'); document.getElementById('q').focus(); return; }
+@@ -1284,6 +1292,7 @@ async function askQuestion(e){
+     if (!res.ok) throw data;
+     const answer = data.answer;
+     questionsUsed = data.questions;
++    if (data.budget) questionBudget = data.budget;
+     renderQuestions();
+     applyClue(data.clue);
+     if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
+@@ -1291,6 +1300,11 @@ async function askQuestion(e){
+     renderConversation(true);
+   }catch(err){
+     showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message, 'ask');
++    if (err && err.code === 'out_of_questions') {
++      questionsUsed = err.questions;
++      if (err.budget) questionBudget = err.budget;
++      renderQuestions();
++    }
+   }finally{
+     if (thinking.parentNode) thinking.remove();
+     askBtn.disabled = false;
+@@ -1299,7 +1313,11 @@ async function askQuestion(e){
+     if (restartBtn) restartBtn.disabled = false;
+     askForm.removeAttribute('aria-busy');
+     qInput.value = '';
+-    qInput.focus();
++    if (budgetOut()) {
++      askBtn.disabled = true;
++      qInput.disabled = true;
++      document.getElementById('budget-accuse').focus();
++    } else qInput.focus();
+   }
+ }
+ 
+@@ -1496,12 +1514,55 @@ function showError(msg, where){
+ }
+ 
+ let questionsUsed = 0;
++let questionBudget = 0; // answered questions allowed in this game, from /api/session (M2 game feel sprint 12)
++const BUDGET_LOW = 2;
++let budgetLeftShown = null;
++function budgetOut() {
++  return questionBudget > 0 && questionsUsed >= questionBudget;
++}
+ function renderQuestions() {
+   const el = document.getElementById('questions-used');
+   el.innerHTML = '';
+   el.appendChild(iconSvg('i-hourglass'));
+-  el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
++  const left = Math.max(0, questionBudget - questionsUsed);
++  el.appendChild(document.createTextNode(questionBudget ? budgetText(lang, left, questionBudget) : questionsText(lang, questionsUsed)));
++  renderBudget(left);
++}
++function renderBudget(left) {
++  const meter = document.getElementById('q-budget');
++  const go = document.getElementById('budget-accuse');
++  if (!meter || !go) return;
++  meter.hidden = !questionBudget;
++  if (meter.children.length !== questionBudget) {
++    meter.innerHTML = '';
++    for (let i = 0; i < questionBudget; i++) {
++      const pip = document.createElement('span');
++      pip.className = 'qb-pip';
++      meter.appendChild(pip);
++    }
++    budgetLeftShown = null;
++  }
++  const pips = [...meter.children];
++  if (budgetLeftShown === null || left > budgetLeftShown) pips.forEach(p => p.classList.remove('is-burning'));
++  pips.forEach((p, i) => p.classList.toggle('is-spent', i >= left));
++  if (budgetLeftShown !== null && left < budgetLeftShown && pips[left]) pips[left].classList.add('is-burning');
++  budgetLeftShown = left;
++  const out = budgetOut();
++  meter.classList.toggle('is-low', !out && questionBudget > 0 && left <= BUDGET_LOW);
++  meter.classList.toggle('is-out', out);
++  go.querySelector('span').textContent = LABELS[lang].toAccuse;
++  go.hidden = !out || gameOver;
++  if (out && !gameOver) {
++    document.getElementById('q').disabled = true;
++    document.getElementById('ask-btn').disabled = true;
++    showError(LABELS[lang].outOfQuestions, 'ask');
++  }
+ }
++document.getElementById('budget-accuse').addEventListener('click', () => {
++  showStep('accuse');
++  const first = document.querySelector('#accuse-buttons button:not([disabled])');
++  if (first) first.focus();
++});
+ 
+ function renderBest() {
+   const b = readBest(store);
+@@ -1536,6 +1597,7 @@ async function restartGame(skipConfirm = false){
+   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: openFile })});
+   const sessData = await sessRes.json();
+   sessionId = sessData.sessionId;
++  questionBudget = sessData.budget || 0;
+   for (const k of Object.keys(histories)) delete histories[k];
+   questionsUsed = 0;
+   selectedSuspect = null;
+diff --git a/src/budget.js b/src/budget.js
+index 4d5b541..153ac86 100644
+--- a/src/budget.js
++++ b/src/budget.js
+@@ -7,6 +7,9 @@ export const PLAY_PRICE = Object.freeze({ inPerM: 0.27, outPerM: 0.85 });
+ /** Model calls allowed in one playthrough (one session) when a case sets no maxCalls. */
+ export const DEFAULT_MAX_CALLS = 20;
+ 
++/** Answered questions allowed in one game when a case sets no questionBudget (M2 game feel sprint 12: harder game). */
++export const DEFAULT_QUESTION_BUDGET = 10;
++
+ /** Documented ceiling for the worst-case spend of one playthrough of any case, in USD. */
+ export const PLAYTHROUGH_CEILING_USD = 0.1;
+ 
+@@ -16,6 +19,18 @@ export function maxCallsFor(c) {
+   return Number.isInteger(n) && n >= 1 && n <= 100 ? n : DEFAULT_MAX_CALLS;
+ }
+ 
++/** Fewest questions that solve case c fairly: two clues against the culprit plus one clearing clue per innocent suspect. */
++export function fairMinimum(c) {
++  return 2 + Math.max(0, ((c && c.suspects) || []).length - 1);
++}
++
++/** Answered questions allowed in one game of case c: its questionBudget (whole number from 1 to its call cap) or the smaller of DEFAULT_QUESTION_BUDGET and the cap. */
++export function questionBudgetFor(c) {
++  const cap = maxCallsFor(c);
++  const n = c && c.questionBudget;
++  return Number.isInteger(n) && n >= 1 && n <= cap ? n : Math.min(DEFAULT_QUESTION_BUDGET, cap);
++}
++
+ /**
+  * Worst-case USD for one playthrough: every call answers with maxTokens and resends the system
+  * prompt plus the whole history so far. One token is counted per character, an upper bound.
+diff --git a/src/messages.js b/src/messages.js
+index 6d32459..f41430c 100644
+--- a/src/messages.js
++++ b/src/messages.js
+@@ -1,6 +1,6 @@
+ /**
+  * Friendly messages for client‑facing errors.
+- * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'|'unknown_suspect'|'unknown_session'|'empty_question'|'question_too_long'|'already_accused'} code
++ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'|'unknown_suspect'|'unknown_session'|'empty_question'|'question_too_long'|'already_accused'|'out_of_questions'} code
+  * @param {'en'|'pt'} lang
+  * @returns {string}
+  */
+@@ -50,6 +50,10 @@ export function friendly(code, lang) {
+       en: 'You already named a culprit in this game. Press Start over to play again.',
+       pt: 'Você já apontou um culpado nesta partida. Toque em Nova partida para jogar de novo.',
+     },
++    out_of_questions: {
++      en: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
++      pt: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
++    },
+   };
+ 
+   const entry = msgs[code];
+diff --git a/src/server.js b/src/server.js
+index 203e2ad..9764771 100644
+--- a/src/server.js
++++ b/src/server.js
+@@ -7,7 +7,7 @@ import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWo
+ import { createProxy } from './proxy.js';
+ import { mockAnswer } from './mock.js';
+ import { friendly } from './messages.js';
+-import { maxCallsFor } from './budget.js';
++import { maxCallsFor, questionBudgetFor } from './budget.js';
+ import { createScoreboard, scoreFor } from './scoreboard.js';
+ 
+ /**
+@@ -228,7 +228,7 @@ export function createServer({
+           found: new Set(),
+           file: wanted || defaultKey,
+         });
+-        return sendJSON(res, 200, { sessionId, file: wanted || defaultKey });
++        return sendJSON(res, 200, { sessionId, file: wanted || defaultKey, budget: questionBudgetFor(pack[wanted || defaultKey] || defaultCase) });
+       }
+ 
+       if (req.method === 'POST' && pathname === '/api/ask') {
+@@ -253,6 +253,12 @@ export function createServer({
+           return sendJSON(res, 400, { error: 'bad_request', code: 'question_too_long', message: friendly('question_too_long', lang) });
+         }
+ 
++        // question budget (M2 game feel sprint 12): answered questions per game, checked before any model call
++        const budget = questionBudgetFor(play);
++        if (sess.questions >= budget) {
++          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: 0 });
++        }
++
+         // per-case cap on model calls per playthrough (M2 sprint 4): no model call once capped
+         if (sess.calls >= maxCallsFor(play)) {
+           return sendJSON(res, 429, { error: 'call_cap', message: friendly('call_cap', lang), questions: sess.questions });
+@@ -303,7 +309,7 @@ export function createServer({
+           found.add(hit.id);
+           clue = { id: hit.id, implicates: hit.implicates ?? null, clears: hit.clears ?? null };
+         }
+-        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions, clue });
++        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions, budget, left: budget - sess.questions, clue });
+       }
+ 
+       if (req.method === 'POST' && pathname === '/api/accuse') {
+diff --git a/test/budget.mjs b/test/budget.mjs
+index ecd4133..d05613a 100644
+--- a/test/budget.mjs
++++ b/test/budget.mjs
+@@ -57,7 +57,11 @@ await test('the server stops calling the model at the cap', async () => {
+   fake.calls = 0;
+   fake.fail = false;
+   const sid = (await post('/session', {})).body.sessionId;
+-  for (let i = 0; i < 20; i++) {
++  // since sprint 12 the question budget (8 answers) ends a game first, so 13 failed calls plus 7 answers reach the cap of 20
++  fake.fail = true;
++  for (let i = 0; i < 13; i++) await ask(sid);
++  fake.fail = false;
++  for (let i = 0; i < 7; i++) {
+     const a = await ask(sid);
+     assert(a.status === 200, `call ${i} failed`);
+   }
+@@ -65,7 +69,7 @@ await test('the server stops calling the model at the cap', async () => {
+   assert(capped.status === 429, 'should be 429');
+   assert(capped.body.error === 'call_cap', 'wrong error code');
+   assert(capped.body.message === friendly('call_cap', 'en'), 'wrong message');
+-  assert(capped.body.questions === 20, 'wrong question count');
++  assert(capped.body.questions === 7, 'wrong question count');
+   assert(fake.calls === 20, `model called ${fake.calls} times`);
+   const pt = await ask(sid, 'pt');
+   assert(pt.status === 429, 'pt session should be 429');
+diff --git a/test/errors.mjs b/test/errors.mjs
+index 9248c06..baf54c3 100644
+--- a/test/errors.mjs
++++ b/test/errors.mjs
+@@ -87,7 +87,7 @@ function sandbox(fetchImpl) {
+   const doc = { getElementById: id => els[id], querySelectorAll: () => [], createElement: () => el() };
+   const src = 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError');
+   const ask = new Function('document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories', 'renderQuestions', 'renderConversation',
+-    'let questionsUsed = 0; let gameOver = false; function applyClue(){}\n' + src + '\nreturn askQuestion;')(doc, fetchImpl, '/api', LABELS, 'carlos', 'pt', 's', {}, () => {}, () => {});
++    'let questionsUsed = 0; let questionBudget = 0; let gameOver = false; function applyClue(){} function budgetOut(){ return false; }\n' + src + '\nreturn askQuestion;')(doc, fetchImpl, '/api', LABELS, 'carlos', 'pt', 's', {}, () => {}, () => {});
+   return { ask, els };
+ }
+ 
+@@ -119,12 +119,12 @@ await check('a non JSON reply (proxy error page) is a netError too', async () =>
+ await check('no suspect and empty question hints land in #ask-msg', async () => {
+   const { els } = sandbox(async () => ({ ok: true, json: async () => ({}) }));
+   const el2 = sandbox(async () => ({}));
+-  const noSus = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false;\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
++  const noSus = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false; function budgetOut(){ return false; }\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
+     { getElementById: id => el2.els[id] }, LABELS, 'en', null);
+   await noSus({ preventDefault() {} });
+   must(el2.els['ask-msg'].textContent === LABELS.en.pickSuspect && el2.els['ask-msg'].hidden === false, 'pickSuspect');
+   els.q.value = '   ';
+-  const empty = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false;\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
++  const empty = new Function('document', 'LABELS', 'lang', 'selectedSuspect', 'let gameOver=false; function budgetOut(){ return false; }\n' + 'async ' + fnSource('askQuestion') + '\n' + fnSource('showError') + '\nreturn askQuestion;')(
+     { getElementById: id => els[id] }, LABELS, 'en', 'carlos');
+   await empty({ preventDefault() {} });
+   must(els['ask-msg'].textContent === LABELS.en.emptyQuestion && els.q.focused === true, 'emptyQuestion + focus');
+diff --git a/test/scoreboard.mjs b/test/scoreboard.mjs
+index fa20506..c549a90 100644
+--- a/test/scoreboard.mjs
++++ b/test/scoreboard.mjs
+@@ -293,7 +293,7 @@ async function run() {
+     const askQuestionObs = new Function(
+       'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+       'renderQuestions', 'renderConversation', 'showError',
+-      'let questionsUsed = 0; let gameOver = false; function applyClue(){}\n' + src + '\nreturn askQuestion;'
++      'let questionsUsed = 0; let questionBudget = 0; let gameOver = false; function applyClue(){} function budgetOut(){ return false; }\n' + src + '\nreturn askQuestion;'
+     )(
+       fakeDoc, observingFetch, '/api', LABELS, 'maya', 'en', 'sess-1', {},
+       () => { calls.renderQuestions++; },
+@@ -324,7 +324,7 @@ async function run() {
+     const askFail = new Function(
+       'document', 'fetch', 'API', 'LABELS', 'selectedSuspect', 'lang', 'sessionId', 'histories',
+       'renderQuestions', 'renderConversation', 'showError',
+-      'let questionsUsed = 0; let gameOver = false; function applyClue(){}\n' + src + '\nreturn askQuestion;'
++      'let questionsUsed = 0; let questionBudget = 0; let gameOver = false; function applyClue(){} function budgetOut(){ return false; }\n' + src + '\nreturn askQuestion;'
+     )(
+       fakeDoc2,
+       async () => ({ ok: false, json: async () => ({ message: 'busy' }) }),

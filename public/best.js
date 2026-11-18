@@ -104,6 +104,17 @@ export function questionsText(lang, n) {
   return lang === 'pt' ? `Perguntas feitas: ${n}` : `Questions used: ${n}`;
 }
 
+/**
+ * Questions left in this game, for the question budget meter (M2 game feel sprint 12).
+ * @param {'en'|'pt'} lang
+ * @param {number} left
+ * @param {number} budget
+ * @returns {string}
+ */
+export function budgetText(lang, left, budget) {
+  return lang === 'pt' ? `Perguntas restantes: ${left} de ${budget}` : `Questions left: ${left} of ${budget}`;
+}
+
 /** @type {{ en: object, pt: object }} */
 export const LABELS = {
   en: {
@@ -120,7 +131,9 @@ export const LABELS = {
     gameOver: 'Game over. Use Start over for a new case.',
     pickSuspect: 'Choose a suspect first.',
     emptyQuestion: 'Type a question first.',
-    netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.'
+    netError: 'Could not reach the game. Check your connection and ask again; nothing was counted.',
+    outOfQuestions: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
+    toAccuse: 'Name the culprit'
   },
   pt: {
     bestTitle: 'Seu recorde',
@@ -136,6 +149,8 @@ export const LABELS = {
     gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
     pickSuspect: 'Escolha um suspeito primeiro.',
     emptyQuestion: 'Digite uma pergunta primeiro.',
-    netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.'
+    netError: 'Não foi possível falar com o jogo. Verifique sua conexão e pergunte de novo; nada foi contado.',
+    outOfQuestions: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
+    toAccuse: 'Apontar o culpado'
   }
 };

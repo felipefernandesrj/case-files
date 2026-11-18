@@ -9,6 +9,7 @@
     "pt": "Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?"
   },
   "culprit": "carlos",
+  "questionBudget": 8,
   "suspects": [
     {
       "id": "lorenzo",

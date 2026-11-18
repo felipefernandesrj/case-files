@@ -1,0 +1,102 @@
+<<<REPLACE package.json>>>
+  "version": "0.4.20",
+=====
+  "version": "0.4.21",
+<<<END>>>
+
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+
+## 0.4.20 (M2 game feel, sprint 11: error messages you can see)
+=====
+# Changelog
+
+## 0.4.21 (M2 game feel, sprint 12: a question budget you can see)
+- Harder game, as Felipi asked: each case now has a small budget of answered questions, 8 for The Vanishing Violin and 10 for The Night Train (before, a game allowed 20 and nothing on screen said so; the limit showed only after the 21st question). Each budget is twice the fewest questions that solve the case fairly (two clues against the culprit plus one clearing clue per innocent suspect), and a test keeps it that way for every case.
+- The Ask step shows "Questions left: 8 of 8" (PT "Perguntas restantes: 8 de 8") with one pip per question. A pip burns out on each answer, the last two blink red, and at zero the meter shakes once, Ask locks, a line says "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." and a "Name the culprit" button takes you to Accuse with the focus on the first suspect. Reduced motion turns every budget animation off. Screen readers hear the line, not the pips.
+- Fairness: failed model calls never spend the budget, you can always accuse after the last question, Start over and Try again give a full budget, and the score rule is unchanged.
+- The server refuses a question past the budget with `out_of_questions` (409, friendly EN/PT line) before any model call, and every answer reports `budget` and `left`. The call cap of 20 stays as the cost guard for failed calls.
+- New test/question-budget.mjs with 11 checks. The automated suite now has 255 checks.
+
+## 0.4.20 (M2 game feel, sprint 11: error messages you can see)
+<<<END>>>
+
+<<<REPLACE README.md>>>
+**M2 in progress (v0.4.20, game feel sprint 11).**
+=====
+**M2 in progress (v0.4.21, game feel sprint 12).**
+<<<END>>>
+
+<<<REPLACE README.md>>>
+Hints and errors on the Ask step (no suspect chosen, empty question, expired game, no connection) now show under the question box in the player's language.
+=====
+Hints and errors on the Ask step (no suspect chosen, empty question, expired game, no connection) now show under the question box in the player's language. The game is harder: each case has a visible budget of answered questions (8 for the Violin, 10 for the Night Train, twice the fewest questions that solve it), shown as pips that burn out; at zero Ask locks and a Name the culprit button opens Accuse.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+244 automated checks.
+=====
+255 automated checks.
+<<<END>>>
+
+<<<REPLACE docs/BUILD_LOG.md>>>
+- Details and receipts: qa/rework.md (M2 game feel sprint 11).
+=====
+- Details and receipts: qa/rework.md (M2 game feel sprint 11).
+
+## M2 game feel sprint 12 (v0.4.21)
+
+- Scope: harder game (asked by Felipi) through a per-case question budget you can see: 8 answered questions for the Violin, 10 for the Night Train, a pip meter, low and out states, a Name the culprit button, server refusal `out_of_questions` before any model call.
+- Calls 272-279 through the Cup key (`@cf/google/gemma-4-26b-a4b-it` thinking off, one rework on `@cf/openai/gpt-oss-120b`). Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf12.mjs, tools/probe-gf12-extra.mjs): before, 20 questions answered with no budget on screen; after, 8 answered, Ask locked at 0 of 8 with the line and the button in both languages. No live play smoke (no model prompt changed).
+- Result: npm test 255/255 (was 244), new test/question-budget.mjs 11 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 12).
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+=====
+## Web page: question budget (M2 game feel sprint 12)
+- Budget: `questionBudgetFor(c)` in src/budget.js returns the case `questionBudget` (whole number from 1 to its call cap) or the smaller of `DEFAULT_QUESTION_BUDGET` (10) and the cap. content/case.json sets 8 and night-train.json sets 10; `fairMinimum(c)` (2 + innocent suspects) times two is the floor the tests enforce.
+- API: `POST /api/session` returns `budget`. `POST /api/ask` answers 409 `{ error: 'out_of_questions', code: 'out_of_questions', message, questions, budget, left: 0 }` once `questions` reaches the budget, before the call cap check and before any model call; a 200 answer adds `budget` and `left`. Failed model calls do not count.
+- Page: `#questions-used` (live, polite) reads `budgetText(lang, left, budget)` ("Questions left: 5 of 8" / "Perguntas restantes: 5 de 8"). `div#q-budget.q-budget` (`aria-hidden`) holds one `span.qb-pip` per question; spent pips get `is-spent`, the one just spent gets `is-burning` (only when `left` drops, never on a re-render), the meter gets `is-low` at 2 left or fewer and `is-out` at 0. At 0 (`budgetOut()`) #q and Ask lock, `showError(LABELS[lang].outOfQuestions, 'ask')` and `button#budget-accuse` ("Name the culprit" / "Apontar o culpado") shows; it opens Accuse and focuses the first accuse button, and game over hides it. init, openPackFile and restartGame read the budget from the session.
+- CSS: square pips, `cf-qb-burn` 0.5 s, `cf-qb-low` blink 3 times, `cf-qb-shake` once; reduced motion turns all of them off.
+
+## Web page: culprit in handcuffs (M2 game feel sprint 10)
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+21. `node test/keyboard.mjs`
+=====
+21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
+22. `node test/keyboard.mjs`
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+Total checks: 244 (
+=====
+Total checks: 255 (
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+arrest 7, errors 10, keyboard 13).
+=====
+arrest 7, errors 10, question-budget 11, keyboard 13).
+<<<END>>>
+
+<<<REPLACE docs/SPEC.md>>>
+- Cap in `/api/ask`: Every question that reaches the model counts toward the cap even if the call fails; if reached, the server returns a 429 with `call_cap` and no model call is made, but the player can still accuse or start a new session.
+=====
+- Cap in `/api/ask`: Every question that reaches the model counts toward the cap even if the call fails; if reached, the server returns a 429 with `call_cap` and no model call is made, but the player can still accuse or start a new session. Since game feel sprint 12 the smaller question budget (answered questions only) usually ends a game first; the cap stays as the guard for failed calls.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+A correct accusation scores 100 points if you asked 3 questions or fewer.
+=====
+Each case gives you a small budget of questions (8 for The Vanishing Violin, 10 for The Night Train), shown under the question box as "Questions left". Only answered questions count. When none are left, Ask locks and the Name the culprit button takes you to Accuse. A correct accusation scores 100 points if you asked 3 questions or fewer.
+<<<END>>>
+
+<<<REPLACE docs/HOW_TO_PLAY.md>>>
+Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos.
+=====
+Cada caso dá um pequeno limite de perguntas (8 em O Violino Desaparecido, 10 em O Trem Noturno), mostrado embaixo da caixa de pergunta como "Perguntas restantes". Só perguntas respondidas contam. Quando acabam, Perguntar fica bloqueado e o botão Apontar o culpado leva você a Acusar. Uma acusação correta vale 100 pontos se você fizer 3 perguntas ou menos.
+<<<END>>>

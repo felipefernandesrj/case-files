@@ -9,6 +9,7 @@
     "pt": "No trem noturno Southern Star, o colar de safira da Duquesa desaparece do cofre trancado no vagão de bagagem entre Alder Crossing e Port Elling. Quatro pessoas tinham motivos para estar por perto. Quem roubou?"
   },
   "culprit": "ines",
+  "questionBudget": 10,
   "suspects": [
     {
       "id": "helena",

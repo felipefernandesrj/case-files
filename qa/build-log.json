@@ -11691,5 +11691,1001 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "m2gf12-272",
+  "at": "2026-11-18T00:10:21.485Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 138203,
+  "usage": {
+   "prompt_tokens": 6492,
+   "completion_tokens": 6345,
+   "total_tokens": 12837,
+   "neurons": 232.06362915039062,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7NZPT0RWDKBDZ4RGYNPK6T6",
+   "x-fullcup-receipt-id": "01M7NZPT0RWDKBDZ4RGYNPK6T6",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794960540"
+  },
+  "files": [
+   {
+    "path": "content/case.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 14
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "src/server.js",
+    "lines": 13,
+    "fullViaReplace": true
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-272-reparse",
+  "at": "2026-11-18T00:10:47.973Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 1,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "content/case.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/budget.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "src/budget.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 18
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 6
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 10
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 19
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 17
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 14
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 20
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 53
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 6
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-273",
+  "at": "2026-11-18T00:12:28.917Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 86173,
+  "usage": {
+   "prompt_tokens": 5315,
+   "completion_tokens": 3628,
+   "total_tokens": 8943,
+   "neurons": 416.4762268066406,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7NZW8WVV54ZC22PK0CZ86H5",
+   "x-fullcup-receipt-id": "01M7NZW8WVV54ZC22PK0CZ86H5",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794960720"
+  },
+  "files": [
+   {
+    "path": "src/budget.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 5
+   },
+   {
+    "path": "src/budget.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 8
+   },
+   {
+    "path": "content/case.json",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 3
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 3
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 4
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 14
+   },
+   {
+    "path": "src/messages.js",
+    "patch": true,
+    "hunksApplied": 1,
+    "hunksFailed": 1
+   },
+   {
+    "path": "src/server.js",
+    "patch": true,
+    "hunksApplied": 4,
+    "hunksFailed": 0
+   },
+   {
+    "path": "public/best.js",
+    "patch": true,
+    "hunksApplied": 3,
+    "hunksFailed": 0
+   },
+   {
+    "path": "public/index.html",
+    "patch": true,
+    "hunksApplied": 8,
+    "hunksFailed": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-274",
+  "at": "2026-11-18T00:15:38.382Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 155403,
+  "usage": {
+   "prompt_tokens": 8340,
+   "completion_tokens": 6913,
+   "total_tokens": 15253,
+   "neurons": 264.35455322265625,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7NZZYPAJVA90WZC5NGSQ18S",
+   "x-fullcup-receipt-id": "01M7NZZYPAJVA90WZC5NGSQ18S",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794960840"
+  },
+  "files": [
+   {
+    "path": "content/case.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 17
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 15
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 55
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "src/budget.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-274-reparse",
+  "at": "2026-11-18T00:15:50.934Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 0,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "content/case.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "content/cases/night-train.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 17
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 15
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 55
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "src/budget.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "src/budget.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 18
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "src/messages.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "src/server.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-275",
+  "at": "2026-11-18T00:18:28.631Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 142859,
+  "usage": {
+   "prompt_tokens": 6602,
+   "completion_tokens": 6253,
+   "total_tokens": 12855,
+   "neurons": 230.55453491210938,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7P05GYFENW55FHMP3HMMN62",
+   "x-fullcup-receipt-id": "01M7P05GYFENW55FHMP3HMMN62",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794961020"
+  },
+  "files": [
+   {
+    "path": "test/question-budget.mjs",
+    "lines": 187
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "test/budget.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "test/budget.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "test/errors.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "test/errors.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-275-reparse",
+  "at": "2026-11-18T00:18:38.474Z",
+  "model": "@cf/openai/gpt-oss-120b",
+  "status": 200,
+  "ms": 1,
+  "usage": null,
+  "headers": {},
+  "files": [
+   {
+    "path": "test/question-budget.mjs",
+    "lines": 170
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "test/budget.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "test/budget.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "test/errors.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "test/errors.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 12
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-276",
+  "at": "2026-11-18T00:19:46.375Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 5633,
+  "usage": {
+   "prompt_tokens": 385,
+   "completion_tokens": 199,
+   "total_tokens": 584,
+   "neurons": 8.92727279663086,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7P0C2MSDA3V4H3RTGGQJ1GG",
+   "x-fullcup-receipt-id": "01M7P0C2MSDA3V4H3RTGGQJ1GG",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794961200"
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-277",
+  "at": "2026-11-18T00:20:03.789Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 5798,
+  "usage": {
+   "prompt_tokens": 453,
+   "completion_tokens": 195,
+   "total_tokens": 648,
+   "neurons": 8.854544639587402,
+   "prompt_tokens_details": {
+    "cached_tokens": 128
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7P0CKTBTYAQ544J345SZQ8H",
+   "x-fullcup-receipt-id": "01M7P0CKTBTYAQ544J345SZQ8H",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1794961200"
+  },
+  "files": [
+   {
+    "path": "test/question-budget.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-278",
+  "at": "2026-11-18T00:22:05.035Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 8129,
+  "usage": {
+   "prompt_tokens": 530,
+   "completion_tokens": 269,
+   "total_tokens": 799,
+   "neurons": 12.154544830322266,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7P0G8XCCV1V7EFY2HWZEXY1",
+   "x-fullcup-receipt-id": "01M7P0G8XCCV1V7EFY2HWZEXY1",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794961320"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/question-budget.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m2gf12-279",
+  "at": "2026-11-18T00:24:13.731Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 48526,
+  "usage": {
+   "prompt_tokens": 2836,
+   "completion_tokens": 2274,
+   "total_tokens": 5110,
+   "neurons": 87.79999542236328,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7P0JXYBVZHTP53NXCH0RA3A",
+   "x-fullcup-receipt-id": "01M7P0JXYBVZHTP53NXCH0RA3A",
+   "x-fullcup-seal-by": "2026-11-19T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1794961440"
+  },
+  "files": [
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "CHANGELOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "README.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/BUILD_LOG.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 7
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/SPEC.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "docs/HOW_TO_PLAY.md",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
  }
 ]

@@ -1,6 +1,6 @@
 /**
  * Friendly messages for client‑facing errors.
- * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'|'unknown_suspect'|'unknown_session'|'empty_question'|'question_too_long'|'already_accused'} code
+ * @param {'no_capacity'|'rate_limited'|'bad_key'|'upstream'|'call_cap'|'bad_request'|'unknown_suspect'|'unknown_session'|'empty_question'|'question_too_long'|'already_accused'|'out_of_questions'} code
  * @param {'en'|'pt'} lang
  * @returns {string}
  */
@@ -49,6 +49,10 @@ export function friendly(code, lang) {
     already_accused: {
       en: 'You already named a culprit in this game. Press Start over to play again.',
       pt: 'Você já apontou um culpado nesta partida. Toque em Nova partida para jogar de novo.',
+    },
+    out_of_questions: {
+      en: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
+      pt: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
     },
   };
 

@@ -1,0 +1,4 @@
+Seal check of receipts 266-271 (gf10 code calls 266-268, gf11 code calls 269-271) and the 6 gf10 art receipts (flux-1-schnell), signed out curl of https://qa.fullcup.ai/receipts/<id>, script sealcheck.sh, ids in ids.txt.
+- 2026-11-17 21:02 BRT (00:02Z, before the 00:05Z cut): all 12 HTTP 200 "Recorded, waiting for the daily seal" (pre-cut.txt, expected, not due yet).
+- 2026-11-17 21:24 BRT (00:24Z): all 12 HTTP 200 Genuine receipt, Sealed at 2026-11-18 00:05:26 UTC (21:05:26 BRT), one of 12 in the signed root of 2026-11-17 (all.txt). Models: gemma-4-26b-a4b-it x6, flux-1-schnell x6.
+- Per receipt exact cost vs build-log neurons x $0.011/1000 (code) and key-usage-log cost (art): costs.txt, all 12 equal to the microdollar. Sums gf10 code $0.002502, gf11 $0.003422 (notes said $0.003421, rounding of the total), art $0.011406; total $0.017330. 0 not sealed, no bug.

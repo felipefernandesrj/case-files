@@ -1,0 +1,16 @@
+14c14
+< const out = j.choices?.[0]?.message?.content || '';
+---
+> const out = (j.choices?.[0]?.message?.content || '').replace(/\n\[\/OLD \d+\]\n\[NEW \d+\]\n/g, '\n=====\n').replace(/^\[\/?(OLD|NEW) \d+\]\n/gm, ''); // sprint 12: the model echoed the [/OLD n] [NEW n] markers of the change list as the separator
+17c17
+< for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n([\s\S]*?)\n?<<<END>>>/g)) {
+---
+> for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n((?:(?!<<<REPLACE |<<<FILE )[\s\S])*?)\n?(?:<<<END>>>|\[\/END>>>|\[\/FILE\]\n?(?=<<<)|(?=<<<REPLACE |<<<FILE ))/g)) { // sprint 12: a FILE block closed by a broken [/END>>> line must not swallow the next blocks
+25c25
+< for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*?)\n={5,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 4: a missing <<<END>>> before the next block ends the block
+---
+> for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*?)\n={3,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 12: gemma wrote 3 or 7 = signs; sprint 4: a missing <<<END>>> before the next block ends the block
+33c33
+<   if (!/^@@/m.test(m[2]) && !/\n={5,}\n/.test(m[2]) && /^(import|\/\/|<!doctype|<!DOCTYPE|\{)/.test(m[2])) { if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; } fs.writeFileSync(m[1], m[2] + '\n'); files.push({ path: m[1], lines: m[2].split('\n').length, fullViaReplace: true }); continue; }
+---
+>   if (!/^@@/m.test(m[2]) && !/\n={3,}\n/.test(m[2]) && /^(import|\/\/|<!doctype|<!DOCTYPE|\{)/.test(m[2]) && !(fs.existsSync(m[1]) && m[2].split('\n').length < fs.readFileSync(m[1], 'utf8').split('\n').length / 2)) { /* sprint 12: never overwrite an existing file with a block under half its size */ if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; } fs.writeFileSync(m[1], m[2] + '\n'); files.push({ path: m[1], lines: m[2].split('\n').length, fullViaReplace: true }); continue; }

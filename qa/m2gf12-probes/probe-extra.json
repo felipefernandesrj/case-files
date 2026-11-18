@@ -1,0 +1,90 @@
+{
+ "low": {
+  "budgetMeter": {
+   "visible": true,
+   "text": "",
+   "pips": 8,
+   "spent": 6,
+   "cls": "q-budget is-low",
+   "anim": "cf-qb-burn"
+  },
+  "questionsUsed": {
+   "visible": true,
+   "text": "Questions left: 2 of 8"
+  },
+  "askMsg": {
+   "visible": false,
+   "text": ""
+  },
+  "goAccuse": {
+   "visible": false,
+   "text": "Name the culprit"
+  },
+  "askDisabled": false,
+  "qDisabled": false,
+  "logAnswers": 6
+ },
+ "lowAnim": "cf-qb-low",
+ "outFocus": "budget-accuse",
+ "outMeterAnim": "cf-qb-shake",
+ "afterButton": {
+  "panel": "accuse",
+  "focus": "Accuse Lorenzo Moretti"
+ },
+ "afterStartOver": {
+  "budgetMeter": {
+   "visible": true,
+   "text": "",
+   "pips": 8,
+   "spent": 0,
+   "cls": "q-budget",
+   "anim": "none"
+  },
+  "questionsUsed": {
+   "visible": true,
+   "text": "Questions left: 8 of 8"
+  },
+  "askMsg": {
+   "visible": false,
+   "text": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game."
+  },
+  "goAccuse": {
+   "visible": false,
+   "text": "Name the culprit"
+  },
+  "askDisabled": false,
+  "qDisabled": false,
+  "logAnswers": 0
+ },
+ "reducedLow": {
+  "anims": [
+   "none"
+  ],
+  "cls": "q-budget is-low"
+ },
+ "nightTrain": {
+  "budgetMeter": {
+   "visible": true,
+   "text": "",
+   "pips": 10,
+   "spent": 0,
+   "cls": "q-budget",
+   "anim": "none"
+  },
+  "questionsUsed": {
+   "visible": true,
+   "text": "Questions left: 10 of 10"
+  },
+  "askMsg": {
+   "visible": false,
+   "text": ""
+  },
+  "goAccuse": {
+   "visible": false,
+   "text": "Name the culprit"
+  },
+  "askDisabled": false,
+  "qDisabled": false,
+  "logAnswers": 0
+ }
+}

@@ -7,7 +7,7 @@ import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWo
 import { createProxy } from './proxy.js';
 import { mockAnswer } from './mock.js';
 import { friendly } from './messages.js';
-import { maxCallsFor } from './budget.js';
+import { maxCallsFor, questionBudgetFor } from './budget.js';
 import { createScoreboard, scoreFor } from './scoreboard.js';
 
 /**
@@ -228,7 +228,7 @@ export function createServer({
           found: new Set(),
           file: wanted || defaultKey,
         });
-        return sendJSON(res, 200, { sessionId, file: wanted || defaultKey });
+        return sendJSON(res, 200, { sessionId, file: wanted || defaultKey, budget: questionBudgetFor(pack[wanted || defaultKey] || defaultCase) });
       }
 
       if (req.method === 'POST' && pathname === '/api/ask') {
@@ -251,6 +251,12 @@ export function createServer({
         }
         if (question.length > 500) {
           return sendJSON(res, 400, { error: 'bad_request', code: 'question_too_long', message: friendly('question_too_long', lang) });
+        }
+
+        // question budget (M2 game feel sprint 12): answered questions per game, checked before any model call
+        const budget = questionBudgetFor(play);
+        if (sess.questions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: 0 });
         }
 
         // per-case cap on model calls per playthrough (M2 sprint 4): no model call once capped
@@ -303,7 +309,7 @@ export function createServer({
           found.add(hit.id);
           clue = { id: hit.id, implicates: hit.implicates ?? null, clears: hit.clears ?? null };
         }
-        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions, clue });
+        return sendJSON(res, 200, { answer: trimmed, questions: sess.questions, budget, left: budget - sess.questions, clue });
       }
 
       if (req.method === 'POST' && pathname === '/api/accuse') {

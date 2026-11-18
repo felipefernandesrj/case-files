@@ -247,6 +247,8 @@
         </form>
         <p id="ask-msg" class="ask-msg" role="alert" hidden></p>
         <p id="questions-used" aria-live="polite"></p>
+        <div id="q-budget" class="q-budget" aria-hidden="true" hidden></div>
+        <button type="button" id="budget-accuse" class="budget-accuse with-icon" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-accuse"></use></svg> <span>Name the culprit</span></button>
         <section id="suspicion-talk" class="suspicion" aria-labelledby="suspicion-title-talk">
           <h3 id="suspicion-title-talk" class="sus-title">Suspicion</h3>
           <ul class="sus-list"></ul>
@@ -345,7 +347,7 @@
 <p id="continue-live" class="continue-live" aria-live="polite"></p>
 <script type="module">
 const API = '/api';
-import { readBest, recordResult, resetBest, bestText, questionsText, LABELS } from '/best.js';
+import { readBest, recordResult, resetBest, bestText, questionsText, budgetText, LABELS } from '/best.js';
 const store = (() => { try { return window.localStorage; } catch { return null; } })();
 let lang = 'en';
 let sessionId = null;
@@ -700,6 +702,8 @@ function setGameOver(on){
     ask.disabled = true;
     accuseBtns.forEach(b => { b.disabled = true; });
     document.getElementById('best-status').textContent = LABELS[lang].gameOver;
+    const go = document.getElementById('budget-accuse');
+    if (go) go.hidden = true;
   } else {
     q.disabled = false;
     ask.disabled = false;
@@ -879,6 +883,7 @@ async function init() {
   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: askedCase })});
   const sessData = await sessRes.json();
   sessionId = sessData.sessionId;
+  questionBudget = sessData.budget || 0;
   if (sessData.file) openFile = sessData.file;
   const wanted = new URLSearchParams(location.search).get('case');
   if (wanted) openFile = wanted;
@@ -1106,6 +1111,7 @@ async function openPackFile(id) {
   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: id })});
   const sessData = await sessRes.json();
   sessionId = sessData.sessionId;
+  questionBudget = sessData.budget || 0;
   openFile = id;
   for (const k of Object.keys(histories)) delete histories[k];
   pins = [];
@@ -1169,6 +1175,7 @@ function selectSuspect(id) {
   if (bs.textContent === LABELS.en.pickSuspect || bs.textContent === LABELS.pt.pickSuspect) bs.textContent = '';
   const askMsg = document.getElementById('ask-msg');
   if (askMsg) askMsg.hidden = true;
+  renderQuestions();
   document.querySelectorAll('#suspect-buttons button').forEach(b=>{
     b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
   });
@@ -1255,6 +1262,7 @@ function renderConversation(animateLast) {
 async function askQuestion(e){
   e.preventDefault();
   if (gameOver) return;
+  if (budgetOut()) return;
   if (!selectedSuspect) { showError(LABELS[lang].pickSuspect, 'ask'); return; }
   const question = document.getElementById('q').value.trim();
   if (!question) { showError(LABELS[lang].emptyQuestion, 'ask'); document.getElementById('q').focus(); return; }
@@ -1284,6 +1292,7 @@ async function askQuestion(e){
     if (!res.ok) throw data;
     const answer = data.answer;
     questionsUsed = data.questions;
+    if (data.budget) questionBudget = data.budget;
     renderQuestions();
     applyClue(data.clue);
     if (!histories[selectedSuspect]) histories[selectedSuspect]=[];
@@ -1291,6 +1300,11 @@ async function askQuestion(e){
     renderConversation(true);
   }catch(err){
     showError(err instanceof Error || !err || !err.message ? LABELS[lang].netError : err.message, 'ask');
+    if (err && err.code === 'out_of_questions') {
+      questionsUsed = err.questions;
+      if (err.budget) questionBudget = err.budget;
+      renderQuestions();
+    }
   }finally{
     if (thinking.parentNode) thinking.remove();
     askBtn.disabled = false;
@@ -1299,7 +1313,11 @@ async function askQuestion(e){
     if (restartBtn) restartBtn.disabled = false;
     askForm.removeAttribute('aria-busy');
     qInput.value = '';
-    qInput.focus();
+    if (budgetOut()) {
+      askBtn.disabled = true;
+      qInput.disabled = true;
+      document.getElementById('budget-accuse').focus();
+    } else qInput.focus();
   }
 }
 
@@ -1496,12 +1514,55 @@ function showError(msg, where){
 }
 
 let questionsUsed = 0;
+let questionBudget = 0; // answered questions allowed in this game, from /api/session (M2 game feel sprint 12)
+const BUDGET_LOW = 2;
+let budgetLeftShown = null;
+function budgetOut() {
+  return questionBudget > 0 && questionsUsed >= questionBudget;
+}
 function renderQuestions() {
   const el = document.getElementById('questions-used');
   el.innerHTML = '';
   el.appendChild(iconSvg('i-hourglass'));
-  el.appendChild(document.createTextNode(questionsText(lang, questionsUsed)));
+  const left = Math.max(0, questionBudget - questionsUsed);
+  el.appendChild(document.createTextNode(questionBudget ? budgetText(lang, left, questionBudget) : questionsText(lang, questionsUsed)));
+  renderBudget(left);
 }
+function renderBudget(left) {
+  const meter = document.getElementById('q-budget');
+  const go = document.getElementById('budget-accuse');
+  if (!meter || !go) return;
+  meter.hidden = !questionBudget;
+  if (meter.children.length !== questionBudget) {
+    meter.innerHTML = '';
+    for (let i = 0; i < questionBudget; i++) {
+      const pip = document.createElement('span');
+      pip.className = 'qb-pip';
+      meter.appendChild(pip);
+    }
+    budgetLeftShown = null;
+  }
+  const pips = [...meter.children];
+  if (budgetLeftShown === null || left > budgetLeftShown) pips.forEach(p => p.classList.remove('is-burning'));
+  pips.forEach((p, i) => p.classList.toggle('is-spent', i >= left));
+  if (budgetLeftShown !== null && left < budgetLeftShown && pips[left]) pips[left].classList.add('is-burning');
+  budgetLeftShown = left;
+  const out = budgetOut();
+  meter.classList.toggle('is-low', !out && questionBudget > 0 && left <= BUDGET_LOW);
+  meter.classList.toggle('is-out', out);
+  go.querySelector('span').textContent = LABELS[lang].toAccuse;
+  go.hidden = !out || gameOver;
+  if (out && !gameOver) {
+    document.getElementById('q').disabled = true;
+    document.getElementById('ask-btn').disabled = true;
+    showError(LABELS[lang].outOfQuestions, 'ask');
+  }
+}
+document.getElementById('budget-accuse').addEventListener('click', () => {
+  showStep('accuse');
+  const first = document.querySelector('#accuse-buttons button:not([disabled])');
+  if (first) first.focus();
+});
 
 function renderBest() {
   const b = readBest(store);
@@ -1536,6 +1597,7 @@ async function restartGame(skipConfirm = false){
   const sessRes = await fetch(API + '/session', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ case: openFile })});
   const sessData = await sessRes.json();
   sessionId = sessData.sessionId;
+  questionBudget = sessData.budget || 0;
   for (const k of Object.keys(histories)) delete histories[k];
   questionsUsed = 0;
   selectedSuspect = null;

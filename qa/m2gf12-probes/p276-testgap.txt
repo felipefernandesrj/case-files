@@ -1,0 +1,18 @@
+Close a test gap in test/question-budget.mjs of the Case Files game (Node, no deps). A mutation that marks pips[left] as burning on every render is not caught, because no check draws the meter for the first time in the middle of a game. Emit exactly one block: a line `<<<REPLACE test/question-budget.mjs>>>`, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and a line `<<<END>>>`. The markers [OLD] [/OLD] [NEW] [/NEW] below are not file content; never write them.
+
+[OLD]
+server.close();
+for (const r of results) console.log(r);
+[/OLD]
+[NEW]
+await check('a meter first drawn mid-game (language switch or new page state) shows no burning pip', () => {
+  const { ids, api } = sandbox({ budget: 8, used: 3, over: false, lang: 'en' });
+  api.render();
+  const pips = ids['q-budget'].children;
+  must(pips.filter((p) => p.classList.contains('is-spent')).length === 3, 'spent');
+  must(!pips.some((p) => p.classList.contains('is-burning')), 'burn on first draw');
+});
+
+server.close();
+for (const r of results) console.log(r);
+[/NEW]

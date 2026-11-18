@@ -7,6 +7,9 @@ export const PLAY_PRICE = Object.freeze({ inPerM: 0.27, outPerM: 0.85 });
 /** Model calls allowed in one playthrough (one session) when a case sets no maxCalls. */
 export const DEFAULT_MAX_CALLS = 20;
 
+/** Answered questions allowed in one game when a case sets no questionBudget (M2 game feel sprint 12: harder game). */
+export const DEFAULT_QUESTION_BUDGET = 10;
+
 /** Documented ceiling for the worst-case spend of one playthrough of any case, in USD. */
 export const PLAYTHROUGH_CEILING_USD = 0.1;
 
@@ -14,6 +17,18 @@ export const PLAYTHROUGH_CEILING_USD = 0.1;
 export function maxCallsFor(c) {
   const n = c && c.maxCalls;
   return Number.isInteger(n) && n >= 1 && n <= 100 ? n : DEFAULT_MAX_CALLS;
+}
+
+/** Fewest questions that solve case c fairly: two clues against the culprit plus one clearing clue per innocent suspect. */
+export function fairMinimum(c) {
+  return 2 + Math.max(0, ((c && c.suspects) || []).length - 1);
+}
+
+/** Answered questions allowed in one game of case c: its questionBudget (whole number from 1 to its call cap) or the smaller of DEFAULT_QUESTION_BUDGET and the cap. */
+export function questionBudgetFor(c) {
+  const cap = maxCallsFor(c);
+  const n = c && c.questionBudget;
+  return Number.isInteger(n) && n >= 1 && n <= cap ? n : Math.min(DEFAULT_QUESTION_BUDGET, cap);
 }
 
 /**

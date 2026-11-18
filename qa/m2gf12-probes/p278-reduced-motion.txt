@@ -1,0 +1,18 @@
+Fix a reduced motion bug in the Case Files game (found by the after probe): with prefers-reduced-motion the low-state pips still blink, because the rule `.q-budget.is-low .qb-pip:not(.is-spent)` is more specific than the reduced motion selector `.q-budget.is-low .qb-pip`. Make the reduced motion selector match the animated one, and make the test require it. Emit exactly two blocks, each: a line `<<<REPLACE ` + path + `>>>`, the OLD line verbatim, a line of exactly five = characters (=====), the NEW line verbatim, and a line `<<<END>>>` (only once, at the end of the block). Example of the shape for a different file:
+<<<REPLACE src/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+Block 1, file public/css/game.css
+OLD line:
+@media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip, .q-budget.is-out { animation: none; transition: none; } }
+NEW line:
+@media (prefers-reduced-motion: reduce) { .qb-pip, .qb-pip.is-burning, .q-budget.is-low .qb-pip:not(.is-spent), .q-budget.is-out { animation: none; transition: none; } }
+
+Block 2, file test/question-budget.mjs
+OLD line:
+  for (const sel of ['.qb-pip.is-burning', '.q-budget.is-low .qb-pip', '.q-budget.is-out']) must(rm.includes(sel), `reduced motion ${sel}`);
+NEW line:
+  for (const sel of ['.qb-pip.is-burning', '.q-budget.is-low .qb-pip:not(.is-spent)', '.q-budget.is-out']) must(rm.includes(sel), `reduced motion ${sel}`);

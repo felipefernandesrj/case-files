@@ -128,6 +128,12 @@
 - API: every 4xx from `POST /api/ask` and `POST /api/accuse` is `{ error: 'bad_request', code, message }` with `code` one of `unknown_suspect`, `unknown_session`, `empty_question`, `question_too_long`, `already_accused` and `message` = `friendly(code, lang)` from src/messages.js.
 - Page: `p#ask-msg.ask-msg` (`role="alert"`, hidden at start) sits right after `#ask-form` in the Conversation panel. `showError(msg, 'ask')` writes there and does not auto-hide; `showError(msg)` keeps writing `#err` in the Accuse panel and hides it after 5 s. `askQuestion()` sends `LABELS[lang].pickSuspect` and `LABELS[lang].emptyQuestion` there, clears it before the request, and maps a thrown Error (network, non JSON reply) to `LABELS[lang].netError`; accuse uses the same mapping on `#err`. `selectSuspect()`, `setLang()`, Start over and a new file hide `#ask-msg`.
 
+## Web page: question budget (M2 game feel sprint 12)
+- Budget: `questionBudgetFor(c)` in src/budget.js returns the case `questionBudget` (whole number from 1 to its call cap) or the smaller of `DEFAULT_QUESTION_BUDGET` (10) and the cap. content/case.json sets 8 and night-train.json sets 10; `fairMinimum(c)` (2 + innocent suspects) times two is the floor the tests enforce.
+- API: `POST /api/session` returns `budget`. `POST /api/ask` answers 409 `{ error: 'out_of_questions', code: 'out_of_questions', message, questions, budget, left: 0 }` once `questions` reaches the budget, before the call cap check and before any model call; a 200 answer adds `budget` and `left`. Failed model calls do not count.
+- Page: `#questions-used` (live, polite) reads `budgetText(lang, left, budget)` ("Questions left: 5 of 8" / "Perguntas restantes: 5 de 8"). `div#q-budget.q-budget` (`aria-hidden`) holds one `span.qb-pip` per question; spent pips get `is-spent`, the one just spent gets `is-burning` (only when `left` drops, never on a re-render), the meter gets `is-low` at 2 left or fewer and `is-out` at 0. At 0 (`budgetOut()`) #q and Ask lock, `showError(LABELS[lang].outOfQuestions, 'ask')` and `button#budget-accuse` ("Name the culprit" / "Apontar o culpado") shows; it opens Accuse and focuses the first accuse button, and game over hides it. init, openPackFile and restartGame read the budget from the session.
+- CSS: square pips, `cf-qb-burn` 0.5 s, `cf-qb-low` blink 3 times, `cf-qb-shake` once; reduced motion turns all of them off.
+
 ## Web page: culprit in handcuffs (M2 game feel sprint 10)
 - Art: `public/assets/characters/<case>-<culpritId>-arrest.png` (128 px) and `@2x.png` (256 px), generated through the Cup key and keyed by scripts/assets; listed in `public/assets/manifest.json` with their receipt ids.
 - API: `POST /api/accuse` returns `culprit` from the session case (not the default case) and `solutions` (`{ en, pt }`).
@@ -187,13 +193,14 @@ This executes:
 18. `node test/aftermath.mjs` (wrong verdict aftermath: a story for every innocent and none for the culprit, sizes and punctuation, names, no leak in the public case, accuse response for both cases, shown only after GAME OVER, language switch without replay, announcement, styles and docking)
 19. `node test/arrest.mjs` (culprit in handcuffs: generated sprites and receipts, accuse response for both cases, sprite before the stamp, alt text and caption, Portuguese and no replay, no request for a wrong verdict or an unsafe id, Solution follows the language, styles and reduced motion)
 20. `node test/errors.mjs` (errors on the Ask step: friendly EN/PT lines for every code, server codes for bad asks and accusations, #ask-msg placement, netError labels, routing in askQuestion, offline, server error cleared on the next ask, non JSON reply, no suspect and empty question, clearing on select, language, Start over and new file)
-21. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
+22. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 244 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, keyboard 13).
+Total checks: 255 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.
-- Cap in `/api/ask`: Every question that reaches the model counts toward the cap even if the call fails; if reached, the server returns a 429 with `call_cap` and no model call is made, but the player can still accuse or start a new session.
+- Cap in `/api/ask`: Every question that reaches the model counts toward the cap even if the call fails; if reached, the server returns a 429 with `call_cap` and no model call is made, but the player can still accuse or start a new session. Since game feel sprint 12 the smaller question budget (answered questions only) usually ends a game first; the cap stays as the guard for failed calls.
 - `worstCaseSpend({ calls, maxTokens, systemChars })`: Calculates the highest possible cost by assuming each call uses `maxTokens` of 300 and resends the system prompt and full history at the `llama-4-scout` price to ensure it remains under the `PLAYTHROUGH_CEILING_USD` of US$0.10.
 
 ### Case engine (`src/case.js`, M2)
