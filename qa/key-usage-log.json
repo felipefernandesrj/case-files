@@ -5326,5 +5326,89 @@
   "kept": true,
   "rework": true,
   "label": "m2gf13-284"
+ },
+ {
+  "at": "2026-11-19T00:00:13Z",
+  "purpose": "m2gf14-build:code (3 pairs: index.html setGameOver clears #ask-msg, cli.js VERDICT_LINES + verdict print)",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 15291,
+  "usage": {
+   "prompt_tokens": 1334,
+   "completion_tokens": 726,
+   "total_tokens": 2060,
+   "neurons": 31.92727279663086,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 0.000351,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7RHMPE1MM48F1BCGRKWPJZT",
+   "x-fullcup-seal-by": "2026-11-20T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": false,
+  "label": "m2gf14-285"
+ },
+ {
+  "at": "2026-11-19T00:01:12Z",
+  "purpose": "m2gf14-build:tests (test/after-verdict.mjs FILE + package.json script)",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 49641,
+  "usage": {
+   "prompt_tokens": 2511,
+   "completion_tokens": 2200,
+   "total_tokens": 4711,
+   "neurons": 82.8272705078125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 0.000911,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7RHNEY5BCME06J9WF4YSFJ7",
+   "x-fullcup-seal-by": "2026-11-20T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": false,
+  "label": "m2gf14-286"
+ },
+ {
+  "at": "2026-11-19T00:02:20Z",
+  "purpose": "m2gf14-build:docs (12 pairs: package version, CHANGELOG, README x3, BUILD_LOG, SPEC x5, HOW_TO_PLAY x2)",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 37935,
+  "usage": {
+   "prompt_tokens": 2210,
+   "completion_tokens": 1548,
+   "total_tokens": 3758,
+   "neurons": 62.30908966064453,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "cost": 0.000685,
+  "costNote": "estimated: neurons x US$0.011/1000 (chat response carries no cost)",
+  "headers": {
+   "x-fullcup-receipt": "01M7RHQX6BT0A0GXNQ06ZCNB7X",
+   "x-fullcup-seal-by": "2026-11-20T00:05:00.000Z"
+  },
+  "error": null,
+  "kept": true,
+  "rework": false,
+  "label": "m2gf14-287"
  }
 ]

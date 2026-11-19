@@ -1,0 +1,79 @@
+Implement "a clean Ask step after the verdict" for the Case Files browser game (Node, no deps), plus Portuguese verdict lines in the terminal game. Today, after the verdict, the line "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." stays under the locked question box, and the terminal game prints "Culprit:", "Score:", "questions asked", "=== Verdict ===" and "--- Top Scores ---" in English even in a Portuguese game. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+1. public/index.html: setGameOver(true) hides #ask-msg and clears its text.
+2. src/cli.js: a VERDICT_LINES table (EN and PT) after OUT_LINE.
+3. src/cli.js: the accuse command prints the verdict, Culprit, Solution, Score and the Top Scores heading from VERDICT_LINES[lang] instead of the English if/else.
+
+All 3 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 3 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file public/index.html
+[OLD 1]
+    if (go) go.hidden = true;
+  } else {
+[/OLD 1]
+[NEW 1]
+    if (go) go.hidden = true;
+    // M2 game feel sprint 14: after the verdict the out line ("Name the culprit in Accuse") is done, so it goes away
+    const askMsg = document.getElementById('ask-msg');
+    if (askMsg) { askMsg.hidden = true; askMsg.textContent = ''; }
+  } else {
+[/NEW 1]
+
+Change 2, file src/cli.js
+[OLD 2]
+  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+};
+[/OLD 2]
+[NEW 2]
+  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+};
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações' },
+};
+[/NEW 2]
+
+Change 3, file src/cli.js
+[OLD 3]
+        });
+        console.log('\n=== Verdict ===');
+        if (lang === 'pt') {
+          console.log(resp.correct ? 'Correto!' : 'Errado.');
+          console.log(`Culprit: ${resp.culpritName}`);
+          console.log(`Solução: ${resp.solution}`);
+          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
+        } else {
+          console.log(resp.correct ? 'Correct!' : 'Wrong.');
+          console.log(`Culprit: ${resp.culpritName}`);
+          console.log(`Solution: ${resp.solution}`);
+          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
+        }
+
+        const top = await getJSON(`${baseUrl}/api/scores`);
+        console.log('--- Top Scores ---');
+        top.forEach((e, idx) => {
+[/OLD 3]
+[NEW 3]
+        });
+        const V = VERDICT_LINES[lang];
+        console.log(`\n=== ${V.title} ===`);
+        console.log(resp.correct ? V.correct : V.wrong);
+        console.log(`${V.culprit}: ${resp.culpritName}`);
+        console.log(`${V.solution}: ${resp.solution}`);
+        console.log(`${V.score}: ${resp.score} (${V.asked}: ${resp.questions})\n`);
+
+        const top = await getJSON(`${baseUrl}/api/scores`);
+        console.log(`--- ${V.top} ---`);
+        top.forEach((e, idx) => {
+[/NEW 3]
+

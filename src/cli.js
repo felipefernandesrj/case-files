@@ -13,6 +13,11 @@ const OUT_LINE = {
   en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
   pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
 };
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações' },
+};
 let questionBudget = 0;
 let questionsLeft = null;
 
@@ -148,21 +153,15 @@ async function processCommand(line) {
           player,
           lang,
         });
-        console.log('\n=== Verdict ===');
-        if (lang === 'pt') {
-          console.log(resp.correct ? 'Correto!' : 'Errado.');
-          console.log(`Culprit: ${resp.culpritName}`);
-          console.log(`Solução: ${resp.solution}`);
-          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
-        } else {
-          console.log(resp.correct ? 'Correct!' : 'Wrong.');
-          console.log(`Culprit: ${resp.culpritName}`);
-          console.log(`Solution: ${resp.solution}`);
-          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
-        }
+        const V = VERDICT_LINES[lang];
+        console.log(`\n=== ${V.title} ===`);
+        console.log(resp.correct ? V.correct : V.wrong);
+        console.log(`${V.culprit}: ${resp.culpritName}`);
+        console.log(`${V.solution}: ${resp.solution}`);
+        console.log(`${V.score}: ${resp.score} (${V.asked}: ${resp.questions})\n`);
 
         const top = await getJSON(`${baseUrl}/api/scores`);
-        console.log('--- Top Scores ---');
+        console.log(`--- ${V.top} ---`);
         top.forEach((e, idx) => {
           console.log(
             `${idx + 1}. ${e.player} - ${e.score} pts (${e.questions} Q) [${e.lang}]`,

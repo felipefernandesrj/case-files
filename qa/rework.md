@@ -815,3 +815,18 @@ Known limit (not in scope): the cap is per session, so Start over gives a fresh 
 - Key: 5 calls (280-284), 11,237/8,706 tokens, 339.59 neurons, ~US$0.0037 (339.59 x $0.011/1000 = $0.003736). Rework 2 calls (283 CHANGELOG blank line, 284 test gap of my own dry design) = 39.79 neurons, 11.7% (was 53.1%). 1 re-parse (280r), 0 API failures. Build calls now also logged in qa/key-usage-log.json (purpose m2gf13-build:*); no live play call.
 - Receipts (seal-by 2026-11-19 00:05Z): 280 01M7Q8GWHGEQ21FT12BTJMNP7B, 281 01M7Q8K8YMC78DWTKNH8804BHJ, 282 01M7Q8NP7S9HDNV5TVJ1CTFWN5, 283 01M7Q8RDANVGNVFYGNA9P9N4GR, 284 01M7Q8VDZ1HGCGJ6CSWHFTFPZ4.
 - Known, not fixed: after a verdict the "No questions left" line stays under the locked box (it says Name the culprit in Accuse, already done); CLI verdict lines "Culprit:" and "Score:" stay English in PT; one budget for all players.
+
+## M2 game feel sprint 14 (v0.4.23), 2026-11-18 20:51-21:20 BRT
+- Housekeeping: git status clean at start (HEAD c0e7f47, v0.4.22, m1-via-key 25 ahead, not pushed). Seal check of 272-284 done in the same run (qa/m2gf14-probes/seal/, see notes).
+- Choice: the "No questions left" line under the box after the verdict (listed as known in sprint 13). Small (3 lines in setGameOver), so the CLI verdict lines in PT were added too. Not chosen: answer language of older log lines, verdict art per case, PT leaderboard rows ("pts", "Q").
+- Reproduced before building (tools/probe-gf14.mjs on HEAD, mock, headless Chrome 1280/390 EN/PT, run42/before-*.png, qa/m2gf14-probes/probe-before.json, repro-before.txt, cli-before.txt): line still visible after a correct verdict 4 of 4 and after a wrong verdict; CLI PT verdict printed Verdict, Culprit, Score, questions asked and Top Scores in English.
+- Dry run first (qa/m2gf14-probes/dry/): setGameOver(true) hides #ask-msg and clears its text (renderBudget already skips the line while gameOver, so a language switch keeps it hidden); VERDICT_LINES {en, pt} in src/cli.js replaces the duplicated EN/PT if/else; test/after-verdict.mjs 6 checks (sandbox of showError + renderBudget + setGameOver with persistent fake elements, CLI EN and PT runs).
+- 285 code (gemma, thinking off, 3 numbered OLD/NEW pairs from tools/gen-pairs.py): 3/3 applied, byte identical to the dry run.
+- 286 tests (gemma, FILE + 1 pair): identical to the dry run.
+- 287 docs (gemma, 12 substring pairs, none starting or ending on a blank line): 12/12 applied, all 6 files identical.
+- Mutation check (qa/m2gf14-probes/mutation-check.txt): 12 of 12 caught.
+- npm test 271/271 (was 265; after-verdict 6 new), 3 full runs + 1 final run, all clean.
+- After (run42/after-*.png, probe-after.json, cli-after.txt): line hidden after a correct verdict 4 of 4 and after a wrong verdict, still shown when the budget runs out and again after Start over; box keeps "Game over"/"Fim de jogo". CLI PT: "=== Veredito ===", "Culpado:", "Pontuação: 100 (perguntas feitas: 0)", "--- Melhores pontuações ---"; EN unchanged.
+- Key: 3 calls (285-287), 6,055/4,474 tokens, 177.06 neurons, ~US$0.0019 (177.06 x $0.011/1000 = $0.001948). Rework 0 calls = 0.0% (was 11.7%). 0 re-parses, 0 API failures. No live play call.
+- Receipts (seal-by 2026-11-20 00:05Z): 285 01M7RHMPE1MM48F1BCGRKWPJZT, 286 01M7RHNEY5BCME06J9WF4YSFJ7, 287 01M7RHQX6BT0A0GXNQ06ZCNB7X.
+- Known, not fixed: PT leaderboard rows in the CLI keep "pts" and "(N Q)"; one budget for all players; verdict art per case.

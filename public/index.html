@@ -704,6 +704,9 @@ function setGameOver(on){
     document.getElementById('best-status').textContent = LABELS[lang].gameOver;
     const go = document.getElementById('budget-accuse');
     if (go) go.hidden = true;
+    // M2 game feel sprint 14: after the verdict the out line ("Name the culprit in Accuse") is done, so it goes away
+    const askMsg = document.getElementById('ask-msg');
+    if (askMsg) { askMsg.hidden = true; askMsg.textContent = ''; }
   } else {
     q.disabled = false;
     ask.disabled = false;

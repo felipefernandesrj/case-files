@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.23 (M2 game feel, sprint 14: a clean Ask step after the verdict)
+- After the verdict the line "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." no longer stays under the locked question box (reproduced at 1280 and 390 in English and Portuguese, after a correct and a wrong verdict). The culprit is already named, so the verdict clears it; the box keeps its "Game over" look. A language switch does not bring it back, and Start over or Try again show it again only when the new budget runs out.
+- The terminal game (node src/cli.js --lang pt) now prints the verdict in Portuguese: "=== Veredito ===", "Culpado:", "Pontuação: 100 (perguntas feitas: 3)" and "--- Melhores pontuações ---" (before, these lines stayed in English). English games print the same lines as before.
+- New test/after-verdict.mjs with 6 checks. The automated suite now has 271 checks.
+
 ## 0.4.22 (M2 game feel, sprint 13: a locked question box that looks locked)
 - When the question budget is spent or the game is over, the question box and the Ask button now look locked instead of looking ready (before, only the cursor over the box changed). They turn dark and muted with a dashed edge, show a not-allowed cursor, and the box reads "Out of questions" (PT "Sem perguntas") or, after the verdict, "Game over" (PT "Fim de jogo"). The muted text keeps a 9.8:1 contrast, above the AA 4.5:1.
 - Both carry `aria-disabled="true"` while locked, and the lock clears on Start over, Try again and a new file. The placeholder follows a language switch. While an answer is on its way the cursor shows progress. Reduced motion turns the box transitions off.

@@ -1,0 +1,165 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 8da704a..a499337 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,10 @@
+ # Changelog
+ 
++## 0.4.23 (M2 game feel, sprint 14: a clean Ask step after the verdict)
++- After the verdict the line "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." no longer stays under the locked question box (reproduced at 1280 and 390 in English and Portuguese, after a correct and a wrong verdict). The culprit is already named, so the verdict clears it; the box keeps its "Game over" look. A language switch does not bring it back, and Start over or Try again show it again only when the new budget runs out.
++- The terminal game (node src/cli.js --lang pt) now prints the verdict in Portuguese: "=== Veredito ===", "Culpado:", "Pontuação: 100 (perguntas feitas: 3)" and "--- Melhores pontuações ---" (before, these lines stayed in English). English games print the same lines as before.
++- New test/after-verdict.mjs with 6 checks. The automated suite now has 271 checks.
++
+ ## 0.4.22 (M2 game feel, sprint 13: a locked question box that looks locked)
+ - When the question budget is spent or the game is over, the question box and the Ask button now look locked instead of looking ready (before, only the cursor over the box changed). They turn dark and muted with a dashed edge, show a not-allowed cursor, and the box reads "Out of questions" (PT "Sem perguntas") or, after the verdict, "Game over" (PT "Fim de jogo"). The muted text keeps a 9.8:1 contrast, above the AA 4.5:1.
+ - Both carry `aria-disabled="true"` while locked, and the lock clears on Start over, Try again and a new file. The placeholder follows a language switch. While an answer is on its way the cursor shows progress. Reduced motion turns the box transitions off.
+diff --git a/README.md b/README.md
+index 0a7f36a..93312d8 100644
+--- a/README.md
++++ b/README.md
+@@ -36,7 +36,7 @@ Then open http://localhost:3000. The key stays on the server, and the browser ne
+ 
+ **M1 Delivered (2026-11-09, v0.4.0).**
+ 
+-**M2 in progress (v0.4.22, game feel sprint 13).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks and can be loaded by id (CASE_ID=night-train, or node src/cli.js --case night-train). The web page has a gothic-noir case picker and a one-viewport game layout (sidebar plus stage plus optional pin rail on desktop; short phone HUD labels with Files in the header). Visual V4 restores parchment, lamp glow and wax-seal atmosphere, fixes the 390 header, fills the desktop/tablet stage, and lines the timetable up with the rail. The game now ships pixel art generated through the Cup key (portraits, rooms, case covers, icons). Game feel has started: a Case progress tracker in the desktop right column and an animated CASE CLOSED stamp on a correct accusation. The room the player opens now stays behind the play area as a dimmed scene and crossfades when another room is opened. Timed hint events now pop up as toasts during a game (three per case, in the current language, never after the verdict), and pinned rooms follow the language switch. The board heading and the scene caption now sit on a dark plate so they stay readable on the cork, and a hint toast already on screen switches language with the page. A wrong accusation now opens an arcade CONTINUE? countdown from 9 to 0: Try again replays the same file, Give up or the end of the count shows GAME OVER with the culprit and the solution. Suspicion bars now show, under the conversation and above the accuse buttons, which suspect each clue you found points to (three pips per suspect, prime suspect at two leads, Cleared when a clue clears someone). Quick players can uncheck "Confirm before accusing" under the accuse buttons to accuse without the dialog; the choice is remembered and the box is checked by default. Answers in the conversation now come with the suspect's portrait, whose mouth moves while the line is revealed (local two frame sprites, no extra model calls; reduced motion shows the line at once). After GAME OVER on a wrong verdict, a next morning newspaper clipping tells what happened to the innocent suspect you accused and how the culprit got away (one story per innocent suspect, EN and PT). A correct accusation shows the culprit led away in handcuffs with the CASE CLOSED stamp on top (one generated sprite per culprit). Hints and errors on the Ask step (no suspect chosen, empty question, expired game, no connection) now show under the question box in the player's language. The game is harder: each case has a visible budget of answered questions (8 for the Violin, 10 for the Night Train, twice the fewest questions that solve it), shown as pips that burn out; at zero the question box and Ask look locked ("Out of questions") and a Name the culprit button opens Accuse; the terminal game counts the same budget. An unknown case id stops with one clear line that lists the valid ids. Each game now has a cap on model calls, which defaults to 20 unless a specific `maxCalls` is set for the case, and shows a friendly message when the limit is reached. The worst case for one game is tested to stay under US$0.10. 265 automated checks.
++**M2 in progress (v0.4.23, game feel sprint 14).** The Night Train case file (content/cases/night-train.json: 4 suspects, a timeline that crosses midnight, EN and PT text) passes the shared fair play and timeline checks and can be loaded by id (CASE_ID=night-train, or node src/cli.js --case night-train). The web page has a gothic-noir case picker and a one-viewport game layout (sidebar plus stage plus optional pin rail on desktop; short phone HUD labels with Files in the header). Visual V4 restores parchment, lamp glow and wax-seal atmosphere, fixes the 390 header, fills the desktop/tablet stage, and lines the timetable up with the rail. The game now ships pixel art generated through the Cup key (portraits, rooms, case covers, icons). Game feel has started: a Case progress tracker in the desktop right column and an animated CASE CLOSED stamp on a correct accusation. The room the player opens now stays behind the play area as a dimmed scene and crossfades when another room is opened. Timed hint events now pop up as toasts during a game (three per case, in the current language, never after the verdict), and pinned rooms follow the language switch. The board heading and the scene caption now sit on a dark plate so they stay readable on the cork, and a hint toast already on screen switches language with the page. A wrong accusation now opens an arcade CONTINUE? countdown from 9 to 0: Try again replays the same file, Give up or the end of the count shows GAME OVER with the culprit and the solution. Suspicion bars now show, under the conversation and above the accuse buttons, which suspect each clue you found points to (three pips per suspect, prime suspect at two leads, Cleared when a clue clears someone). Quick players can uncheck "Confirm before accusing" under the accuse buttons to accuse without the dialog; the choice is remembered and the box is checked by default. Answers in the conversation now come with the suspect's portrait, whose mouth moves while the line is revealed (local two frame sprites, no extra model calls; reduced motion shows the line at once). After GAME OVER on a wrong verdict, a next morning newspaper clipping tells what happened to the innocent suspect you accused and how the culprit got away (one story per innocent suspect, EN and PT). A correct accusation shows the culprit led away in handcuffs with the CASE CLOSED stamp on top (one generated sprite per culprit). Hints and errors on the Ask step (no suspect chosen, empty question, expired game, no connection) now show under the question box in the player's language. The game is harder: each case has a visible budget of answered questions (8 for the Violin, 10 for the Night Train, twice the fewest questions that solve it), shown as pips that burn out; at zero the question box and Ask look locked ("Out of questions") and a Name the culprit button opens Accuse; the terminal game counts the same budget. After the verdict the Ask step no longer shows the out line, and the terminal verdict follows the language (Culpado, Pontuação in Portuguese). An unknown case id stops with one clear line that lists the valid ids. Each game now has a cap on model calls, which defaults to 20 unless a specific `maxCalls` is set for the case, and shows a friendly message when the limit is reached. The worst case for one game is tested to stay under US$0.10. 271 automated checks.
+ 
+ M1 scope as shipped: bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard (names shown as plain text), personal best per language (shown in your language, new best announced) with a confirmed reset, accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload), Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect), fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 97 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
+ 
+diff --git a/docs/BUILD_LOG.md b/docs/BUILD_LOG.md
+index ecd469a..b0cf461 100644
+--- a/docs/BUILD_LOG.md
++++ b/docs/BUILD_LOG.md
+@@ -313,3 +313,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
+ - Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf13.mjs): before, only the box cursor changed when locked; after, box and Ask change background, color, border and cursor, with placeholder and aria-disabled, contrast 9.81:1.
+ - Result: npm test 265/265 (was 255), new test/ask-lock.mjs 10 checks.
+ - Details and receipts: qa/rework.md (M2 game feel sprint 13).
++
++## M2 game feel sprint 14 (v0.4.23)
++
++- Scope: the out line ("No questions left ... Name the culprit in Accuse") leaves the Ask step after the verdict; the terminal verdict lines (Verdict, Culprit, Score, questions asked, Top Scores) follow the language.
++- Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf14.mjs): before, the line stayed visible after a correct verdict (4 of 4) and after a wrong one; after, hidden in every case and back only when a new budget runs out. CLI before and after in qa/m2gf14-probes/cli-*.txt.
++- Result: npm test 271/271 (was 265), new test/after-verdict.mjs 6 checks.
++- Details and receipts: qa/rework.md (M2 game feel sprint 14).
+diff --git a/docs/HOW_TO_PLAY.md b/docs/HOW_TO_PLAY.md
+index 3795555..306fe19 100644
+--- a/docs/HOW_TO_PLAY.md
++++ b/docs/HOW_TO_PLAY.md
+@@ -33,7 +33,7 @@ The game works with Tab and Enter. Escape clears the question box while it is fo
+ After the verdict, you will see a list of our wonderful backers. Every question creates a public receipt on FullCup so backers can see how the capacity is used.
+ 
+ ### Play in a terminal
+-`node src/cli.js` (add `--lang pt` for Portuguese). The terminal shows the same question budget ("Questions left: 8 of 8"); when it reaches zero, use `accuse <suspectId>`.
++`node src/cli.js` (add `--lang pt` for Portuguese). The terminal shows the same question budget ("Questions left: 8 of 8"); when it reaches zero, use `accuse <suspectId>`. The verdict prints in the language of the game.
+ 
+ <a id="portugues"></a>
+ ## Português
+@@ -67,4 +67,4 @@ O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela e
+ Após o veredito, você verá uma lista de nossos apoiadores. Cada pergunta cria um recibo público no FullCup para que os apoiadores vejam como a capacidade está sendo usada.
+ 
+ ### Jogar no terminal
+-`node src/cli.js --lang pt` (o terminal mostra o mesmo limite, "Perguntas restantes: 8 de 8"; quando chega a zero, use `acusar <suspectId>`)
++`node src/cli.js --lang pt` (o terminal mostra o mesmo limite, "Perguntas restantes: 8 de 8"; quando chega a zero, use `acusar <suspectId>`; o veredito sai em português, com Culpado e Pontuação)
+diff --git a/docs/SPEC.md b/docs/SPEC.md
+index ef7bfba..81ff926 100644
+--- a/docs/SPEC.md
++++ b/docs/SPEC.md
+@@ -139,6 +139,10 @@
+ - CSS: locked box and Ask use `--cf-ink-soft` background and `--cf-text-dim` text (9.81:1), a dashed `--cf-lamp-dim` edge (outline on the button, no layout shift), `cursor: not-allowed`, an italic placeholder at full opacity and a dimmed icon; `aria-busy` shows `cursor: progress`; reduced motion removes the box transitions.
+ - CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar), and a later ask, refused by the server with `out_of_questions` before any model call, prints the same line instead of "Error:".
+ 
++## Web page and CLI: after the verdict (M2 game feel sprint 14)
++- Page: `setGameOver(true)` hides `#ask-msg` and clears its text, so the out line (`LABELS[lang].outOfQuestions`) does not stay under the locked box once the culprit is named; `renderBudget()` already skips it while `gameOver` is true, so a language switch does not bring it back. Start over and Try again (`setGameOver(false)`) show it again only when the new budget runs out.
++- CLI: `VERDICT_LINES[lang]` in src/cli.js holds the verdict heading, Correct/Wrong, Culprit, Solution, Score, questions asked and the Top Scores heading in EN and PT ("Veredito", "Culpado", "Solução", "Pontuação", "perguntas feitas", "Melhores pontuações"); the accuse command prints them in the current language.
++
+ ## Web page: culprit in handcuffs (M2 game feel sprint 10)
+ - Art: `public/assets/characters/<case>-<culpritId>-arrest.png` (128 px) and `@2x.png` (256 px), generated through the Cup key and keyed by scripts/assets; listed in `public/assets/manifest.json` with their receipt ids.
+ - API: `POST /api/accuse` returns `culprit` from the session case (not the default case) and `solutions` (`{ en, pt }`).
+@@ -200,9 +204,10 @@ This executes:
+ 20. `node test/errors.mjs` (errors on the Ask step: friendly EN/PT lines for every code, server codes for bad asks and accusations, #ask-msg placement, netError labels, routing in askQuestion, offline, server error cleared on the next ask, non JSON reply, no suspect and empty question, clearing on select, language, Start over and new file)
+ 21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
+ 22. `node test/ask-lock.mjs` (locked question box: EN and PT placeholders, open, out and over states with aria-disabled, refresh from setGameOver and renderBudget, muted CSS with not-allowed cursor, AA contrast, busy cursor and reduced motion, CLI budget countdown and command line at zero, CLI in PT and Night Train 10)
+-23. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
++23. `node test/after-verdict.mjs` (after the verdict: out line shown when the budget is spent, hidden and cleared by the verdict in EN and PT, not back after a language switch, back after Start over only when the new budget runs out, CLI verdict lines in PT for a correct and a wrong accusation, English verdict unchanged)
++24. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+ 
+-Total checks: 265 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, ask-lock 10, keyboard 13).
++Total checks: 271 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, ask-lock 10, after-verdict 6, keyboard 13).
+ 
+ ### Play budget (`src/budget.js`, M2 sprint 4)
+ - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.
+diff --git a/package.json b/package.json
+index ba9bc84..8221a48 100644
+--- a/package.json
++++ b/package.json
+@@ -1,9 +1,9 @@
+ {
+   "name": "fullcup-mystery",
+-  "version": "0.4.22",
++  "version": "0.4.23",
+   "type": "module",
+   "scripts": {
+-    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/keyboard.mjs"
++    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/keyboard.mjs"
+   },
+   "dependencies": {}
+ }
+diff --git a/public/index.html b/public/index.html
+index 48436f3..6e34d23 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -704,6 +704,9 @@ function setGameOver(on){
+     document.getElementById('best-status').textContent = LABELS[lang].gameOver;
+     const go = document.getElementById('budget-accuse');
+     if (go) go.hidden = true;
++    // M2 game feel sprint 14: after the verdict the out line ("Name the culprit in Accuse") is done, so it goes away
++    const askMsg = document.getElementById('ask-msg');
++    if (askMsg) { askMsg.hidden = true; askMsg.textContent = ''; }
+   } else {
+     q.disabled = false;
+     ask.disabled = false;
+diff --git a/src/cli.js b/src/cli.js
+index 1fc947f..bcf4ca3 100644
+--- a/src/cli.js
++++ b/src/cli.js
+@@ -13,6 +13,11 @@ const OUT_LINE = {
+   en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
+   pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+ };
++// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
++const VERDICT_LINES = {
++  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores' },
++  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações' },
++};
+ let questionBudget = 0;
+ let questionsLeft = null;
+ 
+@@ -148,21 +153,15 @@ async function processCommand(line) {
+           player,
+           lang,
+         });
+-        console.log('\n=== Verdict ===');
+-        if (lang === 'pt') {
+-          console.log(resp.correct ? 'Correto!' : 'Errado.');
+-          console.log(`Culprit: ${resp.culpritName}`);
+-          console.log(`Solução: ${resp.solution}`);
+-          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
+-        } else {
+-          console.log(resp.correct ? 'Correct!' : 'Wrong.');
+-          console.log(`Culprit: ${resp.culpritName}`);
+-          console.log(`Solution: ${resp.solution}`);
+-          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
+-        }
++        const V = VERDICT_LINES[lang];
++        console.log(`\n=== ${V.title} ===`);
++        console.log(resp.correct ? V.correct : V.wrong);
++        console.log(`${V.culprit}: ${resp.culpritName}`);
++        console.log(`${V.solution}: ${resp.solution}`);
++        console.log(`${V.score}: ${resp.score} (${V.asked}: ${resp.questions})\n`);
+ 
+         const top = await getJSON(`${baseUrl}/api/scores`);
+-        console.log('--- Top Scores ---');
++        console.log(`--- ${V.top} ---`);
+         top.forEach((e, idx) => {
+           console.log(
+             `${idx + 1}. ${e.player} - ${e.score} pts (${e.questions} Q) [${e.lang}]`,

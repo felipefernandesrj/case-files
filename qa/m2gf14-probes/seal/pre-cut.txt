@@ -1,0 +1,14 @@
+# 2026-11-18 20:51 -0300 pre-cut
+m2gf12-272 01M7NZPT0RWDKBDZ4RGYNPK6T6 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.002553 | no root | gemma-4-26b-a4b-it
+m2gf12-273 01M7NZW8WVV54ZC22PK0CZ86H5 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.004581 | no root | gpt-oss-120b
+m2gf12-274 01M7NZZYPAJVA90WZC5NGSQ18S HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.002908 | no root | gemma-4-26b-a4b-it
+m2gf12-275 01M7P05GYFENW55FHMP3HMMN62 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.002536 | no root | gemma-4-26b-a4b-it
+m2gf12-276 01M7P0C2MSDA3V4H3RTGGQJ1GG HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000098 | no root | gemma-4-26b-a4b-it
+m2gf12-277 01M7P0CKTBTYAQ544J345SZQ8H HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000097 | no root | gemma-4-26b-a4b-it
+m2gf12-278 01M7P0G8XCCV1V7EFY2HWZEXY1 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000134 | no root | gemma-4-26b-a4b-it
+m2gf12-279 01M7P0JXYBVZHTP53NXCH0RA3A HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000966 | no root | gemma-4-26b-a4b-it
+m2gf13-280 01M7Q8GWHGEQ21FT12BTJMNP7B HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000832 | no root | gemma-4-26b-a4b-it
+m2gf13-281 01M7Q8K8YMC78DWTKNH8804BHJ HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001289 | no root | gemma-4-26b-a4b-it
+m2gf13-282 01M7Q8NP7S9HDNV5TVJ1CTFWN5 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001176 | no root | gemma-4-26b-a4b-it
+m2gf13-283 01M7Q8RDANVGNVFYGNA9P9N4GR HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000068 | no root | gemma-4-26b-a4b-it
+m2gf13-284 01M7Q8VDZ1HGCGJ6CSWHFTFPZ4 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000369 | no root | gemma-4-26b-a4b-it

@@ -1,0 +1,130 @@
+Update the docs of the Case Files game for version 0.4.23 (M2 game feel sprint 14: a clean Ask step after the verdict, and the terminal verdict in Portuguese). Make these exact changes, emitted as literal search/replace blocks, one block per change. Some OLD texts are only part of a long line; copy them exactly as given, do not extend them.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+All 12 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 12 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file package.json
+[OLD 1]
+"version": "0.4.22",
+[/OLD 1]
+[NEW 1]
+"version": "0.4.23",
+[/NEW 1]
+
+Change 2, file CHANGELOG.md
+[OLD 2]
+# Changelog
+
+## 0.4.22 (M2 game feel, sprint 13: a locked question box that looks locked)
+[/OLD 2]
+[NEW 2]
+# Changelog
+
+## 0.4.23 (M2 game feel, sprint 14: a clean Ask step after the verdict)
+- After the verdict the line "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." no longer stays under the locked question box (reproduced at 1280 and 390 in English and Portuguese, after a correct and a wrong verdict). The culprit is already named, so the verdict clears it; the box keeps its "Game over" look. A language switch does not bring it back, and Start over or Try again show it again only when the new budget runs out.
+- The terminal game (node src/cli.js --lang pt) now prints the verdict in Portuguese: "=== Veredito ===", "Culpado:", "Pontuação: 100 (perguntas feitas: 3)" and "--- Melhores pontuações ---" (before, these lines stayed in English). English games print the same lines as before.
+- New test/after-verdict.mjs with 6 checks. The automated suite now has 271 checks.
+
+## 0.4.22 (M2 game feel, sprint 13: a locked question box that looks locked)
+[/NEW 2]
+
+Change 3, file README.md
+[OLD 3]
+**M2 in progress (v0.4.22, game feel sprint 13).**
+[/OLD 3]
+[NEW 3]
+**M2 in progress (v0.4.23, game feel sprint 14).**
+[/NEW 3]
+
+Change 4, file README.md
+[OLD 4]
+the terminal game counts the same budget.
+[/OLD 4]
+[NEW 4]
+the terminal game counts the same budget. After the verdict the Ask step no longer shows the out line, and the terminal verdict follows the language (Culpado, Pontuação in Portuguese).
+[/NEW 4]
+
+Change 5, file README.md
+[OLD 5]
+tested to stay under US$0.10. 265 automated checks.
+[/OLD 5]
+[NEW 5]
+tested to stay under US$0.10. 271 automated checks.
+[/NEW 5]
+
+Change 6, file docs/BUILD_LOG.md
+[OLD 6]
+- Details and receipts: qa/rework.md (M2 game feel sprint 13).
+[/OLD 6]
+[NEW 6]
+- Details and receipts: qa/rework.md (M2 game feel sprint 13).
+
+## M2 game feel sprint 14 (v0.4.23)
+
+- Scope: the out line ("No questions left ... Name the culprit in Accuse") leaves the Ask step after the verdict; the terminal verdict lines (Verdict, Culprit, Score, questions asked, Top Scores) follow the language.
+- Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf14.mjs): before, the line stayed visible after a correct verdict (4 of 4) and after a wrong one; after, hidden in every case and back only when a new budget runs out. CLI before and after in qa/m2gf14-probes/cli-*.txt.
+- Result: npm test 271/271 (was 265), new test/after-verdict.mjs 6 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 14).
+[/NEW 6]
+
+Change 7, file docs/SPEC.md
+[OLD 7]
+- CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar), and a later ask, refused by the server with `out_of_questions` before any model call, prints the same line instead of "Error:".
+[/OLD 7]
+[NEW 7]
+- CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar), and a later ask, refused by the server with `out_of_questions` before any model call, prints the same line instead of "Error:".
+
+## Web page and CLI: after the verdict (M2 game feel sprint 14)
+- Page: `setGameOver(true)` hides `#ask-msg` and clears its text, so the out line (`LABELS[lang].outOfQuestions`) does not stay under the locked box once the culprit is named; `renderBudget()` already skips it while `gameOver` is true, so a language switch does not bring it back. Start over and Try again (`setGameOver(false)`) show it again only when the new budget runs out.
+- CLI: `VERDICT_LINES[lang]` in src/cli.js holds the verdict heading, Correct/Wrong, Culprit, Solution, Score, questions asked and the Top Scores heading in EN and PT ("Veredito", "Culpado", "Solução", "Pontuação", "perguntas feitas", "Melhores pontuações"); the accuse command prints them in the current language.
+[/NEW 7]
+
+Change 8, file docs/SPEC.md
+[OLD 8]
+23. `node test/keyboard.mjs`
+[/OLD 8]
+[NEW 8]
+23. `node test/after-verdict.mjs` (after the verdict: out line shown when the budget is spent, hidden and cleared by the verdict in EN and PT, not back after a language switch, back after Start over only when the new budget runs out, CLI verdict lines in PT for a correct and a wrong accusation, English verdict unchanged)
+24. `node test/keyboard.mjs`
+[/NEW 8]
+
+Change 9, file docs/SPEC.md
+[OLD 9]
+Total checks: 265 (suite:
+[/OLD 9]
+[NEW 9]
+Total checks: 271 (suite:
+[/NEW 9]
+
+Change 10, file docs/SPEC.md
+[OLD 10]
+ask-lock 10, keyboard 13).
+[/OLD 10]
+[NEW 10]
+ask-lock 10, after-verdict 6, keyboard 13).
+[/NEW 10]
+
+Change 11, file docs/HOW_TO_PLAY.md
+[OLD 11]
+when it reaches zero, use `accuse <suspectId>`.
+[/OLD 11]
+[NEW 11]
+when it reaches zero, use `accuse <suspectId>`. The verdict prints in the language of the game.
+[/NEW 11]
+
+Change 12, file docs/HOW_TO_PLAY.md
+[OLD 12]
+quando chega a zero, use `acusar <suspectId>`)
+[/OLD 12]
+[NEW 12]
+quando chega a zero, use `acusar <suspectId>`; o veredito sai em português, com Culpado e Pontuação)
+[/NEW 12]
+

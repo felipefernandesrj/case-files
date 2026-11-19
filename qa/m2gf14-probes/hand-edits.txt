@@ -1,0 +1,7 @@
+M2 game feel sprint 14 (v0.4.23), hand edits disclosure.
+- Product code, tests and docs: 0 hand edits in the committed result. Every committed change in public/, src/, test/, package.json, README.md, CHANGELOG.md and docs/ was written by Cup key output (calls 285-287), byte identical to the dry run on the first parse (0 re-parses).
+- Dry run by hand first (qa/m2gf14-probes/dry/, dry-all.diff): written, tested (npm-test-dry.txt 271/271, mutation-check-dry.txt 12/12) and checked in the browser (probe-dry.json), then reverted with git checkout (test file moved out) before any code call. The dry run is the reference given to the model as numbered OLD/NEW pairs.
+- QA tooling written by hand (not product): tools/probe-gf14.mjs (header copied from probe-gf13.mjs), qa/m2gf14-probes/mutation-check.mjs, qa/m2gf14-probes/seal/sealcheck.sh (copy of the gf12 one with the new path) and postcut-loop.sh.
+- Prompt files written by hand: p285 from tools/gen-pairs.py (HEAD vs dry); p286 FILE + 1 pair from gen-pairs on an intermediate package.json with only the script change (dry/package.script.json); p287 12 pairs built by a small inline script as substring pairs (gen-pairs windows started or ended on blank lines, the 282 lesson), self-checked to rebuild the dry docs.
+- Harness tools/build-via-key.mjs and tools/gen-pairs.py: not changed this sprint.
+- Log bookkeeping: qa/key-usage-log.json entries 285-287 appended by a script from the p28x.log files (cost = neurons x $0.011/1000).

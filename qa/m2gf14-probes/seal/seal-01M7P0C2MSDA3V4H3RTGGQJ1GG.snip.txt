@@ -1,0 +1,1 @@
+HTTP 200 | Genuine receipt | Sealed at 2026-11-19 00:05:27 UTC | Exact cost $0.000098 | one of 13 in the signed root of 2026-11-18 | gemma-4-26b-a4b-it

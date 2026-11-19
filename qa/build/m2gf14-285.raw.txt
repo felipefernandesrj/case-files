@@ -1,0 +1,53 @@
+<<<REPLACE public/index.html>>>
+    if (go) go.hidden = true;
+  } else {
+=====
+    if (go) go.hidden = true;
+    // M2 game feel sprint 14: after the verdict the out line ("Name the culprit in Accuse") is done, so it goes away
+    const askMsg = document.getElementById('ask-msg');
+    if (askMsg) { askMsg.hidden = true; askMsg.textContent = ''; }
+  } else {
+<<<END>>>
+<<<REPLACE src/cli.js>>>
+  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+};
+=====
+  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+};
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações' },
+};
+<<<END>>>
+<<<REPLACE src/cli.js>>>
+        });
+        console.log('\n=== Verdict ===');
+        if (lang === 'pt') {
+          console.log(resp.correct ? 'Correto!' : 'Errado.');
+          console.log(`Culprit: ${resp.culpritName}`);
+          console.log(`Solução: ${resp.solution}`);
+          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
+        } else {
+          console.log(resp.correct ? 'Correct!' : 'Wrong.');
+          console.log(`Culprit: ${resp.culpritName}`);
+          console.log(`Solution: ${resp.solution}`);
+          console.log(`Score: ${resp.score} (questions asked: ${resp.questions})\n`);
+        }
+
+        const top = await getJSON(`${baseUrl}/api/scores`);
+        console.log('--- Top Scores ---');
+        top.forEach((e, idx) => {
+=====
+        });
+        const V = VERDICT_LINES[lang];
+        console.log(`\n=== ${V.title} ===`);
+        console.log(resp.correct ? V.correct : V.wrong);
+        console.log(`${V.culprit}: ${resp.culpritName}`);
+        console.log(`${V.solution}: ${resp.solution}`);
+        console.log(`${V.score}: ${resp.score} (${V.asked}: ${resp.questions})\n`);
+
+        const top = await getJSON(`${baseUrl}/api/scores`);
+        console.log(`--- ${V.top} ---`);
+        top.forEach((e, idx) => {
+<<<END>>>

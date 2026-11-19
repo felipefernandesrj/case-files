@@ -1,0 +1,13 @@
+M1 verdict keeps the out line shown: CAUGHT (3 fail) FAIL verdict after the budget hides and clears the out line (EN and PT): en: out line still shown after the ve
+M2 verdict keeps the out line text: CAUGHT (2 fail) FAIL verdict after the budget hides and clears the out line (EN and PT): en: out line text kept: No questions 
+M3 no clear at all: CAUGHT (3 fail) FAIL verdict after the budget hides and clears the out line (EN and PT): en: out line still shown after the ve
+M4 language switch re-shows after the verdict: CAUGHT (1 fail) FAIL a language switch after the verdict does not bring the out line back: out line came back: Acabaram as per
+M5 PT Culprit English: CAUGHT (2 fail) FAIL CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações: missing: Culpado:
+M6 PT Score English: CAUGHT (2 fail) FAIL CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações: missing: Pontuaçã
+M7 PT questions asked English: CAUGHT (2 fail) FAIL CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações: missing: Pontuaçã
+M8 PT heading English: CAUGHT (1 fail) FAIL CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações: missing: === Vere
+M9 PT Top Scores English: CAUGHT (1 fail) FAIL CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações: missing: --- Melh
+M10 always English lines: CAUGHT (2 fail) FAIL CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações: missing: === Vere
+M11 always PT lines: CAUGHT (1 fail) FAIL CLI wrong verdict in PT and the English verdict unchanged: EN missing: === Verdict ===
+M12 PT wrong English: CAUGHT (1 fail) FAIL CLI wrong verdict in PT and the English verdict unchanged: PT wrong verdict
+caught 12/12

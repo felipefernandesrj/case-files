@@ -1,0 +1,164 @@
+{
+ "1280-en": {
+  "out": {
+   "hidden": false,
+   "visible": true,
+   "text": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "lock": "out",
+   "goHidden": false
+  },
+  "verdict": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "verdictSwitch": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "restart": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "",
+   "goHidden": true
+  },
+  "outAgain": {
+   "hidden": false,
+   "visible": true,
+   "text": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "lock": "out",
+   "goHidden": false
+  }
+ },
+ "1280-pt": {
+  "out": {
+   "hidden": false,
+   "visible": true,
+   "text": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "lock": "out",
+   "goHidden": false
+  },
+  "verdict": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "verdictSwitch": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "restart": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "",
+   "goHidden": true
+  },
+  "outAgain": {
+   "hidden": false,
+   "visible": true,
+   "text": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "lock": "out",
+   "goHidden": false
+  }
+ },
+ "390-en": {
+  "out": {
+   "hidden": false,
+   "visible": true,
+   "text": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "lock": "out",
+   "goHidden": false
+  },
+  "verdict": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "verdictSwitch": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "restart": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "",
+   "goHidden": true
+  },
+  "outAgain": {
+   "hidden": false,
+   "visible": true,
+   "text": "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.",
+   "lock": "out",
+   "goHidden": false
+  }
+ },
+ "390-pt": {
+  "out": {
+   "hidden": false,
+   "visible": true,
+   "text": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "lock": "out",
+   "goHidden": false
+  },
+  "verdict": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "verdictSwitch": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "over",
+   "goHidden": true
+  },
+  "restart": {
+   "hidden": true,
+   "visible": false,
+   "text": "",
+   "lock": "",
+   "goHidden": true
+  },
+  "outAgain": {
+   "hidden": false,
+   "visible": true,
+   "text": "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.",
+   "lock": "out",
+   "goHidden": false
+  }
+ },
+ "wrongVerdict": {
+  "hidden": true,
+  "visible": false,
+  "text": "",
+  "lock": "over",
+  "goHidden": true
+ },
+ "earlyVerdict": {
+  "hidden": true,
+  "visible": false,
+  "text": "",
+  "lock": "over",
+  "goHidden": true
+ }
+}

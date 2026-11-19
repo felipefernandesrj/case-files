@@ -313,3 +313,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf13.mjs): before, only the box cursor changed when locked; after, box and Ask change background, color, border and cursor, with placeholder and aria-disabled, contrast 9.81:1.
 - Result: npm test 265/265 (was 255), new test/ask-lock.mjs 10 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 13).
+
+## M2 game feel sprint 14 (v0.4.23)
+
+- Scope: the out line ("No questions left ... Name the culprit in Accuse") leaves the Ask step after the verdict; the terminal verdict lines (Verdict, Culprit, Score, questions asked, Top Scores) follow the language.
+- Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf14.mjs): before, the line stayed visible after a correct verdict (4 of 4) and after a wrong one; after, hidden in every case and back only when a new budget runs out. CLI before and after in qa/m2gf14-probes/cli-*.txt.
+- Result: npm test 271/271 (was 265), new test/after-verdict.mjs 6 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 14).

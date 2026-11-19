@@ -1,0 +1,5 @@
+Reproduced on HEAD c0e7f47 (v0.4.22) before any code call, 2026-11-18 ~20:55 BRT, mock mode, headless Chrome (tools/probe-gf14.mjs, probe-before.json, /workspace/casefiles-qa/run42/before-*.png):
+- Budget spent (8 of 8), then a correct accusation (Carlos), back to the Talk step: #ask-msg still visible with "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." (PT "Acabaram as perguntas desta partida. Aponte o culpado em Acusar ...") under the box that already reads "Game over": 4 of 4 (1280/390 x EN/PT).
+- Same after a wrong accusation (Maya) during the CONTINUE countdown: visible (1280 EN).
+- A language switch after the verdict hid it (setLang hides #ask-msg); an early verdict with questions left never showed it; Start over hid it and a new spent budget showed it again (expected).
+- CLI (cli-before.txt): node src/cli.js --lang pt, "acusar carlos" printed "=== Verdict ===", "Culprit: Carlos Mendes", "Score: 100 (questions asked: 0)", "--- Top Scores ---" in English (only Correto!/Errado. and Solução were Portuguese).
