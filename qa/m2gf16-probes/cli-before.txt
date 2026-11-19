@@ -1,0 +1,22 @@
+
+=== O Violino Desaparecido ===
+
+Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?
+
+Suspeitos:
+- lorenzo: Lorenzo Moretti (Maestro)
+- maya: Maya Santos (Violinista)
+- carlos: Carlos Mendes (Zelador)
+
+Perguntas restantes: 8 de 8
+Unknown command
+Usage: ask <suspectId> <question>
+Usage: accuse <suspectId>
+Usage: history <suspectId>
+No history for this suspect.
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 7 de 8
+1. Q: onde voce estava
+   A: Não tenho comentários sobre isso.

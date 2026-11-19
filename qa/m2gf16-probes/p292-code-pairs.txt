@@ -1,0 +1,130 @@
+Implement "the last English terminal lines in Portuguese" for the Case Files terminal game (Node, no deps). Today a Portuguese game (node src/cli.js --lang pt) prints "Unknown command", "Usage: ...", "No history for this suspect." and the history rows "Q:" / "A:" in English. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+1. src/cli.js: a CLI_LINES table (EN and PT) next to the other line tables.
+2-7. src/cli.js: the unknown command, three usage lines, empty history, history Q/A rows and the error prefix read CLI_LINES[lang].
+8. package.json: version 0.4.25 and node test/cli-lines.mjs in the test script.
+
+All 8 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 8 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file src/cli.js
+[OLD 1]
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações', points: 'pontos', q1: 'pergunta', qn: 'perguntas' },
+};
+[/OLD 1]
+[NEW 1]
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações', points: 'pontos', q1: 'pergunta', qn: 'perguntas' },
+};
+// the other terminal lines in the player's language (M2 delivery sprint 16): PT games printed Unknown command, Usage:, No history and Q:/A: in English
+const CLI_LINES = {
+  en: { unknown: 'Unknown command. Commands: ask, accuse, history, quit', usageAsk: 'Usage: ask <suspectId> <question>', usageAccuse: 'Usage: accuse <suspectId>', usageHistory: 'Usage: history <suspectId>', noHistory: 'No history for this suspect.', q: 'Q', a: 'A', error: 'Error' },
+  pt: { unknown: 'Comando desconhecido. Comandos: pergunta, acusar, historico, sair', usageAsk: 'Uso: pergunta <suspectId> <pergunta>', usageAccuse: 'Uso: acusar <suspectId>', usageHistory: 'Uso: historico <suspectId>', noHistory: 'Nenhuma conversa com este suspeito ainda.', q: 'P', a: 'R', error: 'Erro' },
+};
+[/NEW 1]
+
+Change 2, file src/cli.js
+[OLD 2]
+  if (!action) {
+    console.log('Unknown command');
+    return false;
+[/OLD 2]
+[NEW 2]
+  if (!action) {
+    console.log(CLI_LINES[lang].unknown);
+    return false;
+[/NEW 2]
+
+Change 3, file src/cli.js
+[OLD 3]
+      if (!suspectId || !question) {
+        console.log('Usage: ask <suspectId> <question>');
+      } else {
+[/OLD 3]
+[NEW 3]
+      if (!suspectId || !question) {
+        console.log(CLI_LINES[lang].usageAsk);
+      } else {
+[/NEW 3]
+
+Change 4, file src/cli.js
+[OLD 4]
+      if (!suspectId) {
+        console.log('Usage: accuse <suspectId>');
+      } else {
+[/OLD 4]
+[NEW 4]
+      if (!suspectId) {
+        console.log(CLI_LINES[lang].usageAccuse);
+      } else {
+[/NEW 4]
+
+Change 5, file src/cli.js
+[OLD 5]
+      if (!suspectId) {
+        console.log('Usage: history <suspectId>');
+      } else {
+[/OLD 5]
+[NEW 5]
+      if (!suspectId) {
+        console.log(CLI_LINES[lang].usageHistory);
+      } else {
+[/NEW 5]
+
+Change 6, file src/cli.js
+[OLD 6]
+        if (hist.length === 0) {
+          console.log('No history for this suspect.');
+        } else {
+          hist.forEach((pair, i) => {
+            console.log(`${i + 1}. Q: ${pair.q}`);
+            console.log(`   A: ${pair.a}`);
+          });
+[/OLD 6]
+[NEW 6]
+        if (hist.length === 0) {
+          console.log(CLI_LINES[lang].noHistory);
+        } else {
+          hist.forEach((pair, i) => {
+            console.log(`${i + 1}. ${CLI_LINES[lang].q}: ${pair.q}`);
+            console.log(`   ${CLI_LINES[lang].a}: ${pair.a}`);
+          });
+[/NEW 6]
+
+Change 7, file src/cli.js
+[OLD 7]
+      console.log(OUT_LINE[lang]);
+    } else console.error('Error:', e.message);
+  }
+[/OLD 7]
+[NEW 7]
+      console.log(OUT_LINE[lang]);
+    } else console.error(`${CLI_LINES[lang].error}:`, e.message);
+  }
+[/NEW 7]
+
+Change 8, file package.json
+[OLD 8]
+  "name": "fullcup-mystery",
+  "version": "0.4.24",
+  "type": "module",
+  "scripts": {
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/keyboard.mjs"
+  },
+[/OLD 8]
+[NEW 8]
+  "name": "fullcup-mystery",
+  "version": "0.4.25",
+  "type": "module",
+  "scripts": {
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/cli-lines.mjs && node test/keyboard.mjs"
+  },
+[/NEW 8]
+

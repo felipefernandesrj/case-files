@@ -327,3 +327,12 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Reproduced first and checked after with tools/probe-gf15.mjs (mock mode, Violin and Night Train, EN and PT): before, every PT row read "100 pts (0 Q)" and the heading "Suspects:"; after, "100 pontos (0 perguntas)", "(1 pergunta)" and "Suspeitos:". CLI before and after in qa/m2gf15-probes/cli-*.txt.
 - Result: npm test 277/277 (was 271), new test/cli-rows.mjs 6 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 15).
+
+## M2 delivery sprint 16 (v0.4.25), 2026-11-19
+
+- Scope: the last English lines of a Portuguese terminal game (Unknown command, Usage:, No history, Q:/A: in history, Error:) follow the language; the English unknown command line lists the commands.
+- Reproduced first (qa/m2gf16-probes/cli-before.txt): a PT game printed all of these in English. After: qa/m2gf16-probes/cli-dry.txt (identical output after the key calls).
+- Built through the Cup key: 292 code (8 search/replace pairs) and 293 test file, both byte-identical to the dry run, no rework. Mutation check 12 of 12 caught.
+- Result: npm test 283/283 (was 277), new test/cli-lines.mjs 6 checks.
+- Acceptance: live smoke of the Night Train through the Cup key (tools/smoke-m2.mjs, llama-4-scout, EN Helena + correct accusation, PT Victor + wrong accusation), qa/live-smoke-m2-delivery.json. Delivery screenshots played live through the key (tools/shots-m2.mjs, 12 calls) plus mock shots of the picker and the verdict (tools/shots-m2-closed.mjs, no calls).
+- M2 declared delivered on QA. Details: docs/M2_DELIVERY.md, qa/rework.md (M2 delivery sprint 16).

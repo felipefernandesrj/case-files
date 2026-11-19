@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.25 (M2 delivered: The Night Train; sprint 16, the last English terminal lines in Portuguese)
+- M2 "Case 2: The Night Train" is delivered on 2026-11-19. Delivery notes: docs/M2_DELIVERY.md.
+- In a Portuguese terminal game (node src/cli.js --lang pt) the remaining English lines now follow the language: "Comando desconhecido. Comandos: pergunta, acusar, historico, sair", "Uso: pergunta <suspectId> <pergunta>", "Uso: acusar <suspectId>", "Uso: historico <suspectId>", "Nenhuma conversa com este suspeito ainda." and the history rows "P:" / "R:" (before: Unknown command, Usage:, No history for this suspect., Q:/A:). An unexpected error prints "Erro:".
+- In English the unknown command line now lists the commands ("Unknown command. Commands: ask, accuse, history, quit"); every other English line is unchanged.
+- New test/cli-lines.mjs with 6 checks. The automated suite now has 283 checks.
+
 ## 0.4.24 (M2 game feel, sprint 15: a Portuguese leaderboard in the terminal)
 - In a Portuguese terminal game (node src/cli.js --lang pt) the leaderboard rows after the verdict now read "1. ana - 100 pontos (3 perguntas) [pt]", with "(1 pergunta)" for a single question; before, they kept the English "100 pts (3 Q)" under the Portuguese heading "Melhores pontuações" (reproduced on the Violin and the Night Train). English rows stay "100 pts (3 Q)".
 - The intro heading over the suspect list now reads "Suspeitos:" in Portuguese (it was "Suspects:").

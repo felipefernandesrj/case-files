@@ -1,0 +1,22 @@
+
+=== The Vanishing Violin ===
+
+During a rehearsal at the Aurora Music Academy, the priceless Stradivarius violin disappears from the instrument room. Three people were present that night: the charismatic conductor, a nervous violin prodigy, and the longtime janitor. Who took the priceless instrument?
+
+Suspects:
+- lorenzo: Lorenzo Moretti (Conductor)
+- maya: Maya Santos (Violinist)
+- carlos: Carlos Mendes (Janitor)
+
+Questions left: 8 of 8
+Unknown command. Commands: ask, accuse, history, quit
+Usage: ask <suspectId> <question>
+Usage: accuse <suspectId>
+Usage: history <suspectId>
+No history for this suspect.
+
+I have no comment on that.
+
+Questions left: 7 of 8
+1. Q: where were you
+   A: I have no comment on that.

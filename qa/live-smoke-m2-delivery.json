@@ -1,0 +1,68 @@
+[
+ {
+  "lang": "en",
+  "case": "night-train",
+  "suspect": "helena",
+  "q": "Where were you when the train crossed midnight, and who walked past your cabin?",
+  "status": 200,
+  "budget": 10,
+  "left": 9,
+  "answer": "I was in the dining car, having dinner, when the train crossed midnight. I didn't notice anyone specific walking past, but Tomás Reyes, the night porter, came in to grab a cup of coffee around that time. I was focused on my meal, so I didn't pay much attention.",
+  "words": 49,
+  "upstreamMs": 18032,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "receipt": "01M7TB9S9Q0QQWVT6AK6H9B51G",
+  "sealBy": "2026-11-20T00:05:00.000Z",
+  "usage": {
+   "prompt_tokens": 415,
+   "completion_tokens": 59,
+   "total_tokens": 474,
+   "neurons": 14.745454788208008,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": "ines",
+  "status": 200,
+  "lang": "en",
+  "correct": true,
+  "score": 100,
+  "questions": 1,
+  "culprit": "Inês Duarte"
+ },
+ {
+  "lang": "pt",
+  "case": "night-train",
+  "suspect": "victor",
+  "q": "Onde você estava entre a parada das 23h e a meia-noite, e quem passou pelo corredor?",
+  "status": 200,
+  "budget": 10,
+  "left": 9,
+  "answer": "Eu estava na minha cabine-leito, a sleeper 7, o tempo todo. Não saí dela durante a noite. A Helena passou pela minha porta quando as luzes voltaram, mas não vi ninguém mais no corredor.",
+  "words": 34,
+  "upstreamMs": 10318,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "receipt": "01M7TBAAAW71HVZB6EWYVH26S1",
+  "sealBy": "2026-11-20T00:05:00.000Z",
+  "usage": {
+   "prompt_tokens": 490,
+   "completion_tokens": 49,
+   "total_tokens": 539,
+   "neurons": 15.813636779785156,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": "helena",
+  "status": 200,
+  "lang": "pt",
+  "correct": false,
+  "score": 0,
+  "questions": 1,
+  "culprit": "Inês Duarte"
+ }
+]

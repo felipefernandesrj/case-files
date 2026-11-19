@@ -847,3 +847,14 @@ Known limit (not in scope): the cap is per session, so Start over gives a fresh 
 - Receipts (seal-by 2026-11-20 00:05Z = 19/11 21:05 BRT): 288 01M7STKPXG8TGGZ2T6VDB28XMR, 289 01M7STM8TF166XDEEZWMN5RAFQ, 290 01M7STNK8PHDZCPWZM0Z92MJT7, 291 01M7STT4F0YV9F7XGCT4GVXMPA.
 - Known, not fixed: other CLI lines stay English in PT (Usage:, Unknown command, No history for this suspect., Q:/A: in history); one budget for all players; verdict art per case.
 - Prompt lesson: a test that reads a shared file (data/scores.json) must seed its own fixture; a dry run on a near-empty leaderboard hid the flake.
+
+## M2 delivery sprint 16: the last English terminal lines in Portuguese (v0.4.25), 2026-11-19 BRT
+Model gemma-4-26b-a4b-it, thinking off, via the Cup key. Felipi asked to close M2 today ("Conclui o M2 hoje") and to make assets and post.
+- Reproduced first (qa/m2gf16-probes/cli-before.txt): PT game printed Unknown command, Usage: ask/accuse/history, No history for this suspect., Q:/A: in English.
+- 292 code (8 numbered OLD/NEW pairs from tools/gen-pairs.py, src/cli.js CLI_LINES + package.json 0.4.25 + script): 8/8 applied, byte identical to the dry run. Receipt 01M7TB6MG33CCX1TWAAB2E80JE, 61.85 neurons.
+- 293 tests (FILE test/cli-lines.mjs, 6 checks): identical to the dry run. Receipt 01M7TB7MNTP03QW2B44VW461Q5, 46.84 neurons.
+- Mutation check (qa/m2gf16-probes/mutation-check.txt): 12 of 12 caught. Rework 0 calls, 0.0%.
+- Acceptance live smoke (tools/smoke-m2.mjs, llama-4-scout): 2 calls, receipts 01M7TB9S9Q0QQWVT6AK6H9B51G (EN), 01M7TBAAAW71HVZB6EWYVH26S1 (PT), 30.56 neurons.
+- Delivery screenshots (tools/shots-m2.mjs, llama-4-scout): 12 calls, 12 x 200, 170.68 neurons, receipts 01M7TBCGV52E19SQG29BZQF45E .. 01M7TBKGKHMTJ5Z2DKJGW33249 (all in qa/key-usage-log.json, purpose m2-shots:*). Picker and verdict re-shot in mock mode (tools/shots-m2-closed.mjs, no key calls).
+- Key total this sprint: 16 calls, 309.92 neurons, about US$ 0.0034. Seal-by 2026-11-20 00:05Z (19/11 21:05 BRT). No image generation.
+- Docs by hand (no product change): CHANGELOG 0.4.25, README M2 Delivered, docs/M2_DELIVERY.md, docs/m2/*.png, BUILD_LOG.

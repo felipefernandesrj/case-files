@@ -1,0 +1,258 @@
+import { createServer } from './server.js';
+import { unknownCaseLine } from './case.js';
+import { readFile } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import readline from 'readline';
+import { randomUUID } from 'node:crypto';
+import { URLSearchParams } from 'node:url';
+import { budgetText } from '../public/best.js';
+
+// question budget in the terminal (M2 game feel sprint 13): the same budget as the web page, with commands instead of buttons
+const OUT_LINE = {
+  en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
+  pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
+};
+// the intro heading in the player's language (M2 game feel sprint 15): PT games printed Suspects:
+const SUSPECTS_HEADING = { en: 'Suspects:', pt: 'Suspeitos:' };
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores', points: 'pts', q1: 'Q', qn: 'Q' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações', points: 'pontos', q1: 'pergunta', qn: 'perguntas' },
+};
+// the other terminal lines in the player's language (M2 delivery sprint 16): PT games printed Unknown command, Usage:, No history and Q:/A: in English
+const CLI_LINES = {
+  en: { unknown: 'Unknown command. Commands: ask, accuse, history, quit', usageAsk: 'Usage: ask <suspectId> <question>', usageAccuse: 'Usage: accuse <suspectId>', usageHistory: 'Usage: history <suspectId>', noHistory: 'No history for this suspect.', q: 'Q', a: 'A', error: 'Error' },
+  pt: { unknown: 'Comando desconhecido. Comandos: pergunta, acusar, historico, sair', usageAsk: 'Uso: pergunta <suspectId> <pergunta>', usageAccuse: 'Uso: acusar <suspectId>', usageHistory: 'Uso: historico <suspectId>', noHistory: 'Nenhuma conversa com este suspeito ainda.', q: 'P', a: 'R', error: 'Erro' },
+};
+let questionBudget = 0;
+let questionsLeft = null;
+
+// Helper to perform fetch with JSON body
+async function postJSON(url, data) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    const e = new Error(err.message || `HTTP ${res.status}`);
+    e.code = err.code;
+    throw e;
+  }
+  return res.json();
+}
+
+async function getJSON(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+// Parse CLI args
+const args = process.argv.slice(2);
+let lang = 'en';
+let player = 'anon';
+let caseId; // flag: --case <id> (see CASES in src/case.js); default is the Violin
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === '--lang' && i + 1 < args.length) {
+    lang = args[i + 1] === 'pt' ? 'pt' : 'en';
+    i++;
+  } else if (args[i] === '--player' && i + 1 < args.length) {
+    player = args[i + 1].slice(0, 24);
+    i++;
+  } else if (args[i] === '--case' && i + 1 < args.length) {
+    caseId = args[i + 1];
+    i++;
+  }
+}
+
+// Start server on random port
+let server;
+try {
+  server = await createServer({
+    caseFile: 'content/case.json',
+    caseId,
+    mock: true,
+  });
+} catch (err) {
+  if (err.code !== 'unknown_case') throw err;
+  console.error(unknownCaseLine(caseId));
+  process.exit(2);
+}
+await new Promise((resolve) => server.listen(0, resolve));
+const address = server.address();
+const baseUrl = `http://localhost:${address.port}`;
+
+// Helper to display case intro
+async function displayIntro() {
+  const data = await getJSON(`${baseUrl}/api/case?lang=${lang}`);
+  console.log(`\n=== ${data.title} ===\n`);
+  console.log(data.intro);
+  console.log(`\n${SUSPECTS_HEADING[lang]}`);
+  data.suspects.forEach((s) => {
+    console.log(`- ${s.id}: ${s.name} (${s.role})`);
+  });
+  console.log('');
+}
+
+// History storage
+const histories = new Map(); // suspectId -> [{q, a}]
+
+// Central command processor (shared between interactive & piped mode)
+async function processCommand(line) {
+  const parts = line.trim().split(' ');
+  const cmd = parts[0].toLowerCase();
+
+  const cmdMap = {
+    pergunta: 'ask',
+    acusar: 'accuse',
+    historico: 'history',
+    sair: 'quit',
+    quit: 'quit',
+    ask: 'ask',
+    accuse: 'accuse',
+    history: 'history',
+  };
+  const action = cmdMap[cmd] || null;
+  if (!action) {
+    console.log(CLI_LINES[lang].unknown);
+    return false;
+  }
+  // Adjust language based on Portuguese command aliases
+  if (['pergunta', 'acusar', 'historico', 'sair'].includes(cmd)) {
+    lang = 'pt';
+  }
+
+  try {
+    if (action === 'ask') {
+      const suspectId = parts[1];
+      const question = parts.slice(2).join(' ');
+      if (!suspectId || !question) {
+        console.log(CLI_LINES[lang].usageAsk);
+      } else {
+        const resp = await postJSON(`${baseUrl}/api/ask`, {
+          sessionId,
+          suspectId,
+          question,
+          lang,
+        });
+        console.log(`\n${resp.answer}\n`);
+        if (resp.budget) {
+          questionBudget = resp.budget;
+          questionsLeft = resp.left;
+          console.log(budgetText(lang, questionsLeft, questionBudget));
+          if (questionsLeft === 0) console.log(OUT_LINE[lang]);
+        }
+        const hist = histories.get(suspectId) || [];
+        hist.push({ q: question, a: resp.answer });
+        histories.set(suspectId, hist);
+      }
+    } else if (action === 'accuse') {
+      const suspectId = parts[1];
+      if (!suspectId) {
+        console.log(CLI_LINES[lang].usageAccuse);
+      } else {
+        const resp = await postJSON(`${baseUrl}/api/accuse`, {
+          sessionId,
+          suspectId,
+          player,
+          lang,
+        });
+        const V = VERDICT_LINES[lang];
+        console.log(`\n=== ${V.title} ===`);
+        console.log(resp.correct ? V.correct : V.wrong);
+        console.log(`${V.culprit}: ${resp.culpritName}`);
+        console.log(`${V.solution}: ${resp.solution}`);
+        console.log(`${V.score}: ${resp.score} (${V.asked}: ${resp.questions})\n`);
+
+        const top = await getJSON(`${baseUrl}/api/scores`);
+        console.log(`--- ${V.top} ---`);
+        top.forEach((e, idx) => {
+          console.log(
+            `${idx + 1}. ${e.player} - ${e.score} ${V.points} (${e.questions} ${e.questions === 1 ? V.q1 : V.qn}) [${e.lang}]`,
+          );
+        });
+        return true; // signal termination
+      }
+    } else if (action === 'history') {
+      const suspectId = parts[1];
+      if (!suspectId) {
+        console.log(CLI_LINES[lang].usageHistory);
+      } else {
+        const hist = histories.get(suspectId) || [];
+        if (hist.length === 0) {
+          console.log(CLI_LINES[lang].noHistory);
+        } else {
+          hist.forEach((pair, i) => {
+            console.log(`${i + 1}. ${CLI_LINES[lang].q}: ${pair.q}`);
+            console.log(`   ${CLI_LINES[lang].a}: ${pair.a}`);
+          });
+        }
+      }
+    } else if (action === 'quit') {
+      return true;
+    }
+  } catch (e) {
+    if (e.code === 'out_of_questions') {
+      questionsLeft = 0;
+      console.log(OUT_LINE[lang]);
+    } else console.error(`${CLI_LINES[lang].error}:`, e.message);
+  }
+  return false;
+}
+
+// Main flow
+await displayIntro();
+
+// Create a session
+const { sessionId, budget } = await postJSON(`${baseUrl}/api/session`, {});
+if (budget) {
+  questionBudget = budget;
+  questionsLeft = budget;
+  console.log(budgetText(lang, questionsLeft, questionBudget));
+}
+
+let terminated = false;
+
+// Interactive (TTY) mode
+if (process.stdin.isTTY) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: true,
+  });
+
+  rl.setPrompt('> ');
+  rl.prompt();
+
+  for await (const rawLine of rl) {
+    const line = rawLine.trim();
+    if (!line) {
+      rl.prompt();
+      continue;
+    }
+    terminated = await processCommand(line);
+    if (terminated) {
+      rl.close();
+      break;
+    }
+    rl.prompt();
+  }
+} else {
+  // Piped / non‑interactive mode: read all stdin at once
+  let stdinData = '';
+  for await (const chunk of process.stdin) {
+    stdinData += typeof chunk === 'string' ? chunk : chunk.toString();
+  }
+  const lines = stdinData.split(/\r?\n/).filter((l) => l.trim().length > 0);
+  for (const line of lines) {
+    terminated = await processCommand(line);
+    if (terminated) break;
+  }
+}
+
+// Cleanup
+server.close();
+process.exit(0);

@@ -20,6 +20,11 @@ const VERDICT_LINES = {
   en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores', points: 'pts', q1: 'Q', qn: 'Q' },
   pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações', points: 'pontos', q1: 'pergunta', qn: 'perguntas' },
 };
+// the other terminal lines in the player's language (M2 delivery sprint 16): PT games printed Unknown command, Usage:, No history and Q:/A: in English
+const CLI_LINES = {
+  en: { unknown: 'Unknown command. Commands: ask, accuse, history, quit', usageAsk: 'Usage: ask <suspectId> <question>', usageAccuse: 'Usage: accuse <suspectId>', usageHistory: 'Usage: history <suspectId>', noHistory: 'No history for this suspect.', q: 'Q', a: 'A', error: 'Error' },
+  pt: { unknown: 'Comando desconhecido. Comandos: pergunta, acusar, historico, sair', usageAsk: 'Uso: pergunta <suspectId> <pergunta>', usageAccuse: 'Uso: acusar <suspectId>', usageHistory: 'Uso: historico <suspectId>', noHistory: 'Nenhuma conversa com este suspeito ainda.', q: 'P', a: 'R', error: 'Erro' },
+};
 let questionBudget = 0;
 let questionsLeft = null;
 
@@ -112,7 +117,7 @@ async function processCommand(line) {
   };
   const action = cmdMap[cmd] || null;
   if (!action) {
-    console.log('Unknown command');
+    console.log(CLI_LINES[lang].unknown);
     return false;
   }
   // Adjust language based on Portuguese command aliases
@@ -125,7 +130,7 @@ async function processCommand(line) {
       const suspectId = parts[1];
       const question = parts.slice(2).join(' ');
       if (!suspectId || !question) {
-        console.log('Usage: ask <suspectId> <question>');
+        console.log(CLI_LINES[lang].usageAsk);
       } else {
         const resp = await postJSON(`${baseUrl}/api/ask`, {
           sessionId,
@@ -147,7 +152,7 @@ async function processCommand(line) {
     } else if (action === 'accuse') {
       const suspectId = parts[1];
       if (!suspectId) {
-        console.log('Usage: accuse <suspectId>');
+        console.log(CLI_LINES[lang].usageAccuse);
       } else {
         const resp = await postJSON(`${baseUrl}/api/accuse`, {
           sessionId,
@@ -174,15 +179,15 @@ async function processCommand(line) {
     } else if (action === 'history') {
       const suspectId = parts[1];
       if (!suspectId) {
-        console.log('Usage: history <suspectId>');
+        console.log(CLI_LINES[lang].usageHistory);
       } else {
         const hist = histories.get(suspectId) || [];
         if (hist.length === 0) {
-          console.log('No history for this suspect.');
+          console.log(CLI_LINES[lang].noHistory);
         } else {
           hist.forEach((pair, i) => {
-            console.log(`${i + 1}. Q: ${pair.q}`);
-            console.log(`   A: ${pair.a}`);
+            console.log(`${i + 1}. ${CLI_LINES[lang].q}: ${pair.q}`);
+            console.log(`   ${CLI_LINES[lang].a}: ${pair.a}`);
           });
         }
       }
@@ -193,7 +198,7 @@ async function processCommand(line) {
     if (e.code === 'out_of_questions') {
       questionsLeft = 0;
       console.log(OUT_LINE[lang]);
-    } else console.error('Error:', e.message);
+    } else console.error(`${CLI_LINES[lang].error}:`, e.message);
   }
   return false;
 }

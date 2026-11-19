@@ -1,0 +1,13 @@
+CAUGHT PT unknown English
+CAUGHT PT usageAsk English
+CAUGHT PT usageAccuse English
+CAUGHT PT usageHistory English
+CAUGHT PT noHistory English
+CAUGHT PT q stays Q
+CAUGHT PT a stays A
+CAUGHT EN unknown old line
+CAUGHT history hardcoded Q
+CAUGHT usage ask hardcoded EN
+CAUGHT lang alias switch removed
+CAUGHT EN noHistory PT
+12 of 12 caught
