@@ -139,6 +139,10 @@
 - CSS: locked box and Ask use `--cf-ink-soft` background and `--cf-text-dim` text (9.81:1), a dashed `--cf-lamp-dim` edge (outline on the button, no layout shift), `cursor: not-allowed`, an italic placeholder at full opacity and a dimmed icon; `aria-busy` shows `cursor: progress`; reduced motion removes the box transitions.
 - CLI: src/cli.js prints `budgetText(lang, left, budget)` after the session starts and after every answer; at zero it prints a command line ("Name the culprit with: accuse <suspectId>", PT with acusar), and a later ask, refused by the server with `out_of_questions` before any model call, prints the same line instead of "Error:".
 
+## CLI: leaderboard rows and intro heading (M2 game feel sprint 15)
+- `VERDICT_LINES[lang]` also holds `points` ("pts" / "pontos") and the question word (`q1` "Q" / "pergunta" for one, `qn` "Q" / "perguntas" otherwise); each Top Scores row prints `N. player - score points (questions word) [lang]` in the current language, whatever language the row was played in.
+- `SUSPECTS_HEADING[lang]` prints "Suspects:" or "Suspeitos:" over the suspect list.
+
 ## Web page and CLI: after the verdict (M2 game feel sprint 14)
 - Page: `setGameOver(true)` hides `#ask-msg` and clears its text, so the out line (`LABELS[lang].outOfQuestions`) does not stay under the locked box once the culprit is named; `renderBudget()` already skips it while `gameOver` is true, so a language switch does not bring it back. Start over and Try again (`setGameOver(false)`) show it again only when the new budget runs out.
 - CLI: `VERDICT_LINES[lang]` in src/cli.js holds the verdict heading, Correct/Wrong, Culprit, Solution, Score, questions asked and the Top Scores heading in EN and PT ("Veredito", "Culpado", "Solução", "Pontuação", "perguntas feitas", "Melhores pontuações"); the accuse command prints them in the current language.
@@ -205,9 +209,10 @@ This executes:
 21. `node test/question-budget.mjs` (question budget: fair budget per case, default and bad values, budget and left in session and answers, out_of_questions in EN and PT with no model call, accuse after the last question, failed calls free and Start over full, labels, decorative meter and reduced motion, out state locks Ask and shows the button, burn only on a new answer, no burn on a first draw mid-game)
 22. `node test/ask-lock.mjs` (locked question box: EN and PT placeholders, open, out and over states with aria-disabled, refresh from setGameOver and renderBudget, muted CSS with not-allowed cursor, AA contrast, busy cursor and reduced motion, CLI budget countdown and command line at zero, CLI in PT and Night Train 10)
 23. `node test/after-verdict.mjs` (after the verdict: out line shown when the budget is spent, hidden and cleared by the verdict in EN and PT, not back after a language switch, back after Start over only when the new budget runs out, CLI verdict lines in PT for a correct and a wrong accusation, English verdict unchanged)
-24. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
+24. `node test/cli-rows.mjs` (terminal leaderboard rows in PT with pontos and perguntas, (1 pergunta) and (0 perguntas), Suspeitos heading, Night Train in PT, English rows and heading unchanged with (1 Q) and (0 Q), no Portuguese in an English game)
+25. `node test/keyboard.mjs` (Manual/Keyboard interaction, including Escape twice on the continue box after a wrong verdict)
 
-Total checks: 271 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, ask-lock 10, after-verdict 6, keyboard 13).
+Total checks: 277 (suite: e2e 42, proxy 12, consistency 4, capacity 6, scoreboard 20, night-train 8, case-select 11, icons 4, budget 8, progress 8, scene 8, hints 12, legibility 8, continue 15, suspicion 15, quick-accuse 9, talk 10, aftermath 14, arrest 7, errors 10, question-budget 11, ask-lock 10, after-verdict 6, cli-rows 6, keyboard 13).
 
 ### Play budget (`src/budget.js`, M2 sprint 4)
 - `maxCallsFor(c)`: Returns a `maxCalls` value between 1 and 100 for a case, or the default of 20.

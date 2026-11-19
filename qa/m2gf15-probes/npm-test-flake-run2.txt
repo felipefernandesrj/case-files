@@ -1,0 +1,349 @@
+
+> fullcup-mystery@0.4.24 test
+> node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/keyboard.mjs
+
+PASS status mock mode
+PASS case EN public fields
+PASS case PT public fields differ from EN
+PASS public index.html contains required ids and attributes
+PASS session creation
+PASS ask returns answer and counts questions
+PASS answer is capped at 80 words
+PASS 400 on unknown suspect
+PASS 400 on empty question
+PASS 400 on over‑500‑char question
+PASS 400 on unknown session
+PASS mock answer includes clue text when keyword matches (EN)
+PASS mock answer includes clue text when keyword matches (PT)
+PASS full mock playthrough EN correct accusation
+PASS full mock playthrough PT correct accusation
+PASS wrong accusation yields score 0
+PASS double accuse returns 409
+PASS scoreboard persists and ranks correctly
+PASS scoreFor matches specification
+PASS fairPlay passes on original case
+PASS fairPlay fails when culprit not a suspect
+PASS fairPlay fails when a clue does not implicate culprit
+PASS fairPlay fails when innocent never cleared
+PASS fairPlay fails when clue.from unknown suspect
+PASS each clue ask triggers its text in mock answer (EN)
+FullCup request failed with status: 402
+PASS proxy maps 402 to no_capacity
+FullCup request failed with status: 429
+PASS proxy maps 429 capacity:empty to no_capacity
+FullCup request failed with status: 429
+PASS proxy maps other 429 to rate_limited
+FullCup request failed with status: 401
+PASS proxy maps 401 to bad_key
+FullCup request failed with status: 500
+PASS proxy maps other 5xx to upstream
+FullCup request failed with status: 402
+PASS server returns friendly messages for proxy errors EN
+FullCup request failed with status: 429
+PASS server returns friendly messages for proxy errors PT
+PASS systemPrompt EN has no glossary
+PASS systemPrompt PT includes glossary and correct term
+PASS CLI EN playthrough outputs solution
+PASS CLI PT aliases work
+PASS credits EN
+PASS credits PT
+PASS credits missing file
+PASS credits invalid json
+PASS credits default path independent of cwd
+PASS case PT wording
+42 passed, 0 failed
+PASS Endpoint normalization (no trailing slash)
+PASS Endpoint normalization (with trailing slash)
+PASS Authorization header is Bearer <key>
+PASS Returns content on 200
+PASS Error code bad_key for 401/403
+PASS Error code no_capacity for 402
+PASS Error code no_capacity for 429 with capacity:empty
+PASS Error code rate_limited for plain 429
+PASS Error code upstream for 502
+PASS Leak Check Internal
+PASS Key never appears in console.error
+PASS Key leakage security check
+
+12 passed, 0 failed
+PASS Prompt Integrity (Content, Leakage, Maya, Names)
+PASS History holds questions and answers
+PASS History is per suspect
+FullCup request failed with status: 502
+PASS Failed upstream call adds nothing
+4 passed, 0 failed
+PASS no_capacity text EN
+PASS no_capacity text PT
+PASS all messages are clean sentences
+FullCup request failed with status: 402
+FullCup request failed with status: 402
+PASS 402 shows the friendly text and does not count the question
+FullCup request failed with status: 500
+PASS upstream error does not count and leaves no history
+FullCup request failed with status: 402
+FullCup request failed with status: 402
+FullCup request failed with status: 402
+FullCup request failed with status: 402
+FullCup request failed with status: 402
+PASS score is not reduced by failed questions
+
+6 passed, 0 failed
+PASS best is kept per language
+PASS higher score replaces, lower does not
+PASS same score with fewer questions wins
+PASS wrong accusation never becomes best
+PASS unknown language counts as English
+PASS corrupt or missing storage never throws
+PASS reset clears both languages
+PASS texts EN and PT
+PASS server serves /best.js as JavaScript
+PASS page wires the personal scoreboard
+PASS best lines follow the UI language
+PASS scoreboard shows player names as plain text
+PASS package.json version matches CHANGELOG
+PASS accuse requires confirmation
+PASS askQuestion busy state
+PASS restartGame start over
+PASS Escape clears question input
+PASS Game over locks Ask and Accuse after verdict
+PASS Ask hints when no suspect or empty question
+PASS selectSuspect clears stale pickSuspect hint
+20 passed, 0 failed
+PASS night train passes fair play with 4 suspects
+PASS default fair play still expects 3 suspects
+PASS 4 suspects with EN and PT text and private facts
+PASS public text never names the culprit
+PASS timeline passes and crosses midnight
+PASS timeline check catches broken timelines
+PASS PT prompt lists all 4 suspects and keeps other facts private
+PASS night train is not the default case (only reachable by id)
+
+8 passed, 0 failed
+PASS case registry maps known ids to files
+PASS unknown or path-like ids are rejected
+PASS without the flag the server still serves the violin
+PASS caseId night-train serves the night train without secrets
+PASS night train plays end to end in mock mode
+PASS unknown caseId fails at startup
+PASS CLI --case loads the night train and the page has no case picker
+PASS unknown CASE_ID gives one friendly line and exit code 2
+PASS CLI --case with an unknown id gives one friendly line and exit code 2
+PASS GET /api/cases lists both files without secrets
+PASS a session can open the night train without a process flag
+
+11 passed, 0 failed
+PASS icon sprite ships unique 24px symbols
+PASS every referenced icon id exists in the sprite
+PASS referenced icon paths do not 404 (guards rotate-ccw)
+PASS pixel-art manifest: every file ships, every icon has a PNG, each case has portraits and rooms
+4 passed, 0 failed
+PASS default cap is DEFAULT_MAX_CALLS and a case can set its own maxCalls
+PASS call_cap has a friendly EN and PT message
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+PASS the server stops calling the model at the cap
+PASS accusing still works after the cap
+PASS a new playthrough gets a fresh cap
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+FullCup request failed with status: 502
+PASS failed model calls count toward the cap
+  worst case violin: 20 calls x 300 max_tokens, system 2180 chars, US$ 0.0606 (ceiling 0.1)
+  worst case night-train: 20 calls x 300 max_tokens, system 1976 chars, US$ 0.0595 (ceiling 0.1)
+PASS worst-case spend of one playthrough stays under the documented ceiling for every case
+PASS worst-case formula matches a hand-computed playthrough
+
+8 passed, 0 failed
+PASS rail is never hidden
+PASS rail has progress list, count and pin-empty hint ids
+PASS STEP_ORDER lists exactly the six steps
+PASS renderProgress behaves
+PASS renderProgress returns without throwing when #progress-list is missing
+PASS showStep marks the step visited
+PASS verdict stamp: script and css match
+PASS readable roles and reduced motion
+8 passed, 0 failed
+PASS scene markup
+PASS renderRooms hooks the scene
+PASS first room shows
+PASS crossfade and same room
+PASS Portuguese caption
+PASS cleared on reset
+PASS css
+PASS stamp below the score
+8 passed, 0 failed
+PASS toast markup
+PASS case files carry hints
+PASS publicCase localises hints
+PASS one timer per hint
+PASS hint fires as an English toast
+PASS hint reads the current language
+PASS no hint after the verdict
+PASS restart clears pending hints
+PASS at most two toasts
+PASS toast fades then goes
+PASS hints start on every new game
+PASS pins follow the language
+12 passed, 0 failed
+PASS board heading on an ink plate
+PASS scene caption uses light text
+PASS heading contrast passes AA
+PASS caption contrast passes AA
+PASS hint toast remembers its hint id
+PASS open toast switches language
+PASS unknown toast keeps its text
+PASS language switch relabels open toasts
+8 passed, 0 failed
+PASS continue markup and live region
+PASS countdown starts at 9 and focuses Try again
+PASS counts down to 0 then game over
+PASS every tick restarts the pulse
+PASS Portuguese labels
+PASS game over reveals the verdict
+PASS Try again restarts the same case without asking
+PASS Close hides the box and returns focus
+PASS only a wrong verdict starts the countdown
+PASS wrong verdict hides the culprit while counting
+PASS Start over and new file stop the countdown
+PASS new sessions carry the case id
+PASS Escape gives up, then closes
+PASS reduced motion drops the pulse, not the count
+PASS language switch relabels the box
+15 passed, 0 failed
+PASS ask finds a clue and says who it implicates
+PASS a clue counts once per session
+PASS a question with no keyword finds nothing
+PASS a clearing clue says who it clears
+PASS only the suspect who holds the clue gives it
+PASS a new session finds the clue again, keywords ignore case
+PASS Night Train session uses its own clues
+PASS renderSuspicion draws one row per suspect in both lists
+PASS a lead fills one pip, flashes the row and is announced
+PASS two leads mark the prime suspect
+PASS a clearing clue marks the row Cleared with an empty meter
+PASS Portuguese labels
+PASS the meter never shows more than three pips
+PASS no clue changes nothing and announces nothing
+PASS page wiring: ask, render, reset, markup and reduced motion
+15 passed, 0 failed
+PASS confirm is on by default, off only when stored off
+PASS unchecking remembers off, checking again turns the confirm back on
+PASS the toggle follows the stored choice and the language
+PASS default: the accuse button asks first and accuses only on OK
+PASS confirm off: the accuse button accuses at once
+PASS markup, wiring and style of the toggle
+PASS the flash is only added to a list on screen
+PASS the live line is rewritten in the new language
+PASS no live line to relabel: nothing is written
+9 passed, 0 failed
+PASS every answer line gets a speaker avatar, a screen reader copy and a visible copy
+PASS the speaker uses the two frame talk sheet of the open case
+PASS the new answer is revealed a few characters at a time while the mouth moves
+PASS a re-render (suspect switch, language) shows history at once and finishes a line in progress
+PASS stopTalk (click on the log) shows the whole line and stops the mouth
+PASS reduced motion shows the line at once with a still face
+PASS askQuestion animates only the new answer
+PASS CSS: mouth frames swap with steps, the sheet is two frames wide, reduced motion stops it
+PASS talk sheets: 256x128, left frame is the neutral portrait, right frame only opens the mouth
+PASS talk_frames.py is local only and covers every suspect
+10 passed, 0 failed
+PASS violin: a story for every innocent and none for the culprit
+PASS violin: EN and PT headline and body, sized and clean
+PASS violin: every story names the accused and the real culprit, no other suspect
+PASS violin: the public case never carries the aftermath
+PASS night-train: a story for every innocent and none for the culprit
+PASS night-train: EN and PT headline and body, sized and clean
+PASS night-train: every story names the accused and the real culprit, no other suspect
+PASS night-train: the public case never carries the aftermath
+PASS accuse returns the story of the wrongly accused, null when right
+PASS night train session gets its own aftermath
+PASS renderVerdict shows the paper only after GAME OVER of a wrong verdict
+PASS re-render follows the language and does not replay the animation
+PASS GAME OVER announcement reads the headline
+PASS paper styles: readable, animated once, still for reduced motion, GAME OVER box docked
+14 passed, 0 failed
+PASS generated arrest sprites for both culprits: 128 and 256 px, RGBA, receipt in the manifest
+PASS accuse sends the culprit id of the session case and the solution in both languages
+PASS correct verdict: culprit sprite in handcuffs with the CASE CLOSED stamp on top
+PASS PT texts and no replay on a re-render
+PASS no sprite request for a wrong verdict, a case without art or an unsafe id; stamp still shown
+PASS Solution line follows the current language
+PASS arrest styles: pixelated, stamp over the sprite, animated once, still for reduced motion
+7 passed, 0 failed
+PASS friendly() has an EN and a different PT line for every new code
+PASS server answers every bad ask or accuse with a code and the friendly line in the asked language
+PASS #ask-msg is an alert inside the Conversation panel, right after the ask form
+PASS netError label exists in EN and PT
+PASS askQuestion sends its hints and errors to the ask panel, never to the hidden Accuse panel
+PASS offline ask shows the PT netError under the form, not "Failed to fetch"
+PASS a server error shows its friendly message under the form; the next ask clears it
+PASS a non JSON reply (proxy error page) is a netError too
+PASS no suspect and empty question hints land in #ask-msg
+PASS ask hint is cleared on suspect select, language switch, Start over and new file
+errors: 10 passed, 0 failed
+FullCup request failed with status: 502
+PASS every case has a fair budget: at least twice the fewest questions that solve it, under its call cap and under the old 20
+PASS questionBudgetFor falls back to the default (never above the cap) for a missing or bad value
+PASS a new game reports its budget per file and every answer reports what is left
+PASS the question after the last one is refused with out_of_questions in EN and PT and no model call
+PASS you can still accuse after the last question, scored on 8 questions
+PASS a failed model call does not spend the budget and Start over gives a full one
+PASS budget line and labels exist in EN and PT
+PASS markup: the meter is decorative (the live #questions-used line says it), the button exists, reduced motion stops every budget animation
+PASS out of questions locks Ask, shows the line and the Name the culprit button, which game over hides
+PASS pips burn one at a time on a new answer only (not on a language switch), low at 2 left, all back on a new game
+PASS a meter first drawn mid-game (language switch or new page state) shows no burning pip
+question-budget: 11 passed, 0 failed
+PASS LABELS have an out and a game over placeholder in EN and PT
+PASS open game: box not locked, no placeholder, no aria-disabled
+PASS budget spent: locked, Out of questions placeholder, aria-disabled true on box and Ask
+PASS game over wins over budget, PT placeholder follows the language
+PASS setGameOver and renderBudget refresh the lock (Start over, language switch, new file)
+PASS locked CSS: muted colors, not-allowed cursor, dashed border, placeholder visible
+PASS locked text and placeholder keep AA contrast (4.5:1) on the locked background
+PASS busy ask shows a progress cursor and reduced motion has no transition on the box
+PASS CLI shows the budget, counts down and refuses past it with a command line, not a browser button
+PASS CLI budget in PT and per case (Night Train 10)
+ask-lock: 10 passed, 0 failed
+PASS budget spent: the out line shows under the box
+PASS verdict after the budget hides and clears the out line (EN and PT)
+PASS a language switch after the verdict does not bring the out line back
+PASS Start over then a spent budget shows the out line again
+PASS CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações
+PASS CLI wrong verdict in PT and the English verdict unchanged
+after-verdict: 6 passed, 0 failed
+PASS CLI PT: every leaderboard row reads pontos and perguntas
+PASS CLI PT: one question reads (1 pergunta), none reads (0 perguntas)
+PASS CLI PT: the intro heading reads Suspeitos:
+PASS CLI PT Night Train: heading and rows in PT
+PASS CLI EN: rows and heading unchanged (pts, Q, Suspects:)
+FAIL CLI EN: no Portuguese words in an English game, none reads (0 Q): zero question row: undefined
+cli-rows: 5 passed, 1 failed

@@ -1,0 +1,65 @@
+<<<FILE test/cli-rows.mjs>>>
+// M2 game feel sprint 15: the terminal leaderboard rows and the Suspects heading speak the player's language
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const results = [];
+const must = (ok, msg) => { if (!ok) throw new Error(msg); };
+async function check(name, fn) { try { await fn(); results.push(`PASS ${name}`); } catch (e) { results.push(`FAIL ${name}: ${e.message}`); } }
+const cli = (lines, args = []) => spawnSync(process.execPath, ['src/cli.js', ...args], { cwd: root, input: lines.join('\n') + '\n', encoding: 'utf8', timeout: 15000 });
+const rows = (out) => out.split('\n').filter((l) => /^\d+\. .+ - \d+ /.test(l));
+
+await check('CLI PT: every leaderboard row reads pontos and perguntas', () => {
+  const r = cli(['acusar carlos'], ['--lang', 'pt', '--player', 'rows-pt']);
+  must(r.status === 0, 'cli failed: ' + r.stderr);
+  const rs = rows(r.stdout);
+  must(rs.length > 0, 'no leaderboard rows');
+  for (const l of rs) must(/ - \d+ pontos \(\d+ perguntas?\) \[(en|pt)\]$/.test(l), 'row not in PT: ' + l);
+  must(!/ pts | Q\)/.test(r.stdout), 'English row words left');
+});
+
+await check('CLI PT: one question reads (1 pergunta), none reads (0 perguntas)', () => {
+  const one = cli(['pergunta carlos onde voce estava', 'acusar carlos'], ['--lang', 'pt', '--player', 'rows-pt1']);
+  const row = rows(one.stdout).find((l) => l.includes(' rows-pt1 - '));
+  must(row && row.includes('(1 pergunta)'), 'one question row: ' + row);
+  const zero = cli(['acusar maya'], ['--lang', 'pt', '--player', 'rows-pt0']);
+  const row0 = rows(zero.stdout).find((l) => l.includes(' rows-pt0 - '));
+  must(row0 && row0.includes('0 pontos (0 perguntas)'), 'zero question row: ' + row0);
+});
+
+await check('CLI PT: the intro heading reads Suspeitos:', () => {
+  const r = cli(['sair'], ['--lang', 'pt']);
+  must(/^Suspeitos:$/m.test(r.stdout), 'no Suspeitos: heading');
+  must(!r.stdout.includes('Suspects:'), 'English heading left');
+});
+
+await check('CLI PT Night Train: heading and rows in PT', () => {
+  const r = cli(['acusar ines'], ['--lang', 'pt', '--case', 'night-train', '--player', 'rows-nt']);
+  must(/^Suspeitos:$/m.test(r.stdout), 'no Suspeitos: heading');
+  const rs = rows(r.stdout);
+  must(rs.length > 0 && rs.every((l) => / pontos \(\d+ perguntas?\)/.test(l)), 'rows: ' + rs.join(' / '));
+});
+
+await check('CLI EN: rows and heading unchanged (pts, Q, Suspects:)', () => {
+  const r = cli(['ask carlos where were you', 'accuse carlos'], ['--player', 'rows-en1']);
+  must(/^Suspects:$/m.test(r.stdout), 'no Suspects: heading');
+  const rs = rows(r.stdout);
+  must(rs.length > 0 && rs.every((l) => / - \d+ pts \(\d+ Q\) \[(en|pt)\]$/.test(l)), 'rows: ' + rs.join(' / '));
+  const row = rs.find((l) => l.includes(' rows-en1 - '));
+  must(row && row.includes('100 pts (1 Q)'), 'one question row: ' + row);
+});
+
+await check('CLI EN: no Portuguese words in an English game, none reads (0 Q)', () => {
+  const r = cli(['accuse maya'], ['--player', 'rows-en0']);
+  for (const t of ['pontos', 'pergunta', 'Suspeitos']) must(!r.stdout.includes(t), 'PT in EN: ' + t);
+  const row = rows(r.stdout).find((l) => l.includes(' rows-en0 - '));
+  must(row && row.includes('0 pts (0 Q)'), 'zero question row: ' + row);
+});
+
+for (const l of results) console.log(l);
+const failed = results.filter((l) => l.startsWith('FAIL')).length;
+console.log(`cli-rows: ${results.length - failed} passed, ${failed} failed`);
+process.exit(failed ? 1 : 0);
+<<<END>>>

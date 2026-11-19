@@ -1,0 +1,147 @@
+## PT correct: acusar carlos --lang pt --player probe-pt
+
+=== O Violino Desaparecido ===
+
+Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?
+
+Suspeitos:
+- lorenzo: Lorenzo Moretti (Maestro)
+- maya: Maya Santos (Violinista)
+- carlos: Carlos Mendes (Zelador)
+
+Perguntas restantes: 8 de 8
+
+=== Veredito ===
+Correto!
+Culpado: Carlos Mendes
+Solução: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos.
+Pontuação: 100 (perguntas feitas: 0)
+
+--- Melhores pontuações ---
+1. probe-pt - 100 pontos (0 perguntas) [pt]
+2. probe-en - 100 pontos (0 perguntas) [en]
+3. probe-pt - 100 pontos (0 perguntas) [pt]
+4. probe-pt1 - 100 pontos (1 pergunta) [pt]
+5. probe-en1 - 100 pontos (1 pergunta) [en]
+6. probe-pt - 0 pontos (0 perguntas) [pt]
+
+## PT wrong: acusar maya --lang pt --player probe-pt
+
+=== O Violino Desaparecido ===
+
+Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?
+
+Suspeitos:
+- lorenzo: Lorenzo Moretti (Maestro)
+- maya: Maya Santos (Violinista)
+- carlos: Carlos Mendes (Zelador)
+
+Perguntas restantes: 8 de 8
+
+=== Veredito ===
+Errado.
+Culpado: Carlos Mendes
+Solução: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos.
+Pontuação: 0 (perguntas feitas: 0)
+
+--- Melhores pontuações ---
+1. probe-pt - 0 pontos (0 perguntas) [pt]
+
+## PT one question: pergunta carlos onde voce estava | acusar carlos --lang pt --player probe-pt1
+
+=== O Violino Desaparecido ===
+
+Durante um ensaio na Academia de Música Aurora, o valioso violino Stradivarius desaparece da sala de instrumentos. Três pessoas estavam presentes naquela noite: o carismático maestro, uma jovem violinista prodígio e nervosa, e o zelador de longa data. Quem levou o precioso instrumento?
+
+Suspeitos:
+- lorenzo: Lorenzo Moretti (Maestro)
+- maya: Maya Santos (Violinista)
+- carlos: Carlos Mendes (Zelador)
+
+Perguntas restantes: 8 de 8
+
+Não tenho comentários sobre isso.
+
+Perguntas restantes: 7 de 8
+
+=== Veredito ===
+Correto!
+Culpado: Carlos Mendes
+Solução: O culpado é Carlos Mendes, o zelador. Ele roubou o Stradivarius para pagar a cirurgia da filha, escondendo‑o no fundo do seu carrinho. Lorenzo viu a fechadura aberta, mas assumiu que foi um descuido, enquanto Maya notou a fechadura violada e o carrinho estranho, fornecendo as pistas que apontam para Carlos.
+Pontuação: 100 (perguntas feitas: 1)
+
+--- Melhores pontuações ---
+1. probe-pt1 - 100 pontos (1 pergunta) [pt]
+2. probe-pt - 0 pontos (0 perguntas) [pt]
+
+## PT Night Train: acusar ines --lang pt --case night-train --player probe-pt
+
+=== O Trem Noturno ===
+
+No trem noturno Southern Star, o colar de safira da Duquesa desaparece do cofre trancado no vagão de bagagem entre Alder Crossing e Port Elling. Quatro pessoas tinham motivos para estar por perto. Quem roubou?
+
+Suspeitos:
+- helena: Helena Costa (Chefe de trem)
+- victor: Victor Hale (Joalheiro, passageiro)
+- tomas: Tomás Reyes (Carregador noturno)
+- ines: Inês Duarte (Cozinheira do vagão-restaurante)
+
+Perguntas restantes: 10 de 10
+
+=== Veredito ===
+Correto!
+Culpado: Inês Duarte
+Solução: Inês Duarte pegou o colar durante o apagão no túnel com uma chave copiada e o escondeu em uma lata de farinha; o avental visto por Tomás e a farinha no cofre a incriminam; Helena, Victor e Tomás estão inocentados pelos depoimentos uns dos outros.
+Pontuação: 100 (perguntas feitas: 0)
+
+--- Melhores pontuações ---
+1. probe-pt - 100 pontos (0 perguntas) [pt]
+
+## EN correct: accuse carlos --player probe-en
+
+=== The Vanishing Violin ===
+
+During a rehearsal at the Aurora Music Academy, the priceless Stradivarius violin disappears from the instrument room. Three people were present that night: the charismatic conductor, a nervous violin prodigy, and the longtime janitor. Who took the priceless instrument?
+
+Suspects:
+- lorenzo: Lorenzo Moretti (Conductor)
+- maya: Maya Santos (Violinist)
+- carlos: Carlos Mendes (Janitor)
+
+Questions left: 8 of 8
+
+=== Verdict ===
+Correct!
+Culprit: Carlos Mendes
+Solution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.
+Score: 100 (questions asked: 0)
+
+--- Top Scores ---
+1. probe-en - 100 pts (0 Q) [en]
+
+## EN one question: ask carlos where were you | accuse carlos --player probe-en1
+
+=== The Vanishing Violin ===
+
+During a rehearsal at the Aurora Music Academy, the priceless Stradivarius violin disappears from the instrument room. Three people were present that night: the charismatic conductor, a nervous violin prodigy, and the longtime janitor. Who took the priceless instrument?
+
+Suspects:
+- lorenzo: Lorenzo Moretti (Conductor)
+- maya: Maya Santos (Violinist)
+- carlos: Carlos Mendes (Janitor)
+
+Questions left: 8 of 8
+
+I have no comment on that.
+
+Questions left: 7 of 8
+
+=== Verdict ===
+Correct!
+Culprit: Carlos Mendes
+Solution: The culprit is Carlos Mendes, the janitor. He stole the Stradivarius to fund his daughter's surgery, hiding it in his cart. Lorenzo saw the open lock but thought it was an oversight, while Maya noticed the tampered lock and the odd cart, providing the clues that point to Carlos.
+Score: 100 (questions asked: 1)
+
+--- Top Scores ---
+1. probe-en1 - 100 pts (1 Q) [en]
+

@@ -1,0 +1,44 @@
+Change 1, file src/cli.js
+[OLD 1]
+};
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações' },
+};
+[/OLD 1]
+[NEW 1]
+};
+// the intro heading in the player's language (M2 game feel sprint 15): PT games printed Suspects:
+const SUSPECTS_HEADING = { en: 'Suspects:', pt: 'Suspeitos:' };
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores', points: 'pts', q1: 'Q', qn: 'Q' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações', points: 'pontos', q1: 'pergunta', qn: 'perguntas' },
+};
+[/NEW 1]
+
+Change 2, file src/cli.js
+[OLD 2]
+  console.log(data.intro);
+  console.log('\nSuspects:');
+  data.suspects.forEach((s) => {
+[/OLD 2]
+[NEW 2]
+  console.log(data.intro);
+  console.log(`\n${SUSPECTS_HEADING[lang]}`);
+  data.suspects.forEach((s) => {
+[/NEW 2]
+
+Change 3, file src/cli.js
+[OLD 3]
+          console.log(
+            `${idx + 1}. ${e.player} - ${e.score} pts (${e.questions} Q) [${e.lang}]`,
+          );
+[/OLD 3]
+[NEW 3]
+          console.log(
+            `${idx + 1}. ${e.player} - ${e.score} ${V.points} (${e.questions} ${e.questions === 1 ? V.q1 : V.qn}) [${e.lang}]`,
+          );
+[/NEW 3]
+

@@ -320,3 +320,10 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Reproduced first and checked after in mock mode with headless Chrome at 1280 and 390 in English and Portuguese (tools/probe-gf14.mjs): before, the line stayed visible after a correct verdict (4 of 4) and after a wrong one; after, hidden in every case and back only when a new budget runs out. CLI before and after in qa/m2gf14-probes/cli-*.txt.
 - Result: npm test 271/271 (was 265), new test/after-verdict.mjs 6 checks.
 - Details and receipts: qa/rework.md (M2 game feel sprint 14).
+
+## M2 game feel sprint 15 (v0.4.24)
+
+- Scope: the terminal leaderboard rows ("pts", "(N Q)") and the intro heading ("Suspects:") follow the language; English output unchanged.
+- Reproduced first and checked after with tools/probe-gf15.mjs (mock mode, Violin and Night Train, EN and PT): before, every PT row read "100 pts (0 Q)" and the heading "Suspects:"; after, "100 pontos (0 perguntas)", "(1 pergunta)" and "Suspeitos:". CLI before and after in qa/m2gf15-probes/cli-*.txt.
+- Result: npm test 277/277 (was 271), new test/cli-rows.mjs 6 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 15).

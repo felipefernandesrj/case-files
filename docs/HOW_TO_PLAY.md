@@ -33,7 +33,7 @@ The game works with Tab and Enter. Escape clears the question box while it is fo
 After the verdict, you will see a list of our wonderful backers. Every question creates a public receipt on FullCup so backers can see how the capacity is used.
 
 ### Play in a terminal
-`node src/cli.js` (add `--lang pt` for Portuguese). The terminal shows the same question budget ("Questions left: 8 of 8"); when it reaches zero, use `accuse <suspectId>`. The verdict prints in the language of the game.
+`node src/cli.js` (add `--lang pt` for Portuguese). The terminal shows the same question budget ("Questions left: 8 of 8"); when it reaches zero, use `accuse <suspectId>`. The verdict and the leaderboard print in the language of the game.
 
 <a id="portugues"></a>
 ## Português
@@ -67,4 +67,4 @@ O jogo funciona com Tab e Enter. Escape limpa a caixa de pergunta enquanto ela e
 Após o veredito, você verá uma lista de nossos apoiadores. Cada pergunta cria um recibo público no FullCup para que os apoiadores vejam como a capacidade está sendo usada.
 
 ### Jogar no terminal
-`node src/cli.js --lang pt` (o terminal mostra o mesmo limite, "Perguntas restantes: 8 de 8"; quando chega a zero, use `acusar <suspectId>`; o veredito sai em português, com Culpado e Pontuação)
+`node src/cli.js --lang pt` (o terminal mostra o mesmo limite, "Perguntas restantes: 8 de 8"; quando chega a zero, use `acusar <suspectId>`; o veredito e o placar saem em português, com Culpado, Pontuação e "100 pontos (3 perguntas)")

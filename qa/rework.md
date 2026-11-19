@@ -830,3 +830,20 @@ Known limit (not in scope): the cap is per session, so Start over gives a fresh 
 - Key: 3 calls (285-287), 6,055/4,474 tokens, 177.06 neurons, ~US$0.0019 (177.06 x $0.011/1000 = $0.001948). Rework 0 calls = 0.0% (was 11.7%). 0 re-parses, 0 API failures. No live play call.
 - Receipts (seal-by 2026-11-20 00:05Z): 285 01M7RHMPE1MM48F1BCGRKWPJZT, 286 01M7RHNEY5BCME06J9WF4YSFJ7, 287 01M7RHQX6BT0A0GXNQ06ZCNB7X.
 - Known, not fixed: PT leaderboard rows in the CLI keep "pts" and "(N Q)"; one budget for all players; verdict art per case.
+
+## M2 game feel sprint 15 (v0.4.24), 2026-11-19 08:51-09:10 BRT
+- Housekeeping: git status clean at start (HEAD 6fef48f, v0.4.23, m1-via-key 26 ahead, not pushed). Seal check of 285-287 not due (seal-by 19/11 21:05 BRT), left for the evening run.
+- Choice: the PT leaderboard rows in the terminal ("pts", "(N Q)"), listed as known in sprint 14. Tiny, so the intro heading "Suspects:" in PT was added too. Not chosen: per-player budget, verdict art per case, answer language of older log lines, other English CLI lines (Usage:, Unknown command, No history for this suspect., Q:/A: in history).
+- Reproduced before building (tools/probe-gf15.mjs on HEAD, mock, qa/m2gf15-probes/probe-before.json, repro-before.txt, cli-before.txt): every PT row read "100 pts (0 Q)" and the heading "Suspects:", Violin and Night Train, 4 of 4 PT runs; EN fine.
+- Dry run first (qa/m2gf15-probes/dry/): SUSPECTS_HEADING {en, pt}; VERDICT_LINES gets points ("pts"/"pontos"), q1 ("Q"/"pergunta") and qn ("Q"/"perguntas"); rows print `${e.score} ${V.points} (${e.questions} ${e.questions === 1 ? V.q1 : V.qn})`; test/cli-rows.mjs 6 checks; 13 doc pairs.
+- 288 code (gemma, thinking off, 3 numbered OLD/NEW pairs from tools/gen-pairs.py): 3/3 applied, byte identical to the dry run.
+- 289 tests (gemma, FILE): identical to the dry run, but 2 of 3 full runs then failed one check: the suite shares data/scores.json, and once ten 100 point rows were there the 0 point row of the test fell out of the top 10.
+- 290 docs (gemma, 13 substring pairs incl. package version + script): 13/13 applied, all 6 files identical.
+- 291 rework tests (gemma, FILE): the test seeds a fixed leaderboard (ana 100/1, bia 75/3, zed 0/0, Night Train nt 100/2) before every terminal run and restores data/scores.json at the end; identical to the second dry copy.
+- Mutation check (qa/m2gf15-probes/mutation-check.txt): 12 of 12 caught (dry gap M12 "EN Q changed" closed in the dry copy before any call).
+- npm test 277/277 (was 271; cli-rows 6 new), 3 full runs after 291, each after 12 extra PT games filled the leaderboard, all clean.
+- After (qa/m2gf15-probes/probe-after.json, cli-after.txt): PT rows "100 pontos (0 perguntas)", "(1 pergunta)", heading "Suspeitos:", Violin and Night Train; EN rows "100 pts (1 Q)" and "Suspects:" unchanged.
+- Key: 4 calls (288-291), 6,601/4,972 tokens, 195.61 neurons, ~US$0.0022 (195.61 x $0.011/1000 = $0.002152). Rework 1 call (291) = 68.05 neurons, 34.8% (was 0.0%). 0 re-parses, 0 API failures. No live play call.
+- Receipts (seal-by 2026-11-20 00:05Z = 19/11 21:05 BRT): 288 01M7STKPXG8TGGZ2T6VDB28XMR, 289 01M7STM8TF166XDEEZWMN5RAFQ, 290 01M7STNK8PHDZCPWZM0Z92MJT7, 291 01M7STT4F0YV9F7XGCT4GVXMPA.
+- Known, not fixed: other CLI lines stay English in PT (Usage:, Unknown command, No history for this suspect., Q:/A: in history); one budget for all players; verdict art per case.
+- Prompt lesson: a test that reads a shared file (data/scores.json) must seed its own fixture; a dry run on a near-empty leaderboard hid the flake.

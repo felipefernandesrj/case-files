@@ -13,10 +13,12 @@ const OUT_LINE = {
   en: 'No questions left in this game. Name the culprit with: accuse <suspectId>',
   pt: 'Acabaram as perguntas desta partida. Aponte o culpado com: acusar <suspectId>',
 };
+// the intro heading in the player's language (M2 game feel sprint 15): PT games printed Suspects:
+const SUSPECTS_HEADING = { en: 'Suspects:', pt: 'Suspeitos:' };
 // verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
 const VERDICT_LINES = {
-  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores' },
-  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações' },
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores', points: 'pts', q1: 'Q', qn: 'Q' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações', points: 'pontos', q1: 'pergunta', qn: 'perguntas' },
 };
 let questionBudget = 0;
 let questionsLeft = null;
@@ -83,7 +85,7 @@ async function displayIntro() {
   const data = await getJSON(`${baseUrl}/api/case?lang=${lang}`);
   console.log(`\n=== ${data.title} ===\n`);
   console.log(data.intro);
-  console.log('\nSuspects:');
+  console.log(`\n${SUSPECTS_HEADING[lang]}`);
   data.suspects.forEach((s) => {
     console.log(`- ${s.id}: ${s.name} (${s.role})`);
   });
@@ -164,7 +166,7 @@ async function processCommand(line) {
         console.log(`--- ${V.top} ---`);
         top.forEach((e, idx) => {
           console.log(
-            `${idx + 1}. ${e.player} - ${e.score} pts (${e.questions} Q) [${e.lang}]`,
+            `${idx + 1}. ${e.player} - ${e.score} ${V.points} (${e.questions} ${e.questions === 1 ? V.q1 : V.qn}) [${e.lang}]`,
           );
         });
         return true; // signal termination

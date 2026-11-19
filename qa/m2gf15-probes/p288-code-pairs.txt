@@ -1,0 +1,61 @@
+Implement "a Portuguese leaderboard in the terminal" for the Case Files terminal game (Node, no deps). Today a Portuguese game (node src/cli.js --lang pt) prints the Top Scores rows as "1. ana - 100 pts (3 Q) [pt]" and the intro heading "Suspects:" in English. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+1. src/cli.js: a SUSPECTS_HEADING table (EN and PT) and the points and question words (points, q1 for one question, qn otherwise) in VERDICT_LINES.
+2. src/cli.js: the intro prints SUSPECTS_HEADING[lang].
+3. src/cli.js: each Top Scores row uses V.points and V.q1 or V.qn.
+
+All 3 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 3 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file src/cli.js
+[OLD 1]
+};
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações' },
+};
+[/OLD 1]
+[NEW 1]
+};
+// the intro heading in the player's language (M2 game feel sprint 15): PT games printed Suspects:
+const SUSPECTS_HEADING = { en: 'Suspects:', pt: 'Suspeitos:' };
+// verdict lines in the player's language (M2 game feel sprint 14): PT games printed Culprit:, Score: and the headings in English
+const VERDICT_LINES = {
+  en: { title: 'Verdict', correct: 'Correct!', wrong: 'Wrong.', culprit: 'Culprit', solution: 'Solution', score: 'Score', asked: 'questions asked', top: 'Top Scores', points: 'pts', q1: 'Q', qn: 'Q' },
+  pt: { title: 'Veredito', correct: 'Correto!', wrong: 'Errado.', culprit: 'Culpado', solution: 'Solução', score: 'Pontuação', asked: 'perguntas feitas', top: 'Melhores pontuações', points: 'pontos', q1: 'pergunta', qn: 'perguntas' },
+};
+[/NEW 1]
+
+Change 2, file src/cli.js
+[OLD 2]
+  console.log(data.intro);
+  console.log('\nSuspects:');
+  data.suspects.forEach((s) => {
+[/OLD 2]
+[NEW 2]
+  console.log(data.intro);
+  console.log(`\n${SUSPECTS_HEADING[lang]}`);
+  data.suspects.forEach((s) => {
+[/NEW 2]
+
+Change 3, file src/cli.js
+[OLD 3]
+          console.log(
+            `${idx + 1}. ${e.player} - ${e.score} pts (${e.questions} Q) [${e.lang}]`,
+          );
+[/OLD 3]
+[NEW 3]
+          console.log(
+            `${idx + 1}. ${e.player} - ${e.score} ${V.points} (${e.questions} ${e.questions === 1 ? V.q1 : V.qn}) [${e.lang}]`,
+          );
+[/NEW 3]
+

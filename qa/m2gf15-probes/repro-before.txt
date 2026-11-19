@@ -1,0 +1,4 @@
+Reproduced on HEAD 6fef48f (v0.4.23) before any code call, 2026-11-19 ~08:57 BRT, mock mode, terminal game (tools/probe-gf15.mjs, probe-before.json, cli-before.txt; copies in /workspace/casefiles-qa/run43/):
+- node src/cli.js --lang pt, "acusar carlos" (Violin): heading over the suspect list "Suspects:" and every Top Scores row in English, e.g. "1. probe-pt - 100 pts (0 Q) [pt]", under the Portuguese heading "--- Melhores pontuações ---". Same after "acusar maya" (0 pts (0 Q)) and after one question ("probe-pt1 - 100 pts (1 Q) [pt]").
+- Night Train in PT (--case night-train, "acusar ines"): same English heading and rows.
+- 4 of 4 PT runs BAD (0 PT rows), 2 of 2 EN runs OK (pts, Q, Suspects:).

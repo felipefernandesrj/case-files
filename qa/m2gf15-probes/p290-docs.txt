@@ -1,0 +1,140 @@
+Update the docs of the Case Files game for version 0.4.24 (M2 game feel sprint 15: a Portuguese leaderboard in the terminal, and the Suspeitos heading). Make these exact changes, emitted as literal search/replace blocks, one block per change. Some OLD texts are only part of a long line; copy them exactly as given, do not extend them.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+All 13 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 13 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file package.json
+[OLD 1]
+"version": "0.4.23",
+[/OLD 1]
+[NEW 1]
+"version": "0.4.24",
+[/NEW 1]
+
+Change 2, file package.json
+[OLD 2]
+node test/after-verdict.mjs && node test/keyboard.mjs
+[/OLD 2]
+[NEW 2]
+node test/after-verdict.mjs && node test/cli-rows.mjs && node test/keyboard.mjs
+[/NEW 2]
+
+Change 3, file CHANGELOG.md
+[OLD 3]
+# Changelog
+
+## 0.4.23 (
+[/OLD 3]
+[NEW 3]
+# Changelog
+
+## 0.4.24 (M2 game feel, sprint 15: a Portuguese leaderboard in the terminal)
+- In a Portuguese terminal game (node src/cli.js --lang pt) the leaderboard rows after the verdict now read "1. ana - 100 pontos (3 perguntas) [pt]", with "(1 pergunta)" for a single question; before, they kept the English "100 pts (3 Q)" under the Portuguese heading "Melhores pontuações" (reproduced on the Violin and the Night Train). English rows stay "100 pts (3 Q)".
+- The intro heading over the suspect list now reads "Suspeitos:" in Portuguese (it was "Suspects:").
+- New test/cli-rows.mjs with 6 checks. The automated suite now has 277 checks.
+
+## 0.4.23 (
+[/NEW 3]
+
+Change 4, file README.md
+[OLD 4]
+**M2 in progress (v0.4.23, game feel sprint 14).**
+[/OLD 4]
+[NEW 4]
+**M2 in progress (v0.4.24, game feel sprint 15).**
+[/NEW 4]
+
+Change 5, file README.md
+[OLD 5]
+the terminal verdict follows the language (Culpado, Pontuação in Portuguese).
+[/OLD 5]
+[NEW 5]
+the terminal verdict follows the language (Culpado, Pontuação in Portuguese), down to the leaderboard rows (100 pontos, 3 perguntas) and the Suspeitos heading.
+[/NEW 5]
+
+Change 6, file README.md
+[OLD 6]
+stay under US$0.10. 271 automated checks.
+[/OLD 6]
+[NEW 6]
+stay under US$0.10. 277 automated checks.
+[/NEW 6]
+
+Change 7, file docs/BUILD_LOG.md
+[OLD 7]
+- Details and receipts: qa/rework.md (M2 game feel sprint 14).
+[/OLD 7]
+[NEW 7]
+- Details and receipts: qa/rework.md (M2 game feel sprint 14).
+
+## M2 game feel sprint 15 (v0.4.24)
+
+- Scope: the terminal leaderboard rows ("pts", "(N Q)") and the intro heading ("Suspects:") follow the language; English output unchanged.
+- Reproduced first and checked after with tools/probe-gf15.mjs (mock mode, Violin and Night Train, EN and PT): before, every PT row read "100 pts (0 Q)" and the heading "Suspects:"; after, "100 pontos (0 perguntas)", "(1 pergunta)" and "Suspeitos:". CLI before and after in qa/m2gf15-probes/cli-*.txt.
+- Result: npm test 277/277 (was 271), new test/cli-rows.mjs 6 checks.
+- Details and receipts: qa/rework.md (M2 game feel sprint 15).
+[/NEW 7]
+
+Change 8, file docs/HOW_TO_PLAY.md
+[OLD 8]
+The verdict prints in the language of the game.
+[/OLD 8]
+[NEW 8]
+The verdict and the leaderboard print in the language of the game.
+[/NEW 8]
+
+Change 9, file docs/HOW_TO_PLAY.md
+[OLD 9]
+o veredito sai em português, com Culpado e Pontuação)
+[/OLD 9]
+[NEW 9]
+o veredito e o placar saem em português, com Culpado, Pontuação e "100 pontos (3 perguntas)")
+[/NEW 9]
+
+Change 10, file docs/SPEC.md
+[OLD 10]
+## Web page and CLI: after the verdict (M2 game feel sprint 14)
+[/OLD 10]
+[NEW 10]
+## CLI: leaderboard rows and intro heading (M2 game feel sprint 15)
+- `VERDICT_LINES[lang]` also holds `points` ("pts" / "pontos") and the question word (`q1` "Q" / "pergunta" for one, `qn` "Q" / "perguntas" otherwise); each Top Scores row prints `N. player - score points (questions word) [lang]` in the current language, whatever language the row was played in.
+- `SUSPECTS_HEADING[lang]` prints "Suspects:" or "Suspeitos:" over the suspect list.
+
+## Web page and CLI: after the verdict (M2 game feel sprint 14)
+[/NEW 10]
+
+Change 11, file docs/SPEC.md
+[OLD 11]
+English verdict unchanged)
+24. `node test/keyboard.mjs`
+[/OLD 11]
+[NEW 11]
+English verdict unchanged)
+24. `node test/cli-rows.mjs` (terminal leaderboard rows in PT with pontos and perguntas, (1 pergunta) and (0 perguntas), Suspeitos heading, Night Train in PT, English rows and heading unchanged with (1 Q) and (0 Q), no Portuguese in an English game)
+25. `node test/keyboard.mjs`
+[/NEW 11]
+
+Change 12, file docs/SPEC.md
+[OLD 12]
+Total checks: 271 (
+[/OLD 12]
+[NEW 12]
+Total checks: 277 (
+[/NEW 12]
+
+Change 13, file docs/SPEC.md
+[OLD 13]
+after-verdict 6, keyboard 13).
+[/OLD 13]
+[NEW 13]
+after-verdict 6, cli-rows 6, keyboard 13).
+[/NEW 13]
+

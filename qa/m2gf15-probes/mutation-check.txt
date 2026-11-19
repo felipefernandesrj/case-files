@@ -1,0 +1,13 @@
+M1 PT points English: CAUGHT (3 fail) FAIL CLI PT: every leaderboard row reads pontos and perguntas: row not in PT: 1. rows-pt - 100 pts (0 pergunta
+M2 PT plural English: CAUGHT (3 fail) FAIL CLI PT: every leaderboard row reads pontos and perguntas: row not in PT: 1. rows-pt - 100 pontos (0 Q) [p
+M3 PT singular English: CAUGHT (2 fail) FAIL CLI PT: every leaderboard row reads pontos and perguntas: row not in PT: 2. ana - 100 pontos (1 Q) [pt]
+M4 PT singular used for every count: CAUGHT (2 fail) FAIL CLI PT: one question reads (1 pergunta), fixture rows (1 pergunta), (3 perguntas), (0 perguntas): bia row
+M5 PT plural used for one: CAUGHT (1 fail) FAIL CLI PT: one question reads (1 pergunta), fixture rows (1 pergunta), (3 perguntas), (0 perguntas): one que
+M6 rows hardcoded pts: CAUGHT (3 fail) FAIL CLI PT: every leaderboard row reads pontos and perguntas: row not in PT: 1. rows-pt - 100 pts (0 pergunta
+M7 rows always PT table: CAUGHT (2 fail) FAIL CLI EN: rows and heading unchanged (pts, Q, Suspects:): rows: 1. ana - 100 pontos (1 pergunta) [pt] / 2. 
+M8 PT heading English: CAUGHT (2 fail) FAIL CLI PT: the intro heading reads Suspeitos:: no Suspeitos: heading
+M9 heading hardcoded: CAUGHT (2 fail) FAIL CLI PT: the intro heading reads Suspeitos:: no Suspeitos: heading
+M10 heading always PT: CAUGHT (2 fail) FAIL CLI EN: rows and heading unchanged (pts, Q, Suspects:): no Suspects: heading
+M11 EN points changed: CAUGHT (2 fail) FAIL CLI EN: rows and heading unchanged (pts, Q, Suspects:): rows: 1. ana - 100 points (1 Q) [pt] / 2. rows-en
+M12 EN Q changed: CAUGHT (2 fail) FAIL CLI EN: rows and heading unchanged (pts, Q, Suspects:): rows: 1. ana - 100 pts (1 Q) [pt] / 2. rows-en1 -
+caught 12/12

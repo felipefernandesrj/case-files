@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.24 (M2 game feel, sprint 15: a Portuguese leaderboard in the terminal)
+- In a Portuguese terminal game (node src/cli.js --lang pt) the leaderboard rows after the verdict now read "1. ana - 100 pontos (3 perguntas) [pt]", with "(1 pergunta)" for a single question; before, they kept the English "100 pts (3 Q)" under the Portuguese heading "Melhores pontuações" (reproduced on the Violin and the Night Train). English rows stay "100 pts (3 Q)".
+- The intro heading over the suspect list now reads "Suspeitos:" in Portuguese (it was "Suspects:").
+- New test/cli-rows.mjs with 6 checks. The automated suite now has 277 checks.
+
 ## 0.4.23 (M2 game feel, sprint 14: a clean Ask step after the verdict)
 - After the verdict the line "No questions left in this game. Name the culprit in Accuse, or press Start over for a new game." no longer stays under the locked question box (reproduced at 1280 and 390 in English and Portuguese, after a correct and a wrong verdict). The culprit is already named, so the verdict clears it; the box keeps its "Game over" look. A language switch does not bring it back, and Start over or Try again show it again only when the new budget runs out.
 - The terminal game (node src/cli.js --lang pt) now prints the verdict in Portuguese: "=== Veredito ===", "Culpado:", "Pontuação: 100 (perguntas feitas: 3)" and "--- Melhores pontuações ---" (before, these lines stayed in English). English games print the same lines as before.
