@@ -1,0 +1,251 @@
+<<<REPLACE src/case.js>>>
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+=====
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+<<<END>>>
+<<<REPLACE src/case.js>>>
+
+/** Known cases: id -> case file (relative to the project root). */
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' });
+
+=====
+/** Folder of generated cases (M3 sprint 2): src/generator.js writes gen-<seed>.json here. */
+export const GENERATED_DIR = 'content/generated';
+
+/**
+ * Generated cases in a folder: id -> case file, for every gen-<seed>.json, sorted by id.
+ * @param {string} [dir=GENERATED_DIR] folder relative to the project root
+ * @returns {Object<string,string>}
+ */
+export function generatedCases(dir = GENERATED_DIR) {
+  const abs = resolve(dirname(fileURLToPath(import.meta.url)), '..', dir);
+  if (!existsSync(abs)) return {};
+  const out = {};
+  for (const f of readdirSync(abs).sort()) {
+    const m = /^(gen-[a-z0-9-]+)\.json$/.exec(f);
+    if (m) out[m[1]] = `${dir}/${f}`;
+  }
+  return out;
+}
+
+/** Known cases: id -> case file (relative to the project root). The two handmade cases first, then every generated case. */
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json', ...generatedCases() });
+<<<END>>>
+<<<REPLACE src/case.js>>>
+  if (c?.id === 'case-night-train-002') return 'night-train';
+  return 'violin';
+}
+=====
+  if (c?.id === 'case-night-train-002') return 'night-train';
+  const g = /^case-(gen-[a-z0-9-]+)$/.exec(c?.id || '');
+  if (g) return g[1];
+  return 'violin';
+}
+
+/** Rooms of a loaded case: the handmade list for its file, else the rooms the generator wrote ({ id, en, pt }). */
+export function roomsOf(c, file = fileKeyOf(c)) {
+  if (ROOMS[file]) return ROOMS[file];
+  return (Array.isArray(c?.rooms) ? c.rooms : []).filter(r => r && typeof r.id === 'string' && /^[a-z][a-z0-9-]*$/.test(r.id));
+}
+<<<END>>>
+<<<REPLACE src/case.js>>>
+    const hook = intro.split(/(?<=[.?!])\s/)[0] || intro;
+    return { id, title: c.title?.[l] ?? '', hook };
+  });
+=====
+    const hook = intro.split(/(?<=[.?!])\s/)[0] || intro;
+    const item = { id, title: c.title?.[l] ?? '', hook, generated: Boolean(c.generated) };
+    if (c.generated) item.cost = { usd: Number(c.generated.cost?.usd) || 0, drafts: Number(c.generated.cost?.drafts) || 0 };
+    return item;
+  });
+<<<END>>>
+<<<REPLACE src/case.js>>>
+  const file = fileKeyOf(c);
+  const rooms = (ROOMS[file] || []).map(r => ({ id: r.id, name: r[l] }));
+  const timeline = Array.isArray(c.timeline)
+=====
+  const file = fileKeyOf(c);
+  const rooms = roomsOf(c, file).map(r => ({ id: r.id, name: r[l] ?? '' }));
+  const timeline = Array.isArray(c.timeline)
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+export const MAX_ATTEMPTS = 3;
+
+=====
+export const MAX_ATTEMPTS = 3;
+/** Workers AI price of one neuron in USD (US$ 0.011 per 1,000 neurons). */
+export const NEURON_USD = 0.011 / 1000;
+/** Spending cap of one generation in USD (M3 sprint 2): no new draft starts if it would likely pass the cap. */
+export const DEFAULT_MAX_USD = 0.005;
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+- glossary: en/pt terms.
+- solution: en/pt description of how the crime was solved.
+- aftermath: an OBJECT keyed by each innocent suspect id (not an array), each value { "en": { "headline", "body" }, "pt": { "headline", "body" } }: the newspaper story when the player wrongly accuses that suspect.
+- every clue is a line a suspect says when asked: "from" is the speaker, "ask" is a question to that suspect, "text" is their answer in first person. A suspect never implicates themselves.
+
+=====
+- glossary: en/pt terms.
+- rooms: 3 to 6 places of the case where the detective can look, each { "id" (a-z/numbers/hyphens), "en", "pt" } with a short place name (not an event).
+- solution: en/pt description of how the crime was solved.
+- aftermath: an OBJECT keyed by each innocent suspect id (not an array), each value { "en": { "headline", "body" }, "pt": { "headline", "body" } }: the newspaper story when the player wrongly accuses that suspect.
+- every clue is a line a suspect says when asked: "from" is the speaker, "ask" is a question to that suspect, "text" is their answer in first person ("I saw...", "Eu vi..."), never narration ("The floor shows...", "You find..."). A suspect never implicates themselves.
+
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  suspect_bad: 'every suspect needs a lowercase id, name, role en/pt and facts',
+});
+
+export function genMessages(seed, { suspects = 4, reasons = [] } = {}) {
+=====
+  suspect_bad: 'every suspect needs a lowercase id, name, role en/pt and facts',
+  rooms_bad: 'add "rooms": 3 to 6 places, each with a lowercase id and short en and pt names',
+  clue_not_testimony: 'every clue text is spoken by its "from" suspect in first person, in en and pt ("I saw...", "Eu vi..."), never narration or "You find..."',
+});
+
+const FIRST_EN = /\b(i|i'm|i've|i'd|i'll|me|my|mine|myself|we|us|our|ours)\b/i;
+const FIRST_PT = /(^|[^\p{L}])(eu|me|mim|meu|meus|minha|minhas|comigo|nós|nos|nosso|nossa|nossos|nossas|vi|ouvi|fui|estive|sei|vejo|acho|lembro|tenho|estou|sou|\p{L}{2,}ei)(?![\p{L}])/iu;
+
+/**
+ * True when a clue reads as testimony (M3 sprint 2: drafts narrated scenes instead): its EN and PT text both speak in
+ * first person, or, without "You..." / "Você...", both name another suspect (a witness talking about someone).
+ * @param {Object} clue
+ * @param {Object} [c] the case, for the suspect names
+ */
+export function isTestimony(clue, c) {
+  const en = clue?.text?.en, pt = clue?.text?.pt;
+  if (typeof en !== 'string' || typeof pt !== 'string') return false;
+  if (FIRST_EN.test(en) && FIRST_PT.test(pt)) return true;
+  if (/^\s*you\b/i.test(en) || /^\s*voc[eê]\b/i.test(pt)) return false;
+  const others = (Array.isArray(c?.suspects) ? c.suspects : []).filter((s) => s && s.id !== clue.from).flatMap((s) => String(s.name || '').split(/\s+/)).filter((w) => w.length >= 3);
+  return others.some((w) => en.includes(w) && pt.includes(w));
+}
+
+/** USD of one model answer: from its neurons, else from its tokens at gemma's output price (an upper bound). */
+export function usageUsd(usage) {
+  if (!usage) return 0;
+  if (Number.isFinite(usage.neurons)) return usage.neurons * NEURON_USD;
+  return ((Number(usage.prompt_tokens) || 0) + (Number(usage.completion_tokens) || 0)) * 0.3 / 1e6;
+}
+
+export function genMessages(seed, { suspects = 4, reasons = [] } = {}) {
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.clears != null && cl.clears === c.culprit)) reasons.push('culprit_cleared');
+
+=====
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.clears != null && cl.clears === c.culprit)) reasons.push('culprit_cleared');
+  // M3 sprint 2: a generated case needs its own rooms, and clue texts are lines a suspect says
+  const rooms = Array.isArray(c.rooms) ? c.rooms : [];
+  const roomIds = new Set(rooms.map((r) => r && r.id));
+  if (rooms.length < 3 || rooms.length > 6 || roomIds.size !== rooms.length || rooms.some((r) => !r || typeof r.id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(r.id) || typeof r.en !== 'string' || !r.en.trim() || typeof r.pt !== 'string' || !r.pt.trim())) reasons.push('rooms_bad');
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.text && !isTestimony(cl, c))) reasons.push('clue_not_testimony');
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+
+export function finishCase(c, seed, model) {
+  return {
+=====
+export function finishCase(c, seed, model, attempts = []) {
+  const usd = attempts.reduce((a, t) => a + usageUsd(t.usage), 0);
+  return {
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+    questionBudget: 2 * fairMinimum(c),
+    generated: { seed: String(seed), model }
+  };
+=====
+    questionBudget: 2 * fairMinimum(c),
+    generated: { seed: String(seed), model, cost: { usd: Math.round(usd * 1e6) / 1e6, drafts: attempts.length, receipts: attempts.map((t) => t.receipt).filter(Boolean) } }
+  };
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+
+export async function generateCase(seed, { key, baseUrl = 'https://qa-api.fullcup.ai/v1', fetchImpl = fetch, model = GEN_MODEL, suspects = 4, maxAttempts = MAX_ATTEMPTS, maxTokens = 8000 } = {}) {
+  const attempts = [];
+  let currentReasons = [];
+
+  for (let n = 1; n <= maxAttempts; n++) {
+    try {
+=====
+export async function generateCase(seed, { key, baseUrl = 'https://qa-api.fullcup.ai/v1', fetchImpl = fetch, model = GEN_MODEL, suspects = 4, maxAttempts = MAX_ATTEMPTS, maxTokens = 8000, maxUsd = DEFAULT_MAX_USD } = {}) {
+  const attempts = [];
+  let currentReasons = [];
+  let spentUsd = 0;
+  const round = (v) => Math.round(v * 1e6) / 1e6;
+
+  for (let n = 1; n <= maxAttempts; n++) {
+    // M3 sprint 2: stop before a draft that would likely pass the cap (estimate: the average draft so far)
+    const nextUsd = n === 1 ? 0 : spentUsd / (n - 1);
+    if (!(maxUsd > 0) || (n > 1 && spentUsd + nextUsd > maxUsd)) {
+      return { ok: false, case: null, attempts, reasons: [...currentReasons, 'cost_cap'], spentUsd: round(spentUsd) };
+    }
+    try {
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+      attempts.push({ n, status: response.status, usage, receipt, ok: validation.ok, reasons: validation.reasons });
+
+      if (validation.ok) {
+        return { ok: true, case: finishCase(parsed, seed, model), attempts };
+      }
+=====
+      attempts.push({ n, status: response.status, usage, receipt, ok: validation.ok, reasons: validation.reasons });
+      spentUsd += usageUsd(usage);
+
+      if (validation.ok) {
+        return { ok: true, case: finishCase(parsed, seed, model, attempts), attempts, spentUsd: round(spentUsd) };
+      }
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+
+  return { ok: false, case: null, attempts, reasons: currentReasons };
+}
+=====
+  return { ok: false, case: null, attempts, reasons: currentReasons, spentUsd: round(spentUsd) };
+}
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  if (seedIdx === -1 || !args[seedIdx + 1]) {
+    process.stderr.write('Usage: node src/generator.js --seed "<text>" [--suspects 4] [--out file]\n');
+    process.exit(2);
+=====
+  if (seedIdx === -1 || !args[seedIdx + 1]) {
+    process.stderr.write('Usage: node src/generator.js --seed "<text>" [--suspects 4] [--max-usd 0.005] [--out file]\n');
+    process.exit(2);
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  const outIdx = getIdx('--out');
+  const outPath = outIdx !== -1 ? args[outIdx + 1] : `content/cases/gen-${slugSeed(seed)}.json`;
+
+=====
+  const outIdx = getIdx('--out');
+  const outPath = outIdx !== -1 ? args[outIdx + 1] : `content/generated/gen-${slugSeed(seed)}.json`;
+  const mi = args.indexOf('--max-usd');
+  const maxUsd = mi !== -1 ? Number(args[mi + 1]) : DEFAULT_MAX_USD;
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+    try {
+      const result = await generateCase(seed, { key, baseUrl, suspects });
+      if (result.ok) {
+=====
+    try {
+      const result = await generateCase(seed, { key, baseUrl, suspects, maxUsd });
+      if (result.ok) {
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+        fs.writeFileSync(outPath, JSON.stringify(result.case, null, 2) + '\n');
+        console.log(JSON.stringify({ ok: true, out: outPath, attempts: result.attempts, reasons: [] }, null, 1));
+        process.exit(0);
+      } else {
+        console.log(JSON.stringify({ ok: false, out: null, attempts: result.attempts, reasons: result.reasons }, null, 1));
+        process.exit(1);
+=====
+        fs.writeFileSync(outPath, JSON.stringify(result.case, null, 2) + '\n');
+        console.log(JSON.stringify({ ok: true, out: outPath, attempts: result.attempts, reasons: [], spentUsd: result.spentUsd }, null, 1));
+        process.exit(0);
+      } else {
+        console.log(JSON.stringify({ ok: false, out: null, attempts: result.attempts, reasons: result.reasons, spentUsd: result.spentUsd }, null, 1));
+        process.exit(1);
+<<<END>>>

@@ -36,7 +36,8 @@ const getJ = (base, p) => fetch(base + p).then(async (r) => ({ status: r.status,
 const postJ = (base, p, b) => fetch(base + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then(async (r) => ({ status: r.status, body: await r.json() }));
 
 await test('case registry maps known ids to files', async () => {
-  assert(JSON.stringify(Object.keys(CASES)) === JSON.stringify(['violin', 'night-train']), 'registry mismatch');
+  assert(JSON.stringify(Object.keys(CASES).slice(0, 2)) === JSON.stringify(['violin', 'night-train']), 'registry mismatch');
+  assert(Object.keys(CASES).slice(2).every((k) => k.startsWith('gen-')), 'only generated cases after the two handmade ones');
   assert(caseFileFor('violin') === 'content/case.json', 'violin path wrong');
   assert(caseFileFor('night-train') === 'content/cases/night-train.json', 'night-train path wrong');
   assert(Object.isFrozen(CASES), 'CASES not frozen');
@@ -158,14 +159,14 @@ await test('CLI --case with an unknown id gives one friendly line and exit code 
 });
 
 
-await test('GET /api/cases lists both files without secrets', async () => {
+await test('GET /api/cases lists every file without secrets', async () => {
   const { server, base } = await start({ caseFile: 'content/case.json' });
   try {
     const en = await getJ(base, '/api/cases?lang=en');
     assert(en.status === 200, 'status not 200');
     const ids = en.body.cases.map((c) => c.id);
     assert(ids.includes('violin') && ids.includes('night-train'), 'ids missing');
-    assert(en.body.cases.length === 2, 'count');
+    assert(en.body.cases.length === Object.keys(CASES).length, 'count');
     const txt = JSON.stringify(en.body).toLowerCase();
     assert(!txt.includes('culprit') && !txt.includes('facts'), 'secrets leaked');
     const pt = await getJ(base, '/api/cases?lang=pt');

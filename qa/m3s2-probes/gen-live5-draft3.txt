@@ -1,0 +1,122 @@
+{
+  "title": {
+    "en": "The Vanishing Crown of Santa Teresa",
+    "pt": "A Coroa Desaparecida de Santa Teresa"
+  },
+  "intro": {
+    "en": "Amidst the rhythmic drums and flashing lights of the Carnival parade in Santa Teresa, tragedy strikes. The legendary golden crown of the Samba School, worth millions, has vanished from the costume workshop during the final rehearsal. The gates were locked, meaning the thief is among the inner circle.",
+    "pt": "Em meio aos tambores rítmicos e luzes brilhantes do desfile de Carnaval em Santa Teresa, a tragédia acontece. A lendária coroa dourada da Escola de Samba, valendo milhões, desapareceu do ateliê de fantasias durante o ensaio geral. Os portões estavam trancados, o que significa que o ladrão está entre o círculo íntimo."
+  },
+  "culprit": "suspect-b",
+  "suspects": [
+    {
+      "id": "suspect-a",
+      "name": "Ricardo",
+      "role": { "en": "Costume Designer", "pt": "Figurinista" },
+      "persona": { "en": "Anxious and perfectionist, obsessed with details.", "pt": "Ansioso e perfeccionista, obcecado por detalhes." },
+      "alibi": { "en": "He claims he was in the sewing room fixing a broken hem.", "pt": "Ele afirma que estava na sala de costura consertando uma bainha rasgada." },
+      "facts": { "en": "You are talking to a man with thread stuck in his sleeve. He claims he never left the sewing room, but his hands are completely clean of any fabric dye.", "pt": "Você está falando com um homem com linha presa na manga. Ele afirma que nunca saiu da sala de costura, mas suas mãos estão completamente limpas de qualquer corante de tecido." }
+    },
+    {
+      "id": "suspect-b",
+      "name": "Beatriz",
+      "role": { "en": "Samba Queen", "pt": "Rainha de Bateria" },
+      "persona": { "en": "Glamorous and demanding, knows the value of everything.", "pt": "Glamorosa e exigente, conhece o valor de tudo." },
+      "alibi": { "en": "She says she was practicing her dance moves in the lounge.", "pt": "Ela diz que estava praticando seus passos de dança no lounge." },
+      "facts": { "en": "You are looking at a woman wearing expensive jewelry. She claims she stayed in the lounge, but you notice a small golden feather stuck to her silk dress—the same feathers from the stolen crown.", "pt": "Você está olhando para uma mulher usando joias caras. Ela afirma que ficou no lounge, mas você nota uma pequena pena dourada presa em seu vestido de seda — as mesmas penas da coroa roubada." }
+    },
+    {
+      "id": "suspect-c",
+      "name": "Marcelo",
+      "role": { "en": "Security Guard", "pt": "Segurança" },
+      "persona": { "en": "Grumpy and tired, feels underpaid.", "pt": "Ranzinza e cansado, sente-se mal remunerado." },
+      "alibi": { "en": "He says he was patrolling the perimeter outside.", "pt": "Ele diz que estava patrulhando o perímetro do lado de fora." },
+      "facts": { "en": "You are facing a man who looks bored. He swears he didn't enter the workshop, but you notice the workshop keycard was used at 22:15, and he is the only one with a master key.", "pt": "Você está diante de um homem que parece entediado. Ele jura que não entrou no ateliê, mas você nota que o cartão de acesso foi usado às 22:15, e ele é o único com a chave mestre." }
+    },
+    {
+      "id": "suspect-d",
+      "name": "Tiago",
+      "role": { "en": "Samba Musician", "pt": "Músico de Samba" },
+      "persona": { "en": "Energetic and loud, loves the party.", "pt": "Enérgico e barulhento, ama a festa." },
+      "alibi": { "en": "He says he was in the percussion area tuning his drum.", "pt": "Ele diz que estava na área de percussão afinando seu tambor." },
+      "facts": { "en": "You are talking to a sweaty man. He claims he was nowhere near the workshop, but you see a smudge of gold glitter on his drumstick.", "pt": "Você está falando com um homem suado. Ele afirma que não estava perto do ateliê, mas você vê uma mancha de glitter dourado em sua baqueta." }
+    }
+  ],
+  "timeline": [
+    { "id": "t1", "time": "21:00", "stop": { "en": "Workshop", "pt": "Ateliê" }, "event": { "en": "The crown is placed in the display case.", "pt": "A coroa é colocada na vitrine." }, "who": ["suspect-a"] },
+    { "id": "t2", "time": "22:00", "stop": { "en": "Lounge", "pt": "Lounge" }, "event": { "en": "Beatriz starts her dance practice.", "pt": "Beatriz começa sua prática de dança." }, "who": ["suspect-b"] },
+    { "id": "t3", "time": "22:15", "stop": { "en": "Workshop", "pt": "Ateliê" }, "event": { "en": "The crown is stolen during a power flicker.", "pt": "A coroa é roubada durante uma oscilação de energia.", "crime": true }, "who": ["suspect-b"] },
+    { "id": "t4", "time": "22:30", "stop": { "en": "Percussion Area", "pt": "Área de Percussão" }, "event": { "en": "Tiago finishes tuning his drums.", "pt": "Tiago termina de afinar seus tambores." }, "who": ["suspect-d"] },
+    { "id": "t5", "time": "23:00", "stop": { "en": "Perimeter", "pt": "Perímetro" }, "event": { "en": "Marcelo completes his rounds.", "pt": "Marcelo completa suas rondas." }, "who": ["suspect-c"] }
+  ],
+  "clues": [
+    {
+      "id": "clue-1",
+      "from": "suspect-a",
+      "ask": "Where were you during the power flicker?",
+      "keywords": ["location", "onde", "lugar"],
+      "implicates": null,
+      "clears": "suspect-c",
+      "text": { "en": "I was in the sewing room. I didn't see anyone enter the workshop, but I heard the heavy security door click at 22:15.", "pt": "Eu estava na sala de costura. Não vi ninguém entrar no ateliê, mas ouvi a porta pesada de segurança clicar às 22:15." }
+    },
+    {
+      "id": "clue-2",
+      "from": "suspect-c",
+      "ask": "Did you see anyone near the workshop?",
+      "keywords": ["see", "ver", "witness"],
+      "implicates": "suspect-b",
+      "clears": "suspect-a",
+      "text": { "en": "I was outside, but I saw a flash of a silk dress near the workshop window right when the lights flickered.", "pt": "Eu estava lá fora, mas vi o brilho de um vestido de seda perto da janela do ateliê bem quando as luzes oscilaram." }
+    },
+    {
+      "id": "clue-3",
+      "from": "suspect-d",
+      "ask": "What do you know about the theft?",
+      "keywords": ["theft", "roubo", "crown", "coroa"],
+      "implicates": "suspect-b",
+      "clears": "suspect-d",
+      "text": { "en": "I don't know much, but I saw Beatriz walking very hurriedly toward the lounge right after the lights came back on.", "pt": "Não sei muito, mas vi a Beatriz andando muito apressada em direção ao lounge logo após as luzes voltarem." }
+    },
+    {
+      "id": "clue-4",
+      "from": "suspect-b",
+      "ask": "Did you enter the workshop?",
+      "keywords": ["enter", "entrar", "workshop", "ateliê"],
+      "implicates": null,
+      "clears": "suspect-d",
+      "text": { "en": "Of course not! I was in the lounge the whole time. Tiago is just trying to deflect attention because he's clumsy.", "pt": "Claro que não! Eu estava no lounge o tempo todo. O Tiago só está tentando desviar a atenção porque ele é desastrado." }
+    }
+  ],
+  "hints": [
+    { "id": "hint-1", "after": 45, "text": { "en": "Look closely at the suspects' clothes and what they claim to have been doing.", "pt": "Observe atentamente as roupas dos suspeitos e o que eles dizem que estavam fazendo." } },
+    { "id": "hint-2", "after": 90, "text": { "en": "The silk dress and the security door timing are key pieces of evidence.", "pt": "O vestido de seda e o horário da porta de segurança são peças-chave de evidência." } }
+  ],
+  "glossary": {
+    "en": { "crown": "crown", "workshop": "workshop", "samba school": "samba school" },
+    "pt": { "crown": "coroa", "workshop": "ateliê", "samba school": "escola de samba" }
+  },
+  "rooms": [
+    { "id": "room-1", "en": "Costume Workshop", "pt": "Ateliê de Fantasias" },
+    { "id": "room-2", "en": "Lounge", "pt": "Lounge" },
+    { "id": "room-3", "en": "Percussion Area", "pt": "Área de Percussão" },
+    { "id": "room-4", "en": "Sewing Room", "pt": "Sala de Costura" }
+  ],
+  "solution": {
+    "en": "Beatriz, the Samba Queen, used the distraction of the power flicker to enter the workshop. Although she claimed to be in the lounge, the security guard saw a silk dress near the workshop, and a feather from the crown was found stuck to her dress. She stole the crown to fund her extravagant lifestyle.",
+    "pt": "Beatriz, a Rainha de Bateria, usou a distração da oscilação de energia para entrar no ateliê. Embora tenha afirmado estar no lounge, o segurança viu um vestido de seda perto do ateliê, e uma pena da coroa foi encontrada presa em seu vestido. Ela roubou a coroa para financiar seu estilo de vida extravagante."
+  },
+  "aftermath": {
+    "suspect-a": {
+      "en": { "headline": "Designer Falsely Accused", "body": "Ricardo, the designer, was cleared of all charges today. The real thief is still at large." },
+      "pt": { "headline": "Designer Falsamente Acusado", "body": "Ricardo, o figurinista, foi inocentado de todas as acusações hoje. O verdadeiro ladrão continua à solta." }
+    },
+    "suspect-c": {
+      "en": { "headline": "Security Guard Under Fire", "body": "Marcelo faces suspension after being wrongly accused of negligence in the crown theft." },
+      "pt": { "headline": "Segurança Sob Fogo", "body": "Marcelo enfrenta suspensão após ser injustamente acusado de negligência no roubo da coroa." }
+    },
+    "suspect-d": {
+      "en": { "headline": "Musician Scapegoated", "body": "Tiago's reputation is tarnished after a mistaken accusation regarding the workshop theft." },
+      "pt": { "headline": "Músico Bode Expiatório", "body": "A reputação de Tiago foi manchada após uma acusação equivocada sobre o roubo no ateliê." }
+    }
+  }
+}

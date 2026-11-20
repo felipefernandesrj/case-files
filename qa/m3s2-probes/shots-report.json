@@ -1,0 +1,108 @@
+{
+ "report": [
+  {
+   "tag": "1280-en",
+   "card": {
+    "text": "Generated case · US$ 0.0021 · 2 draftsThe Lapa Midnight HeistRain lashes against the windows of 'Livraria Lapa'.Open file",
+    "tag": "Generated case · US$ 0.0021 · 2 drafts",
+    "art": "url(\"http://127.0.0.1:43043/assets/tex/title-rain.png\")"
+   },
+   "rooms": [
+    "Back Office",
+    "Poetry Section",
+    "Window Nook",
+    "Breakroom"
+   ],
+   "scene": {
+    "label": "Scene: Back Office",
+    "on": [
+     "url(\"/assets/tex/title-rain.png\")"
+    ]
+   },
+   "log": [
+    "Q: What did you find in the trash? Any gloves?",
+    "A\nA: I found a pair of torn silk gloves in the bin near the poetry section. They look like they were used to handle something delicate. I'm not sure what they're doing there, but it's suspicious.\nA: I found a pair of torn silk gloves in the"
+   ],
+   "verdict": "Correct!\n\nCulprit: Beatriz\n\nSolution: Beatriz used her position as an assistant to get close to the case. She wore silk gloves to avoid fingerprints but accidentally tore them while breaking the glass. Claudio saw her near the case, and Daniela saw her cleaning glass from her clothes. Since Arthur a",
+   "budget": "Questions left: 10 of 10"
+  },
+  {
+   "tag": "1280-pt",
+   "card": {
+    "text": "Caso gerado · US$ 0,0021 · 2 rascunhosO Assalto da Meia-noite na LapaA chuva chicoteia as janelas da 'Livraria Lapa'.Abrir dossiê",
+    "tag": "Caso gerado · US$ 0,0021 · 2 rascunhos",
+    "art": "url(\"http://127.0.0.1:43043/assets/tex/title-rain.png\")"
+   },
+   "rooms": [
+    "Escritório nos Fundos",
+    "Seção de Poesia",
+    "Canto da Janela",
+    "Sala de Descanso"
+   ],
+   "scene": {
+    "label": "Cena: Escritório nos Fundos",
+    "on": [
+     "url(\"/assets/tex/title-rain.png\")"
+    ]
+   },
+   "log": [
+    "Pergunta: O que você encontrou na lixeira? Luvas?",
+    "A\nResposta: Sim, encontrei um par de luvas de seda rasgadas. Pareciam ter sido usadas para manipular algo delicado. Estavam perto da seção de poesia.\nResposta: Sim, encontrei um par de luvas de seda rasgadas. Pareciam ter sido usadas para m"
+   ],
+   "verdict": "Você acertou!\n\nCulpado: Beatriz\n\nSolução: Beatriz usou sua posição de assistente para se aproximar da vitrine. Ela usou luvas de seda para evitar impressões digitais, mas acabou rasgando-as ao quebrar o vidro. Claudio a viu perto da vitrine, e Daniela a viu limpando vidro de suas roupas. Como Arthur",
+   "budget": "Perguntas restantes: 10 de 10"
+  },
+  {
+   "tag": "390-en",
+   "card": {
+    "text": "Generated case · US$ 0.0021 · 2 draftsThe Lapa Midnight HeistRain lashes against the windows of 'Livraria Lapa'.Open file",
+    "tag": "Generated case · US$ 0.0021 · 2 drafts",
+    "art": "url(\"http://127.0.0.1:43043/assets/tex/title-rain.png\")"
+   },
+   "rooms": [
+    "Back Office",
+    "Poetry Section",
+    "Window Nook",
+    "Breakroom"
+   ],
+   "scene": {
+    "label": "Scene: Back Office",
+    "on": [
+     "url(\"/assets/tex/title-rain.png\")"
+    ]
+   },
+   "log": [
+    "Q: What did you find in the trash? Any gloves?",
+    "A\nA: I did find something unusual. A pair of torn silk gloves were in the bin near the poetry section. They looked like they were used to handle something delicate, perhaps a book.\nA: I did find something unusual. A pair of torn silk gloves"
+   ],
+   "verdict": "Correct!\n\nCulprit: Beatriz\n\nSolution: Beatriz used her position as an assistant to get close to the case. She wore silk gloves to avoid fingerprints but accidentally tore them while breaking the glass. Claudio saw her near the case, and Daniela saw her cleaning glass from her clothes. Since Arthur a",
+   "budget": "Questions left: 7 of 10"
+  },
+  {
+   "tag": "390-pt",
+   "card": {
+    "text": "Caso gerado · US$ 0,0021 · 2 rascunhosO Assalto da Meia-noite na LapaA chuva chicoteia as janelas da 'Livraria Lapa'.Abrir dossiê",
+    "tag": "Caso gerado · US$ 0,0021 · 2 rascunhos",
+    "art": "url(\"http://127.0.0.1:43043/assets/tex/title-rain.png\")"
+   },
+   "rooms": [
+    "Escritório nos Fundos",
+    "Seção de Poesia",
+    "Canto da Janela",
+    "Sala de Descanso"
+   ],
+   "scene": {
+    "label": "Cena: Escritório nos Fundos",
+    "on": [
+     "url(\"/assets/tex/title-rain.png\")"
+    ]
+   },
+   "log": [
+    "Pergunta: O que você encontrou na lixeira? Luvas?",
+    "A\nResposta: Sim, encontrei um par de luvas de seda rasgadas. Pareciam ter sido usadas para manipular algo delicado. Estavam perto da seção de poesia.\nResposta: Sim, encontrei um par de luvas de seda rasgadas. Pareciam ter sido usadas para m"
+   ],
+   "verdict": "Você acertou!\n\nCulpado: Beatriz\n\nSolução: Beatriz usou sua posição de assistente para se aproximar da vitrine. Ela usou luvas de seda para evitar impressões digitais, mas acabou rasgando-as ao quebrar o vidro. Claudio a viu perto da vitrine, e Daniela a viu limpando vidro de suas roupas. Como Arthur",
+   "budget": "Perguntas restantes: 7 de 10"
+  }
+ ]
+}

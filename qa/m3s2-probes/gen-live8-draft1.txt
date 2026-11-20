@@ -1,0 +1,204 @@
+{
+  "title": {
+    "en": "The Lapa Midnight Heist",
+    "pt": "O Assalto da Meia-noite na Lapa"
+  },
+  "intro": {
+    "en": "Rain lashes against the windows of 'Livraria Lapa'. The storm is loud, but not loud enough to hide the sound of shattering glass. A signed first edition of 'Dom Casmurro' has vanished from the locked display case. The doors were bolted from the inside. The thief is still among us.",
+    "pt": "A chuva chicoteia as janelas da 'Livraria Lapa'. A tempestade é forte, mas não o suficiente para abafar o som de vidro quebrando. Uma primeira edição autografada de 'Dom Casmurro' desapareceu da vitrine trancada. As portas estavam trancadas por dentro. O ladrão ainda está entre nós."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Arthur",
+      "role": { "en": "Shop Owner", "pt": "Dono da Livraria" },
+      "persona": { "en": "Anxious and meticulous collector.", "pt": "Colecionador ansioso e meticuloso." },
+      "alibi": { "en": "I was in the back office checking the inventory.", "pt": "Eu estava no escritório nos fundos conferindo o inventário." },
+      "facts": "You were in the back office at 22:00. You lie that the inventory was perfectly organized to hide your financial troubles."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Beatriz",
+      "role": { "en": "Assistant Librarian", "pt": "Assistente de Biblioteca" },
+      "persona": { "en": "Quiet, observant, and deeply knowledgeable.", "pt": "Silenciosa, observadora e muito conhecedora." },
+      "alibi": { "en": "I was organizing the poetry section in the corner.", "pt": "Eu estava organizando a seção de poesia no canto." },
+      "facts": "You were near the display case at 22:15. You lie that you never approached the glass."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Claudio",
+      "role": { "en": "Regular Customer", "pt": "Cliente Frequente" },
+      "persona": { "en": "A grumpy academic with a love for old paper.", "pt": "Um acadêmico ranzinza com amor por papel antigo." },
+      "alibi": { "en": "I was sitting by the window reading my own book.", "pt": "Eu estava sentado perto da janela lendo meu próprio livro." },
+      "facts": "You were sitting by the window at 22:00. You lie that you didn't hear anything to avoid being interrogated."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Daniela",
+      "role": { "en": "Delivery Driver", "pt": "Entregadora" },
+      "persona": { "en": "Energetic and always in a hurry.", "pt": "Enérgica e sempre com pressa." },
+      "alibi": { "en": "I was in the breakroom waiting for the rain to stop.", "pt": "Eu estava na sala de descanso esperando a chuva parar." },
+      "facts": "You were in the breakroom at 22:00. You lie that you didn't see anyone enter the office."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "22:00",
+      "stop": { "en": "Back Office", "pt": "Escritório nos Fundos" },
+      "event": { "en": "Arthur begins checking books.", "pt": "Arthur começa a conferir os livros." },
+      "who": ["suspect-1"]
+    },
+    {
+      "id": "t2",
+      "time": "22:05",
+      "stop": { "en": "Breakroom", "pt": "Sala de Descanso" },
+      "event": { "en": "Daniela waits for the rain.", "pt": "Daniela espera a chuva passar." },
+      "who": ["suspect-4"]
+    },
+    {
+      "id": "t3",
+      "time": "22:10",
+      "stop": { "en": "Reading Nook", "pt": "Canto de Leitura" },
+      "event": { "en": "Claudio is reading near the window.", "pt": "Claudio está lendo perto da janela." },
+      "who": ["suspect-3"]
+    },
+    {
+      "id": "t4",
+      "time": "22:15",
+      "stop": { "en": "Main Floor", "pt": "Salão Principal" },
+      "event": { "en": "The display case is smashed and the book is gone.", "pt": "A vitrine é quebrada e o livro desaparece." },
+      "who": ["suspect-2"],
+      "crime": true
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-3",
+      "ask": "Did you see anyone near the display case?",
+      "keywords": ["glass", "beatriz", "vitrine"],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Beatriz standing right next to the display case just before the crash.",
+        "pt": "Eu vi a Beatriz parada bem ao lado da vitrine pouco antes do barulho."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-1",
+      "ask": "Was the delivery driver near the crime scene?",
+      "keywords": ["daniela", "breakroom", "daniela"],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "Daniela was in the breakroom the whole time; I saw her through the door.",
+        "pt": "A Daniela estava na sala de descanso o tempo todo; eu a vi pela porta."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "Did Arthur leave his office?",
+      "keywords": ["arthur", "office", "arthur"],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "Arthur never left the back office once I arrived.",
+        "pt": "O Arthur não saiu do escritório dos fundos nem uma vez desde que eu cheguei."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-2",
+      "ask": "Did anyone touch the books?",
+      "keywords": ["claudio", "window", "claudio"],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "Claudio was absorbed in his own reading by the window; he didn't move.",
+        "pt": "O Claudio estava absorto na leitura dele perto da janela; ele não se mexeu."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-1",
+      "ask": "What did you find in the trash?",
+      "keywords": ["gloves", "beatriz", "luvas"],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I found a pair of torn silk gloves in the bin near the poetry section, looking like they were used to handle something delicate.",
+        "pt": "Encontrei um par de luvas de seda rasgadas na lixeira perto da seção de poesia, parecendo que foram usadas para manipular algo delicado."
+      }
+    },
+    {
+      "id": "c6",
+      "from": "suspect-4",
+      "ask": "Is there any evidence of a struggle?",
+      "keywords": ["glass", "beatriz", "vitrine"],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Beatriz cleaning up glass shards from her sleeve after the noise.",
+        "pt": "Eu vi a Beatriz limpando estilhaços de vidro da manga dela depois do barulho."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Look at who was cleared by whom. Arthur, Daniela, and Claudio all have witnesses.",
+        "pt": "Observe quem foi inocentado por quem. Arthur, Daniela e Claudio têm testemunhas."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The clues regarding the gloves and the glass shards point to only one person.",
+        "pt": "As pistas sobre as luvas e os estilhaços de vidro apontam para apenas uma pessoa."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "display case": "vitrine",
+      "first edition": "primeira edição",
+      "shards": "estilhaços"
+    },
+    "pt": {
+      "display case": "vitrine",
+      "first edition": "primeira edição",
+      "shards": "estilhaços"
+    }
+  },
+  "rooms": [
+    { "id": "office", "en": "Back Office", "pt": "Escritório nos Fundos" },
+    { "id": "poetry", "en": "Poetry Section", "pt": "Seção de Poesia" },
+    { "id": "window", "en": "Window Nook", "pt": "Canto da Janela" },
+    { "id": "breakroom", "en": "Breakroom", "pt": "Sala de Descanso" }
+  ],
+  "solution": {
+    "en": "Beatriz used her position as an assistant to get close to the case. She wore silk gloves to avoid fingerprints but accidentally tore them while breaking the glass. Claudio saw her near the case, and Daniela saw her cleaning glass from her clothes. Since Arthur and Daniela were seen by others in their respective locations, Beatriz was the only one with the opportunity and proximity to the crime.",
+    "pt": "Beatriz usou sua posição de assistente para se aproximar da vitrine. Ela usou luvas de seda para evitar impressões digitais, mas acabou rasgando-as ao quebrar o vidro. Claudio a viu perto da vitrine, e Daniela a viu limpando vidro de suas roupas. Como Arthur e Daniela foram vistos por outros em seus respectivos locais, Beatriz era a única com oportunidade e proximidade para o crime."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": { "headline": "Owner Falsely Accused", "body": "Arthur was cleared of all theft charges after the real thief was caught." },
+      "pt": { "headline": "Dono Falsamente Acusado", "body": "Arthur foi inocentado de todas as acusações de roubo após o verdadeiro ladrão ser pego." }
+    },
+    "suspect-3": {
+      "en": { "headline": "Academic Misidentified", "body": "The local professor was wrongly suspected in the Lapa book heist." },
+      "pt": { "headline": "Acadêmico Identificado Erroneamente", "body": "O professor local foi injustamente suspeito no assalto aos livros da Lapa." }
+    },
+    "suspect-4": {
+      "en": { "en": "Delivery Driver Under Scrutiny", "pt": "Entregadora Sob Suspeita", "en": "Daniela faced intense questioning before the truth came out." },
+      "pt": { "en": "Entregadora Sob Suspeita", "pt": "Daniela enfrentou interrogatórios intensos antes da verdade aparecer." }
+    }
+  }
+}

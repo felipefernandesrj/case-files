@@ -1,0 +1,29 @@
+<<<REPLACE public/css/game.css>>>
+  min-height: 52px;
+  display: flex;
+=====
+  min-height: 52px;
+  flex-shrink: 0; /* M3 sprint 2: in the taller case picker the shell squeezed the wrapped phone header to 52px and its buttons covered the cards */
+  display: flex;
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+});
+await check('13. the web player gives generated cases the shared plate for rooms, picker card and verdict (no violin art behind a generated verdict)', async () => {
+=====
+});
+
+await check('13. the web player gives generated cases the shared plate for rooms, picker card and verdict (no violin art behind a generated verdict)', async () => {
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+
+for (const l of results) console.log(l);
+=====
+
+await check('14. the header never shrinks inside the shell (the 3-file picker at 390 squeezed it and the buttons covered the cards)', async () => {
+  const css = fs.readFileSync('public/css/game.css', 'utf8');
+  const rule = css.slice(css.indexOf('\nheader {'), css.indexOf('}', css.indexOf('\nheader {')));
+  must(/flex-shrink:\s*0/.test(rule), 'header rule has flex-shrink: 0');
+});
+
+for (const l of results) console.log(l);
+<<<END>>>

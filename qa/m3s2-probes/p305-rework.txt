@@ -1,0 +1,107 @@
+Conserve as many tokens as possible and be fast (merge commands in few calls).
+Rework for Case Files M3 sprint 2: the previous edits lost blank lines between functions and one edit of public/index.html did not apply (its OLD text had "</div >" with a stray space, the file has "</div>"). Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block.
+
+All 9 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 9 blocks, in this order. Copy every character exactly, including empty lines inside NEW: an empty line in NEW must stay an empty line. Never add or remove a space. Never write the [OLD n] or [NEW n] markers.
+
+Change 1, file src/case.js
+[OLD 1]
+}
+/** Folder of generated cases (M3 sprint 2): src/generator.js writes gen-<seed>.json here. */
+[/OLD 1]
+[NEW 1]
+}
+
+/** Folder of generated cases (M3 sprint 2): src/generator.js writes gen-<seed>.json here. */
+[/NEW 1]
+
+Change 2, file src/case.js
+[OLD 2]
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json', ...generatedCases() });
+/**
+[/OLD 2]
+[NEW 2]
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json', ...generatedCases() });
+
+/**
+[/NEW 2]
+
+Change 3, file src/generator.js
+[OLD 3]
+export const DEFAULT_MAX_USD = 0.005;
+const GEN_SYSTEM = `You are a detective game generator. Create a complete mystery case in JSON format.
+[/OLD 3]
+[NEW 3]
+export const DEFAULT_MAX_USD = 0.005;
+
+const GEN_SYSTEM = `You are a detective game generator. Create a complete mystery case in JSON format.
+[/NEW 3]
+
+Change 4, file src/generator.js
+[OLD 4]
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.text && !isTestimony(cl, c))) reasons.push('clue_not_testimony');
+  return { ok: reasons.length === 0, reasons };
+[/OLD 4]
+[NEW 4]
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.text && !isTestimony(cl, c))) reasons.push('clue_not_testimony');
+
+  return { ok: reasons.length === 0, reasons };
+[/NEW 4]
+
+Change 5, file src/generator.js
+[OLD 5]
+}
+export function finishCase(c, seed, model, attempts = []) {
+[/OLD 5]
+[NEW 5]
+}
+
+export function finishCase(c, seed, model, attempts = []) {
+[/NEW 5]
+
+Change 6, file src/generator.js
+[OLD 6]
+}
+export async function generateCase(seed, { key, baseUrl = 'https://qa-api.fullcup.ai/v1', fetchImpl = fetch, model = GEN_MODEL, suspects = 4, maxAttempts = MAX_ATTEMPTS, maxTokens = 8000, maxUsd = DEFAULT_MAX_USD } = {}) {
+[/OLD 6]
+[NEW 6]
+}
+
+export async function generateCase(seed, { key, baseUrl = 'https://qa-api.fullcup.ai/v1', fetchImpl = fetch, model = GEN_MODEL, suspects = 4, maxAttempts = MAX_ATTEMPTS, maxTokens = 8000, maxUsd = DEFAULT_MAX_USD } = {}) {
+[/NEW 6]
+
+Change 7, file src/generator.js
+[OLD 7]
+  }
+  return { ok: false, case: null, attempts, reasons: currentReasons, spentUsd: round(spentUsd) };
+[/OLD 7]
+[NEW 7]
+  }
+
+  return { ok: false, case: null, attempts, reasons: currentReasons, spentUsd: round(spentUsd) };
+[/NEW 7]
+
+Change 8, file src/generator.js
+[OLD 8]
+  const maxUsd = mi !== -1 ? Number(args[mi + 1]) : DEFAULT_MAX_USD;
+  let key = process.env.FULLCUP_KEY;
+[/OLD 8]
+[NEW 8]
+  const maxUsd = mi !== -1 ? Number(args[mi + 1]) : DEFAULT_MAX_USD;
+
+  let key = process.env.FULLCUP_KEY;
+[/NEW 8]
+
+Change 9, file public/index.html
+[OLD 9]
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div>
+[/OLD 9]
+[NEW 9]
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Every file is a closed case. Open one, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div>
+[/NEW 9]
+

@@ -1,9 +1,9 @@
 {
   "name": "fullcup-mystery",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "type": "module",
   "scripts": {
-    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/cli-lines.mjs && node test/generator.mjs && node test/keyboard.mjs"
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/cli-lines.mjs && node test/generator.mjs && node test/generated-pack.mjs && node test/keyboard.mjs"
   },
   "dependencies": {}
 }

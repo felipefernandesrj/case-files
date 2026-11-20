@@ -1,0 +1,313 @@
+{
+  "title": {
+    "en": "The Lapa Midnight Theft",
+    "pt": "O Roubo da Meia-Noite na Lapa"
+  },
+  "intro": {
+    "en": "A heavy rain lashes against the windows of 'Livraria do Porto' in Lapa, Rio de Janeiro. Inside, the smell of old paper and wet pavement fills the air. The owner discovered that a signed first edition of 'Dom Casmurro' has vanished from a locked glass display case. The doors were locked all night, and only four people were in the building.",
+    "pt": "Uma chuva forte açoita as janelas da 'Livraria do Porto' na Lapa, Rio de Janeiro. Lá dentro, o cheiro de papel antigo e asfalto molhado preenche o ar. O dono descobriu que uma primeira edição autografada de 'Dom Casmurro' desapareceu de uma vitrine de vidro trancada. As portas estavam trancadas a noite toda, e apenas quatro pessoas estavam no prédio."
+  },
+  "culprit": "suspect-3",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Arthur Silva",
+      "role": {
+        "en": "The Bookshop Owner",
+        "pt": "O Dono da Livraria"
+      },
+      "persona": {
+        "en": "Nervous, obsessed with his collection.",
+        "pt": "Nervoso, obcecado por sua coleção."
+      },
+      "alibi": {
+        "en": "Was in his office doing inventory.",
+        "pt": "Estava em seu escritório fazendo inventário."
+      },
+      "facts": {
+        "en": "You are Arthur. You were in your office. You claim you never left your desk, but you actually went to the kitchen for tea around 22:00.",
+        "pt": "Você é o Arthur. Você estava no seu escritório. Você afirma que nunca saiu da sua mesa, mas na verdade foi à cozinha buscar chá por volta das 22:00."
+      }
+    },
+    {
+      "id": "suspect-2",
+      "name": "Beatriz Lima",
+      "role": {
+        "en": "The Resident Scholar",
+        "pt": "A Pesquisadora Residente"
+      },
+      "persona": {
+        "en": "Quiet, always surrounded by stacks of books.",
+        "pt": "Quieta, sempre cercada por pilhas de livros."
+      },
+      "alibi": {
+        "en": "Was reading in the corner lounge.",
+        "pt": "Estava lendo no lounge de canto."
+      },
+      "facts": {
+        "en": "You are Beatriz. You were studying. You claim you heard nothing, but you actually heard a loud crash near the display case.",
+        "pt": "Você é a Beatriz. Você estava estudando. Você afirma que não ouviu nada, mas na verdade ouviu um barulho alto perto da vitrine."
+      }
+    },
+    {
+      "id": "suspect-3",
+      "name": "Carlos Mendes",
+      "role": {
+        "en": "The Delivery Driver",
+        "pt": "O Entregador"
+      },
+      "persona": {
+        "en": "Impatient, wearing a soaked raincoat.",
+        "pt": "Impaciente, usando uma capa de chuva encharcada."
+      },
+      "alibi": {
+        "en": "Was waiting in the hallway for his ride.",
+        "pt": "Estava esperando no corredor por sua carona."
+      },
+      "facts": {
+        "en": "You are Carlos. You were waiting. You claim you stayed in the hallway, but you actually used a master key you stole to open the case. You hid the book in your delivery bag.",
+        "pt": "Você é o Carlos. Você estava esperando. Você afirma que ficou no corredor, mas na verdade usou uma chave mestra que roubou para abrir a vitrine. Você escondeu o livro na sua bolsa de entregas."
+      }
+    },
+    {
+      "id": "suspect-4",
+      "name": "Diana Rocha",
+      "role": {
+        "en": "The Night Guard",
+        "pt": "A Segurança Noturna"
+      },
+      "persona": {
+        "en": "Strict, follows rules to a fault.",
+        "pt": "Rígida, segue as regras ao pé da letra."
+      },
+      "alibi": {
+        "en": "Was patrolling the perimeter.",
+        "pt": "Estava patrulhando o perímetro."
+      },
+      "facts": {
+        "en": "You are Diana. You were patrolling. You claim you saw no one, but you actually saw Carlos walking near the display case with a heavy bag.",
+        "pt": "Você é a Diana. Você estava patrulhando. Você afirma que não viu ninguém, mas na verdade viu o Carlos andando perto da vitrine com uma bolsa pesada."
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:00",
+      "stop": {
+        "en": "Closing Time",
+        "pt": "Hora de Fechar"
+      },
+      "event": {
+        "en": "The shop is locked for the night.",
+        "pt": "A loja é trancada para a noite."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:00",
+      "stop": {
+        "en": "Tea Break",
+        "pt": "Hora do Chá"
+      },
+      "event": {
+        "en": "Arthur leaves his office to go to the kitchen.",
+        "pt": "Arthur sai do escritório para ir à cozinha."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:15",
+      "stop": {
+        "en": "The Theft",
+        "pt": "O Roubo"
+      },
+      "event": {
+        "en": "The glass case is opened and the book is taken.",
+        "pt": "A vitrine é aberta e o livro é levado.",
+        "crime": true
+      },
+      "who": [
+        "suspect-3"
+      ]
+    },
+    {
+      "id": "t4",
+      "time": "23:00",
+      "stop": {
+        "en": "Discovery",
+        "pt": "Descoberta"
+      },
+      "event": {
+        "en": "The empty case is noticed.",
+        "pt": "A vitrine vazia é notada."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-2",
+      "ask": "Did you hear anything unusual tonight?",
+      "keywords": [
+        "noise",
+        "sound",
+        "barulho"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "I heard a loud metallic click near the display case around 22:15, but I thought it was just the rain.",
+        "pt": "Eu ouvi um clique metálico alto perto da vitrine por volta das 22:15, mas achei que fosse apenas a chuva."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Did you see anyone near the display area?",
+      "keywords": [
+        "see",
+        "person",
+        "saw",
+        "viu"
+      ],
+      "implicates": "suspect-3",
+      "clears": "suspect-2",
+      "text": {
+        "en": "I saw Carlos walking past the display case with a very heavy-looking delivery bag right after the rain intensified.",
+        "pt": "Eu vi o Carlos passando pela vitrine com uma bolsa de entregas que parecia muito pesada logo após a chuva intensificar."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-1",
+      "ask": "Was anyone else moving around?",
+      "keywords": [
+        "moving",
+        "people",
+        "gente"
+      ],
+      "implicates": "suspect-3",
+      "clears": "suspect-4",
+      "text": {
+        "en": "I saw Carlos hovering near the staff entrance, looking much more suspicious than a normal driver.",
+        "pt": "Eu vi o Carlos rondando perto da entrada dos funcionários, parecendo muito mais suspeito que um entregador normal."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-3",
+      "ask": "What were you doing in the hallway?",
+      "keywords": [
+        "hallway",
+        "waiting",
+        "corredor"
+      ],
+      "implicates": null,
+      "clears": null,
+      "text": {
+        "en": "I was just waiting for my ride in the hallway; I didn't touch anything, I swear!",
+        "pt": "Eu estava apenas esperando minha carona no corredor; eu não toquei em nada, eu juro!"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Think about the sounds heard and who was seen near the scene.",
+        "pt": "Pense nos sons ouvidos e em quem foi visto perto da cena."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The thief needed a way to open the locked case without breaking the glass. Look for someone with access or suspicious movement.",
+        "pt": "O ladrão precisou de uma maneira de abrir a vitrine trancada sem quebrar o vidro. Procure por alguém com acesso ou movimento suspeito."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "first edition": "the first printing of a book",
+      "display case": "a glass box for showing items"
+    },
+    "pt": {
+      "first edition": "primeira edição",
+      "display case": "vitrine"
+    }
+  },
+  "rooms": [
+    {
+      "id": "office",
+      "en": "Arthur's Office",
+      "pt": "Escritório do Arthur"
+    },
+    {
+      "id": "lounge",
+      "en": "Reading Lounge",
+      "pt": "Lounge de Leitura"
+    },
+    {
+      "id": "hallway",
+      "en": "Main Hallway",
+      "pt": "Corredor Principal"
+    },
+    {
+      "id": "display-area",
+      "en": "Display Area",
+      "pt": "Área da Vitrine"
+    }
+  ],
+  "solution": {
+    "en": "Carlos Mendes used a stolen master key to open the display case at 22:15, as evidenced by the metallic click Beatriz heard. Diana saw him moving near the case with a heavy bag, which contained the stolen book. He lied about staying in the hallway.",
+    "pt": "Carlos Mendes usou uma chave mestra roubada para abrir a vitrine às 22:15, como evidenciado pelo clique metálico que Beatriz ouviu. Diana o viu movendo-se perto da vitrine com uma bolsa pesada, que continha o livro roubado. Ele mentiu ao dizer que ficou apenas no corredor."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Owner Blamed for Negligence",
+        "body": "Arthur Silva faces lawsuits after wrongly accusing himself of being distracted during the theft."
+      },
+      "pt": {
+        "headline": "Dono Acusado de Negligência",
+        "body": "Arthur Silva enfrenta processos após acusar erroneamente a si mesmo de estar distraído durante o roubo."
+      }
+    },
+    "suspect-2": {
+      "en": {
+        "headline": "Scholar Misidentified as Thief",
+        "body": "Beatriz Lima's reputation is ruined after a false accusation involving the stolen classic."
+      },
+      "pt": {
+        "headline": "Pesquisadora Identificada Erroneamente como Ladra",
+        "body": "A reputação de Beatriz Lima foi arruinada após uma acusação falsa envolvendo o clássico roubado."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Guard Fired Following Error",
+        "body": "Diana Rocha lost her job after the detective pointed the finger at her instead of the real culprit."
+      },
+      "pt": {
+        "headline": "Segurança Demitida Após Erro",
+        "body": "Diana Rocha perdeu o emprego depois que o detetive apontou o dedo para ela em vez do verdadeiro culpado."
+      }
+    }
+  }
+}

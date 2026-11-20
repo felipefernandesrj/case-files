@@ -197,7 +197,7 @@
   <section id="cabinet" hidden>
     <p class="stamp" id="cabinet-stamp">Field office</p>
     <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
-    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+    <p id="cabinet-lead">Every file is a closed case. Open one, ask the questions, name who did it.</p>
     <div id="cabinet-list"></div>
   </section>
 
@@ -477,7 +477,8 @@ const UI = {
     pack: 'Case Files', files: 'Files', board: 'Board', boardTitle: 'Evidence board',
     rooms: 'Locations', timeline: 'Timetable', inspect: 'Inspect', pin: 'Pin',
     emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
-    cabinetLead: 'Two closed rooms. Open a file, ask the questions, name who did it.',
+    cabinetLead: 'Every file is a closed case. Open one, ask the questions, name who did it.',
+    generated: 'Generated case', drafts: 'drafts',
     cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
     unpin: 'Remove pin', pins: 'Pins',
     steps: { briefing: 'Brief', locations: 'Places', suspects: 'People', talk: 'Ask', board: 'Board', accuse: 'Accuse' }
@@ -486,7 +487,8 @@ const UI = {
     pack: 'Dossiês', files: 'Arquivos', board: 'Quadro', boardTitle: 'Quadro de evidências',
     rooms: 'Locais', timeline: 'Horário', inspect: 'Examinar', pin: 'Fixar',
     emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
-    cabinetLead: 'Dois cômodos fechados. Abra um dossiê, faça as perguntas, diga quem foi.',
+    cabinetLead: 'Cada dossiê é um caso fechado. Abra um, faça as perguntas, diga quem foi.',
+    generated: 'Caso gerado', drafts: 'rascunhos',
     cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
     unpin: 'Retirar', pins: 'Alfinetes',
     steps: { briefing: 'Caso', locations: 'Locais', suspects: 'Pessoas', talk: 'Interrogar', board: 'Quadro', accuse: 'Acusar' }
@@ -510,7 +512,9 @@ const LOC_ART_ROOM = { hallway: 'hallway-cart' };
 // Art is optional: a case without plates keeps the initials / gradients (images only apply once loaded).
 function artCase() { return caseData && /^[a-z0-9-]+$/.test(caseData.file || '') ? caseData.file : null; }
 function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onload = () => apply(url); im.src = url; }
-function locArt(roomId) { const c = artCase(); return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
+// A generated case (file gen-*) has no plates of its own: every room shows the shared rainy-night plate (M3 sprint 2).
+const GEN_PLATE = '/assets/tex/title-rain.png';
+function locArt(roomId) { const c = artCase(); if (c && c.startsWith('gen-')) return GEN_PLATE; return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
 let sceneRoom = null;
 let sceneFront = 0;
 let hintTimers = [];
@@ -1070,8 +1074,8 @@ function renderCabinet() {
     const art = document.createElement('div');
     art.className = 'folder-art';
     art.setAttribute('aria-hidden', 'true');
-    whenArt(/^[a-z0-9-]+$/.test(item.id || '') && `/assets/titles/${item.id}-stage.png`, (url) => { art.style.backgroundImage = `url(${url})`; });
-    art.appendChild(iconSvg(item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
+    whenArt(item.generated ? GEN_PLATE : /^[a-z0-9-]+$/.test(item.id || '') && `/assets/titles/${item.id}-stage.png`, (url) => { art.style.backgroundImage = `url(${url})`; });
+    art.appendChild(iconSvg(item.generated ? 'i-files' : item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
     const title = document.createElement('strong');
     title.textContent = item.title;
     const hook = document.createElement('span');
@@ -1081,6 +1085,14 @@ function renderCabinet() {
     go.appendChild(iconSvg('i-unlocked'));
     go.appendChild(document.createTextNode(UI[lang].openFile));
     btn.appendChild(art);
+    if (item.generated) {
+      const tag = document.createElement('span');
+      tag.className = 'folder-tag';
+      const c = item.cost || {};
+      const usd = Number(c.usd || 0).toFixed(4);
+      tag.textContent = `${UI[lang].generated} · US$ ${lang === 'pt' ? usd.replace('.', ',') : usd} · ${c.drafts || 0} ${UI[lang].drafts}`;
+      btn.appendChild(tag);
+    }
     btn.appendChild(title);
     btn.appendChild(hook);
     btn.appendChild(go);
@@ -1434,7 +1446,8 @@ function renderVerdict(moveFocus = true) {
   verdict.hidden = false;
   const { correct, culpritName, solution, score } = lastAccuseResult;
   verdict.classList.toggle('ok', !!correct);
-  verdict.style.setProperty('--verdict-art', `url(/assets/loc/violin-verdict-${correct ? 'closed' : 'wrong'}.png)`);
+  const vc = artCase();
+  verdict.style.setProperty('--verdict-art', vc && vc.startsWith('gen-') ? `url(${GEN_PLATE})` : `url(/assets/loc/violin-verdict-${correct ? 'closed' : 'wrong'}.png)`); // M3 sprint 2: a generated case keeps its own plate behind the verdict
   const stamp = correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!');
   verdict.innerHTML = '';
   const p1 = document.createElement('p');

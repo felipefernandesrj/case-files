@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { loadCase } from '../src/case.js';
+import { loadCase, ROOMS } from '../src/case.js';
 import { slugSeed, extractJson, validateCase, finishCase, generateCase, genMessages, GEN_MODEL } from '../src/generator.js';
 
 const results = [];
@@ -22,7 +22,7 @@ function fake(replies) {
 
 const reply = (text) => ({ body: { choices: [{ message: { content: text } }], usage: { prompt_tokens: 10, completion_tokens: 20 } } });
 
-const good = loadCase('content/cases/night-train.json');
+const good = { ...loadCase('content/cases/night-train.json'), rooms: ROOMS['night-train'] }; // M3 sprint 2: a generated case brings its own rooms
 const bad = { ...good, clues: good.clues.map(c => ({ ...c, clears: null })) };
 
 await check('1. slugSeed', async () => {
@@ -97,8 +97,8 @@ await check('5. retries with reasons', async () => {
   must(res.attempts.length === 3, 'retries length');
   must(res.attempts[0].reasons.includes('not_json'), 'attempt 0 reason');
   must(res.attempts[1].reasons.some(r => r === 'suspect_not_cleared'), 'attempt 1 reason');
-  must(capturedCalls[1].body.messages[1].content.includes('not_json'), 'user msg 2');
-  must(capturedCalls[2].body.messages[1].content.includes('suspect_not_cleared'), 'user msg 3');
+  must(capturedCalls[1].body.messages.at(-1).content.includes('not_json'), 'user msg 2');
+  must(capturedCalls[2].body.messages.at(-1).content.includes('suspect_not_cleared'), 'user msg 3');
   must(!capturedCalls[0].body.messages[1].content.includes('previous draft'), 'user msg 1');
 });
 

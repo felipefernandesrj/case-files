@@ -1,0 +1,115 @@
+Conserve as many tokens as possible and be fast (merge commands in few calls).
+Case Files M3 sprint 2, a bug found live: a generation was rejected 3 times with different mistakes each time, because a retry only listed the failed checks and the model wrote a whole new case. Make a retry send the previous draft back as the assistant turn, followed by the fix list, so the model repairs it; plus the tests. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block.
+
+All 7 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 7 blocks, in this order. Copy every character exactly, including backslashes, backticks and empty lines inside NEW. Never add or remove a space. Never write the [OLD n] or [NEW n] markers.
+
+Change 1, file src/generator.js
+[OLD 1]
+
+export function genMessages(seed, { suspects = 4, reasons = [] } = {}) {
+  const why = reasons.map((r) => `- ${r}: ${REASON_HINTS[r] || 'fix this check'}`).join('\n');
+  const userContent = `Seed: ${seed}\nSuspects: ${suspects}${reasons.length ? `\nThe previous draft failed these checks: ${reasons.join(', ')}. Fix every one and send the whole case again.\n${why}` : ''}`;
+  return [
+[/OLD 1]
+[NEW 1]
+
+export function genMessages(seed, { suspects = 4, reasons = [], previous = '' } = {}) {
+  const why = reasons.map((r) => `- ${r}: ${REASON_HINTS[r] || 'fix this check'}`).join('\n');
+  const fix = `The previous draft failed these checks: ${reasons.join(', ')}. Fix every one and send the whole case again.\n${why}`;
+  // M3 sprint 2: with the previous draft in the chat the model repairs it instead of writing a new case with new mistakes
+  if (reasons.length && typeof previous === 'string' && previous.trim()) {
+    return [
+      { role: 'system', content: GEN_SYSTEM },
+      { role: 'user', content: `Seed: ${seed}\nSuspects: ${suspects}` },
+      { role: 'assistant', content: previous.slice(0, 24000) },
+      { role: 'user', content: `${fix}\nKeep everything that already passes; change only what these checks need.` }
+    ];
+  }
+  const userContent = `Seed: ${seed}\nSuspects: ${suspects}${reasons.length ? `\n${fix}` : ''}`;
+  return [
+[/NEW 1]
+
+Change 2, file src/generator.js
+[OLD 2]
+  let currentReasons = [];
+  let spentUsd = 0;
+[/OLD 2]
+[NEW 2]
+  let currentReasons = [];
+  let previous = '';
+  let spentUsd = 0;
+[/NEW 2]
+
+Change 3, file src/generator.js
+[OLD 3]
+          model,
+          messages: genMessages(seed, { suspects, reasons: currentReasons }),
+          max_tokens: maxTokens,
+[/OLD 3]
+[NEW 3]
+          model,
+          messages: genMessages(seed, { suspects, reasons: currentReasons, previous }),
+          max_tokens: maxTokens,
+[/NEW 3]
+
+Change 4, file src/generator.js
+[OLD 4]
+      currentReasons = validation.reasons;
+      attempts.push({ n, status: response.status, usage, receipt, ok: validation.ok, reasons: validation.reasons });
+[/OLD 4]
+[NEW 4]
+      currentReasons = validation.reasons;
+      previous = content;
+      attempts.push({ n, status: response.status, usage, receipt, ok: validation.ok, reasons: validation.reasons });
+[/NEW 4]
+
+Change 5, file test/generator.mjs
+[OLD 5]
+  must(res.attempts[1].reasons.some(r => r === 'suspect_not_cleared'), 'attempt 1 reason');
+  must(capturedCalls[1].body.messages[1].content.includes('not_json'), 'user msg 2');
+  must(capturedCalls[2].body.messages[1].content.includes('suspect_not_cleared'), 'user msg 3');
+  must(!capturedCalls[0].body.messages[1].content.includes('previous draft'), 'user msg 1');
+[/OLD 5]
+[NEW 5]
+  must(res.attempts[1].reasons.some(r => r === 'suspect_not_cleared'), 'attempt 1 reason');
+  must(capturedCalls[1].body.messages.at(-1).content.includes('not_json'), 'user msg 2');
+  must(capturedCalls[2].body.messages.at(-1).content.includes('suspect_not_cleared'), 'user msg 3');
+  must(!capturedCalls[0].body.messages[1].content.includes('previous draft'), 'user msg 1');
+[/NEW 5]
+
+Change 6, file test/generated-pack.mjs
+[OLD 6]
+import { CASES, GENERATED_DIR, generatedCases, loadCase, fileKeyOf, publicCase, listPack, roomsOf } from '../src/case.js';
+import { generateCase, validateCase, isTestimony, usageUsd, finishCase, DEFAULT_MAX_USD, NEURON_USD } from '../src/generator.js';
+import { createServer } from '../src/server.js';
+[/OLD 6]
+[NEW 6]
+import { CASES, GENERATED_DIR, generatedCases, loadCase, fileKeyOf, publicCase, listPack, roomsOf } from '../src/case.js';
+import { generateCase, genMessages, validateCase, isTestimony, usageUsd, finishCase, DEFAULT_MAX_USD, NEURON_USD } from '../src/generator.js';
+import { createServer } from '../src/server.js';
+[/NEW 6]
+
+Change 7, file test/generated-pack.mjs
+[OLD 7]
+
+for (const l of results) console.log(l);
+[/OLD 7]
+[NEW 7]
+
+await check('10. a retry sends the previous draft back to be repaired, not rewritten', async () => {
+  const msgs = genMessages('x', { reasons: ['rooms_bad'], previous: '{"title":1}' });
+  must(msgs.length === 4 && msgs[2].role === 'assistant' && msgs[2].content === '{"title":1}', 'previous draft as the assistant turn');
+  must(msgs[3].role === 'user' && msgs[3].content.includes('rooms_bad: add "rooms"') && msgs[3].content.includes('change only what these checks need'), 'fix list after it');
+  must(genMessages('x', { reasons: [], previous: '{}' }).length === 2 && genMessages('x', { reasons: ['rooms_bad'] }).length === 2, 'first try and no draft keep two messages');
+  must(genMessages('x', { reasons: ['rooms_bad'], previous: 'y'.repeat(30000) })[2].content.length === 24000, 'previous draft capped');
+  const f = fake([replyN('draft one {', 10), replyN('draft two {', 10)]);
+  await generateCase('x', { key: 'K', fetchImpl: f });
+  const b2 = JSON.parse(f.calls[1].body), b3 = JSON.parse(f.calls[2].body);
+  must(b2.messages[2].content === 'draft one {' && b3.messages[2].content === 'draft two {', 'each retry carries the draft before it');
+});
+
+for (const l of results) console.log(l);
+[/NEW 7]
+

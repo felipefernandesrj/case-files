@@ -1,0 +1,18 @@
+{
+ "tag": "live6",
+ "seed": "A rainy night at a Lapa bookshop in Rio: a signed first edition disappears from the locked display case",
+ "ok": true,
+ "out": "content/generated/gen-a-rainy-night-at-a-lapa-bookshop-in-rio.json",
+ "spentUsd": 0.000841,
+ "reasons": [],
+ "attempts": [
+  {
+   "n": 1,
+   "status": 200,
+   "ok": true,
+   "reasons": [],
+   "receipt": "01M7WER916VG6FVM6AMNCKR0GC",
+   "neurons": 76.45454406738281
+  }
+ ]
+}

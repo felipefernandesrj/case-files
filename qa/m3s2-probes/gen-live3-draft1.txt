@@ -1,0 +1,337 @@
+{
+  "title": {
+    "en": "The Lapa First Edition Theft",
+    "pt": "O Roubo da Primeira Edição na Lapa"
+  },
+  "intro": {
+    "en": "A heavy rain lashes against the windows of 'Livraria Lapa'. Inside, the atmosphere is tense. A signed first edition of 'Dom Casmurro' has vanished from a locked glass display case. The lights flickered for a moment, and when they returned, the prize was gone.",
+    "pt": "Uma chuva forte castiga as janelas da 'Livraria Lapa'. Lá dentro, o clima é tenso. Uma primeira edição autografada de 'Dom Casmurro' desapareceu de uma vitrine de vidro trancada. As luzes piscaram por um momento e, quando voltaram, o tesouro havia sumido."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Beatriz Silva",
+      "role": {
+        "en": "Store Manager",
+        "pt": "Gerente da Loja"
+      },
+      "persona": {
+        "en": "Stressed, perfectionist, loves order.",
+        "pt": "Estressada, perfeccionista, ama a ordem."
+      },
+      "alibi": {
+        "en": "She was in the back office checking the inventory logs.",
+        "pt": "Ela estava no escritório nos fundos conferindo os registros de inventário."
+      },
+      "facts": {
+        "en": "You are looking at her trembling hands. She claims she never left the office, but you notice a smudge of ink on her sleeve that wasn't there earlier.",
+        "pt": "Você observa as mãos trêmulas dela. Ela afirma que nunca saiu do escritório, mas você nota uma mancha de tinta na manga que não estava lá antes."
+      }
+    },
+    {
+      "id": "suspect-2",
+      "name": "Ricardo Mendes",
+      "role": {
+        "en": "Collector/Customer",
+        "pt": "Colecionador/Cliente"
+      },
+      "persona": {
+        "en": "Arrogant, wealthy, obsessed with rare books.",
+        "pt": "Arrogante, rico, obcecado por livros raros."
+      },
+      "alibi": {
+        "en": "He claims he was browsing the poetry section in the corner.",
+        "pt": "Ele afirma que estava folheando a seção de poesia no canto."
+      },
+      "facts": {
+        "en": "You see him eyeing the empty case with disdain. He claims he didn't move from the poetry aisle, but he is wearing leather gloves despite the heat.",
+        "pt": "Você o vê olhando para a vitrine vazia com desdém. Ele afirma que não saiu do corredor de poesia, mas está usando luvas de couro apesar do calor."
+      }
+    },
+    {
+      "id": "suspect-3",
+      "name": "Lucas Costa",
+      "role": {
+        "en": "Delivery Driver",
+        "pt": "Entregador"
+      },
+      "persona": {
+        "en": "Quiet, observant, always in a hurry.",
+        "pt": "Quieto, observador, sempre com pressa."
+      },
+      "alibi": {
+        "en": "He was waiting in the hallway for his rain poncho.",
+        "pt": "Ele estava esperando no corredor pelo seu poncho de chuva."
+      },
+      "facts": {
+        "en": "You note he looks soaked. He says he stayed by the door, but he seems to be hiding a small, rectangular object in his pocket.",
+        "pt": "Você nota que ele está encharcado. Ele diz que ficou perto da porta, mas parece estar escondendo um objeto pequeno e retangular no bolso."
+      }
+    },
+    {
+      "id": "suspect-4",
+      "name": "Elena Rocha",
+      "role": {
+        "en": "Assistant",
+        "pt": "Assistente"
+      },
+      "persona": {
+        "en": "Dreamy, distracted, loves literature.",
+        "pt": "Sonhadora, distraída, ama literatura."
+      },
+      "alibi": {
+        "en": "She was cleaning the coffee station.",
+        "pt": "Ela estava limpando a estação de café."
+      },
+      "facts": {
+        "en": "You see her looking upset. She says she saw someone near the case during the blackout, but she refuses to say who.",
+        "pt": "Você a vê parecendo triste. Ela diz que viu alguém perto da vitrine durante o apagão, mas se recusa a dizer quem."
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "19:00",
+      "stop": {
+        "en": "Store Opening",
+        "pt": "Abertura da Loja"
+      },
+      "event": {
+        "en": "The shop opens under heavy rain.",
+        "pt": "A loja abre sob chuva forte."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "19:30",
+      "stop": {
+        "en": "Arrival",
+        "pt": "Chegada"
+      },
+      "event": {
+        "en": "Ricardo and Lucas enter the shop.",
+        "pt": "Ricardo e Lucas entram na loja."
+      },
+      "who": [
+        "suspect-2",
+        "suspect-3"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "20:05",
+      "stop": {
+        "en": "The Blackout",
+        "pt": "O Apagão"
+      },
+      "event": {
+        "en": "Lights flicker and the book disappears.",
+        "pt": "As luzes piscam e o livro desaparece.",
+        "crime": true,
+        "culprit": "suspect-2"
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t4",
+      "time": "20:15",
+      "stop": {
+        "en": "Discovery",
+        "pt": "Descoberta"
+      },
+      "event": {
+        "en": "The theft is noticed.",
+        "pt": "O roubo é notado."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-4",
+      "ask": "Did you see anything strange during the blackout?",
+      "keywords": [
+        "blackout",
+        "darkness",
+        "apagão",
+        "escuridão"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw a tall figure wearing gloves moving quickly towards the exit right after the lights came back on.",
+        "pt": "Eu vi uma figura alta usando luvas se movendo rapidamente em direção à saída logo após as luzes voltarem."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-1",
+      "ask": "Was anyone near the display case?",
+      "keywords": [
+        "case",
+        "display",
+        "vitrine",
+        "display"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "The lock wasn't forced, it was opened with a professional tool or a key. I saw someone with heavy gloves near the case just before the lights flickered.",
+        "pt": "A fechadura não foi forçada, foi aberta com uma ferramenta profissional ou uma chave. Eu vi alguém com luvas grossas perto da vitrine pouco antes das luzes piscarem."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-3",
+      "ask": "What were you doing in the hallway?",
+      "keywords": [
+        "hallway",
+        "waiting",
+        "corredor",
+        "esperando"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I was just standing by the door waiting for my gear. I didn't see anyone go into the office or the poetry section.",
+        "pt": "Eu estava apenas parado perto da porta esperando meu equipamento. Não vi ninguém entrar no escritório ou na seção de poesia."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-1",
+      "ask": "Where is the inventory key?",
+      "keywords": [
+        "key",
+        "chave",
+        "inventory",
+        "inventário"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "The key is always on my belt. I was in the office, and I didn't leave my desk once.",
+        "pt": "A chave está sempre no meu cinto. Eu estava no escritório e não saí da minha mesa nem uma vez."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-4",
+      "ask": "Did you see the manager leave the office?",
+      "keywords": [
+        "manager",
+        "office",
+        "gerente",
+        "escritório"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "No, Beatriz stayed in the back. She was very focused on her paperwork.",
+        "pt": "Não, a Beatriz ficou lá atrás. Ela estava muito concentrada na papelada dela."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on the physical evidence: why would a customer wear gloves inside a warm bookstore?",
+        "pt": "Foque nas evidências físicas: por que um cliente usaria luvas dentro de uma livraria quente?"
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Check the alibis. If the manager never left her office, she couldn't have stolen it, but she might have seen something.",
+        "pt": "Verifique os álibis. Se a gerente nunca saiu do escritório, ela não poderia ter roubado, mas ela pode ter visto algo."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "First Edition": "A book printed during its original publication run.",
+      "Blackout": "A sudden loss of electrical power.",
+      "Display Case": "A glass cabinet used to show items."
+    },
+    "pt": {
+      "First Edition": "Primeira edição.",
+      "Blackout": "Apagão.",
+      "Display Case": "Vitrine."
+    }
+  },
+  "rooms": [
+    {
+      "id": "office",
+      "en": "Back Office",
+      "pt": "Escritório nos Fundos"
+    },
+    {
+      "id": "poetry",
+      "en": "Poetry Aisle",
+      "pt": "Corredor de Poesia"
+    },
+    {
+      "id": "cafe",
+      "en": "Coffee Station",
+      "pt": "Estação de Café"
+    },
+    {
+      "id": "entrance",
+      "en": "Entrance Hall",
+      "pt": "Hall de Entrada"
+    }
+  ],
+  "solution": {
+    "en": "Ricardo Mendes used the cover of the sudden blackout to steal the book. He wore leather gloves to avoid leaving fingerprints on the glass and the book itself. Elena saw a figure in gloves fleeing, and Beatriz noticed someone with gloves near the case. His alibi of being in the poetry section was a lie intended to distance him from the display case.",
+    "pt": "Ricardo Mendes usou o cover do apagão repentino para roubar o livro. Ele usou luvas de couro para evitar deixar impressões digitais no vidro e no próprio livro. Elena viu uma figura com luvas fugindo, e Beatriz notou alguém com luvas perto da vitrine. Seu álibi de estar na seção de poesia era uma mentira para se distanciar da vitrine."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Manager Accused of Negligence!",
+        "body": "Beatriz Silva faces heavy fines after the Lapa theft. Police claim her lack of supervision led to the loss of a national treasure."
+      },
+      "pt": {
+        "headline": "Gerente Acusada de Negligência!",
+        "body": "Beatriz Silva enfrenta multas pesadas após o roubo na Lapa. A polícia afirma que sua falta de supervisão levou à perda de um tesouro nacional."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Delivery Driver Suspected in Book Heist",
+        "body": "Lucas Costa was detained after being wrongly identified as the thief. The real culprit remains at large."
+      },
+      "pt": {
+        "headline": "Entregador Suspeito de Roubo de Livros",
+        "body": "Lucas Costa foi detido após ser identificado erroneamente como o ladrão. O verdadeiro culpado continua foragido."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Assistant Blamed for Distraction",
+        "body": "Elena Rocha's daydreaming may have cost the shop its most valuable item. Critics call her 'unfit' for the role."
+      },
+      "pt": {
+        "headline": "Assistente Culpada por Distração",
+        "body": "O devaneio de Elena Rocha pode ter custado à loja seu item mais valioso. Críticos a chamam de 'inapta' para a função."
+      }
+    }
+  }
+}

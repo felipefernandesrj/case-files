@@ -1,0 +1,42 @@
+{
+ "tag": "live4",
+ "seed": "A rainy night at a Lapa bookshop in Rio: a signed first edition disappears from the locked display case",
+ "ok": false,
+ "out": null,
+ "spentUsd": 0.003655,
+ "reasons": [
+  "timeline_crime_count"
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "status": 200,
+   "ok": false,
+   "reasons": [
+    "culprit_cleared"
+   ],
+   "receipt": "01M7WEEDRX3F0GNR5V0BAKAAZG",
+   "neurons": 92.38182067871094
+  },
+  {
+   "n": 2,
+   "status": 200,
+   "ok": false,
+   "reasons": [
+    "timeline_crime_count"
+   ],
+   "receipt": "01M7WEGEMX9TFMZFGPWBPNF3Y2",
+   "neurons": 119.91818237304688
+  },
+  {
+   "n": 3,
+   "status": 200,
+   "ok": false,
+   "reasons": [
+    "timeline_crime_count"
+   ],
+   "receipt": "01M7WEJKSK0RVABD0JCVBJAQCV",
+   "neurons": 120.00908660888672
+  }
+ ]
+}

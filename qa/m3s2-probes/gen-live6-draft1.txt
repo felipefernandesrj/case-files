@@ -1,0 +1,162 @@
+{
+  "title": {
+    "en": "The Lapa First Edition Theft",
+    "pt": "O Roubo da Primeira Edição na Lapa"
+  },
+  "intro": {
+    "en": "A heavy storm lashes against the windows of 'Lapa Books'. The owner, Seu Jorge, is devastated. A signed first edition of 'Dom Casmurro' has vanished from a locked glass case during a brief power outage. The shop was closed to the public, leaving only four people inside.",
+    "pt": "Uma tempestade forte castiga as janelas da 'Lapa Books'. O proprietário, Seu Jorge, está devastado. Uma primeira edição autografada de 'Dom Casmurro' desapareceu de uma vitrine trancada durante uma breve queda de energia. A livraria estava fechada ao público, restando apenas quatro pessoas lá dentro."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Beatriz",
+      "role": { "en": "Assistant", "pt": "Assistente" },
+      "persona": { "en": "Quiet and studious, she loves the smell of old paper.", "pt": "Quieta e estudiosa, ela ama o cheiro de papel antigo." },
+      "alibi": { "en": "She claims she was organizing the poetry section in the back.", "pt": "Ela afirma que estava organizando a seção de poesia nos fundos." },
+      "facts": "You were in the back room at 21:00. You lie that you never went near the display case."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Ricardo",
+      "role": { "en": "Collector", "pt": "Colecionador" },
+      "persona": { "en": "Arrogant and wealthy, he thinks he deserves everything he sees.", "pt": "Arrogante e rico, ele acha que merece tudo o que vê." },
+      "alibi": { "en": "He claims he was sitting in the lounge sipping tea.", "pt": "Ele afirma que estava sentado no lounge tomando chá." },
+      "facts": "You were by the display case at 21:05 when the lights flickered. You lie that you only approached the case to check the time on your watch."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Clara",
+      "role": { "en": "Delivery Driver", "pt": "Entregadora" },
+      "persona": { "en": "Tired and impatient, she just wants to finish her shift.", "pt": "Cansada e impaciente, ela só quer terminar o turno dela." },
+      "alibi": { "en": "She says she was in the kitchen waiting for the rain to stop.", "pt": "Ela diz que estava na cozinha esperando a chuva parar." },
+      "facts": "You were in the kitchen at 21:00. You lie that you didn't hear any glass clinking."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Marcos",
+      "role": { "en": "Security Guard", "pt": "Segurança" },
+      "persona": { "en": "Strict and observant, but perhaps too focused on the doors.", "pt": "Rígido e observador, mas talvez focado demais nas portas." },
+      "alibi": { "en": "He claims he was patrolling the entrance.", "pt": "Ele afirma que estava patrulhando a entrada." },
+      "facts": "You were at the entrance at 21:00. You lie that you saw no one enter or leave."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:00",
+      "stop": { "en": "Entrance", "pt": "Entrada" },
+      "event": { "en": "The rain intensifies and the power flickers.", "pt": "A chuva aumenta e a energia oscila." },
+      "who": ["suspect-4"]
+    },
+    {
+      "id": "t2",
+      "time": "21:05",
+      "stop": { "en": "Display Case", "pt": "Vitrine" },
+      "event": { "en": "Total darkness for 30 seconds. The book is stolen.", "pt": "Escuridão total por 30 segundos. O livro é roubado." },
+      "who": ["suspect-2"],
+      "crime": true
+    },
+    {
+      "id": "t3",
+      "time": "21:15",
+      "stop": { "en": "Lounge", "pt": "Lounge" },
+      "event": { "en": "The lights come back on. Everyone gathers.", "pt": "As luzes voltam. Todos se reúnem." },
+      "who": ["suspect-1", "suspect-2", "suspect-3", "suspect-4"]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you when the lights went out?",
+      "keywords": ["back", "poesia", "back"],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": { "en": "I was in the back poetry section. I didn't move an inch until the lights came back.", "pt": "Eu estava na seção de poesia nos fundos. Não me movi um centímetro até as luzes voltarem." }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-3",
+      "ask": "Did you hear anything unusual?",
+      "keywords": ["kitchen", "glass", "glass"],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": { "en": "Just the rain. I was in the kitchen and heard nothing but the storm.", "pt": "Apenas a chuva. Eu estava na cozinha e não ouvi nada além da tempestade." }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "Did you see Ricardo near the case?",
+      "keywords": ["ricardo", "case", "case"],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": { "en": "I saw Ricardo standing right by the display case just seconds before the darkness hit.", "pt": "Eu vi o Ricardo parado bem ao lado da vitrine segundos antes do escuro chegar." }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-1",
+      "ask": "Did you see anyone else?",
+      "keywords": ["watch", "ricardo", "watch"],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": { "en": "I saw Ricardo checking his expensive gold watch near the case right before the blackout.", "pt": "Eu vi o Ricardo checando seu relógio de ouro caro perto da vitrine logo antes do apagão." }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-2",
+      "ask": "Why was the case unlocked?",
+      "keywords": ["lock", "key", "lock"],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": { "en": "The security guard, Marcos, has the only keys. He must have left it open.", "pt": "O segurança, Marcos, tem as únicas chaves. Ele deve ter deixado aberto." }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": { "en": "Focus on who was physically closest to the crime scene during the blackout.", "pt": "Foque em quem estava fisicamente mais perto da cena do crime durante o apagão." }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": { "en": "Two different witnesses placed Ricardo at the display case right before the theft.", "pt": "Duas testemunhas diferentes colocaram Ricardo na vitrine logo antes do roubo." }
+    }
+  ],
+  "glossary": {
+    "en": { "First Edition": "An early print of a book", "Display Case": "A glass box for showing items" },
+    "pt": { "First Edition": "Primeira edição", "Display Case": "Vitrine" }
+  },
+  "rooms": [
+    { "id": "entrance", "en": "Entrance", "pt": "Entrada" },
+    { "id": "lounge", "en": "Lounge", "pt": "Lounge" },
+    { "id": "kitchen", "en": "Kitchen", "pt": "Cozinha" },
+    { "id": "back-room", "en": "Back Room", "pt": "Sala dos Fundos" }
+  ],
+  "solution": {
+    "en": "Ricardo used the cover of the darkness to steal the book. While he claimed to be in the lounge, both Beatriz and Marcos saw him hovering near the display case right before the power went out. He relied on the darkness to hide his movements, but his presence at the scene was noted by others.",
+    "pt": "Ricardo usou o manto da escuridão para roubar o livro. Embora ele tenha alegado estar no lounge, tanto Beatriz quanto Marcos o viram pairando perto da vitrine logo antes da queda de energia. Ele contou com o escuro para esconder seus movimentos, mas sua presença no local foi notada por outros."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": { "headline": "Assistant Accused!", "body": "The innocent assistant Beatriz was wrongly detained after a false accusation." },
+      "pt": { "headline": "Assistente Acusada!", "body": "A inocente assistente Beatriz foi detida injustamente após uma acusação falsa." }
+    },
+    "suspect-3": {
+      "en": { "headline": "Driver Falsely Blamed", "body": "Clara, the delivery driver, faces legal battles after a mistake in the investigation." },
+      "pt": { "headline": "Entregadora Falsamente Culpada", "body": "Clara, a entregadora, enfrenta batalhas judiciais após um erro na investigação." }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Security Guard Wrongly Arrested",
+        "body": "Marcos was taken into custody, but the real thief remains at large."
+      },
+      "pt": {
+        "headline": "Segurança Injustamente Preso",
+        "body": "Marcos foi detido, mas o verdadeiro ladrão continua à solta."
+      }
+    }
+  }
+}

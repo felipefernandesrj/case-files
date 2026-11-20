@@ -1,0 +1,45 @@
+<<<REPLACE src/generator.js>>>
+- timeline: an array of stops with id, time (HH:MM), stop (en/pt), event (en/pt), who (array of suspect ids). Exactly one stop must have crime: true and include the culprit. "crime" sits on the stop itself, next to "who", never inside "event": { "id": "t3", "time": "22:15", "stop": { "en": "...", "pt": "..." }, "event": { "en": "...", "pt": "..." }, "who": ["the-culprit-id"], "crime": true }.
+- clues: an array of objects with id, from (suspect id), ask (English), keywords (lowercase en/pt), implicates (suspect id or null), clears (suspect id or null), and text (en/pt). At least 2 clues must implicate the culprit, and every innocent suspect must be cleared by at least one clue.
+- hints: 2 or 3 objects with id, after (seconds 30-120), and text (en/pt).
+=====
+- timeline: an array of stops with id, time (HH:MM), stop (en/pt), event (en/pt), who (array of suspect ids). Exactly one stop must have crime: true and include the culprit. "crime" sits on the stop itself, next to "who", never inside "event": { "id": "t3", "time": "22:15", "stop": { "en": "...", "pt": "..." }, "event": { "en": "...", "pt": "..." }, "who": ["the-culprit-id"], "crime": true }.
+- clues: an array of objects with id, from (suspect id), ask (English), keywords (lowercase en/pt), implicates (suspect id or null), clears (suspect id or null), and text (en/pt). At least 2 clues must implicate the culprit, and every innocent suspect must be cleared by at least one clue from ANOTHER suspect (a witness), not by their own alibi.
+- hints: 2 or 3 objects with id, after (seconds 30-120), and text (en/pt).
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  rooms_bad: 'add "rooms": 3 to 6 places, each with a lowercase id and short en and pt names',
+  clue_not_testimony: 'every clue text is spoken by its "from" suspect in first person, in en and pt ("I saw...", "Eu vi..."), never narration or "You find..."',
+=====
+  rooms_bad: 'add "rooms": 3 to 6 places, each with a lowercase id and short en and pt names',
+  clue_self_cleared_only: 'every innocent suspect must be cleared by a clue "from" ANOTHER suspect (a witness who saw them); a suspect clearing themselves does not count',
+  clue_not_testimony: 'every clue text is spoken by its "from" suspect in first person, in en and pt ("I saw...", "Eu vi..."), never narration or "You find..."',
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.text && !isTestimony(cl, c))) reasons.push('clue_not_testimony');
+
+=====
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.text && !isTestimony(cl, c))) reasons.push('clue_not_testimony');
+  // live drafts 6 and 7: innocents cleared only by their own alibi; a witness has to clear them
+  const clearedBy = (id) => (Array.isArray(c.clues) ? c.clues : []).filter((cl) => cl && cl.clears === id);
+  if (ids.filter((id) => id !== c.culprit).some((id) => clearedBy(id).length && !clearedBy(id).some((cl) => cl.from !== id))) reasons.push('clue_self_cleared_only');
+
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+
+for (const l of results) console.log(l);
+=====
+
+await check('12. an innocent cleared only by their own alibi is rejected (live drafts 6 and 7); a witness clearing them passes', async () => {
+  for (const n of [6, 7]) {
+    const live = JSON.parse(fs.readFileSync(`qa/m3s2-probes/gen-live${n}.case.json`, 'utf8'));
+    must(validateCase(live, { suspects: 4 }).reasons.includes('clue_self_cleared_only'), `live ${n} rejected`);
+  }
+  for (const f of ['content/case.json', 'content/cases/night-train.json']) {
+    must(!validateCase({ ...loadCase(f), rooms: [{ id: 'a', en: 'A', pt: 'A' }, { id: 'b', en: 'B', pt: 'B' }, { id: 'c', en: 'C', pt: 'C' }] }, { suspects: loadCase(f).suspects.length }).reasons.includes('clue_self_cleared_only'), `${f} (Lorenzo also has a self alibi, but Maya clears him)`);
+  }
+  must(!validateCase(gcase, { suspects: gcase.suspects.length }).reasons.includes('clue_self_cleared_only'), 'the generated case in the pack');
+});
+
+for (const l of results) console.log(l);
+<<<END>>>

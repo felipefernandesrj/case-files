@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 (M3 sprint 2: generated cases play in the picker, EN and PT)
+- A case written by the generator (content/generated/gen-<seed>.json) now shows in the case picker with a "Generated case" tag, its cost in USD and the drafts it took; it opens with its own rooms and a shared rainy-night plate, in English and Portuguese.
+- The generator now repairs the previous draft instead of starting over, lifts misplaced "crime" keys, demands 3 to 6 rooms, requires clues spoken as testimony in first person, requires a witness (not the suspect) to clear each innocent, and stops a generation at a cost cap of US$0.005.
+- New test/generated-pack.mjs. Picker lead text reworded.
+
 ## 0.5.0 (M3 sprint 1: a case generator with a fair play gate)
 - New src/generator.js writes a whole new case from a seed through the Cup key (`node src/generator.js --seed "A storm night at the Ilha Rasa lighthouse off Rio: the keeper's logbook vanishes"`), with gemma-4-26b-a4b-it and the workload tag `case-files:generate`.
 - Every draft goes through a gate before it is kept: the shared fair play and timeline checks of the engine, a shape check (titles, intro, solution, suspects, hints), and three checks added after real drafts slipped through: an aftermath object for every innocent suspect, no clue in which a suspect implicates themselves, and no clue that clears the culprit.

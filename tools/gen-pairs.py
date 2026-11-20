@@ -20,7 +20,7 @@ for arg in sys.argv[2:]:
         while True:
             s1, e1 = max(0, i1 - c), min(len(a), i2 + c)
             old = '\n'.join(a[s1:e1])
-            if head.count(old) == 1 and old.strip() and s1 in eqmap and (e1 - 1) in eqmap: break
+            if head.count(old) == 1 and old.strip() and (s1 == 0 or s1 in eqmap) and (e1 == len(a) or (e1 - 1) in eqmap): break  # run 46: a change on the first or last line looped forever
             c += 1
         if win and s1 <= win[-1][1]: win[-1][1] = max(win[-1][1], e1)  # merge overlapping windows
         else: win.append([s1, e1])

@@ -13941,5 +13941,726 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "m3s2-303",
+  "at": "2026-11-20T12:02:45.838Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 35331,
+  "usage": {
+   "prompt_tokens": 2704,
+   "completion_tokens": 2007,
+   "total_tokens": 4711,
+   "neurons": 79.31817626953125,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WDBTTHX2FZ9AQK2AWRAHRH",
+   "x-fullcup-receipt-id": "01M7WDBTTHX2FZ9AQK2AWRAHRH",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795176180"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 3
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "package.json",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-302",
+  "at": "2026-11-20T12:03:58.743Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 108235,
+  "usage": {
+   "prompt_tokens": 5047,
+   "completion_tokens": 4015,
+   "total_tokens": 9062,
+   "neurons": 155.38182067871094,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WDBTW2W4XR9CSMVWNRKEGR",
+   "x-fullcup-receipt-id": "01M7WDBTW2W4XR9CSMVWNRKEGR",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795176180"
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 21
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 11
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 31
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 13
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 6
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-305",
+  "at": "2026-11-20T12:04:41.270Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 26603,
+  "usage": {
+   "prompt_tokens": 1526,
+   "completion_tokens": 1042,
+   "total_tokens": 2568,
+   "neurons": 42.29090881347656,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WDFKS4C29H2TVBN5VTVGT7",
+   "x-fullcup-receipt-id": "01M7WDFKS4C29H2TVBN5VTVGT7",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795176300"
+  },
+  "files": [
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/case.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 3
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-306",
+  "at": "2026-11-20T12:04:55.865Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3046,
+  "usage": {
+   "prompt_tokens": 254,
+   "completion_tokens": 76,
+   "total_tokens": 330,
+   "neurons": 4.090908527374268,
+   "prompt_tokens_details": {
+    "cached_tokens": 64
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WDGS4CVHAV1F845C5P1Y2Q",
+   "x-fullcup-receipt-id": "01M7WDGS4CVHAV1F845C5P1Y2Q",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1795176300"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-304",
+  "at": "2026-11-20T12:07:08.400Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 128766,
+  "usage": {
+   "prompt_tokens": 5110,
+   "completion_tokens": 4494,
+   "total_tokens": 9604,
+   "neurons": 168.72727966308594,
+   "prompt_tokens_details": {
+    "cached_tokens": 64
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WDGZKKH0ZR8ASW1XAAABR9",
+   "x-fullcup-receipt-id": "01M7WDGZKKH0ZR8ASW1XAAABR9",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795176360"
+  },
+  "files": [
+   {
+    "path": "test/generated-pack.mjs",
+    "lines": 150
+   },
+   {
+    "path": "test/generator.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generator.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/case-select.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "test/case-select.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/case-select.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-307",
+  "at": "2026-11-20T12:11:36.710Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 34999,
+  "usage": {
+   "prompt_tokens": 2023,
+   "completion_tokens": 1560,
+   "total_tokens": 3583,
+   "neurons": 60.936363220214844,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WDW1EGFT1EQSEA3FBEQD9K",
+   "x-fullcup-receipt-id": "01M7WDW1EGFT1EQSEA3FBEQD9K",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795176720"
+  },
+  "files": [
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 15
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generator.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 14
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-308",
+  "at": "2026-11-20T12:20:54.023Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 42875,
+  "usage": {
+   "prompt_tokens": 2167,
+   "completion_tokens": 1675,
+   "total_tokens": 3842,
+   "neurons": 65.38182067871094,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WECT0286W7RHMP8AQRK6QY",
+   "x-fullcup-receipt-id": "01M7WECT0286W7RHMP8AQRK6QY",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795177260"
+  },
+  "files": [
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 10
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-309",
+  "at": "2026-11-20T12:26:18.494Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 31091,
+  "usage": {
+   "prompt_tokens": 2415,
+   "completion_tokens": 1906,
+   "total_tokens": 4321,
+   "neurons": 73.93636322021484,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WEQ1RGW4S8KATA8V9FXYQ5",
+   "x-fullcup-receipt-id": "01M7WEQ1RGW4S8KATA8V9FXYQ5",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795177560"
+  },
+  "files": [
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 23
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 17
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-310",
+  "at": "2026-11-20T12:29:11.689Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 35833,
+  "usage": {
+   "prompt_tokens": 1774,
+   "completion_tokens": 1336,
+   "total_tokens": 3110,
+   "neurons": 52.563636779785156,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WEW6TKH22GVGC27FN21MWW",
+   "x-fullcup-receipt-id": "01M7WEW6TKH22GVGC27FN21MWW",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795177740"
+  },
+  "files": [
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "src/generator.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 13
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-311",
+  "at": "2026-11-20T12:37:36.987Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 12015,
+  "usage": {
+   "prompt_tokens": 841,
+   "completion_tokens": 492,
+   "total_tokens": 1333,
+   "neurons": 21.063636779785156,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WFCBBB1BB9S4SR49XQDJG2",
+   "x-fullcup-receipt-id": "01M7WFCBBB1BB9S4SR49XQDJG2",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795178280"
+  },
+  "files": [
+   {
+    "path": "public/index.html",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 4
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 9
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m3s2-312",
+  "at": "2026-11-20T12:40:48.469Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 8763,
+  "usage": {
+   "prompt_tokens": 761,
+   "completion_tokens": 353,
+   "total_tokens": 1114,
+   "neurons": 16.545454025268555,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M7WFJ9CWHA08GCEHT3GW3T4C",
+   "x-fullcup-receipt-id": "01M7WFJ9CWHA08GCEHT3GW3T4C",
+   "x-fullcup-seal-by": "2026-11-21T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795178460"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   },
+   {
+    "path": "test/generated-pack.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 8
+   }
+  ],
+  "skipped": []
  }
 ]

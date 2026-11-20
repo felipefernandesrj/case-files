@@ -1,0 +1,9 @@
+Conserve as many tokens as possible and be fast (merge commands in few calls).
+One last change in public/index.html. Twice the edit did not apply because the copied OLD text came out as "</div >" with a stray space; this time OLD is a single line with no div. Emit exactly one block: a line `<<<REPLACE public/index.html>>>`, the OLD line, a line of exactly five = characters, the NEW line, then `<<<END>>>`. Keep the 4 leading spaces.
+
+[OLD 1]
+    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+[/OLD 1]
+[NEW 1]
+    <p id="cabinet-lead">Every file is a closed case. Open one, ask the questions, name who did it.</p>
+[/NEW 1]

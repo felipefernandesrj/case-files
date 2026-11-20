@@ -1,0 +1,131 @@
+Conserve as many tokens as possible and be fast (merge commands in few calls).
+Show generated cases in the Case Files web picker (public/index.html, no framework): a new lead line that fits any number of files, EN and PT labels "Generated case"/"Caso gerado" and "drafts"/"rascunhos", a tag on generated folder cards with the generation cost and drafts (PT decimal comma), the shared rainy-night plate as art for generated cards and rooms, a CSS rule for the tag, and package.json version 0.5.1 plus the new test in the test script. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block; the first line after the REPLACE line must already be real file content.
+
+Shape of one block (a real-looking example, not one of the changes):
+<<<REPLACE public/example.js>>>
+const a = 1;
+=====
+const a = 2;
+<<<END>>>
+
+1-6. public/index.html: lead line, UI labels EN/PT, GEN_PLATE and locArt, card art and icon, the generated tag.
+7. public/css/game.css: .folder-tag.
+8. package.json: version and test script.
+
+All 8 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 8 blocks, in this order, one per change: the REPLACE line with the file path, the OLD text verbatim, a line of exactly five = characters (=====), the NEW text verbatim, and the <<<END>>> line. Copy every character, including leading spaces, backslashes and backticks, exactly. Never swap OLD and NEW, never add a leading space, never emit a block without the ===== line, never write the [OLD n] or [NEW n] markers.
+
+Change 1, file public/index.html
+[OLD 1]
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div>
+[/OLD 1]
+[NEW 1]
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Every file is a closed case. Open one, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div>
+[/NEW 1]
+
+Change 2, file public/index.html
+[OLD 2]
+    emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
+    cabinetLead: 'Two closed rooms. Open a file, ask the questions, name who did it.',
+    cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
+[/OLD 2]
+[NEW 2]
+    emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
+    cabinetLead: 'Every file is a closed case. Open one, ask the questions, name who did it.',
+    generated: 'Generated case', drafts: 'drafts',
+    cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
+[/NEW 2]
+
+Change 3, file public/index.html
+[OLD 3]
+    emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
+    cabinetLead: 'Dois cômodos fechados. Abra um dossiê, faça as perguntas, diga quem foi.',
+    cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
+[/OLD 3]
+[NEW 3]
+    emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
+    cabinetLead: 'Cada dossiê é um caso fechado. Abra um, faça as perguntas, diga quem foi.',
+    generated: 'Caso gerado', drafts: 'rascunhos',
+    cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
+[/NEW 3]
+
+Change 4, file public/index.html
+[OLD 4]
+function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onload = () => apply(url); im.src = url; }
+function locArt(roomId) { const c = artCase(); return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
+let sceneRoom = null;
+[/OLD 4]
+[NEW 4]
+function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onload = () => apply(url); im.src = url; }
+// A generated case (file gen-*) has no plates of its own: every room shows the shared rainy-night plate (M3 sprint 2).
+const GEN_PLATE = '/assets/tex/title-rain.png';
+function locArt(roomId) { const c = artCase(); if (c && c.startsWith('gen-')) return GEN_PLATE; return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
+let sceneRoom = null;
+[/NEW 4]
+
+Change 5, file public/index.html
+[OLD 5]
+    art.setAttribute('aria-hidden', 'true');
+    whenArt(/^[a-z0-9-]+$/.test(item.id || '') && `/assets/titles/${item.id}-stage.png`, (url) => { art.style.backgroundImage = `url(${url})`; });
+    art.appendChild(iconSvg(item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
+    const title = document.createElement('strong');
+[/OLD 5]
+[NEW 5]
+    art.setAttribute('aria-hidden', 'true');
+    whenArt(item.generated ? GEN_PLATE : /^[a-z0-9-]+$/.test(item.id || '') && `/assets/titles/${item.id}-stage.png`, (url) => { art.style.backgroundImage = `url(${url})`; });
+    art.appendChild(iconSvg(item.generated ? 'i-files' : item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
+    const title = document.createElement('strong');
+[/NEW 5]
+
+Change 6, file public/index.html
+[OLD 6]
+    btn.appendChild(art);
+    btn.appendChild(title);
+[/OLD 6]
+[NEW 6]
+    btn.appendChild(art);
+    if (item.generated) {
+      const tag = document.createElement('span');
+      tag.className = 'folder-tag';
+      const c = item.cost || {};
+      const usd = Number(c.usd || 0).toFixed(4);
+      tag.textContent = `${UI[lang].generated} · US$ ${lang === 'pt' ? usd.replace('.', ',') : usd} · ${c.drafts || 0} ${UI[lang].drafts}`;
+      btn.appendChild(tag);
+    }
+    btn.appendChild(title);
+[/NEW 6]
+
+Change 7, file public/css/game.css
+[OLD 7]
+.folder-art .icon { color: var(--cf-lamp); width: 40px; height: 40px; }
+
+[/OLD 7]
+[NEW 7]
+.folder-art .icon { color: var(--cf-lamp); width: 40px; height: 40px; }
+.folder-tag { align-self: flex-start; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--cf-text-on-paper); border: 1px dashed currentColor; border-radius: 2px; padding: 2px 6px; }
+
+[/NEW 7]
+
+Change 8, file package.json
+[OLD 8]
+  "name": "fullcup-mystery",
+  "version": "0.5.0",
+  "type": "module",
+  "scripts": {
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/cli-lines.mjs && node test/generator.mjs && node test/keyboard.mjs"
+  },
+[/OLD 8]
+[NEW 8]
+  "name": "fullcup-mystery",
+  "version": "0.5.1",
+  "type": "module",
+  "scripts": {
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/cli-lines.mjs && node test/generator.mjs && node test/generated-pack.mjs && node test/keyboard.mjs"
+  },
+[/NEW 8]
+

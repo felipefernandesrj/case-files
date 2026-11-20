@@ -1,0 +1,316 @@
+{
+  "title": {
+    "en": "The Vanishing Crown of Santa Teresa",
+    "pt": "A Coroa Desaparecida de Santa Teresa"
+  },
+  "intro": {
+    "en": "The drums are beating, but the spirit is broken. During the peak of the Carnival parade preparations in Santa Teresa, the legendary golden crown of the 'Estrela da Lapa' samba school has vanished from the locked costume workshop. The celebration is in jeopardy.",
+    "pt": "Os tambores estão batendo, mas o espírito está quebrado. Durante o auge dos preparativos para o desfile de Carnaval em Santa Teresa, a lendária coroa dourada da escola de samba 'Estrela da Lapa' desapareceu do ateliê de fantasias trancado. A celebração está em perigo."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Tiago",
+      "role": {
+        "en": "Samba Drummer",
+        "pt": "Sambista"
+      },
+      "persona": {
+        "en": "Energetic and loud, always focused on the rhythm.",
+        "pt": "Enérgico e barulhento, sempre focado no ritmo."
+      },
+      "alibi": {
+        "en": "He claims he was practicing his drum solo in the courtyard.",
+        "pt": "Ele afirma que estava praticando seu solo de tambor no pátio."
+      },
+      "facts": "You were in the courtyard at 22:00. You tell everyone you were there all night to hide that you went to the kitchen for a snack."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Beatriz",
+      "role": {
+        "en": "Costume Designer",
+        "pt": "Figurinista"
+      },
+      "persona": {
+        "en": "Perfectionist and highly stressed about the details.",
+        "pt": "Perfeccionista e muito estressada com os detalhes."
+      },
+      "alibi": {
+        "en": "She says she was finishing the embroidery in the main hall.",
+        "pt": "Ela diz que estava terminando o bordado no salão principal."
+      },
+      "facts": "You were inside the workshop at 22:15. You lie that you never entered the workshop after the lights went out."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Carlos",
+      "role": {
+        "en": "Security Guard",
+        "pt": "Segurança"
+      },
+      "persona": {
+        "en": "Serious, observant, but slightly lazy.",
+        "pt": "Sério, observador, mas um pouco preguiçoso."
+      },
+      "alibi": {
+        "en": "He claims he was doing his rounds near the entrance.",
+        "pt": "Ele afirma que estava fazendo sua ronda perto da entrada."
+      },
+      "facts": "You were sleeping in the security booth at 22:15. You lie that you were actively patrolling the halls."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Dona Rosa",
+      "role": {
+        "en": "Samba School Matriarch",
+        "pt": "Matriarca da Escola"
+      },
+      "persona": {
+        "en": "Wise, stern, and deeply protective of the school's history.",
+        "pt": "Sábia, severa e profundamente protetora da história da escola."
+      },
+      "alibi": {
+        "en": "She says she was praying in the small chapel.",
+        "pt": "Ela diz que estava rezando na pequena capela."
+      },
+      "facts": "You were walking near the workshop at 22:10. You lie that you stayed in the chapel the whole time."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:30",
+      "stop": {
+        "en": "Workshop",
+        "pt": "Ateliê"
+      },
+      "event": {
+        "en": "The workshop is locked for the night.",
+        "pt": "O ateliê é trancado para a noite."
+      },
+      "who": [
+        "suspect-2"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:00",
+      "stop": {
+        "en": "Courtyard",
+        "pt": "Pátio"
+      },
+      "event": {
+        "en": "Tiago starts the loud drum rehearsal.",
+        "pt": "Tiago começa o ensaio barulhento de tambor."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:15",
+      "stop": {
+        "en": "Workshop",
+        "pt": "Ateliê"
+      },
+      "event": {
+        "en": "The golden crown is stolen.",
+        "pt": "A coroa dourada é roubada."
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "22:30",
+      "stop": {
+        "en": "Main Hall",
+        "pt": "Salão Principal"
+      },
+      "event": {
+        "en": "The theft is discovered.",
+        "pt": "O roubo é descoberto."
+      },
+      "who": [
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you during the rehearsal?",
+      "keywords": [
+        "drum",
+        "tambor",
+        "courtyard",
+        "pátio"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I was in the courtyard playing drums. I saw Dona Rosa walking near the workshop earlier, so she wasn't in the chapel.",
+        "pt": "Eu estava no pátio tocando tambor. Eu vi Dona Rosa andando perto do ateliê mais cedo, então ela não estava na capela."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-3",
+      "ask": "Did you see anything suspicious?",
+      "keywords": [
+        "embroidery",
+        "bordado",
+        "thread",
+        "linha"
+      ],
+      "implicates": "suspect-2",
+      "clears": "suspect-1",
+      "text": {
+        "en": "I didn't see much, but I found a trail of colorful embroidery thread leading from the workshop to the costume designer's desk.",
+        "pt": "Não vi muito, mas encontrei um rastro de linha de bordado colorida indo do ateliê até a mesa da figurinista."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "What can you tell us about the security?",
+      "keywords": [
+        "sleeping",
+        "dormindo",
+        "guard",
+        "segurança"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "The security guard Carlos was definitely not on patrol; I passed his booth and he was fast asleep!",
+        "pt": "O segurança Carlos definitivamente não estava na patrulha; eu passei pela cabine dele e ele estava dormindo profundamente!"
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-1",
+      "ask": "Did you see Beatriz in the hall?",
+      "keywords": [
+        "hall",
+        "salão",
+        "embroidery",
+        "bordado"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "No, I never saw Beatriz in the main hall. It was too loud for her to be working there.",
+        "pt": "Não, eu nunca vi a Beatriz no salão principal. Estava barulhento demais para ela estar trabalhando lá."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on the physical evidence: the embroidery thread connects the crime scene to a specific person.",
+        "pt": "Foque nas evidências físicas: a linha de bordado conecta a cena do crime a uma pessoa específica."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Check the alibis. If someone's alibi is proven false by a witness, they are a prime suspect.",
+        "pt": "Verifique os álibis. Se o álibi de alguém for provado falso por uma testemunha, essa pessoa é a principal suspeita."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "crown": "The stolen object.",
+      "workshop": "The place where costumes are made.",
+      "embroidery": "Decorative stitching used on clothes."
+    },
+    "pt": {
+      "crown": "A coroa roubada.",
+      "workshop": "O lugar onde as fantasias são feitas.",
+      "embroidery": "Bordado decorativo usado nas roupas."
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-1",
+      "en": "Workshop",
+      "pt": "Ateliê"
+    },
+    {
+      "id": "room-2",
+      "en": "Main Hall",
+      "pt": "Salão Principal"
+    },
+    {
+      "id": "room-3",
+      "en": "Courtyard",
+      "pt": "Pátio"
+    },
+    {
+      "id": "room-4",
+      "en": "Security Booth",
+      "pt": "Guarita"
+    }
+  ],
+  "solution": {
+    "en": "Beatriz, the costume designer, stole the crown. While she claimed to be in the Main Hall, Tiago confirmed he never saw her there. Furthermore, Carlos found a trail of embroidery thread—material Beatriz uses—leading directly from the workshop (where the theft occurred) back to her workstation. Her lie about never entering the workshop was exposed by the physical evidence.",
+    "pt": "Beatriz, a figurinista, roubou a coroa. Embora ela tenha alegado estar no Salão Principal, Tiago confirmou que nunca a viu lá. Além disso, Carlos encontrou um rastro de linha de bordado — material que Beatriz usa — indo diretamente do ateliê (onde ocorreu o roubo) de volta para sua mesa de trabalho. Sua mentira de que nunca entrou no ateliê foi exposta pela evidência física."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Drummer Accused!",
+        "body": "Tiago was wrongly blamed for the theft, causing a rift in the samba school."
+      },
+      "pt": {
+        "headline": "Sambista Acusado!",
+        "body": "Tiago foi injustamente culpado pelo roubo, causando uma divisão na escola de samba."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Security Failure!",
+        "body": "The investigation falsely targeted Carlos, though he was just sleeping on the job."
+      },
+      "pt": {
+        "headline": "Falha na Segurança!",
+        "body": "A investigação visou falsamente Carlos, embora ele estivesse apenas dormindo no serviço."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Matriarch Under Fire!",
+        "body": "Dona Rosa was accused of involvement, nearly breaking the spirit of the school."
+      },
+      "pt": {
+        "headline": "Matriarca Sob Fogo!",
+        "body": "Dona Rosa foi acusada de envolvimento, quase quebrando o espírito da escola."
+      }
+    }
+  },
+  "id": "case-gen-carnival-night-in-santa-teresa-the-samba",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "Carnival night in Santa Teresa: the samba school's crown vanishes from the costume workshop",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.002043,
+      "drafts": 2,
+      "receipts": [
+        "01M7WEXZNVGCXESAXECRD324WP",
+        "01M7WEZWJ6SP94TCYB3HKDWWB4"
+      ]
+    }
+  }
+}

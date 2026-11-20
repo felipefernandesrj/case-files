@@ -1,0 +1,352 @@
+{
+  "title": {
+    "en": "Carnival Night in Santa Teresa: The Vanished Crown",
+    "pt": "Carnival Night in Santa Teresa: A Coroa Desaparecida"
+  },
+  "intro": {
+    "en": "The drums are beating in Santa Teresa, but the rhythm is broken. The golden crown of the Samba School, worth thousands, has vanished from the locked costume workshop just hours before the parade. Amidst the glitter and sequins, someone has stolen the soul of the school.",
+    "pt": "Os tambores batem em Santa Teresa, mas o ritmo está quebrado. A coroa dourada da Escola de Samba, valendo milhares, desapareceu da oficina de fantasias trancada poucas horas antes do desfile. Entre o brilho e as lantejoulas, alguém roubou a alma da escola."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Beto",
+      "role": {
+        "en": "Drum Maker",
+        "pt": "Fabricante de Tambores"
+      },
+      "persona": {
+        "en": "Grumpy and hardworking",
+        "pt": "Ranzinza e trabalhador"
+      },
+      "alibi": {
+        "en": "He was tuning the surdos in the courtyard.",
+        "pt": "Ele estava afinando os surdos no pátio."
+      },
+      "facts": "You were in the courtyard at 22:00. You lie that you never entered the workshop all night."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Carla",
+      "role": {
+        "en": "Costume Designer",
+        "pt": "Designer de Fantasias"
+      },
+      "persona": {
+        "en": "Ambitious and stressed",
+        "pt": "Ambiciosa e estressada"
+      },
+      "alibi": {
+        "en": "She was sewing sequins in the lounge.",
+        "pt": "Ela estava costurando lantejoulas no lounge."
+      },
+      "facts": "You were inside the workshop at 22:15. You lie that you were in the lounge the whole time."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Didi",
+      "role": {
+        "en": "Security Guard",
+        "pt": "Segurança"
+      },
+      "persona": {
+        "en": "Distracted and lazy",
+        "pt": "Distraído e preguiçoso"
+      },
+      "alibi": {
+        "en": "He was taking a nap in the breakroom.",
+        "pt": "Ele estava tirando um cochilo na sala de descanso."
+      },
+      "facts": "You saw a shadow near the workshop at 22:10. You lie that you saw nothing unusual."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Elza",
+      "role": {
+        "en": "Samba Queen",
+        "pt": "Rainha de Bateria"
+      },
+      "persona": {
+        "en": "Elegant and observant",
+        "pt": "Elegante e observadora"
+      },
+      "alibi": {
+        "en": "She was practicing her dance steps in the hall.",
+        "pt": "Ela estava praticando seus passos de dança no corredor."
+      },
+      "facts": "You dropped your earring near the workshop door. You lie that you didn't go near the workshop."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:30",
+      "stop": {
+        "en": "Workshop",
+        "pt": "Oficina"
+      },
+      "event": {
+        "en": "The crown is last seen on its pedestal.",
+        "pt": "A coroa é vista pela última vez no pedestal."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:00",
+      "stop": {
+        "en": "Courtyard",
+        "pt": "Pátio"
+      },
+      "event": {
+        "en": "Beto is heard tuning drums.",
+        "pt": "Beto é ouvido afinando os tambores."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:10",
+      "stop": {
+        "en": "Hallway",
+        "pt": "Corredor"
+      },
+      "event": {
+        "en": "A dark figure moves toward the workshop.",
+        "pt": "Uma figura escura se move em direção à oficina."
+      },
+      "who": [
+        "suspect-3"
+      ]
+    },
+    {
+      "id": "t4",
+      "time": "22:15",
+      "stop": {
+        "en": "Workshop",
+        "pt": "Oficina"
+      },
+      "event": {
+        "en": "The crown is stolen!",
+        "pt": "A coroa é roubada!"
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t5",
+      "time": "22:30",
+      "stop": {
+        "en": "Lounge",
+        "pt": "Lounge"
+      },
+      "event": {
+        "en": "The alarm is raised.",
+        "pt": "O alarme é dado."
+      },
+      "who": [
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you at 22:15?",
+      "keywords": [
+        "drums",
+        "tambores",
+        "courtyard",
+        "pátio"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "I was in the courtyard with my drums. I never even touched the workshop door.",
+        "pt": "Eu estava no pátio com meus tambores. Eu nem sequer toquei na porta da oficina."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-3",
+      "ask": "Did you see anything strange?",
+      "keywords": [
+        "shadow",
+        "sombra",
+        "workshop",
+        "oficina"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I was sleeping, but I did hear a door creak near the workshop around 22:10.",
+        "pt": "Eu estava dormindo, mas ouvi uma porta ranger perto da oficina por volta das 22:10."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "What did you see in the hallway?",
+      "keywords": [
+        "sequins",
+        "lantejoulas",
+        "workshop",
+        "oficina"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Carla rushing from the workshop direction, and she had bright blue sequins stuck to her dress that weren't there before.",
+        "pt": "Eu vi a Carla saindo apressada na direção da oficina, e ela tinha lantejoulas azuis brilhantes presas ao vestido que não estavam lá antes."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-2",
+      "ask": "Why are you acting nervous?",
+      "keywords": [
+        "sewing",
+        "costura",
+        "lounge",
+        "lounge"
+      ],
+      "implicates": null,
+      "clears": null,
+      "text": {
+        "en": "I was just in the lounge all night sewing. The stress of the parade is getting to me!",
+        "pt": "Eu estava apenas no lounge a noite toda costurando. O estresse do desfile está me afetando!"
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-4",
+      "ask": "Did you find anything on the floor?",
+      "keywords": [
+        "earring",
+        "brinco",
+        "workshop",
+        "oficina"
+      ],
+      "implicates": "suspect-2",
+      "clears": "suspect-4",
+      "text": {
+        "en": "I dropped my earring near the workshop, but while I was looking for it, I saw Carla's sewing kit was missing a specific blue thread used for the crown!",
+        "pt": "Eu derrubei meu brinco perto da oficina, mas enquanto eu o procurava, vi que o kit de costura da Carla estava sem uma linha azul específica usada na coroa!"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Check the suspects' clothes. Someone has physical evidence of the workshop materials.",
+        "pt": "Verifique as roupas dos suspeitos. Alguém tem evidências físicas dos materiais da oficina."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Carla claimed to be in the lounge, but the clues place her near the crime scene with workshop materials.",
+        "pt": "Carla alegou estar no lounge, mas as pistas a colocam perto da cena do crime com materiais da oficina."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "crown": "coroa",
+      "workshop": "oficina",
+      "sequins": "lantejoulas",
+      "drums": "tambores"
+    },
+    "pt": {
+      "crown": "coroa",
+      "workshop": "oficina",
+      "sequins": "lantejoulas",
+      "drums": "tambores"
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-1",
+      "en": "Costume Workshop",
+      "pt": "Oficina de Fantasias"
+    },
+    {
+      "id": "room-2",
+      "en": "The Lounge",
+      "pt": "O Lounge"
+    },
+    {
+      "id": "room-3",
+      "en": "The Courtyard",
+      "pt": "O Pátio"
+    },
+    {
+      "id": "room-4",
+      "en": "The Hallway",
+      "pt": "O Corredor"
+    }
+  ],
+  "solution": {
+    "en": "Carla, the designer, stole the crown to sell it and pay her debts. She claimed to be in the lounge, but Elza saw blue sequins (from the crown's repair) on her dress, and the missing blue thread in her kit proved she had been working on the crown inside the workshop at 22:15.",
+    "pt": "Carla, a designer, roubou a coroa para vendê-la e pagar suas dívidas. Ela alegou estar no lounge, mas Elza viu lantejoulas azuis (da reparação da coroa) em seu vestido, e a linha azul que faltava em seu kit provou que ela esteve trabalhando na coroa dentro da oficina às 22:15."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Drum Maker Exonerated",
+        "body": "Beto was wrongly accused, but his rhythm remains unbroken."
+      },
+      "pt": {
+        "headline": "Fabricante de Tambores Inocentado",
+        "body": "Beto foi acusado injustamente, mas seu ritmo permanece intacto."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Security Guard Cleared",
+        "body": "Didi's nap didn't stop the truth from coming out."
+      },
+      "pt": {
+        "headline": "Segurança Absolvido",
+        "body": "O cochilo de Didi não impediu que a verdade aparecesse."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Queen Accused",
+        "body": "Elza was suspected of the theft, but the real thief was hiding in plain sight."
+      },
+      "pt": {
+        "headline": "Rainha Acusada",
+        "body": "Elza foi suspeita do roubo, mas a verdadeira ladra estava escondida à vista de todos."
+      }
+    }
+  },
+  "id": "case-gen-carnival-night-in-santa-teresa-the-samba",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "Carnival night in Santa Teresa: the samba school's crown vanishes from the costume workshop",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000892,
+      "drafts": 1,
+      "receipts": [
+        "01M7WERQB8XJQDV9RMKVM01H0E"
+      ]
+    }
+  }
+}

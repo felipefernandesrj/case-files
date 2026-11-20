@@ -1,0 +1,115 @@
+Conserve as many tokens as possible and be fast (merge commands in few calls).
+Case Files M3 sprint 2, found on 6 live drafts: the model always nests "crime": true inside the stop's "event" object (so the gate says timeline_crime_count 3 times in a row), and writes suspect facts as { en, pt } objects (the role-play prompt then prints [object Object]; last sprint's kept case had this too). Add normalizeDraft() that lifts the nested crime onto the stop and flattens object facts to the EN string before the gate, make the gate demand string facts, show the exact stop shape and facts form in the system prompt, plus a test on the saved live draft. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block.
+
+All 6 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 6 blocks, in this order. Copy every character exactly, including backslashes, backticks and empty lines inside NEW. Never add or remove a space. Never write the [OLD n] or [NEW n] markers.
+
+Change 1, file src/generator.js
+[OLD 1]
+- culprit: the ID of one suspect.
+- suspects: an array of objects with id (a-z/numbers/hyphens), name, role (en/pt), persona (en/pt), alibi (en/pt), and facts (English, 2nd person "You are...", including their lie).
+- timeline: an array of stops with id, time (HH:MM), stop (en/pt), event (en/pt), who (array of suspect ids). Exactly one stop must have crime: true and include the culprit.
+- clues: an array of objects with id, from (suspect id), ask (English), keywords (lowercase en/pt), implicates (suspect id or null), clears (suspect id or null), and text (en/pt). At least 2 clues must implicate the culprit, and every innocent suspect must be cleared by at least one clue.
+[/OLD 1]
+[NEW 1]
+- culprit: the ID of one suspect.
+- suspects: an array of objects with id (a-z/numbers/hyphens), name, role (en/pt), persona (en/pt), alibi (en/pt), and facts: ONE English string with that suspect's own private truth told to them in 2nd person ("You were in the lounge at 22:00. You lie that..."), including their lie.
+- timeline: an array of stops with id, time (HH:MM), stop (en/pt), event (en/pt), who (array of suspect ids). Exactly one stop must have crime: true and include the culprit. "crime" sits on the stop itself, next to "who", never inside "event": { "id": "t3", "time": "22:15", "stop": { "en": "...", "pt": "..." }, "event": { "en": "...", "pt": "..." }, "who": ["the-culprit-id"], "crime": true }.
+- clues: an array of objects with id, from (suspect id), ask (English), keywords (lowercase en/pt), implicates (suspect id or null), clears (suspect id or null), and text (en/pt). At least 2 clues must implicate the culprit, and every innocent suspect must be cleared by at least one clue.
+[/NEW 1]
+
+Change 2, file src/generator.js
+[OLD 2]
+
+export function shapeCheck(c) {
+[/OLD 2]
+[NEW 2]
+
+/**
+ * Repair two shapes the model keeps writing before the gate sees a draft (M3 sprint 2, live drafts): "crime": true
+ * nested inside a stop's event or stop text is lifted onto the stop, and facts written as { en, pt } become the EN string.
+ * @param {Object} c a parsed draft (changed in place and returned)
+ */
+export function normalizeDraft(c) {
+  if (!c || typeof c !== 'object' || Array.isArray(c)) return c;
+  for (const t of Array.isArray(c.timeline) ? c.timeline : []) {
+    if (!t || typeof t !== 'object') continue;
+    for (const k of ['event', 'stop']) {
+      if (t[k] && typeof t[k] === 'object' && 'crime' in t[k]) {
+        if (t.crime === undefined && t[k].crime === true) t.crime = true;
+        delete t[k].crime;
+      }
+    }
+  }
+  for (const s of Array.isArray(c.suspects) ? c.suspects : []) {
+    if (s && s.facts && typeof s.facts === 'object' && typeof s.facts.en === 'string') s.facts = s.facts.en;
+  }
+  return c;
+}
+
+export function shapeCheck(c) {
+[/NEW 2]
+
+Change 3, file src/generator.js
+[OLD 3]
+      ids.add(s.id);
+      if (!s.name || !s.role?.en || !s.role?.pt || !s.facts) {
+        reasons.push('suspect_bad');
+[/OLD 3]
+[NEW 3]
+      ids.add(s.id);
+      if (!s.name || !s.role?.en || !s.role?.pt || typeof s.facts !== 'string' || !s.facts.trim()) {
+        reasons.push('suspect_bad');
+[/NEW 3]
+
+Change 4, file src/generator.js
+[OLD 4]
+      
+      const parsed = extractJson(content);
+      const validation = parsed ? validateCase(parsed, { suspects }) : { ok: false, reasons: ['not_json'] };
+[/OLD 4]
+[NEW 4]
+      
+      const parsed = normalizeDraft(extractJson(content));
+      const validation = parsed ? validateCase(parsed, { suspects }) : { ok: false, reasons: ['not_json'] };
+[/NEW 4]
+
+Change 5, file test/generated-pack.mjs
+[OLD 5]
+import { CASES, GENERATED_DIR, generatedCases, loadCase, fileKeyOf, publicCase, listPack, roomsOf } from '../src/case.js';
+import { generateCase, genMessages, validateCase, isTestimony, usageUsd, finishCase, DEFAULT_MAX_USD, NEURON_USD } from '../src/generator.js';
+import { createServer } from '../src/server.js';
+[/OLD 5]
+[NEW 5]
+import { CASES, GENERATED_DIR, generatedCases, loadCase, fileKeyOf, publicCase, listPack, roomsOf } from '../src/case.js';
+import { generateCase, genMessages, validateCase, isTestimony, usageUsd, finishCase, normalizeDraft, DEFAULT_MAX_USD, NEURON_USD } from '../src/generator.js';
+import { createServer } from '../src/server.js';
+[/NEW 5]
+
+Change 6, file test/generated-pack.mjs
+[OLD 6]
+
+for (const l of results) console.log(l);
+[/OLD 6]
+[NEW 6]
+
+await check('11. normalizeDraft lifts a nested "crime": true onto its stop and flattens { en, pt } facts (live drafts 4 and 5)', async () => {
+  const raw = fs.readFileSync('qa/m3s2-probes/gen-live5-draft3.txt', 'utf8');
+  const before = JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
+  must(before.timeline.some((t) => t.event && t.event.crime === true) && !before.timeline.some((t) => t.crime === true), 'live5 draft 3 nests crime inside event');
+  must(validateCase(JSON.parse(JSON.stringify(before)), { suspects: 4 }).reasons.includes('suspect_bad'), 'live5 draft 3 as written fails the gate (object facts)');
+  const d = normalizeDraft(JSON.parse(JSON.stringify(before)));
+  const crime = d.timeline.filter((t) => t.crime === true);
+  must(crime.length === 1 && crime[0].who.includes(d.culprit) && d.timeline.every((t) => !('crime' in (t.event || {}))), 'crime lifted');
+  must(d.suspects.every((s) => typeof s.facts === 'string' && s.facts.trim()), 'facts are strings');
+  must(validateCase(d, { suspects: 4 }).ok, 'after the repair live5 draft 3 passes the whole gate');
+  const keep = normalizeDraft({ timeline: [{ id: 'a', crime: false, event: { en: 'x', crime: true } }], suspects: [{ facts: 'You were here.' }] });
+  must(keep.timeline[0].crime === false && !('crime' in keep.timeline[0].event) && keep.suspects[0].facts === 'You were here.', 'an explicit crime: false on the stop wins, string facts untouched');
+  must(normalizeDraft(null) === null && Array.isArray(normalizeDraft([])), 'non objects pass through');
+  must(validateCase({ ...gcase, suspects: gcase.suspects.map((s, i) => (i ? s : { ...s, facts: { en: s.facts } })) }, { suspects: gcase.suspects.length }).reasons.includes('suspect_bad'), 'object facts that reach the gate are rejected');
+});
+
+for (const l of results) console.log(l);
+[/NEW 6]
+

@@ -1,0 +1,89 @@
+<<<REPLACE public/index.html>>>
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div >
+=====
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Every file is a closed case. Open one, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div >
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
+    cabinetLead: 'Two closed rooms. Open a file, ask the questions, name who did it.',
+    cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
+=====
+    emptyBoard: 'No pins yet. Inspect a room or pin a line from a conversation.',
+    cabinetLead: 'Every file is a closed case. Open one, ask the questions, name who did it.',
+    generated: 'Generated case', drafts: 'drafts',
+    cabinetStamp: 'Field office', openFile: 'Open file', briefStamp: 'Case file',
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
+    cabinetLead: 'Dois cômodos fechados. Abra um dossiê, faça as perguntas, diga quem foi.',
+    cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
+=====
+    emptyBoard: 'Nenhum item ainda. Examine um local ou fixe uma fala da conversa.',
+    cabinetLead: 'Cada dossiê é um caso fechado. Abra um, faça as perguntas, diga quem foi.',
+    generated: 'Caso gerado', drafts: 'rascunhos',
+    cabinetStamp: 'Escritório de campo', openFile: 'Abrir dossiê', briefStamp: 'Dossiê',
+<<<END>>>
+<<<REPLACE public/index.html>>>
+function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onload = () => apply(url); im.src = url; }
+function locArt(roomId) { const c = artCase(); return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
+let sceneRoom = null;
+=====
+function whenArt(url, apply) { if (!url) return; const im = new Image(); im.onload = () => apply(url); im.src = url; }
+// A generated case (file gen-*) has no plates of its own: every room shows the shared rainy-night plate (M3 sprint 2).
+const GEN_PLATE = '/assets/tex/title-rain.png';
+function locArt(roomId) { const c = artCase(); if (c && c.startsWith('gen-')) return GEN_PLATE; return c ? `/assets/loc/${c}-${LOC_ART_ROOM[roomId] || roomId}.png` : null; }
+let sceneRoom = null;
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    art.setAttribute('aria-hidden', 'true');
+    whenArt(/^[a-z0-9-]+$/.test(item.id || '') && `/assets/titles/${item.id}-stage.png`, (url) => { art.style.backgroundImage = `url(${url})`; });
+    art.appendChild(iconSvg(item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
+    const title = document.createElement('strong');
+=====
+    art.setAttribute('aria-hidden', 'true');
+    whenArt(item.generated ? GEN_PLATE : /^[a-z0-9-]+$/.test(item.id || '') && `/assets/titles/${item.id}-stage.png`, (url) => { art.style.backgroundImage = `url(${url})`; });
+    art.appendChild(iconSvg(item.generated ? 'i-files' : item.id === 'violin' ? 'i-ev-violin' : 'i-loc-train', 'icon icon-lg'));
+    const title = document.createElement('strong');
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    btn.appendChild(art);
+    btn.appendChild(title);
+=====
+    btn.appendChild(art);
+    if (item.generated) {
+      const tag = document.createElement('span');
+      tag.className = 'folder-tag';
+      const c = item.cost || {};
+      const usd = Number(c.usd || 0).toFixed(4);
+      tag.textContent = `${UI[lang].generated} · US$ ${lang === 'pt' ? usd.replace('.', ',') : usd} · ${c.drafts || 0} ${UI[lang].drafts}`;
+      btn.appendChild(tag);
+    }
+    btn.appendChild(title);
+<<<END>>>
+<<<REPLACE public/css/game.css>>>
+.folder-art .icon { color: var(--cf-lamp); width: 40px; height: 40px; }
+
+=====
+.folder-art .icon { color: var(--cf-lamp); width: 40px; height: 40px; }
+.folder-tag { align-self: flex-start; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--cf-text-on-paper); border: 1px dashed currentColor; border-radius: 2px; padding: 2px 6px; }
+
+<<<END>>>
+<<<REPLACE package.json>>>
+  "name": "fullcup-mystery",
+  "version": "0.5.0",
+  "type": "module",
+  "scripts": {
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/cli-lines.mjs && node test/generator.mjs && node test/keyboard.mjs"
+  },
+=====
+  "name": "fullcup-mystery",
+  "version": "0.5.1",
+  "type": "module",
+  "scripts": {
+    "test": "node test/e2e.mjs && node test/proxy.mjs && node test/consistency.mjs && node test/capacity.mjs && node test/scoreboard.mjs && node test/night-train.mjs && node test/case-select.mjs && node test/icons.mjs && node test/budget.mjs && node test/progress.mjs && node test/scene.mjs && node test/hints.mjs && node test/legibility.mjs && node test/continue.mjs && node test/suspicion.mjs && node test/quick-accuse.mjs && node test/talk.mjs && node test/aftermath.mjs && node test/arrest.mjs && node test/errors.mjs && node test/question-budget.mjs && node test/ask-lock.mjs && node test/after-verdict.mjs && node test/cli-rows.mjs && node test/cli-lines.mjs && node test/generator.mjs && node test/generated-pack.mjs && node test/keyboard.mjs"
+  },
+<<<END>>>

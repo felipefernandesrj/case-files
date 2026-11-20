@@ -1,0 +1,72 @@
+<<<REPLACE src/generator.js>>>
+  culprit_cleared: 'no clue may have "clears" set to the culprit id; clues only clear innocent suspects',
+  timeline_crime_count: 'exactly one timeline stop has "crime": true',
+  timeline_culprit_absent: 'the crime stop "who" list must include the culprit',
+=====
+  culprit_cleared: 'no clue may have "clears" set to the culprit id; clues only clear innocent suspects',
+  timeline_crime_count: 'exactly one timeline stop has the key "crime": true (the stop when the crime happens, with the culprit in "who"); no other stop has it',
+  timeline_culprit_absent: 'the crime stop "who" list must include the culprit',
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+const FIRST_PT = /(^|[^\p{L}])(eu|me|mim|meu|meus|minha|minhas|comigo|nós|nos|nosso|nossa|nossos|nossas|vi|ouvi|fui|estive|sei|vejo|acho|lembro|tenho|estou|sou|\p{L}{2,}ei)(?![\p{L}])/iu;
+
+/**
+ * True when a clue reads as testimony (M3 sprint 2: drafts narrated scenes instead): its EN and PT text both speak in
+ * first person, or, without "You..." / "Você...", both name another suspect (a witness talking about someone).
+ * @param {Object} clue
+=====
+const FIRST_PT = /(^|[^\p{L}])(eu|me|mim|meu|meus|minha|minhas|comigo|nós|nos|nosso|nossa|nossos|nossas|vi|ouvi|fui|estive|sei|vejo|acho|lembro|tenho|estou|sou|\p{L}{2,}ei)(?![\p{L}])/iu;
+
+const THIRD_EN = /\b(he|she|him|her|his|they|them|their)\b/i;
+const THIRD_PT = /(^|[^\p{L}])(ele|ela|eles|elas|dele|dela|deles|delas)(?![\p{L}])/iu;
+
+/**
+ * True when a clue reads as testimony (M3 sprint 2: drafts narrated scenes instead): its EN and PT text both speak in
+ * first person, or, without "You..." / "Você...", both talk about another person (another suspect's name or a he/she
+ * pronoun), as a witness would. A scene told with no person in it ("The floor shows...") is narration.
+ * @param {Object} clue
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  const others = (Array.isArray(c?.suspects) ? c.suspects : []).filter((s) => s && s.id !== clue.from).flatMap((s) => String(s.name || '').split(/\s+/)).filter((w) => w.length >= 3);
+  return others.some((w) => en.includes(w) && pt.includes(w));
+}
+=====
+  const others = (Array.isArray(c?.suspects) ? c.suspects : []).filter((s) => s && s.id !== clue.from).flatMap((s) => String(s.name || '').split(/\s+/)).filter((w) => w.length >= 3);
+  const self = (Array.isArray(c?.suspects) ? c.suspects : []).filter((s) => s && s.id === clue.from).flatMap((s) => String(s.name || '').split(/\s+/)).filter((w) => w.length >= 3);
+  if (self.some((w) => en.includes(w)) && !others.some((w) => en.includes(w))) return false;
+  return others.some((w) => en.includes(w) && pt.includes(w)) || (THIRD_EN.test(en) && THIRD_PT.test(pt));
+}
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+      { role: 'assistant', content: previous.slice(0, 24000) },
+      { role: 'user', content: `${fix}\nKeep everything that already passes; change only what these checks need.` }
+    ];
+=====
+      { role: 'assistant', content: previous.slice(0, 24000) },
+      { role: 'user', content: `${fix}\nKeep everything that already passes (the rooms, the one timeline stop with "crime": true, the aftermath); change only what these checks need.` }
+    ];
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+await check('6. testimony check: narration and "You find..." fail, first person and a witness naming someone pass', async () => {
+  const c = { suspects: [{ id: 'ana', name: 'Ana Reis' }, { id: 'bia', name: 'Bia Lopes' }] };
+=====
+await check('6. testimony check: narration and "You find..." fail, first person and a witness talking about someone pass', async () => {
+  const c = { suspects: [{ id: 'ana', name: 'Ana Reis' }, { id: 'bia', name: 'Bia Lopes' }] };
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+  must(!t('Ana left early that night.', 'A Ana saiu cedo naquela noite.'), 'speaker about herself in third person');
+  must(!isTestimony({ from: 'ana', text: { en: 'I saw it.' } }, c), 'missing pt');
+=====
+  must(!t('Ana left early that night.', 'A Ana saiu cedo naquela noite.'), 'speaker about herself in third person');
+  must(t('The girl was at the coffee station the whole time, she was busy.', 'A menina estava no café o tempo todo, ela estava ocupada.'), 'witness about someone by pronoun (live3 draft 2)');
+  must(!t('The tower ladder shows no signs of tampering.', 'A escada da torre não mostra sinais de violação.'), 'a scene with no person');
+  must(!isTestimony({ from: 'ana', text: { en: 'I saw it.' } }, c), 'missing pt');
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+  must(validateCase(first, { suspects: 4 }).reasons.includes('clue_not_testimony'), 'first live draft (narrated clues) rejected');
+  for (const f of ['content/case.json', 'content/cases/night-train.json', CASES[gid]]) {
+=====
+  must(validateCase(first, { suspects: 4 }).reasons.includes('clue_not_testimony'), 'first live draft (narrated clues) rejected');
+  must(first.clues.filter((cl) => !isTestimony(cl, first)).length >= 3, 'at least 3 narrated clues of the first live draft caught');
+  for (const f of ['content/case.json', 'content/cases/night-train.json', CASES[gid]]) {
+<<<END>>>

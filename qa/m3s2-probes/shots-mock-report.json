@@ -1,0 +1,106 @@
+[
+ {
+  "tag": "1280-en",
+  "lead": "Every file is a closed case. Open one, ask the questions, name who did it.",
+  "overflow": false,
+  "cards": [
+   {
+    "file": "violin",
+    "w": 616,
+    "h": 272,
+    "tag": null
+   },
+   {
+    "file": "night-train",
+    "w": 616,
+    "h": 272,
+    "tag": null
+   },
+   {
+    "file": "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "w": 616,
+    "h": 286,
+    "tag": "Generated case · US$ 0.0021 · 2 drafts"
+   }
+  ],
+  "verdictArt": "url(/assets/tex/title-rain.png)"
+ },
+ {
+  "tag": "1280-pt",
+  "lead": "Cada dossiê é um caso fechado. Abra um, faça as perguntas, diga quem foi.",
+  "overflow": false,
+  "cards": [
+   {
+    "file": "violin",
+    "w": 616,
+    "h": 272,
+    "tag": null
+   },
+   {
+    "file": "night-train",
+    "w": 616,
+    "h": 272,
+    "tag": null
+   },
+   {
+    "file": "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "w": 616,
+    "h": 286,
+    "tag": "Caso gerado · US$ 0,0021 · 2 rascunhos"
+   }
+  ],
+  "verdictArt": "url(/assets/tex/title-rain.png)"
+ },
+ {
+  "tag": "390-en",
+  "lead": "Every file is a closed case. Open one, ask the questions, name who did it.",
+  "overflow": false,
+  "cards": [
+   {
+    "file": "violin",
+    "w": 358,
+    "h": 290,
+    "tag": null
+   },
+   {
+    "file": "night-train",
+    "w": 358,
+    "h": 308,
+    "tag": null
+   },
+   {
+    "file": "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "w": 358,
+    "h": 286,
+    "tag": "Generated case · US$ 0.0021 · 2 drafts"
+   }
+  ],
+  "verdictArt": "url(/assets/tex/title-rain.png)"
+ },
+ {
+  "tag": "390-pt",
+  "lead": "Cada dossiê é um caso fechado. Abra um, faça as perguntas, diga quem foi.",
+  "overflow": false,
+  "cards": [
+   {
+    "file": "violin",
+    "w": 358,
+    "h": 290,
+    "tag": null
+   },
+   {
+    "file": "night-train",
+    "w": 358,
+    "h": 290,
+    "tag": null
+   },
+   {
+    "file": "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "w": 358,
+    "h": 286,
+    "tag": "Caso gerado · US$ 0,0021 · 2 rascunhos"
+   }
+  ],
+  "verdictArt": "url(/assets/tex/title-rain.png)"
+ }
+]

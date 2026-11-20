@@ -1,0 +1,87 @@
+<<<REPLACE src/generator.js>>>
+
+export function genMessages(seed, { suspects = 4, reasons = [] } = {}) {
+  const why = reasons.map((r) => `- ${r}: ${REASON_HINTS[r] || 'fix this check'}`).join('\n');
+  const userContent = `Seed: ${seed}\nSuspects: ${suspects}${reasons.length ? `\nThe previous draft failed these checks: ${reasons.join(', ')}. Fix every one and send the whole case again.\n${why}` : ''}`;
+  return [
+=====
+
+export function genMessages(seed, { suspects = 4, reasons = [], previous = '' } = {}) {
+  const why = reasons.map((r) => `- ${r}: ${REASON_HINTS[r] || 'fix this check'}`).join('\n');
+  const fix = `The previous draft failed these checks: ${reasons.join(', ')}. Fix every one and send the whole case again.\n${why}`;
+  // M3 sprint 2: with the previous draft in the chat the model repairs it instead of writing a new case with new mistakes
+  if (reasons.length && typeof previous === 'string' && previous.trim()) {
+    return [
+      { role: 'system', content: GEN_SYSTEM },
+      { role: 'user', content: `Seed: ${seed}\nSuspects: ${suspects}` },
+      { role: 'assistant', content: previous.slice(0, 24000) },
+      { role: 'user', content: `${fix}\nKeep everything that already passes; change only what these checks need.` }
+    ];
+  }
+  const userContent = `Seed: ${seed}\nSuspects: ${suspects}${reasons.length ? `\n${fix}` : ''}`;
+  return [
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  let currentReasons = [];
+  let spentUsd = 0;
+=====
+  let currentReasons = [];
+  let previous = '';
+  let spentUsd = 0;
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+          model,
+          messages: genMessages(seed, { suspects, reasons: currentReasons }),
+          max_tokens: maxTokens,
+=====
+          model,
+          messages: genMessages(seed, { suspects, reasons: currentReasons, previous }),
+          max_tokens: maxTokens,
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+      currentReasons = validation.reasons;
+      attempts.push({ n, status: response.status, usage, receipt, ok: validation.ok, reasons: validation.reasons });
+=====
+      currentReasons = validation.reasons;
+      previous = content;
+      attempts.push({ n, status: response.status, usage, receipt, ok: validation.ok, reasons: validation.reasons });
+<<<END>>>
+<<<REPLACE test/generator.mjs>>>
+  must(res.attempts[1].reasons.some(r => r === 'suspect_not_cleared'), 'attempt 1 reason');
+  must(capturedCalls[1].body.messages[1].content.includes('not_json'), 'user msg 2');
+  must(capturedCalls[2].body.messages[1].content.includes('suspect_not_cleared'), 'user msg 3');
+  must(!capturedCalls[0].body.messages[1].content.includes('previous draft'), 'user msg 1');
+=====
+  must(res.attempts[1].reasons.some(r => r === 'suspect_not_cleared'), 'attempt 1 reason');
+  must(capturedCalls[1].body.messages.at(-1).content.includes('not_json'), 'user msg 2');
+  must(capturedCalls[2].body.messages.at(-1).content.includes('suspect_not_cleared'), 'user msg 3');
+  must(!capturedCalls[0].body.messages[1].content.includes('previous draft'), 'user msg 1');
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+import { CASES, GENERATED_DIR, generatedCases, loadCase, fileKeyOf, publicCase, listPack, roomsOf } from '../src/case.js';
+import { generateCase, validateCase, isTestimony, usageUsd, finishCase, DEFAULT_MAX_USD, NEURON_USD } from '../src/generator.js';
+import { createServer } from '../src/server.js';
+=====
+import { CASES, GENERATED_DIR, generatedCases, loadCase, fileKeyOf, publicCase, listPack, roomsOf } from '../src/case.js';
+import { generateCase, genMessages, validateCase, isTestimony, usageUsd, finishCase, DEFAULT_MAX_USD, NEURON_USD } from '../src/generator.js';
+import { createServer } from '../src/server.js';
+<<<END>>>
+<<<REPLACE test/generated-pack.mjs>>>
+
+for (const l of results) console.log(l);
+=====
+
+await check('10. a retry sends the previous draft back to be repaired, not rewritten', async () => {
+  const msgs = genMessages('x', { reasons: ['rooms_bad'], previous: '{"title":1}' });
+  must(msgs.length === 4 && msgs[2].role === 'assistant' && msgs[2].content === '{"title":1}', 'previous draft as the assistant turn');
+  must(msgs[3].role === 'user' && msgs[3].content.includes('rooms_bad: add "rooms"') && msgs[3].content.includes('change only what these checks need'), 'fix list after it');
+  must(genMessages('x', { reasons: [], previous: '{}' }).length === 2 && genMessages('x', { reasons: ['rooms_bad'] }).length === 2, 'first try and no draft keep two messages');
+  must(genMessages('x', { reasons: ['rooms_bad'], previous: 'y'.repeat(30000) })[2].content.length === 24000, 'previous draft capped');
+  const f = fake([replyN('draft one {', 10), replyN('draft two {', 10)]);
+  await generateCase('x', { key: 'K', fetchImpl: f });
+  const b2 = JSON.parse(f.calls[1].body), b3 = JSON.parse(f.calls[2].body);
+  must(b2.messages[2].content === 'draft one {' && b3.messages[2].content === 'draft two {', 'each retry carries the draft before it');
+});
+
+for (const l of results) console.log(l);
+<<<END>>>

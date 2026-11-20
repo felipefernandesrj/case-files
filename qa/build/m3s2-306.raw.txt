@@ -1,0 +1,5 @@
+<<<REPLACE public/index.html>>>
+    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+=====
+    <p id="cabinet-lead">Every file is a closed case. Open one, ask the questions, name who did it.</p>
+<<<END>>>

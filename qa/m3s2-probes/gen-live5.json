@@ -1,0 +1,42 @@
+{
+ "tag": "live5",
+ "seed": "Carnival night in Santa Teresa: the samba school's crown vanishes from the costume workshop",
+ "ok": false,
+ "out": null,
+ "spentUsd": 0.003417,
+ "reasons": [
+  "timeline_crime_count"
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "status": 200,
+   "ok": false,
+   "reasons": [
+    "timeline_crime_count"
+   ],
+   "receipt": "01M7WEF1CPNVS5X8W6QEW8X810",
+   "neurons": 85.63636779785156
+  },
+  {
+   "n": 2,
+   "status": 200,
+   "ok": false,
+   "reasons": [
+    "timeline_crime_count"
+   ],
+   "receipt": "01M7WEGVDR9SYFK0FYK7S2AQH1",
+   "neurons": 113.5
+  },
+  {
+   "n": 3,
+   "status": 200,
+   "ok": false,
+   "reasons": [
+    "timeline_crime_count"
+   ],
+   "receipt": "01M7WEJ0HZJ3BBEZN3HD74MNJB",
+   "neurons": 111.45454406738281
+  }
+ ]
+}

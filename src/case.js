@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -18,8 +18,27 @@ export function unknownCaseLine(id) {
   return `Unknown case "${String(id)}". Valid case ids: ${Object.keys(CASES).join(', ')}.`;
 }
 
-/** Known cases: id -> case file (relative to the project root). */
-export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json' });
+/** Folder of generated cases (M3 sprint 2): src/generator.js writes gen-<seed>.json here. */
+export const GENERATED_DIR = 'content/generated';
+
+/**
+ * Generated cases in a folder: id -> case file, for every gen-<seed>.json, sorted by id.
+ * @param {string} [dir=GENERATED_DIR] folder relative to the project root
+ * @returns {Object<string,string>}
+ */
+export function generatedCases(dir = GENERATED_DIR) {
+  const abs = resolve(dirname(fileURLToPath(import.meta.url)), '..', dir);
+  if (!existsSync(abs)) return {};
+  const out = {};
+  for (const f of readdirSync(abs).sort()) {
+    const m = /^(gen-[a-z0-9-]+)\.json$/.exec(f);
+    if (m) out[m[1]] = `${dir}/${f}`;
+  }
+  return out;
+}
+
+/** Known cases: id -> case file (relative to the project root). The two handmade cases first, then every generated case. */
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json', ...generatedCases() });
 
 /**
  * Resolve a case id to its case file.
@@ -64,7 +83,15 @@ export const ROOMS = Object.freeze({
 export function fileKeyOf(c) {
   if (c?.id === 'case-violin-001') return 'violin';
   if (c?.id === 'case-night-train-002') return 'night-train';
+  const g = /^case-(gen-[a-z0-9-]+)$/.exec(c?.id || '');
+  if (g) return g[1];
   return 'violin';
+}
+
+/** Rooms of a loaded case: the handmade list for its file, else the rooms the generator wrote ({ id, en, pt }). */
+export function roomsOf(c, file = fileKeyOf(c)) {
+  if (ROOMS[file]) return ROOMS[file];
+  return (Array.isArray(c?.rooms) ? c.rooms : []).filter(r => r && typeof r.id === 'string' && /^[a-z][a-z0-9-]*$/.test(r.id));
 }
 
 /** Public pack list for the case picker (titles and hooks only). */
@@ -74,14 +101,16 @@ export function listPack(lang) {
     const c = loadCase(file);
     const intro = c.intro?.[l] ?? '';
     const hook = intro.split(/(?<=[.?!])\s/)[0] || intro;
-    return { id, title: c.title?.[l] ?? '', hook };
+    const item = { id, title: c.title?.[l] ?? '', hook, generated: Boolean(c.generated) };
+    if (c.generated) item.cost = { usd: Number(c.generated.cost?.usd) || 0, drafts: Number(c.generated.cost?.drafts) || 0 };
+    return item;
   });
 }
 
 export function publicCase(c, lang) {
   const l = lang === 'pt' ? 'pt' : 'en';
   const file = fileKeyOf(c);
-  const rooms = (ROOMS[file] || []).map(r => ({ id: r.id, name: r[l] }));
+  const rooms = roomsOf(c, file).map(r => ({ id: r.id, name: r[l] ?? '' }));
   const timeline = Array.isArray(c.timeline)
     ? c.timeline.map(t => ({
         id: t.id,

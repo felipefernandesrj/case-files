@@ -1,0 +1,38 @@
+Conserve as many tokens as possible and be fast (merge commands in few calls).
+Case Files M3 sprint 2, seen in the live screenshots: after a correct verdict in the generated Lapa case the violin's verdict art showed behind CASE CLOSED. A generated case now keeps its shared rainy-night plate behind the verdict; plus a check. Make these exact changes, emitted as literal search/replace blocks, one block per change.
+
+Block format, described in prose: a line `<<<REPLACE ` + the file path + `>>>`, then the old text copied exactly from the current file, then a line of exactly five = characters, then the new text, then a line `<<<END>>>`. Do not write any heading, label or marker line inside a block.
+
+All 2 changes are listed below as exact OLD and NEW text between [OLD n] [/OLD n] and [NEW n] [/NEW n] markers (the markers are not file content). Emit exactly 2 blocks, in this order. Copy every character exactly, including backslashes, backticks and empty lines inside NEW. Never add or remove a space. Never write the [OLD n] or [NEW n] markers.
+
+Change 1, file public/index.html
+[OLD 1]
+  verdict.classList.toggle('ok', !!correct);
+  verdict.style.setProperty('--verdict-art', `url(/assets/loc/violin-verdict-${correct ? 'closed' : 'wrong'}.png)`);
+  const stamp = correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!');
+[/OLD 1]
+[NEW 1]
+  verdict.classList.toggle('ok', !!correct);
+  const vc = artCase();
+  verdict.style.setProperty('--verdict-art', vc && vc.startsWith('gen-') ? `url(${GEN_PLATE})` : `url(/assets/loc/violin-verdict-${correct ? 'closed' : 'wrong'}.png)`); // M3 sprint 2: a generated case keeps its own plate behind the verdict
+  const stamp = correct ? (lang==='pt'?'Você acertou!':'Correct!') : (lang==='pt'?'Você errou!':'Wrong!');
+[/NEW 1]
+
+Change 2, file test/generated-pack.mjs
+[OLD 2]
+
+for (const l of results) console.log(l);
+[/OLD 2]
+[NEW 2]
+
+await check('13. the web player gives generated cases the shared plate for rooms, picker card and verdict (no violin art behind a generated verdict)', async () => {
+  const html = fs.readFileSync('public/index.html', 'utf8');
+  must(html.includes("const GEN_PLATE = '/assets/tex/title-rain.png';") && fs.existsSync('public/assets/tex/title-rain.png'), 'plate exists');
+  must(/function locArt\(roomId\) \{ const c = artCase\(\); if \(c && c\.startsWith\('gen-'\)\) return GEN_PLATE;/.test(html), 'rooms and scene');
+  must(html.includes("whenArt(item.generated ? GEN_PLATE :"), 'picker card');
+  must(html.includes("vc && vc.startsWith('gen-') ? `url(${GEN_PLATE})` :"), 'verdict');
+});
+
+for (const l of results) console.log(l);
+[/NEW 2]
+

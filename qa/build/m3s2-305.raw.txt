@@ -1,0 +1,73 @@
+<<<REPLACE src/case.js>>>
+}
+/** Folder of generated cases (M3 sprint 2): src/generator.js writes gen-<seed>.json here. */
+=====
+}
+
+/** Folder of generated cases (M3 sprint 2): src/generator.js writes gen-<seed>.json here. */
+<<<END>>>
+<<<REPLACE src/case.js>>>
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json', ...generatedCases() });
+/**
+=====
+export const CASES = Object.freeze({ violin: 'content/case.json', 'night-train': 'content/cases/night-train.json', ...generatedCases() });
+
+/**
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+export const DEFAULT_MAX_USD = 0.005;
+const GEN_SYSTEM = `You are a detective game generator. Create a complete mystery case in JSON format.
+=====
+export const DEFAULT_MAX_USD = 0.005;
+
+const GEN_SYSTEM = `You are a detective game generator. Create a complete mystery case in JSON format.
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.text && !isTestimony(cl, c))) reasons.push('clue_not_testimony');
+  return { ok: reasons.length === 0, reasons };
+=====
+  if ((Array.isArray(c.clues) ? c.clues : []).some((cl) => cl && cl.text && !isTestimony(cl, c))) reasons.push('clue_not_testimony');
+
+  return { ok: reasons.length === 0, reasons };
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+}
+export function finishCase(c, seed, model, attempts = []) {
+=====
+}
+
+export function finishCase(c, seed, model, attempts = []) {
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+}
+export async function generateCase(seed, { key, baseUrl = 'https://qa-api.fullcup.ai/v1', fetchImpl = fetch, model = GEN_MODEL, suspects = 4, maxAttempts = MAX_ATTEMPTS, maxTokens = 8000, maxUsd = DEFAULT_MAX_USD } = {}) {
+=====
+}
+
+export async function generateCase(seed, { key, baseUrl = 'https://qa-api.fullcup.ai/v1', fetchImpl = fetch, model = GEN_MODEL, suspects = 4, maxAttempts = MAX_ATTEMPTS, maxTokens = 8000, maxUsd = DEFAULT_MAX_USD } = {}) {
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  }
+  return { ok: false, case: null, attempts, reasons: currentReasons, spentUsd: round(spentUsd) };
+=====
+  }
+
+  return { ok: false, case: null, attempts, reasons: currentReasons, spentUsd: round(spentUsd) };
+<<<END>>>
+<<<REPLACE src/generator.js>>>
+  const maxUsd = mi !== -1 ? Number(args[mi + 1]) : DEFAULT_MAX_USD;
+  let key = process.env.FULLCUP_KEY;
+=====
+  const maxUsd = mi !== -1 ? Number(args[mi + 1]) : DEFAULT_MAX_USD;
+
+  let key = process.env.FULLCUP_KEY;
+<<<END>>>
+<<<REPLACE public/index.html>>>
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Two closed rooms. Open a file, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div >
+=====
+    <h2 id="cabinet-title" class="with-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-files"></use></svg> <span data-label="">Case Files</span></h2>
+    <p id="cabinet-lead">Every file is a closed case. Open one, ask the questions, name who did it.</p>
+    <div id="cabinet-list"></div>
+<<<END>>>
