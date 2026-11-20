@@ -1,0 +1,60 @@
+{
+ "ok": true,
+ "out": "qa/m3s1-probes/gen-live-4.case.json",
+ "attempts": [
+  {
+   "n": 1,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 458,
+    "completion_tokens": 2940,
+    "total_tokens": 3398,
+    "neurons": 84.34545135498047,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "receipt": "01M7V4K93BPXKBBE1NPGHAE990",
+   "ok": false,
+   "reasons": [
+    "clue_self_implicates"
+   ]
+  },
+  {
+   "n": 2,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 523,
+    "completion_tokens": 2907,
+    "total_tokens": 3430,
+    "neurons": 81.99999237060547,
+    "prompt_tokens_details": {
+     "cached_tokens": 448
+    }
+   },
+   "receipt": "01M7V4NWJVNBRHAKTW4QG7F4VZ",
+   "ok": false,
+   "reasons": [
+    "suspect_not_cleared",
+    "timeline_crime_count"
+   ]
+  },
+  {
+   "n": 3,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 531,
+    "completion_tokens": 2751,
+    "total_tokens": 3282,
+    "neurons": 77.81818389892578,
+    "prompt_tokens_details": {
+     "cached_tokens": 448
+    }
+   },
+   "receipt": "01M7V4RRRCAVWCMSD4P009TZXE",
+   "ok": true,
+   "reasons": []
+  }
+ ],
+ "reasons": []
+}

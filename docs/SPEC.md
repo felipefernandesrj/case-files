@@ -180,6 +180,12 @@ The proxy communicates with the FullCup API:
 - `429` (otherwise) $\rightarrow$ `rate_limited`
 - All other non-200 $\rightarrow$ `upstream`
 
+## Case generator (`src/generator.js`, M3 sprint 1)
+- `generateCase(seed, { key, baseUrl, fetchImpl, model, suspects = 4, maxAttempts = 3, maxTokens = 8000 })` posts to `/chat/completions` with `X-FullCup-Workload: case-files:generate` and thinking off, parses one JSON object (fences and prose around it are dropped) and runs `validateCase`.
+- `validateCase` = `shapeCheck` (not_object, missing_title, missing_intro, missing_solution, suspect_bad, duplicate_suspect_id, missing_hints, aftermath_bad, clue_self_implicates, culprit_cleared) + `fairPlay` + `timelineCheck`.
+- A failed draft is retried with the failed codes and one plain-word fix per code (`REASON_HINTS`). 401/403 is `bad_key`, 402 or 429 `capacity:empty` is `no_capacity`, other 429 `rate_limited`, else `upstream`; these throw at once with `err.attempts`.
+- A kept case gets `id: case-gen-<slug>`, `questionBudget: 2 * fairMinimum`, `generated: { seed, model }`. The CLI writes it to `content/cases/gen-<slug>.json` (or `--out`).
+
 ## Testing
 
 Run the full test suite via npm:

@@ -1,0 +1,304 @@
+{
+  "title": {
+    "en": "The Vanishing Logbook of Ilha Rasa",
+    "pt": "O Sumiço do Diário de Bordo da Ilha Rasa"
+  },
+  "intro": {
+    "en": "A violent storm lashes the Ilha Rasa lighthouse near Rio de Janeiro. Amidst the thunder, the keeper's essential logbook has vanished from its locked drawer. Without it, the maritime safety records are lost forever.",
+    "pt": "Uma tempestade violenta atinge o farol da Ilha Rasa, perto do Rio de Janeiro. Em meio aos trovões, o diário de bordo essencial do faroleiro desapareceu de sua gaveta trancada. Sem ele, os registros de segurança marítima serão perdidos para sempre."
+  },
+  "culprit": "suspect-3",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Arthur Silva",
+      "role": {
+        "en": "Assistant Keeper",
+        "pt": "Assistente de Faroleiro"
+      },
+      "persona": {
+        "en": "Anxious and hardworking.",
+        "pt": "Ansioso e trabalhador."
+      },
+      "alibi": {
+        "en": "I was checking the generator in the basement.",
+        "pt": "Eu estava verificando o gerador no porão."
+      },
+      "facts": {
+        "en": "You are talking to a man covered in oil. He claims he never went near the office, but you notice he has a key to the logbook drawer in his pocket.",
+        "pt": "Você está falando com um homem coberto de óleo. Ele afirma que nunca chegou perto do escritório, mas você nota que ele tem uma chave da gaveta do diário no bolso."
+      }
+    },
+    {
+      "id": "suspect-2",
+      "name": "Elena Rocha",
+      "role": {
+        "en": "Marine Biologist",
+        "pt": "Bióloga Marinha"
+      },
+      "persona": {
+        "en": "Studious and detached.",
+        "pt": "Estudiosa e distante."
+      },
+      "alibi": {
+        "en": "I was in the observation deck studying the waves.",
+        "pt": "Eu estava no deck de observação estudando as ondas."
+      },
+      "facts": {
+        "en": "You are looking at a woman soaked from the rain. She says she saw someone running near the stairs, but her wet boots suggest she was much closer to the office than she admits.",
+        "pt": "Você está olhando para uma mulher encharcada pela chuva. Ela diz que viu alguém correndo perto das escadas, mas suas botas molhadas sugerem que ela estava muito mais perto do escritório do que admite."
+      }
+    },
+    {
+      "id": "suspect-3",
+      "name": "Captain Marcos",
+      "role": {
+        "en": "Supply Ship Captain",
+        "pt": "Capitão do Navio de Suprimentos"
+      },
+      "persona": {
+        "en": "Arrogant and impatient.",
+        "pt": "Arrogante e impaciente."
+      },
+      "alibi": {
+        "en": "I was in my cabin resting before the storm got worse.",
+        "pt": "Eu estava na minha cabine descansando antes que a tempestade piorasse."
+      },
+      "facts": {
+        "en": "You are facing a man who hates bureaucracy. He claims he slept through the whole night, but you notice he is carrying a heavy, leather-bound book hidden under his coat.",
+        "pt": "Você está enfrentando um homem que odeia burocracia. Ele afirma que dormiu a noite toda, mas você nota que ele está carregando um livro pesado de capa de couro escondido sob o casaco."
+      }
+    },
+    {
+      "id": "suspect-4",
+      "name": "Clara Mendes",
+      "role": {
+        "en": "Lighthouse Technician",
+        "pt": "Técnica do Farol"
+      },
+      "persona": {
+        "en": "Sharp and observant.",
+        "pt": "Perspicaz e observadora."
+      },
+      "alibi": {
+        "en": "I was fixing the radio transmitter.",
+        "pt": "Eu estava consertando o transmissor de rádio."
+      },
+      "facts": {
+        "en": "You are speaking to a woman with grease on her hands. She claims she heard a loud argument near the office, but she was too busy with the radio to see anything.",
+        "pt": "Você está falando com uma mulher com graxa nas mãos. Ela afirma que ouviu uma discussão alta perto do escritório, mas estava ocupada demais com o rádio para ver qualquer coisa."
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "20:00",
+      "stop": {
+        "en": "Dinner is served.",
+        "pt": "O jantar é servido."
+      },
+      "event": {
+        "en": "Everyone is present in the dining hall.",
+        "pt": "Todos estão presentes no refeitório."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "21:30",
+      "stop": {
+        "en": "Storm intensifies.",
+        "pt": "A tempestade se intensifica."
+      },
+      "event": {
+        "en": "The lights flicker.",
+        "pt": "As luzes piscam."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:15",
+      "stop": {
+        "en": "The Theft.",
+        "pt": "O Roubo."
+      },
+      "event": {
+        "en": "The logbook is stolen from the office during a blackout.",
+        "pt": "O diário de bordo é roubado do escritório durante um apagão."
+      },
+      "who": [
+        "suspect-3"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "23:00",
+      "stop": {
+        "en": "Discovery.",
+        "pt": "Descoberta."
+      },
+      "event": {
+        "en": "The keeper realizes the logbook is gone.",
+        "pt": "O faroleiro percebe que o diário sumiu."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you during the blackout?",
+      "keywords": [
+        "generator",
+        "basement",
+        "gerador",
+        "porão"
+      ],
+      "implicates": null,
+      "clears": "suspect-2",
+      "text": {
+        "en": "I was in the basement fixing the generator. I didn't see Elena anywhere near the office.",
+        "pt": "Eu estava no porão consertando o gerador. Não vi a Elena perto de lugar nenhum do escritório."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-2",
+      "ask": "Did you see anything suspicious?",
+      "keywords": [
+        "radio",
+        "clara",
+        "rádio",
+        "clara"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I saw Clara working on the radio in the comms room; she definitely wasn't in the office.",
+        "pt": "Eu vi a Clara trabalhando no rádio na sala de comunicações; ela com certeza não estava no escritório."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "Who was near the office?",
+      "keywords": [
+        "captain",
+        "marcos",
+        "capitão",
+        "marcos"
+      ],
+      "implicates": "suspect-3",
+      "clears": "suspect-1",
+      "text": {
+        "en": "I heard heavy footsteps near the office. It sounded like Captain Marcos's boots.",
+        "pt": "Eu ouvi passos pesados perto do escritório. Pareciam as botas do Capitão Marcos."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-2",
+      "ask": "What about the Captain's alibi?",
+      "keywords": [
+        "sleeping",
+        "marcos",
+        "dormindo",
+        "marcos"
+      ],
+      "implicates": "suspect-3",
+      "clears": "suspect-4",
+      "text": {
+        "en": "The Captain said he was sleeping, but I saw him walking toward the office just before the lights went out.",
+        "pt": "O Capitão disse que estava dormindo, mas eu o vi caminhando em direção ao escritório pouco antes das luzes se apagarem."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Check the timeline. Only one person was unobserved during the crime window.",
+        "pt": "Verifique a linha do tempo. Apenas uma pessoa estava sem observação durante a janela do crime."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Listen to the witnesses. Clara and Elena both provide evidence that points away from themselves and toward the Captain.",
+        "pt": "Ouça as testemunhas. Clara e Elena fornecem evidências que apontam para longe delas mesmas e em direção ao Capitão."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "logbook": "A record of daily activities.",
+      "keeper": "The person in charge of the lighthouse.",
+      "blackout": "A total loss of electricity."
+    },
+    "pt": {
+      "logbook": "Diário de bordo.",
+      "keeper": "Faroleiro.",
+      "blackout": "Apagão."
+    }
+  },
+  "solution": {
+    "en": "Captain Marcos stole the logbook to hide evidence of illegal cargo on his supply ship. Elena and Clara's testimonies clear them, and Arthur's location in the basement is confirmed by his oily appearance. The timeline shows Marcos was the only one moving during the theft.",
+    "pt": "O Capitão Marcos roubou o diário de bordo para esconder evidências de carga ilegal em seu navio de suprimentos. Os testemunhos de Elena e Clara as inocentam, e a localização de Arthur no porão é confirmada por sua aparência suja de óleo. A linha do tempo mostra que Marcos foi o único se movendo durante o roubo."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Assistant Keeper Scapegoated",
+        "body": "Arthur Silva was wrongly accused of the theft, causing a scandal in the maritime community."
+      },
+      "pt": {
+        "headline": "Assistente de Faroleiro Injustiçado",
+        "body": "Arthur Silva foi acusado injustamente do roubo, causando um escândalo na comunidade marítima."
+      }
+    },
+    "suspect-2": {
+      "en": {
+        "headline": "Biologist Under Fire",
+        "body": "Elena Rocha faced intense questioning after being accused of being near the crime scene."
+      },
+      "pt": {
+        "headline": "Bióloga Sob Fogo",
+        "body": "Elena Rocha enfrentou interrogatórios intensos após ser acusada de estar perto da cena do crime."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Technician's Reputation Ruined",
+        "body": "Clara Mendes was blamed for negligence after the logbook disappeared under her watch."
+      },
+      "pt": {
+        "headline": "Reputação da Técnica Arruinada",
+        "body": "Clara Mendes foi culpada por negligência após o diário desaparecer sob sua vigilância."
+      }
+    }
+  },
+  "id": "case-gen-a-storm-night-at-the-ilha-rasa-lighthous",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A storm night at the Ilha Rasa lighthouse off Rio: the keeper's logbook vanishes",
+    "model": "@cf/google/gemma-4-26b-a4b-it"
+  }
+}

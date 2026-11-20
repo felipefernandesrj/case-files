@@ -1,0 +1,322 @@
+{
+  "title": {
+    "en": "The Vanishing Logbook of Ilha Rasa",
+    "pt": "O Sumiço do Diário de Bordo da Ilha Rasa"
+  },
+  "intro": {
+    "en": "A violent storm lashes the Ilha Rasa lighthouse off the coast of Rio de Janeiro. Amidst the crashing waves, the keeper discovers his precious logbook—the only record of recent maritime sightings—is gone. Four people were in the lighthouse last night.",
+    "pt": "Uma tempestade violenta atinge o farol da Ilha Rasa, na costa do Rio de Janeiro. Entre o bater das ondas, o faroleiro descobre que seu precioso diário de bordo — o único registro de avistamentos marítimos recentes — desapareceu. Quatro pessoas estavam no farol ontem à noite."
+  },
+  "culprit": "b",
+  "suspects": [
+    {
+      "id": "a",
+      "name": "Arthur",
+      "role": {
+        "en": "Assistant Keeper",
+        "pt": "Assistente de Faroleiro"
+      },
+      "persona": {
+        "en": "Anxious and clumsy.",
+        "pt": "Ansioso e desastrado."
+      },
+      "alibi": {
+        "en": "I was in the kitchen making tea to soothe my nerves.",
+        "pt": "Eu estava na cozinha fazendo chá para acalmar meus nervos."
+      },
+      "facts": {
+        "en": "You are a nervous man. You were indeed in the kitchen, but you spilled tea all over your notes, explaining why you look so distressed.",
+        "pt": "Você é um homem nervoso. Você estava de fato na cozinha, mas derramou chá sobre suas notas, o que explica por que parece tão perturbado."
+      }
+    },
+    {
+      "id": "b",
+      "name": "Beatriz",
+      "role": {
+        "en": "Marine Biologist",
+        "pt": "Bióloga Marinha"
+      },
+      "persona": {
+        "en": "Ambitious and cold.",
+        "pt": "Ambiciosa e fria."
+      },
+      "alibi": {
+        "en": "I was in the library studying specimen charts.",
+        "pt": "Eu estava na biblioteca estudando tabelas de espécimes."
+      },
+      "facts": {
+        "en": "You are highly competitive. You claim you never left the library, but you actually slipped into the keeper's office to steal the logbook to hide data that contradicts your research.",
+        "pt": "Você é altamente competitiva. Você afirma que nunca saiu da biblioteca, mas na verdade entrou na sala do faroleiro para roubar o diário para esconder dados que contradizem sua pesquisa."
+      }
+    },
+    {
+      "id": "c",
+      "name": "Caio",
+      "role": {
+        "en": "Maintenance Engineer",
+        "pt": "Engenheiro de Manutenção"
+      },
+      "persona": {
+        "en": "Gruff and tired.",
+        "pt": "Rude e cansado."
+      },
+      "alibi": {
+        "en": "I was fixing the rotating lens gears in the tower.",
+        "pt": "Eu estava consertando as engrenagens da lente rotativa na torre."
+      },
+      "facts": {
+        "en": "You are a man of few words. You were working on the gears, and your hands are covered in grease, which is consistent with your story.",
+        "pt": "Você é um homem de poucas palavras. Você estava trabalhando nas engrenagens, e suas mãos estão cobertas de graxa, o que condiz com sua história."
+      }
+    },
+    {
+      "id": "d",
+      "name": "Dante",
+      "role": {
+        "en": "Tourist",
+        "pt": "Turista"
+      },
+      "persona": {
+        "en": "Wealthy and entitled.",
+        "pt": "Rico e mimado."
+      },
+      "alibi": {
+        "en": "I was sleeping in my guest room since 10 PM.",
+        "pt": "Eu estava dormindo no meu quarto de hóspedes desde as 22h."
+      },
+      "facts": {
+        "en": "You are a rich traveler. You claim you were asleep, but you actually spent most of the night drinking expensive brandy in the lounge.",
+        "pt": "Você é um viajante rico. Você afirma que estava dormindo, mas na verdade passou a maior parte da noite bebendo conhaque caro no salão."
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "20:00",
+      "stop": {
+        "en": "Dinner",
+        "pt": "Jantar"
+      },
+      "event": {
+        "en": "Everyone is present in the dining hall.",
+        "pt": "Todos estão presentes no refeitório."
+      },
+      "who": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "21:30",
+      "stop": {
+        "en": "The Storm Peaks",
+        "pt": "O Pico da Tempestade"
+      },
+      "event": {
+        "en": "Thunder shakes the lighthouse.",
+        "pt": "Trovões sacodem o farol."
+      },
+      "who": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:15",
+      "stop": {
+        "en": "The Theft",
+        "pt": "O Roubo"
+      },
+      "event": {
+        "en": "The logbook is stolen from the office.",
+        "pt": "O diário de bordo é roubado da sala."
+      },
+      "who": [
+        "b"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "23:00",
+      "stop": {
+        "en": "Discovery",
+        "pt": "Descoberta"
+      },
+      "event": {
+        "en": "The keeper notices the logbook is missing.",
+        "pt": "O faroleiro percebe que o diário sumiu."
+      },
+      "who": [
+        "a"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "a",
+      "ask": "Where was Beatriz during the storm?",
+      "keywords": [
+        "beatriz",
+        "biblioteca"
+      ],
+      "implicates": null,
+      "clears": "b",
+      "text": {
+        "en": "She said she was in the library, but I didn't see her pass the kitchen door.",
+        "pt": "Ela disse que estava na biblioteca, mas eu não a vi passar pela porta da cozinha."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "c",
+      "ask": "Did you see anyone near the office?",
+      "keywords": [
+        "escritório",
+        "beatriz"
+      ],
+      "implicates": "b",
+      "clears": null,
+      "text": {
+        "en": "I saw a shadow near the office, and it looked like someone carrying a heavy book.",
+        "pt": "Vi uma sombra perto do escritório, e parecia alguém carregando um livro pesado."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "d",
+      "ask": "What can you tell me about Arthur?",
+      "keywords": [
+        "arthur",
+        "chá"
+      ],
+      "implicates": null,
+      "clears": "a",
+      "text": {
+        "en": "The clumsy boy was in the kitchen all night making tea. He couldn't steal anything without tripping.",
+        "pt": "Aquele rapaz desastrado estava na cozinha a noite toda fazendo chá. Ele não conseguiria roubar nada sem tropeçar."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "b",
+      "ask": "Did you see Caio working?",
+      "keywords": [
+        "caio",
+        "graxa"
+      ],
+      "implicates": null,
+      "clears": "c",
+      "text": {
+        "en": "Caio was covered in grease and working on the gears; he had no time for mischief.",
+        "pt": "Caio estava coberto de graxa e trabalhando nas engrenagens; ele não teve tempo para travessuras."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "a",
+      "ask": "Was Dante in his room?",
+      "keywords": [
+        "dante",
+        "quarto"
+      ],
+      "implicates": null,
+      "clears": "d",
+      "text": {
+        "en": "I heard Dante snoring loudly in his room around midnight.",
+        "pt": "Ouvi o Dante roncando alto no quarto dele por volta da meia-noite."
+      }
+    },
+    {
+      "id": "c6",
+      "from": "c",
+      "ask": "Is there anything unusual about the library?",
+      "keywords": [
+        "biblioteca",
+        "papel"
+      ],
+      "implicates": "b",
+      "clears": null,
+      "text": {
+        "en": "I found some biological research papers scattered near the office door, not in the library.",
+        "pt": "Encontrei alguns papéis de pesquisa biológica espalhados perto da porta do escritório, não na biblioteca."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Pay attention to the locations: if Beatriz wasn't in the library, where was she?",
+        "pt": "Preste atenção aos locais: se Beatriz não estava na biblioteca, onde ela estava?"
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The biological papers found near the crime scene connect the theft to the researcher.",
+        "pt": "Os papéis de biologia encontrados perto da cena do crime ligam o roubo à pesquisadora."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "logbook": "a record of daily events",
+      "keeper": "the person in charge of a lighthouse"
+    },
+    "pt": {
+      "logbook": "diário de bordo",
+      "keeper": "faroleiro"
+    }
+  },
+  "solution": {
+    "en": "Beatriz stole the logbook. While she claimed to be in the library, Arthur (who was in the kitchen) never saw her, and Caio found biological research papers (her specialty) near the office. Furthermore, Caio saw a shadow carrying a heavy book (the logbook) near the office during the storm.",
+    "pt": "Beatriz roubou o diário de bordo. Embora ela tenha afirmado estar na biblioteca, Arthur (que estava na cozinha) nunca a viu, e Caio encontrou papéis de pesquisa biológica (especialidade dela) perto do escritório. Além disso, Caio viu uma sombra carregando um livro pesado (o diário) perto do escritório durante a tempestade."
+  },
+  "aftermath": {
+    "a": {
+      "en": {
+        "headline": "Assistant Keeper Falsely Accused",
+        "body": "Arthur, the clumsy assistant, was wrongly blamed for the theft. He remains devastated."
+      },
+      "pt": {
+        "headline": "Assistente de Faroleiro Falsamente Acusado",
+        "body": "Arthur, o assistente desastrado, foi injustamente culpado pelo roubo. Ele continua devastado."
+      }
+    },
+    "c": {
+      "en": {
+        "headline": "Engineer Arrested in Error",
+        "body": "Caio the engineer was taken into custody today, but evidence proves his innocence."
+      },
+      "pt": {
+        "headline": "Engenheiro Preso por Erro",
+        "body": "Caio, o engenheiro, foi detido hoje, mas as evidências provam sua inocência."
+      }
+    },
+    "d": {
+      "en": {
+        "headline": "Tourist Scandal at Ilha Rasa",
+        "body": "The wealthy traveler Dante was accused of theft, causing a stir in high society."
+      },
+      "pt": {
+        "headline": "Escândalo de Turista na Ilha Rasa",
+        "body": "O rico viajante Dante foi acusado de roubo, causando alvoroço na alta sociedade."
+      }
+    }
+  },
+  "id": "case-gen-a-storm-night-at-the-ilha-rasa-lighthous",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A storm night at the Ilha Rasa lighthouse off Rio: the keeper's logbook vanishes",
+    "model": "@cf/google/gemma-4-26b-a4b-it"
+  }
+}

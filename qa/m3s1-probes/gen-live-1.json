@@ -1,0 +1,42 @@
+{
+ "ok": true,
+ "out": "content/cases/gen-a-storm-night-at-the-ilha-rasa-lighthous.json",
+ "attempts": [
+  {
+   "n": 1,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 374,
+    "completion_tokens": 3008,
+    "total_tokens": 3382,
+    "neurons": 85.43636322021484,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "receipt": "01M7V3ZWBH5T46HZJAP9X2YN3W",
+   "ok": false,
+   "reasons": [
+    "suspect_not_cleared",
+    "timeline_crime_count"
+   ]
+  },
+  {
+   "n": 2,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 404,
+    "completion_tokens": 3373,
+    "total_tokens": 3777,
+    "neurons": 95.66363525390625,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "receipt": "01M7V41AGBQY9HFFJQS9PE0PQJ",
+   "ok": true,
+   "reasons": []
+  }
+ ],
+ "reasons": []
+}

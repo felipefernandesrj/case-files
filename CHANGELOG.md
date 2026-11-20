@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (M3 sprint 1: a case generator with a fair play gate)
+- New src/generator.js writes a whole new case from a seed through the Cup key (`node src/generator.js --seed "A storm night at the Ilha Rasa lighthouse off Rio: the keeper's logbook vanishes"`), with gemma-4-26b-a4b-it and the workload tag `case-files:generate`.
+- Every draft goes through a gate before it is kept: the shared fair play and timeline checks of the engine, a shape check (titles, intro, solution, suspects, hints), and three checks added after real drafts slipped through: an aftermath object for every innocent suspect, no clue in which a suspect implicates themselves, and no clue that clears the culprit.
+- A failed draft is retried up to 3 times, and the retry tells the model what to fix in plain words for each failed check. A capacity or key error stops at once and never retries. The key never appears in a result or an error.
+- A kept case gets the id `case-gen-<seed>`, a question budget of twice the fewest fair questions, and the seed and model it came from.
+- Live through the Cup key: 4 runs, 10 drafts. Run 2 was rejected 3 times for the same mistake, which led to the plain-word fixes; run 4 passed on the third draft. One draft costs about US$0.001.
+- New test/generator.mjs with 10 checks (no network). The automated suite now has 293 checks.
+
 ## 0.4.25 (M2 delivered: The Night Train; sprint 16, the last English terminal lines in Portuguese)
 - M2 "Case 2: The Night Train" is delivered on 2026-11-19. Delivery notes: docs/M2_DELIVERY.md.
 - In a Portuguese terminal game (node src/cli.js --lang pt) the remaining English lines now follow the language: "Comando desconhecido. Comandos: pergunta, acusar, historico, sair", "Uso: pergunta <suspectId> <pergunta>", "Uso: acusar <suspectId>", "Uso: historico <suspectId>", "Nenhuma conversa com este suspeito ainda." and the history rows "P:" / "R:" (before: Unknown command, Usage:, No history for this suspect., Q:/A:). An unexpected error prints "Erro:".

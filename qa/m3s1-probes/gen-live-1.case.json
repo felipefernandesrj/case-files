@@ -1,0 +1,326 @@
+{
+  "title": {
+    "en": "The Vanishing Logbook of Ilha Rasa",
+    "pt": "O Sumiço do Diário de Bordo da Ilha Rasa"
+  },
+  "intro": {
+    "en": "A violent storm batters the Ilha Rasa lighthouse off the coast of Rio de Janeiro. In the morning, the head keeper discovers his precious logbook—containing secret navigation routes—has been stolen from the locked desk. The storm trapped everyone inside.",
+    "pt": "Uma tempestade violenta castiga o farol da Ilha Rasa, na costa do Rio de Janeiro. Pela manhã, o mestre do farol descobre que seu precioso diário de bordo — que contém rotas de navegação secretas — foi roubado da escrivaninha trancada. A tempestade prendeu todos lá dentro."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Arthur Vance",
+      "role": {
+        "en": "Assistant Keeper",
+        "pt": "Assistente de Faroleiro"
+      },
+      "persona": {
+        "en": "Nervous and hardworking, obsessed with safety protocols.",
+        "pt": "Nervoso e trabalhador, obcecado por protocolos de segurança."
+      },
+      "alibi": {
+        "en": "Was checking the lighthouse lantern in the upper tower.",
+        "pt": "Estava verificando a lanterna do farol na torre superior."
+      },
+      "facts": {
+        "en": "You are Arthur. You were indeed in the tower, but you lost your heavy wrench near the desk earlier. You have no interest in secret routes.",
+        "pt": "Você é Arthur. Você estava de fato na torre, mas perdeu sua chave inglesa pesada perto da escrivaninha mais cedo. Você não tem interesse em rotas secretas."
+      }
+    },
+    {
+      "id": "suspect-2",
+      "name": "Marina Silva",
+      "role": {
+        "en": "Marine Biologist",
+        "pt": "Bióloga Marinha"
+      },
+      "persona": {
+        "en": "Ambitious and cold, looking for funding for her research.",
+        "pt": "Ambiciosa e fria, buscando financiamento para sua pesquisa."
+      },
+      "alibi": {
+        "en": "Was in her cabin reading by candlelight.",
+        "pt": "Estava em sua cabine lendo à luz de velas."
+      },
+      "facts": {
+        "en": "You are Marina. You claim to have been reading, but you actually snuck into the office to steal the logbook to sell to a shipping company. You hid it inside your waterproof specimen bag.",
+        "pt": "Você é Marina. Você afirma que estava lendo, mas na verdade entrou escondida no escritório para roubar o diário para vender a uma empresa de navegação. Você o escondeu dentro de sua bolsa impermeável de amostras."
+      }
+    },
+    {
+      "id": "suspect-3",
+      "name": "Captain Rocha",
+      "role": {
+        "en": "Ship Captain",
+        "pt": "Capitão de Navio"
+      },
+      "persona": {
+        "en": "Boisterous and loud, currently stranded due to the storm.",
+        "pt": "Barulhento e expansivo, atualmente encalhado devido à tempestade."
+      },
+      "alibi": {
+        "en": "Was drinking rum in the common room.",
+        "pt": "Estava bebendo rum na sala comum."
+      },
+      "facts": {
+        "en": "You are Rocha. You were drinking all night, but you fell asleep on the sofa around midnight. You are too drunk to have picked a lock.",
+        "pt": "Você é Rocha. Você estava bebendo a noite toda, mas pegou no sono no sofá por volta da meia-noite. Você está bêbado demais para ter arrombado uma fechadura."
+      }
+    },
+    {
+      "id": "suspect-4",
+      "name": "Elena Rossi",
+      "role": {
+        "en": "Supply Technician",
+        "pt": "Técnica de Suprimentos"
+      },
+      "persona": {
+        "en": "Quiet and observant, keeps to herself.",
+        "pt": "Quieta e observadora, mantém-se reservada."
+      },
+      "alibi": {
+        "en": "Was organizing the pantry in the basement.",
+        "pt": "Estava organizando a despensa no porão."
+      },
+      "facts": {
+        "en": "You are Elena. You were in the basement, but you heard someone running up the stairs toward the office during the peak of the storm.",
+        "pt": "Você é Elena. Você estava no porão, mas ouviu alguém correndo escada acima em direção ao escritório durante o auge da tempestade."
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "22:00",
+      "stop": {
+        "en": "Storm begins",
+        "pt": "A tempestade começa"
+      },
+      "event": {
+        "en": "The wind picks up and power flickers.",
+        "pt": "O vento aumenta e a energia oscila."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "23:30",
+      "stop": {
+        "en": "The Theft",
+        "pt": "O Roubo"
+      },
+      "event": {
+        "en": "The logbook is taken from the desk.",
+        "pt": "O diário de bordo é retirado da escrivaninha."
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t3",
+      "time": "00:00",
+      "stop": {
+        "en": "Captain's Nap",
+        "pt": "Soneca do Capitão"
+      },
+      "event": {
+        "en": "Captain Rocha falls asleep in the common room.",
+        "pt": "O Capitão Rocha adormece na sala comum."
+      },
+      "who": [
+        "suspect-3"
+      ]
+    },
+    {
+      "id": "t4",
+      "time": "01:00",
+      "stop": {
+        "en": "The Sound",
+        "pt": "O Barulho"
+      },
+      "event": {
+        "en": "Running footsteps are heard near the office.",
+        "pt": "Passos de corrida são ouvidos perto do escritório."
+      },
+      "who": [
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Search for the lost tool.",
+      "keywords": [
+        "wrench",
+        "ferramenta",
+        "chave inglesa"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "You find your heavy wrench near the desk, but there are wet, muddy footprints leading away from the desk towards the biologist's quarters.",
+        "pt": "Você encontra sua chave inglesa pesada perto da escrivaninha, mas há pegadas molhadas e com lama saindo da escrivaninha em direção aos aposentos da bióloga."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Examine the office floor.",
+      "keywords": [
+        "mud",
+        "lama",
+        "piso"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "The floor shows traces of salt water and marine sediment, which only someone handling biological samples would carry.",
+        "pt": "O chão mostra vestígios de água salgada e sedimentos marinhos, algo que apenas alguém manuseando amostras biológicas carregaria."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-3",
+      "ask": "Check the common room.",
+      "keywords": [
+        "rum",
+        "bebida",
+        "garrafa"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "The Captain's rum bottle is empty, and he is passed out. He hasn't moved since the storm hit its peak.",
+        "pt": "A garrafa de rum do Capitão está vazia e ele está desmaiado. Ele não se moveu desde que a tempestade atingiu o auge."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-1",
+      "ask": "Check the tower ladder.",
+      "keywords": [
+        "ladder",
+        "escada",
+        "tower"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "The tower ladder is secure and shows no signs of tampering, confirming the assistant stayed in his post.",
+        "pt": "A escada da torre está segura e não mostra sinais de violação, confirmando que o assistente permaneceu em seu posto."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-4",
+      "ask": "Inspect the pantry.",
+      "keywords": [
+        "pantry",
+        "despensa",
+        "basement"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "Everything in the pantry is organized exactly as Elena left it; she never left the basement during the storm.",
+        "pt": "Tudo na despensa está organizado exatamente como Elena deixou; ela nunca saiu do porão durante a tempestade."
+      }
+    },
+    {
+      "id": "c6",
+      "from": "suspect-2",
+      "ask": "Search Marina's bag.",
+      "keywords": [
+        "bag",
+        "bolsa",
+        "logbook"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "Inside the waterproof specimen bag, you find the stolen logbook hidden beneath several algae samples.",
+        "pt": "Dentro da bolsa impermeável de amostras, você encontra o diário de bordo roubado escondido sob várias amostras de algas."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Look for clues related to mud and saltwater.",
+        "pt": "Procure por pistas relacionadas a lama e água salgada."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The culprit's occupation involves handling marine biological materials.",
+        "pt": "A profissão do culpado envolve o manuseio de materiais biológicos marinhos."
+      }
+    }
+  ],
+  "glossary": {
+    "logbook": "diário de bordo",
+    "keeper": "faroleiro",
+    "specimen": "amostra",
+    "wrench": "chave inglesa"
+  },
+  "solution": {
+    "en": "Marina Silva stole the logbook. The muddy footprints (c1) and marine sediment (c2) pointed to someone working with ocean samples. While the Captain was passed out (c3), the Assistant was in the tower (c4), and the Technician was in the basement (c5), Marina used the cover of the storm to steal the book and hide it in her waterproof bag (c6).",
+    "pt": "Marina Silva roubou o diário de bordo. As pegadas de lama (c1) e o sedimento marinho (c2) apontavam para alguém que trabalha com amostras oceânicas. Enquanto o Capitão estava desmaiado (c3), o Assistente estava na torre (c4) e a Técnica estava no porão (c5), Marina usou o disfarce da tempestade para roubar o livro e escondê-lo em sua bolsa impermeável (c6)."
+  },
+  "aftermath": [
+    {
+      "id": "suspect-1",
+      "headline": {
+        "en": "Relief for the Assistant",
+        "pt": "Alívio para o Assistente"
+      },
+      "body": {
+        "en": "Arthur Vance continues his duties, though he remains jumpy whenever the wind howls.",
+        "pt": "Arthur Vance continua seus deveres, embora continue nervoso sempre que o vento uiva."
+      }
+    },
+    {
+      "id": "suspect-3",
+      "headline": {
+        "en": "The Captain's Hangover",
+        "pt": "A Ressaca do Capitão"
+      },
+      "body": {
+        "en": "Captain Rocha woke up with a massive headache, unaware he was even a suspect.",
+        "pt": "O Capitão Rocha acordou com uma dor de cabeça terrível, sem saber que era sequer um suspeito."
+      }
+    },
+    {
+      "id": "suspect-4",
+      "headline": {
+        "en": "The Silent Observer",
+        "pt": "A Observadora Silenciosa"
+      },
+      "body": {
+        "en": "Elena Rossi was commended for her keen hearing, which helped establish the timeline.",
+        "pt": "Elena Rossi foi elogiada por sua audição aguçada, que ajudou a estabelecer a linha do tempo."
+      }
+    }
+  ],
+  "id": "case-gen-a-storm-night-at-the-ilha-rasa-lighthous",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A storm night at the Ilha Rasa lighthouse off Rio: the keeper's logbook vanishes",
+    "model": "@cf/google/gemma-4-26b-a4b-it"
+  }
+}

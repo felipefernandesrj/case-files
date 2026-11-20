@@ -1,0 +1,42 @@
+{
+ "ok": true,
+ "out": "content/cases/gen-ilha-rasa.json",
+ "attempts": [
+  {
+   "n": 1,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 458,
+    "completion_tokens": 3083,
+    "total_tokens": 3541,
+    "neurons": 88.24545288085938,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "receipt": "01M7V4CCP46F2E4QSGQNDDHD0H",
+   "ok": false,
+   "reasons": [
+    "suspect_not_cleared",
+    "timeline_crime_count"
+   ]
+  },
+  {
+   "n": 2,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 531,
+    "completion_tokens": 2796,
+    "total_tokens": 3327,
+    "neurons": 81.08181762695312,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "receipt": "01M7V4ERRV53213CWNM1VFMYMV",
+   "ok": true,
+   "reasons": []
+  }
+ ],
+ "reasons": []
+}

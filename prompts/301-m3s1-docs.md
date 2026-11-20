@@ -1,0 +1,64 @@
+Apply these documentation edits verbatim. Output ONLY REPLACE blocks, one per numbered edit, in this exact shape (OLD copied exactly, a line of =====, then NEW copied exactly):
+<<<REPLACE path>>>
+OLD
+=====
+NEW
+<<<END>>>
+
+Edit 1, package.json. OLD:
+  "version": "0.4.25",
+NEW:
+  "version": "0.5.0",
+
+Edit 2, package.json. OLD:
+node test/cli-lines.mjs && node test/keyboard.mjs"
+NEW:
+node test/cli-lines.mjs && node test/generator.mjs && node test/keyboard.mjs"
+
+Edit 3, CHANGELOG.md. OLD:
+# Changelog
+
+## 0.4.25 (M2 delivered: The Night Train; sprint 16, the last English terminal lines in Portuguese)
+NEW:
+# Changelog
+
+## 0.5.0 (M3 sprint 1: a case generator with a fair play gate)
+- New src/generator.js writes a whole new case from a seed through the Cup key (`node src/generator.js --seed "A storm night at the Ilha Rasa lighthouse off Rio: the keeper's logbook vanishes"`), with gemma-4-26b-a4b-it and the workload tag `case-files:generate`.
+- Every draft goes through a gate before it is kept: the shared fair play and timeline checks of the engine, a shape check (titles, intro, solution, suspects, hints), and three checks added after real drafts slipped through: an aftermath object for every innocent suspect, no clue in which a suspect implicates themselves, and no clue that clears the culprit.
+- A failed draft is retried up to 3 times, and the retry tells the model what to fix in plain words for each failed check. A capacity or key error stops at once and never retries. The key never appears in a result or an error.
+- A kept case gets the id `case-gen-<seed>`, a question budget of twice the fewest fair questions, and the seed and model it came from.
+- Live through the Cup key: 4 runs, 10 drafts. Run 2 was rejected 3 times for the same mistake, which led to the plain-word fixes; run 4 passed on the third draft. One draft costs about US$0.001.
+- New test/generator.mjs with 10 checks (no network). The automated suite now has 293 checks.
+
+## 0.4.25 (M2 delivered: The Night Train; sprint 16, the last English terminal lines in Portuguese)
+
+Edit 4, README.md. OLD:
+**Next: M3, The Generated Case.** A generator that writes and validates new mysteries from a seed, built on the same engine checks.
+NEW:
+**M3 in progress: The Generated Case.** Sprint 1 (v0.5.0) shipped the generator: `node src/generator.js --seed "<text>"` writes a whole case from a seed through the Cup key and keeps it only if it passes the engine's fair play and timeline checks plus a shape gate, retrying up to 3 times with a plain-word fix for each failed check. Next: generated cases in the case picker (EN/PT) and a cost cap per generation.
+
+Edit 5, docs/BUILD_LOG.md. OLD:
+- M2 declared delivered on QA. Details: docs/M2_DELIVERY.md, qa/rework.md (M2 delivery sprint 16).
+NEW:
+- M2 declared delivered on QA. Details: docs/M2_DELIVERY.md, qa/rework.md (M2 delivery sprint 16).
+
+## M3 sprint 1 (v0.5.0), 2026-11-19
+- Goal: a generator that writes a new case from a seed and keeps it only after the engine checks pass.
+- Built through the Cup key (gemma-4-26b-a4b-it, thinking off): 294 both files from a spec; 295 rework (an import that does not exist, a test file that did not parse, a broken --suspects flag; first try 502 workers_ai_unavailable, retried); 296 test fix; 297 aftermath and self-implicating clue checks; 298 test gap found by the mutation check (402 test passed without a throw); 299 plain-word fixes on retry; 300 culprit-cleared check; 301 these docs.
+- Live runs (qa/m3s1-probes/gen-live-1..4): run 1 kept a case with an array aftermath and a suspect implicating herself (gate gap, closed in 297); run 2 rejected 3 times for the same mistake (fixed by 299); run 3 kept a case where a clue clears the culprit (gate gap, closed in 300); run 4 passed on the third draft.
+- Result: npm test 293/293, new test/generator.mjs 10 checks, mutation check 5 of 5 caught after 298.
+
+Edit 6, docs/SPEC.md. OLD:
+## Testing
+
+Run the full test suite via npm:
+NEW:
+## Case generator (`src/generator.js`, M3 sprint 1)
+- `generateCase(seed, { key, baseUrl, fetchImpl, model, suspects = 4, maxAttempts = 3, maxTokens = 8000 })` posts to `/chat/completions` with `X-FullCup-Workload: case-files:generate` and thinking off, parses one JSON object (fences and prose around it are dropped) and runs `validateCase`.
+- `validateCase` = `shapeCheck` (not_object, missing_title, missing_intro, missing_solution, suspect_bad, duplicate_suspect_id, missing_hints, aftermath_bad, clue_self_implicates, culprit_cleared) + `fairPlay` + `timelineCheck`.
+- A failed draft is retried with the failed codes and one plain-word fix per code (`REASON_HINTS`). 401/403 is `bad_key`, 402 or 429 `capacity:empty` is `no_capacity`, other 429 `rate_limited`, else `upstream`; these throw at once with `err.attempts`.
+- A kept case gets `id: case-gen-<slug>`, `questionBudget: 2 * fairMinimum`, `generated: { seed, model }`. The CLI writes it to `content/cases/gen-<slug>.json` (or `--out`).
+
+## Testing
+
+Run the full test suite via npm:

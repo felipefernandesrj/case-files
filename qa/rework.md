@@ -858,3 +858,18 @@ Model gemma-4-26b-a4b-it, thinking off, via the Cup key. Felipi asked to close M
 - Delivery screenshots (tools/shots-m2.mjs, llama-4-scout): 12 calls, 12 x 200, 170.68 neurons, receipts 01M7TBCGV52E19SQG29BZQF45E .. 01M7TBKGKHMTJ5Z2DKJGW33249 (all in qa/key-usage-log.json, purpose m2-shots:*). Picker and verdict re-shot in mock mode (tools/shots-m2-closed.mjs, no key calls).
 - Key total this sprint: 16 calls, 309.92 neurons, about US$ 0.0034. Seal-by 2026-11-20 00:05Z (19/11 21:05 BRT). No image generation.
 - Docs by hand (no product change): CHANGELOG 0.4.25, README M2 Delivered, docs/M2_DELIVERY.md, docs/m2/*.png, BUILD_LOG.
+
+## M3 sprint 1 (v0.5.0), 2026-11-19 20:52-21:20 BRT
+- Housekeeping: git clean at start, HEAD 86f4888 = origin/m1-via-key (pushed in run 44). Plan to land M3 + M4 by Sat 21/11 21h; this run is M3 s1: generator seed -> case JSON via key -> gate -> retry.
+- Seal check (qa/m3s1-probes/seal/): 20:59 BRT all 23 receipts (285-293 code, M2 acceptance 2, M2 shots 12) "Recorded, waiting for the daily seal" (pre-cut.txt); 21:06 BRT all 23 HTTP 200 Genuine, Sealed at 2026-11-20 00:05:24 UTC (21:05:24 BRT), one of 27 in the signed root of 2026-11-19; total exact cost $0.007509. 0 not sealed.
+- 294 (gemma, spec, 2 FILE blocks): module crashed on load (`import { solve } from 'node:util'`), test file SyntaxError (stray `});` + runTests wrapper), CLI `--suspects` always NaN, extra hand-made clue check duplicating fairPlay, attempt status 'ok' string.
+- 295 rework: first try HTTP 502 `workers_ai_unavailable` (no usage, no receipt), retried as 295b (stream) OK, 9/10 checks; 296 one-line test fix (fake fetch lost the url) 10/10.
+- Live run 1 (2 drafts, kept) exposed 2 gate gaps on a REAL draft: aftermath as an array (newspaper reads aftermath[id]) and a clue from the culprit implicating herself. 297 added aftermath_bad + clue_self_implicates and a test on the saved draft.
+- Mutation check: removing a throw on 402 was NOT caught (asserts only inside catch). 298 rewrote check 7 (must throw, 1 call, 1 attempt). After: 5/5 mutations caught (qa/m3s1-probes/mutation-check.txt).
+- Live run 2 rejected 3/3 drafts (the model repeated clue_self_implicates with bare codes). 299 sends a plain-word fix per code (REASON_HINTS).
+- Live run 3 (2 drafts, kept) exposed a 3rd gap: clue c1 clears the culprit. 300 added culprit_cleared + test on the saved draft.
+- Live run 4 kept on draft 3 (clue_self_implicates, then suspect_not_cleared + timeline_crime_count, then ok): coherent 4 suspect lighthouse case, saved as qa/m3s1-probes/gen-live-4.case.json (not yet in the picker, M3 s2).
+- 301 docs (package version + script, CHANGELOG 0.5.0, README, BUILD_LOG, SPEC): 6/6 applied verbatim.
+- Key: build 294-301 = 8 OK calls + 1 502, 547.07 neurons ~US$0.0060; rework 295b+296+298 = 218.39 neurons, 39.9%. Generation 4 runs = 10 drafts, 839.89 neurons ~US$0.0092 (~US$0.0009 per draft). No image generation. 0 hand edits in src/ and test/ (prompts, probes, harness logs by hand).
+- Result: npm test 293/293 (was 283).
+- Known, not fixed (M3 s2): generated cases not in CASES/picker yet (fileKeyOf falls back to violin), no rooms/art for generated cases, no per-generation cost cap (max attempts only), clue texts sometimes narrate instead of testimony.

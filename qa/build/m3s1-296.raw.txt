@@ -1,0 +1,11 @@
+<<<REPLACE test/generator.mjs>>>
+    lastOpts = opts;
+=====
+    lastOpts = { ...opts, url };
+<<<END>>>
+
+<<<REPLACE src/generator.js>>>
+import { fairPlay, timelineCheck, loadCase } from './case.js';
+=====
+import { fairPlay, timelineCheck } from './case.js';
+<<<END>>>

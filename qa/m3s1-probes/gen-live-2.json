@@ -1,0 +1,64 @@
+{
+ "ok": false,
+ "out": null,
+ "attempts": [
+  {
+   "n": 1,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 458,
+    "completion_tokens": 2664,
+    "total_tokens": 3122,
+    "neurons": 76.81818389892578,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "receipt": "01M7V45JW53HWQZDDNR728FAMS",
+   "ok": false,
+   "reasons": [
+    "suspect_not_cleared",
+    "timeline_crime_count"
+   ]
+  },
+  {
+   "n": 2,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 489,
+    "completion_tokens": 2925,
+    "total_tokens": 3414,
+    "neurons": 82.18181610107422,
+    "prompt_tokens_details": {
+     "cached_tokens": 448
+    }
+   },
+   "receipt": "01M7V47KZTHNP11PXAV5JVVADB",
+   "ok": false,
+   "reasons": [
+    "clue_self_implicates"
+   ]
+  },
+  {
+   "n": 3,
+   "status": 200,
+   "usage": {
+    "prompt_tokens": 484,
+    "completion_tokens": 3003,
+    "total_tokens": 3487,
+    "neurons": 86.30000305175781,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "receipt": "01M7V49X2NX8GQDHSQSAC156R0",
+   "ok": false,
+   "reasons": [
+    "clue_self_implicates"
+   ]
+  }
+ ],
+ "reasons": [
+  "clue_self_implicates"
+ ]
+}

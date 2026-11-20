@@ -336,3 +336,9 @@ M2 player-chrome polish only (gothic-noir atmosphere, 390 header, stage fill, ti
 - Result: npm test 283/283 (was 277), new test/cli-lines.mjs 6 checks.
 - Acceptance: live smoke of the Night Train through the Cup key (tools/smoke-m2.mjs, llama-4-scout, EN Helena + correct accusation, PT Victor + wrong accusation), qa/live-smoke-m2-delivery.json. Delivery screenshots played live through the key (tools/shots-m2.mjs, 12 calls) plus mock shots of the picker and the verdict (tools/shots-m2-closed.mjs, no calls).
 - M2 declared delivered on QA. Details: docs/M2_DELIVERY.md, qa/rework.md (M2 delivery sprint 16).
+
+## M3 sprint 1 (v0.5.0), 2026-11-19
+- Goal: a generator that writes a new case from a seed and keeps it only after the engine checks pass.
+- Built through the Cup key (gemma-4-26b-a4b-it, thinking off): 294 both files from a spec; 295 rework (an import that does not exist, a test file that did not parse, a broken --suspects flag; first try 502 workers_ai_unavailable, retried); 296 test fix; 297 aftermath and self-implicating clue checks; 298 test gap found by the mutation check (402 test passed without a throw); 299 plain-word fixes on retry; 300 culprit-cleared check; 301 these docs.
+- Live runs (qa/m3s1-probes/gen-live-1..4): run 1 kept a case with an array aftermath and a suspect implicating herself (gate gap, closed in 297); run 2 rejected 3 times for the same mistake (fixed by 299); run 3 kept a case where a clue clears the culprit (gate gap, closed in 300); run 4 passed on the third draft.
+- Result: npm test 293/293, new test/generator.mjs 10 checks, mutation check 5 of 5 caught after 298.

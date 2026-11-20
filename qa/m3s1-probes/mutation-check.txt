@@ -1,0 +1,6 @@
+MUT reasons.push('aftermath_bad') -> generator: 9 passed, 1 failed
+MUT reasons.push('clue_self_implicates') -> generator: 9 passed, 1 failed
+MUT reasons: \['not_json'\] -> generator: 9 passed, 1 failed
+MUT throw err; -> generator: 10 passed, 0 failed
+MUT throw err (after 298) -> generator: 9 passed, 1 failed
+MUT culprit_cleared -> generator: 9 passed, 1 failed

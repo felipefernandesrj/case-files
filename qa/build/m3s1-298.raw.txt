@@ -1,0 +1,53 @@
+<<<REPLACE test/generator.mjs>>>
+await check('7. 402 stops at once', async () => {
+  const f402 = fake([{ status: 402, body: 'capacity:empty' }]);
+  try {
+    await generateCase('x', { key: 'K', fetchImpl: f402 });
+  } catch (e) {
+    must(e.code === 'no_capacity' && e.status === 402, '402 error');
+    must(e.attempts.length === 1, '402 attempts');
+  }
+  const f429 = fake([{ status: 429, body: 'capacity:empty' }]);
+  try {
+    await generateCase('x', { key: 'K', fetchImpl: f429 });
+  } catch (e) {
+    must(e.code === 'no_capacity', '429 capacity');
+  }
+  const f401 = fake([{ status: 401 }]);
+  try {
+    await generateCase('x', { key: 'K', fetchImpl: f401 });
+  } catch (e) {
+    must(e.code === 'bad_key', '401 error');
+  }
+});
+=====
+await check('7. 402/429/401 stop at once', async () => {
+  const thrown = async (f) => {
+    try {
+      await generateCase('x', { key: 'K', fetchImpl: f });
+    } catch (e) {
+      return e;
+    }
+    return null;
+  };
+
+  const scenarios = [
+    { status: 402, body: 'capacity:empty', code: 'no_capacity', expectedStatus: 402 },
+    { status: 429, body: 'capacity:empty', code: 'no_capacity' },
+    { status: 429, body: 'slow down', code: 'rate_limited' },
+    { status: 401, body: '{}', code: 'bad_key' }
+  ];
+
+  for (const s of scenarios) {
+    const f = fake([{ status: s.status, body: s.body }]);
+    const e = await thrown(f);
+    must(e, `${s.status} did not throw`);
+    must(e.code === s.code, `${s.status} code mismatch: ${e.code} !== ${s.code}`);
+    must(f.calls.length === 1, `${s.status} should only make 1 request`);
+    must(e.attempts.length === 1, `${s.status} should only have 1 attempt`);
+    if (s.expectedStatus) {
+      must(e.status === s.expectedStatus, `${s.status} status mismatch`);
+    }
+  }
+});
+<<<END>>>
