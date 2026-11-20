@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.2 (M3 delivered: The Generated Case)
+- M3 delivered 2026-11-20. Delivery notes: docs/M3_DELIVERY.md. New tools/smoke-m3.mjs (live acceptance).
+
 ## 0.5.1 (M3 sprint 2: generated cases play in the picker, EN and PT)
 - A case written by the generator (content/generated/gen-<seed>.json) now shows in the case picker with a "Generated case" tag, its cost in USD and the drafts it took; it opens with its own rooms and a shared rainy-night plate, in English and Portuguese.
 - The generator now repairs the previous draft instead of starting over, lifts misplaced "crime" keys, demands 3 to 6 rooms, requires clues spoken as testimony in first person, requires a witness (not the suspect) to clear each innocent, and stops a generation at a cost cap of US$0.005.

@@ -1,0 +1,68 @@
+[
+ {
+  "lang": "en",
+  "case": "gen-lapa",
+  "suspect": "suspect-1",
+  "q": "Where were you when the display case was opened, and who did you see near it?",
+  "status": 200,
+  "budget": 10,
+  "left": 9,
+  "answer": "I was in the back office, focused on paperwork, from 22:00 until I heard the commotion. I didn't see anyone near the display case, but I did see Daniela in the breakroom through the door the whole time. I assume she couldn't have been involved.",
+  "words": 45,
+  "upstreamMs": 4867,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "receipt": "01M7XP21GYXZ16VYM8394BB9KP",
+  "sealBy": "2026-11-21T00:05:00.000Z",
+  "usage": {
+   "prompt_tokens": 341,
+   "completion_tokens": 57,
+   "total_tokens": 398,
+   "neurons": 12.774545669555664,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": "suspect-2",
+  "status": 200,
+  "lang": "en",
+  "correct": true,
+  "score": 100,
+  "questions": 1,
+  "culprit": "Beatriz"
+ },
+ {
+  "lang": "pt",
+  "case": "gen-lapa",
+  "suspect": "suspect-3",
+  "q": "Onde você estava quando a vitrine foi aberta e quem você viu perto dela?",
+  "status": 200,
+  "budget": 10,
+  "left": 9,
+  "answer": "Eu estava sentado aqui ao lado da janela, absorto em meus pensamentos. Não ouvi nada, mas vi a Beatriz parada bem ao lado da vitrine pouco antes do barulho. Ela parecia procurar algo, mas não dei muita atenção.",
+  "words": 38,
+  "upstreamMs": 2821,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "receipt": "01M7XP25KEDP1FEWPYCR4XR5ZG",
+  "sealBy": "2026-11-21T00:05:00.000Z",
+  "usage": {
+   "prompt_tokens": 333,
+   "completion_tokens": 51,
+   "total_tokens": 384,
+   "neurons": 12.114545822143555,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": "suspect-1",
+  "status": 200,
+  "lang": "pt",
+  "correct": false,
+  "score": 0,
+  "questions": 1,
+  "culprit": "Beatriz"
+ }
+]

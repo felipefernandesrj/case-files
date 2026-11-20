@@ -873,3 +873,7 @@ Model gemma-4-26b-a4b-it, thinking off, via the Cup key. Felipi asked to close M
 - Key: build 294-301 = 8 OK calls + 1 502, 547.07 neurons ~US$0.0060; rework 295b+296+298 = 218.39 neurons, 39.9%. Generation 4 runs = 10 drafts, 839.89 neurons ~US$0.0092 (~US$0.0009 per draft). No image generation. 0 hand edits in src/ and test/ (prompts, probes, harness logs by hand).
 - Result: npm test 293/293 (was 283).
 - Known, not fixed (M3 s2): generated cases not in CASES/picker yet (fileKeyOf falls back to violin), no rooms/art for generated cases, no per-generation cost cap (max attempts only), clue texts sometimes narrate instead of testimony.
+
+## M3 sprint 2 (run 46, 20/11): finished from uncommitted work of the failed 09:00 run
+- Reviewed the diff, fixed the CHANGELOG/package version mismatch (test caught it), 307 checks pass. Gaps closed: generated cases in CASES/picker/fileKeyOf, rooms/plate, cost cap, testimony check. Mock screenshots in /workspace/casefiles-qa/run46/shots. Live smoke tools/smoke-m3.mjs 2 asks + 2 accuses, llama-4-scout, rework 0.
+- Observation (not fixed): 390 "SCENE: BACK OFFICE" tag overlaps the Locations tab label.
