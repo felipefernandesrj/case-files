@@ -1,0 +1,309 @@
+{
+  "title": {
+    "en": "The Botafogo Midnight Heist",
+    "pt": "O Roubo da Meia-Noite em Botafogo"
+  },
+  "intro": {
+    "en": "A glamorous rooftop party in Botafogo, overlooking the Christ the Redeemer, ended in chaos. During the sudden explosion of fireworks, the host's priceless vintage watch vanished from his wrist. The lights flickered, and in those ten seconds of darkness, the thief struck.",
+    "pt": "Uma festa glamorosa em um rooftop em Botafogo, com vista para o Cristo Redentor, terminou em caos. Durante a explosão repentina dos fogos de artifício, o relógio vintage inestimável do anfitrião desapareceu de seu pulso. As luzes oscilaram e, naqueles dez segundos de escuridão, o ladrão agiu."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Beatriz",
+      "role": {
+        "en": "Socialite",
+        "pt": "Socialite"
+      },
+      "persona": {
+        "en": "Always elegant and slightly condescending.",
+        "pt": "Sempre elegante e levemente condescendente."
+      },
+      "alibi": {
+        "en": "She was near the buffet, sipping champagne.",
+        "pt": "Ela estava perto do buffet, tomando champanhe."
+      },
+      "facts": "You were dancing near the DJ booth at 23:55. You lie that you were by the buffet to avoid being linked to the loud music area."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Ricardo",
+      "role": {
+        "en": "Caterer",
+        "pt": "Cadeirista/Garçom"
+      },
+      "persona": {
+        "en": "Anxious, constantly checking the clock.",
+        "pt": "Ansioso, checando o relógio constantemente."
+      },
+      "alibi": {
+        "en": "He claims he was in the kitchen preparing more drinks.",
+        "pt": "Ele afirma que estava na cozinha preparando mais bebidas."
+      },
+      "facts": "You were standing right next to the host when the fireworks started. You lie that you were in the kitchen to hide the fact that you reached for his wrist."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Camila",
+      "role": {
+        "en": "Photographer",
+        "pt": "Fotógrafa"
+      },
+      "persona": {
+        "en": "Observant and quiet, always looking through a lens.",
+        "pt": "Observadora e quieta, sempre olhando através de uma lente."
+      },
+      "alibi": {
+        "en": "She was capturing the fireworks display.",
+        "pt": "Ela estava capturando o show de fogos de artifício."
+      },
+      "facts": "You saw a shadow moving toward the host just before the flash. You lie that you saw nothing to protect your professional reputation of 'missing everything'."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Diego",
+      "role": {
+        "en": "Business Partner",
+        "pt": "Sócio de Negócios"
+      },
+      "persona": {
+        "en": "Arrogant and deeply in debt.",
+        "pt": "Arrogante e profundamente endividado."
+      },
+      "alibi": {
+        "en": "He was on the balcony smoking a cigar.",
+        "pt": "Ele estava na varanda fumando um charuto."
+      },
+      "facts": "You were actually arguing with the host about money moments before the theft. You lie that you were alone on the balcony."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "23:45",
+      "stop": {
+        "en": "The Bar",
+        "pt": "O Bar"
+      },
+      "event": {
+        "en": "Guests begin to gather around the edge of the rooftop.",
+        "pt": "Os convidados começam a se reunir na beira do rooftop."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "23:55",
+      "stop": {
+        "en": "The DJ Booth",
+        "pt": "A Cabine do DJ"
+      },
+      "event": {
+        "en": "Music intensifies; Beatriz is seen dancing.",
+        "pt": "A música intensifica; Beatriz é vista dançando."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "00:00",
+      "stop": {
+        "en": "The Center Lounge",
+        "pt": "O Lounge Central"
+      },
+      "event": {
+        "en": "Fireworks explode and lights flicker; the watch is stolen.",
+        "pt": "Os fogos explodem e as luzes oscilam; o relógio é roubado."
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "00:10",
+      "stop": {
+        "en": "The Balcony",
+        "pt": "A Varanda"
+      },
+      "event": {
+        "en": "The host realizes the loss and screams.",
+        "pt": "O anfitrião percebe a perda e grita."
+      },
+      "who": [
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you during the fireworks?",
+      "keywords": [
+        "buffet",
+        "champagne"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I was by the buffet the whole time, far from the commotion. I saw Diego on the balcony, he wasn't near the host.",
+        "pt": "Eu estava no buffet o tempo todo, longe da confusão. Eu vi o Diego na varanda, ele não estava perto do anfitrião."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-3",
+      "ask": "Did you notice anything unusual?",
+      "keywords": [
+        "shadow",
+        "movement"
+      ],
+      "implicates": "suspect-2",
+      "clears": "suspect-1",
+      "text": {
+        "en": "I didn't see much, but I did see a waiter moving very strangely toward the host right as the lights dimmed.",
+        "pt": "Não vi muito, mas vi um garçom se movendo de forma muito estranha em direção ao anfitrião bem quando as luzes diminuíram."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "Were you alone on the balcony?",
+      "keywords": [
+        "argument",
+        "money"
+      ],
+      "implicates": "suspect-2",
+      "clears": "suspect-3",
+      "text": {
+        "en": "I was smoking, yes. But I heard the photographer, Camila, talking to someone near the kitchen entrance just before the blast.",
+        "pt": "Eu estava fumando, sim. Mas ouvi a fotógrafa, Camila, conversando com alguém perto da entrada da cozinha pouco antes da explosão."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-2",
+      "ask": "What were you doing in the kitchen?",
+      "keywords": [
+        "drinks",
+        "kitchen"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "I was busy with the drinks. I saw Beatriz dancing near the DJ, she definitely wasn't near the host.",
+        "pt": "Eu estava ocupado com as bebidas. Eu vi a Beatriz dançando perto do DJ, ela definitivamente não estava perto do anfitrião."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 60,
+      "text": {
+        "en": "Look at the movements during the blackout. Who was physically close enough to reach the host?",
+        "pt": "Observe os movimentos durante o apagão. Quem estava fisicamente perto o suficiente para alcançar o anfitrião?"
+      }
+    },
+    {
+      "id": "h2",
+      "after": 120,
+      "text": {
+        "en": "The waiter's alibi of being in the kitchen is contradicted by the witness accounts.",
+        "pt": "O álibi do garçom de estar na cozinha é contradito pelos relatos das testemunhas."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "rooftop": "rooftop",
+      "caterer": "caterer/waiter",
+      "vintage watch": "vintage watch"
+    },
+    "pt": {
+      "rooftop": "rooftop",
+      "caterer": "garçom",
+      "vintage watch": "relógio vintage"
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-bar",
+      "en": "The Bar",
+      "pt": "O Bar"
+    },
+    {
+      "id": "room-kitchen",
+      "en": "The Kitchen",
+      "pt": "A Cozinha"
+    },
+    {
+      "id": "room-lounge",
+      "en": "The Lounge",
+      "pt": "O Lounge"
+    },
+    {
+      "id": "room-balcony",
+      "en": "The Balcony",
+      "pt": "A Varanda"
+    }
+  ],
+  "solution": {
+    "en": "Ricardo (the caterer) stole the watch. While he claimed to be in the kitchen, Camila (the photographer) saw a shadow moving toward the host, and Beatriz (the socialite) confirmed she was far away, meaning the person near the host had to be the staff. Most importantly, the 'shadow' seen by Camila was the waiter moving under the cover of the fireworks, and his claim of being in the kitchen was a lie to cover his proximity to the host.",
+    "pt": "Ricardo (o garçom) roubou o relógio. Embora ele afirmasse estar na cozinha, Camila (a fotógrafa) viu uma sombra se movendo em direção ao anfitrião, e Beatriz (a socialite) confirmou que estava longe, o que significa que a pessoa perto do anfitrião tinha que ser o funcionário. Mais importante, a 'sombra' vista por Camila era o garçom se movendo sob o disfarce dos fogos, e sua afirmação de estar na cozinha era uma mentira para esconder sua proximidade com o anfitrião."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Socialite Cleared",
+        "body": "Beatriz was wrongly accused of being distracted, but evidence shows she was merely enjoying the party."
+      },
+      "pt": {
+        "headline": "Socialite Absolvida",
+        "body": "Beatriz foi injustamente acusada de estar distraída, mas as evidências mostram que ela estava apenas aproveitando a festa."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Photographer's Lens Fails",
+        "body": "Camila was suspected of negligence, but it was revealed she was an innocent bystander."
+      },
+      "pt": {
+        "headline": "A Lente da Fotógrafa Falha",
+        "body": "Camila foi suspeita de negligência, mas foi revelado que ela era uma espectadora inocente."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Business Partner Scandal",
+        "body": "Diego's debts made him a prime suspect, but he was simply a man in financial trouble, not a thief."
+      },
+      "pt": {
+        "headline": "Escândalo com Sócio",
+        "body": "As dívidas de Diego o tornaram o principal suspeito, mas ele era apenas um homem com problemas financeiros, não um ladrão."
+      }
+    }
+  },
+  "id": "case-gen-a-rooftop-party-in-botafogo-the-host-s-w",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A rooftop party in Botafogo: the host's watch is taken during the fireworks",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000872,
+      "drafts": 1,
+      "receipts": [
+        "01M7XPBAMRYKWN24X25JTR09XF"
+      ]
+    }
+  }
+}

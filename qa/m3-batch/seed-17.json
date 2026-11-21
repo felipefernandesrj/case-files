@@ -1,0 +1,322 @@
+{
+  "title": {
+    "en": "The Vanishing Grandmaster Trophy",
+    "pt": "O Desaparecimento do Troféu de Grande Mestre"
+  },
+  "intro": {
+    "en": "The prestigious Leblon Chess Club is in shock. The golden championship trophy has vanished from its glass display during the gala dinner. The doors were locked, and only four members were near the trophy room.",
+    "pt": "O prestigiado Clube de Xadrez do Leblon está em choque. O troféu de ouro do campeonato desapareceu da sua vitrine de vidro durante o jantar de gala. As portas estavam trancadas e apenas quatro membros estavam perto da sala dos troféus."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-0",
+      "name": "Arthur Mendes",
+      "role": {
+        "en": "Club President",
+        "pt": "Presidente do Clube"
+      },
+      "persona": {
+        "en": "Stuffy and obsessed with tradition.",
+        "pt": "Metido e obcecado por tradição."
+      },
+      "alibi": {
+        "en": "He was giving a speech in the dining hall.",
+        "pt": "Ele estava fazendo um discurso no salão de jantar."
+      },
+      "facts": "You were in the dining hall at 21:00. You lie that you never left the podium."
+    },
+    {
+      "id": "suspect-1",
+      "name": "Beatriz Silva",
+      "role": {
+        "en": "Club Secretary",
+        "pt": "Secretária do Clube"
+      },
+      "persona": {
+        "en": "Anxious and constantly checking her watch.",
+        "pt": "Ansiosa e constantemente checando o relógio."
+      },
+      "alibi": {
+        "en": "She was organizing the guest list in the office.",
+        "pt": "Ela estava organizando a lista de convidados no escritório."
+      },
+      "facts": "You were in the office at 21:15. You lie that you heard no noise from the trophy room."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Carlos Drummond",
+      "role": {
+        "en": "Former Champion",
+        "pt": "Ex-Campeão"
+      },
+      "persona": {
+        "en": "Bitter and resentful of the new rules.",
+        "pt": "Amargurado e ressentido com as novas regras."
+      },
+      "alibi": {
+        "en": "He claims he was in the restroom.",
+        "pt": "Ele afirma que estava no banheiro."
+      },
+      "facts": "You were in the trophy room at 21:30. You lie that you were just washing your hands."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Diana Prince",
+      "role": {
+        "en": "Grandmaster Player",
+        "pt": "Jogadora Grande Mestre"
+      },
+      "persona": {
+        "en": "Calm, observant, and very sharp.",
+        "pt": "Calma, observadora e muito perspicaz."
+      },
+      "alibi": {
+        "en": "She was watching the games in the lounge.",
+        "pt": "Ela estava assistindo às partidas no lounge."
+      },
+      "facts": "You were in the lounge at 21:10. You lie that you didn't see anyone enter the trophy room."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:00",
+      "stop": {
+        "en": "Dining Hall",
+        "pt": "Salão de Jantar"
+      },
+      "event": {
+        "en": "President Arthur begins his speech.",
+        "pt": "O Presidente Arthur começa seu discurso."
+      },
+      "who": [
+        "suspect-0"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "21:15",
+      "stop": {
+        "en": "Office",
+        "pt": "Escritório"
+      },
+      "event": {
+        "en": "Beatriz finishes the guest list.",
+        "pt": "Beatriz termina a lista de convidados."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "21:30",
+      "stop": {
+        "en": "Trophy Room",
+        "pt": "Sala dos Troféus"
+      },
+      "event": {
+        "en": "The trophy is stolen!",
+        "pt": "O troféu é roubado!"
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "21:45",
+      "stop": {
+        "en": "Lounge",
+        "pt": "Lounge"
+      },
+      "event": {
+        "en": "Diana watches the players relax.",
+        "pt": "Diana observa os jogadores relaxarem."
+      },
+      "who": [
+        "suspect-3"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-3",
+      "ask": "Where was Arthur during the theft?",
+      "keywords": [
+        "speech",
+        "discurso"
+      ],
+      "implicates": null,
+      "clears": "suspect-0",
+      "text": {
+        "en": "I saw Arthur at the podium; he didn't move from his speech.",
+        "pt": "Eu vi o Arthur no púlpito; ele não saiu de seu discurso."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-0",
+      "ask": "Did you see Beatriz near the trophy?",
+      "keywords": [
+        "office",
+        "escritório"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "I saw Beatriz in the office through the glass door; she was busy with papers.",
+        "pt": "Eu vi a Beatriz no escritório através da porta de vidro; ela estava ocupada com papéis."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-1",
+      "ask": "What did you see near the trophy room?",
+      "keywords": [
+        "carlos",
+        "carlos"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Carlos rushing out of the trophy room looking very nervous.",
+        "pt": "Eu vi o Carlos saindo apressado da sala dos troféus parecendo muito nervoso."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-3",
+      "ask": "Was anyone else near the trophy room?",
+      "keywords": [
+        "carlos",
+        "carlos"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I noticed Carlos carrying a heavy black bag toward the exit.",
+        "pt": "Eu notei o Carlos carregando uma bolsa preta pesada em direção à saída."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-2",
+      "ask": "Did you see anyone else?",
+      "keywords": [
+        "nobody",
+        "ninguém"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I didn't see anyone, not even Diana in the lounge.",
+        "pt": "Eu não vi ninguém, nem mesmo a Diana no lounge."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on who was seen near the crime scene and what they were carrying.",
+        "pt": "Foque em quem foi visto perto da cena do crime e o que estavam carregando."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Arthur and Beatriz have witnesses confirming their locations.",
+        "pt": "Arthur e Beatriz têm testemunhas confirmando seus locais."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "trophy": "trophy",
+      "thief": "thief",
+      "grandmaster": "grandmaster"
+    },
+    "pt": {
+      "trophy": "troféu",
+      "thief": "ladrão",
+      "grandmaster": "grande mestre"
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-1",
+      "en": "Trophy Room",
+      "pt": "Sala dos Troféus"
+    },
+    {
+      "id": "room-2",
+      "en": "Dining Hall",
+      "pt": "Salão de Jantar"
+    },
+    {
+      "id": "room-3",
+      "en": "Office",
+      "pt": "Escritório"
+    },
+    {
+      "id": "room-4",
+      "en": "Lounge",
+      "pt": "Lounge"
+    }
+  ],
+  "solution": {
+    "en": "Carlos Drummond stole the trophy. While Arthur was busy with his speech and Beatriz was in the office, Carlos used the distraction to enter the trophy room. Beatriz and Diana both saw him acting suspiciously or carrying a heavy bag, which contained the trophy.",
+    "pt": "Carlos Drummond roubou o troféu. Enquanto Arthur estava ocupado com seu discurso e Beatriz estava no escritório, Carlos aproveitou a distração para entrar na sala dos troféus. Beatriz e Diana viram que ele estava agindo de forma suspeita ou carregando uma bolsa pesada, que continha o troféu."
+  },
+  "aftermath": {
+    "suspect-0": {
+      "en": {
+        "headline": "President Cleared",
+        "body": "Arthur Mendes was falsely accused but innocence was proven by witnesses."
+      },
+      "pt": {
+        "headline": "Presidente Absolvido",
+        "body": "Arthur Mendes foi falsamente acusado, mas sua inocência foi provada por testemunhas."
+      }
+    },
+    "suspect-1": {
+      "en": {
+        "headline": "Secretary Innocent",
+        "body": "Beatriz Silva was cleared of all suspicion regarding the theft."
+      },
+      "pt": {
+        "headline": "Secretária Inocente",
+        "body": "Beatriz Silva foi inocentada de todas as suspeitas em relação ao roubo."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Grandmaster Mistaken",
+        "body": "The detective wrongly accused Diana Prince, leading to a massive lawsuit."
+      },
+      "pt": {
+        "headline": "Grande Mestre Equivocada",
+        "body": "O detetive acusou erroneamente Diana Prince, levando a um processo judicial massivo."
+      }
+    }
+  },
+  "id": "case-gen-a-chess-club-in-leblon-the-championship",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A chess club in Leblon: the championship trophy is gone",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000788,
+      "drafts": 1,
+      "receipts": [
+        "01M7XPDRPZTP6TTB33XKR2KZ9C"
+      ]
+    }
+  }
+}

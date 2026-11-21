@@ -1,0 +1,318 @@
+{
+  "title": {
+    "en": "The Stolen Crust of Santa Teresa",
+    "pt": "A Crosta Roubada de Santa Teresa"
+  },
+  "intro": {
+    "en": "In the heart of Santa Teresa, the legendary 'Pão de Ouro' bakery is in chaos. The master recipe book has been vandalized, its most precious pages torn out. Only four people were in the bakery during the afternoon rush.",
+    "pt": "No coração de Santa Teresa, a lendária padaria 'Pão de Ouro' está em caos. O livro de receitas mestre foi vandalizado, com suas páginas mais preciosas arrancadas. Apenas quatro pessoas estavam na padaria durante o movimento da tarde."
+  },
+  "culprit": "chef-marcos",
+  "suspects": [
+    {
+      "id": "chef-marcos",
+      "name": "Marcos",
+      "role": {
+        "en": "Head Baker",
+        "pt": "Padeiro Principal"
+      },
+      "persona": {
+        "en": "Ambitious and stressed.",
+        "pt": "Ambicioso e estressado."
+      },
+      "alibi": {
+        "en": "I was in the pantry organizing flour bags.",
+        "pt": "Eu estava na despensa organizando sacos de farinha."
+      },
+      "facts": "You were in the kitchen at 16:15. You lie that you were in the pantry, but you were actually tearing the pages to sell to a rival bakery."
+    },
+    {
+      "id": "waitress-clara",
+      "name": "Clara",
+      "role": {
+        "en": "Server",
+        "pt": "Atendente"
+      },
+      "persona": {
+        "en": "Observant and gossip-loving.",
+        "pt": "Observadora e fofoqueira."
+      },
+      "alibi": {
+        "en": "I was serving coffee at the front tables.",
+        "pt": "Eu estava servindo café nas mesas da frente."
+      },
+      "facts": "You saw a shadow near the kitchen at 16:15. You tell the truth about seeing someone near the kitchen."
+    },
+    {
+      "id": "delivery-joao",
+      "name": "João",
+      "role": {
+        "en": "Delivery Driver",
+        "pt": "Entregador"
+      },
+      "persona": {
+        "en": "Always in a hurry.",
+        "pt": "Sempre com pressa."
+      },
+      "alibi": {
+        "en": "I was unloading crates at the back entrance.",
+        "pt": "Eu estava descarregando caixas na entrada dos fundos."
+      },
+      "facts": "You were actually waiting for your phone to charge in the hallway. You tell the truth about being in the hallway."
+    },
+    {
+      "id": "owner-elisa",
+      "name": "Elisa",
+      "role": {
+        "en": "Bakery Owner",
+        "pt": "Dona da Padaria"
+      },
+      "persona": {
+        "en": "Protective and strict.",
+        "pt": "Protetora e rigorosa."
+      },
+      "alibi": {
+        "en": "I was in my office doing the accounts.",
+        "pt": "Eu estava no meu escritório fazendo as contas."
+      },
+      "facts": "You heard a loud sound of paper ripping from your office. You tell the truth about the sound."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "16:00",
+      "stop": {
+        "en": "Main Counter",
+        "pt": "Balcão Principal"
+      },
+      "event": {
+        "en": "The afternoon rush begins.",
+        "pt": "O movimento da tarde começa."
+      },
+      "who": [
+        "waitress-clara",
+        "chef-marcos",
+        "owner-elisa"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "16:10",
+      "stop": {
+        "en": "Back Entrance",
+        "pt": "Entrada dos Fundos"
+      },
+      "event": {
+        "en": "Delivery crates arrive.",
+        "pt": "As caixas da entrega chegam."
+      },
+      "who": [
+        "delivery-joao"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "16:15",
+      "stop": {
+        "en": "Kitchen",
+        "pt": "Cozinha"
+      },
+      "event": {
+        "en": "The recipe book is attacked!",
+        "pt": "O livro de receitas é atacado!"
+      },
+      "who": [
+        "chef-marcos"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "16:30",
+      "stop": {
+        "en": "Main Counter",
+        "pt": "Balcão Principal"
+      },
+      "event": {
+        "en": "Elisa discovers the theft.",
+        "pt": "Elisa descobre o roubo."
+      },
+      "who": [
+        "owner-elisa",
+        "waitress-clara"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "waitress-clara",
+      "ask": "Where were you at 16:15?",
+      "keywords": [
+        "front",
+        "coffee",
+        "frente",
+        "café"
+      ],
+      "implicates": null,
+      "clears": "delivery-joao",
+      "text": {
+        "en": "I was at the front tables serving coffee, and I saw João in the hallway, not near the kitchen.",
+        "pt": "Eu estava nas mesas da frente servindo café, e vi o João no corredor, não perto da cozinha."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "owner-elisa",
+      "ask": "Did you hear anything?",
+      "keywords": [
+        "sound",
+        "ripping",
+        "som",
+        "rasgar"
+      ],
+      "implicates": "chef-marcos",
+      "clears": null,
+      "text": {
+        "en": "I was in my office and heard a loud sound of paper ripping coming from the kitchen right when Marcos said he was in the pantry.",
+        "pt": "Eu estava no meu escritório e ouvi um som alto de papel rasgando vindo da cozinha bem quando o Marcos disse que estava na despensa."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "delivery-joao",
+      "ask": "Did you see anything suspicious?",
+      "keywords": [
+        "marcos",
+        "kitchen",
+        "marcos",
+        "cozinha"
+      ],
+      "implicates": "chef-marcos",
+      "clears": "waitress-clara",
+      "text": {
+        "en": "I didn't see much, but I saw Marcos running out of the kitchen looking very nervous just before the noise.",
+        "pt": "Não vi muito, mas vi o Marcos saindo correndo da cozinha parecendo muito nervoso logo antes do barulho."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "chef-marcos",
+      "ask": "Where were you?",
+      "keywords": [
+        "pantry",
+        "flour",
+        "despensa",
+        "farinha"
+      ],
+      "implicates": null,
+      "clears": "owner-elisa",
+      "text": {
+        "en": "I was in the pantry with the flour, and I heard Elisa in her office as usual.",
+        "pt": "Eu estava na despensa com a farinha, e ouvi a Elisa no escritório como de costume."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Compare the locations: Marcos claims to be in the pantry, but the noise came from the kitchen.",
+        "pt": "Compare as localizações: Marcos afirma estar na despensa, mas o barulho veio da cozinha."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Two witnesses saw or heard something that contradicts Marcos's location.",
+        "pt": "Duas testemunhas viram ou ouviram algo que contradiz a localização de Marcos."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "recipe": "Recipe",
+      "torn": "Torn",
+      "pantry": "Pantry"
+    },
+    "pt": {
+      "recipe": "Receita",
+      "torn": "Rasgado",
+      "pantry": "Despensa"
+    }
+  },
+  "rooms": [
+    {
+      "id": "kitchen",
+      "en": "Kitchen",
+      "pt": "Cozinha"
+    },
+    {
+      "id": "office",
+      "en": "Office",
+      "pt": "Escritório"
+    },
+    {
+      "id": "hallway",
+      "en": "Hallway",
+      "pt": "Corredor"
+    },
+    {
+      "id": "pantry",
+      "en": "Pantry",
+      "pt": "Despensa"
+    }
+  ],
+  "solution": {
+    "en": "Marcos is the culprit. He claimed to be in the pantry, but Elisa heard the sound of paper ripping coming from the kitchen at 16:15, the exact time the crime occurred. Furthermore, João saw him running out of the kitchen looking nervous, proving he was not in the pantry as he claimed.",
+    "pt": "Marcos é o culpado. Ele alegou estar na despensa, mas Elisa ouviu o som de papel rasgando vindo da cozinha às 16:15, o momento exato em que o crime ocorreu. Além disso, João o viu saindo correndo da cozinha parecendo nervoso, provando que ele não estava na despensa como afirmou."
+  },
+  "aftermath": {
+    "waitress-clara": {
+      "en": {
+        "headline": "Clara Cleared!",
+        "body": "The waitress was simply doing her job. She is innocent."
+      },
+      "pt": {
+        "headline": "Clara inocentada!",
+        "body": "A atendente estava apenas fazendo seu trabalho. Ela é inocente."
+      }
+    },
+    "delivery-joao": {
+      "en": {
+        "headline": "Driver Wrongly Accused",
+        "body": "The delivery man is devastated after being wrongly accused of the theft."
+      },
+      "pt": {
+        "headline": "Entregador Injustamente Acusado",
+        "body": "O entregador está devastado após ser acusado injustamente do roubo."
+      }
+    },
+    "owner-elisa": {
+      "en": {
+        "headline": "Owner Under Suspicion",
+        "body": "The investigation turned towards the owner, but it was a mistake."
+      },
+      "pt": {
+        "headline": "Dona Sob Suspeita",
+        "body": "A investigação voltou-se contra a dona, mas foi um erro."
+      }
+    }
+  },
+  "id": "case-gen-a-bakery-in-santa-teresa-the-secret-reci",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A bakery in Santa Teresa: the secret recipe book is torn out",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000796,
+      "drafts": 1,
+      "receipts": [
+        "01M7XPA0Z94F2GMG432007X6W6"
+      ]
+    }
+  }
+}

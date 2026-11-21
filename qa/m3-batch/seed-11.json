@@ -1,0 +1,344 @@
+{
+  "title": {
+    "en": "The Missing Lucky Boots",
+    "pt": "As Botas da Sorte Desaparecidas"
+  },
+  "intro": {
+    "en": "The championship final is in thirty minutes, but the captain's lucky boots have vanished from his locker! The locker room is a mess, and tensions are high.",
+    "pt": "A final do campeonato é em trinta minutos, mas as botas da sorte do capitão desapareceram do armário! O vestiário está um caos e os ânimos estão exaltados."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Marco 'The Wall' Silva",
+      "role": {
+        "en": "Goalkeeper",
+        "pt": "Goleiro"
+      },
+      "persona": {
+        "en": "Stoic and serious.",
+        "pt": "Estoico e sério."
+      },
+      "alibi": {
+        "en": "I was in the showers.",
+        "pt": "Eu estava no chuveiro."
+      },
+      "facts": "You were in the showers at 14:45. You saw the coach entering the locker room alone."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Leo 'Flash' Rossi",
+      "role": {
+        "en": "Striker",
+        "pt": "Atacante"
+      },
+      "persona": {
+        "en": "Arrogant and impatient.",
+        "pt": "Arrogante e impaciente."
+      },
+      "alibi": {
+        "en": "I was tying my laces in the hallway.",
+        "pt": "Eu estava amarrando meus cadarços no corredor."
+      },
+      "facts": "You stole the boots because you were jealous of the captain's fame. You hid them in the equipment bin at 14:50."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Coach Miller",
+      "role": {
+        "en": "Head Coach",
+        "pt": "Treinador"
+      },
+      "persona": {
+        "en": "Stressed and anxious.",
+        "pt": "Estressado e ansioso."
+      },
+      "alibi": {
+        "en": "I was checking the tactics board.",
+        "pt": "Eu estava checando o quadro tático."
+      },
+      "facts": "You were in the locker room at 14:40. You saw Leo Rossi running away from the lockers looking guilty."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Sam 'Kit' Jones",
+      "role": {
+        "en": "Equipment Manager",
+        "pt": "Roupeiro"
+      },
+      "persona": {
+        "en": "Nervous and clumsy.",
+        "pt": "Nervoso e desastrado."
+      },
+      "alibi": {
+        "en": "I was organizing the balls outside.",
+        "pt": "Eu estava organizando as bolas lá fora."
+      },
+      "facts": "You saw Marco Silva in the showers at 14:45. You also saw a muddy footprint near the equipment bin."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "14:30",
+      "stop": {
+        "en": "Locker Room",
+        "pt": "Vestiário"
+      },
+      "event": {
+        "en": "The captain leaves his boots in his locker.",
+        "pt": "O capitão deixa suas botas no armário."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "14:40",
+      "stop": {
+        "en": "Locker Room",
+        "pt": "Vestiário"
+      },
+      "event": {
+        "en": "Coach enters the room to check tactics.",
+        "pt": "O treinador entra na sala para checar táticas."
+      },
+      "who": [
+        "suspect-3"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "14:45",
+      "stop": {
+        "en": "Showers",
+        "pt": "Chuveiros"
+      },
+      "event": {
+        "en": "Marco is seen taking a shower.",
+        "pt": "Marco é visto tomando banho."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t4",
+      "time": "14:50",
+      "stop": {
+        "en": "Locker Room",
+        "pt": "Vestiário"
+      },
+      "event": {
+        "en": "The boots are stolen from the locker!",
+        "pt": "As botas são roubadas do armário!"
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t5",
+      "time": "14:55",
+      "stop": {
+        "en": "Hallway",
+        "pt": "Corredor"
+      },
+      "event": {
+        "en": "Leo is spotted in the hallway.",
+        "pt": "Leo é visto no corredor."
+      },
+      "who": [
+        "suspect-2"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-3",
+      "ask": "Where were you around 14:45?",
+      "keywords": [
+        "leo",
+        "running",
+        "suspicious"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I was by the tactics board, and I saw Leo Rossi running away from the lockers looking very suspicious!",
+        "pt": "Eu estava perto do quadro tático e vi o Leo Rossi correndo dos armários com uma cara muito suspeita!"
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Did you see anyone in the showers?",
+      "keywords": [
+        "marco",
+        "showers"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "Yes, I saw Marco Silva in the showers at 14:45. He couldn't have done it.",
+        "pt": "Sim, eu vi o Marco Silva nos chuveiros às 14:45. Ele não poderia ter feito isso."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-1",
+      "ask": "What did you see before your shower?",
+      "keywords": [
+        "coach",
+        "miller"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I saw Coach Miller checking the tactics board earlier; he was nowhere near the captain's locker.",
+        "pt": "Eu vi o Treinador Miller checando o quadro tático mais cedo; ele não estava nem perto do armário do capitão."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-4",
+      "ask": "Did you see anything suspicious near the storage?",
+      "keywords": [
+        "leo",
+        "jacket",
+        "bin"
+      ],
+      "implicates": "suspect-2",
+      "clears": "suspect-4",
+      "text": {
+        "en": "I saw Leo Rossi running towards the equipment bin with something hidden under his jacket!",
+        "pt": "Eu vi o Leo Rossi correndo para o cesto de equipamentos com algo escondido debaixo da jaqueta!"
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-2",
+      "ask": "Where was Sam Jones?",
+      "keywords": [
+        "sam",
+        "balls"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I saw Sam Jones outside organizing the balls the whole time.",
+        "pt": "Eu vi o Sam Jones lá fora organizando as bolas o tempo todo."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on who was seen fleeing the scene.",
+        "pt": "Foque em quem foi visto fugindo da cena."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The coach and the goalkeeper have solid alibis provided by others.",
+        "pt": "O treinador e o goleiro têm álibis sólidos fornecidos por outros."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "locker": "armário",
+      "striker": "atacante",
+      "equipment bin": "cesto de equipamentos"
+    },
+    "pt": {
+      "locker": "armário",
+      "striker": "atacante",
+      "equipment bin": "cesto de equipamentos"
+    }
+  },
+  "rooms": [
+    {
+      "id": "rm-1",
+      "en": "Locker Room",
+      "pt": "Vestiário"
+    },
+    {
+      "id": "rm-2",
+      "en": "Showers",
+      "pt": "Chuveiros"
+    },
+    {
+      "id": "rm-3",
+      "en": "Hallway",
+      "pt": "Corredor"
+    },
+    {
+      "id": "rm-4",
+      "en": "Equipment Storage",
+      "pt": "Depósito de Equipamentos"
+    }
+  ],
+  "solution": {
+    "en": "Leo Rossi stole the boots out of jealousy. Coach Miller saw him running from the lockers, and Sam saw him hiding something near the equipment bin. Marco and the Coach were cleared by witnesses.",
+    "pt": "Leo Rossi roubou as botas por inveja. O treinador Miller o viu correndo dos armários, e Sam o viu escondendo algo perto do cesto de equipamentos. Marco e o Treinador foram inocentados por testemunhas."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Goalkeeper Wrongly Accused!",
+        "body": "The police arrested the goalkeeper, but the real thief escaped. A disaster for the team."
+      },
+      "pt": {
+        "headline": "Goleiro Injustamente Acusado!",
+        "body": "A polícia prendeu o goleiro, mas o verdadeiro ladrão escapou. Um desastre para o time."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Coach Under Fire!",
+        "body": "The coach was blamed for the theft. The team's morale has hit rock bottom."
+      },
+      "pt": {
+        "headline": "Treinador Sob Fogo!",
+        "body": "O treinador foi culpado pelo roubo. O moral do time atingiu o fundo do poço."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Equipment Manager Arrested!",
+        "body": "In a shocking turn, the man in charge of gear was blamed for the missing boots."
+      },
+      "pt": {
+        "headline": "Roupeiro Preso!",
+        "body": "Em uma reviravolta chocante, o homem responsável pelo material foi culpado pelas botas sumidas."
+      }
+    }
+  },
+  "id": "case-gen-a-football-stadium-locker-room-the-capta",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A football stadium locker room: the captain's lucky boots vanish before the final",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.003008,
+      "drafts": 3,
+      "receipts": [
+        "01M7XPA2E6HH0QA3Q1JNGR36TJ",
+        "01M7XPB8SVD4QWXWS8JV3K8D7M",
+        "01M7XPCV9AJKXK84R8ZE032F1H"
+      ]
+    }
+  }
+}

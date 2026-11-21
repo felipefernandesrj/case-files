@@ -1,0 +1,345 @@
+{
+  "title": {
+    "en": "Silence in Barra",
+    "pt": "Silêncio na Barra"
+  },
+  "intro": {
+    "en": "The most anticipated live broadcast of the year at Barra FM has been ruined. Minutes before the host went on air, the master tape was erased. The studio was locked, and only four people had access to the control room.",
+    "pt": "A transmissão ao vivo mais aguardada do ano na Barra FM foi arruinada. Minutos antes de o apresentador entrar no ar, a fita mestre foi apagada. O estúdio estava trancado e apenas quatro pessoas tinham acesso à sala de controle."
+  },
+  "culprit": "tech-guy",
+  "suspects": [
+    {
+      "id": "host-julian",
+      "name": "Julian",
+      "role": {
+        "en": "Radio Host",
+        "pt": "Apresentador de Rádio"
+      },
+      "persona": {
+        "en": "Arrogant and obsessed with ratings.",
+        "pt": "Arrogante e obcecado por audiência."
+      },
+      "alibi": {
+        "en": "I was in the makeup room preparing my lines.",
+        "pt": "Eu estava na sala de maquiagem preparando meu roteiro."
+      },
+      "facts": "You were in the hallway at 21:50. You lie that you were in the makeup room the whole time to avoid being seen near the studio."
+    },
+    {
+      "id": "tech-guy",
+      "name": "Lucas",
+      "role": {
+        "en": "Sound Engineer",
+        "pt": "Engenheiro de Som"
+      },
+      "persona": {
+        "en": "Quiet, overworked, and recently passed over for promotion.",
+        "pt": "Quieto, sobrecarregado e recentemente preterido em uma promoção."
+      },
+      "alibi": {
+        "en": "I was checking the transmitter levels in the basement.",
+        "pt": "Eu estava verificando os níveis do transmissor no porão."
+      },
+      "facts": "You were in the control room at 21:55. You lie that you were in the basement to hide the fact that you deleted the tape out of spite."
+    },
+    {
+      "id": "producer-mara",
+      "name": "Mara",
+      "role": {
+        "en": "Producer",
+        "pt": "Produtora"
+      },
+      "persona": {
+        "en": "Anxious and hyper-organized.",
+        "pt": "Ansiosa e hiper-organizada."
+      },
+      "alibi": {
+        "en": "I was in the lounge drinking coffee.",
+        "pt": "Eu estava na sala de descanso tomando café."
+      },
+      "facts": "You saw Lucas entering the studio via the side door at 21:50. You lie that you were alone in the lounge to avoid being a witness."
+    },
+    {
+      "id": "intern-leo",
+      "name": "Leo",
+      "role": {
+        "en": "Intern",
+        "pt": "Estagiário"
+      },
+      "persona": {
+        "en": "Eager to please but clumsy.",
+        "pt": "Ansioso para agradar, mas desastrado."
+      },
+      "alibi": {
+        "en": "I was organizing files in the archive room.",
+        "pt": "Eu estava organizando arquivos na sala de arquivos."
+      },
+      "facts": "You saw Julian pacing nervously in the hallway near the studio at 21:50. You lie that you were in the archives to avoid getting involved in drama."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:30",
+      "stop": {
+        "en": "Lounge",
+        "pt": "Sala de Descanso"
+      },
+      "event": {
+        "en": "Staff arrives for the pre-show meeting.",
+        "pt": "A equipe chega para a reunião pré-show."
+      },
+      "who": [
+        "host-julian",
+        "tech-guy",
+        "producer-mara",
+        "intern-leo"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "21:45",
+      "stop": {
+        "en": "Archive Room",
+        "pt": "Sala de Arquivos"
+      },
+      "event": {
+        "en": "The intern begins organizing old tapes.",
+        "pt": "O estagiário começa a organizar fitas antigas."
+      },
+      "who": [
+        "intern-leo"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "21:55",
+      "stop": {
+        "en": "Control Room",
+        "pt": "Sala de Controle"
+      },
+      "event": {
+        "en": "The master tape is wiped clean.",
+        "pt": "A fita mestre é apagada completamente."
+      },
+      "who": [
+        "tech-guy"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "22:05",
+      "stop": {
+        "en": "Studio",
+        "pt": "Estúdio"
+      },
+      "event": {
+        "en": "The host enters to find silence.",
+        "pt": "O apresentador entra e encontra apenas silêncio."
+      },
+      "who": [
+        "host-julian"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "intern-leo",
+      "ask": "Where was Julian before the show?",
+      "keywords": [
+        "julian",
+        "hallway",
+        "corredor"
+      ],
+      "implicates": null,
+      "clears": "host-julian",
+      "text": {
+        "en": "I saw Julian in the hallway near the studio around 21:50, so he wasn't hiding anything in makeup.",
+        "pt": "Eu vi o Julian no corredor perto do estúdio por volta de 21:50, então ele não estava escondido na maquiagem."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "producer-mara",
+      "ask": "Did you see anyone near the studio?",
+      "keywords": [
+        "lucas",
+        "studio",
+        "lucas"
+      ],
+      "implicates": "tech-guy",
+      "clears": null,
+      "text": {
+        "en": "I saw Lucas sneaking into the studio through the side door at 21:50.",
+        "pt": "Eu vi o Lucas entrando furtivamente no estúdio pela porta lateral às 21:50."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "host-julian",
+      "ask": "What did you notice about the equipment?",
+      "keywords": [
+        "lucas",
+        "engineer",
+        "logs"
+      ],
+      "implicates": "tech-guy",
+      "clears": null,
+      "text": {
+        "en": "Only Lucas has the administrative override code to wipe the master tape.",
+        "pt": "Apenas o Lucas tem o código de sobreposição administrativa para apagar a fita mestre."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "tech-guy",
+      "ask": "Where were you during the incident?",
+      "keywords": [
+        "basement",
+        "transmitter",
+        "porão"
+      ],
+      "implicates": null,
+      "clears": "producer-mara",
+      "text": {
+        "en": "I didn't see Mara in the lounge; she was actually quite quiet in her corner, just as she said.",
+        "pt": "Eu não vi a Mara na sala de descanso; ela estava bem quietinha no canto dela, exatamente como ela disse."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "intern-leo",
+      "ask": "Did you see the producer?",
+      "keywords": [
+        "mara",
+        "lounge",
+        "mara"
+      ],
+      "implicates": null,
+      "clears": "producer-mara",
+      "text": {
+        "en": "I passed the lounge at 21:50 and Mara was definitely there having coffee.",
+        "pt": "Passei pela sala de descanso às 21:50 e a Mara definitivamente estava lá tomando café."
+      }
+    },
+    {
+      "id": "c6",
+      "from": "host-julian",
+      "ask": "Was the intern in the archives?",
+      "keywords": [
+        "leo",
+        "archive",
+        "estagiário"
+      ],
+      "implicates": null,
+      "clears": "intern-leo",
+      "text": {
+        "en": "I saw Leo heading toward the archives earlier, so he was likely there.",
+        "pt": "Eu vi o Leo indo em direção aos arquivos mais cedo, então ele provavelmente estava lá."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Check the alibis. Someone is lying about their location at 21:50.",
+        "pt": "Verifique os álibis. Alguém está mentindo sobre sua localização às 21:50."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The crime happened in the Control Room. Who had the technical access and was seen near it?",
+        "pt": "O crime aconteceu na Sala de Controle. Quem tinha o acesso técnico e foi visto perto dela?"
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "master tape": "The main recording",
+      "wipe": "To erase"
+    },
+    "pt": {
+      "master tape": "Fita mestre",
+      "wipe": "Apagar"
+    }
+  },
+  "rooms": [
+    {
+      "id": "control-room",
+      "en": "Control Room",
+      "pt": "Sala de Controle"
+    },
+    {
+      "id": "lounge",
+      "en": "Lounge",
+      "pt": "Sala de Descanso"
+    },
+    {
+      "id": "archive-room",
+      "en": "Archive Room",
+      "pt": "Sala de Arquivos"
+    },
+    {
+      "id": "studio",
+      "en": "Studio",
+      "pt": "Estúdio"
+    }
+  ],
+  "solution": {
+    "en": "Julian lied about being in makeup, and Mara lied about being alone. However, the evidence points to Lucas. Mara saw him entering the studio at 21:50, and Julian confirmed that only Lucas had the code to wipe the tape. Lucas's claim of being in the basement is debunked by his presence at the studio.",
+    "pt": "Julian mentiu sobre estar na maquiagem, e Mara mentiu sobre estar sozinha. No entanto, as evidências apontam para Lucas. Mara o viu entrando no estúdio às 21:50, e Julian confirmou que apenas Lucas tinha o código para apagar a fita. A afirmação de Lucas de que estava no porão é desmentida por sua presença no estúdio."
+  },
+  "aftermath": {
+    "host-julian": {
+      "en": {
+        "headline": "Host's Ego Leads to Chaos",
+        "body": "Julian's lies about his whereabouts during the blackout have sparked a scandal at Barra FM."
+      },
+      "pt": {
+        "headline": "Ego de Apresentador Gera Caos",
+        "body": "As mentiras de Julian sobre seu paradeiro durante o apagão desencadearam um escândalo na Barra FM."
+      }
+    },
+    "producer-mara": {
+      "en": {
+        "headline": "Producer's Silence Backfires",
+        "body": "Mara faces scrutiny after failing to report seeing the culprit in real-time."
+      },
+      "pt": {
+        "headline": "Silêncio da Produtora Surta",
+        "body": "Mara enfrenta escrutínio após não relatar ter visto o culpado em tempo real."
+      }
+    },
+    "intern-leo": {
+      "en": {
+        "headline": "Intern Blamed for Negligence",
+        "body": "The rookie intern is under fire for not noticing the suspicious activity in the halls."
+      },
+      "pt": {
+        "headline": "Estagiário Culpado por Negligência",
+        "body": "O estagiário novato está sob fogo por não notar a atividade suspeita nos corredores."
+      }
+    }
+  },
+  "id": "case-gen-a-radio-station-in-barra-the-live-show-t",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A radio station in Barra: the live show tape is erased minutes before air",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.002005,
+      "drafts": 2,
+      "receipts": [
+        "01M7XPD485MRYYT5ZR4FP2CVHK",
+        "01M7XPER8J761GWB7Q9Q6Y8SVR"
+      ]
+    }
+  }
+}

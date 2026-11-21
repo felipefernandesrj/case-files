@@ -1,0 +1,327 @@
+{
+  "title": {
+    "en": "The Paraty Script Theft",
+    "pt": "O Roubo do Roteiro em Paraty"
+  },
+  "intro": {
+    "en": "On a historic film set in Paraty, the final scene's script has vanished. Without it, the production collapses. The theft happened during the sunset break.",
+    "pt": "Em um set de filmagem histórico em Paraty, o roteiro da cena final desapareceu. Sem ele, a produção colapsa. O roubo ocorreu durante o intervalo do pôr do sol."
+  },
+  "culprit": "director-marcos",
+  "suspects": [
+    {
+      "id": "actress-julia",
+      "name": "Julia",
+      "role": {
+        "en": "Lead Actress",
+        "pt": "Atriz Protagonista"
+      },
+      "persona": {
+        "en": "Divas and perfectionists.",
+        "pt": "Divas e perfeccionistas."
+      },
+      "alibi": {
+        "en": "She was practicing her lines in the garden.",
+        "pt": "Ela estava praticando suas falas no jardim."
+      },
+      "facts": "You were in the garden at 18:00. You lie that you saw nobody near the trailer."
+    },
+    {
+      "id": "makeup-art-beto",
+      "name": "Beto",
+      "role": {
+        "en": "Makeup Artist",
+        "pt": "Maquiador"
+      },
+      "persona": {
+        "en": "Observant and quiet.",
+        "pt": "Observador e silencioso."
+      },
+      "alibi": {
+        "en": "He was cleaning his brushes in the dressing room.",
+        "pt": "Ele estava limpando seus pincéis no camarim."
+      },
+      "facts": "You were in the dressing room at 18:00. You lie that you didn't hear any loud shouting."
+    },
+    {
+      "id": "director-marcos",
+      "name": "Marcos",
+      "role": {
+        "en": "Director",
+        "pt": "Diretor"
+      },
+      "persona": {
+        "en": "Stressed and demanding.",
+        "pt": "Estressado e exigente."
+      },
+      "alibi": {
+        "en": "He claims he was checking the lighting equipment.",
+        "pt": "Ele afirma que estava checando o equipamento de iluminação."
+      },
+      "facts": "You stole the script to delay the shoot because you hate the ending. You lie that you were at the lighting rig."
+    },
+    {
+      "id": "cameraman-leo",
+      "name": "Leo",
+      "role": {
+        "en": "Cameraman",
+        "pt": "Câmera"
+      },
+      "persona": {
+        "en": "Technical and detached.",
+        "pt": "Técnico e desapegado."
+      },
+      "alibi": {
+        "en": "He was adjusting the lenses on his tripod.",
+        "pt": "Ele estava ajustando as lentes no seu tripé."
+      },
+      "facts": "You were by the tripod at 18:00. You lie that the director was nowhere to be seen."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "17:45",
+      "stop": {
+        "en": "Production Trailer",
+        "pt": "Trailer de Produção"
+      },
+      "event": {
+        "en": "The script is last seen on the desk.",
+        "pt": "O roteiro é visto pela última vez na mesa."
+      },
+      "who": [
+        "actress-julia"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "18:00",
+      "stop": {
+        "en": "Production Trailer",
+        "pt": "Trailer de Produção"
+      },
+      "event": {
+        "en": "The script is discovered missing!",
+        "pt": "O roteiro é descoberto como desaparecido!"
+      },
+      "who": [
+        "director-marcos"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t3",
+      "time": "18:10",
+      "stop": {
+        "en": "Garden",
+        "pt": "Jardim"
+      },
+      "event": {
+        "en": "Julia finishes her rehearsal.",
+        "pt": "Julia termina seu ensaio."
+      },
+      "who": [
+        "actress-julia"
+      ]
+    },
+    {
+      "id": "t4",
+      "time": "18:15",
+      "stop": {
+        "en": "Dressing Room",
+        "pt": "Camarim"
+      },
+      "event": {
+        "en": "Beto tidies up his station.",
+        "pt": "Beto arruma sua estação de trabalho."
+      },
+      "who": [
+        "makeup-art-beto"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "actress-julia",
+      "ask": "Where was the director?",
+      "keywords": [
+        "director",
+        "marcos",
+        "diretor"
+      ],
+      "implicates": "director-marcos",
+      "clears": null,
+      "text": {
+        "en": "I saw Marcos running away from the trailer looking very nervous right before the break.",
+        "pt": "Eu vi o Marcos correndo do trailer parecendo muito nervoso logo antes do intervalo."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "cameraman-leo",
+      "ask": "Did you see Marcos?",
+      "keywords": [
+        "marcos",
+        "director",
+        "diretor"
+      ],
+      "implicates": "director-marcos",
+      "clears": null,
+      "text": {
+        "en": "I didn't see the director near the lights; I actually saw him heading towards the trailer.",
+        "pt": "Eu não vi o diretor perto das luzes; na verdade, eu o vi indo em direção ao trailer."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "makeup-art-beto",
+      "ask": "Was Julia in the garden?",
+      "keywords": [
+        "julia",
+        "garden",
+        "jardim"
+      ],
+      "implicates": null,
+      "clears": "actress-julia",
+      "text": {
+        "en": "Yes, Julia was definitely in the garden the whole time, I saw her through the window.",
+        "pt": "Sim, a Julia estava definitivamente no jardim o tempo todo, eu a vi pela janela."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "actress-julia",
+      "ask": "Where was Beto?",
+      "keywords": [
+        "beto",
+        "makeup",
+        "maquiagem"
+      ],
+      "implicates": null,
+      "clears": "makeup-art-beto",
+      "text": {
+        "en": "Beto was in the dressing room; I walked past it to get to the garden.",
+        "pt": "O Beto estava no camarim; eu passei por lá para ir ao jardim."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "makeup-art-beto",
+      "ask": "What about Leo?",
+      "keywords": [
+        "leo",
+        "camera",
+        "câmera"
+      ],
+      "implicates": null,
+      "clears": "cameraman-leo",
+      "text": {
+        "en": "Leo was busy with his tripod near the set, I could hear the clicking of his lenses.",
+        "pt": "O Leo estava ocupado com seu tripé perto do set, eu conseguia ouvir o clique das lentes dele."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Notice that the director's alibi is contradicted by two different people.",
+        "pt": "Note que o álibi do diretor é contradito por duas pessoas diferentes."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The director claimed to be at the lights, but Leo saw him near the trailer.",
+        "pt": "O diretor afirmou estar nas luzes, mas Leo o viu perto do trailer."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "script": "script",
+      "set": "film set",
+      "trailer": "production trailer"
+    },
+    "pt": {
+      "script": "roteiro",
+      "set": "set de filmagem",
+      "trailer": "trailer de produção"
+    }
+  },
+  "rooms": [
+    {
+      "id": "trailer",
+      "en": "Production Trailer",
+      "pt": "Trailer de Produção"
+    },
+    {
+      "id": "garden",
+      "en": "Garden",
+      "pt": "Jardim"
+    },
+    {
+      "id": "dressing-room",
+      "en": "Dressing Room",
+      "pt": "Camarim"
+    },
+    {
+      "id": "lighting-rig",
+      "en": "Lighting Rig",
+      "pt": "Equipamento de Iluminação"
+    }
+  ],
+  "solution": {
+    "en": "The director, Marcos, stole the script because he disagreed with the ending of the film. He lied about being at the lighting rig, but Julia saw him fleeing the trailer, and Leo confirmed he was not at the lights but heading for the scene of the crime.",
+    "pt": "O diretor, Marcos, roubou o roteiro porque discordava do final do filme. Ele mentiu sobre estar no equipamento de iluminação, mas Julia o viu fugindo do trailer, e Leo confirmou que ele não estava nas luzes, mas indo em direção à cena do crime."
+  },
+  "aftermath": {
+    "actress-julia": {
+      "en": {
+        "headline": "Diva Accused!",
+        "body": "The actress was wrongly blamed for the script theft, causing a scandal in Paraty."
+      },
+      "pt": {
+        "headline": "Diva Acusada!",
+        "body": "A atriz foi injustamente culpada pelo roubo do roteiro, causando um escândalo em Paraty."
+      }
+    },
+    "makeup-art-beto": {
+      "en": {
+        "headline": "Makeup Artist Under Fire",
+        "body": "Beto was accused of sabotage, but evidence suggests otherwise."
+      },
+      "pt": {
+        "headline": "Maquiador Sob Fogo",
+        "body": "Beto foi acusado de sabotagem, mas as evidências sugerem o contrário."
+      }
+    },
+    "cameraman-leo": {
+      "en": {
+        "headline": "Camera Sabotage?",
+        "body": "The cameraman faced investigation after the script went missing."
+      },
+      "pt": {
+        "headline": "Sabotagem de Câmera?",
+        "body": "O câmera enfrentou uma investigação após o roteiro desaparecer."
+      }
+    }
+  },
+  "id": "case-gen-a-film-set-in-paraty-the-lead-actor-s-sc",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A film set in Paraty: the lead actor's script goes missing before the final scene",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000785,
+      "drafts": 1,
+      "receipts": [
+        "01M7XP80G3KK7NRWDFZ0CB49NY"
+      ]
+    }
+  }
+}

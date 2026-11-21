@@ -1,0 +1,326 @@
+{
+  "title": {
+    "en": "The Midnight Bloom Heist",
+    "pt": "O Roubo da Flor da Meia-Noite"
+  },
+  "intro": {
+    "en": "The legendary 'Midnight Azure' orchid has been stolen from the Grand Greenhouse just hours before the International Botanical Contest. The security system was bypassed, and only four people had access to the wing tonight.",
+    "pt": "A lendária orquídea 'Azul da Meia-Noite' foi roubada da Grande Estufa poucas horas antes do Concurso Botânico Internacional. O sistema de segurança foi burlado e apenas quatro pessoas tinham acesso à ala esta noite."
+  },
+  "culprit": "suspect-gardener",
+  "suspects": [
+    {
+      "id": "suspect-gardener",
+      "name": "Arthur Vance",
+      "role": {
+        "en": "Head Gardener",
+        "pt": "Jardineiro Chefe"
+      },
+      "persona": {
+        "en": "Meticulous and obsessed with perfection.",
+        "pt": "Meticuloso e obcecado por perfeição."
+      },
+      "alibi": {
+        "en": "Claiming to be pruning roses in the North Wing.",
+        "pt": "Afirmando que estava podando rosas na Ala Norte."
+      },
+      "facts": "You were in the greenhouse at 23:00. You lie that you were pruning roses, but you were actually hiding the orchid in your tool shed."
+    },
+    {
+      "id": "suspect-curator",
+      "name": "Elena Rossi",
+      "role": {
+        "en": "Museum Curator",
+        "pt": "Curadora do Museu"
+      },
+      "persona": {
+        "en": "Elegant, haughty, and protective of her collection.",
+        "pt": "Elegante, arrogante e protetora de sua coleção."
+      },
+      "alibi": {
+        "en": "Claiming to be reviewing inventory in the office.",
+        "pt": "Afirmando que estava revisando o inventário no escritório."
+      },
+      "facts": "You were indeed in the office. You saw a shadow moving near the orchids at 23:00."
+    },
+    {
+      "id": "suspect-student",
+      "name": "Leo Kim",
+      "role": {
+        "en": "Botany Student",
+        "pt": "Estudante de Botânica"
+      },
+      "persona": {
+        "en": "Anxious, eager to please, and constantly taking notes.",
+        "pt": "Ansioso, ávido para agradar e constantemente fazendo anotações."
+      },
+      "alibi": {
+        "en": "Claiming to be studying in the library.",
+        "pt": "Afirmando que estava estudando na biblioteca."
+      },
+      "facts": "You were in the library, but you snuck out to take photos of the plants earlier."
+    },
+    {
+      "id": "suspect-rival",
+      "name": "Dr. Silas Thorne",
+      "role": {
+        "en": "Rival Botanist",
+        "pt": "Botânico Rival"
+      },
+      "persona": {
+        "en": "Bitter, competitive, and highly suspicious.",
+        "pt": "Amargo, competitivo e altamente desconfiado."
+      },
+      "alibi": {
+        "en": "Claiming to be walking in the public gardens.",
+        "pt": "Afirmando que estava caminhando nos jardins públicos."
+      },
+      "facts": "You were walking in the public gardens. You saw Elena in her office through the window."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "22:00",
+      "stop": {
+        "en": "Garden Entrance",
+        "pt": "Entrada do Jardim"
+      },
+      "event": {
+        "en": "All suspects arrive for the evening shift/visit.",
+        "pt": "Todos os suspeitos chegam para o turno/visita da noite."
+      },
+      "who": [
+        "suspect-gardener",
+        "suspect-curator",
+        "suspect-student",
+        "suspect-rival"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:30",
+      "stop": {
+        "en": "Library",
+        "pt": "Biblioteca"
+      },
+      "event": {
+        "en": "Leo is seen entering the library.",
+        "pt": "Leo é visto entrando na biblioteca."
+      },
+      "who": [
+        "suspect-student"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "23:00",
+      "stop": {
+        "en": "Greenhouse",
+        "pt": "Estufa"
+      },
+      "event": {
+        "en": "The orchid is removed from its pedestal.",
+        "pt": "A orquídea é removida de seu pedestal."
+      },
+      "who": [
+        "suspect-gardener"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "23:30",
+      "stop": {
+        "en": "Office",
+        "pt": "Escritório"
+      },
+      "event": {
+        "en": "Elena finishes her inventory work.",
+        "pt": "Elena termina seu trabalho de inventário."
+      },
+      "who": [
+        "suspect-curator"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-curator",
+      "ask": "Where were you last night?",
+      "keywords": [
+        "office",
+        "escritório"
+      ],
+      "implicates": null,
+      "clears": "suspect-rival",
+      "text": {
+        "en": "I was in my office. I saw Dr. Thorne walking in the public gardens through the glass window.",
+        "pt": "Eu estava no meu escritório. Eu vi o Dr. Thorne caminhando nos jardins públicos pela janela de vidro."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-rival",
+      "ask": "Did you see Leo Kim?",
+      "keywords": [
+        "student",
+        "estudante"
+      ],
+      "implicates": null,
+      "clears": "suspect-student",
+      "text": {
+        "en": "I saw the student, Leo, entering the library at 22:30; he stayed there for the rest of the night.",
+        "pt": "Eu vi o estudante, Leo, entrando na biblioteca às 22:30; ele permaneceu lá pelo resto da noite."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-student",
+      "ask": "Was Elena in her office?",
+      "keywords": [
+        "office",
+        "escritório"
+      ],
+      "implicates": null,
+      "clears": "suspect-curator",
+      "text": {
+        "en": "I saw Elena in her office looking very calm while I passed by the hall.",
+        "pt": "Eu vi a Elena em seu escritório parecendo muito calma enquanto eu passava pelo corredor."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-rival",
+      "ask": "What can you tell us about the gardener?",
+      "keywords": [
+        "dirt",
+        "terra"
+      ],
+      "implicates": "suspect-gardener",
+      "clears": null,
+      "text": {
+        "en": "Arthur claimed to be pruning roses, but I saw him carrying a heavy, suspicious-looking pot toward the tool shed, not the rose bushes.",
+        "pt": "Arthur afirmou que estava podando rosas, mas eu o vi carregando um vaso pesado e suspeito em direção ao depósito de ferramentas, não para os arbustos de rosas."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-curator",
+      "ask": "Did you notice anything unusual in the greenhouse?",
+      "keywords": [
+        "shadow",
+        "sombra"
+      ],
+      "implicates": "suspect-gardener",
+      "clears": null,
+      "text": {
+        "en": "I saw a dark shadow moving near the orchid pedestal at 23:00, and it looked exactly like the gardener's silhouette.",
+        "pt": "Eu vi uma sombra escura se movendo perto do pedestal da orquídea às 23:00, e parecia exatamente com a silhueta do jardineiro."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Note that Dr. Thorne was seen by Elena, which clears him.",
+        "pt": "Note que o Dr. Thorne foi visto por Elena, o que o inocenta."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Focus on the gardener's alibi. He said he was with the roses, but others saw him elsewhere.",
+        "pt": "Foque no álibi do jardineiro. Ele disse que estava com as rosas, mas outros o viram em outro lugar."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "orchid": "orchid",
+      "greenhouse": "greenhouse",
+      "tool shed": "tool shed"
+    },
+    "pt": {
+      "orchid": "orquídea",
+      "greenhouse": "estufa",
+      "tool shed": "depósito de ferramentas"
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-greenhouse",
+      "en": "The Greenhouse",
+      "pt": "A Estufa"
+    },
+    {
+      "id": "room-office",
+      "en": "The Office",
+      "pt": "O Escritório"
+    },
+    {
+      "id": "room-library",
+      "en": "The Library",
+      "pt": "A Biblioteca"
+    },
+    {
+      "id": "room-shed",
+      "en": "The Tool Shed",
+      "pt": "O Depósito de Ferramentas"
+    }
+  ],
+  "solution": {
+    "en": "Arthur Vance used his knowledge of the greenhouse to steal the orchid. While he claimed to be pruning roses, Elena saw his silhouette near the orchid at 23:00, and Dr. Thorne spotted him moving a suspicious pot toward the tool shed instead of the garden beds.",
+    "pt": "Arthur Vance usou seu conhecimento da estufa para roubar a orquídea. Enquanto afirmava estar podando rosas, Elena viu sua silhueta perto da orquídea às 23:00, e o Dr. Thorne o avistou movendo um vaso suspeito em direção ao depósito de ferramentas em vez dos canteiros de jardim."
+  },
+  "aftermath": {
+    "suspect-curator": {
+      "en": {
+        "headline": "Curator Wrongly Accused!",
+        "body": "The investigation into the orchid theft took a turn for the worse today when a false accusation against Elena Rossi nearly ruined her reputation."
+      },
+      "pt": {
+        "headline": "Curadora Injustamente Acusada!",
+        "body": "A investigação sobre o roubo da orquídea tomou um rumo pior hoje quando uma falsa acusação contra Elena Rossi quase arruinou sua reputação."
+      }
+    },
+    "suspect-student": {
+      "en": {
+        "headline": "Student Under Pressure",
+        "body": "Leo Kim was briefly detained after being mistaken for the orchid thief. The student remains in shock."
+      },
+      "pt": {
+        "headline": "Estudante sob Pressão",
+        "body": "Leo Kim foi brevemente detido após ser confundido com o ladrão da orquídea. O estudante permanece em choque."
+      }
+    },
+    "suspect-rival": {
+      "en": {
+        "headline": "Rival Botanist Defends Honor",
+        "body": "Dr. Silas Thorne was wrongly suspected of sabotage, but clear evidence has cleared his name."
+      },
+      "pt": {
+        "headline": "Botânico Rival Defende sua Honra",
+        "body": "O Dr. Silas Thorne foi injustamente suspeito de sabotagem, mas evidências claras limparam seu nome."
+      }
+    }
+  },
+  "id": "case-gen-a-botanical-garden-greenhouse-a-rare-orc",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A botanical garden greenhouse: a rare orchid is stolen on the eve of a contest",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.001955,
+      "drafts": 2,
+      "receipts": [
+        "01M7XPBSJS61HCXWTT2QH6T13G",
+        "01M7XPDCZ2CTV6NHE4T232JBWA"
+      ]
+    }
+  }
+}

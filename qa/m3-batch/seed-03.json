@@ -1,0 +1,351 @@
+{
+  "title": {
+    "en": "The Sugarloaf Vanishing",
+    "pt": "O Sumiço no Pão de Açúcar"
+  },
+  "intro": {
+    "en": "During a sunset ride on the Sugarloaf cable car, the lights flickered and the car stalled mid-air. When the lights returned, a diamond necklace was missing from the tourist's neck. The doors were locked, and only four people were in the car.",
+    "pt": "Durante um passeio ao pôr do sol no bondinho do Pão de Açúcar, as luzes piscaram e o carro parou no meio do caminho. Quando a luz voltou, um colar de diamantes havia sumido do pescoço de uma turista. As portas estavam trancadas e apenas quatro pessoas estavam no carro."
+  },
+  "culprit": "suspect-3",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Elena Rossi",
+      "role": {
+        "en": "Socialite",
+        "pt": "Socialite"
+      },
+      "persona": {
+        "en": "Arrogant and wealthy",
+        "pt": "Arrogante e rica"
+      },
+      "alibi": {
+        "en": "I was staring at the view in the corner.",
+        "pt": "Eu estava olhando a vista no canto."
+      },
+      "facts": "You were sitting near the exit at 18:10. You lie that you never saw anyone move near the victim."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Marco Silva",
+      "role": {
+        "en": "Photographer",
+        "pt": "Fotógrafo"
+      },
+      "persona": {
+        "en": "Observant and quiet",
+        "pt": "Observador e quieto"
+      },
+      "alibi": {
+        "en": "I was adjusting my lens during the darkness.",
+        "pt": "Eu estava ajustando minha lente durante a escuridão."
+      },
+      "facts": "You were standing by the window. You lie that you didn't notice the conductor's nervous behavior."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Lucas Mendes",
+      "role": {
+        "en": "Cable Car Attendant",
+        "pt": "Atendente do Bondinho"
+      },
+      "persona": {
+        "en": "Stressed and jittery",
+        "pt": "Estressado e agitado"
+      },
+      "alibi": {
+        "en": "I was trying to fix the control panel.",
+        "pt": "Eu estava tentando consertar o painel de controle."
+      },
+      "facts": "You used the darkness to grab the necklace while pretending to reach for the controls. You lie that the blackout was a mechanical failure."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Beatriz Costa",
+      "role": {
+        "en": "Tourist",
+        "pt": "Turista"
+      },
+      "persona": {
+        "en": "Panicky and helpful",
+        "pt": "Pânica e prestativa"
+      },
+      "alibi": {
+        "en": "I was praying for the car to move again.",
+        "pt": "Eu estava rezando para o carro voltar a andar."
+      },
+      "facts": "You saw a shadow moving toward the front panel. You lie that you didn't see anyone's face."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "18:00",
+      "stop": {
+        "en": "Base Station",
+        "pt": "Estação Base"
+      },
+      "event": {
+        "en": "Passengers board the car.",
+        "pt": "Passageiros embarcam no carro."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "18:05",
+      "stop": {
+        "en": "Mid-air",
+        "pt": "No meio do caminho"
+      },
+      "event": {
+        "en": "The lights flicker and go out.",
+        "pt": "As luzes piscam e apagam."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "18:07",
+      "stop": {
+        "en": "Mid-air",
+        "pt": "No meio do caminho"
+      },
+      "event": {
+        "en": "The necklace is stolen during the blackout.",
+        "pt": "O colar é roubado durante o apagão."
+      },
+      "who": [
+        "suspect-3"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "18:12",
+      "stop": {
+        "en": "Top Station",
+        "pt": "Estação do Topo"
+      },
+      "event": {
+        "en": "Lights return and the theft is discovered.",
+        "pt": "As luzes voltam e o roubo é descoberto."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-2",
+      "ask": "Did you see anything suspicious?",
+      "keywords": [
+        "shadow",
+        "panel",
+        "sombra",
+        "painel"
+      ],
+      "implicates": "suspect-3",
+      "clears": null,
+      "text": {
+        "en": "I saw a shadow moving quickly toward the control panel right when the lights died.",
+        "pt": "Eu vi uma sombra movendo-se rapidamente em direção ao painel de controle logo quando as luzes apagaram."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Where were you during the blackout?",
+      "keywords": [
+        "controls",
+        "attendant",
+        "controles",
+        "atendente"
+      ],
+      "implicates": "suspect-3",
+      "clears": null,
+      "text": {
+        "en": "I heard someone bumping into the control panel, and it sounded like the attendant was struggling.",
+        "pt": "Eu ouvi alguém esbarrando no painel de controle, e parecia que o atendente estava tendo dificuldades."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-1",
+      "ask": "Was the photographer near the victim?",
+      "keywords": [
+        "photographer",
+        "marco",
+        "fotógrafo",
+        "marco"
+      ],
+      "implicates": null,
+      "clears": "suspect-2",
+      "text": {
+        "en": "The photographer was far away by the window, he couldn't have reached her.",
+        "pt": "O fotógrafo estava longe, perto da janela, ele não poderia ter chegado até ela."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-2",
+      "ask": "What about the socialite?",
+      "keywords": [
+        "socialite",
+        "elena",
+        "socialite",
+        "elena"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "Elena was busy complaining about her hair in the corner; she never moved.",
+        "pt": "Elena estava ocupada reclamando do cabelo no canto; ela não se moveu."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-4",
+      "ask": "Did you see the socialite move?",
+      "keywords": [
+        "socialite",
+        "elena",
+        "socialite",
+        "elena"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "I saw Elena staying in her seat the whole time.",
+        "pt": "Eu vi a Elena ficando no assento dela o tempo todo."
+      }
+    },
+    {
+      "id": "c6",
+      "from": "suspect-1",
+      "ask": "Did the tourist see anything?",
+      "keywords": [
+        "tourist",
+        "beatriz",
+        "turista",
+        "beatriz"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "Beatriz was clearly terrified and didn't move from her spot.",
+        "pt": "Beatriz estava claramente apavorada e não saiu do lugar."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on the person who had access to the control panel.",
+        "pt": "Foque na pessoa que tinha acesso ao painel de controle."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The shadow seen by the photographer matches the location of the attendant.",
+        "pt": "A sombra vista pelo fotógrafo coincide com o local do atendente."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "blackout": "Power failure",
+      "attendant": "Staff member"
+    },
+    "pt": {
+      "blackout": "Apagão",
+      "attendant": "Funcionário"
+    }
+  },
+  "rooms": [
+    {
+      "id": "r1",
+      "en": "Control Panel",
+      "pt": "Painel de Controle"
+    },
+    {
+      "id": "r2",
+      "en": "Window Area",
+      "pt": "Área da Janela"
+    },
+    {
+      "id": "r3",
+      "en": "Passenger Seats",
+      "pt": "Assentos dos Passageiros"
+    }
+  ],
+  "solution": {
+    "en": "Lucas Mendes used his position as the attendant to trigger a manual blackout. During the darkness, he moved from the panel to the victim, snatched the necklace, and returned to the panel to pretend he was fixing the issue. The photographer's observation of a shadow moving toward the panel and the tourist's sound of someone bumping into the controls confirm his movement.",
+    "pt": "Lucas Mendes usou sua posição de atendente para provocar um apagão manual. Durante a escuridão, ele se moveu do painel até a vítima, roubou o colar e voltou ao painel para fingir que estava consertando o problema. A observação do fotógrafo sobre uma sombra movendo-se para o painel e o som ouvido pela turista confirmam seu movimento."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Socialite Exonerated",
+        "body": "Elena Rossi was wrongly accused, but witnesses confirm she never left her seat."
+      },
+      "pt": {
+        "headline": "Socialite Inocentada",
+        "body": "Elena Rossi foi acusada injustamente, mas testemunhas confirmam que ela nunca saiu do lugar."
+      }
+    },
+    "suspect-2": {
+      "en": {
+        "headline": "Photographer Mistakenly Arrested",
+        "body": "Marco Silva spent a night in jail after a false accusation regarding the necklace."
+      },
+      "pt": {
+        "headline": "Fotógrafo Preso por Engano",
+        "body": "Marco Silva passou uma noite na cadeia após uma falsa acusação sobre o colar."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Tourist Cleared of Suspicion",
+        "body": "Beatriz Costa was cleared after investigators realized she was a victim of circumstance."
+      },
+      "pt": {
+        "headline": "Turista Livre de Suspeitas",
+        "body": "Beatriz Costa foi inocentada após os investigadores perceberem que ela foi apenas vítima das circunstâncias."
+      }
+    }
+  },
+  "id": "case-gen-a-cable-car-in-sugarloaf-stops-mid-ride",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A cable car in Sugarloaf stops mid-ride and a necklace vanishes",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000868,
+      "drafts": 1,
+      "receipts": [
+        "01M7XP6Q8Q71P0C0J12TDHQ583"
+      ]
+    }
+  }
+}

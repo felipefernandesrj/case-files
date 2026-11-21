@@ -1,0 +1,328 @@
+{
+  "title": {
+    "en": "The Ledger of Lies in São Pedro da Aldeia",
+    "pt": "O Livro de Mentiras em São Pedro da Aldeia"
+  },
+  "intro": {
+    "en": "During the high-stakes tuna auction at the São Pedro da Aldeia fish market, a crucial error was discovered: the final auction ledger was altered to hide a massive theft. The market master is ruined, and the thief is still among us.",
+    "pt": "Durante o leilão de alto risco de atuns no mercado de peixes de São Pedro da Aldeia, um erro crucial foi descoberto: o livro de registros do leilão foi alterado para esconder um roubo massivo. O mestre do mercado está arruinado, e o ladrão ainda está entre nós."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Tiago Silva",
+      "role": {
+        "en": "Fisherman",
+        "pt": "Pescador"
+      },
+      "persona": {
+        "en": "Grumpy and tired",
+        "pt": "Ranzinza e cansado"
+      },
+      "alibi": {
+        "en": "I was cleaning my nets by the pier.",
+        "pt": "Eu estava limpando minhas redes no cais."
+      },
+      "facts": "You were at the pier at 18:00. You lie that you didn't see anyone near the office."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Beatriz Costa",
+      "role": {
+        "en": "Market Accountant",
+        "pt": "Contadora do Mercado"
+      },
+      "persona": {
+        "en": "Strict and professional",
+        "pt": "Rígida e profissional"
+      },
+      "alibi": {
+        "en": "I was in the back office checking the inventory logs.",
+        "pt": "Eu estava no escritório nos fundos conferindo os registros de inventário."
+      },
+      "facts": "You were in the main office at 18:15. You used a special ink to change the numbers in the ledger."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Marcos Oliveira",
+      "role": {
+        "en": "Auctioneer",
+        "pt": "Leiloeiro"
+      },
+      "persona": {
+        "en": "Energetic and loud",
+        "pt": "Energético e barulhento"
+      },
+      "alibi": {
+        "en": "I was preparing the podium for the next batch.",
+        "pt": "Eu estava preparando o pódio para o próximo lote."
+      },
+      "facts": "You saw Beatriz entering the office with a bottle of ink at 18:10."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Lucia Mendes",
+      "role": {
+        "en": "Fish Seller",
+        "pt": "Vendedora de Peixe"
+      },
+      "persona": {
+        "en": "Observant and gossipy",
+        "pt": "Observadora e fofoqueira"
+      },
+      "alibi": {
+        "en": "I was at my stall organizing the ice.",
+        "pt": "Eu estava na minha banca organizando o gelo."
+      },
+      "facts": "You saw Tiago by the pier during the time of the crime."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "18:00",
+      "stop": {
+        "en": "The Pier",
+        "pt": "O Cais"
+      },
+      "event": {
+        "en": "The fishermen finish their shift.",
+        "pt": "Os pescadores terminam seu turno."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "18:10",
+      "stop": {
+        "en": "The Office",
+        "pt": "O Escritório"
+      },
+      "event": {
+        "en": "A person is seen entering the office with supplies.",
+        "pt": "Uma pessoa é vista entrando no escritório com suprimentos."
+      },
+      "who": [
+        "suspect-2",
+        "suspect-3"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "18:15",
+      "stop": {
+        "en": "The Office",
+        "pt": "O Escritório"
+      },
+      "event": {
+        "en": "The auction ledger is tampered with.",
+        "pt": "O livro de leilão é adulterado."
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "18:30",
+      "stop": {
+        "en": "The Auction Floor",
+        "pt": "Salão de Leilão"
+      },
+      "event": {
+        "en": "The discrepancy is noticed.",
+        "pt": "A discrepância é notada."
+      },
+      "who": [
+        "suspect-3",
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-3",
+      "ask": "What did you see before the auction?",
+      "keywords": [
+        "ink",
+        "beatriz",
+        "escritório"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Beatriz entering the office at 18:10 carrying a bottle of permanent blue ink.",
+        "pt": "Eu vi a Beatriz entrando no escritório às 18:10 carregando um frasco de tinta azul permanente."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Where was the fisherman?",
+      "keywords": [
+        "tiago",
+        "cais",
+        "pier"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "I saw Tiago working at the pier from 18:00 until the auction started. He couldn't have been in the office.",
+        "pt": "Eu vi o Tiago trabalhando no cais das 18:00 até o início do leilão. Ele não poderia estar no escritório."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-1",
+      "ask": "Did you see the auctioneer near the office?",
+      "keywords": [
+        "marcos",
+        "leiloeiro",
+        "podium"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I saw Marcos by the podium the whole time; he never even went near the manager's door.",
+        "pt": "Eu vi o Marcos perto do pódio o tempo todo; ele nem sequer chegou perto da porta do gerente."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-3",
+      "ask": "What about the fish seller?",
+      "keywords": [
+        "lucia",
+        "stall",
+        "gelo"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "Lucia was clearly at her stall with the ice; I saw her there just before the auction started.",
+        "pt": "A Lucia estava claramente na banca dela com o gelo; eu a vi lá pouco antes do leilão começar."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-4",
+      "ask": "What was wrong with the ledger?",
+      "keywords": [
+        "ink",
+        "smudge",
+        "blue"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "The new numbers in the ledger have a very specific shade of blue ink that matches the bottle Beatriz was holding.",
+        "pt": "Os novos números no livro têm um tom muito específico de tinta azul que combina com o frasco que a Beatriz estava segurando."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Pay attention to who was seen near the office and what they were carrying.",
+        "pt": "Preste atenção em quem foi visto perto do escritório e o que estavam carregando."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Two witnesses have cleared Tiago and Marcos. Focus on the ink.",
+        "pt": "Duas testemunhas inocentaram o Tiago e o Marcos. Foque na tinta."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "ledger": "auction record book",
+      "pier": "dock for boats"
+    },
+    "pt": {
+      "ledger": "livro de registros",
+      "pier": "cais"
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-office",
+      "en": "The Manager's Office",
+      "pt": "O Escritório do Gerente"
+    },
+    {
+      "id": "room-pier",
+      "en": "The Pier",
+      "pt": "O Cais"
+    },
+    {
+      "id": "room-floor",
+      "en": "Auction Floor",
+      "pt": "Salão de Leilão"
+    },
+    {
+      "id": "room-stalls",
+      "en": "Fish Stalls",
+      "pt": "Bancas de Peixe"
+    }
+  ],
+  "solution": {
+    "en": "The crime was solved by connecting the specific blue ink seen by Marcos to the ledger's alterations. Beatriz used her access to the office and her supplies to change the numbers. Tiago, Marcos, and Lucia were all cleared by statements from other witnesses.",
+    "pt": "O crime foi resolvido conectando a tinta azul específica vista por Marcos às alterações no livro. Beatriz usou seu acesso ao escritório e seus suprimentos para mudar os números. Tiago, Marcos e Lucia foram todos inocentados por declarações de outras testemunhas."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Fisherman Wrongly Accused",
+        "body": "Tiago Silva was released today after the real thief was caught. He vows to stay away from the market."
+      },
+      "pt": {
+        "headline": "Pescador Inocentado",
+        "body": "Tiago Silva foi libertado hoje após o verdadeiro ladrão ser capturado. Ele promete ficar longe do mercado."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Auctioneer Faces Scrutiny",
+        "body": "Marcos Oliveira was briefly detained but cleared of all charges regarding the ledger theft."
+      },
+      "pt": {
+        "headline": "Leiloeiro Sob Suspeita",
+        "body": "Marcos Oliveira foi brevemente detido, mas inocentado de todas as acusações sobre o roubo do livro."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Seller Misidentified",
+        "body": "Lucia Mendes was wrongly blamed for witnessing a crime she didn't commit. The market remains in chaos."
+      },
+      "pt": {
+        "headline": "Vendedora Identificada Erroneamente",
+        "body": "Lucia Mendes foi injustamente culpada por testemunhar um crime que não cometeu. O mercado continua em caos."
+      }
+    }
+  },
+  "id": "case-gen-a-fish-market-at-sao-pedro-da-aldeia-the",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A fish market at Sao Pedro da Aldeia: the auction ledger is altered",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.001967,
+      "drafts": 2,
+      "receipts": [
+        "01M7XPEJYFD197AFJ3JRNSPX1Q",
+        "01M7XPG6KKAVMAG99SBA38R1TQ"
+      ]
+    }
+  }
+}

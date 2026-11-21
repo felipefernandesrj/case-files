@@ -1,0 +1,308 @@
+{
+  "title": {
+    "en": "The Vanishing Vows of Copacabana",
+    "pt": "Os Votos Desaparecidos de Copacabana"
+  },
+  "intro": {
+    "en": "The grand ballroom of the Copacabana Palace is set for the wedding of the year. But as the priest reaches for the rings, the velvet box is empty. The lights flickered for ten seconds, and in that darkness, the gold disappeared.",
+    "pt": "O grande salão do Copacabana Palace está preparado para o casamento do ano. Mas, quando o padre estende a mão para os anéis, a caixa de veludo está vazia. As luzes piscaram por dez segundos e, naquela escuridão, o ouro desapareceu."
+  },
+  "culprit": "suspect-3",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Clara Mendes",
+      "role": {
+        "en": "Maid of Honor",
+        "pt": "Dama de Honra"
+      },
+      "persona": {
+        "en": "Anxious and perfectionist",
+        "pt": "Ansiosa e perfeccionista"
+      },
+      "alibi": {
+        "en": "She was fixing her dress in the hallway.",
+        "pt": "Ela estava ajustando o vestido no corredor."
+      },
+      "facts": "You were near the buffet at 21:55. You lie that you never left the bride's side."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Bruno Silva",
+      "role": {
+        "en": "Best Man",
+        "pt": "Padrinho"
+      },
+      "persona": {
+        "en": "Relaxed and a bit clumsy",
+        "pt": "Relaxado e um pouco desastrado"
+      },
+      "alibi": {
+        "en": "He was getting a drink from the bar.",
+        "pt": "Ele estava pegando uma bebida no bar."
+      },
+      "facts": "You saw someone running near the curtains at 22:05. You lie that you were only at the bar."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Ricardo Costa",
+      "role": {
+        "en": "Caterer",
+        "pt": "Copeiro"
+      },
+      "persona": {
+        "en": "Quiet and observant",
+        "pt": "Quiet e observador"
+      },
+      "alibi": {
+        "en": "He was checking the kitchen supplies.",
+        "pt": "Ele estava conferindo os suprimentos da cozinha."
+      },
+      "facts": "You stole the rings during the blackout. You lie that you were in the kitchen the whole time."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Elena Rossi",
+      "role": {
+        "en": "Photographer",
+        "pt": "Fotógrafa"
+      },
+      "persona": {
+        "en": "Professional and sharp",
+        "pt": "Profissional e sagaz"
+      },
+      "alibi": {
+        "en": "She was checking her camera settings.",
+        "pt": "Ela estava conferindo as configurações da câmera."
+      },
+      "facts": "You saw the lights flicker and noticed a shadow by the ring table. You lie that you didn't see anything."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "21:50",
+      "stop": {
+        "en": "Entrance",
+        "pt": "Entrada"
+      },
+      "event": {
+        "en": "Guests arrive at the ballroom.",
+        "pt": "Convidados chegam ao salão."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:00",
+      "stop": {
+        "en": "Buffet Area",
+        "pt": "Área do Buffet"
+      },
+      "event": {
+        "en": "Clara moves toward the buffet.",
+        "pt": "Clara se move em direção ao buffet."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:05",
+      "stop": {
+        "en": "Main Table",
+        "pt": "Mesa Principal"
+      },
+      "event": {
+        "en": "The lights go out and the rings are stolen!",
+        "pt": "As luzes apagam e os anéis são roubados!"
+      },
+      "who": [
+        "suspect-3"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "22:10",
+      "stop": {
+        "en": "Bar",
+        "pt": "Bar"
+      },
+      "event": {
+        "en": "Bruno is seen at the bar after the blackout.",
+        "pt": "Bruno é visto no bar após o apagão."
+      },
+      "who": [
+        "suspect-2"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you during the blackout?",
+      "keywords": [
+        "buffet",
+        "food"
+      ],
+      "implicates": null,
+      "clears": "suspect-2",
+      "text": {
+        "en": "I was near the buffet fixing my dress; I saw Bruno at the bar right after the lights came back.",
+        "pt": "Eu estava perto do buffet ajustando meu vestido; vi o Bruno no bar logo que as luzes voltaram."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-2",
+      "ask": "Did you see anything suspicious?",
+      "keywords": [
+        "shadow",
+        "curtain"
+      ],
+      "implicates": "suspect-3",
+      "clears": null,
+      "text": {
+        "en": "I saw a shadow in a white catering uniform running toward the kitchen curtains!",
+        "pt": "Eu vi uma sombra com um uniforme de garçom correndo para as cortinas da cozinha!"
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "What did your camera capture?",
+      "keywords": [
+        "light",
+        "rings"
+      ],
+      "implicates": "suspect-3",
+      "clears": "suspect-1",
+      "text": {
+        "en": "My flash went off! I saw the caterer reaching for the ring box just as the power failed.",
+        "pt": "Meu flash disparou! Eu vi o copeiro alcançando a caixa de anéis bem quando a energia falhou."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-3",
+      "ask": "Where were you?",
+      "keywords": [
+        "kitchen",
+        "supplies"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I was in the kitchen checking supplies; I saw the photographer checking her lens near the table.",
+        "pt": "Eu estava na cozinha conferindo os suprimentos; vi a fotógrafa conferindo a lente perto da mesa."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on the uniforms. Who was wearing white?",
+        "pt": "Foque nos uniformes. Quem estava usando branco?"
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The photographer's flash might have captured the truth.",
+        "pt": "O flash da fotógrafa pode ter capturado a verdade."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "caterer": "person providing food",
+      "blackout": "loss of electricity"
+    },
+    "pt": {
+      "copeiro": "pessoa que fornece comida",
+      "apagão": "perda de eletricidade"
+    }
+  },
+  "rooms": [
+    {
+      "id": "r1",
+      "en": "Ballroom",
+      "pt": "Salão de Festas"
+    },
+    {
+      "id": "r2",
+      "en": "Kitchen",
+      "pt": "Cozinha"
+    },
+    {
+      "id": "r3",
+      "en": "Bar",
+      "pt": "Bar"
+    },
+    {
+      "id": "r4",
+      "en": "Hallway",
+      "pt": "Corredor"
+    }
+  ],
+  "solution": {
+    "en": "Ricardo Costa, the caterer, used the darkness to steal the rings. Bruno saw a white uniform near the curtains, and Elena's camera flash captured him reaching for the box. Clara was cleared by Bruno's observation of him at the bar later, and Elena was cleared by Ricardo's own statement.",
+    "pt": "Ricardo Costa, o copeiro, usou a escuridão para roubar os anéis. Bruno viu um uniforme branco perto das cortinas, e o flash da câmera de Elena o capturou alcançando a caixa. Clara foi inocentada pela observação de Bruno no bar, e Elena foi inocentada pelo próprio depoimento de Ricardo."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Maid of Honor Misunderstands Duty",
+        "body": "Clara Mendes was wrongly accused of theft, causing a scandal at the wedding."
+      },
+      "pt": {
+        "headline": "Dama de Honra Confunde seu Dever",
+        "body": "Clara Mendes foi injustamente acusada de roubo, causando um escândalo no casamento."
+      }
+    },
+    "suspect-2": {
+      "en": {
+        "headline": "Best Man Blamed for Chaos",
+        "body": "Bruno Silva's clumsiness was mistaken for criminal intent during the jewelry heist."
+      },
+      "pt": {
+        "headline": "Padrinho Culpado pelo Caos",
+        "body": "A desajeiteza de Bruno Silva foi confundida com intenção criminosa durante o roubo das joias."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Photographer Under Investigation",
+        "body": "Elena Rossi's camera was thought to be used for casing the wedding, not just photos."
+      },
+      "pt": {
+        "headline": "Fotógrafa Sob Investigação",
+        "body": "Pensou-se que a câmera de Elena Rossi foi usada para vigiar o casamento, não apenas fotos."
+      }
+    }
+  },
+  "id": "case-gen-a-hotel-ballroom-in-copacabana-the-weddi",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A hotel ballroom in Copacabana: the wedding rings are gone before the vows",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000775,
+      "drafts": 1,
+      "receipts": [
+        "01M7XP8J15Y8ATEEVE8FCJHNTK"
+      ]
+    }
+  }
+}

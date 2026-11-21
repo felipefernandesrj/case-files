@@ -1,0 +1,162 @@
+[
+ {
+  "i": 1,
+  "seed": "A foggy night at a Santos Dumont airport lounge: a diplomat's briefcase is swapped",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000998
+ },
+ {
+  "i": 2,
+  "seed": "A samba school rehearsal in Madureira: the lead drum is found sabotaged",
+  "ok": true,
+  "drafts": 2,
+  "reasons": [],
+  "spentUsd": 0.002
+ },
+ {
+  "i": 3,
+  "seed": "A cable car in Sugarloaf stops mid-ride and a necklace vanishes",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000868
+ },
+ {
+  "i": 4,
+  "seed": "A closed pharmacy in Tijuca: the safe with the prescription pads is emptied",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000829
+ },
+ {
+  "i": 5,
+  "seed": "A film set in Paraty: the lead actor's script goes missing before the final scene",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000785
+ },
+ {
+  "i": 6,
+  "seed": "A beach kiosk in Recreio at dawn: the day's takings disappear",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000845
+ },
+ {
+  "i": 7,
+  "seed": "A hotel ballroom in Copacabana: the wedding rings are gone before the vows",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000775
+ },
+ {
+  "i": 8,
+  "seed": "A university lab in Fundao: a prototype chip is stolen overnight",
+  "ok": true,
+  "drafts": 2,
+  "reasons": [],
+  "spentUsd": 0.001905
+ },
+ {
+  "i": 9,
+  "seed": "A ferry to Niteroi: a painting in the cargo hold is replaced by a copy",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000833
+ },
+ {
+  "i": 10,
+  "seed": "A bakery in Santa Teresa: the secret recipe book is torn out",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000796
+ },
+ {
+  "i": 11,
+  "seed": "A football stadium locker room: the captain's lucky boots vanish before the final",
+  "ok": true,
+  "drafts": 3,
+  "reasons": [],
+  "spentUsd": 0.003008
+ },
+ {
+  "i": 12,
+  "seed": "A library in the Centro: a rare map is cut from an atlas",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.00086
+ },
+ {
+  "i": 13,
+  "seed": "A rooftop party in Botafogo: the host's watch is taken during the fireworks",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000872
+ },
+ {
+  "i": 14,
+  "seed": "A botanical garden greenhouse: a rare orchid is stolen on the eve of a contest",
+  "ok": true,
+  "drafts": 2,
+  "reasons": [],
+  "spentUsd": 0.001955
+ },
+ {
+  "i": 15,
+  "seed": "A tram in Santa Teresa: the conductor's ticket box goes missing",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000766
+ },
+ {
+  "i": 16,
+  "seed": "A radio station in Barra: the live show tape is erased minutes before air",
+  "ok": true,
+  "drafts": 2,
+  "reasons": [],
+  "spentUsd": 0.002005
+ },
+ {
+  "i": 17,
+  "seed": "A chess club in Leblon: the championship trophy is gone",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000788
+ },
+ {
+  "i": 18,
+  "seed": "A fish market at Sao Pedro da Aldeia: the auction ledger is altered",
+  "ok": true,
+  "drafts": 2,
+  "reasons": [],
+  "spentUsd": 0.001967
+ },
+ {
+  "i": 19,
+  "seed": "A jazz club in Lapa: the saxophonist's golden mouthpiece is stolen",
+  "ok": true,
+  "drafts": 1,
+  "reasons": [],
+  "spentUsd": 0.000848
+ },
+ {
+  "i": 20,
+  "seed": "A bookstore cafe in Ipanema: the poet's manuscript disappears from a locked drawer",
+  "ok": true,
+  "drafts": 2,
+  "reasons": [],
+  "spentUsd": 0.001839
+ }
+]

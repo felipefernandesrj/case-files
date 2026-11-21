@@ -1,0 +1,335 @@
+{
+  "title": {
+    "en": "The Niterói Ferry Heist",
+    "pt": "O Roubo na Balsa de Niterói"
+  },
+  "intro": {
+    "en": "During a midnight crossing to Niterói, a priceless maritime painting was swapped for a crude replica in the cargo hold. The theft occurred during a sudden power outage.",
+    "pt": "Durante uma travessia à meia-noite para Niterói, uma pintura marítima inestimável foi trocada por uma réplica mal feita no porão de carga. O roubo ocorreu durante uma queda repentina de energia."
+  },
+  "culprit": "suspect-3",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Arthur Mendes",
+      "role": {
+        "en": "Art Collector",
+        "pt": "Colecionador de Arte"
+      },
+      "persona": {
+        "en": "Sophisticated and anxious",
+        "pt": "Sofisticado e ansioso"
+      },
+      "alibi": {
+        "en": "He was in the lounge drinking tea.",
+        "pt": "Ele estava no salão bebendo chá."
+      },
+      "facts": "You were in the lounge at 23:45. You lie that you never left your seat."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Beatriz Silva",
+      "role": {
+        "en": "Ferry Crew",
+        "pt": "Tripulante da Balsa"
+      },
+      "persona": {
+        "en": "Strict and observant",
+        "pt": "Rígida e observadora"
+      },
+      "alibi": {
+        "en": "She was checking the engine room.",
+        "pt": "Ela estava verificando a sala de máquinas."
+      },
+      "facts": "You were in the engine room at 23:50. You lie that the lights went out naturally."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Carlos Drago",
+      "role": {
+        "en": "Security Guard",
+        "pt": "Segurança"
+      },
+      "persona": {
+        "en": "Lazy and dismissive",
+        "pt": "Preguiçoso e desdenhoso"
+      },
+      "alibi": {
+        "en": "He was patrolling the deck.",
+        "pt": "Ele estava patrulhando o convés."
+      },
+      "facts": "You were in the cargo hold at 23:55. You lie that you were guarding the painting."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Diana Prince",
+      "role": {
+        "en": "Historian",
+        "pt": "Historiadora"
+      },
+      "persona": {
+        "en": "Curious and sharp",
+        "pt": "Curiosa e perspicaz"
+      },
+      "alibi": {
+        "en": "She was studying in her cabin.",
+        "pt": "Ela estava estudando em sua cabine."
+      },
+      "facts": "You were in the corridor at 23:50. You lie that you didn't see anyone near the cargo hold."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "23:30",
+      "stop": {
+        "en": "Lounge",
+        "pt": "Salão"
+      },
+      "event": {
+        "en": "Passengers gather for the crossing.",
+        "pt": "Passageiros se reúnem para a travessia."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "23:45",
+      "stop": {
+        "en": "Engine Room",
+        "pt": "Sala de Máquinas"
+      },
+      "event": {
+        "en": "The lights flicker for a moment.",
+        "pt": "As luzes piscam por um momento."
+      },
+      "who": [
+        "suspect-2"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "23:55",
+      "stop": {
+        "en": "Cargo Hold",
+        "pt": "Porão de Carga"
+      },
+      "event": {
+        "en": "The painting is swapped during the blackout.",
+        "pt": "A pintura é trocada durante o apagão."
+      },
+      "who": [
+        "suspect-3"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "00:10",
+      "stop": {
+        "en": "Deck",
+        "pt": "Convés"
+      },
+      "event": {
+        "en": "The theft is discovered.",
+        "pt": "O roubo é descoberto."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you when the lights went out?",
+      "keywords": [
+        "lounge",
+        "tea",
+        "salão",
+        "chá"
+      ],
+      "implicates": null,
+      "clears": "suspect-2",
+      "text": {
+        "en": "I was in the lounge. I saw Beatriz walking towards the engine room just before the darkness.",
+        "pt": "Eu estava no salão. Eu vi a Beatriz caminhando em direção à sala de máquinas logo antes do escuro."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-2",
+      "ask": "Did you notice anything suspicious in the engine room?",
+      "keywords": [
+        "engine",
+        "lights",
+        "motor",
+        "luzes"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "Everything was normal until the blackout. I didn't see Arthur leave the lounge area.",
+        "pt": "Tudo estava normal até o apagão. Eu não vi o Arthur sair da área do salão."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "Did you see anyone near the cargo hold?",
+      "keywords": [
+        "cargo",
+        "guard",
+        "porão",
+        "segurança"
+      ],
+      "implicates": "suspect-3",
+      "clears": null,
+      "text": {
+        "en": "I saw Carlos sneaking out of the cargo hold with a large, flat package just as the lights came back on.",
+        "pt": "Eu vi o Carlos saindo de fininho do porão de carga com um pacote grande e plano assim que as luzes voltaram."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-3",
+      "ask": "What were you doing during the blackout?",
+      "keywords": [
+        "patrol",
+        "deck",
+        "patrulha",
+        "convés"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I was on the deck. I saw Diana in the corridor, she wasn't in her cabin like she claimed.",
+        "pt": "Eu estava no convés. Eu vi a Diana no corredor, ela não estava na cabine como alegou."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-2",
+      "ask": "Who had access to the cargo hold?",
+      "keywords": [
+        "security",
+        "guard",
+        "segurança",
+        "acesso"
+      ],
+      "implicates": "suspect-3",
+      "clears": null,
+      "text": {
+        "en": "Only the security guard has the key to the cargo hold, and Carlos was the only one on duty.",
+        "pt": "Apenas o segurança tem a chave do porão de carga, e o Carlos era o único de plantão."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Check the alibis. Some people are contradicting what others saw.",
+        "pt": "Verifique os álibis. Algumas pessoas estão contradizendo o que outros viram."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The security guard is the only one who could have accessed the painting easily.",
+        "pt": "O segurança é o único que poderia ter acessado a pintura facilmente."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "cargo hold": "porão de carga",
+      "blackout": "apagão",
+      "swapped": "trocado"
+    },
+    "pt": {
+      "cargo hold": "porão de carga",
+      "blackout": "apagão",
+      "swapped": "trocado"
+    }
+  },
+  "rooms": [
+    {
+      "id": "lounge",
+      "en": "Lounge",
+      "pt": "Salão"
+    },
+    {
+      "id": "engine-room",
+      "en": "Engine Room",
+      "pt": "Sala de Máquinas"
+    },
+    {
+      "id": "cargo-hold",
+      "en": "Cargo Hold",
+      "pt": "Porão de Carga"
+    },
+    {
+      "id": "deck",
+      "en": "Deck",
+      "pt": "Convés"
+    }
+  ],
+  "solution": {
+    "en": "Carlos Drago used his security access to enter the cargo hold. He orchestrated a temporary short circuit in the engine room (which Beatriz noticed) to create a blackout. During the darkness, he swapped the original painting for a copy he had hidden. Diana saw him fleeing with the package, and Beatriz confirmed only he had the key.",
+    "pt": "Carlos Drago usou seu acesso de segurança para entrar no porão de carga. Ele orquestrou um curto-circuito temporário na sala de máquinas (que Beatriz notou) para criar um apagão. Durante a escuridão, ele trocou a pintura original por uma cópia que havia escondido. Diana o viu fugindo com o pacote, e Beatriz confirmou que apenas ele tinha a chave."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Collector Exonerated",
+        "body": "Arthur Mendes was wrongly accused of the theft, but evidence shows he never left his tea."
+      },
+      "pt": {
+        "headline": "Colecionador Exonerado",
+        "body": "Arthur Mendes foi acusado injustamente do roubo, mas as evidências mostram que ele nunca deixou seu chá."
+      }
+    },
+    "suspect-2": {
+      "en": {
+        "headline": "Crew Member Mistakenly Blamed",
+        "body": "Beatriz Silva was investigated for the blackout, but was innocent all along."
+      },
+      "pt": {
+        "headline": "Tripulante Injustamente Culpada",
+        "body": "Beatriz Silva foi investigada pelo apagão, mas era inocente o tempo todo."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Historian's Reputation Ruined",
+        "body": "Diana Prince was accused of being a lookout, but the real thief has already escaped."
+      },
+      "pt": {
+        "headline": "Reputação da Historiadora Arruinada",
+        "body": "Diana Prince foi acusada de ser cúmplice, mas o verdadeiro ladrão já escapou."
+      }
+    }
+  },
+  "id": "case-gen-a-ferry-to-niteroi-a-painting-in-the-car",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A ferry to Niteroi: a painting in the cargo hold is replaced by a copy",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000833,
+      "drafts": 1,
+      "receipts": [
+        "01M7XP9SMGAZH4N40NZF6YST35"
+      ]
+    }
+  }
+}

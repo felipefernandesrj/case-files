@@ -1,0 +1,327 @@
+{
+  "title": {
+    "en": "The Foggy Briefcase Swap",
+    "pt": "A Troca da Maleta no Nevoeiro"
+  },
+  "intro": {
+    "en": "A dense fog has grounded all flights at Santos Dumont Airport. In the VIP lounge, a high-ranking diplomat's briefcase, containing sensitive treaty documents, has been swapped with an identical but empty one. The theft occurred during a momentary power flicker.",
+    "pt": "Um nevoeiro denso paralisou todos os voos no Aeroporto Santos Dumont. Na sala VIP, a maleta de um diplomata de alto escalão, contendo documentos sensíveis de um tratado, foi trocada por uma idêntica, porém vazia. O roubo ocorreu durante uma oscilação de energia momentânea."
+  },
+  "culprit": "suspect-b",
+  "suspects": [
+    {
+      "id": "suspect-a",
+      "name": "Arthur Vance",
+      "role": {
+        "en": "Private Security",
+        "pt": "Segurança Particular"
+      },
+      "persona": {
+        "en": "Stoic and observant, always scanning the room.",
+        "pt": "Estoico e observador, sempre vigiando a sala."
+      },
+      "alibi": {
+        "en": "I was standing by the main entrance monitoring the crowd.",
+        "pt": "Eu estava parado perto da entrada principal monitorando a multidão."
+      },
+      "facts": "You were standing by the entrance at 22:05. You saw the lights flicker, but you didn't see anyone near the diplomat's table."
+    },
+    {
+      "id": "suspect-b",
+      "name": "Beatriz Costa",
+      "role": {
+        "en": "Flight Attendant",
+        "pt": "Comissária de Bordo"
+      },
+      "persona": {
+        "en": "Polite but visibly anxious due to the flight delays.",
+        "pt": "Educada, mas visivelmente ansiosa devido aos atrasos dos voos."
+      },
+      "alibi": {
+        "en": "I was in the kitchenette preparing coffee for the passengers.",
+        "pt": "Eu estava na copa preparando café para os passageiros."
+      },
+      "facts": "You were in the lounge during the blackout. You used the darkness to swap the briefcase with the empty one you hid in your service trolley."
+    },
+    {
+      "id": "suspect-c",
+      "name": "Carlos Mendes",
+      "role": {
+        "en": "Journalist",
+        "pt": "Jornalista"
+      },
+      "persona": {
+        "en": "Curious and constantly checking his camera equipment.",
+        "pt": "Curioso e constantemente verificando seus equipamentos de câmera."
+      },
+      "alibi": {
+        "en": "I was sitting in the corner, trying to charge my camera battery.",
+        "pt": "Eu estava sentado no canto, tentando carregar a bateria da minha câmera."
+      },
+      "facts": "You were in the corner at 22:05. You saw Beatriz walking quickly towards the diplomat's table right before the lights went out."
+    },
+    {
+      "id": "suspect-d",
+      "name": "Diana Prince",
+      "role": {
+        "en": "Business Executive",
+        "pt": "Executiva de Negócios"
+      },
+      "persona": {
+        "en": "Impatient and demanding high-quality service.",
+        "pt": "Impaciente e exigente com a qualidade do serviço."
+      },
+      "alibi": {
+        "en": "I was on a phone call in the quiet zone.",
+        "pt": "Eu estava em uma chamada telefônica na zona de silêncio."
+      },
+      "facts": "You were in the quiet zone. You heard the sound of a heavy metal trolley moving rapidly near the diplomat's table during the blackout."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "22:00",
+      "stop": {
+        "en": "Lounge Entrance",
+        "pt": "Entrada do Lounge"
+      },
+      "event": {
+        "en": "The diplomat places his briefcase on the central table.",
+        "pt": "O diplomata coloca sua maleta na mesa central."
+      },
+      "who": [
+        "suspect-a"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:05",
+      "stop": {
+        "en": "VIP Seating",
+        "pt": "Assentos VIP"
+      },
+      "event": {
+        "en": "The power flickers and the lights go out for 30 seconds.",
+        "pt": "A energia oscila e as luzes se apagam por 30 segundos."
+      },
+      "who": [
+        "suspect-b",
+        "suspect-c"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:06",
+      "stop": {
+        "en": "Central Table",
+        "pt": "Mesa Central"
+      },
+      "event": {
+        "en": "The briefcase is swapped during the darkness.",
+        "pt": "A maleta é trocada durante a escuridão."
+      },
+      "who": [
+        "suspect-b"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "22:10",
+      "stop": {
+        "en": "Lounge Area",
+        "pt": "Área do Lounge"
+      },
+      "event": {
+        "en": "The lights come back on; the theft is discovered.",
+        "pt": "As luzes voltam; o roubo é descoberto."
+      },
+      "who": [
+        "suspect-a",
+        "suspect-d"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-c",
+      "ask": "What did you see before the lights went out?",
+      "keywords": [
+        "beatriz",
+        "movement",
+        "table"
+      ],
+      "implicates": "suspect-b",
+      "clears": null,
+      "text": {
+        "en": "I saw Beatriz walking very suspiciously towards the diplomat's table just as the lights began to dim.",
+        "pt": "Eu vi a Beatriz caminhando de forma muito suspeita em direção à mesa do diplomata logo quando as luzes começaram a diminuir."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-d",
+      "ask": "Did you hear anything during the blackout?",
+      "keywords": [
+        "trolley",
+        "sound",
+        "noise"
+      ],
+      "implicates": "suspect-b",
+      "clears": null,
+      "text": {
+        "en": "I heard the unmistakable rattle of a service trolley moving fast near the diplomat's seat in the dark.",
+        "pt": "Eu ouvi o tilintar inconfundível de um carrinho de serviço movendo-se rápido perto do assento do diplomata no escuro."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-a",
+      "ask": "Was anyone near the entrance?",
+      "keywords": [
+        "journalist",
+        "carlos",
+        "corner"
+      ],
+      "implicates": null,
+      "clears": "suspect-c",
+      "text": {
+        "en": "I saw Carlos sitting quietly in his corner with his camera the whole time; he didn't move toward the table.",
+        "pt": "Eu vi o Carlos sentado tranquilamente no canto dele com sua câmera o tempo todo; ele não se moveu em direção à mesa."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-b",
+      "ask": "Where were you during the power failure?",
+      "keywords": [
+        "kitchenette",
+        "coffee"
+      ],
+      "implicates": null,
+      "clears": "suspect-a",
+      "text": {
+        "en": "I didn't see Arthur move from his post at the door; he was just standing there like a statue.",
+        "pt": "Eu não vi o Arthur sair do posto dele na porta; ele estava apenas parado lá como uma estátua."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-c",
+      "ask": "Did you see any executives acting strangely?",
+      "keywords": [
+        "executive",
+        "diana"
+      ],
+      "implicates": null,
+      "clears": "suspect-d",
+      "text": {
+        "en": "Diana was clearly preoccupied with her phone in the quiet zone; she never even looked up.",
+        "pt": "A Diana estava claramente ocupada com o telefone na zona de silêncio; ela nem sequer olhou para cima."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Listen to the sounds: a service trolley is a very specific piece of equipment.",
+        "pt": "Preste atenção nos sons: um carrinho de serviço é um equipamento muito específico."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Two people saw Beatriz moving near the crime scene or equipment used in the crime.",
+        "pt": "Duas pessoas viram a Beatriz se movendo perto do local do crime ou de equipamentos usados no crime."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "briefcase": "briefcase",
+      "trolley": "service cart/trolley",
+      "blackout": "power failure"
+    },
+    "pt": {
+      "briefcase": "maleta",
+      "trolley": "carrinho de serviço",
+      "blackout": "apagão"
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-lounge",
+      "en": "VIP Lounge",
+      "pt": "Lounge VIP"
+    },
+    {
+      "id": "room-kitchenette",
+      "en": "Kitchenette",
+      "pt": "Copa"
+    },
+    {
+      "id": "room-quiet-zone",
+      "en": "Quiet Zone",
+      "pt": "Zona de Silêncio"
+    },
+    {
+      "id": "room-entrance",
+      "en": "Main Entrance",
+      "pt": "Entrada Principal"
+    }
+  ],
+  "solution": {
+    "en": "Beatriz Costa used the cover of the blackout and her service trolley to approach the diplomat's table. She swapped the real briefcase for an empty one hidden in her trolley. Carlos saw her approaching the table, and Diana heard the trolley moving during the darkness.",
+    "pt": "Beatriz Costa usou a cobertura do apagão e seu carrinho de serviço para se aproximar da mesa do diplomata. Ela trocou a maleta real por uma vazia escondida em seu carrinho. Carlos a viu se aproximando da mesa, e Diana ouviu o carrinho se movendo durante a escuridão."
+  },
+  "aftermath": {
+    "suspect-a": {
+      "en": {
+        "headline": "Security Failure at Santos Dumont!",
+        "body": "The airport's top security guard was arrested after failing to prevent a major diplomatic theft."
+      },
+      "pt": {
+        "headline": "Falha de Segurança no Santos Dumont!",
+        "body": "O principal segurança do aeroporto foi preso após não conseguir impedir um grande roubo diplomático."
+      }
+    },
+    "suspect-c": {
+      "en": {
+        "headline": "Journalist Accused of Theft!",
+        "body": "A local reporter was detained under suspicion of stealing documents during a flight delay."
+      },
+      "pt": {
+        "headline": "Jornalista Acusado de Roubo!",
+        "body": "Um repórter local foi detido sob suspeita de roubar documentos durante um atraso de voo."
+      }
+    },
+    "suspect-d": {
+      "en": {
+        "headline": "Executive Caught in Diplomatic Scandal!",
+        "body": "A prominent business leader was wrongly accused of participating in the briefcase swap."
+      },
+      "pt": {
+        "headline": "Executiva Envolvida em Escândalo Diplomático!",
+        "body": "Uma importante líder de negócios foi erroneamente acusada de participar da troca de maletas."
+      }
+    }
+  },
+  "id": "case-gen-a-foggy-night-at-a-santos-dumont-airport",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A foggy night at a Santos Dumont airport lounge: a diplomat's briefcase is swapped",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000998,
+      "drafts": 1,
+      "receipts": [
+        "01M7XP6Q5KH747W6XERDT5PV54"
+      ]
+    }
+  }
+}

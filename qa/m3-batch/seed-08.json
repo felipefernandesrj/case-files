@@ -1,0 +1,333 @@
+{
+  "title": {
+    "en": "The Silicon Heist",
+    "pt": "O Roubo de Silício"
+  },
+  "intro": {
+    "en": "In a high-security lab at the University of Fundão, a prototype quantum chip has vanished. The security system was bypassed during a brief power outage. Four people were in the building.",
+    "pt": "Em um laboratório de alta segurança na Universidade de Fundão, um chip quântico protótipo desapareceu. O sistema de segurança foi burlado durante uma breve queda de energia. Quatro pessoas estavam no prédio."
+  },
+  "culprit": "prof-silva",
+  "suspects": [
+    {
+      "id": "prof-silva",
+      "name": "Professor Silva",
+      "role": {
+        "en": "Lead Researcher",
+        "pt": "Pesquisador Principal"
+      },
+      "persona": {
+        "en": "Ambitious and stressed.",
+        "pt": "Ambicioso e estressado."
+      },
+      "alibi": {
+        "en": "I was in my office writing a report.",
+        "pt": "Eu estava no meu escritório escrevendo um relatório."
+      },
+      "facts": "You were in the server room at 23:10. You lie that you never left your office."
+    },
+    {
+      "id": "tech-ana",
+      "name": "Ana Oliveira",
+      "role": {
+        "en": "Lab Technician",
+        "pt": "Técnica de Laboratório"
+      },
+      "persona": {
+        "en": "Methodical and quiet.",
+        "pt": "Metódica e quieta."
+      },
+      "alibi": {
+        "en": "I was calibrating equipment in the cleanroom.",
+        "pt": "Eu estava calibrando equipamentos na sala limpa."
+      },
+      "facts": "You saw a shadow near the server room at 23:10. You lie that you saw nothing."
+    },
+    {
+      "id": "guard-pedro",
+      "name": "Pedro Santos",
+      "role": {
+        "en": "Security Guard",
+        "pt": "Segurança"
+      },
+      "persona": {
+        "en": "Lazy and easily distracted.",
+        "pt": "Preguiçoso e facilmente distraído."
+      },
+      "alibi": {
+        "en": "I was doing my rounds in the hallway.",
+        "pt": "Eu estava fazendo minha ronda no corredor."
+      },
+      "facts": "You fell asleep for 20 minutes. You lie that you were awake the whole time."
+    },
+    {
+      "id": "stu-lucas",
+      "name": "Lucas Costa",
+      "role": {
+        "en": "PhD Student",
+        "pt": "Doutorando"
+      },
+      "persona": {
+        "en": "Brilliant but broke.",
+        "pt": "Brilhante, mas sem dinheiro."
+      },
+      "alibi": {
+        "en": "I was studying in the library lounge.",
+        "pt": "Eu estava estudando no lounge da biblioteca."
+      },
+      "facts": "You found a discarded security badge near the lab entrance. You lie that you didn't see anything."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "22:30",
+      "stop": {
+        "en": "Main Hall",
+        "pt": "Hall Principal"
+      },
+      "event": {
+        "en": "Shift change and guard patrol begins.",
+        "pt": "Troca de turno e início da ronda do segurança."
+      },
+      "who": [
+        "guard-pedro"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "23:00",
+      "stop": {
+        "en": "Cleanroom",
+        "pt": "Sala Limpa"
+      },
+      "event": {
+        "en": "Power outage occurs.",
+        "pt": "Ocorre uma queda de energia."
+      },
+      "who": [
+        "tech-ana",
+        "stu-lucas"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "23:10",
+      "stop": {
+        "en": "Server Room",
+        "pt": "Sala do Servidor"
+      },
+      "event": {
+        "en": "The prototype chip is stolen during the blackout.",
+        "pt": "O chip protótipo é roubado durante o apagão."
+      },
+      "who": [
+        "prof-silva"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "23:45",
+      "stop": {
+        "en": "Lab Entrance",
+        "pt": "Entrada do Laboratório"
+      },
+      "event": {
+        "en": "The theft is discovered.",
+        "pt": "O roubo é descoberto."
+      },
+      "who": [
+        "tech-ana",
+        "prof-silva"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "tech-ana",
+      "ask": "Where were you during the blackout?",
+      "keywords": [
+        "blackout",
+        "apagão",
+        "server",
+        "servidor"
+      ],
+      "implicates": "prof-silva",
+      "clears": "guard-pedro",
+      "text": {
+        "en": "I was in the cleanroom, and I heard the guard shouting in the hallway at 23:00, so he couldn't have been in the server room.",
+        "pt": "Eu estava na sala limpa e ouvi o segurança gritando no corredor às 23:00, então ele não poderia estar na sala do servidor."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "stu-lucas",
+      "ask": "Did you see anyone near the lab?",
+      "keywords": [
+        "lab",
+        "laboratório",
+        "ana",
+        "ana"
+      ],
+      "implicates": "prof-silva",
+      "clears": "tech-ana",
+      "text": {
+        "en": "I saw Ana in the cleanroom through the glass window right before the lights went out; she was definitely there.",
+        "pt": "Eu vi a Ana na sala limpa pela janela de vidro logo antes das luzes se apagarem; ela estava definitivamente lá."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "guard-pedro",
+      "ask": "What about the students?",
+      "keywords": [
+        "student",
+        "estudante",
+        "lucas",
+        "lucas"
+      ],
+      "implicates": "prof-silva",
+      "clears": "stu-lucas",
+      "text": {
+        "en": "I saw Lucas sitting in the library lounge via the security camera before I dozed off; he never left his seat.",
+        "pt": "Eu vi o Lucas sentado no lounge da biblioteca pela câmera de segurança antes de eu cochilar; ele não saiu do lugar."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "prof-silva",
+      "ask": "Did you see anything suspicious?",
+      "keywords": [
+        "suspicious",
+        "suspeito",
+        "shadow",
+        "sombra"
+      ],
+      "implicates": null,
+      "clears": null,
+      "text": {
+        "en": "I saw nothing but shadows in the hallway.",
+        "pt": "Eu não vi nada além de sombras no corredor."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "tech-ana",
+      "ask": "Who else has access?",
+      "keywords": [
+        "access",
+        "acesso",
+        "professor",
+        "professor"
+      ],
+      "implicates": "prof-silva",
+      "clears": null,
+      "text": {
+        "en": "I saw Professor Silva entering the restricted server zone using his master key just before the power cut.",
+        "pt": "Eu vi o Professor Silva entrando na zona restrita do servidor usando sua chave mestra pouco antes da queda de energia."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Look at who clears whom. Ana is cleared by Lucas, Lucas by Pedro, and Pedro by Ana.",
+        "pt": "Veja quem inocenta quem. A Ana é inocentada pelo Lucas, o Lucas pelo Pedro, e o Pedro pela Ana."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The Professor is the only one not cleared by another person's testimony.",
+        "pt": "O Professor é o único que não é inocentado pelo testemunho de outra pessoa."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "chip": "Prototype silicon component",
+      "blackout": "Total loss of electrical power"
+    },
+    "pt": {
+      "chip": "Componente de silício protótipo",
+      "blackout": "Perda total de energia elétrica"
+    }
+  },
+  "rooms": [
+    {
+      "id": "r1",
+      "en": "Server Room",
+      "pt": "Sala do Servidor"
+    },
+    {
+      "id": "r2",
+      "en": "Cleanroom",
+      "pt": "Sala Limpa"
+    },
+    {
+      "id": "r3",
+      "en": "Professor's Office",
+      "pt": "Escritório do Professor"
+    },
+    {
+      "id": "r4",
+      "en": "Library Lounge",
+      "pt": "Lounge da Biblioteca"
+    }
+  ],
+  "solution": {
+    "en": "Professor Silva stole the chip. He used his master key to enter the server room during the blackout. He tried to hide his tracks, but Lucas saw him enter the zone, and Ana's testimony about the timing and the Professor's access left him as the only person without an alibi provided by others.",
+    "pt": "O Professor Silva roubou o chip. Ele usou sua chave mestra para entrar na sala do servidor durante o apagão. Ele tentou esconder seus rastros, mas Lucas o viu entrar na zona, e o testemunho de Ana sobre o tempo e o acesso do Professor o deixou como a única pessoa sem um álibi fornecido por outros."
+  },
+  "aftermath": {
+    "tech-ana": {
+      "en": {
+        "headline": "Technician Framed!",
+        "body": "Ana Oliveira was wrongly accused of the theft. The real culprit remains at large."
+      },
+      "pt": {
+        "headline": "Técnica Incriminada!",
+        "body": "Ana Oliveira foi injustamente acusada do roubo. O verdadeiro culpado permanece à solta."
+      }
+    },
+    "guard-pedro": {
+      "en": {
+        "headline": "Security Failure!",
+        "body": "The guard is fired after the investigation points to negligence, though he didn't steal the chip."
+      },
+      "pt": {
+        "headline": "Falha de Segurança!",
+        "body": "O segurança é demitido após a investigação apontar negligência, embora ele não tenha roubado o chip."
+      }
+    },
+    "stu-lucas": {
+      "en": {
+        "headline": "Student Scapegoat!",
+        "body": "The PhD student was suspected of stealing the chip to pay debts, but evidence was thin."
+      },
+      "pt": {
+        "headline": "Estudante Bode Expiatório!",
+        "body": "O doutorando foi suspeito de roubar o chip para pagar dívidas, mas as evidências eram fracas."
+      }
+    }
+  },
+  "id": "case-gen-a-university-lab-in-fundao-a-prototype-c",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A university lab in Fundao: a prototype chip is stolen overnight",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.001905,
+      "drafts": 2,
+      "receipts": [
+        "01M7XP9FV5A0N04V6Y8XV3FYBZ",
+        "01M7XP9XVBWM87335J0TJ1W4PC"
+      ]
+    }
+  }
+}

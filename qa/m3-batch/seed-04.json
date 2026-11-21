@@ -1,0 +1,325 @@
+{
+  "title": {
+    "en": "The Tijuca Pharmacy Heist",
+    "pt": "O Roubo na Farmácia da Tijuca"
+  },
+  "intro": {
+    "en": "A high-security pharmacy in the heart of Tijuca was broken into last night. The thief didn't take the money, but emptied the safe of all official prescription pads. The alarm was deactivated manually. Four people were in the building.",
+    "pt": "Uma farmácia de alta segurança no coração da Tijuca foi invadida ontem à noite. O ladrão não levou o dinheiro, mas esvaziou o cofre de todos os blocos de receitas oficiais. O alarme foi desativado manualmente. Quatro pessoas estavam no prédio."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Dr. Arnaldo",
+      "role": {
+        "en": "Pharmacist",
+        "pt": "Farmacêutico"
+      },
+      "persona": {
+        "en": "Stressed and meticulous",
+        "pt": "Estressado e meticuloso"
+      },
+      "alibi": {
+        "en": "I was in my office checking inventory.",
+        "pt": "Eu estava no meu escritório conferindo o estoque."
+      },
+      "facts": "You were in the office at 22:00. You lie that you never left your desk, but you actually went to the kitchen for coffee."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Beatriz",
+      "role": {
+        "en": "Assistant",
+        "pt": "Assistente"
+      },
+      "persona": {
+        "en": "Ambitious and quiet",
+        "pt": "Ambiciosa e quieta"
+      },
+      "alibi": {
+        "en": "I was cleaning the stockroom.",
+        "pt": "Eu estava limpando o estoque."
+      },
+      "facts": "You were in the safe room at 22:15. You lie that you were in the stockroom the whole time."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Carlos",
+      "role": {
+        "en": "Security Guard",
+        "pt": "Segurança"
+      },
+      "persona": {
+        "en": "Lazy and distracted",
+        "pt": "Preguiçoso e distraído"
+      },
+      "alibi": {
+        "en": "I was watching the monitors in the lobby.",
+        "pt": "Eu estava assistindo aos monitores no saguão."
+      },
+      "facts": "You were sleeping in the lobby at 22:00. You lie that you saw everything on the cameras clearly."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Diana",
+      "role": {
+        "en": "Delivery Driver",
+        "pt": "Entregadora"
+      },
+      "persona": {
+        "en": "Always in a hurry",
+        "pt": "Sempre com pressa"
+      },
+      "alibi": {
+        "en": "I was dropping off a package at the back door.",
+        "pt": "Eu estava entregando um pacote na porta dos fundos."
+      },
+      "facts": "You were near the safe room at 22:10. You lie that you never saw anyone near the safe."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "22:00",
+      "stop": {
+        "en": "Lobby",
+        "pt": "Saguão"
+      },
+      "event": {
+        "en": "Carlos begins his shift.",
+        "pt": "Carlos começa seu turno."
+      },
+      "who": [
+        "suspect-3"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "22:10",
+      "stop": {
+        "en": "Back Entrance",
+        "pt": "Entrada dos Fundos"
+      },
+      "event": {
+        "en": "Diana arrives with a delivery.",
+        "pt": "Diana chega com uma entrega."
+      },
+      "who": [
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "22:15",
+      "stop": {
+        "en": "Safe Room",
+        "pt": "Sala do Cofre"
+      },
+      "event": {
+        "en": "The prescription pads are stolen.",
+        "pt": "Os blocos de receitas são roubados."
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "22:30",
+      "stop": {
+        "en": "Office",
+        "pt": "Escritório"
+      },
+      "event": {
+        "en": "Dr. Arnaldo discovers the theft.",
+        "pt": "Dr. Arnaldo descobre o roubo."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-3",
+      "ask": "Where was Beatriz?",
+      "keywords": [
+        "beatriz",
+        "stockroom",
+        "estoque"
+      ],
+      "implicates": null,
+      "clears": "suspect-1",
+      "text": {
+        "en": "I didn't see Dr. Arnaldo leave his office, he stayed there all night.",
+        "pt": "Eu não vi o Dr. Arnaldo sair do escritório, ele ficou lá a noite toda."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Did you see anything suspicious?",
+      "keywords": [
+        "beatriz",
+        "safe",
+        "beatriz"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Beatriz entering the safe room with a large empty bag!",
+        "pt": "Eu vi a Beatriz entrando na sala do cofre com uma bolsa grande e vazia!"
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-1",
+      "ask": "What did you notice about the security?",
+      "keywords": [
+        "carlos",
+        "sleeping",
+        "carlos"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I saw Carlos nodding off in the lobby; he wasn't watching the cameras properly.",
+        "pt": "Eu vi o Carlos cochilando no saguão; ele não estava vigiando as câmeras direito."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-1",
+      "ask": "Where were the keys?",
+      "keywords": [
+        "beatriz",
+        "keys",
+        "beatriz"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I noticed Beatriz's fingerprints all over the safe keypad this morning.",
+        "pt": "Notei as impressões digitais da Beatriz em todo o teclado do cofre esta manhã."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "suspect-2",
+      "ask": "Where is the delivery person?",
+      "keywords": [
+        "diana",
+        "delivery",
+        "diana"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I saw Diana leaving through the back door at 22:10, she was just a delivery person.",
+        "pt": "Eu vi a Diana saindo pela porta dos fundos às 22:10, ela era apenas uma entregadora."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on who was seen near the safe room.",
+        "pt": "Foque em quem foi visto perto da sala do cofre."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The security guard was too sleepy to be a suspect for the theft itself, but he missed the culprit.",
+        "pt": "O segurança estava com sono demais para ser o suspeito do roubo, mas ele deixou o culpado passar."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "prescription pads": "Official medical documents for drugs",
+      "safe": "A reinforced box for valuables"
+    },
+    "pt": {
+      "prescription pads": "Blocos de receitas médicas",
+      "safe": "Cofre"
+    }
+  },
+  "rooms": [
+    {
+      "id": "r1",
+      "en": "Safe Room",
+      "pt": "Sala do Cofre"
+    },
+    {
+      "id": "r2",
+      "en": "Lobby",
+      "pt": "Saguão"
+    },
+    {
+      "id": "r3",
+      "en": "Office",
+      "pt": "Escritório"
+    },
+    {
+      "id": "r4",
+      "en": "Stockroom",
+      "pt": "Estoque"
+    }
+  ],
+  "solution": {
+    "en": "Beatriz is the thief. Diana witnessed her entering the safe room with a bag to hide the pads, and Dr. Arnaldo found her fingerprints on the keypad. Carlos's laziness allowed her to slip past unnoticed.",
+    "pt": "Beatriz é a ladra. Diana a viu entrando na sala do cofre com uma bolsa para esconder as receitas, e o Dr. Arnaldo encontrou as impressões digitais dela no teclado. A preguiça de Carlos permitiu que ela passasse sem ser notada."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Pharmacist Cleared",
+        "body": "Dr. Arnaldo was wrongly accused but proved to be a victim of the theft."
+      },
+      "pt": {
+        "headline": "Farmacêutico Absolvido",
+        "body": "O Dr. Arnaldo foi acusado injustamente, mas provou ser uma vítima do roubo."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Guard Blamed for Negligence",
+        "body": "Carlos was fired for sleeping, though he didn't steal the pads."
+      },
+      "pt": {
+        "headline": "Segurança Culpado por Negligência",
+        "body": "Carlos foi demitido por dormir, embora não tenha roubado as receitas."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Delivery Driver Mistaken for Accomplice",
+        "body": "Diana was investigated but her testimony actually helped solve the case."
+      },
+      "pt": {
+        "headline": "Entregadora Confundida com Cúmplice",
+        "body": "Diana foi investigada, mas seu depoimento na verdade ajudou a resolver o caso."
+      }
+    }
+  },
+  "id": "case-gen-a-closed-pharmacy-in-tijuca-the-safe-wit",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A closed pharmacy in Tijuca: the safe with the prescription pads is emptied",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000829,
+      "drafts": 1,
+      "receipts": [
+        "01M7XP6Q5TDDSF38P1ZX0AMRJ1"
+      ]
+    }
+  }
+}

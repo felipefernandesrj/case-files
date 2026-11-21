@@ -1,0 +1,318 @@
+{
+  "title": {
+    "en": "The Vanishing Verse",
+    "pt": "O Verso Desaparecido"
+  },
+  "intro": {
+    "en": "In the cozy atmosphere of 'Livraria Ipanema', a legendary poet's final manuscript vanished from a locked drawer during a sudden power outage. The shop was closed to the public, leaving only four people inside.",
+    "pt": "No ambiente aconchegante da 'Livraria Ipanema', o manuscrito final de um lendário poeta desapareceu de uma gaveta trancada durante uma queda de energia repentina. A loja estava fechada ao público, deixando apenas quatro pessoas lá dentro."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Clara",
+      "role": {
+        "en": "Barista",
+        "pt": "Barista"
+      },
+      "persona": {
+        "en": "Anxious and detail-oriented.",
+        "pt": "Ansiosa e detalhista."
+      },
+      "alibi": {
+        "en": "She was cleaning the espresso machine when the lights went out.",
+        "pt": "Ela estava limpando a máquina de espresso quando as luzes se apagaram."
+      },
+      "facts": "You were indeed behind the counter, but you saw a shadow moving near the desk before the darkness hit."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Ricardo",
+      "role": {
+        "en": "Literature Professor",
+        "pt": "Professor de Literatura"
+      },
+      "persona": {
+        "en": "Arrogant and obsessed with rare works.",
+        "pt": "Arrogante e obcecado por obras raras."
+      },
+      "alibi": {
+        "en": "He claims he was reading in the corner by the window.",
+        "pt": "Ele afirma que estava lendo no canto, perto da janela."
+      },
+      "facts": "You stole the manuscript because you believe it belongs in a museum, not a cafe. You used a master key you swiped earlier."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Beatriz",
+      "role": {
+        "en": "Owner",
+        "pt": "Dona da Livraria"
+      },
+      "persona": {
+        "en": "Protective and stressed.",
+        "pt": "Protetora e estressada."
+      },
+      "alibi": {
+        "en": "She was in her office checking the inventory.",
+        "pt": "Ela estava em seu escritório verificando o inventário."
+      },
+      "facts": "You heard the sound of a drawer sliding open right after the power cut."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Hugo",
+      "role": {
+        "en": "Delivery Driver",
+        "pt": "Entregador"
+      },
+      "persona": {
+        "en": "Quiet and observant.",
+        "pt": "Quieto e observador."
+      },
+      "alibi": {
+        "en": "He was waiting in the hallway for his receipt.",
+        "pt": "Ele estava esperando no corredor pelo seu recibo."
+      },
+      "facts": "You saw Ricardo walking towards the desk just as the lights flickered."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "19:00",
+      "stop": {
+        "en": "Cafe Entrance",
+        "pt": "Entrada do Café"
+      },
+      "event": {
+        "en": "Closing time. Everyone stays inside.",
+        "pt": "Hora de fechar. Todos permanecem lá dentro."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "19:15",
+      "stop": {
+        "en": "Backroom",
+        "pt": "Sala dos Fundos"
+      },
+      "event": {
+        "en": "The power goes out suddenly.",
+        "pt": "A energia cai de repente."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "19:17",
+      "stop": {
+        "en": "Author's Desk",
+        "pt": "Escrivaninha do Autor"
+      },
+      "event": {
+        "en": "The manuscript is stolen from the locked drawer.",
+        "pt": "O manuscrito é roubado da gaveta trancada."
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "19:25",
+      "stop": {
+        "en": "Main Hall",
+        "pt": "Salão Principal"
+      },
+      "event": {
+        "en": "Lights come back on. The loss is discovered.",
+        "pt": "As luzes voltam. A perda é descoberta."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you when it happened?",
+      "keywords": [
+        "machine",
+        "espresso",
+        "counter"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I was cleaning the espresso machine at the counter the whole time; I didn't leave my post.",
+        "pt": "Eu estava limpando a máquina de espresso no balcão o tempo todo; eu não saí do meu posto."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Did you see anything unusual?",
+      "keywords": [
+        "ricardo",
+        "desk",
+        "shadow"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Ricardo moving toward the desk just as the lights flickered.",
+        "pt": "Eu vi o Ricardo indo em direção à escrivaninha bem quando as luzes piscaram."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-3",
+      "ask": "What did you hear?",
+      "keywords": [
+        "drawer",
+        "sound",
+        "click"
+      ],
+      "implicates": "suspect-2",
+      "clears": "suspect-1",
+      "text": {
+        "en": "I heard a metallic click and a drawer sliding, and I know it wasn't near the kitchen where Clara was.",
+        "pt": "Eu ouvi um clique metálico e uma gaveta deslizando, e eu sei que não foi perto da cozinha onde a Clara estava."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-2",
+      "ask": "What were you doing?",
+      "keywords": [
+        "reading",
+        "window"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I was reading my book by the window, so I didn't see Hugo in the hallway at all.",
+        "pt": "Eu estava lendo meu livro perto da janela, então eu não vi o Hugo no corredor de jeito nenhum."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on who was seen near the desk during the blackout.",
+        "pt": "Foque em quem foi visto perto da escrivaninha durante o apagão."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "The sound of the drawer implies someone was very close to the desk.",
+        "pt": "O som da gaveta implica que alguém estava muito perto da escrivaninha."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "manuscript": "handwritten document",
+      "blackout": "loss of electricity"
+    },
+    "pt": {
+      "manuscrito": "documento manuscrito",
+      "apagão": "queda de energia"
+    }
+  },
+  "rooms": [
+    {
+      "id": "room-1",
+      "en": "Coffee Bar",
+      "pt": "Balcão de Café"
+    },
+    {
+      "id": "room-2",
+      "en": "Reading Nook",
+      "pt": "Canto de Leitura"
+    },
+    {
+      "id": "room-3",
+      "en": "Owner's Office",
+      "pt": "Escritório da Dona"
+    },
+    {
+      "id": "room-4",
+      "en": "The Desk",
+      "pt": "A Escrivaninha"
+    }
+  ],
+  "solution": {
+    "en": "Ricardo used the cover of the blackout to steal the manuscript. Hugo saw him heading to the desk, and Beatriz heard the drawer opening. Since Clara was confirmed to be at the counter by her own detailed account and Beatriz's testimony about the sound direction, Ricardo is the only one who could have been at the desk.",
+    "pt": "Ricardo usou o apagão para roubar o manuscrito. Hugo o viu indo em direção à escrivaninha, e Beatriz ouviu a gaveta abrindo. Como Clara estava confirmada no balcão e o som da gaveta não veio da cozinha, Ricardo é o único que poderia estar na escrivaninha."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Barista Wrongly Accused!",
+        "body": "The local cafe is in turmoil after a wrongful accusation against its hardworking barista."
+      },
+      "pt": {
+        "headline": "Barista Acusada Injustamente!",
+        "body": "O café local está em turbulência após uma acusação errônea contra sua dedicada barista."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Owner Under Fire!",
+        "body": "The owner of Livraria Ipanema faces backlash after being blamed for the theft."
+      },
+      "pt": {
+        "headline": "Dona sob Fogo Cruzado!",
+        "body": "A dona da Livraria Ipanema enfrenta reações negativas após ser culpada pelo roubo."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Delivery Driver Implicated!",
+        "body": "A simple delivery driver was caught in a web of lies regarding the manuscript theft."
+      },
+      "pt": {
+        "headline": "Entregador Implicado!",
+        "body": "Um simples entregador foi pego em uma teia de mentiras sobre o roubo do manuscrito."
+      }
+    }
+  },
+  "id": "case-gen-a-bookstore-cafe-in-ipanema-the-poet-s-m",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A bookstore cafe in Ipanema: the poet's manuscript disappears from a locked drawer",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.001839,
+      "drafts": 2,
+      "receipts": [
+        "01M7XPFCFN5PY6F0CACY83XKA9",
+        "01M7XPGZFPDYQ7FCGV58CTMX6A"
+      ]
+    }
+  }
+}

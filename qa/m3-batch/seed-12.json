@@ -1,0 +1,308 @@
+{
+  "title": {
+    "en": "The Atlas Heist",
+    "pt": "O Roubo do Atlas"
+  },
+  "intro": {
+    "en": "In the heart of Centro, inside the silent halls of the Municipal Library, a priceless 16th-century map has been sliced from its atlas. The thief left behind a smell of expensive perfume and a single torn thread of silk.",
+    "pt": "No coração do Centro, nos corredores silenciosos da Biblioteca Municipal, um mapa do século XVI foi cortado de seu atlas. O ladrão deixou para trás um cheiro de perfume caro e um único fio de seda rasgado."
+  },
+  "culprit": "suspect-3",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Arthur Sterling",
+      "role": {
+        "en": "Head Librarian",
+        "pt": "Bibliotecário-chefe"
+      },
+      "persona": {
+        "en": "Stiff, elderly, and obsessed with order.",
+        "pt": "Rígido, idoso e obcecado por ordem."
+      },
+      "alibi": {
+        "en": "He was organizing the archives in the basement.",
+        "pt": "Ele estava organizando os arquivos no porão."
+      },
+      "facts": "You were in the basement at 21:00. You lie that the basement door was locked all night to hide that you lost the keys earlier."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Elena Vance",
+      "role": {
+        "en": "Researcher",
+        "pt": "Pesquisadora"
+      },
+      "persona": {
+        "en": "Anxious, caffeine-addicted, and highly intelligent.",
+        "pt": "Ansiosa, viciada em cafeína e altamente inteligente."
+      },
+      "alibi": {
+        "en": "She was studying in the reading room.",
+        "pt": "Ela estava estudando na sala de leitura."
+      },
+      "facts": "You were in the reading room at 21:00. You lie that you didn't see anyone near the atlas to avoid being a witness."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Julian Thorne",
+      "role": {
+        "en": "Art Collector",
+        "pt": "Colecionador de Arte"
+      },
+      "persona": {
+        "en": "Charismatic, wealthy, and suspiciously smooth.",
+        "pt": "Carismático, rico e suspeitosamente suave."
+      },
+      "alibi": {
+        "en": "He claims he was leaving the library through the main exit.",
+        "pt": "Ele afirma que estava saindo da biblioteca pela saída principal."
+      },
+      "facts": "You were in the Rare Books Room at 21:15. You lie that you were merely admiring the binding of a different book while you cut the map."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Clara Oswald",
+      "role": {
+        "en": "Janitor",
+        "pt": "Faxineira"
+      },
+      "persona": {
+        "en": "Observant, tired, and no-nonsense.",
+        "pt": "Observadora, cansada e direta."
+      },
+      "alibi": {
+        "en": "She was cleaning the corridors.",
+        "pt": "Ela estava limpando os corredores."
+      },
+      "facts": "You were in the corridors at 21:00. You lie that you didn't hear anything to avoid being interrogated by the police."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "20:30",
+      "stop": {
+        "en": "Main Hall",
+        "pt": "Hall Principal"
+      },
+      "event": {
+        "en": "The library closes for the evening.",
+        "pt": "A biblioteca fecha para a noite."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "21:00",
+      "stop": {
+        "en": "Archives",
+        "pt": "Arquivos"
+      },
+      "event": {
+        "en": "Arthur is heard working downstairs.",
+        "pt": "Arthur é ouvido trabalhando no andar de baixo."
+      },
+      "who": [
+        "suspect-1"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "21:15",
+      "stop": {
+        "en": "Rare Books Room",
+        "pt": "Sala de Livros Raros"
+      },
+      "event": {
+        "en": "The map is stolen using a precision blade.",
+        "pt": "O mapa é roubado usando uma lâmina de precisão."
+      },
+      "who": [
+        "suspect-3"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "21:45",
+      "stop": {
+        "en": "Reading Room",
+        "pt": "Sala de Leitura"
+      },
+      "event": {
+        "en": "Elena finishes her notes.",
+        "pt": "Elena termina suas notas."
+      },
+      "who": [
+        "suspect-2"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you during the theft?",
+      "keywords": [
+        "basement",
+        "porão"
+      ],
+      "implicates": null,
+      "clears": "suspect-2",
+      "text": {
+        "en": "I was in the basement; I saw Elena in the reading room through the glass partition, she never left her desk.",
+        "pt": "Eu estava no porão; eu vi a Elena na sala de leitura através da divisória de vidro, ela nunca saiu da mesa."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-2",
+      "ask": "Did you notice anyone suspicious?",
+      "keywords": [
+        "perfume",
+        "perfume"
+      ],
+      "implicates": "suspect-3",
+      "clears": "suspect-4",
+      "text": {
+        "en": "I didn't see much, but I distinctly remember a very strong, expensive floral perfume passing by my table.",
+        "pt": "Não vi muito, mas me lembro nitidamente de um perfume floral muito forte e caro passando pela minha mesa."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-4",
+      "ask": "What did you find while cleaning?",
+      "keywords": [
+        "silk",
+        "seda"
+      ],
+      "implicates": "suspect-3",
+      "clears": "suspect-1",
+      "text": {
+        "en": "I found a blue silk thread caught on the edge of the atlas display case.",
+        "pt": "Eu encontrei um fio de seda azul preso na borda da vitrine do atlas."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-3",
+      "ask": "Did you see the thief?",
+      "keywords": [
+        "nothing",
+        "nada"
+      ],
+      "implicates": null,
+      "clears": null,
+      "text": {
+        "en": "I saw nothing but old books and dust.",
+        "pt": "Não vi nada além de livros velhos e poeira."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Focus on the sensory evidence: the perfume and the silk thread.",
+        "pt": "Foque nas evidências sensoriais: o perfume e o fio de seda."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Who among the suspects wears expensive clothing and high-end fragrances?",
+        "pt": "Quem entre os suspeitos usa roupas caras e fragrâncias de luxo?"
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "atlas": "A collection of maps",
+      "heist": "A robbery"
+    },
+    "pt": {
+      "atlas": "Um atlas",
+      "heist": "Um roubo"
+    }
+  },
+  "rooms": [
+    {
+      "id": "hall",
+      "en": "Main Hall",
+      "pt": "Hall Principal"
+    },
+    {
+      "id": "archives",
+      "en": "Archives",
+      "pt": "Arquivos"
+    },
+    {
+      "id": "reading-room",
+      "en": "Reading Room",
+      "pt": "Sala de Leitura"
+    },
+    {
+      "id": "rare-books",
+      "en": "Rare Books Room",
+      "pt": "Sala de Livros Raros"
+    }
+  ],
+  "solution": {
+    "en": "Julian Thorne is the culprit. Elena's testimony about the expensive perfume and Clara's discovery of the blue silk thread (matching Julian's luxury attire) point directly to him. Furthermore, Elena's alibi was confirmed by Arthur, clearing her.",
+    "pt": "Julian Thorne é o culpado. O testemunho de Elena sobre o perfume caro e a descoberta de Clara do fio de seda azul (combinando com as roupas de luxo de Julian) apontam diretamente para ele. Além disso, o álibi de Elena foi confirmado por Arthur, inocentando-a."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Librarian Wrongly Accused",
+        "body": "Arthur Sterling was detained today, but evidence shows he was merely a victim of poor security."
+      },
+      "pt": {
+        "headline": "Bibliotecário Injustamente Acusado",
+        "body": "Arthur Sterling foi detido hoje, mas as evidências mostram que ele foi apenas vítima de uma segurança deficiente."
+      }
+    },
+    "suspect-2": {
+      "en": {
+        "headline": "Researcher Under Fire",
+        "body": "Elena Vance faces investigation after being mistaken for the map thief."
+      },
+      "pt": {
+        "headline": "Pesquisadora Sob Suspeita",
+        "body": "Elena Vance enfrenta investigação após ser confundida com a ladra do mapa."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Janitor Misidentified",
+        "body": "The library staff is in shock after a wrongful accusation against Clara Oswald."
+      },
+      "pt": {
+        "headline": "Faxineira Identificada Erroneamente",
+        "body": "A equipe da biblioteca está em choque após uma acusação errônea contra Clara Oswald."
+      }
+    }
+  },
+  "id": "case-gen-a-library-in-the-centro-a-rare-map-is-cu",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A library in the Centro: a rare map is cut from an atlas",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.00086,
+      "drafts": 1,
+      "receipts": [
+        "01M7XPBA9VR8H55RCY0338G70R"
+      ]
+    }
+  }
+}

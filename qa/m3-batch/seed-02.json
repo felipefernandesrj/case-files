@@ -1,0 +1,333 @@
+{
+  "title": {
+    "en": "The Silent Batucada",
+    "pt": "O Samba Silencioso"
+  },
+  "intro": {
+    "en": "The drums of the 'Estrela de Madureira' have gone silent. During the midnight rehearsal, the lead surdo drum was found smashed, its skin torn and the wooden frame shattered. Without the pulse of the lead drum, the school cannot compete in the parade. Four people were near the drum room when the sabotage happened.",
+    "pt": "Os tambores da 'Estrela de Madureira' silenciaram. Durante o ensaio da meia-noite, o surdo de marcação foi encontrado destruído, sua pele rasgada e a estrutura de madeira estilhaçada. Sem a batida do surdo principal, a escola não pode competir no desfile. Quatro pessoas estavam perto da sala de percussão quando a sabotagem ocorreu."
+  },
+  "culprit": "marta-the-dancer",
+  "suspects": [
+    {
+      "id": "marta-the-dancer",
+      "name": "Marta",
+      "role": {
+        "en": "Lead Dancer",
+        "pt": "Passista Principal"
+      },
+      "persona": {
+        "en": "Ambitious and perfectionist, she wants a new drum section to improve the rhythm.",
+        "pt": "Ambiciosa e perfeccionista, ela quer uma nova seção de percussão para melhorar o ritmo."
+      },
+      "alibi": {
+        "en": "She claims she was practicing her footwork in the main hall.",
+        "pt": "Ela afirma que estava praticando seus passos no salão principal."
+      },
+      "facts": "You were in the drum room at 23:50. You lie that you were in the main hall all night."
+    },
+    {
+      "id": "ricardo-the-drummer",
+      "name": "Ricardo",
+      "role": {
+        "en": "Percussionist",
+        "pt": "Percussionista"
+      },
+      "persona": {
+        "en": "Old school and loyal to the current instruments.",
+        "pt": "Velha guarda e leal aos instrumentos atuais."
+      },
+      "alibi": {
+        "en": "He says he was tuning his tambourines in the storage room.",
+        "pt": "Ele diz que estava afinando seus pandeiros no depósito."
+      },
+      "facts": "You were in the storage room at 23:50. You saw Marta running away from the drum room."
+    },
+    {
+      "id": "lucas-the-manager",
+      "name": "Lucas",
+      "role": {
+        "en": "School Manager",
+        "pt": "Diretor da Escola"
+      },
+      "persona": {
+        "en": "Always stressed about money and repairs.",
+        "pt": "Sempre estressado com dinheiro e reparos."
+      },
+      "alibi": {
+        "en": "He says he was checking the gates at the entrance.",
+        "pt": "Ele diz que estava conferindo os portões na entrada."
+      },
+      "facts": "You were at the entrance. You saw Ricardo in the storage room through the window."
+    },
+    {
+      "id": "beatriz-the-costumer",
+      "name": "Beatriz",
+      "role": {
+        "en": "Costume Designer",
+        "pt": "Figurinista"
+      },
+      "persona": {
+        "en": "Observant and a bit of a gossip.",
+        "pt": "Observadora e um pouco fofoqueira."
+      },
+      "alibi": {
+        "en": "She says she was sewing sequins in the dressing room.",
+        "pt": "Ela diz que estava costurando paetês no camarim."
+      },
+      "facts": "You were in the dressing room. You found a broken piece of a dancer's heel near the drum."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "23:30",
+      "stop": {
+        "en": "Main Hall",
+        "pt": "Salão Principal"
+      },
+      "event": {
+        "en": "Rehearsal begins.",
+        "pt": "O ensaio começa."
+      },
+      "who": [
+        "marta-the-dancer",
+        "ricardo-the-drummer",
+        "lucas-the-manager",
+        "beatriz-the-costumer"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "23:45",
+      "stop": {
+        "en": "Storage Room",
+        "pt": "Depósito"
+      },
+      "event": {
+        "en": "Ricardo goes to tune his instruments.",
+        "pt": "Ricardo vai afinar seus instrumentos."
+      },
+      "who": [
+        "ricardo-the-drummer"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "23:50",
+      "stop": {
+        "en": "Drum Room",
+        "pt": "Sala de Percussão"
+      },
+      "event": {
+        "en": "The lead surdo is smashed.",
+        "pt": "O surdo principal é destruído."
+      },
+      "who": [
+        "marta-the-dancer"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "00:10",
+      "stop": {
+        "en": "Main Hall",
+        "pt": "Salão Principal"
+      },
+      "event": {
+        "en": "The sabotage is discovered.",
+        "pt": "A sabotagem é descoberta."
+      },
+      "who": [
+        "lucas-the-manager"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "ricardo-the-drummer",
+      "ask": "Where were the others?",
+      "keywords": [
+        "marta",
+        "running",
+        "marta"
+      ],
+      "implicates": "marta-the-dancer",
+      "clears": null,
+      "text": {
+        "en": "I saw Marta running away from the drum room right after I heard a loud crash.",
+        "pt": "Eu vi a Marta correndo da sala de percussão logo depois que ouvi um estrondo alto."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "lucas-the-manager",
+      "ask": "What did you see in the storage?",
+      "keywords": [
+        "ricardo",
+        "storage",
+        "ricardo"
+      ],
+      "implicates": null,
+      "clears": "ricardo-the-drummer",
+      "text": {
+        "en": "I saw Ricardo inside the storage room through the window, so he couldn't have done it.",
+        "pt": "Eu vi o Ricardo dentro do depósito pela janela, então ele não poderia ter feito isso."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "beatriz-the-costumer",
+      "ask": "Did you find anything unusual?",
+      "keywords": [
+        "heel",
+        "dancer",
+        "dancer"
+      ],
+      "implicates": "marta-the-dancer",
+      "clears": null,
+      "text": {
+        "en": "I found a broken piece of a high-heeled dancer's shoe near the broken drum.",
+        "pt": "Eu encontrei um pedaço quebrado de um salto de dançarina perto do tambor quebrado."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "ricardo-the-drummer",
+      "ask": "Did you see the manager?",
+      "keywords": [
+        "lucas",
+        "gate",
+        "lucas"
+      ],
+      "implicates": null,
+      "clears": "lucas-the-manager",
+      "text": {
+        "en": "I saw Lucas at the entrance gate when I was walking to the storage.",
+        "pt": "Eu vi o Lucas no portão da entrada quando eu estava indo para o depósito."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "lucas-the-manager",
+      "ask": "Where was Beatriz?",
+      "keywords": [
+        "beatriz",
+        "sewing",
+        "beatriz"
+      ],
+      "implicates": null,
+      "clears": "beatriz-the-costumer",
+      "text": {
+        "en": "I passed the dressing room and saw Beatriz sewing peacefully; she was definitely there.",
+        "pt": "Passei pelo camarim e vi a Beatriz costurando tranquilamente; ela com certeza estava lá."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Note that the dancer's shoe part is a very specific physical evidence.",
+        "pt": "Note que o pedaço do sapato de dançarina é uma evidência física muito específica."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Ricardo has a witness confirming his location.",
+        "pt": "Ricardo tem uma testemunha confirmando sua localização."
+      }
+    }
+  ],
+  "glossary": {
+    "surdo": {
+      "en": "Lead bass drum",
+      "pt": "Surdo de marcação"
+    },
+    "passista": {
+      "en": "Lead samba dancer",
+      "pt": "Passista"
+    },
+    "batucada": {
+      "en": "Drum ensemble/rhythm",
+      "pt": "Batucada/Ritmo"
+    }
+  },
+  "rooms": [
+    {
+      "id": "drum-room",
+      "en": "Drum Room",
+      "pt": "Sala de Percussão"
+    },
+    {
+      "id": "main-hall",
+      "en": "Main Hall",
+      "pt": "Salão Principal"
+    },
+    {
+      "id": "storage",
+      "en": "Storage Room",
+      "pt": "Depósito"
+    },
+    {
+      "id": "dressing-room",
+      "en": "Dressing Room",
+      "pt": "Camarim"
+    }
+  ],
+  "solution": {
+    "en": "Marta sabotaged the drum to force the school to buy new, better instruments. Ricardo saw her running from the scene, and Beatriz found her broken dancer's heel at the crime scene. Lucas cleared Ricardo, Ricardo cleared Lucas, and Lucas cleared Beatriz, leaving Marta as the only one without an alibi.",
+    "pt": "Marta sabotou o tambor para forçar a escola a comprar instrumentos novos e melhores. Ricardo a viu correndo da cena, e Beatriz encontrou o salto quebrado de sua sandália na cena do crime. Lucas inocentou Ricardo, Ricardo inocentou Lucas, e Lucas inocentou Beatriz, deixando Marta como a única sem um álibi."
+  },
+  "aftermath": {
+    "ricardo-the-drummer": {
+      "en": {
+        "headline": "Wrong Man!",
+        "body": "The percussionist Ricardo was wrongly accused of destroying the school's pride. He remains heartbroken."
+      },
+      "pt": {
+        "headline": "Homem Errado!",
+        "body": "O percussionista Ricardo foi injustamente acusado de destruir o orgulho da escola. Ele continua com o coração partido."
+      }
+    },
+    "lucas-the-manager": {
+      "en": {
+        "headline": "Manager Under Fire",
+        "body": "Lucas is being blamed for the security lapse during the rehearsal."
+      },
+      "pt": {
+        "headline": "Diretor Sob Fogo",
+        "body": "Lucas está sendo culpado pela falha de segurança durante o ensaio."
+      }
+    },
+    "beatriz-the-costumer": {
+      "en": {
+        "headline": "Gossip or Culprit?",
+        "body": "Beatriz's constant comments led many to believe she orchestrated the sabotage."
+      },
+      "pt": {
+        "headline": "Fofoqueira ou Culpada?",
+        "body": "Os comentários constantes de Beatriz levaram muitos a acreditar que ela orquestrou a sabotagem."
+      }
+    }
+  },
+  "id": "case-gen-a-samba-school-rehearsal-in-madureira-th",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A samba school rehearsal in Madureira: the lead drum is found sabotaged",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.002,
+      "drafts": 2,
+      "receipts": [
+        "01M7XP6Q5WVMF94CC1XWWWF6A6",
+        "01M7XP8NP311HWW1NRCDCWRKQV"
+      ]
+    }
+  }
+}

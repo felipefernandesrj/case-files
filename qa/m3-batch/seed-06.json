@@ -1,0 +1,316 @@
+{
+  "title": {
+    "en": "The Dawn Heist at Recreio",
+    "pt": "O Roubo da Alvorada no Recreio"
+  },
+  "intro": {
+    "en": "As the sun rises over the Recreio beach, the owner of 'O Cantinho' kiosk discovers the cash box is empty. The day's earnings have vanished during the quiet hours before dawn.",
+    "pt": "Enquanto o sol nasce na praia do Recreio, o dono do quiosque 'O Cantinho' descobre que a caixa registradora está vazia. O dinheiro do dia desapareceu durante as horas silenciosas antes do amanhecer."
+  },
+  "culprit": "marcos-delivery",
+  "suspects": [
+    {
+      "id": "marcos-delivery",
+      "name": "Marcos",
+      "role": {
+        "en": "Delivery Driver",
+        "pt": "Entregador"
+      },
+      "persona": {
+        "en": "Always in a rush, smelling of salt and engine oil.",
+        "pt": "Sempre com pressa, cheirando a sal e óleo de motor."
+      },
+      "alibi": {
+        "en": "He claims he was picking up a last order in the city center.",
+        "pt": "Ele afirma que estava buscando um último pedido no centro da cidade."
+      },
+      "facts": "You were at the kiosk at 05:00. You lie that you were only there to drop off a forgotten bag."
+    },
+    {
+      "id": "clara-waitress",
+      "name": "Clara",
+      "role": {
+        "en": "Waitress",
+        "pt": "Garçonete"
+      },
+      "persona": {
+        "en": "Observant and a bit anxious about the management.",
+        "pt": "Observadora e um pouco ansiosa com a gerência."
+      },
+      "alibi": {
+        "en": "She says she was walking on the boardwalk to clear her head.",
+        "pt": "Ela diz que estava caminhando no calçadão para espairecer."
+      },
+      "facts": "You saw a delivery bike parked near the back entrance at 05:00. You lie that you didn't see anyone."
+    },
+    {
+      "id": "seu-jose",
+      "name": "Seu José",
+      "role": {
+        "en": "Cleaner",
+        "pt": "Faxineiro"
+      },
+      "persona": {
+        "en": "An old man who knows everyone's business.",
+        "pt": "Um senhor que conhece a vida de todo mundo."
+      },
+      "alibi": {
+        "en": "He was sleeping in his small room behind the kiosk.",
+        "pt": "Ele estava dormindo em seu pequeno quarto atrás do quiosque."
+      },
+      "facts": "You heard the delivery bike engine revving very loudly at 05:00. You lie that you heard nothing."
+    },
+    {
+      "id": "beatriz-regular",
+      "name": "Beatriz",
+      "role": {
+        "en": "Regular Customer",
+        "pt": "Cliente Frequente"
+      },
+      "persona": {
+        "en": "A fitness enthusiast who jogs every morning.",
+        "pt": "Uma entusiasta de fitness que corre todas as manhãs."
+      },
+      "alibi": {
+        "en": "She was finishing her morning jog on the sand.",
+        "pt": "Ela estava terminando sua corrida matinal na areia."
+      },
+      "facts": "You saw Clara walking on the boardwalk at 05:15. You lie that you were alone."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "04:30",
+      "stop": {
+        "en": "Kiosk",
+        "pt": "Quiosque"
+      },
+      "event": {
+        "en": "The kiosk is locked and quiet.",
+        "pt": "O quiosque está trancado e silencioso."
+      },
+      "who": [
+        "clara-waitress",
+        "marcos-delivery",
+        "seu-jose",
+        "beatriz-regular"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "05:00",
+      "stop": {
+        "en": "Back Entrance",
+        "pt": "Entrada dos Fundos"
+      },
+      "event": {
+        "en": "The cash box is stolen during a brief disturbance.",
+        "pt": "A caixa registradora é roubada durante um breve tumulto."
+      },
+      "who": [
+        "marcos-delivery"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t3",
+      "time": "05:15",
+      "stop": {
+        "en": "Boardwalk",
+        "pt": "Calçadão"
+      },
+      "event": {
+        "en": "People begin to appear as the light grows.",
+        "pt": "As pessoas começam a aparecer conforme a luz aumenta."
+      },
+      "who": [
+        "clara-waitress",
+        "beatriz-regular"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "clara-waitress",
+      "ask": "Did you see anyone suspicious?",
+      "keywords": [
+        "bike",
+        "moto",
+        "veículo"
+      ],
+      "implicates": "marcos-delivery",
+      "clears": null,
+      "text": {
+        "en": "I saw a delivery bike parked right by the back door around 05:00.",
+        "pt": "Eu vi uma moto de entrega estacionada bem na porta dos fundos por volta das 05:00."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "seu-jose",
+      "ask": "Did you hear anything last night?",
+      "keywords": [
+        "engine",
+        "motor",
+        "barulho"
+      ],
+      "implicates": "marcos-delivery",
+      "clears": null,
+      "text": {
+        "en": "I heard a loud motorcycle engine revving near the kitchen at 05:00.",
+        "pt": "Eu ouvi o motor de uma moto acelerando alto perto da cozinha às 05:00."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "beatriz-regular",
+      "ask": "Was Clara around?",
+      "keywords": [
+        "clara",
+        "walk",
+        "caminhada"
+      ],
+      "implicates": null,
+      "clears": "clara-waitress",
+      "text": {
+        "en": "I saw Clara walking calmly on the boardwalk around 05:15, she wasn't near the kiosk.",
+        "pt": "Eu vi a Clara caminhando calmamente no calçadão por volta das 05:15, ela não estava perto do quiosque."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "marcos-delivery",
+      "ask": "Where were you at dawn?",
+      "keywords": [
+        "city",
+        "centro",
+        "entrega"
+      ],
+      "implicates": null,
+      "clears": "beatriz-regular",
+      "text": {
+        "en": "I didn't see anyone, I was all the way in the city center doing deliveries.",
+        "pt": "Eu não vi ninguém, eu estava lá no centro da cidade fazendo entregas."
+      }
+    },
+    {
+      "id": "c5",
+      "from": "clara-waitress",
+      "ask": "What about the cleaner?",
+      "keywords": [
+        "jose",
+        "dormindo",
+        "sleeping"
+      ],
+      "implicates": null,
+      "clears": "seu-jose",
+      "text": {
+        "en": "Seu José was definitely in his room, he didn't come out once.",
+        "pt": "Seu José estava com certeza no quarto dele, ele não saiu nem uma vez."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 60,
+      "text": {
+        "en": "Focus on the noise and the vehicle reported near the time of the theft.",
+        "pt": "Foque no barulho e no veículo relatado perto da hora do roubo."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 120,
+      "text": {
+        "en": "The delivery driver's alibi contradicts the witness descriptions of a motorcycle.",
+        "pt": "O álibi do entregador contradiz os relatos das testemunhas sobre uma motocicleta."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "kiosk": "kiosk",
+      "cash box": "cash box",
+      "dawn": "dawn"
+    },
+    "pt": {
+      "kiosk": "quiosque",
+      "cash box": "caixa registradora",
+      "dawn": "alvorada"
+    }
+  },
+  "rooms": [
+    {
+      "id": "kiosk-main",
+      "en": "Main Counter",
+      "pt": "Balcão Principal"
+    },
+    {
+      "id": "back-entrance",
+      "en": "Back Entrance",
+      "pt": "Entrada dos Fundos"
+    },
+    {
+      "id": "kitchen",
+      "en": "Kitchen",
+      "pt": "Cozinha"
+    },
+    {
+      "id": "storage",
+      "en": "Storage Room",
+      "pt": "Depósito"
+    }
+  ],
+  "solution": {
+    "en": "The crime was solved by linking the loud motorcycle engine heard by Seu José and seen by Clara to the delivery bike Marcos claimed he didn't use near the kiosk. His claim of being in the city center was debunked by the physical presence of his specific vehicle at the crime scene at 05:00.",
+    "pt": "O crime foi resolvido ao ligar o barulho alto do motor da moto ouvido por Seu José e visto por Clara à moto de entrega que Marcos alegou não ter usado perto do quiosque. Sua afirmação de estar no centro da cidade foi desmentida pela presença física de seu veículo específico na cena do crime às 05:00."
+  },
+  "aftermath": {
+    "clara-waitress": {
+      "en": {
+        "headline": "Waitress Accused!",
+        "body": "Clara was wrongly accused of the heist, but evidence proves she was merely jogging."
+      },
+      "pt": {
+        "headline": "Garçonete Acusada!",
+        "body": "Clara foi injustamente acusada do roubo, mas as evidências provam que ela estava apenas caminhando."
+      }
+    },
+    "seu-jose": {
+      "en": {
+        "headline": "Elderly Man Under Scrutiny",
+        "body": "The local cleaner was mistaken for a thief, causing a community uproar."
+      },
+      "pt": {
+        "headline": "Idoso Sob Suspeita",
+        "body": "O faxineiro local foi confundido com um ladrão, causando indignação na comunidade."
+      }
+    },
+    "beatriz-regular": {
+      "en": {
+        "headline": "Jogger Involved in Investigation",
+        "body": "A local fitness enthusiast was wrongly detained during the Recreio robbery case."
+      },
+      "pt": {
+        "headline": "Corredora Envolvida em Investigação",
+        "body": "Uma entusiasta do fitness local foi detida injustamente durante o caso de roubo no Recreio."
+      }
+    }
+  },
+  "id": "case-gen-a-beach-kiosk-in-recreio-at-dawn-the-day",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A beach kiosk in Recreio at dawn: the day's takings disappear",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000845,
+      "drafts": 1,
+      "receipts": [
+        "01M7XP8BZQ3XAS5QRDYX98PGBA"
+      ]
+    }
+  }
+}

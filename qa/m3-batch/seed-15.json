@@ -1,0 +1,299 @@
+{
+  "title": {
+    "en": "The Missing Ticket Box of Santa Teresa",
+    "pt": "O Sumiço da Bilheteria de Santa Teresa"
+  },
+  "intro": {
+    "en": "A vintage yellow tram was climbing the steep hills of Santa Teresa when the conductor realized his locked metal ticket box had vanished from the driver's cabin. The tram was in motion, and the passengers were few.",
+    "pt": "Um bonde amarelo vintage subia as ladeiras íngremes de Santa Teresa quando o cobrador percebeu que sua caixa de metal com os bilhetes havia sumido da cabine do motorista. O bonde estava em movimento e os passageiros eram poucos."
+  },
+  "culprit": "suspect-2",
+  "suspects": [
+    {
+      "id": "suspect-1",
+      "name": "Clara",
+      "role": {
+        "en": "Tourist",
+        "pt": "Turista"
+      },
+      "persona": {
+        "en": "An enthusiastic photographer.",
+        "pt": "Uma fotógrafa entusiasta."
+      },
+      "alibi": {
+        "en": "She was taking photos of the scenery through the window.",
+        "pt": "Ela estava tirando fotos da paisagem pela janela."
+      },
+      "facts": "You were in the back car at 14:10. You lie that you never saw anyone near the cabin."
+    },
+    {
+      "id": "suspect-2",
+      "name": "Beto",
+      "role": {
+        "en": "Maintenance Worker",
+        "pt": "Trabalhador de Manutenção"
+      },
+      "persona": {
+        "en": "A grumpy man who knows every bolt of the tram.",
+        "pt": "Um homem ranzinza que conhece cada parafuso do bonde."
+      },
+      "alibi": {
+        "en": "He claims he was fixing a loose floorboard in the rear.",
+        "pt": "Ele afirma que estava consertando uma tábua solta no fundo."
+      },
+      "facts": "You were in the driver's cabin at 14:10. You lie that you were in the rear car the whole time."
+    },
+    {
+      "id": "suspect-3",
+      "name": "Sofia",
+      "role": {
+        "en": "Old Resident",
+        "pt": "Moradora Antiga"
+      },
+      "persona": {
+        "en": "A sweet lady who has lived in Santa Teresa for 80 years.",
+        "pt": "Uma senhora doce que mora em Santa Teresa há 80 anos."
+      },
+      "alibi": {
+        "en": "She was dozing off in her usual seat.",
+        "pt": "Ela estava cochilando em seu assento habitual."
+      },
+      "facts": "You were near the cabin at 14:10. You lie that you didn't hear any metallic sounds."
+    },
+    {
+      "id": "suspect-4",
+      "name": "Lucas",
+      "role": {
+        "en": "Student",
+        "pt": "Estudante"
+      },
+      "persona": {
+        "en": "A tech-savvy teenager looking at his phone.",
+        "pt": "Um adolescente tecnológico olhando para o celular."
+      },
+      "alibi": {
+        "en": "He was listening to music with headphones on.",
+        "pt": "Ele estava ouvindo música com fones de ouvido."
+      },
+      "facts": "You saw Beto near the cabin. You lie that you were asleep."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "14:00",
+      "stop": {
+        "en": "Station",
+        "pt": "Estação"
+      },
+      "event": {
+        "en": "The tram departs from Largo do Curvelo.",
+        "pt": "O bonde parte do Largo do Curvelo."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-2",
+        "suspect-3",
+        "suspect-4"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "14:10",
+      "stop": {
+        "en": "The Slope",
+        "pt": "A Ladeira"
+      },
+      "event": {
+        "en": "The ticket box is stolen from the cabin.",
+        "pt": "A caixa de bilhetes é roubada da cabine."
+      },
+      "who": [
+        "suspect-2"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t3",
+      "time": "14:20",
+      "stop": {
+        "en": "Station",
+        "pt": "Estação"
+      },
+      "event": {
+        "en": "The conductor discovers the theft.",
+        "pt": "O cobrador descobre o roubo."
+      },
+      "who": [
+        "suspect-1",
+        "suspect-3"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "suspect-1",
+      "ask": "Where were you during the trip?",
+      "keywords": [
+        "photo",
+        "window",
+        "foto",
+        "janela"
+      ],
+      "implicates": null,
+      "clears": "suspect-3",
+      "text": {
+        "en": "I was at the very back of the tram taking photos of the view; I didn't see anything near the driver.",
+        "pt": "Eu estava no fundo do bonde tirando fotos da vista; não vi nada perto do motorista."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "suspect-4",
+      "ask": "Did you notice anything unusual?",
+      "keywords": [
+        "maintenance",
+        "beto",
+        "manutenção",
+        "beto"
+      ],
+      "implicates": "suspect-2",
+      "clears": null,
+      "text": {
+        "en": "I saw Beto walking toward the front cabin just before the conductor shouted.",
+        "pt": "Eu vi o Beto caminhando em direção à cabine da frente pouco antes do cobrador gritar."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "suspect-3",
+      "ask": "Did you hear any strange noises?",
+      "keywords": [
+        "metal",
+        "clank",
+        "metal",
+        "barulho"
+      ],
+      "implicates": "suspect-2",
+      "clears": "suspect-1",
+      "text": {
+        "en": "I heard a loud metallic clank coming from the cabin, but Clara was far away in the back.",
+        "pt": "Eu ouvi um estalo metálico vindo da cabine, mas a Clara estava longe, no fundo."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "suspect-2",
+      "ask": "What were you doing?",
+      "keywords": [
+        "repair",
+        "floor",
+        "reparo",
+        "chão"
+      ],
+      "implicates": null,
+      "clears": "suspect-4",
+      "text": {
+        "en": "I was busy fixing a floorboard in the rear car, and that kid Lucas was just staring at his phone, not bothering anyone.",
+        "pt": "Eu estava ocupado consertando uma tábua no fundo do bonde, e aquele garoto Lucas estava apenas olhando para o celular, não incomodando ninguém."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Notice that Clara and Sofia's statements confirm each other's locations.",
+        "pt": "Note que as declarações de Clara e Sofia confirmam a localização uma da outra."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "If Beto was in the rear car, why did Lucas see him heading to the cabin?",
+        "pt": "Se Beto estava no carro de trás, por que o Lucas o viu indo para a cabine?"
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "conductor": "Ticket collector",
+      "tram": "Streetcar",
+      "cabin": "Driver's area"
+    },
+    "pt": {
+      "conductor": "Cobrador",
+      "tram": "Bonde",
+      "cabin": "Cabine"
+    }
+  },
+  "rooms": [
+    {
+      "id": "cabin",
+      "en": "Driver's Cabin",
+      "pt": "Cabine do Motorista"
+    },
+    {
+      "id": "rear-car",
+      "en": "Rear Car",
+      "pt": "Vagão Traseiro"
+    },
+    {
+      "id": "passenger-area",
+      "en": "Passenger Seating",
+      "pt": "Área de Passageiros"
+    }
+  ],
+  "solution": {
+    "en": "Beto was the only one with the technical knowledge to quickly manipulate the cabin lock. While he claimed to be fixing the floor in the rear, Lucas saw him moving toward the cabin, and Sofia heard the metallic sound of the box being moved. He used the 'repair' as a cover to move around the tram unnoticed.",
+    "pt": "Beto era o único com o conhecimento técnico para manipular rapidamente a trava da cabine. Embora ele afirmasse estar consertando o chão no fundo, Lucas o viu indo em direção à cabine, e Sofia ouviu o som metálico da caixa sendo movida. Ele usou o 'reparo' como cobertura para circular pelo bonde sem ser notado."
+  },
+  "aftermath": {
+    "suspect-1": {
+      "en": {
+        "headline": "Tourist Caught in Lie",
+        "body": "Clara was detained for questioning after misleading investigators."
+      },
+      "pt": {
+        "headline": "Turista é Pega na Mentira",
+        "body": "Clara foi detida para interrogatório após induzir os investigadores ao erro."
+      }
+    },
+    "suspect-3": {
+      "en": {
+        "headline": "Elderly Woman Misidentified",
+        "body": "Sofia faces scrutiny after being wrongly accused of the theft."
+      },
+      "pt": {
+        "headline": "Idosa é Identificada Erroneamente",
+        "body": "Sofia enfrenta escrutínio após ser acusada injustamente do roubo."
+      }
+    },
+    "suspect-4": {
+      "en": {
+        "headline": "Teenager Under Investigation",
+        "body": "The student was held due to a false accusation during the tram robbery."
+      },
+      "pt": {
+        "headline": "Estudante Sob Investigação",
+        "body": "O estudante foi detido devido a uma falsa acusação durante o roubo no bonde."
+      }
+    }
+  },
+  "id": "case-gen-a-tram-in-santa-teresa-the-conductor-s-t",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A tram in Santa Teresa: the conductor's ticket box goes missing",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000766,
+      "drafts": 1,
+      "receipts": [
+        "01M7XPD2WFRWQBH1TJ9V2JZXBA"
+      ]
+    }
+  }
+}

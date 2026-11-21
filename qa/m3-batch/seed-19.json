@@ -1,0 +1,336 @@
+{
+  "title": {
+    "en": "The Golden Note Heist",
+    "pt": "O Roubo da Nota de Ouro"
+  },
+  "intro": {
+    "en": "In the smoky, neon-lit atmosphere of 'O Samba de Ouro' in Lapa, the jazz scene is in shock. Leo, the star saxophonist, discovered his legendary 24k gold mouthpiece is missing from his case. The club was closed for a private rehearsal, leaving only four people inside.",
+    "pt": "Na atmosfera esfumaçada e iluminada por neon do 'O Samba de Ouro' na Lapa, a cena do jazz está em choque. Leo, o saxofonista estrela, descobriu que seu lendário bocal de ouro 24k sumiu de seu estojo. O clube estava fechado para um ensaio privado, deixando apenas quatro pessoas lá dentro."
+  },
+  "culprit": "marcos-drummer",
+  "suspects": [
+    {
+      "id": "marcos-drummer",
+      "name": "Marcos",
+      "role": {
+        "en": "Drummer",
+        "pt": "Baterista"
+      },
+      "persona": {
+        "en": "Irritable and tired of playing second fiddle.",
+        "pt": "Irritável e cansado de ser coadjuvante."
+      },
+      "alibi": {
+        "en": "I was in the back alley smoking a cigarette.",
+        "pt": "Eu estava no beco fumando um cigarro."
+      },
+      "facts": "You were in the storage room at 23:10. You lie that you were outside smoking the whole time to hide that you were looking for something to sell."
+    },
+    {
+      "id": "elena-singer",
+      "name": "Elena",
+      "role": {
+        "en": "Vocalist",
+        "pt": "Cantora"
+      },
+      "persona": {
+        "en": "Elegant and observant.",
+        "pt": "Elegante e observadora."
+      },
+      "alibi": {
+        "en": "I was in the dressing room fixing my makeup.",
+        "pt": "Eu estava no camarim retocando minha maquiagem."
+      },
+      "facts": "You were in the dressing room at 23:10. You tell the truth about your location."
+    },
+    {
+      "id": "julio-manager",
+      "name": "Julio",
+      "role": {
+        "en": "Club Manager",
+        "pt": "Gerente do Clube"
+      },
+      "persona": {
+        "en": "Anxious and obsessed with finances.",
+        "pt": "Ansioso e obcecado por finanças."
+      },
+      "alibi": {
+        "en": "I was in my office checking the books.",
+        "pt": "Eu estava no meu escritório conferindo as contas."
+      },
+      "facts": "You were in your office at 23:10. You tell the truth about your location."
+    },
+    {
+      "id": "beatriz-waitress",
+      "name": "Beatriz",
+      "role": {
+        "en": "Waitress",
+        "pt": "Garçonete"
+      },
+      "persona": {
+        "en": "Friendly but easily distracted.",
+        "pt": "Amigável, mas facilmente distraída."
+      },
+      "alibi": {
+        "en": "I was cleaning the bar area.",
+        "pt": "Eu estava limpando a área do bar."
+      },
+      "facts": "You were at the bar at 23:10. You tell the truth about your location."
+    }
+  ],
+  "timeline": [
+    {
+      "id": "t1",
+      "time": "23:00",
+      "stop": {
+        "en": "Stage",
+        "pt": "Palco"
+      },
+      "event": {
+        "en": "The rehearsal ends.",
+        "pt": "O ensaio termina."
+      },
+      "who": [
+        "marcos-drummer",
+        "elena-singer",
+        "julio-manager",
+        "beatriz-waitress"
+      ]
+    },
+    {
+      "id": "t2",
+      "time": "23:05",
+      "stop": {
+        "en": "Dressing Room",
+        "pt": "Camarim"
+      },
+      "event": {
+        "en": "Elena enters the dressing room.",
+        "pt": "Elena entra no camarim."
+      },
+      "who": [
+        "elena-singer"
+      ]
+    },
+    {
+      "id": "t3",
+      "time": "23:10",
+      "stop": {
+        "en": "Storage Room",
+        "pt": "Depósito"
+      },
+      "event": {
+        "en": "The gold mouthpiece is stolen from the case.",
+        "pt": "O bocal de ouro é roubado do estojo."
+      },
+      "who": [
+        "marcos-drummer"
+      ],
+      "crime": true
+    },
+    {
+      "id": "t4",
+      "time": "23:15",
+      "stop": {
+        "en": "Bar",
+        "pt": "Bar"
+      },
+      "event": {
+        "en": "Beatriz starts cleaning the bar.",
+        "pt": "Beatriz começa a limpar o bar."
+      },
+      "who": [
+        "beatriz-waitress"
+      ]
+    },
+    {
+      "id": "t5",
+      "time": "23:20",
+      "stop": {
+        "en": "Manager's Office",
+        "pt": "Escritório do Gerente"
+      },
+      "event": {
+        "en": "Julio locks his office door.",
+        "pt": "Julio tranca a porta do seu escritório."
+      },
+      "who": [
+        "julio-manager"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "c1",
+      "from": "elena-singer",
+      "ask": "Where were you during the break?",
+      "keywords": [
+        "makeup",
+        "dressing room",
+        "maquiagem",
+        "camarim"
+      ],
+      "implicates": null,
+      "clears": "beatriz-waitress",
+      "text": {
+        "en": "I was in the dressing room. I saw Beatriz through the window cleaning the bar area around 23:10.",
+        "pt": "Eu estava no camarim. Eu vi a Beatriz pela janela limpando a área do bar por volta das 23:10."
+      }
+    },
+    {
+      "id": "c2",
+      "from": "beatriz-waitress",
+      "ask": "Did you see anyone suspicious?",
+      "keywords": [
+        "marcos",
+        "drummer",
+        "marcos",
+        "baterista"
+      ],
+      "implicates": "marcos-drummer",
+      "clears": null,
+      "text": {
+        "en": "I didn't see much, but I saw Marcos sneaking into the storage room, not the alley like he said.",
+        "pt": "Eu não vi muita coisa, mas vi o Marcos entrando escondido no depósito, não no beco como ele disse."
+      }
+    },
+    {
+      "id": "c3",
+      "from": "julio-manager",
+      "ask": "What did you hear?",
+      "keywords": [
+        "noise",
+        "storage",
+        "barulho",
+        "depósito"
+      ],
+      "implicates": "marcos-drummer",
+      "clears": "elena-singer",
+      "text": {
+        "en": "I heard a loud thud from the storage room at 23:10, but I thought it was just the drummer moving gear.",
+        "pt": "Ouvi um estrondo vindo do depósito às 23:10, mas achei que fosse apenas o baterista movendo equipamentos."
+      }
+    },
+    {
+      "id": "c4",
+      "from": "marcos-drummer",
+      "ask": "Where was the manager?",
+      "keywords": [
+        "office",
+        "manager",
+        "escritório",
+        "gerente"
+      ],
+      "implicates": null,
+      "clears": "julio-manager",
+      "text": {
+        "en": "Julio was in his office all night, I saw the light under his door.",
+        "pt": "O Julio estava no escritório dele a noite toda, eu vi a luz sob a porta dele."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "after": 45,
+      "text": {
+        "en": "Check the alibis. Someone's location doesn't match what others saw.",
+        "pt": "Verifique os álibis. A localização de alguém não condiz com o que os outros viram."
+      }
+    },
+    {
+      "id": "h2",
+      "after": 90,
+      "text": {
+        "en": "Beatriz saw Marcos going into the storage room, but Marcos claimed to be in the alley.",
+        "pt": "Beatriz viu Marcos entrando no depósito, mas Marcos afirmou que estava no beco."
+      }
+    }
+  ],
+  "glossary": {
+    "en": {
+      "mouthpiece": "The part of the instrument you blow into.",
+      "storage room": "A room for keeping equipment."
+    },
+    "pt": {
+      "mouthpiece": "Bocal",
+      "storage room": "Depósito"
+    }
+  },
+  "rooms": [
+    {
+      "id": "stage",
+      "en": "Stage",
+      "pt": "Palco"
+    },
+    {
+      "id": "dressing-room",
+      "en": "Dressing Room",
+      "pt": "Camarim"
+    },
+    {
+      "id": "bar",
+      "en": "Bar",
+      "pt": "Bar"
+    },
+    {
+      "id": "office",
+      "en": "Manager's Office",
+      "pt": "Escritório"
+    },
+    {
+      "id": "storage-room",
+      "en": "Storage Room",
+      "pt": "Depósito"
+    }
+  ],
+  "solution": {
+    "en": "Marcos claimed to be in the alley smoking, but Beatriz saw him entering the storage room at 23:10, which is exactly when the mouthpiece was stolen. Julio also heard a noise in the storage room at that time. Marcos stole the mouthpiece to pay off his debts.",
+    "pt": "Marcos afirmou que estava no beco fumando, mas Beatriz o viu entrando no depósito às 23:10, que é exatamente quando o bocal foi roubado. Julio também ouviu um barulho no depósito naquele momento. Marcos roubou o bocal para pagar suas dívidas."
+  },
+  "aftermath": {
+    "elena-singer": {
+      "en": {
+        "headline": "Singer Wrongly Accused!",
+        "body": "The investigation into the Lapa heist has taken a turn for the worse after a false accusation against our local star."
+      },
+      "pt": {
+        "headline": "Cantora Acusada Indevidamente!",
+        "body": "A investigação sobre o roubo na Lapa tomou um rumo pior após uma acusação falsa contra nossa estrela local."
+      }
+    },
+    "julio-manager": {
+      "en": {
+        "headline": "Manager's Reputation Tarnished",
+        "body": "The club manager was wrongly suspected, causing chaos in the jazz community."
+      },
+      "pt": {
+        "headline": "Reputação do Gerente Manchada",
+        "body": "O gerente do clube foi injustamente suspeito, causando caos na comunidade do jazz."
+      }
+    },
+    "beatriz-waitress": {
+      "en": {
+        "headline": "Waitress Under Fire",
+        "body": "A mistaken accusation against the club's server has left patrons questioning the detective's skills."
+      },
+      "pt": {
+        "headline": "Garçonete Sob Ataque",
+        "body": "Uma acusação equivocada contra a garçonete do clube deixou os clientes questionando as habilidades do detetive."
+      }
+    }
+  },
+  "id": "case-gen-a-jazz-club-in-lapa-the-saxophonist-s-go",
+  "questionBudget": 10,
+  "generated": {
+    "seed": "A jazz club in Lapa: the saxophonist's golden mouthpiece is stolen",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "cost": {
+      "usd": 0.000848,
+      "drafts": 1,
+      "receipts": [
+        "01M7XPF1SMPSNBYKDT2RCCNP44"
+      ]
+    }
+  }
+}
