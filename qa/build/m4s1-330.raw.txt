@@ -1,0 +1,43 @@
+<<<REPLACE package.json>>>
+  "version": "0.5.2",
+=====
+  "version": "0.6.0",
+<<<END>>>
+
+<<<REPLACE package.json>>>
+&& node test/keyboard.mjs
+=====
+&& node test/keyboard.mjs && node test/pack-m4.mjs
+<<<END>>>
+
+<<<REPLACE CHANGELOG.md>>>
+# Changelog
+=====
+# Changelog
+
+## 0.6.0 (M4 sprint 1: cost log, pack scoreboard, real credits)
+- Added public cost log at /costs and GET /api/costs.
+- Cost log built by node src/costs.js from key logs, build logs, and art receipts.
+- Cost calculated as neurons x US$0.011 per 1,000.
+- Total logged: 697 calls, 530 receipts, US$0.688976.
+- Added shared pack scoreboard on the case picker.
+- Added fourth case: The Silent Batucada.
+- Added real public backers to credits.
+- Added missing # column header to case scoreboard.
+- Added test/pack-m4.mjs with 9 checks.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+**M3 delivered: The Generated Case (2026-11-20).** `node src/generator.js --seed "<text>"` writes a case through the Cup key and keeps it only if it passes the shape, fair play and timeline checks; generated cases show in the picker (EN/PT) with their cost and drafts. Next: M4, the pack with a shared scoreboard and a public cost log.
+=====
+**M3 delivered: The Generated Case (2026-11-20).** `node src/generator.js --seed "<text>"` writes a case through the Cup key and keeps it only if it passes the shape, fair play and timeline checks; generated cases show in the picker (EN/PT) with their cost and drafts.
+
+**M4 in progress (sprint 1, v0.6.0).** This sprint added a public cost log page at /costs built via node src/costs.js, a shared pack scoreboard, four cases in the picker, and real credits. Total costs: Violin US$0.051778, Night Train US$0.037506, Lapa US$0.003868, Samba US$0.002000, build tools US$0.593824. M4 is not declared yet.
+<<<END>>>
+
+<<<REPLACE README.md>>>
+npm test                                            # run tests
+=====
+npm test                                            # run tests
+node src/costs.js                                   # rebuild the public cost log (data/cost-log.json)
+<<<END>>>

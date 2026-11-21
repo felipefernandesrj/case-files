@@ -1,0 +1,48 @@
+<<<REPLACE src/costs.js>>>
+OLD
+    cases[key] = loadCase(key);
+=====
+    cases[key] = loadCase(cases[key]);
+<<<END>>>
+
+<<<REPLACE src/scoreboard.js>>>
+OLD
+      const nameRaw = entry.player;
+      if (!nameRaw || nameRaw.trim() === '' || nameRaw.toLowerCase() === 'anon') continue;
+      const name = nameRaw.trim();
+      
+      if (!playersMap.has(name)) {
+        playersMap.set(name, { name, entries: [] });
+      }
+      playersMap.get(name).entries.push(entry);
+=====
+      const nameRaw = entry.player;
+      const normalizedName = nameRaw ? nameRaw.trim().toLowerCase() : '';
+      if (!normalizedName || normalizedName === 'anon') continue;
+      
+      const displayName = nameRaw.trim();
+      
+      if (!playersMap.has(normalizedName)) {
+        playersMap.set(normalizedName, { name: displayName, entries: [] });
+      }
+      playersMap.get(normalizedName).entries.push(entry);
+<<<END>>>
+
+<<<REPLACE src/server.js>>>
+OLD
+      if (req.method === 'GET' && pathname === '/costs') {
+        return sendFile(res, resolve(__dirname, '..', 'public', 'costs.html'));
+      }
+=====
+      if (req.method === 'GET' && pathname === '/costs') {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        return sendFile(res, resolve(__dirname, '..', 'public', 'costs.html'));
+      }
+<<<END>>>
+
+<<<REPLACE src/server.js>>>
+OLD
+          const absPath = resolve(costFile);
+=====
+          const absPath = resolve(__dirname, '..', costFile);
+<<<END>>>

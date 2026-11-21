@@ -1,0 +1,473 @@
+<<<FILE public/costs.html>>>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Log | Case Files</title>
+    <style>
+        :root {
+            --ink: #0C0B0A;
+            --ink-soft: #1A1714;
+            --paper: #F5EEDC;
+            --lamp: #D9A05B;
+            --text: #F3EADF;
+            --text-dim: #C9BFAE;
+            --line: rgba(232, 184, 109, 0.35);
+            --seal: #8C2F2B;
+        }
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--ink);
+            color: var(--text);
+            font-family: Georgia, serif;
+            margin: 0;
+            padding: 16px;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        h1, h2 { color: var(--lamp); margin-top: 2rem; }
+        h1 { font-size: 2.5rem; margin-bottom: 0; }
+        h2 { font-size: 1.8rem; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+        a { color: var(--lamp); text-decoration: underline; }
+        a:focus-visible { outline: 2px solid var(--lamp); outline-offset: 2px; }
+        
+        .container { max-width: 960px; margin: 0 auto; min-width: 0; }
+        
+        .lang-switcher { margin-bottom: 2rem; display: flex; gap: 8px; }
+        .lang-btn {
+            background: var(--ink-soft);
+            color: var(--text);
+            border: 1px solid var(--line);
+            padding: 0 16px;
+            min-height: 44px;
+            cursor: pointer;
+            font-family: inherit;
+            border-radius: 4px;
+        }
+        .lang-btn[aria-pressed="true"] {
+            background: var(--lamp);
+            color: var(--ink);
+            border-color: var(--lamp);
+        }
+
+        .lead { font-style: italic; color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem; }
+        
+        .div-scroll { overflow-x: auto; width: 100%; min-width: 0; margin-bottom: 1.5rem; }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid var(--line); }
+        th { color: var(--text-dim); font-weight: normal; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        td.num { text-align: right; font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+        
+        .summary-row { font-weight: bold; color: var(--lamp); }
+        
+        .case-section { background: var(--ink-soft); padding: 20px; margin-bottom: 3rem; border-radius: 4px; }
+        .tag { font-size: 0.75rem; background: var(--seal); color: var(--paper); padding: 2px 6px; border-radius: 3px; margin-left: 10px; vertical-align: middle; }
+        .totals-line { font-size: 1.1rem; margin: 10px 0; font-family: ui-monospace, monospace; }
+        .kinds-list { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1rem; }
+        
+        details { border: 1px solid var(--line); border-radius: 4px; }
+        summary { padding: 12px; cursor: pointer; font-weight: bold; outline: none; }
+        summary:focus-visible { outline: 2px solid var(--lamp); }
+        
+        .footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); color: var(--text-dim); font-size: 0.9rem; }
+        
+        .error-msg { color: var(--seal); font-weight: bold; padding: 2rem; text-align: center; }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 1.6rem; }
+            table { font-size: 0.85rem; }
+            .case-section { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a id="back-link" href="/?lang=en">← Back to the cases</a>
+        </nav>
+
+        <div class="lang-switcher">
+            <button id="lang-en" class="lang-btn" aria-pressed="true">EN</button>
+            <button id="lang-pt" class="lang-btn" aria-pressed="false">PT</button>
+        </div>
+
+        <header>
+            <h1 id="title">Cost log</h1>
+            <div id="subtitle" style="color: var(--text-dim)">Case Files</div>
+        </header>
+
+        <p id="lead" class="lead"></p>
+
+        <div id="main-content"></div>
+
+        <footer class="footer" id="footer"></footer>
+    </div>
+
+    <script>
+        const T = {
+            en: {
+                back: "← Back to the cases",
+                title: "Cost log",
+                subtitle: "Case Files",
+                lead: "Every model call this pack made through the FullCup key, with its cost and its signed receipt. Cost = neurons × US$ 0.011 per 1,000 neurons. Open any receipt to check the exact cost and the daily seal yourself.",
+                summaryCaption: "Cost per case",
+                colCase: "Case",
+                colPlay: "Play",
+                colMade: "Made",
+                colTotal: "Total",
+                colCalls: "Calls",
+                colReceipts: "Receipts",
+                rowAll: "All",
+                updated: "Updated",
+                brt: "(BRT)",
+                tagGenerated: "Generated case",
+                kindNames: { play: "Play", author: "Writing", art: "Art", generate: "Generation", build: "Build", dev: "Tools and tests" },
+                summaryLine: "US$ {usd} · {calls} calls · {receipts} receipts",
+                kindLine: "{kind}: US$ {usd} ({calls})",
+                detailsSummary: "Every call ({n})",
+                tableWhen: "When",
+                tableWhat: "What",
+                tableModel: "Model",
+                tableStatus: "Status",
+                tableCost: "Cost",
+                tableReceipt: "Receipt",
+                unknown: "unknown",
+                noReceipt: "none",
+                error: "The cost log is not available right now.",
+                footer: "Receipts are signed by FullCup and sealed once a day. Calls that failed cost nothing and have no receipt."
+            },
+            pt: {
+                back: "← Voltar aos casos",
+                title: "Registro de custos",
+                subtitle: "Dossiês",
+                lead: "Cada chamada de modelo que este pacote fez pela chave FullCup, com o custo e o recibo assinado. Custo = neurônios × US$ 0,011 por 1.000 neurônios. Abra qualquer recibo para conferir o custo exato e o selo diário.",
+                summaryCaption: "Custo por caso",
+                colCase: "Caso",
+                colPlay: "Partidas",
+                colMade: "Produção",
+                colTotal: "Total",
+                colCalls: "Chamadas",
+                colReceipts: "Recibos",
+                rowAll: "Tudo",
+                updated: "Atualizado em",
+                brt: "(BRT)",
+                tagGenerated: "Caso gerado",
+                kindNames: { play: "Partidas", author: "Escrita", art: "Arte", generate: "Geração", build: "Construção", dev: "Ferramentas e testes" },
+                summaryLine: "US$ {usd} · {calls} chamadas · {receipts} recibos",
+                kindLine: "{kind}: US$ {usd} ({calls})",
+                detailsSummary: "Todas as chamadas ({n})",
+                tableWhen: "Quando",
+                tableWhat: "O quê",
+                tableModel: "Modelo",
+                tableStatus: "Status",
+                tableCost: "Custo",
+                tableReceipt: "Recibo",
+                unknown: "sem registro",
+                noReceipt: "sem recibo",
+                error: "O registro de custos não está disponível agora.",
+                footer: "Os recibos são assinados pela FullCup e selados uma vez por dia. Chamadas que falharam não custam nada e não têm recibo."
+            }
+        };
+
+        let state = {
+            lang: 'en',
+            data: null
+        };
+
+        function formatMoney(usd, lang) {
+            const val = usd.toFixed(6);
+            if (lang === 'pt') {
+                return 'US$ ' + val.replace('.', ',');
+            }
+            return 'US$ ' + val;
+        }
+
+        function formatDate(iso, lang) {
+            if (!iso) return T[lang].unknown;
+            const d = new Date(iso);
+            return d.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US', {
+                timeZone: 'America/Sao_Paulo',
+                dateStyle: 'medium',
+                timeStyle: 'short'
+            });
+        }
+
+        async function fetchData() {
+            try {
+                const res = await fetch('/api/costs');
+                if (!res.ok) throw new Error();
+                state.data = await res.json();
+                render();
+            } catch (e) {
+                const main = document.getElementById('main-content');
+                main.innerHTML = `<p class="error-msg" role="alert">${T[state.lang].error}</p>`;
+            }
+        }
+
+        function render() {
+            const { lang, data } = state;
+            const t = T[lang];
+
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+            document.getElementById('back-link').textContent = t.back;
+            document.getElementById('back-link').href = `/?lang=${lang}`;
+            document.getElementById('title').textContent = t.title;
+            document.getElementById('subtitle').textContent = t.subtitle;
+            document.getElementById('lead').textContent = t.lead;
+            document.getElementById('footer').textContent = t.footer;
+
+            document.getElementById('lang-en').setAttribute('aria-pressed', lang === 'en');
+            document.getElementById('lang-pt').setAttribute('aria-pressed', lang === 'pt');
+
+            if (!data) return;
+
+            const main = document.getElementById('main-content');
+            main.innerHTML = '';
+
+            // Summary Table
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'div-scroll';
+            const table = document.createElement('table');
+            const caption = document.createElement('caption');
+            caption.textContent = t.summaryCaption;
+            table.appendChild(caption);
+
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            [t.colCase, t.colPlay, t.colMade, t.colTotal, t.colCalls, t.colReceipts].forEach(txt => {
+                const th = document.createElement('th');
+                th.textContent = txt;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            
+            // Process buckets (cases first, then pack)
+            const sortedBuckets = [...data.cases].sort((a, b) => a.id === 'pack' ? 1 : (b.id === 'pack' ? -1 : 0));
+
+            sortedBuckets.forEach(bucket => {
+                const tr = document.createElement('tr');
+                const linkTd = document.createElement('td');
+                const a = document.createElement('a');
+                a.href = `#${bucket.id}`;
+                a.textContent = bucket.title[lang] || bucket.title['en'];
+                linkTd.appendChild(a);
+                tr.appendChild(linkTd);
+
+                const playTd = document.createElement('td');
+                playTd.className = 'num';
+                playTd.textContent = formatMoney(bucket.totals.byKind.play?.usd || 0, lang);
+                tr.appendChild(playTd);
+
+                const madeTd = document.createElement('td');
+                madeTd.className = 'num';
+                let otherKindsSum = 0;
+                for (const [k, v] of Object.entries(bucket.totals.byKind)) {
+                    if (k !== 'play') otherKindsSum += v.usd;
+                }
+                madeTd.textContent = formatMoney(otherKindsSum, lang);
+                tr.appendChild(madeTd);
+
+                const totalTd = document.createElement('td');
+                totalTd.className = 'num';
+                totalTd.textContent = formatMoney(bucket.totals.usd, lang);
+                tr.appendChild(totalTd);
+
+                const callsTd = document.createElement('td');
+                callsTd.className = 'num';
+                callsTd.textContent = bucket.totals.calls;
+                tr.appendChild(callsTd);
+
+                const receiptsTd = document.createElement('td');
+                receiptsTd.className = 'num';
+                receiptsTd.textContent = bucket.totals.receipts;
+                tr.appendChild(receiptsTd);
+
+                tbody.appendChild(tr);
+            });
+
+            // Total Row
+            const totalTr = document.createElement('tr');
+            totalTr.className = 'summary-row';
+            const tCaseTd = document.createElement('td');
+            tCaseTd.textContent = t.rowAll;
+            totalTr.appendChild(tCaseTd);
+
+            const tPlayTd = document.createElement('td');
+            tPlayTd.className = 'num';
+            tPlayTd.textContent = formatMoney(data.total.byKind.play?.usd || 0, lang);
+            totalTr.appendChild(tPlayTd);
+
+            const tMadeTd = document.createElement('td');
+            tMadeTd.className = 'num';
+            let totalOtherSum = 0;
+            for (const [k, v] of Object.entries(data.total.byKind)) {
+                if (k !== 'play') totalOtherSum += v.usd;
+            }
+            tMadeTd.textContent = formatMoney(totalOtherSum, lang);
+            totalTr.appendChild(tMadeTd);
+
+            const tTotalTd = document.createElement('td');
+            tTotalTd.className = 'num';
+            tTotalTd.textContent = formatMoney(data.total.usd, lang);
+            totalTr.appendChild(tTotalTd);
+
+            const tCallsTd = document.createElement('td');
+            tCallsTd.className = 'num';
+            tCallsTd.textContent = data.total.calls;
+            totalTr.appendChild(tCallsTd);
+
+            const tRecTd = document.createElement('td');
+            tRecTd.className = 'num';
+            tRecTd.textContent = data.total.receipts;
+            totalTr.appendChild(tRecTd);
+
+            tbody.appendChild(totalTr);
+            table.appendChild(tbody);
+            summaryDiv.appendChild(table);
+            main.appendChild(summaryDiv);
+
+            const updatedP = document.createElement('p');
+            updatedP.style.fontSize = '0.9rem';
+            updatedP.textContent = `${t.updated} ${formatDate(data.generatedAt, lang)} ${t.brt}`;
+            main.appendChild(updatedP);
+
+            // Detail Sections
+            sortedBuckets.forEach(bucket => {
+                const section = document.createElement('section');
+                section.id = bucket.id;
+                section.className = 'case-section';
+
+                const h2 = document.createElement('h2');
+                h2.textContent = bucket.title[lang] || bucket.title['en'];
+                if (bucket.generated) {
+                    const tag = document.createElement('span');
+                    tag.className = 'tag';
+                    tag.textContent = t.tagGenerated;
+                    h2.appendChild(tag);
+                }
+                section.appendChild(h2);
+
+                const summaryLineP = document.createElement('p');
+                summaryLineP.className = 'totals-line';
+                summaryLineP.textContent = t.summaryLine
+                    .replace('{usd}', formatMoney(bucket.totals.usd, lang))
+                    .replace('{calls}', bucket.totals.calls)
+                    .replace('{receipts}', bucket.totals.receipts);
+                section.appendChild(summaryLineP);
+
+                const kindsP = document.createElement('div');
+                kindsP.className = 'kinds-list';
+                const kindsArr = [];
+                for (const [kind, val] of Object.entries(bucket.totals.byKind)) {
+                    const name = t.kindNames[kind] || kind;
+                    kindsArr.push(t.kindLine
+                        .replace('{kind}', name)
+                        .replace('{usd}', formatMoney(val.usd, lang))
+                        .replace('{calls}', val.calls));
+                }
+                kindsP.textContent = kindsArr.join(' · ');
+                section.appendChild(kindsP);
+
+                const details = document.createElement('details');
+                const summary = document.createElement('summary');
+                summary.textContent = t.detailsSummary.replace('{n}', bucket.totals.calls);
+                details.appendChild(summary);
+
+                if (location.hash === `#${bucket.id}`) {
+                    details.open = true;
+                }
+
+                const dScroll = document.createElement('div');
+                dScroll.className = 'div-scroll';
+                const dTable = document.createElement('table');
+                const dThead = document.createElement('thead');
+                const dHeadRow = document.createElement('tr');
+                [t.tableWhen, t.tableWhat, t.tableModel, t.tableStatus, t.tableCost, t.tableReceipt].forEach(txt => {
+                    const th = document.createElement('th');
+                    th.textContent = txt;
+                    dHeadRow.appendChild(th);
+                });
+                dThead.appendChild(dHeadRow);
+                dTable.appendChild(dThead);
+
+                const dTbody = document.createElement('tbody');
+                bucket.entries.forEach(entry => {
+                    const tr = document.createElement('tr');
+                    
+                    const tdWhen = document.createElement('td');
+                    tdWhen.textContent = formatDate(entry.at, lang);
+                    tr.appendChild(tdWhen);
+
+                    const tdWhat = document.createElement('td');
+                    tdWhat.textContent = t.kindNames[entry.kind] || entry.kind;
+                    tr.appendChild(tdWhat);
+
+                    const tdModel = document.createElement('td');
+                    if (entry.model) {
+                        tdModel.textContent = entry.model.replace(/^@cf\//, '');
+                    } else {
+                        tdModel.textContent = '-';
+                    }
+                    tr.appendChild(tdModel);
+
+                    const tdStatus = document.createElement('td');
+                    tdStatus.textContent = entry.status;
+                    tr.appendChild(tdStatus);
+
+                    const tdCost = document.createElement('td');
+                    tdCost.className = 'num';
+                    tdCost.textContent = formatMoney(entry.usd, lang);
+                    tr.appendChild(tdCost);
+
+                    const tdReceipt = document.createElement('td');
+                    if (entry.receipt) {
+                        const a = document.createElement('a');
+                        a.href = data.receiptUrl + entry.receipt;
+                        a.target = '_blank';
+                        a.rel = 'noopener';
+                        a.textContent = entry.receipt.substring(0, 10) + '…';
+                        tdReceipt.appendChild(a);
+                    } else {
+                        tdReceipt.textContent = t.noReceipt;
+                    }
+                    tr.appendChild(tdReceipt);
+
+                    dTbody.appendChild(tr);
+                });
+                dTable.appendChild(dTbody);
+                dScroll.appendChild(dTable);
+                details.appendChild(dScroll);
+                section.appendChild(details);
+
+                main.appendChild(section);
+            });
+        }
+
+        function setLang(newLang) {
+            state.lang = newLang;
+            const url = new URL(window.location);
+            if (newLang === 'en') url.searchParams.delete('lang');
+            else url.searchParams.set('lang', 'pt');
+            window.history.replaceState({}, '', url.toString());
+            render();
+        }
+
+        document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
+        document.getElementById('lang-pt').addEventListener('click', () => setLang('pt'));
+
+        window.addEventListener('hashchange', () => {
+            if (state.data) render();
+        });
+
+        // Init
+        const params = new URLSearchParams(window.location.search);
+        state.lang = params.get('lang') === 'pt' ? 'pt' : 'en';
+        fetchData();
+    </script>
+</body>
+</html>
+<<<END>>>

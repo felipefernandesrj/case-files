@@ -9,6 +9,7 @@ import { mockAnswer } from './mock.js';
 import { friendly } from './messages.js';
 import { maxCallsFor, questionBudgetFor } from './budget.js';
 import { createScoreboard, scoreFor } from './scoreboard.js';
+import { costsFor } from './costs.js';
 
 /**
  * Helper to read request body as JSON.
@@ -104,6 +105,7 @@ export function createServer({
   caseId,
   scoreFile = 'data/scores.json',
   creditsFile = 'data/credits.json',
+  costFile = 'data/cost-log.json',
   key,
   baseUrl,
   fetchImpl,
@@ -184,6 +186,25 @@ export function createServer({
       if (req.method === 'GET' && pathname === '/best.js') {
         res.setHeader('Content-Type', 'text/javascript; charset=utf-8');
         return sendFile(res, bestPath);
+      }
+      if (req.method === 'GET' && pathname === '/costs') {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        return sendFile(res, resolve(__dirname, '..', 'public', 'costs.html'));
+      }
+      if (req.method === 'GET' && pathname === '/api/costs') {
+        try {
+          const absPath = resolve(__dirname, '..', costFile);
+          const log = JSON.parse(readFileSync(absPath, 'utf8'));
+          const caseParam = url.searchParams.get('case');
+          if (caseParam) {
+            const bucket = costsFor(log, caseParam);
+            if (!bucket) return sendJSON(res, 404, { error: 'unknown_case' });
+            return sendJSON(res, 200, bucket);
+          }
+          return sendJSON(res, 200, log);
+        } catch (e) {
+          return sendJSON(res, 404, { error: 'no_cost_log' });
+        }
       }
       if (req.method === 'GET' && pathname === '/') {
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -360,6 +381,7 @@ export function createServer({
       }
 
       if (req.method === 'GET' && pathname === '/api/scores') {
+        if (url.searchParams.get('case') === 'all') return sendJSON(res, 200, scoreboard.packTop(10));
         const wanted = resolveFile(url.searchParams.get('case'));
         const chosen = wanted ? pack[wanted] : c;
         const top = scoreboard.top(10, chosen.id);
@@ -392,6 +414,7 @@ export function createServer({
         return sendJSON(res, 200, {
           title: title,
           backers: credits.backers || [],
+          others: Number(credits.others) || 0,
           example: !!credits.example,
         });
       }

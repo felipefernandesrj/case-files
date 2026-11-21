@@ -1,0 +1,26 @@
+Product: Case Files, a pack of browser detective games (Node.js server, plain HTML/CSS/JS in the browser, no frameworks, no external requests besides the same-origin API). M4 "The Pack, published" needs a PUBLIC COST LOG for each case: every model call made through the FullCup key, its cost and its signed receipt, so backers can check what each case cost. A backer asked how the cost log lets them verify the cost of each question.
+
+Write ONE new file, public/costs.html (served at /costs), self-contained (inline <style> and <script>, no imports, no external fonts or images). Output it as:
+<<<FILE public/costs.html>>>
+...
+<<<END>>>
+
+Data: `fetch('/api/costs')` returns
+{ version: 1, generatedAt: ISO string, usdPer1000Neurons: 0.011, receiptUrl: 'https://qa.fullcup.ai/receipts/',
+  cases: [ bucket, ... ], pack: bucket, total: { usd, calls, receipts } }
+bucket = { id: 'violin' | 'night-train' | 'gen-...' | 'pack', title: { en, pt }, generated: boolean,
+  totals: { usd, calls, receipts, byKind: { play|author|art|generate|build|dev: { usd, calls } } },
+  entries: [ { at: ISO string or null, kind, purpose, model: string or null, status: number, usd: number, receipt: string or null } ] }
+
+Language: 'pt' when the query string has lang=pt, else 'en'. Two buttons EN / PT (ids lang-en, lang-pt, aria-pressed) switch the language without reload (update ?lang with history.replaceState) and re-render; <html lang> is 'en' or 'pt-BR'.
+
+Page content, in this order, every text in both languages (a `T = { en: {...}, pt: {...} }` object):
+1. Header: link back to the game `/?lang=<lang>` ("← Back to the cases" / "← Voltar aos casos"), title h1 "Cost log" / "Registro de custos", the subtitle "Case Files" / "Dossiês".
+2. Lead paragraph: EN "Every model call this pack made through the FullCup key, with its cost and its signed receipt. Cost = neurons × US$ 0.011 per 1,000 neurons. Open any receipt to check the exact cost and the daily seal yourself." PT "Cada chamada de modelo que este pacote fez pela chave FullCup, com o custo e o recibo assinado. Custo = neurônios × US$ 0,011 por 1.000 neurônios. Abra qualquer recibo para conferir o custo exato e o selo diário."
+3. Summary table (caption "Cost per case" / "Custo por caso"): one row per case bucket then the pack bucket; columns Case/Caso (a link to #<id>), Play/Partidas (byKind.play usd), Made/Produção (sum of every other kind's usd), Total, Calls/Chamadas, Receipts/Recibos; a final bold row "All" / "Tudo" from `total`. Under it the line "Updated <date>" / "Atualizado em <date>" from generatedAt formatted with toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US', { timeZone: 'America/Sao_Paulo', dateStyle: 'medium', timeStyle: 'short' }) followed by " (BRT)".
+4. One <section id="<bucket id>"> per bucket (cases then pack): h2 with the title in the language; a generated case gets a small tag "Generated case" / "Caso gerado"; a line of totals "US$ X · N calls · R receipts" / "US$ X · N chamadas · R recibos"; a line per kind present in byKind "Play: US$ X (N)" with kind names play Play/Partidas, author Writing/Escrita, art Art/Arte, generate Generation/Geração, build Build/Construção, dev Tools and tests/Ferramentas e testes; then a <details> (open when location.hash equals '#'+id, and opened on hashchange) whose <summary> is "Every call (N)" / "Todas as chamadas (N)" containing a table: When/Quando (date in BRT as above, or "unknown"/"sem registro" for null), What/O quê (kind name), Model/Modelo (model without the leading '@cf/' and its vendor segment, e.g. '@cf/google/gemma-4-26b-a4b-it' -> 'gemma-4-26b-a4b-it'; null -> '-'), Status, Cost/Custo, Receipt/Recibo (a link to receiptUrl + receipt, text = first 10 chars of the receipt + '…', target _blank rel noopener; null -> "none"/"sem recibo").
+5. Footer: "Receipts are signed by FullCup and sealed once a day. Calls that failed cost nothing and have no receipt." / "Os recibos são assinados pela FullCup e selados uma vez por dia. Chamadas que falharam não custam nada e não têm recibo."
+Money: 'US$ ' + usd.toFixed(6), with the decimal point as a comma in Portuguese. Every text from data goes in with textContent (never innerHTML with data). If the fetch fails show "The cost log is not available right now." / "O registro de custos não está disponível agora." in a role=alert paragraph.
+
+Look: dark detective-noir, like the game. CSS variables: --ink #0C0B0A (page background), --ink-soft #1A1714 (panels), --paper #F5EEDC, --lamp #D9A05B (links, headings, focus), --text #F3EADF, --text-dim #C9BFAE, --line rgba(232,184,109,0.35), --seal #8C2F2B. Body font Georgia, serif; numbers and receipts in ui-monospace, monospace with font-variant-numeric: tabular-nums. Max width 960px centered, padding 16px. Tables: full width, border-collapse, 1px var(--line) rows, cells padding 6px 8px, numbers right aligned; EVERY table sits inside a div.scroll with overflow-x: auto so a 390 px wide phone never scrolls the page sideways (body has overflow-x: hidden is NOT allowed; fix it with the wrappers and min-width: 0). Links underlined, :focus-visible outline 2px solid var(--lamp). Language buttons at least 44px tall. Text contrast at least 4.5:1. At max-width 600px: h1 1.6rem, tables font-size 0.85rem.
+Start your reply directly with <<<FILE. No analysis text.

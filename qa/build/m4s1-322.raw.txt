@@ -1,0 +1,146 @@
+<<<REPLACE public/index.html>>>
+    <div id="cabinet-list"></div>
+=====
+    <div id="cabinet-list"></div>
+    <section id="pack-scores" aria-labelledby="pack-scores-title">
+        <h3 id="pack-scores-title"></h3>
+        <div class="pack-scroll">
+            <table>
+                <caption id="pack-scores-caption"></caption>
+                <thead>
+                    <tr>
+                        <th id="th-pack-rank">#</th>
+                        <th id="th-pack-player">Player</th>
+                        <th id="th-pack-solved">Solved</th>
+                        <th id="th-pack-total">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="pack-scores-body"></tbody>
+            </table>
+            <p id="pack-scores-empty" hidden></p>
+        </div>
+        <p class="pack-links"><a id="cost-link" href="/costs">Cost log for every case</a></p>
+    </section>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+                <th id="th-player">Player</th>
+=====
+                <th id="th-rank">#</th>
+                <th id="th-player">Player</th>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+          <p id="credits-note"></p>
+=====
+          <p id="credits-note"></p>
+          <p id="credits-others" hidden></p>
+          <p><a id="credits-cost" href="/costs">See what this case cost</a></p>
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    generated: 'Generated case', drafts: 'drafts',
+=====
+    generated: 'Generated case', drafts: 'drafts',
+    packScores: 'Pack scoreboard', packCaption: 'Best score per case, added up', packPlayer: 'Player', packSolved: 'Cases solved', packTotal: 'Total', packEmpty: 'No named player yet. Solve a case and sign your name.', costLink: 'Cost log for every case', caseCost: 'See what this case cost', others: (n) => `and ${n} more backers who chose not to appear`,
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    generated: 'Caso gerado', drafts: 'rascunhos',
+=====
+    generated: 'Caso gerado', drafts: 'rascunhos',
+    packScores: 'Placar do pacote', packCaption: 'Melhor pontuação de cada caso, somada', packPlayer: 'Jogador', packSolved: 'Casos resolvidos', packTotal: 'Total', packEmpty: 'Nenhum jogador com nome ainda. Resolva um caso e assine seu nome.', costLink: 'Registro de custos de cada caso', caseCost: 'Veja quanto este caso custou', others: (n) => `e mais ${n} apoiadores que preferiram não aparecer`,
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+function showCabinet() {
+=====
+async function loadPackScores() {
+    const title = document.getElementById('pack-scores-title');
+    const caption = document.getElementById('pack-scores-caption');
+    const thPlayer = document.getElementById('th-pack-player');
+    const thSolved = document.getElementById('th-pack-solved');
+    const thTotal = document.getElementById('th-pack-total');
+    const costLink = document.getElementById('cost-link');
+    const tbody = document.getElementById('pack-scores-body');
+    const empty = document.getElementById('pack-scores-empty');
+
+    if (title) title.textContent = UI[lang].packScores;
+    if (caption) caption.textContent = UI[lang].packCaption;
+    if (thPlayer) thPlayer.textContent = UI[lang].packPlayer;
+    if (thSolved) thSolved.textContent = UI[lang].packSolved;
+    if (thTotal) thTotal.textContent = UI[lang].packTotal;
+    if (costLink) {
+        costLink.textContent = UI[lang].costLink;
+        costLink.href = '/costs?lang=' + lang;
+    }
+
+    try {
+        const res = await fetch(`${API}/scores?case=all`);
+        const scores = await res.json();
+        tbody.innerHTML = '';
+        empty.hidden = true;
+
+        if (!scores || scores.length === 0) {
+            throw new Error('Empty');
+        }
+
+        scores.forEach((s, i) => {
+            const tr = document.createElement('tr');
+            const tdRank = document.createElement('td');
+            tdRank.textContent = i + 1;
+            const tdPlayer = document.createElement('td');
+            tdPlayer.textContent = s.player;
+            const tdSolved = document.createElement('td');
+            tdSolved.textContent = s.solved;
+            const tdTotal = document.createElement('td');
+            tdTotal.textContent = s.total;
+            tr.append(tdRank, tdPlayer, tdSolved, tdTotal);
+            tbody.appendChild(tr);
+        });
+    } catch (e) {
+        tbody.innerHTML = '';
+        empty.hidden = false;
+        empty.textContent = UI[lang].packEmpty;
+    }
+}
+
+function showCabinet() {
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  document.body.dataset.view = 'cabinet';
+=====
+  document.body.dataset.view = 'cabinet';
+  if (typeof loadPackScores === 'function') loadPackScores();
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+  document.getElementById('cabinet-stamp').textContent = UI[newLang].cabinetStamp;
+=====
+  document.getElementById('cabinet-stamp').textContent = UI[newLang].cabinetStamp;
+  if (!document.getElementById('cabinet').hidden) await loadPackScores();
+<<<END>>>
+
+<<<REPLACE public/index.html>>>
+    if (data.example) {
+=====
+    const othersEl = document.getElementById('credits-others');
+    const costEl = document.getElementById('credits-cost');
+    if (othersEl) {
+        othersEl.textContent = UI[lang].others(data.others);
+        othersEl.hidden = data.others <= 0;
+    }
+    if (costEl) {
+        costEl.textContent = UI[lang].caseCost;
+        costEl.href = '/costs?lang=' + lang + '#' + encodeURIComponent(openFile || 'violin');
+    }
+    if (data.example) {
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+@media (prefers-reduced-motion: reduce) { #ask-form #q, #ask-form #ask-btn { transition: none; } }
+=====
+@media (prefers-reduced-motion: reduce) { #ask-form #q, #ask-form #ask-btn { transition: none; } }
+#pack-scores { margin-top: 24px; padding: 12px; border: 1px solid var(--cf-line); background: var(--cf-ink-soft); color: var(--cf-text); } #pack-scores h3 { margin: 0 0 8px; color: var(--cf-lamp); } .pack-scroll { overflow-x: auto; max-width: 100%; } #pack-scores table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; } #pack-scores caption { text-align: left; color: var(--cf-text-dim); font-size: 0.85rem; padding-bottom: 4px; } #pack-scores th, #pack-scores td { padding: 6px 8px; border-bottom: 1px solid var(--cf-line); text-align: left; } #pack-scores td:nth-child(3), #pack-scores td:nth-child(4), #pack-scores th:nth-child(3), #pack-scores th:nth-child(4) { text-align: right; } #pack-scores-empty { color: var(--cf-text-dim); margin: 8px 0; } .pack-links a, #credits-cost { color: var(--cf-lamp); text-decoration: underline; display: inline-block; min-height: 44px; line-height: 44px; } .pack-links a:focus-visible, #credits-cost:focus-visible { outline: 2px solid var(--cf-lamp); outline-offset: 2px; } #credits-others { color: var(--cf-text-dim); font-style: italic; }
+<<<END>>>

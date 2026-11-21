@@ -1,0 +1,81 @@
+<<<REPLACE src/costs.js>>>
+  for (const e of build) {
+    const receipt = receiptOf(e);
+    if (receipt && seenReceipts.has(receipt)) continue;
+    
+    packBucket.entries.push({
+      at: e.at || ulidTime(receipt),
+      kind: 'build',
+      purpose: 'build:' + e.label,
+      model: e.model,
+      status: e.status,
+      usd: entryUsd(e),
+      receipt
+    });
+  }
+
+  const allBuckets = [...buckets, packBucket];
+=====
+  for (const e of build) {
+    const receipt = receiptOf(e);
+    if (receipt && seenReceipts.has(receipt)) continue;
+    if (receipt) seenReceipts.add(receipt);
+    
+    packBucket.entries.push({
+      at: e.at || ulidTime(receipt),
+      kind: 'build',
+      purpose: 'build:' + e.label,
+      model: e.model,
+      status: e.status,
+      usd: entryUsd(e),
+      receipt
+    });
+  }
+
+  for (const item of art) {
+    if (item.receipt && seenReceipts.has(item.receipt)) continue;
+    if (item.receipt) seenReceipts.add(item.receipt);
+    const bucket = buckets.find(b => b.id === artCase(item.asset)) || packBucket;
+    bucket.entries.push({
+      at: ulidTime(item.receipt),
+      kind: 'art',
+      purpose: 'art:' + item.asset + ':' + item.attempt,
+      model: item.model || null,
+      status: 200,
+      usd: round6(Number(item.usd) || 0),
+      receipt: item.receipt || null
+    });
+  }
+
+  const allBuckets = [...buckets, packBucket];
+<<<END>>>
+
+<<<REPLACE src/costs.js>>>
+export function writeCostLog({ usageFile = 'qa/key-usage-log.json', buildFile = 'qa/build-log.json', outFile = 'data/cost-log.json' } = {}) {
+  const usage = existsSync(usageFile) ? JSON.parse(readFileSync(usageFile, 'utf8')) : [];
+  const build = existsSync(buildFile) ? JSON.parse(readFileSync(buildFile, 'utf8')) : [];
+  
+  const cases = {};
+  for (const key of Object.keys(CASES)) {
+    cases[key] = loadCase(CASES[key]);
+  }
+
+  const log = buildCostLog({ usage, build, cases });
+  writeFileSync(outFile, JSON.stringify(log, null, 1) + '\n');
+}
+=====
+export function writeCostLog({ usageFile = 'qa/key-usage-log.json', buildFile = 'qa/build-log.json', artFile = 'data/art-receipts.json', outFile = 'data/cost-log.json' } = {}) {
+  const usage = existsSync(usageFile) ? JSON.parse(readFileSync(usageFile, 'utf8')) : [];
+  const build = existsSync(buildFile) ? JSON.parse(readFileSync(buildFile, 'utf8')) : [];
+  const artRaw = existsSync(artFile) ? JSON.parse(readFileSync(artFile, 'utf8')) : [];
+  const art = Array.isArray(artRaw) ? artRaw.items || artRaw : [];
+  
+  const cases = {};
+  for (const key of Object.keys(CASES)) {
+    cases[key] = loadCase(CASES[key]);
+  }
+
+  const log = buildCostLog({ usage, build, art, cases });
+  writeFileSync(outFile, JSON.stringify(log, null, 1) + '\n');
+}
+<<<END>>>

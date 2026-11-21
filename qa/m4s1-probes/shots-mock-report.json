@@ -1,0 +1,226 @@
+[
+ {
+  "tag": "1280-en",
+  "cards": [
+   "violin",
+   "night-train",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+   "gen-a-samba-school-rehearsal-in-madureira-th"
+  ],
+  "pack": {
+   "title": "Pack scoreboard",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ],
+   "empty": false,
+   "link": "Cost log for every case /costs?lang=en"
+  },
+  "overflowPicker": false,
+  "costs": {
+   "h1": "Cost log",
+   "rows": [
+    "CASE\tPLAY\tMADE\tTOTAL\tCALLS\tRECEIPTS",
+    "The Vani hing Violin\tUS$ 0.009963\tUS$ 0.041815\tUS$ 0.051778\t99\t91",
+    "The Night Train\tUS$ 0.003288\tUS$ 0.034218\tUS$ 0.037506\t38\t38",
+    "The Lapa Midnight Hei t\tUS$ 0.001738\tUS$ 0.002130\tUS$ 0.003868\t16\t16",
+    "The Silent Batucada\tUS$ 0.000000\tUS$ 0.002000\tUS$ 0.002000\t2\t2",
+    "The whole pack ( hared build and tool )\tUS$ 0.000000\tUS$ 0.599222\tUS$ 0.599222\t555\t396",
+    "All\tUS$ 0.014989\tUS$ 0.679385\tUS$ 0.694374\t710\t543"
+   ],
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false,
+   "alert": null
+  },
+  "ntOpen": true,
+  "ntFirstRows": [
+   "WHEN\tWHAT\tMODEL\tSTATUS\tCOST\tRECEIPT",
+   "Nov 10, 2026, 9:16 AM\tPlay\tllama-4- cout-17b-16e-in truct\t200\tUS$ 0.000167\t01M72P67XG…",
+   "Nov 10, 2026, 9:16 AM\tPlay\tllama-4- cout-17b-16e-in truct\t200\tUS$ 0.000170\t01M72P69JM…",
+   "Nov 10, 2026, 9:27 PM\tPlay\tllama-4- cout-17b-16e-in truct\t200\tUS$ 0.000197\t01M7401B9M…"
+  ],
+  "receiptHref": "https://qa.fullcup.ai/receipts/01M72P67XGGGA762NA2K6SG7W1",
+  "overflowCostsNt": false,
+  "credits": {
+   "hidden": false,
+   "title": "This case was funded by",
+   "names": 12,
+   "others": "and 26 more backers who chose not to appear",
+   "note": null,
+   "cost": "See what this case cost /costs?lang=en#violin"
+  }
+ },
+ {
+  "tag": "1280-pt",
+  "cards": [
+   "violin",
+   "night-train",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+   "gen-a-samba-school-rehearsal-in-madureira-th"
+  ],
+  "pack": {
+   "title": "Placar do pacote",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ],
+   "empty": false,
+   "link": "Registro de custos de cada caso /costs?lang=pt"
+  },
+  "overflowPicker": false,
+  "costs": {
+   "h1": "Registro de custos",
+   "rows": [
+    "CASO\tPARTIDAS\tPRODUÇÃO\tTOTAL\tCHAMADAS\tRECIBOS",
+    "O Violino De aparecido\tUS$ 0,009963\tUS$ 0,041815\tUS$ 0,051778\t99\t91",
+    "O Trem Noturno\tUS$ 0,003288\tUS$ 0,034218\tUS$ 0,037506\t38\t38",
+    "O A alto da Meia-noite na Lapa\tUS$ 0,001738\tUS$ 0,002130\tUS$ 0,003868\t16\t16",
+    "O Samba Silencio o\tUS$ 0,000000\tUS$ 0,002000\tUS$ 0,002000\t2\t2",
+    "O pacote inteiro (con trução e ferramenta  compartilhada )\tUS$ 0,000000\tUS$ 0,599222\tUS$ 0,599222\t555\t396",
+    "Tudo\tUS$ 0,014989\tUS$ 0,679385\tUS$ 0,694374\t710\t543"
+   ],
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false,
+   "alert": null
+  },
+  "ntOpen": true,
+  "ntFirstRows": [
+   "QUANDO\tO QUÊ\tMODELO\tSTATUS\tCUSTO\tRECIBO",
+   "10 de nov. de 2026, 09:16\tPartida \tllama-4- cout-17b-16e-in truct\t200\tUS$ 0,000167\t01M72P67XG…",
+   "10 de nov. de 2026, 09:16\tPartida \tllama-4- cout-17b-16e-in truct\t200\tUS$ 0,000170\t01M72P69JM…",
+   "10 de nov. de 2026, 21:27\tPartida \tllama-4- cout-17b-16e-in truct\t200\tUS$ 0,000197\t01M7401B9M…"
+  ],
+  "receiptHref": "https://qa.fullcup.ai/receipts/01M72P67XGGGA762NA2K6SG7W1",
+  "overflowCostsNt": false,
+  "credits": {
+   "hidden": false,
+   "title": "Este caso foi financiado por",
+   "names": 12,
+   "others": "e mais 26 apoiadores que preferiram não aparecer",
+   "note": null,
+   "cost": "Veja quanto este caso custou /costs?lang=pt#violin"
+  }
+ },
+ {
+  "tag": "390-en",
+  "cards": [
+   "violin",
+   "night-train",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+   "gen-a-samba-school-rehearsal-in-madureira-th"
+  ],
+  "pack": {
+   "title": "Pack scoreboard",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ],
+   "empty": false,
+   "link": "Cost log for every case /costs?lang=en"
+  },
+  "overflowPicker": false,
+  "costs": {
+   "h1": "Cost log",
+   "rows": [
+    "CASE\tPLAY\tMADE\tTOTAL\tCALLS\tRECEIPTS",
+    "The Vani hing Violin\tUS$ 0.009963\tUS$ 0.041815\tUS$ 0.051778\t99\t91",
+    "The Night Train\tUS$ 0.003288\tUS$ 0.034218\tUS$ 0.037506\t38\t38",
+    "The Lapa Midnight Hei t\tUS$ 0.001738\tUS$ 0.002130\tUS$ 0.003868\t16\t16",
+    "The Silent Batucada\tUS$ 0.000000\tUS$ 0.002000\tUS$ 0.002000\t2\t2",
+    "The whole pack ( hared build and tool )\tUS$ 0.000000\tUS$ 0.599222\tUS$ 0.599222\t555\t396",
+    "All\tUS$ 0.014989\tUS$ 0.679385\tUS$ 0.694374\t710\t543"
+   ],
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false,
+   "alert": null
+  },
+  "ntOpen": true,
+  "ntFirstRows": [
+   "WHEN\tWHAT\tMODEL\tSTATUS\tCOST\tRECEIPT",
+   "Nov 10, 2026, 9:16 AM\tPlay\tllama-4- cout-17b-16e-in truct\t200\tUS$ 0.000167\t01M72P67XG…",
+   "Nov 10, 2026, 9:16 AM\tPlay\tllama-4- cout-17b-16e-in truct\t200\tUS$ 0.000170\t01M72P69JM…",
+   "Nov 10, 2026, 9:27 PM\tPlay\tllama-4- cout-17b-16e-in truct\t200\tUS$ 0.000197\t01M7401B9M…"
+  ],
+  "receiptHref": "https://qa.fullcup.ai/receipts/01M72P67XGGGA762NA2K6SG7W1",
+  "overflowCostsNt": false,
+  "credits": {
+   "hidden": false,
+   "title": "This case was funded by",
+   "names": 12,
+   "others": "and 26 more backers who chose not to appear",
+   "note": null,
+   "cost": "See what this case cost /costs?lang=en#violin"
+  }
+ },
+ {
+  "tag": "390-pt",
+  "cards": [
+   "violin",
+   "night-train",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+   "gen-a-samba-school-rehearsal-in-madureira-th"
+  ],
+  "pack": {
+   "title": "Placar do pacote",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ],
+   "empty": false,
+   "link": "Registro de custos de cada caso /costs?lang=pt"
+  },
+  "overflowPicker": false,
+  "costs": {
+   "h1": "Registro de custos",
+   "rows": [
+    "CASO\tPARTIDAS\tPRODUÇÃO\tTOTAL\tCHAMADAS\tRECIBOS",
+    "O Violino De aparecido\tUS$ 0,009963\tUS$ 0,041815\tUS$ 0,051778\t99\t91",
+    "O Trem Noturno\tUS$ 0,003288\tUS$ 0,034218\tUS$ 0,037506\t38\t38",
+    "O A alto da Meia-noite na Lapa\tUS$ 0,001738\tUS$ 0,002130\tUS$ 0,003868\t16\t16",
+    "O Samba Silencio o\tUS$ 0,000000\tUS$ 0,002000\tUS$ 0,002000\t2\t2",
+    "O pacote inteiro (con trução e ferramenta  compartilhada )\tUS$ 0,000000\tUS$ 0,599222\tUS$ 0,599222\t555\t396",
+    "Tudo\tUS$ 0,014989\tUS$ 0,679385\tUS$ 0,694374\t710\t543"
+   ],
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false,
+   "alert": null
+  },
+  "ntOpen": true,
+  "ntFirstRows": [
+   "QUANDO\tO QUÊ\tMODELO\tSTATUS\tCUSTO\tRECIBO",
+   "10 de nov. de 2026, 09:16\tPartida \tllama-4- cout-17b-16e-in truct\t200\tUS$ 0,000167\t01M72P67XG…",
+   "10 de nov. de 2026, 09:16\tPartida \tllama-4- cout-17b-16e-in truct\t200\tUS$ 0,000170\t01M72P69JM…",
+   "10 de nov. de 2026, 21:27\tPartida \tllama-4- cout-17b-16e-in truct\t200\tUS$ 0,000197\t01M7401B9M…"
+  ],
+  "receiptHref": "https://qa.fullcup.ai/receipts/01M72P67XGGGA762NA2K6SG7W1",
+  "overflowCostsNt": false,
+  "credits": {
+   "hidden": false,
+   "title": "Este caso foi financiado por",
+   "names": 12,
+   "others": "e mais 26 apoiadores que preferiram não aparecer",
+   "note": null,
+   "cost": "Veja quanto este caso custou /costs?lang=pt#violin"
+  }
+ }
+]

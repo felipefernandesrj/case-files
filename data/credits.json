@@ -1,13 +1,23 @@
 {
-  "example": true,
-  "note": "Example data. Replace with real backer names before release.",
+  "example": false,
   "title": {
-    "en": "Thanks to the backers",
-    "pt": "Obrigado aos apoiadores"
+    "en": "This case was funded by",
+    "pt": "Este caso foi financiado por"
   },
   "backers": [
-    "Backer 1",
-    "Backer 2",
-    "Backer 3"
-  ]
+    "Bia Klein",
+    "Helô Igreja",
+    "Yago Lopes",
+    "Bernardo Domínguez",
+    "Nico Rocha",
+    "Leo Quintal",
+    "Duda Ochoa",
+    "Leandro Vieira",
+    "Gabriela Pires",
+    "Brian Umpiérrez",
+    "Giovana Macedo",
+    "Citlali Ríos"
+  ],
+  "others": 26,
+  "source": "Public backers of the Case Files Cup on qa.fullcup.ai, 2026-11-21; 26 more backers chose not to appear."
 }

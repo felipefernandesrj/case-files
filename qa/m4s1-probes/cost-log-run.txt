@@ -1,0 +1,6 @@
+violin: US$ 0.051778 over 99 calls (91 receipts)
+night-train: US$ 0.037506 over 38 calls (38 receipts)
+gen-a-rainy-night-at-a-lapa-bookshop-in-rio: US$ 0.003868 over 16 calls (16 receipts)
+gen-a-samba-school-rehearsal-in-madureira-th: US$ 0.002000 over 2 calls (2 receipts)
+pack: US$ 0.599222 over 556 calls (396 receipts)
+total: US$ 0.694374 over 711 calls (543 receipts)

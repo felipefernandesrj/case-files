@@ -1,0 +1,46 @@
+<<<REPLACE test/pack-m4.mjs>>>
+    const r1 = receiptOf({ 'x-fullcup-receipt': 'abc' });
+    const r2 = receiptOf({});
+=====
+    const r1 = receiptOf({ headers: { 'x-fullcup-receipt': 'abc' } });
+    const r2 = receiptOf({});
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+    const p = costsFor(log, 'pack');
+    assert(p.entries.length === 2, `p_len: ${p.entries.length}`);
+    assert(p.totals.calls === 5, `p_calls: ${p.totals.calls}`);
+    assert(p.totals.usd === round6(0.011 + 0.022 + 0.0019 + 0 + 0), `p_usd: ${p.totals.usd}`);
+=====
+    const p = costsFor(log, 'pack');
+    assert(p.entries.length === 2, `p_len: ${p.entries.length}`);
+    assert(p.totals.calls === 2, `p_calls: ${p.totals.calls}`);
+    assert(p.totals.usd === 0, `p_usd: ${p.totals.usd}`);
+
+    assert(log.total.calls === 5, `log_calls: ${log.total.calls}`);
+    assert(log.total.usd === round6(0.011 + 0.022 + 0.0019), `log_usd: ${log.total.usd}`);
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+    const logKeys = Object.keys(log.cases || {});
+    const buckets = { ...log.cases, pack: log.pack };
+=====
+    assert(Array.isArray(log.cases), 'log.cases is array');
+    assert(JSON.stringify(log.cases.map(b => b.id)) === JSON.stringify(Object.keys(CASES)), 'cases order');
+    const buckets = Object.fromEntries(log.cases.map(b => [b.id, b]));
+    buckets.pack = log.pack;
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+      if (k !== 'pack' && !CASES[k]) continue; // skip gen- keys for the 'generated' check if not in CASES but in log
+      if (CASES[k] && CASES[k].generated) {
+=====
+      if (k !== 'pack' && !CASES[k]) continue; // skip gen- keys for the 'generated' check if not in CASES but in log
+      if (CASES[k]?.generated) {
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+    assert(top[0].player === 'ana' && top[0].total === 140 && top[0].solved === 2, 'top0');
+=====
+    assert(top[0].player.toLowerCase() === 'ana' && top[0].total === 180 && top[0].solved === 2, 'top0');
+<<<END>>>

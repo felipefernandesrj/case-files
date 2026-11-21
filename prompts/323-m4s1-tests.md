@@ -1,0 +1,43 @@
+Product: Case Files, a pack of browser detective games (Node.js 20 ESM, built-ins only, tests are plain scripts run with node that print PASS/FAIL lines and a summary, and exit 1 on any failure). M4 "The Pack, published": every case in one app with a case picker, a shared pack scoreboard, a public cost log per case and credits with the real backers.
+
+Write the new test file test/pack-m4.mjs as a FILE block, and fix two checks in test/keyboard.mjs with edit blocks. Shapes:
+<<<FILE test/pack-m4.mjs>>>
+...
+<<<END>>>
+and for an edit (old text copied exactly with its indentation, a line =====, the new text; no labels):
+<<<REPLACE test/example.mjs>>>
+  const total = a + b;
+=====
+  const total = Number(a) + Number(b);
+<<<END>>>
+
+What exists (do not rewrite):
+- `import { CASES } from '../src/case.js'` : object case key -> case file; keys 'violin', 'night-train', then generated keys starting with 'gen-'.
+- `import { NEURON_USD, RECEIPT_URL, RULES, round6, entryUsd, receiptOf, classify, ulidTime, artCase, buildCostLog, costsFor } from '../src/costs.js'`.
+  entryUsd(e): usage.neurons x NEURON_USD (0.011/1000) rounded to 6 decimals, else e.cost if a number, else 0. receiptOf(e): headers['x-fullcup-receipt-id'] || headers['x-fullcup-receipt'] || null. classify(purpose) -> { case, kind } from RULES (e.g. 'interrogate:maya' -> violin/play, 'm2-acceptance:en:helena' -> night-train/play, 'm2gf10-art:violin-carlos:seed1' -> violin/art, 'author-case' -> violin/author), otherwise { case: 'pack', kind: 'build' if the purpose contains 'build' else 'dev' }. ulidTime('01M7XPG6KKAVMAG99SBA38R1TQ') -> an ISO string in 2026-11 (ULID time); ulidTime('x') -> null; ulidTime('01M7XPG6KUAVMAG99SBA38R1TQ'.slice(0,9) + '!') -> null. artCase('characters/violin-carlos') -> 'violin', 'loc/night-train-tunnel' -> 'night-train', 'i-score' -> 'pack'.
+  buildCostLog({ usage, build, art, cases, now }) -> { version: 1, generatedAt: now, usdPer1000Neurons: 0.011, receiptUrl, cases: [bucket per key of `cases`, in order], pack: bucket id 'pack', total: { usd, calls, receipts } }; bucket = { id, title, generated, entries: [{ at, kind, purpose, model, status, usd, receipt }], totals: { usd, calls, receipts, byKind: { kind: { usd, calls } } } }. Usage entries without a `status` field are skipped; a usage entry whose receipt is listed in a case's generated.cost.receipts goes to that case with kind 'generate'; build entries go to pack as kind 'build' with purpose 'build:' + label and are skipped when their receipt was already seen; art items { asset, attempt, receipt, usd, model } go to artCase(asset) with kind 'art' unless their receipt was seen; entries with at null get ulidTime(receipt); entries are sorted by at. costsFor(log, key): 'pack' -> log.pack, a case key -> its bucket, else null.
+- `import { createScoreboard } from '../src/scoreboard.js'`: createScoreboard(null) gives { add, top, packTop }; `await add({ player, score, questions, correct, lang, caseId })`; packTop(n) groups players by trimmed lowercased name, skips '' and 'anon', sums the best score per caseId -> [{ player, total, solved, cases }] sorted by total desc, solved desc, name.
+- `import { createServer } from '../src/server.js'`: createServer({ caseFile: 'content/case.json', scoreFile: null, mock: true, costFile? , creditsFile? }) returns an http.Server; listen(0) then use fetch on http://127.0.0.1:<port>. Routes: GET /costs (text/html, the cost log page), GET /api/costs (the whole log JSON; 404 { error: 'no_cost_log' } when costFile is missing), GET /api/costs?case=<key> (the bucket, 404 { error: 'unknown_case' } for an unknown key), GET /api/scores?case=all (pack scoreboard array), GET /api/credits?lang=pt -> { title, backers, others, example }.
+- Files: data/cost-log.json (real log, written by `node src/costs.js`), data/credits.json ({ example: false, title, backers: [12 names], others: 26 }), public/costs.html, public/index.html.
+
+test/pack-m4.mjs checks (one PASS/FAIL line each, numbered; catch errors per check; at the end print `pack-m4: N passed, M failed` and process.exit(1) when M > 0; close the server):
+1. entryUsd/receiptOf/round6: { usage: { neurons: 100 } } -> 0.0011; { cost: 0.002 } -> 0.002; {} -> 0; receiptOf of a header object with only 'x-fullcup-receipt' works; no headers -> null.
+2. classify: the four examples above plus 'sprint12-smoke:en:maya' -> violin/play, 'm3-acceptance:en:suspect-1' -> 'gen-a-rainy-night-at-a-lapa-bookshop-in-rio'/play, 'sprint5-build:12' -> pack/build, 'qa:list-models' -> pack/dev.
+3. ulidTime and artCase as above (the 2026-11 time starts with '2026-11-').
+4. buildCostLog on a small fixture: cases { violin: { title: { en: 'V', pt: 'V' } }, 'gen-x': { title: { en: 'G', pt: 'G' }, generated: { cost: { receipts: ['R2'] } } } }; usage [ { at: '2026-11-02T10:00:00Z', purpose: 'interrogate:maya', model: 'm', status: 200, usage: { neurons: 1000 }, headers: { 'x-fullcup-receipt-id': 'R1' } }, { at: '2026-11-01T10:00:00Z', purpose: 'm3s2-generate:live1:draft1', model: 'g', status: 200, usage: { neurons: 2000 }, headers: { 'x-fullcup-receipt-id': 'R2' } }, { at: null, purpose: 'qa:list-models', status: 200, headers: {} }, { purpose: 'note only' } ]; build [ { label: 'b1', at: '2026-11-03T00:00:00Z', model: 'm', status: 200, usage: { neurons: 500 }, headers: { 'x-fullcup-receipt-id': 'R1' } }, { label: 'b2', at: '2026-11-03T00:00:00Z', model: 'm', status: 502, usage: null, headers: {} } ]; art [ { asset: 'characters/violin-maya', attempt: 'orig', receipt: '01M7XPG6KKAVMAG99SBA38R1TQ', usd: 0.0019, model: 'f' } ]; now '2026-11-21T00:00:00Z'. Expect: violin has 2 entries (play 0.011, art 0.0019), totals.usd 0.0129, receipts 2; gen-x has 1 entry kind 'generate' usd 0.022; pack has the qa entry (dev, usd 0) and build b2 only (b1 skipped as a seen receipt) so 2 entries; total.calls 5; total.usd 0.0349; generatedAt equals now; costsFor(log, 'gen-x').id === 'gen-x', costsFor(log, 'pack') === log.pack, costsFor(log, 'nope') === null.
+5. The real data/cost-log.json: has a bucket for every key of CASES (same order) plus pack; every entry usd is a number >= 0; total.usd equals round6 of the sum of all bucket totals (within 1e-6); every receipt is null or a 26 char string; receiptUrl is 'https://qa.fullcup.ai/receipts/'; the violin and night-train buckets each have at least one 'play' and one 'art' entry; every generated case bucket has a 'generate' entry.
+6. Pack scoreboard: createScoreboard(null), add ana 100 violin, ' Ana ' 80 night-train, ana 40 violin, bia 100 violin, bia 0 night-train, anon 100 violin, '' 100 violin (await each); packTop(10) -> first { player: 'Ana' or 'ana' (any case), total 180, solved 2, cases 2 }, second bia total 100 solved 1 cases 2, length 2 (anon and '' skipped).
+7. Server: GET /costs is 200 with content-type text/html and the body contains 'Cost log'; GET /api/costs is 200 and its cases length equals the number of CASES keys; /api/costs?case=night-train -> 200 id 'night-train'; ?case=pack -> id 'pack'; ?case=nope -> 404 unknown_case; a server made with costFile: 'data/no-such-cost-log.json' answers /api/costs with 404 no_cost_log.
+8. Server: GET /api/scores?case=all returns an array; GET /api/credits?lang=pt returns example false, at least 10 backers, none matching /^Backer \d+$/, and others 26.
+9. Pack: CASES has at least 4 keys, 'violin' and 'night-train' first, and at least 2 keys starting with 'gen-'; public/index.html contains id="pack-scores", id="cost-link", id="credits-others", id="credits-cost" and the text "Placar do pacote"; public/costs.html contains "Registro de custos" and the receipt link base is not hard coded to the production host (does not contain 'https://fullcup.ai').
+
+Edits in test/keyboard.mjs (the credits are real now, so the example note must be hidden):
+Old (exact, 2 spaces):
+  const noteVisible = await evaluate(`!document.getElementById('credits-note').hidden`);
+  if (!noteVisible) throw new Error('example note not visible');
+New: when creditsData.example is true keep the old check; when it is false the note must be hidden (throw 'example note visible for real names'), and #credits-others must be visible and contain String(creditsData.others) when creditsData.others > 0.
+Old (exact, 2 spaces):
+  const note = await evaluate(`document.getElementById('credits-note').textContent`);
+  if (note !== 'Nomes de exemplo') throw new Error(`note fail: ${note}`);
+New: when creditsData.example is true keep the old check; otherwise read #credits-others textContent and throw `others pt fail: ${text}` unless it contains 'apoiadores'.
+Start your reply directly with <<<FILE. No analysis text.

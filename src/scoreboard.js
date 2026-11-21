@@ -95,5 +95,52 @@ export function createScoreboard(filePath = null) {
     return sorted.slice(0, n);
   }
 
-  return { add, top };
+  function packTop(n = 10) {
+    const playersMap = new Map();
+    for (const entry of entries) {
+      const nameRaw = entry.player;
+      const normalizedName = nameRaw ? nameRaw.trim().toLowerCase() : '';
+      if (!normalizedName || normalizedName === 'anon') continue;
+      
+      const displayName = nameRaw.trim();
+      
+      if (!playersMap.has(normalizedName)) {
+        playersMap.set(normalizedName, { name: displayName, entries: [] });
+      }
+      playersMap.get(normalizedName).entries.push(entry);
+    }
+
+    const leaderboard = Array.from(playersMap.values()).map(p => {
+      const sortedEntries = p.entries.sort((a, b) => b.at.localeCompare(a.at));
+      const newestAt = sortedEntries[0].at;
+      const name = sortedEntries[0].player.trim();
+      
+      const bestPerCase = new Map();
+      for (const e of p.entries) {
+        const cid = e.caseId || 'unknown';
+        const score = e.score || 0;
+        if (!bestPerCase.has(cid) || score > bestPerCase.get(cid)) {
+          bestPerCase.set(cid, score);
+        }
+      }
+
+      const caseIds = Array.from(bestPerCase.keys());
+      const solvedCount = caseIds.filter(cid => cid !== 'unknown' && bestPerCase.get(cid) > 0).length;
+      const totalScore = Array.from(bestPerCase.values()).reduce((a, b) => a + b, 0);
+
+      return {
+        player: name,
+        total: totalScore,
+        solved: solvedCount,
+        cases: caseIds.length,
+        last: newestAt
+      };
+    });
+
+    return leaderboard
+      .sort((a, b) => b.total - a.total || b.solved - a.solved || a.player.localeCompare(b.player))
+      .slice(0, n);
+  }
+
+  return { add, top, packTop };
 }

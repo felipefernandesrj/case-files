@@ -1,0 +1,11 @@
+<<<REPLACE src/costs.js>>>
+    b.entries.sort((a, b) => a.at.localeCompare(b.at));
+=====
+    b.entries.sort((a, b) => String(a.at || '').localeCompare(String(b.at || '')));
+<<<END>>>
+
+<<<REPLACE src/costs.js>>>
+    cases[key] = loadCase(cases[key]);
+=====
+    cases[key] = loadCase(CASES[key]);
+<<<END>>>

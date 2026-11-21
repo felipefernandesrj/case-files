@@ -1,0 +1,8 @@
+CAUGHT src/costs.js: "kind = 'generate';" -> "kind = 'play';"
+CAUGHT src/costs.js: 'if (receipt && seenReceipts.has(receipt)) continue;' -> 'if (false) continue;'
+CAUGHT src/scoreboard.js: "normalizedName === 'anon'" -> "normalizedName === 'anonx'"
+CAUGHT src/server.js: "if (url.searchParams.get('case') === 'all') return sendJSON(" -> ''
+CAUGHT src/server.js: 'others: Number(credits.others) || 0,' -> ''
+CAUGHT src/costs.js: 'return round6(e.usage.neurons * NEURON_USD)' -> 'return round6(e.usage.neurons * NEURON_U'
+CAUGHT src/costs.js: 'const bucket = buckets.find(b => b.id === artCase(item.asset' -> 'const bucket = packBucket;'
+CAUGHT src/server.js: "if (!bucket) return sendJSON(res, 404, { error: 'unknown_cas" -> 'if (!bucket) return sendJSON(res, 200, {'

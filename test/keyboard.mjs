@@ -279,7 +279,13 @@ await runStep('credits-a11y', async () => {
     if (listItems[i] !== creditsData.backers[i]) throw new Error(`backer ${i} fail: ${listItems[i]}`);
   }
   const noteVisible = await evaluate(`!document.getElementById('credits-note').hidden`);
-  if (!noteVisible) throw new Error('example note not visible');
+  if (creditsData.example) {
+    if (!noteVisible) throw new Error('example note not visible');
+  } else {
+    if (noteVisible) throw new Error('example note visible for real names');
+    const othersText = await evaluate(`document.getElementById('credits-others').textContent`);
+    if (creditsData.others > 0 && !othersText.includes(String(creditsData.others))) throw new Error(`others text mismatch: ${othersText}`);
+  }
 });
 
 // 8. Credits PT
@@ -287,8 +293,13 @@ await runStep('credits-pt', async () => {
   await evaluate(`document.getElementById('lpt').focus()`);
   await pressEnter();
   await waitFor(async () => (await evaluate(`document.getElementById('credits-title').textContent`)) === creditsData.title.pt);
-  const note = await evaluate(`document.getElementById('credits-note').textContent`);
-  if (note !== 'Nomes de exemplo') throw new Error(`note fail: ${note}`);
+  if (creditsData.example) {
+    const note = await evaluate(`document.getElementById('credits-note').textContent`);
+    if (note !== 'Nomes de exemplo') throw new Error(`note fail: ${note}`);
+  } else {
+    const text = await evaluate(`document.getElementById('credits-others').textContent`);
+    if (!text.includes('apoiadores')) throw new Error(`others pt fail: ${text}`);
+  }
   const vText = await evaluate(`document.getElementById('verdict').innerText`);
   if (!vText.includes('Culpado')) throw new Error(`verdict pt fail: ${vText}`);
   const sCap = await evaluate(`document.getElementById('scores-caption').textContent`);

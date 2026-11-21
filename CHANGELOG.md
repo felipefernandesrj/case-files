@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.0 (M4 sprint 1: cost log, pack scoreboard, real credits)
+- Added public cost log at /costs and GET /api/costs.
+- Cost log built by node src/costs.js from key logs, build logs, and art receipts.
+- Cost calculated as neurons x US$0.011 per 1,000.
+- Cost per case at release: Violin US$0.051778, Night Train US$0.037506, Lapa US$0.003868, Samba US$0.002000. The shared build and tools line grows with every build; the live total is on /costs and the Cup page.
+- Added shared pack scoreboard on the case picker.
+- Added fourth case: The Silent Batucada.
+- Added real public backers to credits.
+- Added missing # column header to case scoreboard.
+- Added test/pack-m4.mjs with 9 checks.
+
 ## 0.5.2 (M3 delivered: The Generated Case)
 - M3 delivered 2026-11-20. Delivery notes: docs/M3_DELIVERY.md. New tools/smoke-m3.mjs (live acceptance).
 

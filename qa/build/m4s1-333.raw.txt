@@ -1,0 +1,5 @@
+<<<REPLACE test/pack-m4.mjs>>>
+    await listen(0);
+=====
+    await new Promise(r => ps.listen(0, r));
+<<<END>>>

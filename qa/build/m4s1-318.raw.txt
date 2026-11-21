@@ -1,0 +1,128 @@
+<<<REPLACE src/costs.js>>>
+export function receiptOf(e) {
+  return e.headers?.['x-fullcup-receipt-id'] || e.headers?.['x-fullcup-receipt'] || null;
+}
+=====
+export function receiptOf(e) {
+  return e.headers?.['x-fullcup-receipt-id'] || e.headers?.['x-fullcup-receipt'] || null;
+}
+
+export function ulidTime(id) {
+  if (typeof id !== 'string' || id.length < 10) return null;
+  const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+  let ms = 0;
+  const sub = id.substring(0, 10).toUpperCase();
+  for (let i = 0; i < sub.length; i++) {
+    const idx = ALPHABET.indexOf(sub[i]);
+    if (idx === -1) return null;
+    ms = ms * 32 + idx;
+  }
+  return new Date(ms).toISOString();
+}
+<<<END>>>
+
+<<<REPLACE src/costs.js>>>
+export function ulidTime(id) {
+  if (typeof id !== 'string' || id.length < 10) return null;
+  const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+  let ms = 0;
+  const sub = id.substring(0, 10).toUpperCase();
+  for (let i = 0; i < sub.length; i++) {
+    const idx = ALPHABET.indexOf(sub[i]);
+    if (idx === -1) return null;
+    ms = ms * 32 + idx;
+  }
+  return new Date(ms).toISOString();
+}
+=====
+export function ulidTime(id) {
+  if (typeof id !== 'string' || id.length < 10) return null;
+  const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+  let ms = 0;
+  const sub = id.substring(0, 10).toUpperCase();
+  for (let i = 0; i < sub.length; i++) {
+    const idx = ALPHABET.indexOf(sub[i]);
+    if (idx === -1) return null;
+    ms = ms * 32 + idx;
+  }
+  return new Date(ms).toISOString();
+}
+
+export function artCase(asset) {
+  if (/(^|\/)violin(-|$)/.test(String(asset))) return 'violin';
+  if (/(^|\/)night-train(-|$)/.test(String(asset))) return 'night-train';
+  return 'pack';
+}
+<<<END>>>
+
+<<<REPLACE src/costs.js>>>
+export function buildCostLog({ usage = [], build = [], cases = {}, now = new Date().toISOString() }) {
+=====
+export function buildCostLog({ usage = [], build = [], cases = {}, art = [], now = new Date().toISOString() }) {
+<<<END>>>
+
+<<<REPLACE src/costs.js>>>
+      at: e.at,
+=====
+      at: e.at || ulidTime(receipt),
+<<<END>>>
+
+<<<REPLACE src/costs.js>>>
+    packBucket.entries.push({
+      at: e.at,
+      kind: 'build',
+      purpose: 'build:' + e.label,
+      model: e.model,
+      status: e.status,
+      usd: entryUsd(e),
+      receipt
+    });
+  }
+
+  const allBuckets = [...buckets, packBucket];
+=====
+    packBucket.entries.push({
+      at: e.at,
+      kind: 'build',
+      purpose: 'build:' + e.label,
+      model: e.model,
+      status: e.status,
+      usd: entryUsd(e),
+      receipt
+    });
+  }
+
+  for (const item of art) {
+    if (item.receipt && seenReceipts.has(item.receipt)) continue;
+    const targetCaseKey = artCase(item.asset);
+    const bucket = buckets.find(b => b.id === targetCaseKey) || packBucket;
+    bucket.entries.push({
+      at: ulidTime(item.receipt),
+      kind: 'art',
+      purpose: 'art:' + item.asset + ':' + item.attempt,
+      model: item.model || null,
+      status: 200,
+      usd: round6(Number(item.usd) || 0),
+      receipt: item.receipt || null
+    });
+    if (item.receipt) seenReceipts.add(item.receipt);
+  }
+
+  const allBuckets = [...buckets, packBucket];
+<<<END>>>
+
+<<<REPLACE src/costs.js>>>
+export function writeCostLog({ usageFile = 'qa/key-usage-log.json', buildFile = 'qa/build-log.json', outFile = 'data/cost-log.json' } = {}) {
+  const usage = readJson(usageFile);
+  const build = readJson(buildFile);
+  const cases = readJson('data/cases.json');
+  const log = buildCostLog({ usage, build, cases });
+=====
+export function writeCostLog({ usageFile = 'qa/key-usage-log.json', buildFile = 'qa/build-log.json', outFile = 'data/cost-log.json', artFile = 'data/art-receipts.json' } = {}) {
+  const usage = readJson(usageFile);
+  const build = readJson(buildFile);
+  const cases = readJson('data/cases.json');
+  const artRaw = readJson(artFile);
+  const art = Array.isArray(artRaw?.items) ? artRaw.items : [];
+  const log = buildCostLog({ usage, build, cases, art });
+<<<END>>>

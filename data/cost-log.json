@@ -1,0 +1,6529 @@
+{
+ "version": 1,
+ "generatedAt": "2026-11-21T12:28:29.107Z",
+ "usdPer1000Neurons": 0.011,
+ "receiptUrl": "https://qa.fullcup.ai/receipts/",
+ "cases": [
+  {
+   "id": "violin",
+   "title": {
+    "en": "The Vanishing Violin",
+    "pt": "O Violino Desaparecido"
+   },
+   "generated": false,
+   "entries": [
+    {
+     "at": "2026-10-31T16:41:15.600Z",
+     "kind": "author",
+     "purpose": "author-case",
+     "model": "@cf/openai/gpt-oss-120b",
+     "status": 200,
+     "usd": 0.001734,
+     "receipt": "01M69DBAYSVAWBEC7NHXBZET5W"
+    },
+    {
+     "at": "2026-10-31T16:41:34.996Z",
+     "kind": "author",
+     "purpose": "author-case",
+     "model": "@cf/openai/gpt-oss-120b",
+     "status": 200,
+     "usd": 0.001983,
+     "receipt": "01M69DC6NMGGHKE7R56HX0CZ4E"
+    },
+    {
+     "at": "2026-10-31T16:42:25.173Z",
+     "kind": "author",
+     "purpose": "revise-case",
+     "model": "@cf/openai/gpt-oss-120b",
+     "status": 200,
+     "usd": 0.001979,
+     "receipt": "01M69DDN4R585YS1M8QKHQ930A"
+    },
+    {
+     "at": "2026-10-31T16:43:14.291Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000101,
+     "receipt": "01M69DFXB4RS5ZWM4MYJ9WZWWP"
+    },
+    {
+     "at": "2026-10-31T16:43:17.298Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000091,
+     "receipt": "01M69DG2H6JVEMWVJF5WYCQAH4"
+    },
+    {
+     "at": "2026-10-31T16:43:20.536Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000103,
+     "receipt": "01M69DG47Z0SG422SC228SHHHM"
+    },
+    {
+     "at": "2026-10-31T16:43:26.344Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000091,
+     "receipt": "01M69DG8MGSD7SC6PKV8JV6R8J"
+    },
+    {
+     "at": "2026-10-31T16:43:29.775Z",
+     "kind": "play",
+     "purpose": "interrogate:marta",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000091,
+     "receipt": "01M69DGEA0P1XYV6T2X0M0BYTM"
+    },
+    {
+     "at": "2026-10-31T16:43:34.916Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000118,
+     "receipt": "01M69DGHYF192Q6NC8D7F3XYTG"
+    },
+    {
+     "at": "2026-10-31T16:43:38.887Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000103,
+     "receipt": "01M69DGPP9Y8YC7S5MEJBCG0X4"
+    },
+    {
+     "at": "2026-10-31T16:43:45.613Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000121,
+     "receipt": "01M69DGTHMPP0MKBQ344A0ETM0"
+    },
+    {
+     "at": "2026-10-31T16:43:50.473Z",
+     "kind": "play",
+     "purpose": "interrogate:marta",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000101,
+     "receipt": "01M69DH15NW4MKZRFAKS48SQDF"
+    },
+    {
+     "at": "2026-11-01T00:10:18.097Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000101,
+     "receipt": "01M6A72KQ3M2KM8082JCC4S4HN"
+    },
+    {
+     "at": "2026-11-01T00:10:20.485Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000091,
+     "receipt": "01M6A72NNMTP68MHEJWNN85YES"
+    },
+    {
+     "at": "2026-11-01T00:10:23.647Z",
+     "kind": "play",
+     "purpose": "interrogate:marta",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000093,
+     "receipt": "01M6A72QZJP1RXW4544SDZ7Z5K"
+    },
+    {
+     "at": "2026-11-01T00:10:25.418Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000123,
+     "receipt": "01M6A72V2R62WRQGBGC6CMMDRW"
+    },
+    {
+     "at": "2026-11-01T00:10:26.897Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000122,
+     "receipt": "01M6A72WT9AXG5K0V7VGCR23ER"
+    },
+    {
+     "at": "2026-11-01T00:10:28.424Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000103,
+     "receipt": "01M6A72Y8ZV32E4KGVXJMGBKF4"
+    },
+    {
+     "at": "2026-11-01T00:10:30.090Z",
+     "kind": "play",
+     "purpose": "interrogate:marta",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000101,
+     "receipt": "01M6A72ZR0D8XX8SE9HV3RDC9C"
+    },
+    {
+     "at": "2026-11-01T12:09:17.560Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000106,
+     "receipt": "01M6BG740JFXW35N5N9VVFWQHK"
+    },
+    {
+     "at": "2026-11-01T12:09:18.857Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000091,
+     "receipt": "01M6BG761MEMJZW0GYQWKMVCCX"
+    },
+    {
+     "at": "2026-11-01T12:09:19.821Z",
+     "kind": "play",
+     "purpose": "interrogate:marta",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000091,
+     "receipt": "01M6BG779HQ1J82SFGJ7JXXS61"
+    },
+    {
+     "at": "2026-11-01T12:09:21.298Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000119,
+     "receipt": "01M6BG787X3F01E1QW6D7RX18B"
+    },
+    {
+     "at": "2026-11-01T12:09:22.423Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000134,
+     "receipt": "01M6BG79P354R18M6ZNT965EV9"
+    },
+    {
+     "at": "2026-11-01T12:09:23.417Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00011,
+     "receipt": "01M6BG7AS285A5QT24BWEZEPMX"
+    },
+    {
+     "at": "2026-11-01T12:09:24.294Z",
+     "kind": "play",
+     "purpose": "interrogate:marta",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000111,
+     "receipt": "01M6BG7BR8KB3PBZ4NZDJPZJAP"
+    },
+    {
+     "at": "2026-11-01T12:09:25.065Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000118,
+     "receipt": "01M6BG7CKNV3MYSHJRZNRNQC6Z"
+    },
+    {
+     "at": "2026-11-01T15:35:34.389Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000122,
+     "receipt": "01M6BW0VMWNXK9QS91AARG8T5J"
+    },
+    {
+     "at": "2026-11-01T15:35:48.587Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000134,
+     "receipt": "01M6BW19RBAH1Y143FNP8ERQRZ"
+    },
+    {
+     "at": "2026-11-01T15:36:27.214Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000143,
+     "receipt": "01M6BW2ECZS6FY8Z6KM6E2AEVK"
+    },
+    {
+     "at": "2026-11-01T15:37:08.575Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000171,
+     "receipt": "01M6BW3PXADKJ7TB3VY990E5T4"
+    },
+    {
+     "at": "2026-11-01T15:37:36.098Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000126,
+     "receipt": "01M6BW4J30913XXJYEHCAPM92M"
+    },
+    {
+     "at": "2026-11-01T15:38:21.183Z",
+     "kind": "play",
+     "purpose": "interrogate:lia",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000144,
+     "receipt": "01M6BW5XAQ1Y4Z81E6B7GY2PBD"
+    },
+    {
+     "at": "2026-11-01T15:39:32.481Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00019,
+     "receipt": "01M6BW842H2Z23DDFTW0CQM0TW"
+    },
+    {
+     "at": "2026-11-01T15:40:03.205Z",
+     "kind": "play",
+     "purpose": "interrogate:tomas",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000203,
+     "receipt": "01M6BW928PHGJZQ91CNJ6B7JZ8"
+    },
+    {
+     "at": "2026-11-01T15:40:34.866Z",
+     "kind": "play",
+     "purpose": "interrogate:marta",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000117,
+     "receipt": "01M6BWA00KQ37169D2S4MGASES"
+    },
+    {
+     "at": "2026-11-02T12:19:19.728Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000159,
+     "receipt": "01M6E369DN79FAQ0RVGJYFJGSM"
+    },
+    {
+     "at": "2026-11-02T12:19:21.338Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000166,
+     "receipt": "01M6E36ANCP4WD4CZN6P0CB33J"
+    },
+    {
+     "at": "2026-11-02T12:19:22.870Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000171,
+     "receipt": "01M6E36C58ZZBR57709B3DRJ61"
+    },
+    {
+     "at": "2026-11-02T12:19:24.312Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:en:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000143,
+     "receipt": "01M6E36DJ9Z4KR2QM0QAPPF0A2"
+    },
+    {
+     "at": "2026-11-02T12:19:25.476Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:en:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000156,
+     "receipt": "01M6E36EPCKBT3WYYVC4KCSXRB"
+    },
+    {
+     "at": "2026-11-02T12:19:27.319Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:pt:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000176,
+     "receipt": "01M6E36GG6C7ZD4D4FJ7VQ6XA8"
+    },
+    {
+     "at": "2026-11-02T12:19:28.964Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:pt:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000186,
+     "receipt": "01M6E36J3SR7V8RHM1WJ9X9586"
+    },
+    {
+     "at": "2026-11-02T12:19:30.737Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:pt:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000188,
+     "receipt": "01M6E36KV1ACT2WZ648TT7VR8F"
+    },
+    {
+     "at": "2026-11-02T12:19:31.862Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000173,
+     "receipt": "01M6E36N8D6WYVGPQ4X20993Q0"
+    },
+    {
+     "at": "2026-11-02T12:19:33.630Z",
+     "kind": "play",
+     "purpose": "sprint5-consistency:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M6E36PN5HD4PQ9V52JA7HQEX"
+    },
+    {
+     "at": "2026-11-03T00:12:05.172Z",
+     "kind": "play",
+     "purpose": "sprint6-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000164,
+     "receipt": "01M6FBZCQ9CAXFV60KG1HARD1N"
+    },
+    {
+     "at": "2026-11-03T00:12:07.265Z",
+     "kind": "play",
+     "purpose": "sprint6-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M6FBZE8KQJSBK8Q82ME2YXQM"
+    },
+    {
+     "at": "2026-11-03T12:10:48.877Z",
+     "kind": "play",
+     "purpose": "sprint7-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M6GN3DF6C8HXB3M61WGRX632"
+    },
+    {
+     "at": "2026-11-03T12:10:51.953Z",
+     "kind": "play",
+     "purpose": "sprint7-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00017,
+     "receipt": "01M6GN3G8E8K1PQT999CVMC7V6"
+    },
+    {
+     "at": "2026-11-04T00:05:52.386Z",
+     "kind": "play",
+     "purpose": "sprint8-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000168,
+     "receipt": "01M6HY0QNT36A43HHEMRRM5CH4"
+    },
+    {
+     "at": "2026-11-04T00:05:56.304Z",
+     "kind": "play",
+     "purpose": "sprint8-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00017,
+     "receipt": "01M6HY0V084JNZQ3556CTBNXJV"
+    },
+    {
+     "at": "2026-11-04T12:08:50.269Z",
+     "kind": "play",
+     "purpose": "sprint9-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M6K7CGWX7R7QCJ656XNZ2S5H"
+    },
+    {
+     "at": "2026-11-04T12:08:56.183Z",
+     "kind": "play",
+     "purpose": "sprint9-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000172,
+     "receipt": "01M6K7CP5AWA1ASMMRHGDNWBAX"
+    },
+    {
+     "at": "2026-11-05T00:07:19.619Z",
+     "kind": "play",
+     "purpose": "sprint10-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000168,
+     "receipt": "01M6MGG3SSY5Z7ABZX4EXXCAXX"
+    },
+    {
+     "at": "2026-11-05T00:07:22.602Z",
+     "kind": "play",
+     "purpose": "sprint10-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000172,
+     "receipt": "01M6MGG699F82AQYXE7YZ8D6CX"
+    },
+    {
+     "at": "2026-11-05T12:09:25.779Z",
+     "kind": "play",
+     "purpose": "sprint11-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000168,
+     "receipt": "01M6NSTB23KY07RM05FSAY3DK1"
+    },
+    {
+     "at": "2026-11-05T12:09:28.633Z",
+     "kind": "play",
+     "purpose": "sprint11-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00017,
+     "receipt": "01M6NSTCVH7E9GQMJFPQF6WQCD"
+    },
+    {
+     "at": "2026-11-06T00:13:52.735Z",
+     "kind": "play",
+     "purpose": "sprint12-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000168,
+     "receipt": "01M6Q38TZ6YR18RCY5V55V8YEJ"
+    },
+    {
+     "at": "2026-11-06T00:13:54.984Z",
+     "kind": "play",
+     "purpose": "sprint12-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M6Q38WF3GDWP50K3BPNFMD9X"
+    },
+    {
+     "at": "2026-11-06T12:12:12.843Z",
+     "kind": "play",
+     "purpose": "sprint13-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000168,
+     "receipt": "01M6RCC5B6NB688T6ZX0P73ZVY"
+    },
+    {
+     "at": "2026-11-06T12:12:15.446Z",
+     "kind": "play",
+     "purpose": "sprint13-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00017,
+     "receipt": "01M6RCC6S2JV00FCMF7S7JRJRH"
+    },
+    {
+     "at": "2026-11-07T00:11:40.002Z",
+     "kind": "play",
+     "purpose": "sprint14-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000167,
+     "receipt": "01M6SNHG5C29GY40ANRF7WYXXR"
+    },
+    {
+     "at": "2026-11-07T00:11:43.069Z",
+     "kind": "play",
+     "purpose": "sprint14-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000171,
+     "receipt": "01M6SNHJMYGDFMXYEH2NY5XKSK"
+    },
+    {
+     "at": "2026-11-07T12:12:54.162Z",
+     "kind": "play",
+     "purpose": "sprint15-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000167,
+     "receipt": "01M6TYT3XMDQC8VZ3JJ0F097QW"
+    },
+    {
+     "at": "2026-11-07T12:13:01.459Z",
+     "kind": "play",
+     "purpose": "sprint15-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000171,
+     "receipt": "01M6TYTAQM20G6YQB1QG7ADBNX"
+    },
+    {
+     "at": "2026-11-08T12:12:41.090Z",
+     "kind": "play",
+     "purpose": "sprint16-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M6XH6E23J5KVNGRW6156VDNR"
+    },
+    {
+     "at": "2026-11-08T12:12:43.615Z",
+     "kind": "play",
+     "purpose": "sprint16-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M6XH6G7BXX958W3821GNFP67"
+    },
+    {
+     "at": "2026-11-09T12:06:54.412Z",
+     "kind": "play",
+     "purpose": "sprint17-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000168,
+     "receipt": "01M7038JJGT5PTN1VPAHDV6BCK"
+    },
+    {
+     "at": "2026-11-09T12:06:58.248Z",
+     "kind": "play",
+     "purpose": "sprint17-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M7038NZKWJ3HV9328T97JVMC"
+    },
+    {
+     "at": "2026-11-10T00:32:26.597Z",
+     "kind": "play",
+     "purpose": "m1-acceptance:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000167,
+     "receipt": "01M71DXPH99V0EA0CR170X3MYW"
+    },
+    {
+     "at": "2026-11-10T00:32:31.419Z",
+     "kind": "play",
+     "purpose": "m1-acceptance:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00017,
+     "receipt": "01M71DXTQMZN91NFP0DD1Q0VBM"
+    },
+    {
+     "at": "2026-11-12T00:54:51.155Z",
+     "kind": "art",
+     "purpose": "art:characters/violin-lorenzo:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M050KKC07WT2R7KX52DPB"
+    },
+    {
+     "at": "2026-11-12T00:55:03.330Z",
+     "kind": "art",
+     "purpose": "art:characters/violin-maya:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M0GX2Q3TJWGFTE613VADT"
+    },
+    {
+     "at": "2026-11-12T00:55:13.195Z",
+     "kind": "art",
+     "purpose": "art:characters/violin-carlos:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M0THBY7W13PSA9TEGWF1G"
+    },
+    {
+     "at": "2026-11-12T00:56:15.054Z",
+     "kind": "art",
+     "purpose": "art:evidence/violin-items:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M2PYE0CY4GA7D4BV04589"
+    },
+    {
+     "at": "2026-11-12T00:57:00.139Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-verdict-closed:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M42ZBJMWBN59TMAMCP0K8"
+    },
+    {
+     "at": "2026-11-12T00:57:09.157Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-verdict-wrong:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M4BS5CN9E6XPG3R7W2VRV"
+    },
+    {
+     "at": "2026-11-12T00:57:17.953Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-academy-exterior:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M4MC1S3EGAR1FV49SPQHG"
+    },
+    {
+     "at": "2026-11-12T00:57:26.715Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-instrument-room:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M4WXVWQZZ7GMK75M5FYWE"
+    },
+    {
+     "at": "2026-11-12T00:57:35.365Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-rehearsal-hall:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M55C53EGGFC0BTK8DZBJY"
+    },
+    {
+     "at": "2026-11-12T00:57:44.736Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-hallway-cart:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M5EH0ET4YXQ141MC1DCDF"
+    },
+    {
+     "at": "2026-11-12T00:59:06.162Z",
+     "kind": "art",
+     "purpose": "art:titles/violin-stage:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M7Y1JBHK1R8E2TPEHGZK8"
+    },
+    {
+     "at": "2026-11-12T00:59:23.989Z",
+     "kind": "art",
+     "purpose": "art:cutscene/violin:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M8FEN5W7E3RTSJECZZQC1"
+    },
+    {
+     "at": "2026-11-12T01:04:06.623Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-instrument-room:r1",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76MH3EZNVQWG3F8X9GSCMA6"
+    },
+    {
+     "at": "2026-11-12T01:04:08.912Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-rehearsal-hall:r1",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76MH5PGQFR121SR1VTD19ZS"
+    },
+    {
+     "at": "2026-11-12T01:04:11.317Z",
+     "kind": "art",
+     "purpose": "art:loc/violin-hallway-cart:r1",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76MH81NKN099S5G0FJ12CE0"
+    },
+    {
+     "at": "2026-11-12T01:17:43.353Z",
+     "kind": "art",
+     "purpose": "art:evidence/violin-items:r1",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76NA11SAGZBX8SJ4R1EHGB8"
+    },
+    {
+     "at": "2026-11-17T00:02:33Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811601",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:02:51Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811602",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:03:50Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811605",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:04:05Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811606",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:04:32Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811608",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:04:49Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811609",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:05:04Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811610",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:05:28Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811603",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M7KD55ZC351G2FNXPWEP2GVY"
+    },
+    {
+     "at": "2026-11-17T00:05:38Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811611",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 502,
+     "usd": 0,
+     "receipt": null
+    },
+    {
+     "at": "2026-11-17T00:05:56Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811612",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M7KD63P4B4XYGXXG7X2VD68V"
+    },
+    {
+     "at": "2026-11-17T00:06:07Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:violin-carlos:seed3811613",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M7KD6DSPF7KVYPKXSS947AGS"
+    }
+   ],
+   "totals": {
+    "usd": 0.051778,
+    "calls": 99,
+    "receipts": 91,
+    "byKind": {
+     "author": {
+      "usd": 0.005696,
+      "calls": 3
+     },
+     "play": {
+      "usd": 0.009963,
+      "calls": 69
+     },
+     "art": {
+      "usd": 0.036119,
+      "calls": 27
+     }
+    }
+   }
+  },
+  {
+   "id": "night-train",
+   "title": {
+    "en": "The Night Train",
+    "pt": "O Trem Noturno"
+   },
+   "generated": false,
+   "entries": [
+    {
+     "at": "2026-11-10T12:16:09.036Z",
+     "kind": "play",
+     "purpose": "m2s1-smoke:en:maya",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000167,
+     "receipt": "01M72P67XGGGA762NA2K6SG7W1"
+    },
+    {
+     "at": "2026-11-10T12:16:11.778Z",
+     "kind": "play",
+     "purpose": "m2s1-smoke:pt:carlos",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00017,
+     "receipt": "01M72P69JMT9BDP0QHZQKKK4K4"
+    },
+    {
+     "at": "2026-11-11T00:27:28.930Z",
+     "kind": "play",
+     "purpose": "m2s2-smoke:pt:helena",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000197,
+     "receipt": "01M7401B9MRPS3SVG831BQ5046"
+    },
+    {
+     "at": "2026-11-11T00:27:33.083Z",
+     "kind": "play",
+     "purpose": "m2s2-smoke:pt:ines",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000169,
+     "receipt": "01M7401EECT79SWA6WGHZ6E0MB"
+    },
+    {
+     "at": "2026-11-11T12:16:35.615Z",
+     "kind": "play",
+     "purpose": "m2s3-smoke:pt:victor",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000176,
+     "receipt": "01M758KRCCC3VQB2TGG70X204B"
+    },
+    {
+     "at": "2026-11-12T00:23:10.884Z",
+     "kind": "play",
+     "purpose": "m2s4-smoke:pt:helena",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000195,
+     "receipt": "01M76J65DA82FZ71D5VBM8FRYV"
+    },
+    {
+     "at": "2026-11-12T00:55:21.836Z",
+     "kind": "art",
+     "purpose": "art:characters/night-train-helena:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M12ZCM7MW1XWNDQA56NMP"
+    },
+    {
+     "at": "2026-11-12T00:55:31.334Z",
+     "kind": "art",
+     "purpose": "art:characters/night-train-victor:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M1C8692RNCX3PKKKRBGMD"
+    },
+    {
+     "at": "2026-11-12T00:55:40.925Z",
+     "kind": "art",
+     "purpose": "art:characters/night-train-tomas:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M1NKXWHT0C75CBPEG9CME"
+    },
+    {
+     "at": "2026-11-12T00:55:49.622Z",
+     "kind": "art",
+     "purpose": "art:characters/night-train-ines:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M1Y3PQY5S3S96J6G00W6K"
+    },
+    {
+     "at": "2026-11-12T00:56:23.905Z",
+     "kind": "art",
+     "purpose": "art:evidence/night-train-items:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M2ZK1N3JQPJWSPA7AC18C"
+    },
+    {
+     "at": "2026-11-12T00:57:53.786Z",
+     "kind": "art",
+     "purpose": "art:loc/night-train-exterior:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M5QBTCNE2VG2GNQYA7772"
+    },
+    {
+     "at": "2026-11-12T00:58:03.723Z",
+     "kind": "art",
+     "purpose": "art:loc/night-train-luggage-safe:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M612BEPET5NKXTZXG3981"
+    },
+    {
+     "at": "2026-11-12T00:58:12.600Z",
+     "kind": "art",
+     "purpose": "art:loc/night-train-dining-kitchen:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M69QR9NZD66GG8RW28M6C"
+    },
+    {
+     "at": "2026-11-12T00:58:21.268Z",
+     "kind": "art",
+     "purpose": "art:loc/night-train-sleeper-corridor:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M6J6M2WHX7XM0M3E8XQ2Q"
+    },
+    {
+     "at": "2026-11-12T00:58:30.144Z",
+     "kind": "art",
+     "purpose": "art:loc/night-train-tunnel:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M6TW0QEVRSP4R0QGS9GNC"
+    },
+    {
+     "at": "2026-11-12T00:58:39.483Z",
+     "kind": "art",
+     "purpose": "art:loc/night-train-port-elling:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M73ZVGJV2XNF1B6J8GFSX"
+    },
+    {
+     "at": "2026-11-12T00:59:15.464Z",
+     "kind": "art",
+     "purpose": "art:titles/night-train-stage:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M8748RTRR86FWF8QHEACK"
+    },
+    {
+     "at": "2026-11-12T00:59:33.161Z",
+     "kind": "art",
+     "purpose": "art:cutscene/night-train:orig",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76M8RD9HMM5B7RAZM19BBSV"
+    },
+    {
+     "at": "2026-11-12T01:03:34.314Z",
+     "kind": "art",
+     "purpose": "art:characters/night-train-victor:r1",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76MG3XA88EJ96KE6F5GVJDZ"
+    },
+    {
+     "at": "2026-11-12T01:03:36.571Z",
+     "kind": "art",
+     "purpose": "art:characters/night-train-ines:r1",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M76MG63VJZFDY6CQK1D8260X"
+    },
+    {
+     "at": "2026-11-17T00:01:56Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:night-train-ines:seed3811603",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M7KCXMKP5GP6J6AD6WH12KC2"
+    },
+    {
+     "at": "2026-11-17T00:02:21Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:night-train-ines:seed3811604",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M7KCZ4CYWRSZGCED7P4WE7JS"
+    },
+    {
+     "at": "2026-11-17T00:04:18Z",
+     "kind": "art",
+     "purpose": "m2gf10-art:night-train-ines:seed3811607",
+     "model": "@cf/black-forest-labs/flux-1-schnell",
+     "status": 200,
+     "usd": 0.001901,
+     "receipt": "01M7KD33YQ7QEHW3QSQP261Y4M"
+    },
+    {
+     "at": "2026-11-19T16:47:37.592Z",
+     "kind": "play",
+     "purpose": "m2-acceptance:en:helena",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000162,
+     "receipt": "01M7TB9S9Q0QQWVT6AK6H9B51G"
+    },
+    {
+     "at": "2026-11-19T16:47:55.634Z",
+     "kind": "play",
+     "purpose": "m2-acceptance:pt:victor",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000174,
+     "receipt": "01M7TBAAAW71HVZB6EWYVH26S1"
+    },
+    {
+     "at": "2026-11-19T16:49:07.161Z",
+     "kind": "play",
+     "purpose": "m2-shots:1280-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000144,
+     "receipt": "01M7TBCGV52E19SQG29BZQF45E"
+    },
+    {
+     "at": "2026-11-19T16:49:22.862Z",
+     "kind": "play",
+     "purpose": "m2-shots:1280-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000144,
+     "receipt": "01M7TBCZVF1TGP18A8RF0W9Q21"
+    },
+    {
+     "at": "2026-11-19T16:49:34.522Z",
+     "kind": "play",
+     "purpose": "m2-shots:1280-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000138,
+     "receipt": "01M7TBDAWPHFDN6YT7A00005GT"
+    },
+    {
+     "at": "2026-11-19T16:50:09.338Z",
+     "kind": "play",
+     "purpose": "m2-shots:1280-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000177,
+     "receipt": "01M7TBEDQ543YJFFK3AYXNH9P4"
+    },
+    {
+     "at": "2026-11-19T16:50:41.594Z",
+     "kind": "play",
+     "purpose": "m2-shots:1280-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000179,
+     "receipt": "01M7TBFCS7AQKPCEVA1X4BR268"
+    },
+    {
+     "at": "2026-11-19T16:50:54.246Z",
+     "kind": "play",
+     "purpose": "m2-shots:1280-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000158,
+     "receipt": "01M7TBFRR09ZKV37PMYQVPEP0C"
+    },
+    {
+     "at": "2026-11-19T16:51:27.496Z",
+     "kind": "play",
+     "purpose": "m2-shots:390-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.00014,
+     "receipt": "01M7TBGT4EFH9PN0SEQAS85ZGG"
+    },
+    {
+     "at": "2026-11-19T16:51:42.171Z",
+     "kind": "play",
+     "purpose": "m2-shots:390-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000144,
+     "receipt": "01M7TBH7HRZZMFFJ56KPAPV8DC"
+    },
+    {
+     "at": "2026-11-19T16:51:53.325Z",
+     "kind": "play",
+     "purpose": "m2-shots:390-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000138,
+     "receipt": "01M7TBHJSZ267GE98FMBSN8ZNX"
+    },
+    {
+     "at": "2026-11-19T16:52:20.093Z",
+     "kind": "play",
+     "purpose": "m2-shots:390-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000179,
+     "receipt": "01M7TBJD6DNZCXXF188YGPMC2B"
+    },
+    {
+     "at": "2026-11-19T16:52:41.800Z",
+     "kind": "play",
+     "purpose": "m2-shots:390-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000179,
+     "receipt": "01M7TBK1RCGBRQ2YJMCZKK63PP"
+    },
+    {
+     "at": "2026-11-19T16:52:56.973Z",
+     "kind": "play",
+     "purpose": "m2-shots:390-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000158,
+     "receipt": "01M7TBKGKHMTJ5Z2DKJGW33249"
+    }
+   ],
+   "totals": {
+    "usd": 0.037506,
+    "calls": 38,
+    "receipts": 38,
+    "byKind": {
+     "play": {
+      "usd": 0.003288,
+      "calls": 20
+     },
+     "art": {
+      "usd": 0.034218,
+      "calls": 18
+     }
+    }
+   }
+  },
+  {
+   "id": "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+   "title": {
+    "en": "The Lapa Midnight Heist",
+    "pt": "O Assalto da Meia-noite na Lapa"
+   },
+   "generated": true,
+   "entries": [
+    {
+     "at": "2026-11-20T12:29:19.012Z",
+     "kind": "generate",
+     "purpose": "m3s2-generate:live8:draft1",
+     "model": "@cf/google/gemma-4-26b-a4b-it",
+     "status": 200,
+     "usd": 0.00092,
+     "receipt": "01M7WEXGV615RGBANGSK3C1X9N"
+    },
+    {
+     "at": "2026-11-20T12:30:28.795Z",
+     "kind": "generate",
+     "purpose": "m3s2-generate:live8:draft2",
+     "model": "@cf/google/gemma-4-26b-a4b-it",
+     "status": 200,
+     "usd": 0.00121,
+     "receipt": "01M7WEZMFSP7S0FC3WMF21V2XG"
+    },
+    {
+     "at": "2026-11-20T12:32:44.509Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:1280-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000115,
+     "receipt": "01M7WF3S5BAXN932EESS9W4KHA"
+    },
+    {
+     "at": "2026-11-20T12:33:01.714Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:1280-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000111,
+     "receipt": "01M7WF49ZFB3W9TPDMY3KWJDPF"
+    },
+    {
+     "at": "2026-11-20T12:33:14.389Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:1280-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000124,
+     "receipt": "01M7WF4P4V9M5MMZEA6ZZF6MMH"
+    },
+    {
+     "at": "2026-11-20T12:33:52.185Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:1280-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000121,
+     "receipt": "01M7WF5VG0YWXTWAP9EKW8ZFJB"
+    },
+    {
+     "at": "2026-11-20T12:34:04.833Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:1280-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000134,
+     "receipt": "01M7WF67DNAA4ATMWHC4AHZDJ7"
+    },
+    {
+     "at": "2026-11-20T12:34:21.508Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:1280-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000128,
+     "receipt": "01M7WF6QNM2RCTR3DDV6BKAX66"
+    },
+    {
+     "at": "2026-11-20T12:34:56.625Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:390-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000115,
+     "receipt": "01M7WF7THYYK65KJQ0AGQ52RTQ"
+    },
+    {
+     "at": "2026-11-20T12:35:10.301Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:390-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000111,
+     "receipt": "01M7WF87P59DS7Y49X9YTSHPGH"
+    },
+    {
+     "at": "2026-11-20T12:35:21.966Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:390-en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000122,
+     "receipt": "01M7WF8K3ZHRRPPNGJS0VCD80Z"
+    },
+    {
+     "at": "2026-11-20T12:35:50.692Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:390-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000121,
+     "receipt": "01M7WF9F48KNEK90N75XHYYVWW"
+    },
+    {
+     "at": "2026-11-20T12:36:04.873Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:390-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000134,
+     "receipt": "01M7WF9WKZTE4GC88M6R5KHM1C"
+    },
+    {
+     "at": "2026-11-20T12:36:18.554Z",
+     "kind": "play",
+     "purpose": "m3s2-shots:390-pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000128,
+     "receipt": "01M7WFA9XYDMEEMTDKM5NAAV8K"
+    },
+    {
+     "at": "2026-11-20T23:53:21.435Z",
+     "kind": "play",
+     "purpose": "m3-acceptance:en:suspect-1",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000141,
+     "receipt": "01M7XP21GYXZ16VYM8394BB9KP"
+    },
+    {
+     "at": "2026-11-20T23:53:26.313Z",
+     "kind": "play",
+     "purpose": "m3-acceptance:pt:suspect-3",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000133,
+     "receipt": "01M7XP25KEDP1FEWPYCR4XR5ZG"
+    }
+   ],
+   "totals": {
+    "usd": 0.003868,
+    "calls": 16,
+    "receipts": 16,
+    "byKind": {
+     "generate": {
+      "usd": 0.00213,
+      "calls": 2
+     },
+     "play": {
+      "usd": 0.001738,
+      "calls": 14
+     }
+    }
+   }
+  },
+  {
+   "id": "gen-a-samba-school-rehearsal-in-madureira-th",
+   "title": {
+    "en": "The Silent Batucada",
+    "pt": "O Samba Silencioso"
+   },
+   "generated": true,
+   "entries": [
+    {
+     "at": "2026-11-20T23:55:54.933Z",
+     "kind": "generate",
+     "purpose": "m3-batch:2:draft1",
+     "model": "@cf/google/gemma-4-26b-a4b-it",
+     "status": 200,
+     "usd": 0.000849,
+     "receipt": "01M7XP6Q5WVMF94CC1XWWWF6A6"
+    },
+    {
+     "at": "2026-11-20T23:56:59.400Z",
+     "kind": "generate",
+     "purpose": "m3-batch:2:draft2",
+     "model": "@cf/google/gemma-4-26b-a4b-it",
+     "status": 200,
+     "usd": 0.001151,
+     "receipt": "01M7XP8NP311HWW1NRCDCWRKQV"
+    }
+   ],
+   "totals": {
+    "usd": 0.002,
+    "calls": 2,
+    "receipts": 2,
+    "byKind": {
+     "generate": {
+      "usd": 0.002,
+      "calls": 2
+     }
+    }
+   }
+  }
+ ],
+ "pack": {
+  "id": "pack",
+  "title": {
+   "en": "The whole pack (shared build and tools)",
+   "pt": "O pacote inteiro (construção e ferramentas compartilhadas)"
+  },
+  "generated": false,
+  "entries": [
+   {
+    "at": "2026-10-31T16:43:04.135Z",
+    "kind": "dev",
+    "purpose": "qa:list-models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-10-31T16:43:08.648Z",
+    "kind": "dev",
+    "purpose": "qa:allowed-model",
+    "model": "@cf/zai-org/glm-4.7-flash",
+    "status": 200,
+    "usd": 0.000009,
+    "receipt": "01M69DFRPATEQBVKWG7N7ACEC6"
+   },
+   {
+    "at": "2026-10-31T16:43:08.771Z",
+    "kind": "dev",
+    "purpose": "qa:disallowed-model",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-10-31T16:43:08.833Z",
+    "kind": "dev",
+    "purpose": "qa:disallowed-model",
+    "model": "deepseek-v4-pro",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-10-31T16:43:08.904Z",
+    "kind": "dev",
+    "purpose": "qa:disallowed-model",
+    "model": "gpt-4o",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-10-31T16:43:08.980Z",
+    "kind": "dev",
+    "purpose": "pick-model",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-10-31T16:43:16.036Z",
+    "kind": "dev",
+    "purpose": "pick-model",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T00:10:16.013Z",
+    "kind": "dev",
+    "purpose": "pick-model",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T12:09:15.439Z",
+    "kind": "dev",
+    "purpose": "pick-model",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:35:33.173Z",
+    "kind": "dev",
+    "purpose": "pick-model",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:47:46.697Z",
+    "kind": "build",
+    "purpose": "build:01-case",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.001508,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:48:56.158Z",
+    "kind": "build",
+    "purpose": "build:02-code",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.00485,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:49:43.726Z",
+    "kind": "build",
+    "purpose": "build:03-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003299,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:50:14.085Z",
+    "kind": "build",
+    "purpose": "build:04-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.001713,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:51:08.537Z",
+    "kind": "build",
+    "purpose": "build:05-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002496,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:57:09.574Z",
+    "kind": "build",
+    "purpose": "build:06-case-v2",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003956,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:58:01.708Z",
+    "kind": "build",
+    "purpose": "build:07-lib",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004041,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T15:59:10.788Z",
+    "kind": "build",
+    "purpose": "build:08-server",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005445,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:01:22.529Z",
+    "kind": "build",
+    "purpose": "build:09-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.007645,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:02:11.285Z",
+    "kind": "build",
+    "purpose": "build:10-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002016,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:03:43.107Z",
+    "kind": "build",
+    "purpose": "build:11-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002792,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:04:20.632Z",
+    "kind": "build",
+    "purpose": "build:12-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002343,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:04:45.769Z",
+    "kind": "build",
+    "purpose": "build:13-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002023,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:06:39.437Z",
+    "kind": "build",
+    "purpose": "build:14-page",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004828,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:07:37.240Z",
+    "kind": "build",
+    "purpose": "build:15-e2e",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.001982,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:10:00.632Z",
+    "kind": "build",
+    "purpose": "build:15b-e2e",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.00638,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:10:34.156Z",
+    "kind": "build",
+    "purpose": "build:16-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004802,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:14:33.147Z",
+    "kind": "build",
+    "purpose": "build:17-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:18:03.435Z",
+    "kind": "build",
+    "purpose": "build:18-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.012192,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:18:53.438Z",
+    "kind": "build",
+    "purpose": "build:19-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005599,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:20:20.913Z",
+    "kind": "build",
+    "purpose": "build:20-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.0051,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:21:35.726Z",
+    "kind": "build",
+    "purpose": "build:21-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004221,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:23:51.101Z",
+    "kind": "build",
+    "purpose": "build:22-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.007516,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:24:51.090Z",
+    "kind": "build",
+    "purpose": "build:23-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.006001,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:26:20.582Z",
+    "kind": "build",
+    "purpose": "build:24-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.00587,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:27:03.470Z",
+    "kind": "build",
+    "purpose": "build:25-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005403,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:28:16.905Z",
+    "kind": "build",
+    "purpose": "build:26-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005694,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:28:54.971Z",
+    "kind": "build",
+    "purpose": "build:27-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005286,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:29:08.925Z",
+    "kind": "build",
+    "purpose": "build:28-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003885,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:29:48.729Z",
+    "kind": "build",
+    "purpose": "build:29-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002897,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:29:56.694Z",
+    "kind": "build",
+    "purpose": "build:30-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.00116,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:30:10.374Z",
+    "kind": "build",
+    "purpose": "build:31-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.001408,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:31:15.821Z",
+    "kind": "build",
+    "purpose": "build:32-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005183,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:33:00.143Z",
+    "kind": "build",
+    "purpose": "build:33-case-js",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.009855,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:34:10.906Z",
+    "kind": "build",
+    "purpose": "build:34-kbd",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005493,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:34:18.689Z",
+    "kind": "build",
+    "purpose": "build:35-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002239,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:34:32.230Z",
+    "kind": "build",
+    "purpose": "build:36-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002611,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:34:46.221Z",
+    "kind": "build",
+    "purpose": "build:37-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002498,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:35:27.465Z",
+    "kind": "build",
+    "purpose": "build:38-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004231,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:36:30.877Z",
+    "kind": "build",
+    "purpose": "build:39-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004802,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:37:03.927Z",
+    "kind": "build",
+    "purpose": "build:39-reparse",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:41:47.862Z",
+    "kind": "build",
+    "purpose": "build:40-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002658,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:44:49.410Z",
+    "kind": "build",
+    "purpose": "build:41-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003415,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:52:32.588Z",
+    "kind": "build",
+    "purpose": "build:42-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004132,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:55:35.970Z",
+    "kind": "build",
+    "purpose": "build:43-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.002623,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:55:40.194Z",
+    "kind": "build",
+    "purpose": "build:43-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003212,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:55:59.954Z",
+    "kind": "build",
+    "purpose": "build:44-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003063,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:56:28.777Z",
+    "kind": "build",
+    "purpose": "build:46-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003259,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:56:47.725Z",
+    "kind": "build",
+    "purpose": "build:47-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003135,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:58:03.415Z",
+    "kind": "build",
+    "purpose": "build:48-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.006679,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T16:59:20.413Z",
+    "kind": "build",
+    "purpose": "build:49-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.005484,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:00:54.946Z",
+    "kind": "build",
+    "purpose": "build:50-fix",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.006632,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:06:26.860Z",
+    "kind": "build",
+    "purpose": "build:51-kbd",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.00449,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:07:47.745Z",
+    "kind": "build",
+    "purpose": "build:52-kbd",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.006634,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:17:30.768Z",
+    "kind": "build",
+    "purpose": "build:53b-kbd",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.006528,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:34:05.412Z",
+    "kind": "build",
+    "purpose": "build:54-kbd",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.006894,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:46:29.785Z",
+    "kind": "build",
+    "purpose": "build:55-kbd",
+    "model": "@cf/zai-org/glm-5.3-flash",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:52:31.959Z",
+    "kind": "build",
+    "purpose": "build:56-kbd",
+    "model": "@cf/zai-org/glm-5.3-flash",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:53:40.756Z",
+    "kind": "build",
+    "purpose": "build:57-probe",
+    "model": "@cf/zai-org/glm-5.3-flash",
+    "status": 200,
+    "usd": 0.000027,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T17:58:41.839Z",
+    "kind": "build",
+    "purpose": "build:58-kbd",
+    "model": "@cf/zai-org/glm-5.3-flash",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:04:35.528Z",
+    "kind": "build",
+    "purpose": "build:59-kbd",
+    "model": "@cf/zai-org/glm-5.3-flash",
+    "status": 200,
+    "usd": 0.000004,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:14:26.369Z",
+    "kind": "build",
+    "purpose": "build:61-kbd",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.003307,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:17:52.054Z",
+    "kind": "build",
+    "purpose": "build:62-kbd",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.003431,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:21:58.481Z",
+    "kind": "build",
+    "purpose": "build:63-kbd",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.003894,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:23:11.216Z",
+    "kind": "build",
+    "purpose": "build:64-proxy",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001114,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:27:41.680Z",
+    "kind": "build",
+    "purpose": "build:65-case",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002242,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:28:22.424Z",
+    "kind": "build",
+    "purpose": "build:66-proxytest",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001488,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:30:15.357Z",
+    "kind": "build",
+    "purpose": "build:67-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001662,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:31:15.998Z",
+    "kind": "build",
+    "purpose": "build:69-backbone",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001196,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:31:16.837Z",
+    "kind": "build",
+    "purpose": "build:68-spec",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000961,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-01T18:31:59.072Z",
+    "kind": "build",
+    "purpose": "build:70-readme",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001868,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:11:21.217Z",
+    "kind": "build",
+    "purpose": "build:71-case-pt",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002536,
+    "receipt": "01M6CSBZ4B08KHP34G7B9NKSJG"
+   },
+   {
+    "at": "2026-11-02T00:11:46.082Z",
+    "kind": "build",
+    "purpose": "build:72-credits",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000154,
+    "receipt": "01M6CSHSVX7DS0CSW1TP8B2ZWY"
+   },
+   {
+    "at": "2026-11-02T00:12:46.748Z",
+    "kind": "build",
+    "purpose": "build:73-server-credits",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001741,
+    "receipt": "01M6CSJF92PJP6SB67T4KZJZ7E"
+   },
+   {
+    "at": "2026-11-02T00:16:53.637Z",
+    "kind": "build",
+    "purpose": "build:74-page",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:20:05.882Z",
+    "kind": "build",
+    "purpose": "build:75-page",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": "01M6CSVT02GTYBSMQW8HG2X7N1"
+   },
+   {
+    "at": "2026-11-02T00:21:27.483Z",
+    "kind": "build",
+    "purpose": "build:76-page",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002786,
+    "receipt": "01M6CT1M5Q6FW0XAS62XR44BNJ"
+   },
+   {
+    "at": "2026-11-02T00:25:37.245Z",
+    "kind": "build",
+    "purpose": "build:77-page",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:28:18.777Z",
+    "kind": "build",
+    "purpose": "build:78-page",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002444,
+    "receipt": "01M6CTBWTQNWVMBPACQF8YVAJA"
+   },
+   {
+    "at": "2026-11-02T00:30:10.511Z",
+    "kind": "build",
+    "purpose": "build:79-kbd",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.003054,
+    "receipt": "01M6CTHDGP7NMS2QGQ1NQ5AMK0"
+   },
+   {
+    "at": "2026-11-02T00:34:19.181Z",
+    "kind": "build",
+    "purpose": "build:80-page-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:37:15.831Z",
+    "kind": "build",
+    "purpose": "build:81-page-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002559,
+    "receipt": "01M6CTVP5A29EG6VDTCTJFTQ7M"
+   },
+   {
+    "at": "2026-11-02T00:38:00.000Z",
+    "kind": "build",
+    "purpose": "build:82a-probe",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000068,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:38:00.000Z",
+    "kind": "build",
+    "purpose": "build:82b-probe",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000053,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:38:00.000Z",
+    "kind": "build",
+    "purpose": "build:82c-probe",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000009,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:38:07.380Z",
+    "kind": "build",
+    "purpose": "build:83-page-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000708,
+    "receipt": "01M6CV1R5WJ5E0320WM9WPFA64"
+   },
+   {
+    "at": "2026-11-02T00:39:09.690Z",
+    "kind": "build",
+    "purpose": "build:84-page-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001025,
+    "receipt": "01M6CV3AWZ2MF6BNAPCWBWCZA0"
+   },
+   {
+    "at": "2026-11-02T00:39:40.180Z",
+    "kind": "build",
+    "purpose": "build:85-page-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000643,
+    "receipt": "01M6CV4PRPQTPK0JA44HE9QNZR"
+   },
+   {
+    "at": "2026-11-02T00:40:11.633Z",
+    "kind": "build",
+    "purpose": "build:85-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:40:36.437Z",
+    "kind": "build",
+    "purpose": "build:86-page-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000564,
+    "receipt": "01M6CV6GWV9RKJP4S5XMDMNV3S"
+   },
+   {
+    "at": "2026-11-02T00:41:25.464Z",
+    "kind": "build",
+    "purpose": "build:87-page-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000606,
+    "receipt": "01M6CV7PC6A2JQXMAV9B305G2S"
+   },
+   {
+    "at": "2026-11-02T00:42:03.778Z",
+    "kind": "build",
+    "purpose": "build:88-e2e",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001346,
+    "receipt": "01M6CV97D4S5A7BQ20CXHZJ1VM"
+   },
+   {
+    "at": "2026-11-02T00:42:42.059Z",
+    "kind": "build",
+    "purpose": "build:89-e2e",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001378,
+    "receipt": "01M6CV9T57NMJANBS14E1MSG5Q"
+   },
+   {
+    "at": "2026-11-02T00:43:09.631Z",
+    "kind": "build",
+    "purpose": "build:90-e2e-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00022,
+    "receipt": "01M6CVB37MZG5350ZK5MGX4GJD"
+   },
+   {
+    "at": "2026-11-02T00:43:25.219Z",
+    "kind": "build",
+    "purpose": "build:91-e2e-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000181,
+    "receipt": "01M6CVBVPE97QPFNM4T34TV8W6"
+   },
+   {
+    "at": "2026-11-02T00:44:15.822Z",
+    "kind": "build",
+    "purpose": "build:92-server-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000917,
+    "receipt": "01M6CVCADJTEHBFXM9FPCSE64Q"
+   },
+   {
+    "at": "2026-11-02T00:44:41.569Z",
+    "kind": "build",
+    "purpose": "build:94-readme",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000084,
+    "receipt": "01M6CVE741Q8596R9A4V7JP81Q"
+   },
+   {
+    "at": "2026-11-02T00:48:28.308Z",
+    "kind": "build",
+    "purpose": "build:93-spec",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T00:48:53.330Z",
+    "kind": "build",
+    "purpose": "build:95-spec",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000393,
+    "receipt": "01M6CVNFAX3J7NZMCZAWED1TQA"
+   },
+   {
+    "at": "2026-11-02T00:49:07.051Z",
+    "kind": "build",
+    "purpose": "build:96-spec-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000193,
+    "receipt": "01M6CVP9MHKN1NQ0MFR8NN686K"
+   },
+   {
+    "at": "2026-11-02T00:50:29.062Z",
+    "kind": "build",
+    "purpose": "build:97-spec-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000976,
+    "receipt": "01M6CVPR7938YVH9GDF2T2ND66"
+   },
+   {
+    "at": "2026-11-02T00:51:08.187Z",
+    "kind": "build",
+    "purpose": "build:98-spec-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000479,
+    "receipt": "01M6CVS8HQHQY1Z53K43411CGM"
+   },
+   {
+    "at": "2026-11-02T12:07:28.475Z",
+    "kind": "build",
+    "purpose": "sprint5-build:99-case-prompt",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000268,
+    "receipt": "01M6E2G7BETE0J2P5B66P80CXV"
+   },
+   {
+    "at": "2026-11-02T12:07:45.523Z",
+    "kind": "build",
+    "purpose": "sprint5-build:100-case-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000202,
+    "receipt": "01M6E2GXDTS1HFH4TYYE4RWW50"
+   },
+   {
+    "at": "2026-11-02T12:08:01.550Z",
+    "kind": "build",
+    "purpose": "sprint5-build:101-case-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000116,
+    "receipt": "01M6E2HFP7VYFA4W401QF9XPY2"
+   },
+   {
+    "at": "2026-11-02T12:09:00.671Z",
+    "kind": "build",
+    "purpose": "sprint5-build:102-case-full",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000776,
+    "receipt": "01M6E2J27V8SKX9RBETVRTXJ14"
+   },
+   {
+    "at": "2026-11-02T12:09:11.631Z",
+    "kind": "build",
+    "purpose": "sprint5-build:103-server-history",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000048,
+    "receipt": "01M6E2KNBM6KPFW27DBZJPTAZP"
+   },
+   {
+    "at": "2026-11-02T12:10:56.670Z",
+    "kind": "build",
+    "purpose": "sprint5-build:104-consistency-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001018,
+    "receipt": "01M6E2MQAHCN65M3HB3N9EXMF1"
+   },
+   {
+    "at": "2026-11-02T12:11:10.482Z",
+    "kind": "build",
+    "purpose": "sprint5-build:105-consistency-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000055,
+    "receipt": "01M6E2Q44A3SC299WVRV5D943R"
+   },
+   {
+    "at": "2026-11-02T12:11:31.821Z",
+    "kind": "build",
+    "purpose": "sprint5-build:106-consistency-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000105,
+    "receipt": "01M6E2QVM9AN9P6WP1CCP5NRZE"
+   },
+   {
+    "at": "2026-11-02T12:16:05.569Z",
+    "kind": "build",
+    "purpose": "sprint5-build:107-consistency-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000073,
+    "receipt": "01M6E309XX37PFFXQQNPYH9V1J"
+   },
+   {
+    "at": "2026-11-02T12:17:37.005Z",
+    "kind": "build",
+    "purpose": "sprint5-build:108-live-smoke",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000882,
+    "receipt": "01M6E31B34W00VF89WD6JTRBW0"
+   },
+   {
+    "at": "2026-11-02T12:18:49.396Z",
+    "kind": "build",
+    "purpose": "sprint5-build:109-live-smoke-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001061,
+    "receipt": "01M6E33XCYJRDHBJJ01ZTR6HNP"
+   },
+   {
+    "at": "2026-11-02T12:19:07.775Z",
+    "kind": "build",
+    "purpose": "sprint5-build:110-live-smoke-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000084,
+    "receipt": "01M6E35SGGSFD2RYSJQ0TZ43R5"
+   },
+   {
+    "at": "2026-11-02T12:19:15.914Z",
+    "kind": "build",
+    "purpose": "build:110-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T12:20:30.706Z",
+    "kind": "build",
+    "purpose": "sprint5-build:112-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000181,
+    "receipt": "01M6E387FVDM4S6Y7VJFN7454V"
+   },
+   {
+    "at": "2026-11-02T12:21:40Z",
+    "kind": "dev",
+    "purpose": "sprint5-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T12:21:40Z",
+    "kind": "build",
+    "purpose": "build:111a-probe",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T12:21:41Z",
+    "kind": "dev",
+    "purpose": "sprint5-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T12:21:41Z",
+    "kind": "build",
+    "purpose": "build:111b-probe",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-02T12:21:42Z",
+    "kind": "dev",
+    "purpose": "sprint5-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T00:06:03.149Z",
+    "kind": "build",
+    "purpose": "sprint6-build:113-messages",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000218,
+    "receipt": "01M6FBKZM0CFTPR25YCA4QTF0J"
+   },
+   {
+    "at": "2026-11-03T00:06:17.003Z",
+    "kind": "build",
+    "purpose": "sprint6-build:114-server-count",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000071,
+    "receipt": "01M6FBMN4YCMMZRMXSPYYPDQ7Q"
+   },
+   {
+    "at": "2026-11-03T00:07:50.791Z",
+    "kind": "build",
+    "purpose": "sprint6-build:115-capacity-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001026,
+    "receipt": "01M6FBNGQXKRZQGYDVMMCDYWXV"
+   },
+   {
+    "at": "2026-11-03T00:09:01.426Z",
+    "kind": "build",
+    "purpose": "sprint6-build:116-capacity-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001107,
+    "receipt": "01M6FBR0N0N8ED2F6NGMM9GR7N"
+   },
+   {
+    "at": "2026-11-03T00:09:14.132Z",
+    "kind": "build",
+    "purpose": "sprint6-build:117-capacity-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000049,
+    "receipt": "01M6FBT2WFKZ0XDX16ZQKZ0S71"
+   },
+   {
+    "at": "2026-11-03T00:09:28.993Z",
+    "kind": "build",
+    "purpose": "sprint6-build:118-package",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00005,
+    "receipt": "01M6FBTGZ56KHTE43TATS32NJC"
+   },
+   {
+    "at": "2026-11-03T00:10:03.407Z",
+    "kind": "build",
+    "purpose": "sprint6-build:119-how-to-play",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000362,
+    "receipt": "01M6FBV469RCSY1ECT7DSABBWQ"
+   },
+   {
+    "at": "2026-11-03T00:10:29.995Z",
+    "kind": "build",
+    "purpose": "sprint6-build:120-how-to-play-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000451,
+    "receipt": "01M6FBW5NQAX3QQ9W66X0NBBE0"
+   },
+   {
+    "at": "2026-11-03T00:10:41.363Z",
+    "kind": "build",
+    "purpose": "sprint6-build:121-how-to-play-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000048,
+    "receipt": "01M6FBWQWV2J4V54HYVSHXYEV4"
+   },
+   {
+    "at": "2026-11-03T00:10:52.969Z",
+    "kind": "build",
+    "purpose": "sprint6-build:122-messages-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000044,
+    "receipt": "01M6FBX2ZESRSHV4G7G528N6TB"
+   },
+   {
+    "at": "2026-11-03T00:11:24.832Z",
+    "kind": "build",
+    "purpose": "sprint6-build:123-spec",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000061,
+    "receipt": "01M6FBY1MRVEP9RA95V9GCSAMN"
+   },
+   {
+    "at": "2026-11-03T00:11:32.320Z",
+    "kind": "build",
+    "purpose": "sprint6-build:124-readme",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000137,
+    "receipt": "01M6FBY50WYVFX9R05T2AZG304"
+   },
+   {
+    "at": "2026-11-03T00:11:46.133Z",
+    "kind": "build",
+    "purpose": "sprint6-build:125-changelog",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000066,
+    "receipt": "01M6FBYPW32A5V6XY55AMXXFM0"
+   },
+   {
+    "at": "2026-11-03T00:12:05Z",
+    "kind": "dev",
+    "purpose": "sprint6-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T00:12:06Z",
+    "kind": "dev",
+    "purpose": "sprint6-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T00:12:40Z",
+    "kind": "dev",
+    "purpose": "sprint6-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T00:13:00Z",
+    "kind": "build",
+    "purpose": "build:sprint6-summary",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T12:05:02.133Z",
+    "kind": "build",
+    "purpose": "sprint7-build:126-best-module",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00042,
+    "receipt": "01M6GMR2XW1XCNVWR07CRQ72CF"
+   },
+   {
+    "at": "2026-11-03T12:05:15.876Z",
+    "kind": "build",
+    "purpose": "sprint7-build:127-server-best",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000094,
+    "receipt": "01M6GMS3TPE5EG0JKDFNQDTSQK"
+   },
+   {
+    "at": "2026-11-03T12:06:42.837Z",
+    "kind": "build",
+    "purpose": "sprint7-build:128-scoreboard-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.0011,
+    "receipt": "01M6GMSVBCYVGYNSK96EFSJA54"
+   },
+   {
+    "at": "2026-11-03T12:07:51.538Z",
+    "kind": "build",
+    "purpose": "sprint7-build:129-scoreboard-test-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001226,
+    "receipt": "01M6GMWHEEDWEX9YABQF8BF8SV"
+   },
+   {
+    "at": "2026-11-03T12:07:54.996Z",
+    "kind": "build",
+    "purpose": "sprint7-build:130-server-best-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000053,
+    "receipt": "01M6GMY109NV498DAFE298Q2Z3"
+   },
+   {
+    "at": "2026-11-03T12:08:12.250Z",
+    "kind": "build",
+    "purpose": "sprint7-build:131-best-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000176,
+    "receipt": "01M6GMYHMXCJZS5YRMQP2EVHVQ"
+   },
+   {
+    "at": "2026-11-03T12:08:13.389Z",
+    "kind": "build",
+    "purpose": "sprint7-build:132-scoreboard-test-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00006,
+    "receipt": "01M6GMYMEXMCV1SEEQ5K9ZA5HS"
+   },
+   {
+    "at": "2026-11-03T12:08:50.455Z",
+    "kind": "build",
+    "purpose": "sprint7-build:133-page-best",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000714,
+    "receipt": "01M6GMZ92TK3QNFC278RGH6AC0"
+   },
+   {
+    "at": "2026-11-03T12:09:11.976Z",
+    "kind": "build",
+    "purpose": "sprint7-build:134-page-best-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000082,
+    "receipt": "01M6GN0AQMZE60YBMTX9FGR46G"
+   },
+   {
+    "at": "2026-11-03T12:09:29.458Z",
+    "kind": "build",
+    "purpose": "sprint7-build:135-best-visible",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000091,
+    "receipt": "01M6GN0W27CD49T4RNHP5B4V7B"
+   },
+   {
+    "at": "2026-11-03T12:09:40.657Z",
+    "kind": "build",
+    "purpose": "sprint7-build:136-package",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000057,
+    "receipt": "01M6GN17WFKV8K23EKBAS4G2BF"
+   },
+   {
+    "at": "2026-11-03T12:11:20Z",
+    "kind": "dev",
+    "purpose": "sprint7-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T12:11:21Z",
+    "kind": "dev",
+    "purpose": "sprint7-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T12:11:22Z",
+    "kind": "dev",
+    "purpose": "sprint7-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-03T12:11:38.611Z",
+    "kind": "build",
+    "purpose": "sprint7-build:137-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000253,
+    "receipt": "01M6GN4GBX439MBEZEJP2Q6ZYC"
+   },
+   {
+    "at": "2026-11-03T12:13:00Z",
+    "kind": "build",
+    "purpose": "build:sprint7-summary",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T00:02:44.811Z",
+    "kind": "build",
+    "purpose": "sprint8-build:138-best-ui-lang",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000476,
+    "receipt": "01M6HXSZB17G8ZQ2FSC0WT1A9W"
+   },
+   {
+    "at": "2026-11-04T00:03:11.899Z",
+    "kind": "build",
+    "purpose": "sprint8-build:139-best-ui-lang-retry",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000257,
+    "receipt": "01M6HXVH3N2G6J4GFXM6MPYV42"
+   },
+   {
+    "at": "2026-11-04T00:03:33.934Z",
+    "kind": "build",
+    "purpose": "sprint8-build:140-page-tests",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000284,
+    "receipt": "01M6HXW8YAS6W4CZ0CF62HKYT5"
+   },
+   {
+    "at": "2026-11-04T00:04:05.753Z",
+    "kind": "build",
+    "purpose": "sprint8-build:141-test-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00026,
+    "receipt": "01M6HXWQG7HKTKY6R7QWP1KVYH"
+   },
+   {
+    "at": "2026-11-04T00:04:36.717Z",
+    "kind": "build",
+    "purpose": "sprint8-build:142-msg-jsdoc",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000276,
+    "receipt": "01M6HXXTY37Q0NE97VXZT0W3BM"
+   },
+   {
+    "at": "2026-11-04T00:05:04.095Z",
+    "kind": "build",
+    "purpose": "sprint8-build:143-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00019,
+    "receipt": "01M6HXYYWJYNNRWP6WJ27AAYHG"
+   },
+   {
+    "at": "2026-11-04T00:05:46.667Z",
+    "kind": "build",
+    "purpose": "sprint8-build:144-docs-fix",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000339,
+    "receipt": "01M6HY015ZQTN8YY3Z0FTDKSFD"
+   },
+   {
+    "at": "2026-11-04T00:06:08.443Z",
+    "kind": "dev",
+    "purpose": "sprint8-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T00:06:08.625Z",
+    "kind": "dev",
+    "purpose": "sprint8-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T00:06:08.729Z",
+    "kind": "dev",
+    "purpose": "sprint8-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T00:06:23Z",
+    "kind": "dev",
+    "purpose": "sprint8-seal-check",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T00:07:00Z",
+    "kind": "build",
+    "purpose": "build:sprint8-summary",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T12:07:35.215Z",
+    "kind": "build",
+    "purpose": "sprint9-build:145-scores-as-text",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000311,
+    "receipt": "01M6K79REJ3CPFMAKP9PPEN9EZ"
+   },
+   {
+    "at": "2026-11-04T12:08:02.766Z",
+    "kind": "build",
+    "purpose": "sprint9-build:146-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000185,
+    "receipt": "01M6K7ATS20V8JQ552Y5BEK30X"
+   },
+   {
+    "at": "2026-11-04T12:08:16.911Z",
+    "kind": "build",
+    "purpose": "sprint9-build:147-changelog-top",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00003,
+    "receipt": "01M6K7BEH4P5WQVFE6P08DM3AK"
+   },
+   {
+    "at": "2026-11-04T12:08:33.287Z",
+    "kind": "build",
+    "purpose": "build:146-reparse",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T12:08:35.748Z",
+    "kind": "build",
+    "purpose": "sprint9-build:148-changelog-top-diff",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000028,
+    "receipt": "01M6K7C0MNH44NC4GT5SMJEV44"
+   },
+   {
+    "at": "2026-11-04T12:09:00.152Z",
+    "kind": "dev",
+    "purpose": "sprint9-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T12:09:00.694Z",
+    "kind": "dev",
+    "purpose": "sprint9-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T12:09:00.765Z",
+    "kind": "dev",
+    "purpose": "sprint9-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-04T12:09:19Z",
+    "kind": "dev",
+    "purpose": "sprint9-seal-check",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T00:06:12.637Z",
+    "kind": "build",
+    "purpose": "sprint10-build:149-indent-version",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000174,
+    "receipt": "01M6MGDR9RTM08XQYNZKB7N46B"
+   },
+   {
+    "at": "2026-11-05T00:06:26.988Z",
+    "kind": "build",
+    "purpose": "build:149-indent-version-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T00:06:51.605Z",
+    "kind": "build",
+    "purpose": "sprint10-build:150-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000181,
+    "receipt": "01M6MGEXP593TKRWR10CFX42FB"
+   },
+   {
+    "at": "2026-11-05T00:07:08.846Z",
+    "kind": "build",
+    "purpose": "sprint10-build:151-spec-blank",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000053,
+    "receipt": "01M6MGFP78M5EQFJCA0VJR81KF"
+   },
+   {
+    "at": "2026-11-05T00:07:28Z",
+    "kind": "dev",
+    "purpose": "sprint10-probe:models (crashed run)",
+    "model": null,
+    "status": "200 (not captured)",
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T00:07:29.427Z",
+    "kind": "dev",
+    "purpose": "sprint10-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T00:07:30.299Z",
+    "kind": "dev",
+    "purpose": "sprint10-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T00:07:30.392Z",
+    "kind": "dev",
+    "purpose": "sprint10-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T00:07:47Z",
+    "kind": "dev",
+    "purpose": "sprint10-seal-check",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T12:08:29.957Z",
+    "kind": "build",
+    "purpose": "sprint11-build:152-accuse-confirm",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000339,
+    "receipt": "01M6NSR1K7M57JSP37EXD53DK1"
+   },
+   {
+    "at": "2026-11-05T12:09:04.379Z",
+    "kind": "build",
+    "purpose": "sprint11-build:153-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000304,
+    "receipt": "01M6NSS5VC8KG3QM5K7ADTWNSG"
+   },
+   {
+    "at": "2026-11-05T12:09:30.011Z",
+    "kind": "dev",
+    "purpose": "sprint11-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T12:09:30.541Z",
+    "kind": "dev",
+    "purpose": "sprint11-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T12:09:30.607Z",
+    "kind": "dev",
+    "purpose": "sprint11-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T12:10:10.448245Z",
+    "kind": "dev",
+    "purpose": "sprint11-seal-check",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-05T12:10:10.448358Z",
+    "kind": "dev",
+    "purpose": "sprint11-summary",
+    "model": null,
+    "status": null,
+    "usd": 0.000981,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-06T00:12:15.249Z",
+    "kind": "dev",
+    "purpose": "sprint12-busy",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001077,
+    "receipt": "01M6Q345C32V3WYFWK20NBKCFA"
+   },
+   {
+    "at": "2026-11-06T00:13:06.698Z",
+    "kind": "dev",
+    "purpose": "sprint12-busy-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000665,
+    "receipt": "01M6Q36F5EMDW5C317B116GVGH"
+   },
+   {
+    "at": "2026-11-06T00:13:39.223Z",
+    "kind": "dev",
+    "purpose": "sprint12-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00031,
+    "receipt": "01M6Q37W7JKJE4W6QS4FH8HZ9G"
+   },
+   {
+    "at": "2026-11-06T00:14:02.228Z",
+    "kind": "dev",
+    "purpose": "sprint12-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-06T00:14:02.400Z",
+    "kind": "dev",
+    "purpose": "sprint12-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-06T00:14:02.479Z",
+    "kind": "dev",
+    "purpose": "sprint12-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-06T00:14:30.107096Z",
+    "kind": "dev",
+    "purpose": "sprint12-summary",
+    "model": null,
+    "status": null,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-06T12:09:35.548Z",
+    "kind": "build",
+    "purpose": "build:sprint13-restart",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000531,
+    "receipt": "01M6RC6FD4G7PHA1CC7H3R1JZZ"
+   },
+   {
+    "at": "2026-11-06T12:10:48.281Z",
+    "kind": "build",
+    "purpose": "build:sprint13-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000722,
+    "receipt": "01M6RC8ACM789TQS43F0CD81F7"
+   },
+   {
+    "at": "2026-11-06T12:11:12.287Z",
+    "kind": "build",
+    "purpose": "build:sprint13-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000358,
+    "receipt": "01M6RC9Q5T9ANDDA0MMVRSK00R"
+   },
+   {
+    "at": "2026-11-06T12:12:02.367Z",
+    "kind": "build",
+    "purpose": "build:sprint13-kbd",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000052,
+    "receipt": "01M6RCBQF6ECDN49JWWB7QNX2G"
+   },
+   {
+    "at": "2026-11-06T12:12:21.825Z",
+    "kind": "dev",
+    "purpose": "sprint13-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-06T12:12:22.333Z",
+    "kind": "dev",
+    "purpose": "sprint13-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-06T12:12:22.386Z",
+    "kind": "dev",
+    "purpose": "sprint13-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-07T00:10:27.126Z",
+    "kind": "build",
+    "purpose": "build:161",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000106,
+    "receipt": "01M6SNF6SFB4WWXBJHVWD2271Z"
+   },
+   {
+    "at": "2026-11-07T00:10:43.357Z",
+    "kind": "build",
+    "purpose": "build:162",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000175,
+    "receipt": "01M6SNFEPRX5Y72DP6BW86NJ3F"
+   },
+   {
+    "at": "2026-11-07T00:11:17.260Z",
+    "kind": "build",
+    "purpose": "build:163",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000343,
+    "receipt": "01M6SNFX4KN3NQMMBT4Z1RQ8ZW"
+   },
+   {
+    "at": "2026-11-07T00:11:50.929Z",
+    "kind": "dev",
+    "purpose": "sprint14-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-07T00:11:51.097Z",
+    "kind": "dev",
+    "purpose": "sprint14-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-07T00:11:51.148Z",
+    "kind": "dev",
+    "purpose": "sprint14-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-07T12:11:34.871Z",
+    "kind": "build",
+    "purpose": "build:sprint15-gameover",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000418,
+    "receipt": "01M6TYQ1SF3KWCYNR8RY6YH2HS"
+   },
+   {
+    "at": "2026-11-07T12:11:51.770Z",
+    "kind": "build",
+    "purpose": "build:sprint15-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000252,
+    "receipt": "01M6TYQZ7MEHTK016GNYCJR0T3"
+   },
+   {
+    "at": "2026-11-07T12:12:12.618Z",
+    "kind": "build",
+    "purpose": "build:sprint15-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000347,
+    "receipt": "01M6TYR9C53KEGDT1SP3WN0VWH"
+   },
+   {
+    "at": "2026-11-07T12:12:44.689Z",
+    "kind": "build",
+    "purpose": "build:sprint15-test-stubs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000134,
+    "receipt": "01M6TYSKXFZ1FW280BMCN1YT5M"
+   },
+   {
+    "at": "2026-11-07T12:13:12.315Z",
+    "kind": "dev",
+    "purpose": "sprint15-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-07T12:13:12.862Z",
+    "kind": "dev",
+    "purpose": "sprint15-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-07T12:13:12.899Z",
+    "kind": "dev",
+    "purpose": "sprint15-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-08T00:08:17.214Z",
+    "kind": "build",
+    "purpose": "build:sprint16-hints",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000131,
+    "receipt": "01M6W7QX8TF6V66QVMK39M0W0W"
+   },
+   {
+    "at": "2026-11-08T12:11:48.933Z",
+    "kind": "build",
+    "purpose": "build:sprint16-hints-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000219,
+    "receipt": "01M6XH4GCGHASKD871BRANYV89"
+   },
+   {
+    "at": "2026-11-08T12:12:10.563Z",
+    "kind": "build",
+    "purpose": "build:sprint16-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000408,
+    "receipt": "01M6XH4Y5BRCW5V62EW2Z4BHW9"
+   },
+   {
+    "at": "2026-11-08T12:12:20.340Z",
+    "kind": "build",
+    "purpose": "build:sprint16-pkg-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000035,
+    "receipt": "01M6XH5R5GT4Z15YSCEJJ68KCC"
+   },
+   {
+    "at": "2026-11-08T12:12:48.013Z",
+    "kind": "dev",
+    "purpose": "sprint16-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-08T12:12:48.473Z",
+    "kind": "dev",
+    "purpose": "sprint16-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-08T12:12:48.515Z",
+    "kind": "dev",
+    "purpose": "sprint16-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-09T12:06:17.073Z",
+    "kind": "build",
+    "purpose": "build:sprint17-hint",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000057,
+    "receipt": "01M7037B798DQXF3VHKHHYFJ2A"
+   },
+   {
+    "at": "2026-11-09T12:06:22.501Z",
+    "kind": "build",
+    "purpose": "build:sprint17-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000122,
+    "receipt": "01M7037DZCN4VAQSM0R0J5P4D1"
+   },
+   {
+    "at": "2026-11-09T12:06:35.356Z",
+    "kind": "build",
+    "purpose": "build:sprint17-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000241,
+    "receipt": "01M7037KH3A3GK8T51GZD21307"
+   },
+   {
+    "at": "2026-11-09T12:06:47.461Z",
+    "kind": "build",
+    "purpose": "build:sprint17-spec-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000042,
+    "receipt": "01M70389EATXWNAAA41H2HZ9J5"
+   },
+   {
+    "at": "2026-11-09T12:07:00.534Z",
+    "kind": "dev",
+    "purpose": "sprint17-probe:models",
+    "model": null,
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-09T12:07:01.049Z",
+    "kind": "dev",
+    "purpose": "sprint17-probe:receipt-api",
+    "model": null,
+    "status": 404,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-09T12:07:01.100Z",
+    "kind": "dev",
+    "purpose": "sprint17-probe:disallowed-model",
+    "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "status": 403,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-10T12:09:29.044Z",
+    "kind": "build",
+    "purpose": "build:m2s1-case",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000949,
+    "receipt": "01M72NRCX1X2EZASSMTQP2SDPW"
+   },
+   {
+    "at": "2026-11-10T12:11:00.158Z",
+    "kind": "build",
+    "purpose": "build:m2s1-case-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000689,
+    "receipt": "01M72NVRKSW176ZY3MFBA6B26T"
+   },
+   {
+    "at": "2026-11-10T12:11:48.625Z",
+    "kind": "build",
+    "purpose": "build:m2s1-engine",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000365,
+    "receipt": "01M72NXQQ0N4DYXTM04RYT28MG"
+   },
+   {
+    "at": "2026-11-10T12:12:29.242Z",
+    "kind": "build",
+    "purpose": "build:m2s1-engine-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000287,
+    "receipt": "01M72NZ0EM2M0RE01QBPY54FQJ"
+   },
+   {
+    "at": "2026-11-10T12:13:53.660Z",
+    "kind": "build",
+    "purpose": "build:m2s1-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000648,
+    "receipt": "01M72P0G79M201C0NNYPGKWYJ1"
+   },
+   {
+    "at": "2026-11-10T12:14:16.757Z",
+    "kind": "build",
+    "purpose": "build:m2s1-test-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000054,
+    "receipt": "01M72P2Q5QDBQTJY3C3HVTTZ54"
+   },
+   {
+    "at": "2026-11-10T12:15:07.532Z",
+    "kind": "build",
+    "purpose": "build:m2s1-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000311,
+    "receipt": "01M72P3XPF1066JA2FYWMB58AB"
+   },
+   {
+    "at": "2026-11-10T12:15:58.473Z",
+    "kind": "build",
+    "purpose": "build:m2s1-docs-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000202,
+    "receipt": "01M72P54E85ENNJSGXJG0KJBCP"
+   },
+   {
+    "at": "2026-11-11T00:25:44.296Z",
+    "kind": "build",
+    "purpose": "build:m2s2-case-select",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000339,
+    "receipt": "01M73ZXN0R8A3J8VZE4AEVHYM8"
+   },
+   {
+    "at": "2026-11-11T00:26:06.425Z",
+    "kind": "build",
+    "purpose": "build:m2s2-case-select-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000068,
+    "receipt": "01M73ZYPSNJ9P2XJQDC5E7H7VQ"
+   },
+   {
+    "at": "2026-11-11T00:27:07.680Z",
+    "kind": "build",
+    "purpose": "build:m2s2-case-select-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000741,
+    "receipt": "01M73ZZTAG3121CMCQGH5RWADX"
+   },
+   {
+    "at": "2026-11-11T00:30:16.349Z",
+    "kind": "build",
+    "purpose": "build:m2s2-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000369,
+    "receipt": "01M740646V33WCKR94JSYH19KX"
+   },
+   {
+    "at": "2026-11-11T00:30:36.702Z",
+    "kind": "build",
+    "purpose": "build:m2s2-docs-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000148,
+    "receipt": "01M7406TK8KACBDHCG3X7ZRW9V"
+   },
+   {
+    "at": "2026-11-11T12:15:01.075Z",
+    "kind": "build",
+    "purpose": "build:m2s3-unknown-case",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000239,
+    "receipt": "01M758GFHJTZV664VCHY1F3PQX"
+   },
+   {
+    "at": "2026-11-11T12:15:32.997Z",
+    "kind": "build",
+    "purpose": "build:m2s3-unknown-case-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000234,
+    "receipt": "01M758HEBCSY4KX7Z41KCPNGGZ"
+   },
+   {
+    "at": "2026-11-11T12:16:07.708Z",
+    "kind": "build",
+    "purpose": "build:m2s3-unknown-case-test-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000299,
+    "receipt": "01M758J5R5NE1W4ZFY0FYP2D55"
+   },
+   {
+    "at": "2026-11-11T12:17:22.027Z",
+    "kind": "build",
+    "purpose": "build:m2s3-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000361,
+    "receipt": "01M758MKQANJ9NT9Z9N0A1YB71"
+   },
+   {
+    "at": "2026-11-11T12:17:35.950Z",
+    "kind": "build",
+    "purpose": "build:m2s3-docs-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000068,
+    "receipt": "01M758NE8C24CG0F62GCAAFAZK"
+   },
+   {
+    "at": "2026-11-11T14:02:49.229Z",
+    "kind": "build",
+    "purpose": "build:v3-icons",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001562,
+    "receipt": "01M75EK5YP2X1WFSGDSJXFRK63"
+   },
+   {
+    "at": "2026-11-11T14:05:12.594Z",
+    "kind": "build",
+    "purpose": "build:v3-icons-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001605,
+    "receipt": "01M75EQ25CZK9GY6K537BFACNB"
+   },
+   {
+    "at": "2026-11-11T14:06:24.031Z",
+    "kind": "build",
+    "purpose": "build:v3-css",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001091,
+    "receipt": "01M75EVN9X4ZQNCBHYE4FHRBX0"
+   },
+   {
+    "at": "2026-11-11T14:09:07.850Z",
+    "kind": "build",
+    "purpose": "build:v3-html",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00194,
+    "receipt": "01M75EYGB6WXDJ2MHN0B07AN21"
+   },
+   {
+    "at": "2026-11-11T14:11:42.489Z",
+    "kind": "build",
+    "purpose": "build:v3-js",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000988,
+    "receipt": "01M75F4ZE6M8KW732YRG2EN7B1"
+   },
+   {
+    "at": "2026-11-11T14:13:27.790Z",
+    "kind": "build",
+    "purpose": "build:v3-css-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001111,
+    "receipt": "01M75F7MTEKD16TTH3WRXXW42J"
+   },
+   {
+    "at": "2026-11-11T14:13:49.309Z",
+    "kind": "build",
+    "purpose": "build:v3-kbd",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000155,
+    "receipt": "01M75FA5HPQ30Q3K06FS4SQX6E"
+   },
+   {
+    "at": "2026-11-11T14:16:46.715Z",
+    "kind": "build",
+    "purpose": "build:v3-kbd-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000188,
+    "receipt": "01M75FFG40X14J6G53T9BJTPRP"
+   },
+   {
+    "at": "2026-11-11T14:18:12.632Z",
+    "kind": "build",
+    "purpose": "build:v3-steplabels",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000232,
+    "receipt": "01M75FJ4ZAZPD6E5M4YJB8WA6Q"
+   },
+   {
+    "at": "2026-11-11T14:18:46.537Z",
+    "kind": "build",
+    "purpose": "build:v3-js-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-11T14:18:56.650Z",
+    "kind": "build",
+    "purpose": "build:v3-css-tablet",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000153,
+    "receipt": "01M75FKNTJJY5B40RXQQ7D43FZ"
+   },
+   {
+    "at": "2026-11-11T14:19:12.871Z",
+    "kind": "build",
+    "purpose": "build:v3-css-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-11T14:19:12.912Z",
+    "kind": "build",
+    "purpose": "build:v3-css-rework-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-11T14:23:31.892Z",
+    "kind": "build",
+    "purpose": "build:v3-css-sprite",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000188,
+    "receipt": "01M75FVT7WNEJJ472R9M34DAA9"
+   },
+   {
+    "at": "2026-11-11T14:27:46.075Z",
+    "kind": "build",
+    "purpose": "build:v4-icons",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000189,
+    "receipt": "01M75G3JG3MTAS6WV84BR1FYZT"
+   },
+   {
+    "at": "2026-11-11T14:28:04.991Z",
+    "kind": "build",
+    "purpose": "build:v4-html",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000179,
+    "receipt": "01M75G462G70M8G3EQ632VX6EV"
+   },
+   {
+    "at": "2026-11-11T14:34:45.939Z",
+    "kind": "build",
+    "purpose": "build:v4-css",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001449,
+    "receipt": "01M75GDTJPXZKPB87TFZ2G3VG2"
+   },
+   {
+    "at": "2026-11-12T00:19:21.219Z",
+    "kind": "build",
+    "purpose": "build:m2s4-call-cap",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000363,
+    "receipt": "01M76HYZ9HD4PMHGETGYCBZ3R9"
+   },
+   {
+    "at": "2026-11-12T00:20:36.522Z",
+    "kind": "build",
+    "purpose": "build:m2s4-call-cap-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000821,
+    "receipt": "01M76J01DBRFPJBK37CN16CY7V"
+   },
+   {
+    "at": "2026-11-12T00:20:50.942Z",
+    "kind": "build",
+    "purpose": "build:m2s4-call-cap-test-reframe",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-12T00:21:32.179Z",
+    "kind": "build",
+    "purpose": "build:m2s4-spend-formula-test",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000101,
+    "receipt": "01M76J2ZYCMBQAVHR0S3Z6WNBY"
+   },
+   {
+    "at": "2026-11-12T00:22:49.045Z",
+    "kind": "build",
+    "purpose": "build:m2s4-docs",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000484,
+    "receipt": "01M76J4MBSJ81NZ08J58GS8PC9"
+   },
+   {
+    "at": "2026-11-12T00:23:05.133Z",
+    "kind": "build",
+    "purpose": "build:m2s4-docs-rework",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00008,
+    "receipt": "01M76J5VEF4N1XZSM6DQMR2VRX"
+   },
+   {
+    "at": "2026-11-12T00:43:04.225Z",
+    "kind": "art",
+    "purpose": "art:i-briefing:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KAJN1N7X5XXTBTS34DTJQ"
+   },
+   {
+    "at": "2026-11-12T00:43:22.595Z",
+    "kind": "art",
+    "purpose": "art:i-locations:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KB4K3XSFNAK2N0TG71G8Y"
+   },
+   {
+    "at": "2026-11-12T00:43:26.219Z",
+    "kind": "art",
+    "purpose": "art:i-suspects:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KB84B71QJXQGAG8GY8M3P"
+   },
+   {
+    "at": "2026-11-12T00:43:31.985Z",
+    "kind": "art",
+    "purpose": "art:i-board:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KBDRHRQHM8NE8NGXHWAXV"
+   },
+   {
+    "at": "2026-11-12T00:43:34.999Z",
+    "kind": "art",
+    "purpose": "art:i-accuse:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KBGPQ3CVFPN5JG91M9X3E"
+   },
+   {
+    "at": "2026-11-12T00:43:38.432Z",
+    "kind": "art",
+    "purpose": "art:i-score:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KBM20XE2051TQF83C7Y2Q"
+   },
+   {
+    "at": "2026-11-12T00:43:41.056Z",
+    "kind": "art",
+    "purpose": "art:i-files:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KBPM0GMQGVS3P47ASRQ2C"
+   },
+   {
+    "at": "2026-11-12T00:43:44.457Z",
+    "kind": "art",
+    "purpose": "art:i-pin:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KBSY9RD8YPK8HHQKEREMZ"
+   },
+   {
+    "at": "2026-11-12T00:43:47.255Z",
+    "kind": "art",
+    "purpose": "art:i-close:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KBWNQGQEZGC35V5HHH6RH"
+   },
+   {
+    "at": "2026-11-12T00:44:00.488Z",
+    "kind": "art",
+    "purpose": "art:i-loc-rehearsal:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KC9K8ZSZXKFHZR9QEMB80"
+   },
+   {
+    "at": "2026-11-12T00:44:03.155Z",
+    "kind": "art",
+    "purpose": "art:i-loc-hallway:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCC6K33AMBZ2WGTVFA80P"
+   },
+   {
+    "at": "2026-11-12T00:44:05.919Z",
+    "kind": "art",
+    "purpose": "art:i-loc-train:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCEWZ4G8BX2C3YZGHPX10"
+   },
+   {
+    "at": "2026-11-12T00:44:08.410Z",
+    "kind": "art",
+    "purpose": "art:i-loc-dining:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCHAT3R7M2706RNQVBTFC"
+   },
+   {
+    "at": "2026-11-12T00:44:11.030Z",
+    "kind": "art",
+    "purpose": "art:i-loc-sleeper:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCKWPK8VBW9WTBZPCXZFA"
+   },
+   {
+    "at": "2026-11-12T00:44:13.836Z",
+    "kind": "art",
+    "purpose": "art:i-loc-luggage:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCPMCK70HBTSYVEJ1BQR0"
+   },
+   {
+    "at": "2026-11-12T00:44:16.742Z",
+    "kind": "art",
+    "purpose": "art:i-loc-tunnel:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCSF6W192SXY6BHDH3T6Y"
+   },
+   {
+    "at": "2026-11-12T00:44:19.261Z",
+    "kind": "art",
+    "purpose": "art:i-loc-platform:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCVXX7FQHYXRQH9B3ZR18"
+   },
+   {
+    "at": "2026-11-12T00:44:21.793Z",
+    "kind": "art",
+    "purpose": "art:i-ev-fingerprint:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KCYD1846KFV34CBPANHVX"
+   },
+   {
+    "at": "2026-11-12T00:44:24.269Z",
+    "kind": "art",
+    "purpose": "art:i-ev-key:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KD0TDA695825WS8CH7ENQ"
+   },
+   {
+    "at": "2026-11-12T00:45:43.224Z",
+    "kind": "art",
+    "purpose": "art:i-talk:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KFDXRN6JS001P37HSQQH1"
+   },
+   {
+    "at": "2026-11-12T00:46:30.983Z",
+    "kind": "art",
+    "purpose": "art:i-lang:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KGWJ7566CE45CC6THG723"
+   },
+   {
+    "at": "2026-11-12T00:46:39.813Z",
+    "kind": "art",
+    "purpose": "art:i-restart:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KH5655KG31VWQ0VNZ8B37"
+   },
+   {
+    "at": "2026-11-12T00:47:06.612Z",
+    "kind": "art",
+    "purpose": "art:i-role-conductor:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KHZBMZMT8T3513MZFH6AJ"
+   },
+   {
+    "at": "2026-11-12T00:47:15.533Z",
+    "kind": "art",
+    "purpose": "art:i-role-violinist:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KJ82DQMCBP4DN50R2MZ9B"
+   },
+   {
+    "at": "2026-11-12T00:47:24.909Z",
+    "kind": "art",
+    "purpose": "art:i-role-janitor:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KJH7DEBRKCPJCVR6YD6D7"
+   },
+   {
+    "at": "2026-11-12T00:47:33.925Z",
+    "kind": "art",
+    "purpose": "art:i-role-train-conductor:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KJT156QQGX8P05D52M8RS"
+   },
+   {
+    "at": "2026-11-12T00:50:06.868Z",
+    "kind": "art",
+    "purpose": "art:i-role-jeweller:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KQFCM71PT1HBF2P6QCMJJ"
+   },
+   {
+    "at": "2026-11-12T00:50:17.011Z",
+    "kind": "art",
+    "purpose": "art:i-role-porter:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KQS9KDCE1852R4MTZRBVE"
+   },
+   {
+    "at": "2026-11-12T00:50:26.049Z",
+    "kind": "art",
+    "purpose": "art:i-role-chef:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KR241Q6TRC6N9A281MK4Y"
+   },
+   {
+    "at": "2026-11-12T00:50:35.469Z",
+    "kind": "art",
+    "purpose": "art:i-loc-academy:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KRBADJTCQ8YTW1RZDY2TE"
+   },
+   {
+    "at": "2026-11-12T00:50:44.898Z",
+    "kind": "art",
+    "purpose": "art:i-loc-office:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KRMH2XJF5J2CS53WJCWES"
+   },
+   {
+    "at": "2026-11-12T00:50:54.614Z",
+    "kind": "art",
+    "purpose": "art:i-loc-instrument:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KRY0PAPVPBW17TWF11XM7"
+   },
+   {
+    "at": "2026-11-12T00:52:08.508Z",
+    "kind": "art",
+    "purpose": "art:i-ev-ticket:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KV65W40TQMTCX0YS3HKCT"
+   },
+   {
+    "at": "2026-11-12T00:52:18.059Z",
+    "kind": "art",
+    "purpose": "art:i-ev-letter:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KVFGB1QFF91SY4CBGJ580"
+   },
+   {
+    "at": "2026-11-12T00:52:27.285Z",
+    "kind": "art",
+    "purpose": "art:i-ev-necklace:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KVRGNKS9HWK952CD4QVA5"
+   },
+   {
+    "at": "2026-11-12T00:52:35.927Z",
+    "kind": "art",
+    "purpose": "art:i-ev-violin:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KW0YQPA648T1QRM2D9YNZ"
+   },
+   {
+    "at": "2026-11-12T00:52:44.927Z",
+    "kind": "art",
+    "purpose": "art:i-ev-watch:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KW9QZ06YCWJYKT3V3ZJDE"
+   },
+   {
+    "at": "2026-11-12T00:52:54.978Z",
+    "kind": "art",
+    "purpose": "art:i-ev-footprint:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KWKJ2JB9J70XM6H86B97S"
+   },
+   {
+    "at": "2026-11-12T00:53:04.145Z",
+    "kind": "art",
+    "purpose": "art:i-tl-marker:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KWWGHG8E0KN9B88207BZT"
+   },
+   {
+    "at": "2026-11-12T00:53:13.663Z",
+    "kind": "art",
+    "purpose": "art:i-tl-gap:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KX5SZX9NP4QWSZ0REJCXF"
+   },
+   {
+    "at": "2026-11-12T00:53:22.244Z",
+    "kind": "art",
+    "purpose": "art:i-questions:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KXE64NKFXPW0239REYXKV"
+   },
+   {
+    "at": "2026-11-12T00:53:31.201Z",
+    "kind": "art",
+    "purpose": "art:i-hourglass:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KXPY1AGS86TTR32C4CBTV"
+   },
+   {
+    "at": "2026-11-12T00:53:40.144Z",
+    "kind": "art",
+    "purpose": "art:i-locked:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KXZNGQJZ6M4GSP7QN823Q"
+   },
+   {
+    "at": "2026-11-12T00:53:49.802Z",
+    "kind": "art",
+    "purpose": "art:i-unlocked:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KY93AT64XQHG63P0H2NA3"
+   },
+   {
+    "at": "2026-11-12T00:53:59.135Z",
+    "kind": "art",
+    "purpose": "art:i-verdict-ok:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KYJ6Z984THB8F3NAVDN2T"
+   },
+   {
+    "at": "2026-11-12T00:54:41.911Z",
+    "kind": "art",
+    "purpose": "art:i-verdict-wrong:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76KZVZQTH55949FP50WAK4S"
+   },
+   {
+    "at": "2026-11-12T00:56:32.535Z",
+    "kind": "art",
+    "purpose": "art:tex/desk:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76M380QCDWF944D4XSQEFQF"
+   },
+   {
+    "at": "2026-11-12T00:56:41.754Z",
+    "kind": "art",
+    "purpose": "art:tex/cork:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76M3H0TK249KN28128TK4C6"
+   },
+   {
+    "at": "2026-11-12T00:56:51.101Z",
+    "kind": "art",
+    "purpose": "art:tex/dossier-paper:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76M3T4XN3DT5J7XSAH0R1XH"
+   },
+   {
+    "at": "2026-11-12T00:58:48.168Z",
+    "kind": "art",
+    "purpose": "art:tex/title-rain:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76M7CF86M9SNZFWS3WP09G2"
+   },
+   {
+    "at": "2026-11-12T00:58:56.985Z",
+    "kind": "art",
+    "purpose": "art:tex/select-frame:orig",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76M7N2SH23BJN66C99G2V26"
+   },
+   {
+    "at": "2026-11-12T01:01:56.042Z",
+    "kind": "art",
+    "purpose": "art:i-suspects:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MD3YA9NWETEQ9KYSJ3RVN"
+   },
+   {
+    "at": "2026-11-12T01:01:59.206Z",
+    "kind": "art",
+    "purpose": "art:i-talk:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MD716774M6RXEZ2PV2R9F"
+   },
+   {
+    "at": "2026-11-12T01:02:02.267Z",
+    "kind": "art",
+    "purpose": "art:i-board:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MDA0VRW7FZXKXKTJ1CQRG"
+   },
+   {
+    "at": "2026-11-12T01:02:04.321Z",
+    "kind": "art",
+    "purpose": "art:i-files:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MDC1118FFKTJRHZS3PC8V"
+   },
+   {
+    "at": "2026-11-12T01:02:40.496Z",
+    "kind": "art",
+    "purpose": "art:i-restart:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MEFBGSDVAA0DB4V8057K3"
+   },
+   {
+    "at": "2026-11-12T01:02:59.043Z",
+    "kind": "art",
+    "purpose": "art:i-role-conductor:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MF1F3FCPJ544Z1TF5VJK0"
+   },
+   {
+    "at": "2026-11-12T01:03:01.335Z",
+    "kind": "art",
+    "purpose": "art:i-role-train-conductor:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MF3PQ6CM9N03EJR8CW31J"
+   },
+   {
+    "at": "2026-11-12T01:03:04.216Z",
+    "kind": "art",
+    "purpose": "art:i-loc-rehearsal:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MF6GR5AVEB053XA44W85K"
+   },
+   {
+    "at": "2026-11-12T01:03:06.735Z",
+    "kind": "art",
+    "purpose": "art:i-loc-train:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MF8ZFM97RYYX8WQ3XBYPN"
+   },
+   {
+    "at": "2026-11-12T01:03:26.744Z",
+    "kind": "art",
+    "purpose": "art:i-loc-tunnel:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MFWGR03JE92C6PNGKKSXM"
+   },
+   {
+    "at": "2026-11-12T01:03:30.039Z",
+    "kind": "art",
+    "purpose": "art:i-ev-fingerprint:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MFZQQVM7GVE88XMYS9MNX"
+   },
+   {
+    "at": "2026-11-12T01:03:32.298Z",
+    "kind": "art",
+    "purpose": "art:i-unlocked:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MG1YAFC6TSRYBD0BZQDPS"
+   },
+   {
+    "at": "2026-11-12T01:03:39.024Z",
+    "kind": "art",
+    "purpose": "art:tex/desk:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MG8GGVJSCGHCFR5WJGBFT"
+   },
+   {
+    "at": "2026-11-12T01:04:01.093Z",
+    "kind": "art",
+    "purpose": "art:tex/cork:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MGY25EQD14MQCP8XPHR0M"
+   },
+   {
+    "at": "2026-11-12T01:04:03.582Z",
+    "kind": "art",
+    "purpose": "art:tex/dossier-paper:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MH0FYGACC9CKZMCQWH64A"
+   },
+   {
+    "at": "2026-11-12T01:04:13.500Z",
+    "kind": "art",
+    "purpose": "art:tex/select-frame:r1",
+    "model": "@cf/black-forest-labs/flux-1-schnell",
+    "status": 200,
+    "usd": 0.001901,
+    "receipt": "01M76MHA5WA1CK0Y91ZX7ZEW0G"
+   },
+   {
+    "at": "2026-11-12T01:30:40.495Z",
+    "kind": "build",
+    "purpose": "build:art-wire",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00064,
+    "receipt": "01M76P0FC3F7P6C93ST4EGYSVG"
+   },
+   {
+    "at": "2026-11-12T12:17:21.173Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-199",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00037,
+    "receipt": "01M77V186JWF4893R1KX2B7NQD"
+   },
+   {
+    "at": "2026-11-12T12:17:31.649Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-199b-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-12T12:18:15.460Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-200",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000475,
+    "receipt": "01M77V2Z8NBQMMEK7FKN0546RH"
+   },
+   {
+    "at": "2026-11-12T12:19:16.727Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-201",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000051,
+    "receipt": "01M77V41GK475GNFZRE2VB0GP9"
+   },
+   {
+    "at": "2026-11-12T12:20:39.524Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-202",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000763,
+    "receipt": "01M77V6DN5YK0W2Y6GQNNS7RRK"
+   },
+   {
+    "at": "2026-11-12T12:21:20.124Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-203",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000247,
+    "receipt": "01M77V8PPKQCDCR1Y35ZJ2E7AB"
+   },
+   {
+    "at": "2026-11-12T12:21:29.687Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-203b-reparse",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-12T12:22:33.159Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-204",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000049,
+    "receipt": "01M77VB9D44C9WV8GVT71KX534"
+   },
+   {
+    "at": "2026-11-12T12:23:32.684Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-205",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000258,
+    "receipt": "01M77VCQWJ87VEE4M7H4EF20RF"
+   },
+   {
+    "at": "2026-11-12T12:23:57.000Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-206",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000058,
+    "receipt": "01M77VDW7DCJ2K4HJ99EMHPQVM"
+   },
+   {
+    "at": "2026-11-12T12:24:06.311Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-206b-reparse",
+    "model": "x",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-12T12:24:17.848Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-207",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00006,
+    "receipt": "01M77VEEZV23YATJQDZMWZJR54"
+   },
+   {
+    "at": "2026-11-12T12:24:28.907Z",
+    "kind": "build",
+    "purpose": "build:m2gf1-208",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000057,
+    "receipt": "01M77VET97983G20X9PAY5JAD3"
+   },
+   {
+    "at": "2026-11-13T00:18:44.469Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-209",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000281,
+    "receipt": "01M794AAZS8KTR05ZB6R705MT4"
+   },
+   {
+    "at": "2026-11-13T00:19:22.787Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-210",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000345,
+    "receipt": "01M794BCFARB8J4HMXMVSG63XP"
+   },
+   {
+    "at": "2026-11-13T00:20:17.602Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-211",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00007,
+    "receipt": "01M794DFEBQCEP89NXEBGJYWW8"
+   },
+   {
+    "at": "2026-11-13T00:21:55.836Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-212",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001069,
+    "receipt": "01M794EAWNR06KAEQMQDXA6HWY"
+   },
+   {
+    "at": "2026-11-13T00:22:19.306Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-213",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000113,
+    "receipt": "01M794H3E2CFQ1B14V6HCKST95"
+   },
+   {
+    "at": "2026-11-13T00:22:40.146Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-214",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.0001,
+    "receipt": "01M794HRQG8DGTGPQNNKZZ3X2P"
+   },
+   {
+    "at": "2026-11-13T00:22:53.768Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-215",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000076,
+    "receipt": "01M794J7XSZC8E6VP7PBDKQ7EN"
+   },
+   {
+    "at": "2026-11-13T00:25:18.747Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-216",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000432,
+    "receipt": "01M794NFJCRJB6NF9G5S23AHPN"
+   },
+   {
+    "at": "2026-11-13T00:25:52.641Z",
+    "kind": "build",
+    "purpose": "build:m2gf2-217",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000154,
+    "receipt": "01M794QFTW05CT1RGJ1RJXSGK3"
+   },
+   {
+    "at": "2026-11-13T12:18:04.462Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-218",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000237,
+    "receipt": "01M7ADFQKE2T3SBB9PZ2JPVQEG"
+   },
+   {
+    "at": "2026-11-13T12:19:01.558Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-219",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000318,
+    "receipt": "01M7ADGXZCW0Y9GZ62S0HAGQ0K"
+   },
+   {
+    "at": "2026-11-13T12:19:27.485Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-220",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000243,
+    "receipt": "01M7ADJ7PF9Q1XJ9FCNKD730YA"
+   },
+   {
+    "at": "2026-11-13T12:23:28.851Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-221",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001497,
+    "receipt": "01M7ADPKXCDPHZYHVDV3QJ8W0V"
+   },
+   {
+    "at": "2026-11-13T12:23:50.796Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-222",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000135,
+    "receipt": "01M7ADT8DMM9A17J7A1YSDGNBX"
+   },
+   {
+    "at": "2026-11-13T12:24:08.477Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-223",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00014,
+    "receipt": "01M7ADTRFDKRQX426HD4WFHM8R"
+   },
+   {
+    "at": "2026-11-13T12:24:37.277Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-224",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000046,
+    "receipt": "01M7ADVNB8YQNZNYYXSG2PNA5G"
+   },
+   {
+    "at": "2026-11-13T12:26:20.297Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-225",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000681,
+    "receipt": "01M7ADXS629A5ND60PAD9PB04P"
+   },
+   {
+    "at": "2026-11-13T12:27:06.210Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-226",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000117,
+    "receipt": "01M7AE06ZN160H353AAAW5CKW9"
+   },
+   {
+    "at": "2026-11-13T12:27:16.916Z",
+    "kind": "build",
+    "purpose": "build:m2gf3-227",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000035,
+    "receipt": "01M7AE0Q4JMPW56A2C85MKD0V2"
+   },
+   {
+    "at": "2026-11-14T00:23:09.497Z",
+    "kind": "build",
+    "purpose": "build:m2gf4-228",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000198,
+    "receipt": "01M7BPZ9VSKVHWM0DEVAKTSWVN"
+   },
+   {
+    "at": "2026-11-14T00:23:27.974Z",
+    "kind": "build",
+    "purpose": "build:m2gf4-229",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000197,
+    "receipt": "01M7BPZVV93CQ9FY0KBTZWABGA"
+   },
+   {
+    "at": "2026-11-14T00:23:57.403Z",
+    "kind": "build",
+    "purpose": "build:m2gf4-230",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000198,
+    "receipt": "01M7BQ0QHM1YVHHZ6FFADXHRXM"
+   },
+   {
+    "at": "2026-11-14T00:25:29.087Z",
+    "kind": "build",
+    "purpose": "build:m2gf4-231",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001198,
+    "receipt": "01M7BQ253N4G8RS5RVC1MBT5GV"
+   },
+   {
+    "at": "2026-11-14T00:27:50.078Z",
+    "kind": "build",
+    "purpose": "build:m2gf4-232",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000052,
+    "receipt": "01M7BQ820SMWEDK7RF5WDS5D5Y"
+   },
+   {
+    "at": "2026-11-14T00:29:47.058Z",
+    "kind": "build",
+    "purpose": "build:m2gf4-233",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000593,
+    "receipt": "01M7BQAT02R53NDBEGBQ52BPKT"
+   },
+   {
+    "at": "2026-11-14T12:28:56.326Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-234",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000813,
+    "receipt": "01M7D0FB7HMMMX2EHQBYBAJJ81"
+   },
+   {
+    "at": "2026-11-14T12:29:23.479Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-235",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000114,
+    "receipt": "01M7D0H6FNSBSW5MX5HWS5EVGY"
+   },
+   {
+    "at": "2026-11-14T12:30:02.278Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-236",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000335,
+    "receipt": "01M7D0HZ5VQ6YZG0V4QQVVM4RJ"
+   },
+   {
+    "at": "2026-11-14T12:30:24.339Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-237",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000094,
+    "receipt": "01M7D0K2X95TXREVW45EY7NZ8S"
+   },
+   {
+    "at": "2026-11-14T12:34:56.933Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-238",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001485,
+    "receipt": "01M7D0S3Z5XY38E7ETKHMXPZYC"
+   },
+   {
+    "at": "2026-11-14T12:35:11.884Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-239",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00005,
+    "receipt": "01M7D0VWWKVY6YE27EXMRYDKYQ"
+   },
+   {
+    "at": "2026-11-14T12:35:51.910Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-240",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000181,
+    "receipt": "01M7D0WYNP74JK6HZAXPYAX99Q"
+   },
+   {
+    "at": "2026-11-14T12:37:47.095Z",
+    "kind": "build",
+    "purpose": "build:m2gf5-241",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000777,
+    "receipt": "01M7D0ZG2DX8AE4YQ364G6DH2V"
+   },
+   {
+    "at": "2026-11-15T00:02:45.464Z",
+    "kind": "build",
+    "purpose": "build:m2gf6-242",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000149,
+    "receipt": "01M7E86PX6CMG181BT6956SZP5"
+   },
+   {
+    "at": "2026-11-15T00:03:52.640Z",
+    "kind": "build",
+    "purpose": "build:m2gf6-243",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00069,
+    "receipt": "01M7E87S2ZX7KS74EQBARZ9BZH"
+   },
+   {
+    "at": "2026-11-15T00:04:29.593Z",
+    "kind": "build",
+    "purpose": "build:m2gf6-244",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00041,
+    "receipt": "01M7E89H4S0STCW3P82QKNYMXS"
+   },
+   {
+    "at": "2026-11-15T00:06:43.962Z",
+    "kind": "build",
+    "purpose": "build:m2gf6-245",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001462,
+    "receipt": "01M7E8C1910P7Z9F2Y2V3QFVFJ"
+   },
+   {
+    "at": "2026-11-15T00:08:29.191Z",
+    "kind": "build",
+    "purpose": "build:m2gf6-246",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000287,
+    "receipt": "01M7E8H0YMK34941R9JJ0Y4E5P"
+   },
+   {
+    "at": "2026-11-15T00:10:17.572Z",
+    "kind": "build",
+    "purpose": "build:m2gf6-247",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000781,
+    "receipt": "01M7E8KFCNC91QG8YZTBHTY127"
+   },
+   {
+    "at": "2026-11-15T12:00:26.777Z",
+    "kind": "build",
+    "purpose": "build:m2gf7-248",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000695,
+    "receipt": "01M7FH8993X7FGG4P2VZR5ETX8"
+   },
+   {
+    "at": "2026-11-15T12:00:38.719Z",
+    "kind": "build",
+    "purpose": "build:m2gf7-249",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000041,
+    "receipt": "01M7FH9BYPSFAZXFW5CC7D293B"
+   },
+   {
+    "at": "2026-11-15T12:01:43.933Z",
+    "kind": "build",
+    "purpose": "build:m2gf7-250",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001443,
+    "receipt": "01M7FH9VV0N95XTPFFBK5C0SSE"
+   },
+   {
+    "at": "2026-11-15T12:03:44.154Z",
+    "kind": "build",
+    "purpose": "build:m2gf7-251",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000778,
+    "receipt": "01M7FHDVARA321ETK8C0SP6BVG"
+   },
+   {
+    "at": "2026-11-16T00:08:12.208Z",
+    "kind": "build",
+    "purpose": "build:m2gf8-252",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000754,
+    "receipt": "01M7GTWZPABGH6ZHJSRJ99WE33"
+   },
+   {
+    "at": "2026-11-16T00:08:26.978Z",
+    "kind": "build",
+    "purpose": "build:m2gf8-252b",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-16T00:08:57.186Z",
+    "kind": "build",
+    "purpose": "build:m2gf8-253",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000431,
+    "receipt": "01M7GTYB6PRS62MXG33JSZK1NM"
+   },
+   {
+    "at": "2026-11-16T00:10:49.946Z",
+    "kind": "build",
+    "purpose": "build:m2gf8-254",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001839,
+    "receipt": "01M7GTZ84AR2D6PX82Q67M2ZHW"
+   },
+   {
+    "at": "2026-11-16T00:13:45.210Z",
+    "kind": "build",
+    "purpose": "build:m2gf8-255",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000716,
+    "receipt": "01M7GV6PVHGWHHMKN35V7V1E7W"
+   },
+   {
+    "at": "2026-11-16T11:52:46.256Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-256",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000287,
+    "receipt": "01M7J375GX67BKBB28CF8DYZDP"
+   },
+   {
+    "at": "2026-11-16T11:53:10.390Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-257",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000365,
+    "receipt": "01M7J3822V9HA79CBQS0NKVT45"
+   },
+   {
+    "at": "2026-11-16T11:54:05.842Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-258",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.003134,
+    "receipt": "01M7J38P5E4KGJ260XHGDPN579"
+   },
+   {
+    "at": "2026-11-16T11:54:55.012Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-259",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.001582,
+    "receipt": "01M7J3AK3ZYDYAM0QD6957MME4"
+   },
+   {
+    "at": "2026-11-16T11:55:21.280Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-260",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.00131,
+    "receipt": "01M7J3C246C81BAH750SQB6CTH"
+   },
+   {
+    "at": "2026-11-16T11:57:57.265Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-261",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000552,
+    "receipt": "01M7J3GD1M63V709J562PC2JSB"
+   },
+   {
+    "at": "2026-11-16T11:58:29.859Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-262",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000391,
+    "receipt": "01M7J3HPJF9EG61KT1CR5ZA4K8"
+   },
+   {
+    "at": "2026-11-16T11:59:01.406Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-263",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00115,
+    "receipt": "01M7J3JF55EEM4E2XS8GGX30PZ"
+   },
+   {
+    "at": "2026-11-16T12:03:49.612Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-264",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000069,
+    "receipt": "01M7J3VVHPN8CTW8CCVRA0G1R1"
+   },
+   {
+    "at": "2026-11-16T12:05:01.403Z",
+    "kind": "build",
+    "purpose": "build:m2gf9-265",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.0007,
+    "receipt": "01M7J3X3Q85X9V9FED7G3PJRN7"
+   },
+   {
+    "at": "2026-11-17T00:15:24.691Z",
+    "kind": "build",
+    "purpose": "build:m2gf10-266",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000667,
+    "receipt": "01M7KDPNSH5JCNRXPMXXZH4QXS"
+   },
+   {
+    "at": "2026-11-17T00:16:36.726Z",
+    "kind": "build",
+    "purpose": "build:m2gf10-267",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001119,
+    "receipt": "01M7KDQVZ2GK7ASCC94KE2HX76"
+   },
+   {
+    "at": "2026-11-17T00:19:33.602Z",
+    "kind": "build",
+    "purpose": "build:m2gf10-268",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000716,
+    "receipt": "01M7KDY1E9YRRAZSGTZ811EVGF"
+   },
+   {
+    "at": "2026-11-17T12:04:24.744Z",
+    "kind": "build",
+    "purpose": "build:m2gf11-269",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00153,
+    "receipt": "01M7MP7M78QFJG24CV8SGR80BB"
+   },
+   {
+    "at": "2026-11-17T12:04:37.778Z",
+    "kind": "build",
+    "purpose": "build:m2gf11-269r",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-17T12:05:39.210Z",
+    "kind": "build",
+    "purpose": "build:m2gf11-270",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001217,
+    "receipt": "01M7MPACBJJC8EQ4ZBZQP377KG"
+   },
+   {
+    "at": "2026-11-17T12:07:47.300Z",
+    "kind": "build",
+    "purpose": "build:m2gf11-271",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000675,
+    "receipt": "01M7MPEZYJXYDTPHCQ6R6HG21P"
+   },
+   {
+    "at": "2026-11-18T00:10:21.485Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-272",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002553,
+    "receipt": "01M7NZPT0RWDKBDZ4RGYNPK6T6"
+   },
+   {
+    "at": "2026-11-18T00:10:47.973Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-272-reparse",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-18T00:12:28.917Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-273",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0.004581,
+    "receipt": "01M7NZW8WVV54ZC22PK0CZ86H5"
+   },
+   {
+    "at": "2026-11-18T00:15:38.382Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-274",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002908,
+    "receipt": "01M7NZZYPAJVA90WZC5NGSQ18S"
+   },
+   {
+    "at": "2026-11-18T00:15:50.934Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-274-reparse",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-18T00:18:28.631Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-275",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002536,
+    "receipt": "01M7P05GYFENW55FHMP3HMMN62"
+   },
+   {
+    "at": "2026-11-18T00:18:38.474Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-275-reparse",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-18T00:19:46.375Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-276",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000098,
+    "receipt": "01M7P0C2MSDA3V4H3RTGGQJ1GG"
+   },
+   {
+    "at": "2026-11-18T00:20:03.789Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-277",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000097,
+    "receipt": "01M7P0CKTBTYAQ544J345SZQ8H"
+   },
+   {
+    "at": "2026-11-18T00:22:05.035Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-278",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000134,
+    "receipt": "01M7P0G8XCCV1V7EFY2HWZEXY1"
+   },
+   {
+    "at": "2026-11-18T00:24:13.731Z",
+    "kind": "build",
+    "purpose": "build:m2gf12-279",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000966,
+    "receipt": "01M7P0JXYBVZHTP53NXCH0RA3A"
+   },
+   {
+    "at": "2026-11-18T12:02:07Z",
+    "kind": "build",
+    "purpose": "m2gf13-build:code (12 pairs: best.js, game.css, index.html, cli.js)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000832,
+    "receipt": "01M7Q8GWHGEQ21FT12BTJMNP7B"
+   },
+   {
+    "at": "2026-11-18T12:02:23.946Z",
+    "kind": "build",
+    "purpose": "build:m2gf13-280-reparse",
+    "model": "@cf/openai/gpt-oss-120b",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-18T12:03:52Z",
+    "kind": "build",
+    "purpose": "m2gf13-build:tests (test/ask-lock.mjs FILE + package.json script)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001289,
+    "receipt": "01M7Q8K8YMC78DWTKNH8804BHJ"
+   },
+   {
+    "at": "2026-11-18T12:04:59Z",
+    "kind": "build",
+    "purpose": "m2gf13-build:docs (12 pairs: package version, README x3, CHANGELOG, BUILD_LOG, SPEC x2, HOW_TO_PLAY x4)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001176,
+    "receipt": "01M7Q8NP7S9HDNV5TVJ1CTFWN5"
+   },
+   {
+    "at": "2026-11-18T12:05:32Z",
+    "kind": "build",
+    "purpose": "m2gf13-build:rework CHANGELOG blank line (282 lost one)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000068,
+    "receipt": "01M7Q8RDANVGNVFYGNA9P9N4GR"
+   },
+   {
+    "at": "2026-11-18T12:07:26Z",
+    "kind": "build",
+    "purpose": "m2gf13-build:rework test gap (mutation M3) + CLI simplification + SPEC line",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000369,
+    "receipt": "01M7Q8VDZ1HGCGJ6CSWHFTFPZ4"
+   },
+   {
+    "at": "2026-11-19T00:00:13Z",
+    "kind": "build",
+    "purpose": "m2gf14-build:code (3 pairs: index.html setGameOver clears #ask-msg, cli.js VERDICT_LINES + verdict print)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000351,
+    "receipt": "01M7RHMPE1MM48F1BCGRKWPJZT"
+   },
+   {
+    "at": "2026-11-19T00:01:12Z",
+    "kind": "build",
+    "purpose": "m2gf14-build:tests (test/after-verdict.mjs FILE + package.json script)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000911,
+    "receipt": "01M7RHNEY5BCME06J9WF4YSFJ7"
+   },
+   {
+    "at": "2026-11-19T00:02:20Z",
+    "kind": "build",
+    "purpose": "m2gf14-build:docs (12 pairs: package version, CHANGELOG, README x3, BUILD_LOG, SPEC x5, HOW_TO_PLAY x2)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000685,
+    "receipt": "01M7RHQX6BT0A0GXNQ06ZCNB7X"
+   },
+   {
+    "at": "2026-11-19T11:56:11Z",
+    "kind": "build",
+    "purpose": "m2gf15-build:code (3 numbered OLD/NEW pairs in src/cli.js: SUSPECTS_HEADING, points/q1/qn in VERDICT_LINES, intro heading, leaderboard row)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00031,
+    "receipt": "01M7STKPXG8TGGZ2T6VDB28XMR"
+   },
+   {
+    "at": "2026-11-19T11:56:53Z",
+    "kind": "build",
+    "purpose": "m2gf15-build:tests (FILE test/cli-rows.mjs, 6 checks; superseded by 291 after a shared-leaderboard flake)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000515,
+    "receipt": "01M7STM8TF166XDEEZWMN5RAFQ"
+   },
+   {
+    "at": "2026-11-19T11:57:28Z",
+    "kind": "build",
+    "purpose": "m2gf15-build:docs (13 pairs: package version + script, CHANGELOG, README x3, BUILD_LOG, HOW_TO_PLAY x2, SPEC x4)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000579,
+    "receipt": "01M7STNK8PHDZCPWZM0Z92MJT7"
+   },
+   {
+    "at": "2026-11-19T12:00:13Z",
+    "kind": "build",
+    "purpose": "m2gf15-build:tests rework (FILE test/cli-rows.mjs with a fixed seeded leaderboard, restored at the end; 289 failed 2 of 3 full runs when a 0 point row fell out of the top 10)",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000749,
+    "receipt": "01M7STT4F0YV9F7XGCT4GVXMPA"
+   },
+   {
+    "at": "2026-11-19T16:46:27.231Z",
+    "kind": "build",
+    "purpose": "build:m2gf16-292",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00068,
+    "receipt": "01M7TB6MG33CCX1TWAAB2E80JE"
+   },
+   {
+    "at": "2026-11-19T16:46:55.113Z",
+    "kind": "build",
+    "purpose": "build:m2gf16-293",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000515,
+    "receipt": "01M7TB7MNTP03QW2B44VW461Q5"
+   },
+   {
+    "at": "2026-11-19T23:56:23.736Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-294",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002085,
+    "receipt": "01M7V3S9DXF1DS5EA16K0ZF3GT"
+   },
+   {
+    "at": "2026-11-19T23:57:03.965Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-295",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-19T23:57:03.965Z",
+    "kind": "build",
+    "purpose": "build:m3s1-295",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-19T23:58:39.250Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-295b",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.002089,
+    "receipt": "01M7V3W8EXW2CBMCQJNXK1DH3N"
+   },
+   {
+    "at": "2026-11-19T23:59:00.715Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-296",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000048,
+    "receipt": "01M7V3ZK5NN6GK80ERXW7W1DPA"
+   },
+   {
+    "at": "2026-11-19T23:59:08.145Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live1:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00094,
+    "receipt": "01M7V3ZWBH5T46HZJAP9X2YN3W"
+   },
+   {
+    "at": "2026-11-19T23:59:55.403Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live1:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001052,
+    "receipt": "01M7V41AGBQY9HFFJQS9PE0PQJ"
+   },
+   {
+    "at": "2026-11-20T00:02:04.276Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-297",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000373,
+    "receipt": "01M7V44JA3NN969JAQ8HFR2PKC"
+   },
+   {
+    "at": "2026-11-20T00:02:15.045Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live2:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000845,
+    "receipt": "01M7V45JW53HWQZDDNR728FAMS"
+   },
+   {
+    "at": "2026-11-20T00:02:46.571Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-298",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000266,
+    "receipt": "01M7V462AQ6AP5MBWEV14DBNSV"
+   },
+   {
+    "at": "2026-11-20T00:03:21.722Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live2:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000904,
+    "receipt": "01M7V47KZTHNP11PXAV5JVVADB"
+   },
+   {
+    "at": "2026-11-20T00:04:36.565Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live2:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000949,
+    "receipt": "01M7V49X2NX8GQDHSQSAC156R0"
+   },
+   {
+    "at": "2026-11-20T00:05:51.782Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-299",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000348,
+    "receipt": "01M7V4BVVXYBHN17G71Y0FCHWB"
+   },
+   {
+    "at": "2026-11-20T00:05:58.084Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live3:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000971,
+    "receipt": "01M7V4CCP46F2E4QSGQNDDHD0H"
+   },
+   {
+    "at": "2026-11-20T00:07:15.995Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live3:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000892,
+    "receipt": "01M7V4ERRV53213CWNM1VFMYMV"
+   },
+   {
+    "at": "2026-11-20T00:09:37.693Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-300",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000208,
+    "receipt": "01M7V4JP6YHJA89Q4ZJ9Y1DY46"
+   },
+   {
+    "at": "2026-11-20T00:09:43.787Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live4:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000928,
+    "receipt": "01M7V4K93BPXKBBE1NPGHAE990"
+   },
+   {
+    "at": "2026-11-20T00:11:09.275Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live4:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000902,
+    "receipt": "01M7V4NWJVNBRHAKTW4QG7F4VZ"
+   },
+   {
+    "at": "2026-11-20T00:12:43.660Z",
+    "kind": "dev",
+    "purpose": "m3s1-generate:live4:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000856,
+    "receipt": "01M7V4RRRCAVWCMSD4P009TZXE"
+   },
+   {
+    "at": "2026-11-20T00:15:22.053Z",
+    "kind": "build",
+    "purpose": "m3s1-build:m3s1-301",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000602,
+    "receipt": "01M7V4WMACYZCHCPCCMAQBRYRZ"
+   },
+   {
+    "at": "2026-11-20T12:02:45.838Z",
+    "kind": "build",
+    "purpose": "build:m3s2-303",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000872,
+    "receipt": "01M7WDBTTHX2FZ9AQK2AWRAHRH"
+   },
+   {
+    "at": "2026-11-20T12:03:58.743Z",
+    "kind": "build",
+    "purpose": "build:m3s2-302",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001709,
+    "receipt": "01M7WDBTW2W4XR9CSMVWNRKEGR"
+   },
+   {
+    "at": "2026-11-20T12:04:41.270Z",
+    "kind": "build",
+    "purpose": "build:m3s2-305",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000465,
+    "receipt": "01M7WDFKS4C29H2TVBN5VTVGT7"
+   },
+   {
+    "at": "2026-11-20T12:04:55.865Z",
+    "kind": "build",
+    "purpose": "build:m3s2-306",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000045,
+    "receipt": "01M7WDGS4CVHAV1F845C5P1Y2Q"
+   },
+   {
+    "at": "2026-11-20T12:07:08.400Z",
+    "kind": "build",
+    "purpose": "build:m3s2-304",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001856,
+    "receipt": "01M7WDGZKKH0ZR8ASW1XAAABR9"
+   },
+   {
+    "at": "2026-11-20T12:07:22.653Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live1:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000938,
+    "receipt": "01M7WDNB9G7K5QN8GF1VVK8FBQ"
+   },
+   {
+    "at": "2026-11-20T12:08:00.754Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live1:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000949,
+    "receipt": "01M7WDPG38G6FRMC6RMTWVZXRK"
+   },
+   {
+    "at": "2026-11-20T12:08:50.952Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live1:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000927,
+    "receipt": "01M7WDR14M7C1VG9JDRCZB303Q"
+   },
+   {
+    "at": "2026-11-20T12:11:36.710Z",
+    "kind": "build",
+    "purpose": "build:m3s2-307",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00067,
+    "receipt": "01M7WDW1EGFT1EQSEA3FBEQD9K"
+   },
+   {
+    "at": "2026-11-20T12:11:42.585Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live2:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000899,
+    "receipt": "01M7WDX9BFCEPS8AP7WWNDV1HA"
+   },
+   {
+    "at": "2026-11-20T12:12:55.576Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live2:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001163,
+    "receipt": "01M7WDZG2PFMKBQQ6QXVYW0BM7"
+   },
+   {
+    "at": "2026-11-20T12:14:04.529Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live2:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001169,
+    "receipt": "01M7WE1KDEDN3WBR2VRTP3H1K0"
+   },
+   {
+    "at": "2026-11-20T12:15:30.852Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live3:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001067,
+    "receipt": "01M7WE47YC2S4JHKSXD7S0QFTP"
+   },
+   {
+    "at": "2026-11-20T12:16:52.233Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live3:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001482,
+    "receipt": "01M7WE6Q50E8J9FCKGJQX7VBQF"
+   },
+   {
+    "at": "2026-11-20T12:17:47.755Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live3:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001488,
+    "receipt": "01M7WE8DACM2W1QAZ57JWPCZBX"
+   },
+   {
+    "at": "2026-11-20T12:20:54.023Z",
+    "kind": "build",
+    "purpose": "build:m3s2-308",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000719,
+    "receipt": "01M7WECT0286W7RHMP8AQRK6QY"
+   },
+   {
+    "at": "2026-11-20T12:21:04.411Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live4:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001016,
+    "receipt": "01M7WEEDRX3F0GNR5V0BAKAAZG"
+   },
+   {
+    "at": "2026-11-20T12:21:24.434Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live5:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000942,
+    "receipt": "01M7WEF1CPNVS5X8W6QEW8X810"
+   },
+   {
+    "at": "2026-11-20T12:22:10.872Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live4:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001319,
+    "receipt": "01M7WEGEMX9TFMZFGPWBPNF3Y2"
+   },
+   {
+    "at": "2026-11-20T12:22:24.286Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live5:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001249,
+    "receipt": "01M7WEGVDR9SYFK0FYK7S2AQH1"
+   },
+   {
+    "at": "2026-11-20T12:23:02.338Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live5:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001226,
+    "receipt": "01M7WEJ0HZJ3BBEZN3HD74MNJB"
+   },
+   {
+    "at": "2026-11-20T12:23:22.175Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live4:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00132,
+    "receipt": "01M7WEJKSK0RVABD0JCVBJAQCV"
+   },
+   {
+    "at": "2026-11-20T12:26:18.494Z",
+    "kind": "build",
+    "purpose": "build:m3s2-309",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000813,
+    "receipt": "01M7WEQ1RGW4S8KATA8V9FXYQ5"
+   },
+   {
+    "at": "2026-11-20T12:26:26.998Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live6:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000841,
+    "receipt": "01M7WER916VG6FVM6AMNCKR0GC"
+   },
+   {
+    "at": "2026-11-20T12:26:42.008Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live7:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000892,
+    "receipt": "01M7WERQB8XJQDV9RMKVM01H0E"
+   },
+   {
+    "at": "2026-11-20T12:29:11.689Z",
+    "kind": "build",
+    "purpose": "build:m3s2-310",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000578,
+    "receipt": "01M7WEW6TKH22GVGC27FN21MWW"
+   },
+   {
+    "at": "2026-11-20T12:29:34.012Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live9:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000895,
+    "receipt": "01M7WEXZNVGCXESAXECRD324WP"
+   },
+   {
+    "at": "2026-11-20T12:30:37.118Z",
+    "kind": "dev",
+    "purpose": "m3s2-generate:live9:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001148,
+    "receipt": "01M7WEZWJ6SP94TCYB3HKDWWB4"
+   },
+   {
+    "at": "2026-11-20T12:37:36.987Z",
+    "kind": "build",
+    "purpose": "build:m3s2-311",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000232,
+    "receipt": "01M7WFCBBB1BB9S4SR49XQDJG2"
+   },
+   {
+    "at": "2026-11-20T12:40:48.469Z",
+    "kind": "build",
+    "purpose": "build:m3s2-312",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000182,
+    "receipt": "01M7WFJ9CWHA08GCEHT3GW3T4C"
+   },
+   {
+    "at": "2026-11-20T23:55:54.908Z",
+    "kind": "dev",
+    "purpose": "m3-batch:1:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000998,
+    "receipt": "01M7XP6Q5KH747W6XERDT5PV54"
+   },
+   {
+    "at": "2026-11-20T23:55:54.934Z",
+    "kind": "dev",
+    "purpose": "m3-batch:4:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000829,
+    "receipt": "01M7XP6Q5TDDSF38P1ZX0AMRJ1"
+   },
+   {
+    "at": "2026-11-20T23:55:54.934Z",
+    "kind": "dev",
+    "purpose": "m3-batch:3:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000868,
+    "receipt": "01M7XP6Q8Q71P0C0J12TDHQ583"
+   },
+   {
+    "at": "2026-11-20T23:56:37.530Z",
+    "kind": "dev",
+    "purpose": "m3-batch:5:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000785,
+    "receipt": "01M7XP80G3KK7NRWDFZ0CB49NY"
+   },
+   {
+    "at": "2026-11-20T23:56:49.451Z",
+    "kind": "dev",
+    "purpose": "m3-batch:6:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000845,
+    "receipt": "01M7XP8BZQ3XAS5QRDYX98PGBA"
+   },
+   {
+    "at": "2026-11-20T23:56:55.601Z",
+    "kind": "dev",
+    "purpose": "m3-batch:7:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000775,
+    "receipt": "01M7XP8J15Y8ATEEVE8FCJHNTK"
+   },
+   {
+    "at": "2026-11-20T23:57:26.086Z",
+    "kind": "dev",
+    "purpose": "m3-batch:8:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000818,
+    "receipt": "01M7XP9FV5A0N04V6Y8XV3FYBZ"
+   },
+   {
+    "at": "2026-11-20T23:57:36.197Z",
+    "kind": "dev",
+    "purpose": "m3-batch:9:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000833,
+    "receipt": "01M7XP9SMGAZH4N40NZF6YST35"
+   },
+   {
+    "at": "2026-11-20T23:57:40.501Z",
+    "kind": "dev",
+    "purpose": "m3-batch:8:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001086,
+    "receipt": "01M7XP9XVBWM87335J0TJ1W4PC"
+   },
+   {
+    "at": "2026-11-20T23:57:43.718Z",
+    "kind": "dev",
+    "purpose": "m3-batch:10:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000796,
+    "receipt": "01M7XPA0Z94F2GMG432007X6W6"
+   },
+   {
+    "at": "2026-11-20T23:57:45.214Z",
+    "kind": "dev",
+    "purpose": "m3-batch:11:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000828,
+    "receipt": "01M7XPA2E6HH0QA3Q1JNGR36TJ"
+   },
+   {
+    "at": "2026-11-20T23:58:24.450Z",
+    "kind": "dev",
+    "purpose": "m3-batch:11:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001061,
+    "receipt": "01M7XPB8SVD4QWXWS8JV3K8D7M"
+   },
+   {
+    "at": "2026-11-20T23:58:26.022Z",
+    "kind": "dev",
+    "purpose": "m3-batch:12:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00086,
+    "receipt": "01M7XPBA9VR8H55RCY0338G70R"
+   },
+   {
+    "at": "2026-11-20T23:58:26.375Z",
+    "kind": "dev",
+    "purpose": "m3-batch:13:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000872,
+    "receipt": "01M7XPBAMRYKWN24X25JTR09XF"
+   },
+   {
+    "at": "2026-11-20T23:58:41.102Z",
+    "kind": "dev",
+    "purpose": "m3-batch:14:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000823,
+    "receipt": "01M7XPBSJS61HCXWTT2QH6T13G"
+   },
+   {
+    "at": "2026-11-20T23:59:16.106Z",
+    "kind": "dev",
+    "purpose": "m3-batch:11:draft3",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001119,
+    "receipt": "01M7XPCV9AJKXK84R8ZE032F1H"
+   },
+   {
+    "at": "2026-11-20T23:59:23.990Z",
+    "kind": "dev",
+    "purpose": "m3-batch:15:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000766,
+    "receipt": "01M7XPD2WFRWQBH1TJ9V2JZXBA"
+   },
+   {
+    "at": "2026-11-20T23:59:25.382Z",
+    "kind": "dev",
+    "purpose": "m3-batch:16:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000848,
+    "receipt": "01M7XPD485MRYYT5ZR4FP2CVHK"
+   },
+   {
+    "at": "2026-11-20T23:59:34.266Z",
+    "kind": "dev",
+    "purpose": "m3-batch:14:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001132,
+    "receipt": "01M7XPDCZ2CTV6NHE4T232JBWA"
+   },
+   {
+    "at": "2026-11-20T23:59:46.337Z",
+    "kind": "dev",
+    "purpose": "m3-batch:17:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000788,
+    "receipt": "01M7XPDRPZTP6TTB33XKR2KZ9C"
+   },
+   {
+    "at": "2026-11-21T00:00:13.116Z",
+    "kind": "dev",
+    "purpose": "m3-batch:18:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000817,
+    "receipt": "01M7XPEJYFD197AFJ3JRNSPX1Q"
+   },
+   {
+    "at": "2026-11-21T00:00:18.643Z",
+    "kind": "dev",
+    "purpose": "m3-batch:16:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001158,
+    "receipt": "01M7XPER8J761GWB7Q9Q6Y8SVR"
+   },
+   {
+    "at": "2026-11-21T00:00:28.399Z",
+    "kind": "dev",
+    "purpose": "m3-batch:19:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000848,
+    "receipt": "01M7XPF1SMPSNBYKDT2RCCNP44"
+   },
+   {
+    "at": "2026-11-21T00:00:39.322Z",
+    "kind": "dev",
+    "purpose": "m3-batch:20:draft1",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000757,
+    "receipt": "01M7XPFCFN5PY6F0CACY83XKA9"
+   },
+   {
+    "at": "2026-11-21T00:01:06.028Z",
+    "kind": "dev",
+    "purpose": "m3-batch:18:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00115,
+    "receipt": "01M7XPG6KKAVMAG99SBA38R1TQ"
+   },
+   {
+    "at": "2026-11-21T00:01:31.521Z",
+    "kind": "dev",
+    "purpose": "m3-batch:20:draft2",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001082,
+    "receipt": "01M7XPGZFPDYQ7FCGV58CTMX6A"
+   },
+   {
+    "at": "2026-11-21T12:04:44.409Z",
+    "kind": "build",
+    "purpose": "build:m4s1-313",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 502,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-21T12:06:10.612Z",
+    "kind": "build",
+    "purpose": "m4s1-build:313b",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001223,
+    "receipt": "01M7YZXE5XG0KK1NQ6KSYD18WB"
+   },
+   {
+    "at": "2026-11-21T12:06:38.936Z",
+    "kind": "build",
+    "purpose": "m4s1-build:314",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000187,
+    "receipt": "01M7Z00BNG2PKBNYHPSH26YACN"
+   },
+   {
+    "at": "2026-11-21T12:06:45.279Z",
+    "kind": "build",
+    "purpose": "build:m4s1-314r",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0,
+    "receipt": null
+   },
+   {
+    "at": "2026-11-21T12:07:02.430Z",
+    "kind": "build",
+    "purpose": "m4s1-build:315",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000069,
+    "receipt": "01M7Z01B1C1EGS99W7PZPNGFF0"
+   },
+   {
+    "at": "2026-11-21T12:07:20.713Z",
+    "kind": "build",
+    "purpose": "m4s1-build:316",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000068,
+    "receipt": "01M7Z01WMHAJJKAVCH24072J36"
+   },
+   {
+    "at": "2026-11-21T12:10:42.540Z",
+    "kind": "build",
+    "purpose": "m4s1-build:317",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001715,
+    "receipt": "01M7Z03ZFEWYT99XQJJ94Y935A"
+   },
+   {
+    "at": "2026-11-21T12:11:30.431Z",
+    "kind": "build",
+    "purpose": "m4s1-build:318",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000531,
+    "receipt": "01M7Z096Z47C84VRH2P717H06P"
+   },
+   {
+    "at": "2026-11-21T12:12:04.925Z",
+    "kind": "build",
+    "purpose": "m4s1-build:319",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.00034,
+    "receipt": "01M7Z0A1FFSPBJ72XYWZGW20F8"
+   },
+   {
+    "at": "2026-11-21T12:12:23.342Z",
+    "kind": "build",
+    "purpose": "m4s1-build:320",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000178,
+    "receipt": "01M7Z0AZJQ241YV4VNJ404HTX5"
+   },
+   {
+    "at": "2026-11-21T12:12:37.472Z",
+    "kind": "build",
+    "purpose": "m4s1-build:321",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000062,
+    "receipt": "01M7Z0BJB10W34MCHPYCQAEM78"
+   },
+   {
+    "at": "2026-11-21T12:14:28.534Z",
+    "kind": "build",
+    "purpose": "m4s1-build:322",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000793,
+    "receipt": "01M7Z0CRBMBVNB8TA6DA8RZ4WY"
+   },
+   {
+    "at": "2026-11-21T12:17:18.152Z",
+    "kind": "build",
+    "purpose": "m4s1-build:323",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.001652,
+    "receipt": "01M7Z0GWGB4JNX55RMA5KCSZXH"
+   },
+   {
+    "at": "2026-11-21T12:17:48.208Z",
+    "kind": "build",
+    "purpose": "m4s1-build:324",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000117,
+    "receipt": "01M7Z0N1ATSV9NSWJN8JTKMXB3"
+   },
+   {
+    "at": "2026-11-21T12:18:18.123Z",
+    "kind": "build",
+    "purpose": "m4s1-build:325",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000388,
+    "receipt": "01M7Z0NSDJNW0XCDFJS013FPQA"
+   },
+   {
+    "at": "2026-11-21T12:18:43.100Z",
+    "kind": "build",
+    "purpose": "m4s1-build:326",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000202,
+    "receipt": "01M7Z0PEMQADWBKR2MAGM0ZY80"
+   },
+   {
+    "at": "2026-11-21T12:21:12.373Z",
+    "kind": "build",
+    "purpose": "m4s1-build:327",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000271,
+    "receipt": "01M7Z0TSP6NWNZ9NW2NG74AFKV"
+   },
+   {
+    "at": "2026-11-21T12:22:01.866Z",
+    "kind": "build",
+    "purpose": "m4s1-build:328",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000531,
+    "receipt": "01M7Z0VMVXNJ3ESWWDVVH5QS2B"
+   },
+   {
+    "at": "2026-11-21T12:25:06.040Z",
+    "kind": "build",
+    "purpose": "m4s1-build:329",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000086,
+    "receipt": "01M7Z0ZWCN6WEEXKDW7JWR0AHX"
+   },
+   {
+    "at": "2026-11-21T12:25:57.173Z",
+    "kind": "build",
+    "purpose": "m4s1-build:330",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000302,
+    "receipt": "01M7Z13J7131MG3TSXB7EJFXR1"
+   },
+   {
+    "at": "2026-11-21T12:26:58.184Z",
+    "kind": "build",
+    "purpose": "m4s1-build:331",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000357,
+    "receipt": "01M7Z14YNY4MTPQ0QK41EHNKBH"
+   },
+   {
+    "at": "2026-11-21T12:27:33.906Z",
+    "kind": "build",
+    "purpose": "m4s1-build:332",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000487,
+    "receipt": "01M7Z16GPKB74796HC1B92TJ2M"
+   },
+   {
+    "at": "2026-11-21T12:27:47.023Z",
+    "kind": "build",
+    "purpose": "m4s1-build:333",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000035,
+    "receipt": "01M7Z17BXYA0RKER4P4Z9JV72W"
+   },
+   {
+    "at": "2026-11-21T12:28:15.003Z",
+    "kind": "build",
+    "purpose": "m4s1-build:334",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000177,
+    "receipt": "01M7Z17ZWREE0CAPDPB9RGSQP3"
+   }
+  ],
+  "totals": {
+   "usd": 0.599222,
+   "calls": 555,
+   "receipts": 396,
+   "byKind": {
+    "dev": {
+     "usd": 0.056753,
+     "calls": 114
+    },
+    "build": {
+     "usd": 0.415102,
+     "calls": 374
+    },
+    "art": {
+     "usd": 0.127367,
+     "calls": 67
+    }
+   }
+  }
+ },
+ "total": {
+  "usd": 0.694374,
+  "calls": 710,
+  "receipts": 543
+ }
+}

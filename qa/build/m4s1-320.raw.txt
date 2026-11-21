@@ -1,0 +1,30 @@
+<<<REPLACE src/costs.js>>>
+export function writeCostLog({ usageFile = 'qa/key-usage-log.json', buildFile = 'qa/build-log.json', outFile = 'data/cost-log.json' } = {}) {
+  const usage = existsSync(usageFile) ? JSON.parse(readFileSync(usageFile, 'utf8')) : [];
+  const build = existsSync(buildFile) ? JSON.parse(readFileSync(buildFile, 'utf8')) : [];
+  
+  const cases = {};
+  for (const key of Object.keys(CASES)) {
+    cases[key] = loadCase(CASES[key]);
+  }
+
+  const log = buildCostLog({ usage, build, cases });
+  writeFileSync(outFile, JSON.stringify(log, null, 1) + '\n');
+  return log;
+}
+=====
+export function writeCostLog({ usageFile = 'qa/key-usage-log.json', buildFile = 'qa/build-log.json', artFile = 'data/art-receipts.json', outFile = 'data/cost-log.json' } = {}) {
+  const usage = existsSync(usageFile) ? JSON.parse(readFileSync(usageFile, 'utf8')) : [];
+  const build = existsSync(buildFile) ? JSON.parse(readFileSync(buildFile, 'utf8')) : [];
+  const art = existsSync(artFile) ? (() => { const parsed = JSON.parse(readFileSync(artFile, 'utf8')); return Array.isArray(parsed) ? parsed.items : []; })() : [];
+  
+  const cases = {};
+  for (const key of Object.keys(CASES)) {
+    cases[key] = loadCase(CASES[key]);
+  }
+
+  const log = buildCostLog({ usage, build, cases, art });
+  writeFileSync(outFile, JSON.stringify(log, null, 1) + '\n');
+  return log;
+}
+<<<END>>>

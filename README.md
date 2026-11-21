@@ -30,6 +30,7 @@ This repo starts from **The Vanishing Violin**, a working case: three suspects p
 node src/server.js                                  # mock mode, no key needed
 FULLCUP_KEY=<your key> node src/server.js       # or put it in .fullcup-key (git-ignored)
 npm test                                            # run tests
+node src/costs.js                                   # rebuild the public cost log (data/cost-log.json)
 node src/cli.js --lang pt                           # play in the terminal
 ```
 Then open http://localhost:3000. The key stays on the server, and the browser never sees it.
@@ -38,7 +39,9 @@ Then open http://localhost:3000. The key stays on the server, and the browser ne
 
 **M2 Delivered (2026-11-19, v0.4.25).** The Night Train is the second case: 4 suspects (Helena, Victor, Tomás, Inês), a timetable that runs from 21:10 past midnight to 00:40 with the crime in the tunnel blackout, EN and PT text, on the same case engine as the Violin (shared fair play and timeline checks, case picker, `?case=night-train`, `CASE_ID=night-train`, `node src/cli.js --case night-train`). Around it M2 shipped a gothic-noir case picker and a one-viewport layout, pixel art made through the Cup key, a Case progress tracker, room scenes, timed hint toasts, suspicion bars, talking portraits, a CASE CLOSED stamp with the culprit in handcuffs, a CONTINUE? countdown with GAME OVER and a next-morning newspaper, a visible question budget (8 for the Violin, 10 for the Night Train) with a locked Ask box when it runs out, errors shown under the question box, and a terminal game fully in Portuguese. Each game has a cap of 20 model calls and the worst case is tested to stay under US$0.10. 283 automated checks. Details: [docs/M2_DELIVERY.md](docs/M2_DELIVERY.md).
 
-**M3 delivered: The Generated Case (2026-11-20).** `node src/generator.js --seed "<text>"` writes a case through the Cup key and keeps it only if it passes the shape, fair play and timeline checks; generated cases show in the picker (EN/PT) with their cost and drafts. Next: M4, the pack with a shared scoreboard and a public cost log.
+**M3 delivered: The Generated Case (2026-11-20).** `node src/generator.js --seed "<text>"` writes a case through the Cup key and keeps it only if it passes the shape, fair play and timeline checks; generated cases show in the picker (EN/PT) with their cost and drafts.
+
+**M4 in progress (sprint 1, v0.6.0).** This sprint added a public cost log page at /costs built via node src/costs.js, a shared pack scoreboard, four cases in the picker, and real credits. Cost per case: Violin US$0.051778, Night Train US$0.037506, Lapa US$0.003868, Samba US$0.002000; the shared build and tools line and the live total are on /costs. 316 automated checks. M4 is not declared yet.
 
 M1 scope as shipped: bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard (names shown as plain text), personal best per language (shown in your language, new best announced) with a confirmed reset, accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload), Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect), fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 97 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
 

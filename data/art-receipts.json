@@ -1,0 +1,805 @@
+{
+ "note": "Pixel art made through the Cup key (flux-1-schnell). Exact cost of each image read from its public receipt page on qa.fullcup.ai on 2026-11-21.",
+ "items": [
+  {
+   "asset": "characters/night-train-helena",
+   "attempt": "orig",
+   "receipt": "01M76M12ZCM7MW1XWNDQA56NMP",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/night-train-ines",
+   "attempt": "orig",
+   "receipt": "01M76M1Y3PQY5S3S96J6G00W6K",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/night-train-ines",
+   "attempt": "r1",
+   "receipt": "01M76MG63VJZFDY6CQK1D8260X",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/night-train-tomas",
+   "attempt": "orig",
+   "receipt": "01M76M1NKXWHT0C75CBPEG9CME",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/night-train-victor",
+   "attempt": "orig",
+   "receipt": "01M76M1C8692RNCX3PKKKRBGMD",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/night-train-victor",
+   "attempt": "r1",
+   "receipt": "01M76MG3XA88EJ96KE6F5GVJDZ",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/violin-carlos",
+   "attempt": "orig",
+   "receipt": "01M76M0THBY7W13PSA9TEGWF1G",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/violin-lorenzo",
+   "attempt": "orig",
+   "receipt": "01M76M050KKC07WT2R7KX52DPB",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/violin-maya",
+   "attempt": "orig",
+   "receipt": "01M76M0GX2Q3TJWGFTE613VADT",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "cutscene/night-train",
+   "attempt": "orig",
+   "receipt": "01M76M8RD9HMM5B7RAZM19BBSV",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "cutscene/violin",
+   "attempt": "orig",
+   "receipt": "01M76M8FEN5W7E3RTSJECZZQC1",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "evidence/night-train-items",
+   "attempt": "orig",
+   "receipt": "01M76M2ZK1N3JQPJWSPA7AC18C",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "evidence/violin-items",
+   "attempt": "orig",
+   "receipt": "01M76M2PYE0CY4GA7D4BV04589",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "evidence/violin-items",
+   "attempt": "r1",
+   "receipt": "01M76NA11SAGZBX8SJ4R1EHGB8",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-accuse",
+   "attempt": "orig",
+   "receipt": "01M76KBGPQ3CVFPN5JG91M9X3E",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-board",
+   "attempt": "orig",
+   "receipt": "01M76KBDRHRQHM8NE8NGXHWAXV",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-board",
+   "attempt": "r1",
+   "receipt": "01M76MDA0VRW7FZXKXKTJ1CQRG",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-briefing",
+   "attempt": "orig",
+   "receipt": "01M76KAJN1N7X5XXTBTS34DTJQ",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-close",
+   "attempt": "orig",
+   "receipt": "01M76KBWNQGQEZGC35V5HHH6RH",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-fingerprint",
+   "attempt": "orig",
+   "receipt": "01M76KCYD1846KFV34CBPANHVX",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-fingerprint",
+   "attempt": "r1",
+   "receipt": "01M76MFZQQVM7GVE88XMYS9MNX",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-footprint",
+   "attempt": "orig",
+   "receipt": "01M76KWKJ2JB9J70XM6H86B97S",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-key",
+   "attempt": "orig",
+   "receipt": "01M76KD0TDA695825WS8CH7ENQ",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-letter",
+   "attempt": "orig",
+   "receipt": "01M76KVFGB1QFF91SY4CBGJ580",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-necklace",
+   "attempt": "orig",
+   "receipt": "01M76KVRGNKS9HWK952CD4QVA5",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-ticket",
+   "attempt": "orig",
+   "receipt": "01M76KV65W40TQMTCX0YS3HKCT",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-violin",
+   "attempt": "orig",
+   "receipt": "01M76KW0YQPA648T1QRM2D9YNZ",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-ev-watch",
+   "attempt": "orig",
+   "receipt": "01M76KW9QZ06YCWJYKT3V3ZJDE",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-files",
+   "attempt": "orig",
+   "receipt": "01M76KBPM0GMQGVS3P47ASRQ2C",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-files",
+   "attempt": "r1",
+   "receipt": "01M76MDC1118FFKTJRHZS3PC8V",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-hourglass",
+   "attempt": "orig",
+   "receipt": "01M76KXPY1AGS86TTR32C4CBTV",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-lang",
+   "attempt": "orig",
+   "receipt": "01M76KGWJ7566CE45CC6THG723",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-academy",
+   "attempt": "orig",
+   "receipt": "01M76KRBADJTCQ8YTW1RZDY2TE",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-dining",
+   "attempt": "orig",
+   "receipt": "01M76KCHAT3R7M2706RNQVBTFC",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-hallway",
+   "attempt": "orig",
+   "receipt": "01M76KCC6K33AMBZ2WGTVFA80P",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-instrument",
+   "attempt": "orig",
+   "receipt": "01M76KRY0PAPVPBW17TWF11XM7",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-luggage",
+   "attempt": "orig",
+   "receipt": "01M76KCPMCK70HBTSYVEJ1BQR0",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-office",
+   "attempt": "orig",
+   "receipt": "01M76KRMH2XJF5J2CS53WJCWES",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-platform",
+   "attempt": "orig",
+   "receipt": "01M76KCVXX7FQHYXRQH9B3ZR18",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-rehearsal",
+   "attempt": "orig",
+   "receipt": "01M76KC9K8ZSZXKFHZR9QEMB80",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-rehearsal",
+   "attempt": "r1",
+   "receipt": "01M76MF6GR5AVEB053XA44W85K",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-sleeper",
+   "attempt": "orig",
+   "receipt": "01M76KCKWPK8VBW9WTBZPCXZFA",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-train",
+   "attempt": "orig",
+   "receipt": "01M76KCEWZ4G8BX2C3YZGHPX10",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-train",
+   "attempt": "r1",
+   "receipt": "01M76MF8ZFM97RYYX8WQ3XBYPN",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-tunnel",
+   "attempt": "orig",
+   "receipt": "01M76KCSF6W192SXY6BHDH3T6Y",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-loc-tunnel",
+   "attempt": "r1",
+   "receipt": "01M76MFWGR03JE92C6PNGKKSXM",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-locations",
+   "attempt": "orig",
+   "receipt": "01M76KB4K3XSFNAK2N0TG71G8Y",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-locked",
+   "attempt": "orig",
+   "receipt": "01M76KXZNGQJZ6M4GSP7QN823Q",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-pin",
+   "attempt": "orig",
+   "receipt": "01M76KBSY9RD8YPK8HHQKEREMZ",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-questions",
+   "attempt": "orig",
+   "receipt": "01M76KXE64NKFXPW0239REYXKV",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-restart",
+   "attempt": "orig",
+   "receipt": "01M76KH5655KG31VWQ0VNZ8B37",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-restart",
+   "attempt": "r1",
+   "receipt": "01M76MEFBGSDVAA0DB4V8057K3",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-chef",
+   "attempt": "orig",
+   "receipt": "01M76KR241Q6TRC6N9A281MK4Y",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-conductor",
+   "attempt": "orig",
+   "receipt": "01M76KHZBMZMT8T3513MZFH6AJ",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-conductor",
+   "attempt": "r1",
+   "receipt": "01M76MF1F3FCPJ544Z1TF5VJK0",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-janitor",
+   "attempt": "orig",
+   "receipt": "01M76KJH7DEBRKCPJCVR6YD6D7",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-jeweller",
+   "attempt": "orig",
+   "receipt": "01M76KQFCM71PT1HBF2P6QCMJJ",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-porter",
+   "attempt": "orig",
+   "receipt": "01M76KQS9KDCE1852R4MTZRBVE",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-train-conductor",
+   "attempt": "orig",
+   "receipt": "01M76KJT156QQGX8P05D52M8RS",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-train-conductor",
+   "attempt": "r1",
+   "receipt": "01M76MF3PQ6CM9N03EJR8CW31J",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-role-violinist",
+   "attempt": "orig",
+   "receipt": "01M76KJ82DQMCBP4DN50R2MZ9B",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-score",
+   "attempt": "orig",
+   "receipt": "01M76KBM20XE2051TQF83C7Y2Q",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-suspects",
+   "attempt": "orig",
+   "receipt": "01M76KB84B71QJXQGAG8GY8M3P",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-suspects",
+   "attempt": "r1",
+   "receipt": "01M76MD3YA9NWETEQ9KYSJ3RVN",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-talk",
+   "attempt": "orig",
+   "receipt": "01M76KFDXRN6JS001P37HSQQH1",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-talk",
+   "attempt": "r1",
+   "receipt": "01M76MD716774M6RXEZ2PV2R9F",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-tl-gap",
+   "attempt": "orig",
+   "receipt": "01M76KX5SZX9NP4QWSZ0REJCXF",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-tl-marker",
+   "attempt": "orig",
+   "receipt": "01M76KWWGHG8E0KN9B88207BZT",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-unlocked",
+   "attempt": "orig",
+   "receipt": "01M76KY93AT64XQHG63P0H2NA3",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-unlocked",
+   "attempt": "r1",
+   "receipt": "01M76MG1YAFC6TSRYBD0BZQDPS",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-verdict-ok",
+   "attempt": "orig",
+   "receipt": "01M76KYJ6Z984THB8F3NAVDN2T",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "i-verdict-wrong",
+   "attempt": "orig",
+   "receipt": "01M76KZVZQTH55949FP50WAK4S",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/night-train-dining-kitchen",
+   "attempt": "orig",
+   "receipt": "01M76M69QR9NZD66GG8RW28M6C",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/night-train-exterior",
+   "attempt": "orig",
+   "receipt": "01M76M5QBTCNE2VG2GNQYA7772",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/night-train-luggage-safe",
+   "attempt": "orig",
+   "receipt": "01M76M612BEPET5NKXTZXG3981",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/night-train-port-elling",
+   "attempt": "orig",
+   "receipt": "01M76M73ZVGJV2XNF1B6J8GFSX",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/night-train-sleeper-corridor",
+   "attempt": "orig",
+   "receipt": "01M76M6J6M2WHX7XM0M3E8XQ2Q",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/night-train-tunnel",
+   "attempt": "orig",
+   "receipt": "01M76M6TW0QEVRSP4R0QGS9GNC",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-academy-exterior",
+   "attempt": "orig",
+   "receipt": "01M76M4MC1S3EGAR1FV49SPQHG",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-hallway-cart",
+   "attempt": "orig",
+   "receipt": "01M76M5EH0ET4YXQ141MC1DCDF",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-hallway-cart",
+   "attempt": "r1",
+   "receipt": "01M76MH81NKN099S5G0FJ12CE0",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-instrument-room",
+   "attempt": "orig",
+   "receipt": "01M76M4WXVWQZZ7GMK75M5FYWE",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-instrument-room",
+   "attempt": "r1",
+   "receipt": "01M76MH3EZNVQWG3F8X9GSCMA6",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-rehearsal-hall",
+   "attempt": "orig",
+   "receipt": "01M76M55C53EGGFC0BTK8DZBJY",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-rehearsal-hall",
+   "attempt": "r1",
+   "receipt": "01M76MH5PGQFR121SR1VTD19ZS",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-verdict-closed",
+   "attempt": "orig",
+   "receipt": "01M76M42ZBJMWBN59TMAMCP0K8",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "loc/violin-verdict-wrong",
+   "attempt": "orig",
+   "receipt": "01M76M4BS5CN9E6XPG3R7W2VRV",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/cork",
+   "attempt": "orig",
+   "receipt": "01M76M3H0TK249KN28128TK4C6",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/cork",
+   "attempt": "r1",
+   "receipt": "01M76MGY25EQD14MQCP8XPHR0M",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/desk",
+   "attempt": "orig",
+   "receipt": "01M76M380QCDWF944D4XSQEFQF",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/desk",
+   "attempt": "r1",
+   "receipt": "01M76MG8GGVJSCGHCFR5WJGBFT",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/dossier-paper",
+   "attempt": "orig",
+   "receipt": "01M76M3T4XN3DT5J7XSAH0R1XH",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/dossier-paper",
+   "attempt": "r1",
+   "receipt": "01M76MH0FYGACC9CKZMCQWH64A",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/select-frame",
+   "attempt": "orig",
+   "receipt": "01M76M7N2SH23BJN66C99G2V26",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/select-frame",
+   "attempt": "r1",
+   "receipt": "01M76MHA5WA1CK0Y91ZX7ZEW0G",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "tex/title-rain",
+   "attempt": "orig",
+   "receipt": "01M76M7CF86M9SNZFWS3WP09G2",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "titles/night-train-stage",
+   "attempt": "orig",
+   "receipt": "01M76M8748RTRR86FWF8QHEACK",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "titles/violin-stage",
+   "attempt": "orig",
+   "receipt": "01M76M7Y1JBHK1R8E2TPEHGZK8",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-13T00:05:22Z"
+  },
+  {
+   "asset": "characters/violin-carlos-arrest",
+   "attempt": "orig",
+   "receipt": "01M7KD6DSPF7KVYPKXSS947AGS",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-18T00:05:26Z"
+  },
+  {
+   "asset": "characters/night-train-ines-arrest",
+   "attempt": "orig",
+   "receipt": "01M7KCXMKP5GP6J6AD6WH12KC2",
+   "usd": 0.001901,
+   "model": "@cf/black-forest-labs/flux-1-schnell",
+   "sealedAt": "2026-11-18T00:05:26Z"
+  }
+ ]
+}

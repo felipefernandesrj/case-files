@@ -1,0 +1,30 @@
+<<<REPLACE test/pack-m4.mjs>>>
+    assert(u3 === 0, `u3: ${u3}`);
+    const r1 = receiptOf({ 'x-fullcup-receipt': 'abc' });
+    assert(r1 === 'abc', `r1: ${r1}`);
+    const r2 = receiptOf({});
+    assert(r2 === null, `r2: ${r2}`);
+=====
+    assert(u3 === 0, `u3: ${u3}`);
+    const r1 = receiptOf({ headers: { 'x-fullcup-receipt': 'abc' } });
+    assert(r1 === 'abc', `r1: ${r1}`);
+    const r2 = receiptOf({});
+    assert(r2 === null, `r2: ${r2}`);
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+    const log = JSON.parse(await readFile('data/cost-log.json', 'utf8'));
+    const keys = Object.keys(CASES);
+    const expectedKeys = [...keys, 'pack'];
+    const logKeys = Object.keys(log.cases || {});
+    // The log structure from buildCostLog results in log.cases being an object or array? 
+    // The prompt says "cases: [bucket per key of cases, in order]" and "pack: bucket id 'pack'".
+    // Actually buildCostLog returns { cases: { [key]: bucket }, pack: bucket }.
+    const buckets = { ...log.cases, pack: log.pack };
+=====
+    const log = JSON.parse(await readFile('data/cost-log.json', 'utf8'));
+    const keys = Object.keys(CASES);
+    const expectedKeys = [...keys, 'pack'];
+    assert(JSON.stringify(log.cases.map(b => b.id)) === JSON.stringify(keys), 'order');
+    const buckets = { ...Object.fromEntries(log.cases.map(b => [b.id, b])), pack: log.pack };
+<<<END>>>

@@ -877,3 +877,17 @@ Model gemma-4-26b-a4b-it, thinking off, via the Cup key. Felipi asked to close M
 ## M3 sprint 2 (run 46, 20/11): finished from uncommitted work of the failed 09:00 run
 - Reviewed the diff, fixed the CHANGELOG/package version mismatch (test caught it), 307 checks pass. Gaps closed: generated cases in CASES/picker/fileKeyOf, rooms/plate, cost cap, testimony check. Mock screenshots in /workspace/casefiles-qa/run46/shots. Live smoke tools/smoke-m3.mjs 2 asks + 2 accuses, llama-4-scout, rework 0.
 - Observation (not fixed): 390 "SCENE: BACK OFFICE" tag overlaps the Locations tab label.
+
+## M4 sprint 1 (run 47, 21/11 09:00 BRT): cost log, pack scoreboard, four cases, real credits (v0.6.0)
+- Spec-first prompts (no dry run), gemma-4-26b-a4b-it thinking off, stream on. Calls 313-334 = 23 calls (313 HTTP 502 workers_ai_unavailable after 236 s, no usage, no receipt; retried as 313b with stream).
+- 313b engine (src/costs.js, scoreboard packTop, 5 server edits, data/credits.json): 8/8 blocks applied. Errors from its own code fed back: loadCase(key) instead of the file (314, its fix still wrong, loadCase(cases[key]) loaded the Violin for every case), packTop not lowercased (314), /costs without content type and costFile against cwd (314), sort on at null crashed (315/316).
+- Harness: the model echoed a bare "OLD" line from the block shape; tools/build-via-key.mjs now strips it (re-parse 314r, no new call). 315 used OLD/NEW as labels; 316 with a one-block real example applied 2/2.
+- 317 public/costs.html (471 lines) failed in Chrome: data.total.byKind (does not exist) threw and showed "not available"; pack bucket missing; vendor kept in model names (327, broken: undefined cells, duplicate const) -> 328 rewrote the All row; "US$ US$" in section lines (329).
+- 318-321 art receipts + ULID times: ordering of my edits made one OLD miss (319), my excerpt cut a function so the model invented a brace (320), Array.isArray(parsed) inverted (321).
+- 322 picker/credits/CSS: 10/10 applied, no rework.
+- 323 tests: unclosed template literal, shadowed creditsData (324); 4 wrong expectations in the test (325); my prompt joined non-adjacent lines (326). Mutation check: 1/8 missed (pack route), 331-333 closed it (333 because my prompt literally said "await listen(0)"). After: 8/8 caught.
+- 330 + 334 docs (334 removed totals that drift with each build call).
+- Key: 22 OK calls + 1 failed, 888.55 neurons, ~US$0.0098. Rework (314-316, 319-321, 324-329, 331-333) 307.32 neurons = 34.6%.
+- Data by hand (QA tooling, disclosed): data/art-receipts.json (exact cost of 100 art receipts read from their public receipt pages, all Genuine), content/generated/gen-a-samba-school-rehearsal-in-madureira-th.json copied from qa/m3-batch/seed-02.json (generated through the key in M3), tools/shots-m4s1-mock.mjs, build-log -> key-usage-log bookkeeping. No hand edits in src/, public/, test/, docs.
+- Result: npm test 316/316 (2 full runs). Mock shots 1280/390 EN/PT in /workspace/casefiles-qa/run47/shots, no horizontal overflow.
+- Known, not fixed: Cup page "used on key" ($0.80) is higher than the logged total ($0.69); some early calls were never logged locally. Failed calls logged only in the build log show once; tables on /costs scroll sideways at 390 (by design).

@@ -1,0 +1,13 @@
+<<<REPLACE public/costs.html>>>
+                summaryLine: "US$ {usd} · {calls} calls · {receipts} receipts",
+=====
+                summaryLine: "{usd} · {calls} calls · {receipts} receipts",
+<<<REPLACE public/costs.html>>>
+                kindLine: "{kind}: US$ {usd} ({calls})",
+=====
+                kindLine: "{kind}: {usd} ({calls})",
+<<<REPLACE public/costs.html>>>
+                summaryLine: "US$ {usd} · {calls} chamadas · {receipts} recibos",
+=====
+                summaryLine: "{usd} · {calls} chamadas · {receipts} recibos",
+<<<END>>>

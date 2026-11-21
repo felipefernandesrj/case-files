@@ -1,0 +1,100 @@
+<<<REPLACE public/costs.html>>>
+            // Total Row
+            const totalTr = document.createElement('tr');
+            totalTr.className = 'summary-row';
+            const tCaseTd = document.createElement('td');
+            tCaseTd.textContent = t.rowAll;
+            totalTr.appendChild(tCaseTd);
+
+            const tPlayTd = document.createElement('td');
+            tPlayTd.className = 'num';
+            const playUsd = [...data.cases, data.pack].filter(c => c.kind === 'play').reduce((sum, c) => sum + c.usd, 0);
+            const playCalls = [...data.cases, data.pack].filter(c => c.kind === 'play').reduce((sum, c) => sum + c.calls, 0);
+            const playReceipts = [...data.cases, data.pack].filter(c => c.kind === 'play').reduce((sum, c) => sum + c.receipts, 0);
+            tPlayTd.textContent = formatMoney(playUsd, lang);
+            tPlayCallsTd.textContent = playCalls.toLocaleString(lang);
+            tPlayReceiptsTd.textContent = playReceipts.toLocaleString(lang);
+            totalTr.appendChild(tPlayTd);
+
+            const tMadeTd = document.createElement('td');
+            tMadeTd.className = 'num';
+            let totalOtherSum = 0;
+            const playUsd = [...data.cases, data.pack].filter(c => c.kind === 'play').reduce((sum, c) => sum + c.usd, 0);
+            const playCalls = [...data.cases, data.pack].filter(c => c.kind === 'play').reduce((sum, c) => sum + c.calls, 0);
+            const playReceipts = [...data.cases, data.pack].filter(c => c.kind === 'play').reduce((sum, c) => sum + c.receipts, 0);
+            const madeUsd = [...data.cases, data.pack].filter(c => c.kind === 'made').reduce((sum, c) => sum + c.usd, 0);
+            const madeCalls = [...data.cases, data.pack].filter(c => c.kind === 'made').reduce((sum, c) => sum + c.calls, 0);
+            const madeReceipts = [...data.cases, data.pack].filter(c => c.kind === 'made').reduce((sum, c) => sum + c.receipts, 0);
+
+            const byKind = [
+                { kind: 'play', usd: playUsd, calls: playCalls, receipts: playReceipts },
+                { kind: 'made', usd: madeUsd, calls: madeCalls, receipts: madeReceipts }
+            ];
+            for (const item of byKind) {
+                if (k !== 'play') totalOtherSum += v.usd;
+            }
+            tMadeTd.textContent = formatMoney(totalOtherSum, lang);
+            totalTr.appendChild(tMadeTd);
+
+            const tTotalTd = document.createElement('td');
+            tTotalTd.className = 'num';
+            tTotalTd.textContent = formatMoney(data.total.usd, lang);
+            totalTr.appendChild(tTotalTd);
+
+            const tCallsTd = document.createElement('td');
+            tCallsTd.className = 'num';
+            tCallsTd.textContent = data.total.calls;
+            totalTr.appendChild(tCallsTd);
+
+            const tRecTd = document.createElement('td');
+            tRecTd.className = 'num';
+            tRecTd.textContent = data.total.receipts;
+            totalTr.appendChild(tRecTd);
+
+            tbody.appendChild(totalTr);
+=====
+            // Total Row
+            const totalTr = document.createElement('tr');
+            totalTr.className = 'summary-row';
+            
+            const tCaseTd = document.createElement('td');
+            tCaseTd.textContent = t.rowAll;
+            totalTr.appendChild(tCaseTd);
+
+            const allBuckets = [...data.cases, data.pack];
+            const playSum = allBuckets.reduce((sum, b) => sum + (b.totals.byKind.play?.usd || 0), 0);
+            const madeSum = allBuckets.reduce((sum, b) => {
+                let bucketOther = 0;
+                for (const kind in b.totals.byKind) {
+                    if (kind !== 'play') bucketOther += b.totals.byKind[kind].usd || 0;
+                }
+                return sum + bucketOther;
+            }, 0);
+
+            const tPlayTd = document.createElement('td');
+            tPlayTd.className = 'num';
+            tPlayTd.textContent = formatMoney(playSum, lang);
+            totalTr.appendChild(tPlayTd);
+
+            const tMadeTd = document.createElement('td');
+            tMadeTd.className = 'num';
+            tMadeTd.textContent = formatMoney(madeSum, lang);
+            totalTr.appendChild(tMadeTd);
+
+            const tTotalUsdTd = document.createElement('td');
+            tTotalUsdTd.className = 'num';
+            tTotalUsdTd.textContent = formatMoney(data.total.usd, lang);
+            totalTr.appendChild(tTotalUsdTd);
+
+            const tTotalCallsTd = document.createElement('td');
+            tTotalCallsTd.className = 'num';
+            tTotalCallsTd.textContent = data.total.calls;
+            totalTr.appendChild(tTotalCallsTd);
+
+            const tTotalReceiptsTd = document.createElement('td');
+            tTotalReceiptsTd.className = 'num';
+            tTotalReceiptsTd.textContent = data.total.receipts;
+            totalTr.appendChild(tTotalReceiptsTd);
+
+            tbody.appendChild(totalTr);
+<<<END>>>

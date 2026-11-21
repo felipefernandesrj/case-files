@@ -1,0 +1,315 @@
+<<<FILE src/costs.js>>>
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { CASES, loadCase } from './case.js';
+
+export const NEURON_USD = 0.011 / 1000;
+export const RECEIPT_URL = 'https://qa.fullcup.ai/receipts/';
+
+export const RULES = [
+  { re: /^m2gf\d+-art:violin-/, case: 'violin', kind: 'art' },
+  { re: /^m2gf\d+-art:night-train-/, case: 'night-train', kind: 'art' },
+  { re: /^(interrogate|m1-acceptance|sprint\d+-smoke|sprint5-consistency)(:|$)/, case: 'violin', kind: 'play' },
+  { re: /^(author-case|revise-case)(:|$)/, case: 'violin', kind: 'author' },
+  { re: /^(m2-acceptance|m2s\d+-smoke|m2-shots)(:|$)/, case: 'night-train', kind: 'play' },
+  { re: /^(m3-acceptance|m3s2-shots)(:|$)/, case: 'gen-a-rainy-night-at-a-lapa-bookshop-in-rio', kind: 'play' }
+];
+
+export function round6(x) {
+  return Math.round(x * 1e6) / 1e6;
+}
+
+export function entryUsd(e) {
+  if (e.usage && Number.isFinite(e.usage.neurons)) return round6(e.usage.neurons * NEURON_USD);
+  else if (typeof e.cost === 'number') return round6(e.cost);
+  else return 0;
+}
+
+export function receiptOf(e) {
+  return e.headers?.['x-fullcup-receipt-id'] || e.headers?.['x-fullcup-receipt'] || null;
+}
+
+export function classify(purpose, rules = RULES) {
+  const str = String(purpose || '');
+  for (const { re, case: c, kind } of rules) {
+    if (re.test(str)) return { case: c, kind };
+  }
+  return { case: 'pack', kind: /build/.test(purpose) ? 'build' : 'dev' };
+}
+
+export function buildCostLog({ usage = [], build = [], cases = {}, now = new Date().toISOString() }) {
+  const buckets = [];
+  const caseKeys = Object.keys(cases);
+  
+  for (const key of caseKeys) {
+    const c = cases[key];
+    buckets.push({
+      id: key,
+      title: c.title,
+      generated: Boolean(c.generated),
+      entries: []
+    });
+  }
+  
+  const packBucket = {
+    id: 'pack',
+    title: { en: 'The whole pack (shared build and tools)', pt: 'O pacote inteiro (construção e ferramentas compartilhadas)' },
+    generated: false,
+    entries: []
+  };
+
+  const receiptToCase = new Map();
+  for (const key of caseKeys) {
+    const c = cases[key];
+    const receipts = c.generated?.cost?.receipts || [];
+    for (const r of receipts) receiptToCase.set(r, key);
+  }
+
+  const seenReceipts = new Set();
+
+  for (const e of usage) {
+    if (e.status === undefined) continue;
+    const receipt = receiptOf(e);
+    let targetCaseKey;
+    let kind;
+
+    if (receipt && receiptToCase.has(receipt)) {
+      targetCaseKey = receiptToCase.get(receipt);
+      kind = 'generate';
+    } else {
+      const cls = classify(e.purpose);
+      targetCaseKey = cls.case;
+      kind = cls.kind;
+    }
+
+    const bucket = buckets.find(b => b.id === targetCaseKey) || packBucket;
+    bucket.entries.push({
+      at: e.at,
+      kind,
+      purpose: e.purpose,
+      model: e.model || null,
+      status: e.status,
+      usd: entryUsd(e),
+      receipt
+    });
+    if (receipt) seenReceipts.add(receipt);
+  }
+
+  for (const e of build) {
+    const receipt = receiptOf(e);
+    if (receipt && seenReceipts.has(receipt)) continue;
+    
+    packBucket.entries.push({
+      at: e.at,
+      kind: 'build',
+      purpose: 'build:' + e.label,
+      model: e.model,
+      status: e.status,
+      usd: entryUsd(e),
+      receipt
+    });
+  }
+
+  const allBuckets = [...buckets, packBucket];
+
+  for (const b of allBuckets) {
+    b.entries.sort((a, b) => a.at.localeCompare(b.at));
+    const totals = {
+      usd: 0,
+      calls: b.entries.length,
+      receipts: 0,
+      byKind: {}
+    };
+    for (const entry of b.entries) {
+      totals.usd += entry.usd;
+      if (entry.receipt) totals.receipts++;
+      if (!totals.byKind[entry.kind]) totals.byKind[entry.kind] = { usd: 0, calls: 0 };
+      totals.byKind[entry.kind].usd += entry.usd;
+      totals.byKind[entry.kind].calls += 1;
+    }
+    totals.usd = round6(totals.usd);
+    for (const k in totals.byKind) {
+      totals.byKind[k].usd = round6(totals.byKind[k].usd);
+    }
+    b.totals = totals;
+  }
+
+  const totalSum = allBuckets.reduce((acc, b) => acc + b.totals.usd, 0);
+  const totalCalls = allBuckets.reduce((acc, b) => acc + b.totals.calls, 0);
+  const totalReceipts = allBuckets.reduce((acc, b) => acc + b.totals.receipts, 0);
+
+  return {
+    version: 1,
+    generatedAt: now,
+    usdPer1000Neurons: 0.011,
+    receiptUrl: RECEIPT_URL,
+    cases: buckets,
+    pack: packBucket,
+    total: {
+      usd: round6(totalSum),
+      calls: totalCalls,
+      receipts: totalReceipts
+    }
+  };
+}
+
+export function costsFor(log, key) {
+  if (key === 'pack') return log.pack;
+  return log.cases.find(b => b.id === key) || null;
+}
+
+export function writeCostLog({ usageFile = 'qa/key-usage-log.json', buildFile = 'qa/build-log.json', outFile = 'data/cost-log.json' } = {}) {
+  const usage = existsSync(usageFile) ? JSON.parse(readFileSync(usageFile, 'utf8')) : [];
+  const build = existsSync(buildFile) ? JSON.parse(readFileSync(buildFile, 'utf8')) : [];
+  
+  const cases = {};
+  for (const key of Object.keys(CASES)) {
+    cases[key] = loadCase(key);
+  }
+
+  const log = buildCostLog({ usage, build, cases });
+  writeFileSync(outFile, JSON.stringify(log, null, 1) + '\n');
+  return log;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const log = writeCostLog();
+  for (const b of [...log.cases, log.pack]) {
+    console.log(`${b.id}: US$ ${b.totals.usd.toFixed(6)} over ${b.totals.calls} calls (${b.totals.receipts} receipts)`);
+  }
+  console.log(`total: US$ ${log.total.usd.toFixed(6)} over ${log.total.calls} calls (${log.total.receipts} receipts)`);
+}
+<<<END>>>
+<<<REPLACE src/scoreboard.js>>>
+  return { add, top };
+}
+<<<END>>>
+<<<REPLACE src/scoreboard.js>>>
+  return { add, top };
+}
+=====
+  function packTop(n = 10) {
+    const playersMap = new Map();
+    for (const entry of entries) {
+      const nameRaw = entry.player;
+      if (!nameRaw || nameRaw.trim() === '' || nameRaw.toLowerCase() === 'anon') continue;
+      const name = nameRaw.trim();
+      
+      if (!playersMap.has(name)) {
+        playersMap.set(name, { name, entries: [] });
+      }
+      playersMap.get(name).entries.push(entry);
+    }
+
+    const leaderboard = Array.from(playersMap.values()).map(p => {
+      const sortedEntries = p.entries.sort((a, b) => b.at.localeCompare(a.at));
+      const newestAt = sortedEntries[0].at;
+      const name = sortedEntries[0].player.trim();
+      
+      const bestPerCase = new Map();
+      for (const e of p.entries) {
+        const cid = e.caseId || 'unknown';
+        const score = e.score || 0;
+        if (!bestPerCase.has(cid) || score > bestPerCase.get(cid)) {
+          bestPerCase.set(cid, score);
+        }
+      }
+
+      const caseIds = Array.from(bestPerCase.keys());
+      const solvedCount = caseIds.filter(cid => cid !== 'unknown' && bestPerCase.get(cid) > 0).length;
+      const totalScore = Array.from(bestPerCase.values()).reduce((a, b) => a + b, 0);
+
+      return {
+        player: name,
+        total: totalScore,
+        solved: solvedCount,
+        cases: caseIds.length,
+        last: newestAt
+      };
+    });
+
+    return leaderboard
+      .sort((a, b) => b.total - a.total || b.solved - a.solved || a.player.localeCompare(b.player))
+      .slice(0, n);
+  }
+
+  return { add, top, packTop };
+}
+<<<END>>>
+<<<REPLACE src/server.js>>>
+import { createScoreboard, scoreFor } from './scoreboard.js';
+=====
+import { createScoreboard, scoreFor } from './scoreboard.js';
+import { costsFor } from './costs.js';
+<<<END>>>
+<<<REPLACE src/server.js>>>
+  creditsFile = 'data/credits.json',
+  key,
+=====
+  creditsFile = 'data/credits.json',
+  costFile = 'data/cost-log.json',
+  key,
+<<<END>>>
+<<<REPLACE src/server.js>>>
+      if (req.method === 'GET' && pathname === '/') {
+=====
+      if (req.method === 'GET' && pathname === '/costs') {
+        return sendFile(res, resolve(__dirname, '..', 'public', 'costs.html'));
+      }
+      if (req.method === 'GET' && pathname === '/api/costs') {
+        try {
+          const absPath = resolve(costFile);
+          const log = JSON.parse(readFileSync(absPath, 'utf8'));
+          const caseParam = url.searchParams.get('case');
+          if (caseParam) {
+            const bucket = costsFor(log, caseParam);
+            if (!bucket) return sendJSON(res, 404, { error: 'unknown_case' });
+            return sendJSON(res, 200, bucket);
+          }
+          return sendJSON(res, 200, log);
+        } catch (e) {
+          return sendJSON(res, 404, { error: 'no_cost_log' });
+        }
+      }
+      if (req.method === 'GET' && pathname === '/') {
+<<<END>>>
+<<<REPLACE src/server.js>>>
+      if (req.method === 'GET' && pathname === '/api/scores') {
+        const wanted = resolveFile(url.searchParams.get('case'));
+=====
+      if (req.method === 'GET' && pathname === '/api/scores') {
+        if (url.searchParams.get('case') === 'all') return sendJSON(res, 200, scoreboard.packTop(10));
+        const wanted = resolveFile(url.searchParams.get('case'));
+<<<END>>>
+<<<REPLACE src/server.js>>>
+          backers: credits.backers || [],
+          example: !!credits.example,
+=====
+          backers: credits.backers || [],
+          others: Number(credits.others) || 0,
+          example: !!credits.example,
+<<<END>>>
+<<<FILE data/credits.json>>>
+{
+  "example": false,
+  "title": {
+    "en": "This case was funded by",
+    "pt": "Este caso foi financiado por"
+  },
+  "backers": [
+    "Bia Klein",
+    "Helô Igreja",
+    "Yago Lopes",
+    "Bernardo Domínguez",
+    "Nico Rocha",
+    "Leo Quintal",
+    "Duda Ochoa",
+    "Leandro Vieira",
+    "Gabriela Pires",
+    "Brian Umpiérrez",
+    "Giovana Macedo",
+    "Citlali Ríos"
+  ],
+  "others": 26,
+  "source": "Public backers of the Case Files Cup on qa.fullcup.ai, 2026-11-21; 26 more backers chose not to appear."
+}
+<<<END>>>

@@ -1,0 +1,5 @@
+<<<REPLACE src/costs.js>>>
+  const art = existsSync(artFile) ? (() => { const parsed = JSON.parse(readFileSync(artFile, 'utf8')); return Array.isArray(parsed) ? parsed.items : []; })() : [];
+=====
+  const art = existsSync(artFile) ? (() => { const parsed = JSON.parse(readFileSync(artFile, 'utf8')); return parsed && Array.isArray(parsed.items) ? parsed.items : []; })() : [];
+<<<END>>>

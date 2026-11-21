@@ -24,7 +24,7 @@ for (const m of out.matchAll(/<<<FILE ([^>\s]+)>>>\n((?:(?!<<<REPLACE |<<<FILE )
 // literal search/replace edits produced by the model: <<<REPLACE path>>>\nOLD\n=====\nNEW\n<<<END>>>
 for (const m of out.matchAll(/<<<REPLACE ([^>\s]+)>>>\n((?:(?!<<<END>>>)[\s\S])*?)\n={3,}\n([\s\S]*?)\n?(?:<<<END>>>|(?=<<<REPLACE ))/g)) { // sprint 12: gemma wrote 3 or 7 = signs; sprint 4: a missing <<<END>>> before the next block ends the block
   if (allow && !allow.includes(m[1])) { skipped.push(m[1]); continue; }
-  m[2] = m[2].replace(/^OLD \(copied exactly from the current file\)\n/, ''); // sprint 11: the model echoed the format placeholder line
+  m[2] = m[2].replace(/^OLD \(copied exactly from the current file\)\n/, ''); m[2] = m[2].replace(/^OLD\n/, ''); // M4 sprint 1: the model echoed a bare OLD line from the block shape // sprint 11: the model echoed the format placeholder line
   const cur = fs.readFileSync(m[1], 'utf8'); const n = cur.split(m[2]).length - 1;
   let next = cur.split(m[2]).join(m[3]); if (cur.endsWith('\n') && !next.endsWith('\n')) next += '\n'; // sprint 13: an edit at the end of a file keeps its final newline
   fs.writeFileSync(m[1], next); files.push({ path: m[1], edit: true, occurrences: n, lines: m[3].split('\n').length });

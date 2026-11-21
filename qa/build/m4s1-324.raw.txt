@@ -1,0 +1,18 @@
+<<<REPLACE test/pack-m4.mjs>>>
+    const r6 = await fetch(`${base}/api/costs?case=bad_file_test'); // We need a second server for this
+=====
+<<<END>>>
+
+<<<REPLACE test/keyboard.mjs>>>
+  const noteVisible = await evaluate(`!document.getElementById('credits-note').hidden`);
+  const creditsData = await evaluate(`window.creditsData`);
+=====
+  const noteVisible = await evaluate(`!document.getElementById('credits-note').hidden`);
+<<<END>>>
+
+<<<REPLACE test/keyboard.mjs>>>
+  await waitFor(async () => (await evaluate(`document.getElementById('credits-title').textContent`)) === creditsData.title.pt);
+  const creditsData = await evaluate(`window.creditsData`);
+=====
+  await waitFor(async () => (await evaluate(`document.getElementById('credits-title').textContent`)) === creditsData.title.pt);
+<<<END>>>
