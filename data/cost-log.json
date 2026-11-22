@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-11-22T00:06:26.607Z",
+ "generatedAt": "2026-11-22T00:12:14.017Z",
  "usdPer1000Neurons": 0.011,
  "receiptUrl": "https://qa.fullcup.ai/receipts/",
  "cases": [
@@ -6548,20 +6548,47 @@
     "status": 200,
     "usd": 0.000086,
     "receipt": "01M8096C4MA308ZF8279P7YK8V"
+   },
+   {
+    "at": "2026-11-22T00:11:11.278Z",
+    "kind": "build",
+    "purpose": "m4-build:338",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000242,
+    "receipt": "01M809F07H0DRPFNS13Y0KDV6H"
+   },
+   {
+    "at": "2026-11-22T00:11:35.030Z",
+    "kind": "build",
+    "purpose": "m4-build:339",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000166,
+    "receipt": "01M809FRVDPDYCGS5WHF0Z2WBF"
+   },
+   {
+    "at": "2026-11-22T00:11:48.947Z",
+    "kind": "build",
+    "purpose": "m4-build:340",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000104,
+    "receipt": "01M809GD9107R64FMM1T3NHTEQ"
    }
   ],
   "totals": {
-   "usd": 0.599489,
-   "calls": 558,
-   "receipts": 399,
+   "usd": 0.600001,
+   "calls": 561,
+   "receipts": 402,
    "byKind": {
     "dev": {
      "usd": 0.056753,
      "calls": 114
     },
     "build": {
-     "usd": 0.415369,
-     "calls": 377
+     "usd": 0.415881,
+     "calls": 380
     },
     "art": {
      "usd": 0.127367,
@@ -6571,8 +6598,8 @@
   }
  },
  "total": {
-  "usd": 0.694923,
-  "calls": 715,
-  "receipts": 548
+  "usd": 0.695435,
+  "calls": 718,
+  "receipts": 551
  }
 }

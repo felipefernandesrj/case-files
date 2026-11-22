@@ -405,6 +405,7 @@ PASS #err-alert
 7. PASS
 8. PASS
 9. PASS
+10. PASS
 
-pack-m4: 9 passed, 0 failed
+pack-m4: 10 passed, 0 failed
 exit 0

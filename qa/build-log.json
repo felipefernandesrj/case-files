@@ -15749,5 +15749,113 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "m4-338",
+  "at": "2026-11-22T00:11:11.278Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 13124,
+  "usage": {
+   "prompt_tokens": 692,
+   "completion_tokens": 577,
+   "total_tokens": 1269,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 22.02727248892188
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M809F07H0DRPFNS13Y0KDV6H",
+   "x-fullcup-receipt-id": "01M809F07H0DRPFNS13Y0KDV6H",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "files": [
+   {
+    "path": "test/pack-m4.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/pack-m4.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 29
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m4-339",
+  "at": "2026-11-22T00:11:35.030Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 11632,
+  "usage": {
+   "prompt_tokens": 575,
+   "completion_tokens": 374,
+   "total_tokens": 949,
+   "prompt_tokens_details": {
+    "cached_tokens": 64
+   },
+   "neurons": 15.136363245546818
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M809FRVDPDYCGS5WHF0Z2WBF",
+   "x-fullcup-receipt-id": "01M809FRVDPDYCGS5WHF0Z2WBF",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "files": [
+   {
+    "path": "test/pack-m4.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/pack-m4.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   },
+   {
+    "path": "test/pack-m4.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m4-340",
+  "at": "2026-11-22T00:11:48.947Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 4807,
+  "usage": {
+   "prompt_tokens": 328,
+   "completion_tokens": 238,
+   "total_tokens": 566,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 9.472727306187153
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M809GD9107R64FMM1T3NHTEQ",
+   "x-fullcup-receipt-id": "01M809GD9107R64FMM1T3NHTEQ",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "files": [
+   {
+    "path": "test/pack-m4.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 5
+   }
+  ],
+  "skipped": []
  }
 ]

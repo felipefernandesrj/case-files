@@ -1,0 +1,19 @@
+<<<REPLACE test/pack-m4.mjs>>>
+      const fetch = (p, m, b) => fetch(`${url}${p}`, { method: m, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then(r => r.json());
+=====
+      const call = async (p, m, b) => { const r = await globalThis.fetch(`${url}${p}`, { method: m, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }); return { status: r.status, ...(await r.json()) }; };
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+      const s1 = await fetch('/session', 'POST', { case: k });
+=====
+      const s1 = await call('/session', 'POST', { case: k }).catch((e) => { srv.close(); throw e; });
+      assert(s1.status === 200, 'e2e ' + k + ' session');
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+      await fetch('/ask', 'POST', { sessionId: s1.sessionId, suspectId: suspects[0].id, question: 'Where were you?', lang: 'en' });
+=====
+      const q1 = await call('/ask', 'POST', { sessionId: s1.sessionId, suspectId: suspects[0].id, question: 'Where were you?', lang: 'en' });
+      assert(q1.status === 200, 'e2e ' + k + ' ask');
+<<<END>>>

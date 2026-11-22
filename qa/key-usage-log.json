@@ -8888,5 +8888,83 @@
   },
   "error": null,
   "rework": false
+ },
+ {
+  "at": "2026-11-22T00:11:11.278Z",
+  "purpose": "m4-build:338",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 13124,
+  "usage": {
+   "prompt_tokens": 692,
+   "completion_tokens": 577,
+   "total_tokens": 1269,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 22.02727248892188
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M809F07H0DRPFNS13Y0KDV6H",
+   "x-fullcup-receipt-id": "01M809F07H0DRPFNS13Y0KDV6H",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "error": null,
+  "rework": false
+ },
+ {
+  "at": "2026-11-22T00:11:35.030Z",
+  "purpose": "m4-build:339",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 11632,
+  "usage": {
+   "prompt_tokens": 575,
+   "completion_tokens": 374,
+   "total_tokens": 949,
+   "prompt_tokens_details": {
+    "cached_tokens": 64
+   },
+   "neurons": 15.136363245546818
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M809FRVDPDYCGS5WHF0Z2WBF",
+   "x-fullcup-receipt-id": "01M809FRVDPDYCGS5WHF0Z2WBF",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "error": null,
+  "rework": true
+ },
+ {
+  "at": "2026-11-22T00:11:48.947Z",
+  "purpose": "m4-build:340",
+  "method": "POST",
+  "endpoint": "/chat/completions",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 4807,
+  "usage": {
+   "prompt_tokens": 328,
+   "completion_tokens": 238,
+   "total_tokens": 566,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 9.472727306187153
+  },
+  "cost": null,
+  "headers": {
+   "x-fullcup-receipt": "01M809GD9107R64FMM1T3NHTEQ",
+   "x-fullcup-receipt-id": "01M809GD9107R64FMM1T3NHTEQ",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "error": null,
+  "rework": true
  }
 ]

@@ -1,0 +1,13 @@
+<<<REPLACE test/pack-m4.mjs>>>
+      const a1 = await fetch('/accuse', 'POST', { sessionId: s1.sessionId, suspectId: innocent.id, lang: 'en' });
+      assert(a1.correct === false, 'innocent');
+      
+      const s2 = await fetch('/session', 'POST', { case: k });
+      const a2 = await fetch('/accuse', 'POST', { sessionId: s2.sessionId, suspectId: c.culprit, lang: 'en' });
+=====
+      const a1 = await call('/accuse', 'POST', { sessionId: s1.sessionId, suspectId: innocent.id, lang: 'en' });
+      assert(a1.correct === false, 'innocent');
+      
+      const s2 = await call('/session', 'POST', { case: k });
+      const a2 = await call('/accuse', 'POST', { sessionId: s2.sessionId, suspectId: c.culprit, lang: 'en' });
+<<<END>>>

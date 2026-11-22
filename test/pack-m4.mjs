@@ -1,4 +1,4 @@
-import { CASES } from '../src/case.js';
+import { CASES, loadCase } from '../src/case.js';
 
 import { writeFileSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
@@ -267,6 +267,36 @@ async function run() {
     assert(/#credits-list\s*\{[^}]*list-style:\s*none/.test(css), 'css1');
     report(9, true);
   } catch (e) { report(9, false, e.message); }
+
+  // 10
+  try {
+    const { createServer } = await import('../src/server.js');
+    for (const k of Object.keys(CASES)) {
+      const c = loadCase(CASES[k]);
+      const srv = createServer({ caseFile: CASES[k], scoreFile: null, mock: true });
+      await new Promise(r => srv.listen(0, r));
+      const port = srv.address().port;
+      const url = `http://localhost:${port}/api`;
+      const call = async (p, m, b) => { const r = await globalThis.fetch(`${url}${p}`, { method: m, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }); return { status: r.status, ...(await r.json()) }; };
+      
+      const s1 = await call('/session', 'POST', { case: k }).catch((e) => { srv.close(); throw e; });
+      assert(s1.status === 200, 'e2e ' + k + ' session');
+      assert(s1.budget > 0, 'budget');
+      const suspects = Object.values(c.suspects);
+      const innocent = suspects.find(s => s.id !== c.culprit);
+      const q1 = await call('/ask', 'POST', { sessionId: s1.sessionId, suspectId: suspects[0].id, question: 'Where were you?', lang: 'en' });
+      assert(q1.status === 200, 'e2e ' + k + ' ask');
+      const a1 = await call('/accuse', 'POST', { sessionId: s1.sessionId, suspectId: innocent.id, lang: 'en' });
+      assert(a1.correct === false, 'innocent');
+      
+      const s2 = await call('/session', 'POST', { case: k });
+      const a2 = await call('/accuse', 'POST', { sessionId: s2.sessionId, suspectId: c.culprit, lang: 'en' });
+      assert(a2.correct === true && a2.culprit === c.culprit && a2.score > 0, 'culprit');
+      srv.close();
+    }
+    report(10, true);
+  } catch (e) { report(10, false, e.message); }
+
 
   console.log(`\npack-m4: ${passed} passed, ${failed} failed`);
   if (failed > 0) process.exit(1);

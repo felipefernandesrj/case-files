@@ -1,0 +1,39 @@
+<<<REPLACE test/pack-m4.mjs>>>
+import { CASES } from '../src/case.js';
+=====
+import { CASES, loadCase } from '../src/case.js';
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+  } catch (e) { report(9, false, e.message); }
+=====
+  } catch (e) { report(9, false, e.message); }
+
+  // 10
+  try {
+    const { createServer } = await import('../src/server.js');
+    for (const k of Object.keys(CASES)) {
+      const c = loadCase(CASES[k]);
+      const srv = createServer({ caseFile: CASES[k], scoreFile: null, mock: true });
+      await new Promise(r => srv.listen(0, r));
+      const port = srv.address().port;
+      const url = `http://localhost:${port}/api`;
+      const fetch = (p, m, b) => fetch(`${url}${p}`, { method: m, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then(r => r.json());
+      
+      const s1 = await fetch('/session', 'POST', { case: k });
+      assert(s1.budget > 0, 'budget');
+      const suspects = Object.values(c.suspects);
+      const innocent = suspects.find(s => s.id !== c.culprit);
+      await fetch('/ask', 'POST', { sessionId: s1.sessionId, suspectId: suspects[0].id, question: 'Where were you?', lang: 'en' });
+      const a1 = await fetch('/accuse', 'POST', { sessionId: s1.sessionId, suspectId: innocent.id, lang: 'en' });
+      assert(a1.correct === false, 'innocent');
+      
+      const s2 = await fetch('/session', 'POST', { case: k });
+      const a2 = await fetch('/accuse', 'POST', { sessionId: s2.sessionId, suspectId: c.culprit, lang: 'en' });
+      assert(a2.correct === true && a2.culprit === c.culprit && a2.score > 0, 'culprit');
+      srv.close();
+    }
+    report(10, true);
+  } catch (e) { report(10, false, e.message); }
+
+<<<END>>>
