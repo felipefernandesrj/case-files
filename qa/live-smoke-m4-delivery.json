@@ -1,0 +1,68 @@
+[
+ {
+  "lang": "en",
+  "case": "gen-samba",
+  "suspect": "ricardo-the-drummer",
+  "q": "Where were you when the lead surdo was smashed, and who did you see near the drum room?",
+  "status": 200,
+  "budget": 10,
+  "left": 9,
+  "answer": "I was in the storage room at 23:50. I saw Marta running away from the drum room right after I heard a loud crash. I didn't see anyone else near the drum room, but I did see Lucas at the entrance gate when I was walking to the storage.",
+  "words": 49,
+  "upstreamMs": 13755,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "receipt": "01M8094TRFPFJY66PCN6VAEFP0",
+  "sealBy": "2026-11-23T00:05:00.000Z",
+  "usage": {
+   "prompt_tokens": 333,
+   "completion_tokens": 57,
+   "total_tokens": 390,
+   "neurons": 12.578182220458984,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": "marta-the-dancer",
+  "status": 200,
+  "lang": "en",
+  "correct": true,
+  "score": 100,
+  "questions": 1,
+  "culprit": "Marta"
+ },
+ {
+  "lang": "pt",
+  "case": "gen-samba",
+  "suspect": "beatriz-the-costumer",
+  "q": "Onde você estava quando o surdo foi quebrado e o que encontrou na sala de percussão?",
+  "status": 200,
+  "budget": 10,
+  "left": 9,
+  "answer": "Eu estava no vestiário, mas fui até a sala de percussão depois. Encontrei um pedaço quebrado de um salto de dançarina perto do tambor quebrado. Não vi nada mais estranho, mas ouvi que Ricardo, o percussionista, estava por perto.",
+  "words": 39,
+  "upstreamMs": 14005,
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "receipt": "01M80958449EXNA5ZGWPT2F388",
+  "sealBy": "2026-11-23T00:05:00.000Z",
+  "usage": {
+   "prompt_tokens": 339,
+   "completion_tokens": 62,
+   "total_tokens": 401,
+   "neurons": 13.111818313598633,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ },
+ {
+  "accuse": "lucas-the-manager",
+  "status": 200,
+  "lang": "pt",
+  "correct": false,
+  "score": 0,
+  "questions": 1,
+  "culprit": "Marta"
+ }
+]

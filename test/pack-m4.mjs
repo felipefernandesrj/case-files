@@ -263,6 +263,8 @@ async function run() {
     const cos = await readFile('public/costs.html', 'utf8');
     assert(cos.includes('Registro de custos'), 'cos1');
     assert(!cos.includes('https://fullcup.ai'), 'cos2');
+    const css = await readFile(new URL('../public/css/game.css', import.meta.url), 'utf8');
+    assert(/#credits-list\s*\{[^}]*list-style:\s*none/.test(css), 'css1');
     report(9, true);
   } catch (e) { report(9, false, e.message); }
 

@@ -1,0 +1,6 @@
+<<<REPLACE public/css/game.css>>>
+.scene-label[hidden] { display: none; }
+=====
+.scene-label[hidden] { display: none; }
+@media (max-width: 767px) { .scene-label { position: static; display: block; width: fit-content; max-width: 100%; margin: 0 0 8px auto; } }
+<<<END>>>

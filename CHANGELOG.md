@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 (M4 delivered: The Pack, published. Game complete)
+- M4 delivered 2026-11-21. Delivery notes: docs/M4_DELIVERY.md. Screenshots: docs/m4/.
+- Credits list: no bullets, names centered (bullets stood apart from centered names at 1280).
+- Scene label flows above the panel under 768 px (it covered the Locations tab label at 390).
+- Cost log books the M4 delivery smoke (purpose m4-acceptance) on The Silent Batucada.
+- New tools/smoke-m4.mjs (live smoke on The Silent Batucada) and tools/shots-m4-delivery.mjs (screenshots).
+
 ## 0.6.0 (M4 sprint 1: cost log, pack scoreboard, real credits)
 - Added public cost log at /costs and GET /api/costs.
 - Cost log built by node src/costs.js from key logs, build logs, and art receipts.

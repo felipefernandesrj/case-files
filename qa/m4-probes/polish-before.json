@@ -1,0 +1,32 @@
+[
+ {
+  "w": 1280,
+  "r": {
+   "linkColor": "rgb(217, 160, 91)",
+   "bg": "rgb(12, 11, 10)",
+   "opacity": 1,
+   "contrast": "8.55",
+   "filter": "none",
+   "ulTextAlign": "center",
+   "listStyle": "outside disc",
+   "liWidth": 255.375,
+   "liTextW": 61.765625,
+   "font": "Palatino, Georgia, serif"
+  }
+ },
+ {
+  "w": 390,
+  "r": {
+   "linkColor": "rgb(217, 160, 91)",
+   "bg": "rgb(12, 11, 10)",
+   "opacity": 1,
+   "contrast": "8.55",
+   "filter": "none",
+   "ulTextAlign": "start",
+   "listStyle": "outside disc",
+   "liWidth": 318,
+   "liTextW": 61.765625,
+   "font": "Palatino, Georgia, serif"
+  }
+ }
+]

@@ -1,0 +1,162 @@
+[
+ {
+  "tag": "1280-en",
+  "cards": [
+   "violin | The Vanishing Violin",
+   "night-train | The Night Train",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio | The Lapa Midnight Heist",
+   "gen-a-samba-school-rehearsal-in-madureira-th | The Silent Batucada"
+  ],
+  "pack": {
+   "title": "Pack scoreboard",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ]
+  },
+  "overflowPicker": false,
+  "samba": "gen-a-samba-school-rehearsal-in-madureira-th",
+  "title": " The Silent Batucada",
+  "sceneOverlap": {
+   "tag": false,
+   "tab": true
+  },
+  "accused": true,
+  "verdict": "Correct!\n\nCulprit: Marta\n\nSolution: Marta sabotaged the drum to force the school to buy new, better instruments. Ricardo saw her running from the scene, and Beatriz found her broken dancer's heel at the crime scene. Lucas cleared Ricardo, Ricardo cleared Lucas, and Lucas cleared Beatriz, leaving Marta as the only one without an alibi.\n\nScore: 100\n\nCASE CLOSED\n\nCase closed: Marta is led away in handcuffs.",
+  "credits": {
+   "hidden": false,
+   "names": 12,
+   "cost": "/costs?lang=en#gen-a-samba-school-rehearsal-in-madureira-th"
+  },
+  "costs": {
+   "h1": "Cost log",
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false
+  }
+ },
+ {
+  "tag": "1280-pt",
+  "cards": [
+   "violin | O Violino Desaparecido",
+   "night-train | O Trem Noturno",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio | O Assalto da Meia-noite na Lapa",
+   "gen-a-samba-school-rehearsal-in-madureira-th | O Samba Silencioso"
+  ],
+  "pack": {
+   "title": "Placar do pacote",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ]
+  },
+  "overflowPicker": false,
+  "samba": "gen-a-samba-school-rehearsal-in-madureira-th",
+  "title": " O Samba Silencioso",
+  "sceneOverlap": {
+   "tag": false,
+   "tab": true
+  },
+  "accused": true,
+  "verdict": "Você acertou!\n\nCulpado: Marta\n\nSolução: Marta sabotou o tambor para forçar a escola a comprar instrumentos novos e melhores. Ricardo a viu correndo da cena, e Beatriz encontrou o salto quebrado de sua sandália na cena do crime. Lucas inocentou Ricardo, Ricardo inocentou Lucas, e Lucas inocentou Beatriz, deixando Marta como a única sem um álibi.\n\nPontuação: 100\n\nCASO ENCERRADO\n\nCaso encerrado: Marta sai com as mãos algemadas.",
+  "credits": {
+   "hidden": false,
+   "names": 12,
+   "cost": "/costs?lang=pt#gen-a-samba-school-rehearsal-in-madureira-th"
+  },
+  "costs": {
+   "h1": "Registro de custos",
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false
+  }
+ },
+ {
+  "tag": "390-en",
+  "cards": [
+   "violin | The Vanishing Violin",
+   "night-train | The Night Train",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio | The Lapa Midnight Heist",
+   "gen-a-samba-school-rehearsal-in-madureira-th | The Silent Batucada"
+  ],
+  "pack": {
+   "title": "Pack scoreboard",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ]
+  },
+  "overflowPicker": false,
+  "samba": "gen-a-samba-school-rehearsal-in-madureira-th",
+  "title": " The Silent Batucada",
+  "sceneOverlap": {
+   "tag": false,
+   "tab": true
+  },
+  "accused": true,
+  "verdict": "Correct!\n\nCulprit: Marta\n\nSolution: Marta sabotaged the drum to force the school to buy new, better instruments. Ricardo saw her running from the scene, and Beatriz found her broken dancer's heel at the crime scene. Lucas cleared Ricardo, Ricardo cleared Lucas, and Lucas cleared Beatriz, leaving Marta as the only one without an alibi.\n\nScore: 100\n\nCASE CLOSED\n\nCase closed: Marta is led away in handcuffs.",
+  "credits": {
+   "hidden": false,
+   "names": 12,
+   "cost": "/costs?lang=en#gen-a-samba-school-rehearsal-in-madureira-th"
+  },
+  "costs": {
+   "h1": "Cost log",
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false
+  }
+ },
+ {
+  "tag": "390-pt",
+  "cards": [
+   "violin | O Violino Desaparecido",
+   "night-train | O Trem Noturno",
+   "gen-a-rainy-night-at-a-lapa-bookshop-in-rio | O Assalto da Meia-noite na Lapa",
+   "gen-a-samba-school-rehearsal-in-madureira-th | O Samba Silencioso"
+  ],
+  "pack": {
+   "title": "Placar do pacote",
+   "rows": [
+    "1\tCaio (mock)\t2\t190"
+   ]
+  },
+  "overflowPicker": false,
+  "samba": "gen-a-samba-school-rehearsal-in-madureira-th",
+  "title": " O Samba Silencioso",
+  "sceneOverlap": {
+   "tag": false,
+   "tab": true
+  },
+  "accused": true,
+  "verdict": "Você acertou!\n\nCulpado: Marta\n\nSolução: Marta sabotou o tambor para forçar a escola a comprar instrumentos novos e melhores. Ricardo a viu correndo da cena, e Beatriz encontrou o salto quebrado de sua sandália na cena do crime. Lucas inocentou Ricardo, Ricardo inocentou Lucas, e Lucas inocentou Beatriz, deixando Marta como a única sem um álibi.\n\nPontuação: 100\n\nCASO ENCERRADO\n\nCaso encerrado: Marta sai com as mãos algemadas.",
+  "credits": {
+   "hidden": false,
+   "names": 12,
+   "cost": "/costs?lang=pt#gen-a-samba-school-rehearsal-in-madureira-th"
+  },
+  "costs": {
+   "h1": "Registro de custos",
+   "sections": [
+    "violin",
+    "night-train",
+    "gen-a-rainy-night-at-a-lapa-bookshop-in-rio",
+    "gen-a-samba-school-rehearsal-in-madureira-th",
+    "pack"
+   ],
+   "overflow": false
+  }
+ }
+]

@@ -1,0 +1,13 @@
+<<<REPLACE public/css/game.css>>>
+#credits-others { color: var(--cf-text-dim); font-style: italic; }
+=====
+#credits-others { color: var(--cf-text-dim); font-style: italic; } #credits-list { list-style: none; padding-left: 0; margin: 8px 0; } #credits-list li { margin: 2px 0; }
+<<<END>>>
+
+<<<REPLACE test/pack-m4.mjs>>>
+    assert(!cos.includes('https://fullcup.ai'), 'cos2');
+=====
+    assert(!cos.includes('https://fullcup.ai'), 'cos2');
+    const css = await readFile(new URL('../public/css/game.css', import.meta.url), 'utf8');
+    assert(/#credits-list\s*\{[^}]*list-style:\s*none/.test(css), 'css1');
+<<<END>>>

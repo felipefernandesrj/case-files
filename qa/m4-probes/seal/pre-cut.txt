@@ -1,0 +1,60 @@
+m3batch-tail 01M7XPD2WFRWQBH1TJ9V2JZXBA HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000766 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPD485MRYYT5ZR4FP2CVHK HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000848 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPDCZ2CTV6NHE4T232JBWA HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001132 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPDRPZTP6TTB33XKR2KZ9C HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000788 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPEJYFD197AFJ3JRNSPX1Q HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000817 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPER8J761GWB7Q9Q6Y8SVR HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001158 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPF1SMPSNBYKDT2RCCNP44 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000848 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPFCFN5PY6F0CACY83XKA9 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000757 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPG6KKAVMAG99SBA38R1TQ HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001150 | no root | gemma-4-26b-a4b-it
+m3batch-tail 01M7XPGZFPDYQ7FCGV58CTMX6A HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001082 | no root | gemma-4-26b-a4b-it
+m3-batch:4:draft1 01M7XP6Q5TDDSF38P1ZX0AMRJ1 HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000829 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:3:draft1 01M7XP6Q8Q71P0C0J12TDHQ583 HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000868 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:1:draft1 01M7XP6Q5KH747W6XERDT5PV54 HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000998 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:2:draft1 01M7XP6Q5WVMF94CC1XWWWF6A6 HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000849 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:6:draft1 01M7XP8BZQ3XAS5QRDYX98PGBA HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000845 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:5:draft1 01M7XP80G3KK7NRWDFZ0CB49NY HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000785 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:8:draft1 01M7XP9FV5A0N04V6Y8XV3FYBZ HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000818 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:7:draft1 01M7XP8J15Y8ATEEVE8FCJHNTK HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000775 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:2:draft2 01M7XP8NP311HWW1NRCDCWRKQV HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.001151 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:11:draft1 01M7XPA2E6HH0QA3Q1JNGR36TJ HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000828 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:8:draft2 01M7XP9XVBWM87335J0TJ1W4PC HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.001086 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:9:draft1 01M7XP9SMGAZH4N40NZF6YST35 HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000833 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:10:draft1 01M7XPA0Z94F2GMG432007X6W6 HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000796 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:11:draft2 01M7XPB8SVD4QWXWS8JV3K8D7M HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.001061 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:13:draft1 01M7XPBAMRYKWN24X25JTR09XF HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000872 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:12:draft1 01M7XPBA9VR8H55RCY0338G70R HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000860 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:14:draft1 01M7XPBSJS61HCXWTT2QH6T13G HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.000823 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:11:draft3 01M7XPCV9AJKXK84R8ZE032F1H HTTP 200 | Genuine receipt | Sealed at 2026-11-21 00:05:28 UTC | Exact cost $0.001119 | one of 78 in the signed root of 2026-11-20 | gemma-4-26b-a4b-it
+m3-batch:15:draft1 01M7XPD2WFRWQBH1TJ9V2JZXBA HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000766 | no root | gemma-4-26b-a4b-it
+m3-batch:16:draft1 01M7XPD485MRYYT5ZR4FP2CVHK HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000848 | no root | gemma-4-26b-a4b-it
+m3-batch:14:draft2 01M7XPDCZ2CTV6NHE4T232JBWA HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001132 | no root | gemma-4-26b-a4b-it
+m3-batch:17:draft1 01M7XPDRPZTP6TTB33XKR2KZ9C HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000788 | no root | gemma-4-26b-a4b-it
+m3-batch:18:draft1 01M7XPEJYFD197AFJ3JRNSPX1Q HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000817 | no root | gemma-4-26b-a4b-it
+m3-batch:16:draft2 01M7XPER8J761GWB7Q9Q6Y8SVR HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001158 | no root | gemma-4-26b-a4b-it
+m3-batch:19:draft1 01M7XPF1SMPSNBYKDT2RCCNP44 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000848 | no root | gemma-4-26b-a4b-it
+m3-batch:20:draft1 01M7XPFCFN5PY6F0CACY83XKA9 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000757 | no root | gemma-4-26b-a4b-it
+m3-batch:18:draft2 01M7XPG6KKAVMAG99SBA38R1TQ HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001150 | no root | gemma-4-26b-a4b-it
+m3-batch:20:draft2 01M7XPGZFPDYQ7FCGV58CTMX6A HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001082 | no root | gemma-4-26b-a4b-it
+build-313b 01M7YZXE5XG0KK1NQ6KSYD18WB HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001223 | no root | gemma-4-26b-a4b-it
+build-314 01M7Z00BNG2PKBNYHPSH26YACN HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000187 | no root | gemma-4-26b-a4b-it
+build-315 01M7Z01B1C1EGS99W7PZPNGFF0 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000069 | no root | gemma-4-26b-a4b-it
+build-316 01M7Z01WMHAJJKAVCH24072J36 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000068 | no root | gemma-4-26b-a4b-it
+build-317 01M7Z03ZFEWYT99XQJJ94Y935A HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001715 | no root | gemma-4-26b-a4b-it
+build-318 01M7Z096Z47C84VRH2P717H06P HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000531 | no root | gemma-4-26b-a4b-it
+build-319 01M7Z0A1FFSPBJ72XYWZGW20F8 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000340 | no root | gemma-4-26b-a4b-it
+build-320 01M7Z0AZJQ241YV4VNJ404HTX5 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000178 | no root | gemma-4-26b-a4b-it
+build-321 01M7Z0BJB10W34MCHPYCQAEM78 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000062 | no root | gemma-4-26b-a4b-it
+build-322 01M7Z0CRBMBVNB8TA6DA8RZ4WY HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000793 | no root | gemma-4-26b-a4b-it
+build-323 01M7Z0GWGB4JNX55RMA5KCSZXH HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.001652 | no root | gemma-4-26b-a4b-it
+build-324 01M7Z0N1ATSV9NSWJN8JTKMXB3 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000117 | no root | gemma-4-26b-a4b-it
+build-325 01M7Z0NSDJNW0XCDFJS013FPQA HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000388 | no root | gemma-4-26b-a4b-it
+build-326 01M7Z0PEMQADWBKR2MAGM0ZY80 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000202 | no root | gemma-4-26b-a4b-it
+build-327 01M7Z0TSP6NWNZ9NW2NG74AFKV HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000271 | no root | gemma-4-26b-a4b-it
+build-328 01M7Z0VMVXNJ3ESWWDVVH5QS2B HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000531 | no root | gemma-4-26b-a4b-it
+build-329 01M7Z0ZWCN6WEEXKDW7JWR0AHX HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000086 | no root | gemma-4-26b-a4b-it
+build-330 01M7Z13J7131MG3TSXB7EJFXR1 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000302 | no root | gemma-4-26b-a4b-it
+build-331 01M7Z14YNY4MTPQ0QK41EHNKBH HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000357 | no root | gemma-4-26b-a4b-it
+build-332 01M7Z16GPKB74796HC1B92TJ2M HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000487 | no root | gemma-4-26b-a4b-it
+build-333 01M7Z17BXYA0RKER4P4Z9JV72W HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000035 | no root | gemma-4-26b-a4b-it
+build-334 01M7Z17ZWREE0CAPDPB9RGSQP3 HTTP 200 | Recorded, waiting for the daily seal | waiting for the daily seal | Exact cost $0.000177 | no root | gemma-4-26b-a4b-it

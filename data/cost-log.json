@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-11-21T12:28:29.107Z",
+ "generatedAt": "2026-11-22T00:06:26.607Z",
  "usdPer1000Neurons": 0.011,
  "receiptUrl": "https://qa.fullcup.ai/receipts/",
  "cases": [
@@ -1485,15 +1485,37 @@
      "status": 200,
      "usd": 0.001151,
      "receipt": "01M7XP8NP311HWW1NRCDCWRKQV"
+    },
+    {
+     "at": "2026-11-22T00:05:25.253Z",
+     "kind": "play",
+     "purpose": "m4-acceptance:en:ricardo-the-drummer",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000138,
+     "receipt": "01M8094TRFPFJY66PCN6VAEFP0"
+    },
+    {
+     "at": "2026-11-22T00:05:39.017Z",
+     "kind": "play",
+     "purpose": "m4-acceptance:pt:beatriz-the-costumer",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000144,
+     "receipt": "01M80958449EXNA5ZGWPT2F388"
     }
    ],
    "totals": {
-    "usd": 0.002,
-    "calls": 2,
-    "receipts": 2,
+    "usd": 0.002282,
+    "calls": 4,
+    "receipts": 4,
     "byKind": {
      "generate": {
       "usd": 0.002,
+      "calls": 2
+     },
+     "play": {
+      "usd": 0.000282,
       "calls": 2
      }
     }
@@ -6499,20 +6521,47 @@
     "status": 200,
     "usd": 0.000177,
     "receipt": "01M7Z17ZWREE0CAPDPB9RGSQP3"
+   },
+   {
+    "at": "2026-11-22T00:00:37.315Z",
+    "kind": "build",
+    "purpose": "m4-build:335",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000112,
+    "receipt": "01M808VE3R4KASZ2TQ79VZFWSB"
+   },
+   {
+    "at": "2026-11-22T00:03:01.864Z",
+    "kind": "build",
+    "purpose": "m4-build:336",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000069,
+    "receipt": "01M8090BK0HP6HX9PQRJQZPRND"
+   },
+   {
+    "at": "2026-11-22T00:06:20.617Z",
+    "kind": "build",
+    "purpose": "m4-build:337",
+    "model": "@cf/google/gemma-4-26b-a4b-it",
+    "status": 200,
+    "usd": 0.000086,
+    "receipt": "01M8096C4MA308ZF8279P7YK8V"
    }
   ],
   "totals": {
-   "usd": 0.599222,
-   "calls": 555,
-   "receipts": 396,
+   "usd": 0.599489,
+   "calls": 558,
+   "receipts": 399,
    "byKind": {
     "dev": {
      "usd": 0.056753,
      "calls": 114
     },
     "build": {
-     "usd": 0.415102,
-     "calls": 374
+     "usd": 0.415369,
+     "calls": 377
     },
     "art": {
      "usd": 0.127367,
@@ -6522,8 +6571,8 @@
   }
  },
  "total": {
-  "usd": 0.694374,
-  "calls": 710,
-  "receipts": 543
+  "usd": 0.694923,
+  "calls": 715,
+  "receipts": 548
  }
 }

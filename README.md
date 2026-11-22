@@ -17,7 +17,7 @@ This repo starts from **The Vanishing Violin**, a working case: three suspects p
 | M1 | The Vanishing Violin, polished | $25 | The current case, public, in English and Portuguese, with a scoreboard and a friendly message when capacity runs out. **Delivered 2026-11-09** ([delivery notes](docs/M1_DELIVERY.md)) |
 | M2 | Case 2: The Night Train | $30 | A second case with 4 suspects and a moving timeline, on a shared case engine. **Delivered 2026-11-19** ([delivery notes](docs/M2_DELIVERY.md)) |
 | M3 | Case 3: The Generated Case | $35 | A generator that writes and validates new mysteries from a seed. **Delivered 2026-11-20** ([delivery notes](docs/M3_DELIVERY.md)) |
-| M4 | The Pack, published | $30 | One web app with every case, a case picker, a shared scoreboard and a public cost log for each case. |
+| M4 | The Pack, published | $30 | One web app with every case, a case picker, a shared scoreboard and a public cost log for each case. **Delivered 2026-11-21** ([delivery notes](docs/M4_DELIVERY.md)) |
 
 ## What backers get
 - Early play links for each case, as soon as its milestone is delivered.
@@ -41,7 +41,9 @@ Then open http://localhost:3000. The key stays on the server, and the browser ne
 
 **M3 delivered: The Generated Case (2026-11-20).** `node src/generator.js --seed "<text>"` writes a case through the Cup key and keeps it only if it passes the shape, fair play and timeline checks; generated cases show in the picker (EN/PT) with their cost and drafts.
 
-**M4 in progress (sprint 1, v0.6.0).** This sprint added a public cost log page at /costs built via node src/costs.js, a shared pack scoreboard, four cases in the picker, and real credits. Cost per case: Violin US$0.051778, Night Train US$0.037506, Lapa US$0.003868, Samba US$0.002000; the shared build and tools line and the live total are on /costs. 316 automated checks. M4 is not declared yet.
+**M4 Delivered: The Pack, published (2026-11-21, v1.0.0).** One web app with all four cases (The Vanishing Violin, The Night Train, The Lapa Midnight Heist, The Silent Batucada), a case picker, a shared pack scoreboard, a public cost log at /costs with a section per case and a receipt link for every call, and real credits on every closing screen. Cost per case: Violin US$0.051778, Night Train US$0.037506, Lapa US$0.003868, Samba US$0.002282; the shared build and tools line and the live total are on /costs. 316 automated checks. Details: [docs/M4_DELIVERY.md](docs/M4_DELIVERY.md).
+
+**Game complete.** All four milestones are delivered: two handmade cases, a generator that writes and checks new ones from a seed, two generated cases in the pack, a scoreboard for the whole pack, a public cost log and credits for the backers who paid for it. Everything was built and played through the Cup key on open models, with a signed receipt for every call. Thank you to every backer.
 
 M1 scope as shipped: bilingual (EN / PT-BR) with full PT wording pass, consistent suspects that never invent people, per-suspect history, answers under 60 words, keyboard and screen reader support, CDP tests, scoreboard (names shown as plain text), personal best per language (shown in your language, new best announced) with a confirmed reset, accuse confirmation before the one allowed accusation, ask busy state (aria-busy, locked #q and Accuse while waiting), Start over / Nova partida (fresh session without reload), Escape clears the question box while focused, Ask and Accuse lock after the verdict until Start over, Ask explains a missing suspect or empty question instead of returning silently (the hint clears when you pick a suspect), fair-play check, CLI, clear capacity messages (failed questions never count), and credits screen. 97 automated checks. Live play requires `FULLCUP_KEY` or `.fullcup-key`.
 

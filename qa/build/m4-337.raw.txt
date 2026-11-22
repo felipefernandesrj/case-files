@@ -1,0 +1,6 @@
+<<<REPLACE src/costs.js>>>
+  { re: /^(m3-acceptance|m3s2-shots)(:|$)/, case: 'gen-a-rainy-night-at-a-lapa-bookshop-in-rio', kind: 'play' }
+=====
+  { re: /^(m3-acceptance|m3s2-shots)(:|$)/, case: 'gen-a-rainy-night-at-a-lapa-bookshop-in-rio', kind: 'play' },
+  { re: /^m4-acceptance/, case: 'gen-a-samba-school-rehearsal-in-madureira-th', kind: 'play' }
+<<<END>>>

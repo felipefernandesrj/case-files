@@ -10,7 +10,8 @@ export const RULES = [
   { re: /^(interrogate|m1-acceptance|sprint\d+-smoke|sprint5-consistency)(:|$)/, case: 'violin', kind: 'play' },
   { re: /^(author-case|revise-case)(:|$)/, case: 'violin', kind: 'author' },
   { re: /^(m2-acceptance|m2s\d+-smoke|m2-shots)(:|$)/, case: 'night-train', kind: 'play' },
-  { re: /^(m3-acceptance|m3s2-shots)(:|$)/, case: 'gen-a-rainy-night-at-a-lapa-bookshop-in-rio', kind: 'play' }
+  { re: /^(m3-acceptance|m3s2-shots)(:|$)/, case: 'gen-a-rainy-night-at-a-lapa-bookshop-in-rio', kind: 'play' },
+  { re: /^m4-acceptance/, case: 'gen-a-samba-school-rehearsal-in-madureira-th', kind: 'play' }
 ];
 
 export function round6(x) {

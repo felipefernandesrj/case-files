@@ -15653,5 +15653,101 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "m4-335",
+  "at": "2026-11-22T00:00:37.315Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 20431,
+  "usage": {
+   "prompt_tokens": 450,
+   "completion_tokens": 224,
+   "total_tokens": 674,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 10.199999928474426
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M808VE3R4KASZ2TQ79VZFWSB",
+   "x-fullcup-receipt-id": "01M808VE3R4KASZ2TQ79VZFWSB",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/pack-m4.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 3
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m4-336",
+  "at": "2026-11-22T00:03:01.864Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 3718,
+  "usage": {
+   "prompt_tokens": 386,
+   "completion_tokens": 102,
+   "total_tokens": 488,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 6.290909089148045
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M8090BK0HP6HX9PQRJQZPRND",
+   "x-fullcup-receipt-id": "01M8090BK0HP6HX9PQRJQZPRND",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "m4-337",
+  "at": "2026-11-22T00:06:20.617Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 5301,
+  "usage": {
+   "prompt_tokens": 356,
+   "completion_tokens": 167,
+   "total_tokens": 523,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "neurons": 7.790909115225077
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M8096C4MA308ZF8279P7YK8V",
+   "x-fullcup-receipt-id": "01M8096C4MA308ZF8279P7YK8V",
+   "x-fullcup-seal-by": "2026-11-23T00:05:00.000Z"
+  },
+  "files": [
+   {
+    "path": "src/costs.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
  }
 ]
