@@ -54,6 +54,19 @@ export function friendly(code, lang) {
       en: 'No questions left in this game. Name the culprit in Accuse, or press Start over for a new game.',
       pt: 'Acabaram as perguntas desta partida. Aponte o culpado em Acusar ou toque em Nova partida para jogar de novo.',
     },
+    // launch (v1.1.0): caps of the public Worker
+    player_cap: {
+      en: 'You have used today\'s free play on this network. Thanks for playing! Come back tomorrow for more questions.',
+      pt: 'Você já usou o jogo grátis de hoje nesta rede. Obrigado por jogar! Volte amanhã para mais perguntas.',
+    },
+    daily_cap: {
+      en: 'The game has used all of today\'s free play for everyone. Please come back tomorrow (it resets at 00:00 UTC).',
+      pt: 'O jogo já usou todo o jogo grátis de hoje para todo mundo. Volte amanhã (renova à meia-noite UTC).',
+    },
+    too_many_games: {
+      en: 'Too many new games from this network today. Finish this one or come back tomorrow.',
+      pt: 'Muitas partidas novas desta rede hoje. Termine esta ou volte amanhã.',
+    },
   };
 
   const entry = msgs[code];

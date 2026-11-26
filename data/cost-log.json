@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-11-26T16:12:49.267Z",
+ "generatedAt": "2026-11-26T17:09:31.482Z",
  "usdPer1000Neurons": 0.011,
  "receiptUrl": "https://qa.fullcup.ai/receipts/",
  "cases": [
@@ -902,20 +902,110 @@
      "status": 200,
      "usd": 0.001901,
      "receipt": "01M7KD6DSPF7KVYPKXSS947AGS"
+    },
+    {
+     "at": "2026-11-26T17:02:27.896Z",
+     "kind": "play",
+     "purpose": "live:violin:en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000177,
+     "receipt": "01M8CCXZS5E88AGS6QDF8F20WH"
+    },
+    {
+     "at": "2026-11-26T17:02:37.362Z",
+     "kind": "play",
+     "purpose": "live:violin:en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000182,
+     "receipt": "01M8CCY8BHG921WDCVD9JRSR63"
+    },
+    {
+     "at": "2026-11-26T17:02:44.334Z",
+     "kind": "play",
+     "purpose": "live:violin:en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000151,
+     "receipt": "01M8CCYF564JD0ZYCH2JS48W9Q"
+    },
+    {
+     "at": "2026-11-26T17:02:49.756Z",
+     "kind": "play",
+     "purpose": "live:violin:en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000191,
+     "receipt": "01M8CCYMESH3FXV8TX38BZW5G5"
+    },
+    {
+     "at": "2026-11-26T17:04:40.285Z",
+     "kind": "play",
+     "purpose": "launch-capcheck:violin:en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000179,
+     "receipt": "01M8CD210X456W0G42ZRVEA832"
+    },
+    {
+     "at": "2026-11-26T17:06:15.458Z",
+     "kind": "play",
+     "purpose": "launch-capcheck:violin:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000204,
+     "receipt": "01M8CD4XWQES26XJXXR8E27PV5"
+    },
+    {
+     "at": "2026-11-26T17:06:21.381Z",
+     "kind": "play",
+     "purpose": "launch-capcheck:violin:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000201,
+     "receipt": "01M8CD53JR470AXJ0K9KNQZPQY"
+    },
+    {
+     "at": "2026-11-26T17:06:33.675Z",
+     "kind": "play",
+     "purpose": "launch-capcheck:violin:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000204,
+     "receipt": "01M8CD5FETE9HNQWWWBP8DG410"
+    },
+    {
+     "at": "2026-11-26T17:07:01.437Z",
+     "kind": "play",
+     "purpose": "launch-capcheck:violin:en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000171,
+     "receipt": "01M8CD6B0E9GJZJS9R6K1Y5QRD"
+    },
+    {
+     "at": "2026-11-26T17:07:05.548Z",
+     "kind": "play",
+     "purpose": "launch-capcheck:violin:en",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000181,
+     "receipt": "01M8CD6E9S5C5B3WRRTKQTZ11Z"
     }
    ],
    "totals": {
-    "usd": 0.051778,
-    "calls": 99,
-    "receipts": 91,
+    "usd": 0.053619,
+    "calls": 109,
+    "receipts": 101,
     "byKind": {
      "author": {
       "usd": 0.005696,
       "calls": 3
      },
      "play": {
-      "usd": 0.009963,
-      "calls": 69
+      "usd": 0.011804,
+      "calls": 79
      },
      "art": {
       "usd": 0.036119,
@@ -1273,16 +1363,61 @@
      "status": 200,
      "usd": 0.000158,
      "receipt": "01M7TBKGKHMTJ5Z2DKJGW33249"
+    },
+    {
+     "at": "2026-11-26T17:03:14.042Z",
+     "kind": "play",
+     "purpose": "live:night-train:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000187,
+     "receipt": "01M8CCZCNA5BX2SXH94MDDGBR2"
+    },
+    {
+     "at": "2026-11-26T17:03:21.054Z",
+     "kind": "play",
+     "purpose": "live:night-train:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000186,
+     "receipt": "01M8CCZK0P7XACJ557850HS2NW"
+    },
+    {
+     "at": "2026-11-26T17:03:29.058Z",
+     "kind": "play",
+     "purpose": "live:night-train:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000194,
+     "receipt": "01M8CCZTTKM0RY8F9ZH9S5DFP7"
+    },
+    {
+     "at": "2026-11-26T17:03:35.921Z",
+     "kind": "play",
+     "purpose": "live:night-train:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000192,
+     "receipt": "01M8CD01HJPPGDXWF0QB22EC7W"
+    },
+    {
+     "at": "2026-11-26T17:03:42.859Z",
+     "kind": "play",
+     "purpose": "live:night-train:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000173,
+     "receipt": "01M8CD089M6S7EQ8DRYDJ3F31F"
     }
    ],
    "totals": {
-    "usd": 0.037506,
-    "calls": 38,
-    "receipts": 38,
+    "usd": 0.038438,
+    "calls": 43,
+    "receipts": 43,
     "byKind": {
      "play": {
-      "usd": 0.003288,
-      "calls": 20
+      "usd": 0.00422,
+      "calls": 25
      },
      "art": {
       "usd": 0.034218,
@@ -1503,20 +1638,29 @@
      "status": 200,
      "usd": 0.000144,
      "receipt": "01M80958449EXNA5ZGWPT2F388"
+    },
+    {
+     "at": "2026-11-26T17:09:24.581Z",
+     "kind": "play",
+     "purpose": "live:gen-a-samba-school-rehearsal-in-madureira-th:pt",
+     "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+     "status": 200,
+     "usd": 0.000127,
+     "receipt": "01M8CDAPGRPWGV0ENJJ5G9HGM0"
     }
    ],
    "totals": {
-    "usd": 0.002282,
-    "calls": 4,
-    "receipts": 4,
+    "usd": 0.002409,
+    "calls": 5,
+    "receipts": 5,
     "byKind": {
      "generate": {
       "usd": 0.002,
       "calls": 2
      },
      "play": {
-      "usd": 0.000282,
-      "calls": 2
+      "usd": 0.000409,
+      "calls": 3
      }
     }
    }
@@ -25678,8 +25822,8 @@
   }
  },
  "total": {
-  "usd": 0.932886,
-  "calls": 2838,
-  "receipts": 2545
+  "usd": 0.935786,
+  "calls": 2854,
+  "receipts": 2561
  }
 }

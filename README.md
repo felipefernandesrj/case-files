@@ -41,6 +41,8 @@ Then open http://localhost:3000. The key stays on the server, and the browser ne
 
 **M3 delivered: The Generated Case (2026-11-20).** `node src/generator.js --seed "<text>"` writes a case through the Cup key and keeps it only if it passes the shape, fair play and timeline checks; generated cases show in the picker (EN/PT) with their cost and drafts.
 
+**Play now (free): https://case-files.fullcup.ai** Four AI detective cases in English and Portuguese, no account needed. Launched 2026-11-26 (v1.1.0) on Cloudflare Workers with daily free-play caps; how it runs: [docs/LAUNCH.md](docs/LAUNCH.md).
+
 **Pre-launch QA (2026-11-26, v1.0.1).** Stress test up to ~4400 sessions, 7 vision bot reviewers and 132 LLM bot games through the Cup key; fixes for the question budget race, cost leaks, verdict layout, scoring and generated-case hints. 334 automated checks. Details: [docs/prelaunch/TRIAGE.md](docs/prelaunch/TRIAGE.md).
 
 **M4 Delivered: The Pack, published (2026-11-21, v1.0.0).** One web app with all four cases (The Vanishing Violin, The Night Train, The Lapa Midnight Heist, The Silent Batucada), a case picker, a shared pack scoreboard, a public cost log at /costs with a section per case and a receipt link for every call, and real credits on every closing screen. Cost per case: Violin US$0.051778, Night Train US$0.037506, Lapa US$0.003868, Samba US$0.002282; the shared build and tools line and the live total are on /costs. 317 automated checks, with an end to end play of every case. Details: [docs/M4_DELIVERY.md](docs/M4_DELIVERY.md).

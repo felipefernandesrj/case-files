@@ -1,0 +1,22 @@
+{
+  "name": "case-files",
+  "main": "src/index.js",
+  "compatibility_date": "2025-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [ { "pattern": "case-files.fullcup.ai", "custom_domain": true } ],
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"], "html_handling": "auto-trailing-slash" },
+  "durable_objects": { "bindings": [ { "name": "HUB", "class_name": "Hub" }, { "name": "GAME", "class_name": "Game" } ] },
+  "migrations": [ { "tag": "v1", "new_sqlite_classes": ["Hub", "Game"] } ],
+  "vars": { "PLAYER_CAP_USD": "0.01", "GLOBAL_CAP_USD": "1", "RPM": "50", "GAMES_PER_IP_DAY": "40", "CUP_BASE_URL": "https://qa-api.fullcup.ai/v1" },
+  "observability": { "enabled": true },
+  "env": {
+    "capcheck": {
+      "name": "case-files-capcheck",
+      "workers_dev": true,
+      "routes": [],
+      "durable_objects": { "bindings": [ { "name": "HUB", "class_name": "Hub" }, { "name": "GAME", "class_name": "Game" } ] },
+      "vars": { "PLAYER_CAP_USD": "1", "GLOBAL_CAP_USD": "0.00001", "RPM": "50", "GAMES_PER_IP_DAY": "3", "TEST_NETWORK_HEADER": "x-test-network", "CUP_BASE_URL": "https://qa-api.fullcup.ai/v1" }
+    }
+  }
+}

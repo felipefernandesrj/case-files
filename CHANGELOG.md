@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 (public launch on Cloudflare)
+- Live at https://case-files.fullcup.ai (also case-files.felipefernandesrj.workers.dev). Notes: docs/LAUNCH.md.
+- worker/: Workers static assets for public/, the src/server.js routes ported to one Worker; each game is a Durable Object (same pending rule, so parallel asks cannot pass the budget), one Hub Durable Object for caps, scoreboard and live usage.
+- Caps: US$0.01 a day per network (IPv6 per /64), 40 new games a day per network, US$1 a day for everyone, 50 requests a minute (key allows 60), friendly EN/PT messages; no_capacity from the Cup is shown as before.
+- Cup key only as the CUP_KEY Worker secret. GET /api/usage lists the Worker's calls (no player data); tools/sync-live-usage.mjs books them in qa/key-usage-log.json, and the cost log puts live:<case> calls on their case.
+- New test/launch-worker.mjs (6 checks); tools/verify-live.mjs plays live games in a headless browser.
+
 ## 1.0.1 (pre-launch QA: stress test, vision bots, difficulty)
 - Triage and numbers: docs/prelaunch/TRIAGE.md, DIFFICULTY.md, DIFFICULTY-r7.md; before/after shots in docs/prelaunch/shots/.
 - Server: parallel questions can no longer pass the budget; asking after the verdict returns 409 (no paid call); sessions expire after 2 h (max 5000); one retry on a short Cup 429.
