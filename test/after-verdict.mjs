@@ -69,7 +69,8 @@ await check('Start over then a spent budget shows the out line again', () => {
 await check('CLI verdict in PT: Veredito, Culpado, Pontuação, perguntas feitas, Melhores pontuações', () => {
   const r = cli(['acusar carlos'], ['--lang', 'pt']);
   must(r.status === 0, 'cli failed: ' + r.stderr);
-  for (const t of ['=== Veredito ===', 'Correto!', 'Culpado: Carlos Mendes', 'Solução: ', 'Pontuação: 100 (perguntas feitas: 0)', '--- Melhores pontuações ---']) must(r.stdout.includes(t), 'missing: ' + t);
+  // pre-launch QA: a right name with 0 questions now scores the hunch score 25 (was 100)
+  for (const t of ['=== Veredito ===', 'Correto!', 'Culpado: Carlos Mendes', 'Solução: ', 'Pontuação: 25 (perguntas feitas: 0)', '--- Melhores pontuações ---']) must(r.stdout.includes(t), 'missing: ' + t);
   for (const t of ['Verdict', 'Culprit:', 'Score:', 'questions asked', 'Top Scores']) must(!r.stdout.includes(t), 'English left: ' + t);
 });
 
@@ -77,7 +78,7 @@ await check('CLI wrong verdict in PT and the English verdict unchanged', () => {
   const pt = cli(['acusar maya'], ['--lang', 'pt']);
   must(pt.stdout.includes('Errado.') && pt.stdout.includes('Culpado: Carlos Mendes') && pt.stdout.includes('Pontuação: 0 (perguntas feitas: 0)'), 'PT wrong verdict');
   const en = cli(['accuse carlos']);
-  for (const t of ['=== Verdict ===', 'Correct!', 'Culprit: Carlos Mendes', 'Solution: ', 'Score: 100 (questions asked: 0)', '--- Top Scores ---']) must(en.stdout.includes(t), 'EN missing: ' + t);
+  for (const t of ['=== Verdict ===', 'Correct!', 'Culprit: Carlos Mendes', 'Solution: ', 'Score: 25 (questions asked: 0)', '--- Top Scores ---']) must(en.stdout.includes(t), 'EN missing: ' + t);
   must(!en.stdout.includes('Culpado') && !en.stdout.includes('Pontuação'), 'PT in an English game');
 });
 

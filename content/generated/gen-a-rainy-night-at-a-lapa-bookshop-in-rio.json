@@ -244,16 +244,24 @@
       "id": "h1",
       "after": 45,
       "text": {
-        "en": "Look at who was cleared by whom. Arthur, Daniela, and Claudio all have witnesses.",
-        "pt": "Observe quem foi inocentado por quem. Arthur, Daniela e Claudio têm testemunhas."
+        "en": "Torn silk gloves were thrown in the bin near the poetry section.",
+        "pt": "Luvas de seda rasgadas foram jogadas na lixeira perto da seção de poesia."
       }
     },
     {
       "id": "h2",
       "after": 90,
       "text": {
-        "en": "The clues regarding the gloves and the glass shards point to only one person.",
-        "pt": "As pistas sobre as luvas e os estilhaços de vidro apontam para apenas uma pessoa."
+        "en": "Glass shards cling to fabric. Ask who was seen brushing off a sleeve.",
+        "pt": "Estilhaços de vidro grudam no tecido. Pergunte quem foi visto limpando a manga."
+      }
+    },
+    {
+      "id": "h3",
+      "after": 120,
+      "text": {
+        "en": "Someone stood right next to the display case just before the crash; the regular customer by the window saw it.",
+        "pt": "Alguém estava bem ao lado da vitrine pouco antes do barulho; o cliente frequente perto da janela viu."
       }
     }
   ],

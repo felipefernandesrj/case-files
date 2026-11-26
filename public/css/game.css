@@ -606,7 +606,8 @@ header {
 
 @media (min-width: 768px) {
   #briefing.is-on, #accuse-stage.is-on {
-    justify-content: center;
+    flex: 1 0 auto; /* pre-launch QA: grow with the verdict instead of overflowing above the scroll top */
+    justify-content: safe center;
     align-items: center;
     text-align: center;
   }
@@ -701,7 +702,7 @@ body[data-view="cabinet"] #steps {
 @keyframes cf-toast-out { 0% { opacity: 1; } 100% { opacity: 0; transform: translateY(8px); } }
 @media (max-width: 767px) { .toasts { bottom: calc(var(--dock-h) + 12px); } }
 @media (prefers-reduced-motion: reduce) { .toast, .toast.is-out { animation: none; } }
-.continue { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 120; width: min(360px, calc(100vw - 32px)); box-sizing: border-box; padding: 20px 24px; text-align: center; color: var(--cf-text); background: rgba(12,11,10,0.94); border: 2px solid var(--cf-lamp); box-shadow: 0 0 0 4px rgba(12,11,10,0.6), 0 0 40px rgba(232,184,109,0.25); }
+.continue { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 120; width: min(360px, calc(100vw - 32px)); box-sizing: border-box; padding: 20px 24px; text-align: center; color: var(--cf-text); background: rgba(12,11,10,0.94); border: 2px solid var(--cf-lamp); box-shadow: 0 0 0 4px rgba(12,11,10,0.6), 0 0 40px rgba(232,184,109,0.25), 0 0 0 100vmax rgba(5,4,3,0.72); }
 .continue-title { margin: 0; font-family: monospace; font-weight: 700; font-size: 1.6rem; letter-spacing: 0.2em; color: var(--cf-lamp); }
 .continue.is-over { border-color: var(--cf-seal-bright); }
 .continue.is-over .continue-title { color: #E2675E; }

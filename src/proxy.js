@@ -14,6 +14,8 @@ export function createProxy({
   baseUrl,
   fetchImpl = fetch,
   model = '@cf/meta/llama-4-scout-17b-16e-instruct',
+  retryMaxMs = 8000,
+  sleep = (ms) => new Promise((r) => setTimeout(r, ms)),
 }) {
   const endpoint = baseUrl.replace(/\/$/, '') + '/chat/completions';
 
@@ -24,7 +26,7 @@ export function createProxy({
       max_tokens: 300,
     };
 
-    const response = await fetchImpl(endpoint, {
+    const send = () => fetchImpl(endpoint, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${key}`,
@@ -33,6 +35,17 @@ export function createProxy({
       },
       body: JSON.stringify(payload),
     });
+    let response = await send();
+    // pre-launch QA: the Cup key allows 60 requests a minute for the whole game; wait out one short rate limit instead of failing the question
+    if (response.status === 429) {
+      const ra = Number(response.headers?.get?.('retry-after'));
+      let peek = '';
+      try { peek = await response.clone().text(); } catch {}
+      if (!peek.toLowerCase().includes('capacity:empty') && Number.isFinite(ra) && ra * 1000 <= retryMaxMs) {
+        await sleep(ra * 1000);
+        response = await send();
+      }
+    }
 
     if (response.ok) {
       const data = await response.json();

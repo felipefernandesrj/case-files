@@ -231,16 +231,24 @@
       "id": "h1",
       "after": 45,
       "text": {
-        "en": "Note that the dancer's shoe part is a very specific physical evidence.",
-        "pt": "Note que o pedaço do sapato de dançarina é uma evidência física muito específica."
+        "en": "A broken piece of a high heel lies beside the smashed drum.",
+        "pt": "Um pedaço quebrado de salto alto está ao lado do tambor destruído."
       }
     },
     {
       "id": "h2",
       "after": 90,
       "text": {
-        "en": "Ricardo has a witness confirming his location.",
-        "pt": "Ricardo tem uma testemunha confirmando sua localização."
+        "en": "From the storage room window you can see who was tuning the instruments.",
+        "pt": "Da janela do depósito dá para ver quem estava afinando os instrumentos."
+      }
+    },
+    {
+      "id": "h3",
+      "after": 120,
+      "text": {
+        "en": "Someone ran out of the drum room right after the crash. The percussionist heard it.",
+        "pt": "Alguém saiu correndo da sala de percussão logo depois do estrondo. O percussionista ouviu."
       }
     }
   ],

@@ -173,6 +173,8 @@ export function systemPrompt(c, suspectId, lang) {
 
   // 4. Consistency rules
   prompt += `\n\nStay consistent with everything you said earlier in this conversation and with your private facts. Do not change your story between questions. You may lie only where your facts say you lie or hide something.`;
+  // pre-launch QA (bot games): innocents improvised alibis and sightings (Beatriz said Marta was with her at 23:50), so a methodical player was talked out of the right answer
+  prompt += ` Never invent where another person was, when, or what they did: only say what your private facts and the things you know say about them. If asked about something you did not see, say you did not notice.`;
 
   // Glossary is added for PT prompts. Include all glossary entries except any that contain the term "violonista".
   if (l === 'pt' && Array.isArray(c.glossary)) {

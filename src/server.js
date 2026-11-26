@@ -7,7 +7,7 @@ import { loadCase, caseFileFor, unknownCaseLine, publicCase, systemPrompt, capWo
 import { createProxy } from './proxy.js';
 import { mockAnswer } from './mock.js';
 import { friendly } from './messages.js';
-import { maxCallsFor, questionBudgetFor } from './budget.js';
+import { maxCallsFor, questionBudgetFor, fairMinimum } from './budget.js';
 import { createScoreboard, scoreFor } from './scoreboard.js';
 import { costsFor } from './costs.js';
 
@@ -110,6 +110,8 @@ export function createServer({
   baseUrl,
   fetchImpl,
   mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
 }) {
   // Load case (synchronously). An unknown caseId still throws (caseFileFor) so startup stays the same.
   // The default case is the process flag; sessions may open another file from the pack.
@@ -163,7 +165,12 @@ export function createServer({
   const scoreboard = createScoreboard(scoreFile);
 
   // Session storage
-  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean}
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, pending:number, accused:boolean, seen:number}
+  // pre-launch stress QA: idle games are dropped (an expired game gets the friendly unknown_session reply)
+  function sweepSessions(now = Date.now()) {
+    for (const [id, s] of sessions) if (now - (s.seen || 0) > sessionTtlMs) sessions.delete(id);
+    while (sessions.size >= maxSessions) sessions.delete(sessions.keys().next().value);
+  }
 
   // Load static index.html
   const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -240,6 +247,7 @@ export function createServer({
       if (req.method === 'POST' && pathname === '/api/session') {
         const body = await readJSON(req).catch(() => ({}));
         const wanted = resolveFile(body && body.case);
+        sweepSessions();
         const sessionId = randomUUID();
         sessions.set(sessionId, {
           history: new Map(),
@@ -248,6 +256,8 @@ export function createServer({
           accused: false,
           found: new Set(),
           file: wanted || defaultKey,
+          pending: 0,
+          seen: Date.now(),
         });
         return sendJSON(res, 200, { sessionId, file: wanted || defaultKey, budget: questionBudgetFor(pack[wanted || defaultKey] || defaultCase) });
       }
@@ -262,6 +272,11 @@ export function createServer({
           return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
         }
         const sess = sessions.get(sessionId);
+        sess.seen = Date.now();
+        // pre-launch stress QA: no model call after the verdict
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
         const play = caseOfSession(sess);
         const suspect = play.suspects.find((s) => s.id === suspectId);
         if (!suspect) {
@@ -276,8 +291,9 @@ export function createServer({
 
         // question budget (M2 game feel sprint 12): answered questions per game, checked before any model call
         const budget = questionBudgetFor(play);
-        if (sess.questions >= budget) {
-          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: 0 });
+        // pre-launch stress QA: asks still waiting for the model count too, so parallel asks cannot pass the budget
+        if (sess.questions + (sess.pending || 0) >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
         }
 
         // per-case cap on model calls per playthrough (M2 sprint 4): no model call once capped
@@ -285,6 +301,7 @@ export function createServer({
           return sendJSON(res, 429, { error: 'call_cap', message: friendly('call_cap', lang), questions: sess.questions });
         }
         sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
 
         // question is counted only after a successful answer (sprint 6)
 
@@ -305,7 +322,9 @@ export function createServer({
           } else {
             answer = await proxy.chat(messages);
           }
+          sess.pending -= 1;
         } catch (e) {
+          sess.pending -= 1;
           const code = e.code;
           let status;
           if (code === 'no_capacity') status = 402;
@@ -341,6 +360,7 @@ export function createServer({
           return sendJSON(res, 400, { error: 'bad_request', code: 'unknown_session', message: friendly('unknown_session', lang) });
         }
         const sess = sessions.get(sessionId);
+        sess.seen = Date.now();
         if (sess.accused) {
           return sendJSON(res, 409, { error: 'bad_request', code: 'already_accused', message: friendly('already_accused', lang) });
         }
@@ -355,7 +375,7 @@ export function createServer({
         const culpritName = culpritObj ? culpritObj.name : '';
         const solution = play.solution?.[lang] ?? '';
         const playerName = typeof player === 'string' && player.trim() ? player.trim().slice(0, 24) : 'anon';
-        const sc = scoreFor(correct, sess.questions);
+        const sc = scoreFor(correct, sess.questions, fairMinimum(play));
         scoreboard.add({
           player: playerName,
           score: sc,

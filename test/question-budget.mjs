@@ -82,7 +82,7 @@ await check('you can still accuse after the last question, scored on 8 questions
   const [, { sessionId }] = await post('/session', {});
   for (let i = 0; i < 9; i++) await ask(sessionId);
   const [st, v] = await post('/accuse', { sessionId, suspectId: 'carlos', player: 'budget', lang: 'en' });
-  must(st === 200 && v.correct === true && v.questions === 8 && v.score === scoreFor(true, 8), JSON.stringify(v));
+  must(st === 200 && v.correct === true && v.questions === 8 && v.score === scoreFor(true, 8, 4), JSON.stringify(v));
 });
 
 await check('a failed model call does not spend the budget and Start over gives a full one', async () => {

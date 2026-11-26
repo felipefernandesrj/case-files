@@ -63,7 +63,7 @@ await check('CLI EN: rows and heading unchanged (pts, Q, Suspects:)', () => {
   const rs = rows(r.stdout);
   must(rs.length > 0 && rs.every((l) => / - \d+ pts \(\d+ Q\) \[(en|pt)\]$/.test(l)), 'rows: ' + rs.join(' / '));
   const row = rs.find((l) => l.includes(' rows-en1 - '));
-  must(row && row.includes('100 pts (1 Q)'), 'one question row: ' + row);
+  must(row && row.includes('25 pts (1 Q)'), 'one question row: ' + row); // pre-launch QA: 1 question is a hunch (25)
 });
 
 await check('CLI EN: no Portuguese words in an English game, fixture rows (1 Q), (3 Q), (0 Q)', () => {

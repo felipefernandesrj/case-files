@@ -15857,5 +15857,181 @@
    }
   ],
   "skipped": []
+ },
+ {
+  "label": "prelaunch-01",
+  "at": "2026-11-26T15:21:06.331Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 139196,
+  "usage": {
+   "prompt_tokens": 2196,
+   "completion_tokens": 6000,
+   "total_tokens": 8196,
+   "neurons": 183.60000610351562,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M8C7050928YYWTK2YZ24PY7J",
+   "x-fullcup-receipt-id": "01M8C7050928YYWTK2YZ24PY7J",
+   "x-fullcup-seal-by": "2026-11-27T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "17",
+   "x-ratelimit-reset": "1795706340"
+  },
+  "files": [
+   {
+    "path": "package.json",
+    "lines": 12
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "prelaunch-03",
+  "at": "2026-11-26T15:22:08.537Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 43113,
+  "usage": {
+   "prompt_tokens": 865,
+   "completion_tokens": 2267,
+   "total_tokens": 3132,
+   "neurons": 69.69091033935547,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M8C74Z109X2DGCMHH2SB2VV1",
+   "x-fullcup-receipt-id": "01M8C74Z109X2DGCMHH2SB2VV1",
+   "x-fullcup-seal-by": "2026-11-27T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "58",
+   "x-ratelimit-reset": "1795706520"
+  },
+  "files": [
+   {
+    "path": "test/prelaunch-stress.mjs",
+    "lines": 184
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "prelaunch-02",
+  "at": "2026-11-26T15:22:33.968Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 71542,
+  "usage": {
+   "prompt_tokens": 1612,
+   "completion_tokens": 3500,
+   "total_tokens": 5112,
+   "neurons": 110.10908508300781,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M8C74W9GG2ZY3V9N89KHTPSG",
+   "x-fullcup-receipt-id": "01M8C74W9GG2ZY3V9N89KHTPSG",
+   "x-fullcup-seal-by": "2026-11-27T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "59",
+   "x-ratelimit-reset": "1795706520"
+  },
+  "files": [],
+  "skipped": []
+ },
+ {
+  "label": "prelaunch-04",
+  "at": "2026-11-26T15:33:44.973Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 10726,
+  "usage": {
+   "prompt_tokens": 851,
+   "completion_tokens": 577,
+   "total_tokens": 1428,
+   "neurons": 23.472726821899414,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M8C7V6TR2QBJCWP2DM8P7A3R",
+   "x-fullcup-receipt-id": "01M8C7V6TR2QBJCWP2DM8P7A3R",
+   "x-fullcup-seal-by": "2026-11-27T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "30",
+   "x-ratelimit-reset": "1795707240"
+  },
+  "files": [
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 0,
+    "lines": 3
+   },
+   {
+    "path": "public/css/game.css",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "public/best.js",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 1
+   },
+   {
+    "path": "test/scoreboard.mjs",
+    "edit": true,
+    "occurrences": 1,
+    "lines": 2
+   }
+  ],
+  "skipped": []
+ },
+ {
+  "label": "prelaunch-05",
+  "at": "2026-11-26T15:44:52.549Z",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "status": 200,
+  "ms": 40846,
+  "usage": {
+   "prompt_tokens": 1391,
+   "completion_tokens": 2103,
+   "total_tokens": 3494,
+   "neurons": 70,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "headers": {
+   "x-fullcup-receipt": "01M8C8EP98JFPQCZ5G4SYC962E",
+   "x-fullcup-receipt-id": "01M8C8EP98JFPQCZ5G4SYC962E",
+   "x-fullcup-seal-by": "2026-11-27T00:05:00.000Z",
+   "x-ratelimit-limit": "60",
+   "x-ratelimit-remaining": "56",
+   "x-ratelimit-reset": "1795707900"
+  },
+  "files": [
+   {
+    "path": "test/prelaunch-difficulty.mjs",
+    "lines": 72
+   }
+  ],
+  "skipped": []
  }
 ]

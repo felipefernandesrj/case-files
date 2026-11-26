@@ -1,15 +1,22 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+
+/** Score for a right accusation after fewer than 2 answered questions (pre-launch QA difficulty pass). */
+export const HUNCH_SCORE = 25;
 import { dirname } from 'node:path';
 
 /**
  * Compute a score.
  * @param {boolean} correct
  * @param {number} questions
+ * @param {number} [free=3] questions that cost nothing (the server passes the case's fairMinimum)
  * @returns {number}
  */
-export function scoreFor(correct, questions) {
+export function scoreFor(correct, questions, free = 3) {
   if (!correct) return 0;
-  return Math.max(10, 100 - 5 * Math.max(0, questions - 3));
+  // pre-launch QA: a right name with fewer than 2 answered questions is a hunch, not a deduction (a blind guess used to score the top 100)
+  if (questions < 2) return HUNCH_SCORE;
+  // pre-launch QA: free questions = the case's fair minimum (server passes it), so checking every alibi is no longer worth less than a 3-question hunch
+  return Math.max(10, 100 - 5 * Math.max(0, questions - free));
 }
 
 /**

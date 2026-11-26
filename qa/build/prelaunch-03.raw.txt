@@ -1,0 +1,200 @@
+<<<FILE test/prelaunch-stress.mjs>>>
+import { createServer } from '../src/server.js';
+import { createProxy } from '../src/proxy.js';
+import { fetch } from 'node-fetch';
+import http from 'http';
+
+const check = async (name, fn) => {
+  try {
+    await fn();
+    console.log(`PASS ${name}`);
+    return true;
+  } catch (err) {
+    console.log(`FAIL ${name}: ${err.message}`);
+    return false;
+  }
+};
+
+const post = async (url, body) => {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json().catch(() => ({}));
+  return { status: res.status, data };
+};
+
+const run = async () => {
+  const results = [];
+  let server;
+
+  const cleanup = async () => {
+    if (server) {
+      await new Promise(r => server.close(r));
+    }
+  };
+
+  const setupServer = (options) => {
+    let callCount = 0;
+    const fetchImpl = async (req) => {
+      callCount++;
+      await new Promise(r => setTimeout(r, 50));
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'I was in the hall.' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' }
+      });
+    };
+    return { fetchImpl, getCallCount: () => callCount, create: (opts) => createServer({ ...opts, fetchImpl }) };
+  };
+
+  // a. parallel asks never pass the question budget
+  results.push(await check("parallel asks never pass the question budget", async () => {
+    const { fetchImpl, getCallCount, create } = setupServer();
+    server = create({ caseFile: 'content/case.json', scoreFile: null, mock: false, key: 'test', fetchImpl });
+    await new Promise(r => server.listen(0, '127.0.0.1', r));
+    const port = server.address().port;
+    const baseUrl = `http://127.0.0.1:${port}`;
+
+    const { data: { sessionId } } = await post(`${baseUrl}/api/session`, {});
+    const asks = Array(12).fill().map(() => post(`${baseUrl}/api/ask`, { sessionId, suspectId: 'maya', lang: 'en' }));
+    const responses = await Promise.all(asks);
+
+    const ok = responses.filter(r => r.status === 200).length;
+    const refused = responses.filter(r => r.status === 409 && r.data.code === 'out_of_questions').length;
+
+    if (ok !== 8 || refused !== 4 || getCallCount() !== 8) {
+      throw new Error(`Expected 8 ok, 4 out_of_questions, 8 calls. Got ${ok} ok, ${refused} out_of_questions, ${getCallCount()} calls`);
+    }
+    await cleanup();
+  }));
+
+  // b. ask after the verdict is refused without a model call
+  results.push(await check("ask after the verdict is refused without a model call", async () => {
+    const { fetchImpl, getCallCount, create } = setupServer();
+    server = create({ caseFile: 'content/case.json', scoreFile: null, mock: false, key: 'test', fetchImpl });
+    await new Promise(r => server.listen(0, '127.0.0.1', r));
+    const port = server.address().port;
+    const baseUrl = `http://127.0.0.1:${port}`;
+
+    const { data: { sessionId } } = await post(`${baseUrl}/api/session`, {});
+    await post(`${baseUrl}/api/accuse`, { sessionId, suspectId: 'carlos', lang: 'en' });
+    const res = await post(`${baseUrl}/api/ask`, { sessionId, suspectId: 'maya', lang: 'en' });
+
+    if (res.status !== 409 || res.data.code !== 'already_accused' || getCallCount() !== 0) {
+      throw new Error(`Expected 409 already_accused and 0 calls. Got ${res.status} ${JSON.stringify(res.data)} and ${getCallCount()} calls`);
+    }
+    await cleanup();
+  }));
+
+  // c. old sessions are swept
+  results.push(await check("old sessions are swept", async () => {
+    const { fetchImpl, create } = setupServer();
+    server = create({ caseFile: 'content/case.json', scoreFile: null, mock: false, key: 'test', fetchImpl, sessionTtlMs: 1, maxSessions: 3 });
+    await new Promise(r => server.listen(0, '127.0.0.1', r));
+    const port = server.address().port;
+    const baseUrl = `http://127.0.0.1:${port}`;
+
+    const sessions = [];
+    for (let i = 0; i < 5; i++) {
+      const { data: { sessionId } } = await post(`${baseUrl}/api/session`, {});
+      sessions.push(sessionId);
+      await new Promise(r => setTimeout(r, 5));
+    }
+
+    const res = await post(`${baseUrl}/api/ask`, { sessionId: sessions[0], suspectId: 'maya', lang: 'en' });
+    if (res.status !== 400 || res.data.code !== 'unknown_session') {
+      throw new Error(`Expected 400 unknown_session for old session. Got ${res.status} ${JSON.stringify(res.data)}`);
+    }
+    await cleanup();
+  }));
+
+  // d. proxy retries one 429 with a short Retry-After
+  results.push(await check("proxy retries one 429 with a short Retry-After", async () => {
+    let calls = 0;
+    const fetchImpl = async () => {
+      calls++;
+      if (calls === 1) {
+        return new Response('{"error":"rate_limit_exceeded"}', { 
+          status: 429, 
+          headers: { 'retry-after': '1' } 
+        });
+      }
+      return new Response('ok', { status: 200 });
+    };
+
+    const proxy = createProxy({
+      key: 'test',
+      baseUrl: 'http://localhost:9999',
+      fetchImpl,
+      sleep: async () => {},
+      retryMaxMs: 8000
+    });
+
+    const res = await proxy.chat('hello');
+    if (res !== 'ok' || calls !== 2) {
+      throw new Error(`Expected 'ok' and 2 calls. Got '${res}' and ${calls} calls`);
+    }
+  }));
+
+  // e. proxy never retries capacity:empty or a long Retry-After
+  results.push(await check("proxy never retries capacity:empty or a long Retry-After", async () => {
+    // Case 1: capacity:empty
+    let calls1 = 0;
+    const fetchImpl1 = async () => {
+      calls1++;
+      return new Response(JSON.stringify({ error: { code: 'capacity:empty' } }), {
+        status: 429,
+        headers: { 'retry-after': '1' }
+      });
+    };
+    const proxy1 = createProxy({ key: 'test', baseUrl: '', fetchImpl: fetchImpl1, sleep: async () => {} });
+    try {
+      await proxy1.chat('hi');
+    } catch (err) {
+      if (err.code !== 'no_capacity' || calls1 !== 1) {
+        throw new Error(`Expected no_capacity and 1 call. Got ${err.code} and ${calls1} calls`);
+      }
+    }
+
+    // Case 2: long Retry-After
+    let calls2 = 0;
+    const fetchImpl2 = async () => {
+      calls2++;
+      return new Response('rate limit', {
+        status: 429,
+        headers: { 'retry-after': '30' }
+      });
+    };
+    const proxy2 = createProxy({ key: 'test', baseUrl: '', fetchImpl: fetchImpl2, sleep: async () => {}, retryMaxMs: 8000 });
+    try {
+      await proxy2.chat('hi');
+    } catch (err) {
+      if (err.code !== 'rate_limited' || calls2 !== 1) {
+        throw new Error(`Expected rate_limited and 1 call. Got ${err.code} and ${calls2} calls`);
+      }
+    }
+  }));
+
+  if (results.includes(false)) process.exit(1);
+};
+
+run().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
+<<<END>>>
+<REPLACE package.json>
+{
+  "name": "question-engine",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node test/pack-m4.mjs && node test/prelaunch-stress.mjs"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
+<<<END>>>

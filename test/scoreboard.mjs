@@ -451,8 +451,8 @@ async function run() {
     const best = fs.readFileSync('./public/best.js', 'utf8');
     assert(html.includes('let gameOver') || html.includes('var gameOver') || /gameOver\s*=\s*false/.test(html), "declares gameOver");
     assert(html.includes('function setGameOver') || html.includes('setGameOver('), "has setGameOver");
-    assert(best.includes("gameOver: 'Game over. Use Start over for a new case.'") || best.includes('gameOver: "Game over. Use Start over for a new case."'), "LABELS.en.gameOver");
-    assert(best.includes("gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'") || best.includes('gameOver: "Fim de jogo. Use Nova partida para um novo caso."'), "LABELS.pt.gameOver");
+    assert(best.includes("gameOver: 'This game is over. Press Start over to play it again, or Files for another case.'"), "LABELS.en.gameOver");
+    assert(best.includes("gameOver: 'Esta partida acabou. Toque em Nova partida para jogar de novo ou em Arquivos para outro caso.'"), "LABELS.pt.gameOver");
     assert(/if\s*\(\s*gameOver\s*\)\s*return/.test(html), "askQuestion/accuse guard returns when gameOver");
     const askIdx = html.indexOf('async function askQuestion');
     assert(askIdx >= 0, "askQuestion present");

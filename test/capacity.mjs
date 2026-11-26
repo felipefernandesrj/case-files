@@ -177,6 +177,8 @@ async function run() {
       }
 
       mode = 'ok';
+      // pre-launch QA: fewer than 2 answered questions now scores the hunch score, so answer 2 and expect the full 100 (failed ones still do not count)
+      for (let i = 0; i < 2; i++) await request('POST', '/api/ask', { sessionId, suspectId: caseData.suspects[0].id, question: '?', lang: 'en' }, port);
       const res = await request('POST', '/api/accuse', { 
         sessionId, 
         suspectId: caseData.culprit, 
@@ -186,7 +188,7 @@ async function run() {
 
       if (res.status !== 200) throw new Error(`expected 200, got ${res.status}`);
       if (res.body.correct !== true) throw new Error('accusal should be correct');
-      if (res.body.questions !== 0) throw new Error('questions should be 0');
+      if (res.body.questions !== 2) throw new Error('questions should be 2 (the 5 failed ones not counted)');
       if (res.body.score !== 100) throw new Error(`score should be 100, got ${res.body.score}`);
     } finally {
       server.close();

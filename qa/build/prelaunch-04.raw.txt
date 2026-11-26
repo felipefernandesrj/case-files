@@ -1,0 +1,34 @@
+<<<REPLACE public/css/game.css>>>
+#briefing.is-on, #accuse-stage.is-on {
+  justify-content: center;
+=====
+#briefing.is-on, #accuse-stage.is-on {
+  flex: 1 0 auto; /* pre-launch QA: grow with the verdict instead of overflowing above the scroll top */
+  justify-content: safe center;
+<<<END>>>
+
+<<<REPLACE public/css/game.css>>>
+box-shadow: 0 0 0 4px rgba(12,11,10,0.6), 0 0 40px rgba(232,184,109,0.25); }
+=====
+box-shadow: 0 0 0 4px rgba(12,11,10,0.6), 0 0 40px rgba(232,184,109,0.25), 0 0 0 100vmax rgba(5,4,3,0.72); }
+<<<END>>>
+
+<<<REPLACE public/best.js>>>
+    gameOver: 'Game over. Use Start over for a new case.',
+=====
+    gameOver: 'This game is over. Press Start over to play it again, or Files for another case.',
+<<<END>>>
+
+<<<REPLACE public/best.js>>>
+    gameOver: 'Fim de jogo. Use Nova partida para um novo caso.',
+=====
+    gameOver: 'Esta partida acabou. Toque em Nova partida para jogar de novo ou em Arquivos para outro caso.',
+<<<END>>>
+
+<<<REPLACE test/scoreboard.mjs>>>
+    assert(best.includes("gameOver: 'Game over. Use Start over for a new case.'") || best.includes('gameOver: "Game over. Use Start over for a new case."'), "LABELS.en.gameOver");
+    assert(best.includes("gameOver: 'Fim de jogo. Use Nova partida para um novo caso.'") || best.includes('gameOver: "Fim de jogo. Use Nova partida para um novo caso."'), "LABELS.pt.gameOver");
+=====
+    assert(best.includes("gameOver: 'This game is over. Press Start over to play it again, or Files for another case.'"), "LABELS.en.gameOver");
+    assert(best.includes("gameOver: 'Esta partida acabou. Toque em Nova partida para jogar de novo ou em Arquivos para outro caso.'"), "LABELS.pt.gameOver");
+<<<END>>>

@@ -1,0 +1,598 @@
+<<<FILE package.json>>>
+{
+  "name": "detective-logic",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node test/pack-m4.mjs && node test/prelaunch-stress.mjs"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+<<<END>>>
+
+<<<REPLACE src/server.js>>>
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+}) {
+...
+  // Session storage
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+        });
+...
+        const sess = sessions.get(sessionId);
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
+...
+        const budget = questionBudgetFor(play);
+        if (sess.questions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: 0 });
+        }
+...
+        sess.calls += 1;
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'bad_request', code: 'already_accused', message: friendly('already_accused', lang) });
+<<<END>>>
+<<<REPLACE src/server.js>>>
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+}) {
+...
+  // Session storage
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+        const suspect = play.suspects.find((s) => s.id === suspectId);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  // Session storage
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  // Session storage
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  // Session storage
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  // Session storage
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error: 'out_of_questions', code: 'out_of_questions', message: friendly('out_of_questions', lang), questions: sess.questions, budget, left: Math.max(0, budget - sess.questions) });
+        }
+...
+        sess.calls += 1;
+        sess.pending = (sess.pending || 0) + 1;
+        sess.seen = Date.now();
+...
+        let answer;
+        try {
+          if (modeMock) {
+            answer = mockAnswer(play, suspectId, question, lang);
+          } else {
+            answer = await proxy.chat(messages);
+          }
+        } catch (e) {
+...
+        } finally {
+          sess.pending = Math.max(0, (sess.pending || 0) - 1);
+        }
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        sess.accused = true;
+...
+  key,
+  baseUrl,
+  fetchImpl,
+  mock,
+  sessionTtlMs = 2 * 60 * 60 * 1000,
+  maxSessions = 5000,
+}) {
+...
+  const sessions = new Map(); // sessionId -> {history:Map(suspectId=>msg[]), questions:number, accused:boolean, seen:number, pending:number}
+...
+        sessions.set(sessionId, {
+          history: new Map(),
+          questions: 0,
+          calls: 0,
+          accused: false,
+          found: new Set(),
+          file: wanted || defaultKey,
+          seen: Date.now(),
+          pending: 0,
+        });
+...
+        const sess = sessions.get(sessionId);
+        if (sess.accused) {
+          return sendJSON(res, 409, { error: 'already_accused', code: 'already_accused', message: friendly('already_accused', lang) });
+        }
+        const play = caseOfSession(sess);
+...
+        const budget = questionBudgetFor(play);
+        const effectiveQuestions = sess.questions + (sess.pending || 0);
+        if (effectiveQuestions >= budget) {
+          return sendJSON(res, 409, { error:

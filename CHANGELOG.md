@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 (pre-launch QA: stress test, vision bots, difficulty)
+- Triage and numbers: docs/prelaunch/TRIAGE.md, DIFFICULTY.md, DIFFICULTY-r7.md; before/after shots in docs/prelaunch/shots/.
+- Server: parallel questions can no longer pass the budget; asking after the verdict returns 409 (no paid call); sessions expire after 2 h (max 5000); one retry on a short Cup 429.
+- Score: under 2 questions is a hunch worth 25; the fair minimum of questions (Violin 4, others 5) is free, then minus 5 each, floor 10.
+- Generated cases: hints no longer name the culprit (generator gate hintLeak); suspects may not invent other people's alibis or sightings.
+- UI: verdict top reachable at 768 px and up; dark backdrop behind CONTINUE?/GAME OVER; game-over wording no longer reads like a loss after a win.
+- New tests: prelaunch-stress (5), prelaunch-ui (3), prelaunch-difficulty (9). 334 checks.
+
 ## 1.0.0 (M4 delivered: The Pack, published. Game complete)
 - M4 delivered 2026-11-21. Delivery notes: docs/M4_DELIVERY.md. Screenshots: docs/m4/.
 - Credits list: no bullets, names centered (bullets stood apart from centered names at 1280).

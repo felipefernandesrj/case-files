@@ -55,6 +55,8 @@ export const REASON_HINTS = Object.freeze({
   suspect_bad: 'every suspect needs a lowercase id, name, role en/pt and facts',
   rooms_bad: 'add "rooms": 3 to 6 places, each with a lowercase id and short en and pt names',
   clue_self_cleared_only: 'every innocent suspect must be cleared by a clue "from" ANOTHER suspect (a witness who saw them); a suspect clearing themselves does not count',
+  hint_names_culprit: 'hints must not contain the culprit name or role; describe a sound, a mark or an object instead and let the player connect it',
+  hint_lists_innocents: 'a hint must never list every innocent suspect; at most one hint may point at one witness',
   clue_not_testimony: 'every clue text is spoken by its "from" suspect in first person, in en and pt ("I saw...", "Eu vi..."), never narration or "You find..."',
 });
 
@@ -71,6 +73,34 @@ const THIRD_PT = /(^|[^\p{L}])(ele|ela|eles|elas|dele|dela|deles|delas)(?![\p{L}
  * @param {Object} clue
  * @param {Object} [c] the case, for the suspect names
  */
+/** Pre-launch QA (82 bot games): both generated cases gave the culprit away in the 45 s hint.
+ * 'hint_names_culprit' when a hint (en or pt) has the culprit's name or a 5+ letter word of the culprit's role;
+ * 'hint_lists_innocents' when one hint names every innocent suspect; else null. */
+export function hintLeak(c) {
+  const suspects = Array.isArray(c && c.suspects) ? c.suspects : [];
+  const hints = Array.isArray(c && c.hints) ? c.hints : [];
+  const names = (s) => [...new Set((typeof s.name === 'object' && s.name ? Object.values(s.name) : [s.name]).filter((n) => typeof n === 'string' && n.trim()).map((n) => n.trim().toLowerCase()))];
+  const words = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(/[^a-z0-9]+/).filter(Boolean);
+  const has = (text, phrase) => { const w = words(text).join(' '); const p = words(phrase).join(' '); return !!p && (' ' + w + ' ').includes(' ' + p + ' '); };
+  const culprit = suspects.find((s) => s && s.id === c.culprit);
+  const innocents = suspects.filter((s) => s && s.id !== c.culprit);
+  for (const h of hints) {
+    const texts = h && typeof h.text === 'object' && h.text ? Object.values(h.text) : [h && h.text];
+    for (const t of texts) {
+      if (typeof t !== 'string') continue;
+      if (culprit) {
+        if (names(culprit).some((n) => has(t, n) || has(t, n.split(/\s+/)[0]))) return 'hint_names_culprit';
+        // the role noun only (EN last word, PT first word): 'Lead Dancer' -> dancer, 'Passista Principal' -> passista; 'dining car' stays a place
+        const roleWords = [words(culprit.role && culprit.role.en).at(-1), words(culprit.role && culprit.role.pt)[0]].filter((w) => w && w.length >= 5);
+        const tw = words(t);
+        if (roleWords.some((rw) => tw.some((w) => w === rw || w === rw + 's'))) return 'hint_names_culprit';
+      }
+      if (innocents.length && innocents.every((s) => names(s).some((n) => has(t, n.split(/\s+/)[0])))) return 'hint_lists_innocents';
+    }
+  }
+  return null;
+}
+
 export function isTestimony(clue, c) {
   const en = clue?.text?.en, pt = clue?.text?.pt;
   if (typeof en !== 'string' || typeof pt !== 'string') return false;
@@ -187,6 +217,9 @@ export function shapeCheck(c) {
   const clearedBy = (id) => (Array.isArray(c.clues) ? c.clues : []).filter((cl) => cl && cl.clears === id);
   if (ids.filter((id) => id !== c.culprit).some((id) => clearedBy(id).length && !clearedBy(id).some((cl) => cl.from !== id))) reasons.push('clue_self_cleared_only');
 
+  // pre-launch QA: a hint may not name the culprit or the culprit's role, and may not name every innocent suspect
+  const leak = hintLeak(c);
+  if (leak) reasons.push(leak);
   return { ok: reasons.length === 0, reasons };
 }
 
